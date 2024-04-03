@@ -20,8 +20,8 @@ import { LogosFigma } from '@/logo/LogosFigma'
 import { LogosTwitch } from '@/logo/LogosTwitch'
 import { SkillIconsGithubDark } from '@/logo/SkillIconsGithubDark'
 
-import QRCode from 'qrcode' // For the card
-
+// For the card flip QR code
+import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
 import {
@@ -112,9 +112,9 @@ export default function Hero() {
   const [cardBackground, setCardBackground] = useState('project-card-bg.jpg')
   const [cardAvatar, setCardAvatar] = useState('aa.png')
   const [jobTitle, setJobTitle] = useState('')
-  const [isFlipped, setIsFlipped] = useState(false)
 
   // Flip Card QR
+  const [isFlipped, setIsFlipped] = useState(false)
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   QRCode.toDataURL(pathname).then(setImgSrc)
@@ -147,6 +147,7 @@ export default function Hero() {
     setIsConnectionModalOpen(true)
   }
 
+  // Flip Card QR
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
@@ -598,7 +599,7 @@ export default function Hero() {
                 <input
                   type='text'
                   id='project-name'
-                  className='h-8 w-80 p-2 text-black'
+                  className='h-8 w-full rounded-md bg-white/10  p-2 text-white'
                   placeholder='Project Name'
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -609,7 +610,7 @@ export default function Hero() {
                 </label>
                 <textarea
                   id='project-descrip'
-                  className='h-12 w-full resize-none p-1 text-black'
+                  className='h-12 w-full resize-none  rounded-md bg-white/10 p-1 text-white'
                   placeholder='Description'
                   onChange={(e) => setDescription(e.target.value)}
                 />
@@ -627,6 +628,8 @@ export default function Hero() {
             </div>
           </form>
         </FormModal>
+
+        {/* Connection Form */}
         <FormModal show={isConnectionModalOpen} onClick={openConnectionModal} onclose={setIsConnectionModalOpen}>
           <div
             className='lg:grid-cols-center m-5 grid grid-cols-3 items-center justify-center gap-6 p-4 md:grid-cols-5 lg:justify-center'

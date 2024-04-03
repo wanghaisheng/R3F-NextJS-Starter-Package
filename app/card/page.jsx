@@ -29,53 +29,46 @@ export default function Page() {
         <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
           <p className='w-full uppercase'> GG User Next + React Three Fiber</p>
           <h1 className='my-4 text-5xl font-bold leading-tight'>Next 3D Starter</h1>
-          <p className='mb-8 text-2xl leading-normal'>A minimalist starter for Next.js, React-three-fiber and Threejs.</p>
+          <p className='mb-8 text-2xl leading-normal'>
+            A minimalist starter for Next.js, React-three-fiber and Threejs.
+          </p>
         </div>
       </div>
       <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row  lg:w-4/5'>
         <div className='relative my-12 h-48 py-6 sm:w-1/2 md:mb-40'>
           <View orbit className='relative size-full sm:h-48  sm:w-full'>
             <Logo_1 scale={2} position={[120, -12, -80]} />
-            <Common color={'lightblue'}/>
+            <Common color={'lightblue'} />
           </View>
         </div>
       </div>
       <div>
-        <CardContainer className="hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl">
-          <CardBody className="group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]">
-            <div className="flex">
-              <CardItem
-                className="mt-4 w-full"
-                >
+        <CardContainer className='hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+          <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+            <div className='flex'>
+              <CardItem className='mt-4 w-full'>
                 <Image
-                  src="/aa.png"
-                  height="1000"
-                  width="1000"
-                  className="size-full rounded-xl object-cover group-hover/card:shadow-xl"
-                  alt="thumbnail"
+                  src='/aa.png'
+                  height='1000'
+                  width='1000'
+                  className='size-full rounded-xl object-cover group-hover/card:shadow-xl'
+                  alt='thumbnail'
                 />
               </CardItem>
-              <div className="flex flex-col">
-                <CardItem
-                  translateZ="50"
-                  className="text-2xl font-bold text-neutral-600 dark:text-white"
-                  >
-                  Genius Card 
+              <div className='flex flex-col'>
+                <CardItem translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
+                  Genius Card
                 </CardItem>
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]"
-                >
-                Coming Soon!
+                <CardItem as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                  Coming Soon!
                 </CardItem>
-                <div className="mt-20 flex items-center justify-between">
+                <div className='mt-20 flex items-center justify-between'>
                   <CardItem
                     translateZ={20}
-                    as="button"
-                    className="right-0 rounded-xl bg-black px-4 py-2 text-xs font-bold text-white dark:bg-white dark:text-black"
+                    as='button'
+                    className='right-0 rounded-xl bg-black px-4 py-2 text-xs font-bold text-white dark:bg-white dark:text-black'
                   >
-                  Sign up
+                    Sign up
                   </CardItem>
                 </div>
               </div>
