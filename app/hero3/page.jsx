@@ -20,9 +20,67 @@ import { LogosFigma } from '@/logo/LogosFigma'
 import { LogosTwitch } from '@/logo/LogosTwitch'
 import { SkillIconsGithubDark } from '@/logo/SkillIconsGithubDark'
 
-import QRCode from 'qrcode'
+import QRCode from 'qrcode' // For the card
 
 import { usePathname } from 'next/navigation'
+
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  Rectangle,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
+
+const data = [
+  {
+    skill: 'Python',
+    percentage: 76,
+  },
+  {
+    skill: 'Java',
+    percentage: 78,
+  },
+  {
+    skill: 'Django',
+    percentage: 56,
+  },
+  {
+    skill: 'PHP',
+    percentage: 59,
+  },
+  {
+    skill: 'HTML',
+    percentage: 75,
+  },
+  {
+    skill: 'CSS',
+    percentage: 65,
+  },
+]
+
+// Custom tooltip component
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
+        <p className='text-base'>{label}</p>
+        <p className='text-sm text-indigo-400'>
+          <span className='ml-2'>{payload[0].payload.percentage}</span>%
+        </p>
+      </div>
+    )
+  }
+}
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -56,9 +114,11 @@ export default function Hero() {
   const [jobTitle, setJobTitle] = useState('')
   const [isFlipped, setIsFlipped] = useState(false)
 
+  // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   QRCode.toDataURL(pathname).then(setImgSrc)
+  // Flip Card QR end
 
   const closeAllModals = () => {
     setIsSkillModalOpen(false)
@@ -113,6 +173,7 @@ export default function Hero() {
           ambientOcclusion: true,
         }}
       />
+
       {/* <EnvironmentModel environment="spaceStation" scale={1} /> */}
       <div className='right-[30%] top-[32%] size-full md:absolute'>
         <div className='ml-[12%] flex flex-col items-center justify-center'>
@@ -184,6 +245,7 @@ export default function Hero() {
               </div>
             </CardBody>
           </CardContainer>
+          {/* Flip Card Start */}
           <CardBody>
             <div className='mx-auto flex justify-center py-4'>
               {/* Event Image  */}
@@ -240,6 +302,7 @@ export default function Hero() {
               </div>
             </div>
           </CardBody>
+          {/* Flip Card End */}
         </div>
       </div>
       <div className='flex items-center justify-center space-x-40'>
@@ -248,10 +311,7 @@ export default function Hero() {
           whileTap={{ scale: 0.9 }}
           className='rounded-2xl border-2 p-3 px-14 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
-            setIsSkillModalOpen(true)
-            setIsCardModalOpen(false)
-            setIsWorkModalOpen(false)
-            setIsConnectionModalOpen(false)
+            openSkillModal(true)
           }}
         >
           Skill
@@ -261,10 +321,7 @@ export default function Hero() {
           whileTap={{ scale: 0.9 }}
           className='rounded-2xl border-2 p-3 px-14 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
-            setIsSkillModalOpen(false)
-            setIsCardModalOpen(true)
-            setIsWorkModalOpen(false)
-            setIsConnectionModalOpen(false)
+            openCardModal(true)
           }}
         >
           Card
@@ -274,10 +331,7 @@ export default function Hero() {
           whileTap={{ scale: 0.9 }}
           className='rounded-2xl border-2 p-3 px-14 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
-            setIsSkillModalOpen(false)
-            setIsCardModalOpen(false)
-            setIsWorkModalOpen(true)
-            setIsConnectionModalOpen(false)
+            openWorkModal(true)
           }}
         >
           Work
@@ -287,19 +341,79 @@ export default function Hero() {
           whileTap={{ scale: 0.9 }}
           className='rounded-2xl border-2 p-3 px-10 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
-            setIsSkillModalOpen(false)
-            setIsCardModalOpen(false)
-            setIsWorkModalOpen(false)
-            setIsConnectionModalOpen(true)
+            openConnectionModal(true)
           }}
         >
           Connection
         </motion.button>
       </div>
       <div>
+        {/* Skill Button */}
         <FormModal show={isSkillModalOpen} onClick={openSkillModal} onclose={setIsSkillModalOpen}>
           <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
             {/* skill chart pending... */}
+            <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+              <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+                <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                  <div className=' '>
+                    {/* Condition for changing barchart chart and radar chart*/}
+                    {data.length < 6 ? (
+                      <ResponsiveContainer width={400} height={250}>
+                        <BarChart
+                          width={400}
+                          height={250}
+                          data={data}
+                          margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                          }}
+                        >
+                          <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                          <YAxis domain={[0, 100]} />
+                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                          <Bar
+                            name='Ram'
+                            dataKey='percentage'
+                            fill='#6E29F7'
+                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      // Radar chart
+                      <ResponsiveContainer width={400} height={250}>
+                        <RadarChart
+                          // cx={300}
+                          // cy={250}
+                          // outerRadius={150}
+                          width={400}
+                          height={250}
+                          data={data}
+                        >
+                          <PolarGrid />
+                          <PolarAngleAxis dataKey='skill' />
+                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                          <Radar
+                            name='Ram'
+                            dataKey='percentage'
+                            stroke='#28B5E1'
+                            strokeWidth={4}
+                            fill='#28B5E1'
+                            fillOpacity={0.4}
+                          />
+                          {/* <Tooltip /> */}
+                          {/* <Legend values="100%" /> */}
+                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        </RadarChart>
+                      </ResponsiveContainer>
+                    )}
+                  </div>
+                </div>
+              </CardBody>
+            </CardContainer>
 
             <div className='flex items-center space-x-4'>
               <input
@@ -363,6 +477,8 @@ export default function Hero() {
             </button>
           </form>
         </FormModal>
+
+        {/* Card Button */}
         <FormModal show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
           <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
             <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
@@ -396,44 +512,47 @@ export default function Hero() {
                 </div>
               </CardBody>
             </CardContainer>
-            <div>
-              <input
-                type=''
-                placeholder='Avatar ID'
-                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
-              />
-            </div>
-            <div>
-              <input
-                type='Name'
-                placeholder='Full Name'
-                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type='text'
-                placeholder='Job Title'
-                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
-                value={jobTitle}
-                onChange={(e) => setJobTitle(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type='address'
-                placeholder='Address'
-                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
-              />
-            </div>
-            <div>
-              <input
-                type='text'
-                placeholder='Phone Number'
-                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
-              />
+            {/* Input fields */}
+            <div className='flex w-full flex-col px-4'>
+              <div>
+                <input
+                  type=''
+                  placeholder='Avatar ID'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-white outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                />
+              </div>
+              <div>
+                <input
+                  type='Name'
+                  placeholder='Full Name'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  placeholder='Job Title'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                />
+              </div>
+              <div>
+                <input
+                  type='address'
+                  placeholder='Address'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  placeholder='Phone Number'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                />
+              </div>
             </div>
 
             <button className='mt-2 inline-block cursor-pointer rounded-lg bg-[#191970] px-6 py-2 font-bold text-white transition duration-500 hover:scale-110'>
@@ -441,6 +560,8 @@ export default function Hero() {
             </button>
           </form>
         </FormModal>
+
+        {/* Work Button */}
         <FormModal show={isWorkModalOpen} onClick={openWorkModal} onclose={setIsWorkModalOpen}>
           <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
             <div className='image-preview w-50 object-fit relative mb-10 h-44 overflow-hidden rounded-md bg-white'>
