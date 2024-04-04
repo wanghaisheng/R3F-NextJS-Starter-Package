@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-export default function GitHubCard() {
+export default function GitHubCard({ githubKey }) {
   // State for storing the username
   const [username, setUsername] = useState(() => {
     return ''
@@ -12,17 +12,37 @@ export default function GitHubCard() {
 
   const [repositories, setRepositories] = useState([])
 
+  const [gitData, setGitData] = useState([])
+
   useEffect(() => {
     const fetchRepositories = async () => {
       try {
-        const response = await axios.get(`https://api.github.com/users/${username}/repos`)
+        const response = await axios.get(`https://api.github.com/users/${username}/repos`, {
+          headers: {
+            Authorization: `Bearer ${githubKey}`,
+          },
+        })
+
         setRepositories(response.data)
       } catch (error) {
         console.error('Error fetching repositories:', error)
       }
     }
+    const fetchGitData = async () => {
+      try {
+        const response = await axios.get(`https://api.github.com/users/${username}`, {
+          headers: {
+            Authorization: `Bearer ${githubKey}`,
+          },
+        })
+        setGitData(response.data)
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      }
+    }
 
     fetchRepositories()
+    fetchGitData()
   }, [username])
 
   // Debounced callback function for handling input changes
@@ -57,6 +77,12 @@ export default function GitHubCard() {
                 </li>
               ))}
             </ul>
+            <div className='flex flex-col'>
+              Created At: {gitData.created_at}
+              Public Repos: {gitData.public_repos}
+              Follower: {gitData.followers}
+              Following: {gitData.following}
+            </div>
           </div>
         </div>
       </div>
