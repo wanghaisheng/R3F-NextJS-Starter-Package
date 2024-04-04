@@ -16,6 +16,8 @@ export default function GitHubCard() {
 
   const [gitData, setGitData] = useState([])
   const [topLanguages, setTopLanguages] = useState([])
+  const [mostProductiveDay, setMostProductiveDay] = useState('')
+  const [starredRepo, setStarredRepo] = useState([])
 
   useEffect(() => {
     const fetchGitData = async () => {
@@ -34,6 +36,7 @@ export default function GitHubCard() {
     fetchGitData()
   }, [username, token])
 
+  // For top 5 language
   useEffect(() => {
     if (gitData.repos_url) {
       const fetchTopLanguages = async () => {
@@ -66,6 +69,63 @@ export default function GitHubCard() {
       fetchTopLanguages()
     }
   }, [gitData.repos_url, token])
+
+  // Most productive day
+  useEffect(() => {
+    if (gitData.login) {
+      const fetchActivity = async () => {
+        try {
+          const response = await axios.get(`https://api.github.com/users/${username}/events`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          // Extract the day of the week from each commit and count occurrences
+          const days = response.data.reduce((acc, event) => {
+            const date = new Date(event.created_at)
+            const day = date.getDay()
+            acc[day] = acc[day] ? acc[day] + 1 : 1
+            return acc
+          }, {})
+
+          // Find the most productive day (day with the most commits)
+          const mostProductive = Object.keys(days).reduce((a, b) => (days[a] > days[b] ? a : b))
+
+          setMostProductiveDay(getDayName(mostProductive))
+        } catch (error) {
+          console.error('Error fetching activity:', error)
+        }
+      }
+
+      fetchActivity()
+    }
+  }, [gitData.login, token])
+
+  // Repo Starred
+  useEffect(() => {
+    const fetchStarredRepo = async () => {
+      try {
+        const response = await axios.get(`https://api.github.com/users/${gitData.login}/starred`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        setStarredRepo(response.data)
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      }
+    }
+
+    fetchStarredRepo()
+  }, [gitData, token])
+
+  // Utility function to convert day number to name
+  const getDayName = (day) => {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    return daysOfWeek[day]
+  }
 
   // Debounced callback function for handling input changes
   const handleChange = useDebouncedCallback((e) => {
@@ -122,6 +182,12 @@ export default function GitHubCard() {
                   </tr>
                   <tr>
                     <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
+                      Most Productive Day
+                    </th>
+                    <td class='px-6 py-4'>{mostProductiveDay}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
                       Public Repos
                     </th>
                     <td class='px-6 py-4'>{gitData.public_repos}</td>
@@ -143,6 +209,12 @@ export default function GitHubCard() {
                       Following
                     </th>
                     <td class='px-6 py-4'>{gitData.following}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
+                      Starred
+                    </th>
+                    <td class='px-6 py-4'>{starredRepo.length}</td>
                   </tr>
                 </tbody>
               </table>
