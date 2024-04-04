@@ -10,15 +10,20 @@ export default function GitHubCard() {
     return ''
   })
 
+  // For token input
   const [token, setToken] = useState(() => {
     return ''
   })
 
+  // State for storing the GitHub data
   const [gitData, setGitData] = useState([])
   const [topLanguages, setTopLanguages] = useState([])
   const [mostProductiveDay, setMostProductiveDay] = useState('')
   const [starredRepo, setStarredRepo] = useState([])
+  const [pullRequestsMerged, setPullRequestsMerged] = useState(0)
+  const [contributionsCount, setContributionsCount] = useState(0)
 
+  // Fetch GitHub data
   useEffect(() => {
     const fetchGitData = async () => {
       try {
@@ -102,6 +107,12 @@ export default function GitHubCard() {
     }
   }, [gitData.login, token])
 
+  // Utility function to convert day number to name
+  const getDayName = (day) => {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    return daysOfWeek[day]
+  }
+
   // Repo Starred
   useEffect(() => {
     const fetchStarredRepo = async () => {
@@ -121,12 +132,6 @@ export default function GitHubCard() {
     fetchStarredRepo()
   }, [gitData, token])
 
-  // Utility function to convert day number to name
-  const getDayName = (day) => {
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    return daysOfWeek[day]
-  }
-
   // Debounced callback function for handling input changes
   const handleChange = useDebouncedCallback((e) => {
     setUsername(e.target.value)
@@ -135,6 +140,52 @@ export default function GitHubCard() {
   const handleTokenChange = useDebouncedCallback((e) => {
     setToken(e.target.value)
   }, 400) // Debounce delay of 400ms
+
+  // Pull Requests Merged
+  useEffect(() => {
+    const fetchPullRequestsMerged = async () => {
+      if (gitData.login) {
+        try {
+          const response = await axios.get(
+            `https://api.github.com/search/issues?q=author:${gitData.login}+is:pr+is:merged`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+
+          setPullRequestsMerged(response.data.total_count)
+        } catch (error) {
+          console.error('Error fetching pull requests merged:', error)
+        }
+      }
+    }
+
+    fetchPullRequestsMerged()
+  }, [gitData.login, token])
+
+  // Contributions
+  useEffect(() => {
+    const fetchContributions = async () => {
+      if (gitData.login) {
+        try {
+          const response = await axios.get(`https://api.github.com/users/${gitData.login}/events`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          const contributions = response.data.filter((event) => event.type === 'PushEvent')
+          setContributionsCount(contributions.length)
+        } catch (error) {
+          console.error('Error fetching contributions:', error)
+        }
+      }
+    }
+
+    fetchContributions()
+  }, [gitData.login, token])
 
   return (
     <>
@@ -179,6 +230,18 @@ export default function GitHubCard() {
                         </li>
                       ))}
                     </td>
+                  </tr>
+                  <tr>
+                    <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
+                      Pull Requests Merged
+                    </th>
+                    <td className='px-6 py-4'>{pullRequestsMerged}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
+                      Contributions
+                    </th>
+                    <td className='px-6 py-4'>{contributionsCount}</td>
                   </tr>
                   <tr>
                     <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
