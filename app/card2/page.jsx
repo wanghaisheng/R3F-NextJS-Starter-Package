@@ -6,7 +6,7 @@ const Card2 = () => {
   return (
     <div>
       <TicketCard />
-      <GitHubCard githubKey={githubToken} />
+      <GitHubCard />
     </div>
   )
 }
