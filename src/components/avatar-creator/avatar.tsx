@@ -3,6 +3,8 @@ import { AvatarCreator, AvatarCreatorConfig, AvatarExportedEvent } from '@readyp
 import { useRouter } from 'next/navigation';
 
 import { useState } from "react";
+import axios from 'axios'
+import { useUser } from '@/context/UserContext/UserContext';
 
 const config: AvatarCreatorConfig = {
   clearCache: false,
@@ -20,6 +22,32 @@ export default function App() {
     router.push('/hero')
     setAvatarUrl(event.data.url);
   };
+
+  const { log } = console
+  const { user } = useUser();
+  // const userId = user.gg_id;
+  console.log(avatarUrl)
+  console.log(user)
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault()
+  //   const submit = {
+  //     avatarUrl
+  //   }
+
+  //   log('Submit: ', submit)
+
+  //   try {
+  //     const { data } = await axios({
+  //       url: `/api/avatar/${userId}`,
+  //       method: 'PUT',
+  //       data: submit,
+  //     })
+  //     log('Response:', data)
+  //   } catch (error) {
+  //     log('Error: ', error)
+  //   }
+  // }
 
   return (
       <>
