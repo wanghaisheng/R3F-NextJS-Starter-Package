@@ -15,6 +15,7 @@ export default function GitHubCard() {
   })
 
   const [gitData, setGitData] = useState([])
+  const [topLanguages, setTopLanguages] = useState([])
 
   useEffect(() => {
     const fetchGitData = async () => {
@@ -32,6 +33,39 @@ export default function GitHubCard() {
 
     fetchGitData()
   }, [username, token])
+
+  useEffect(() => {
+    if (gitData.repos_url) {
+      const fetchTopLanguages = async () => {
+        try {
+          const response = await axios.get(gitData.repos_url, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          // Extract languages from repositories
+          const languages = response.data.reduce((acc, repo) => {
+            if (repo.language) {
+              acc[repo.language] = acc[repo.language] ? acc[repo.language] + 1 : 1
+            }
+            return acc
+          }, {})
+
+          // Sort languages by usage count
+          const sortedLanguages = Object.entries(languages)
+            .sort((a, b) => b[1] - a[1])
+            .map(([language, count]) => ({ language, count }))
+
+          setTopLanguages(sortedLanguages.slice(0, 5)) // Display top 5 languages
+        } catch (error) {
+          console.error('Error fetching top languages:', error)
+        }
+      }
+
+      fetchTopLanguages()
+    }
+  }, [gitData.repos_url, token])
 
   // Debounced callback function for handling input changes
   const handleChange = useDebouncedCallback((e) => {
@@ -73,6 +107,19 @@ export default function GitHubCard() {
             <div className='relative mt-10 overflow-x-auto rounded-lg bg-black/10'>
               <table className='w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400'>
                 <tbody>
+                  {/* Display Top 5 Languages */}
+                  <tr>
+                    <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
+                      Top Five Languages
+                    </th>
+                    <td class='px-6 py-4'>
+                      {topLanguages.map(({ language, count }) => (
+                        <li key={language} className='mb-2'>
+                          {language}: {count} repositories
+                        </li>
+                      ))}
+                    </td>
+                  </tr>
                   <tr>
                     <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
                       Public Repos
