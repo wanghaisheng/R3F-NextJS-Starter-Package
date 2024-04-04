@@ -289,7 +289,7 @@ export default function Hero() {
                       </div>
                     </div>
                   </div>
-                  <div className='absolute inset-0 flex size-full items-center rounded-lg bg-black/75 px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
+                  <div className='absolute inset-0 flex size-full items-center rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
                     {/* <QRCodeComponent /> */}
                     <Image
                       className='mx-auto rounded-xl object-cover'
@@ -519,14 +519,14 @@ export default function Hero() {
                 <input
                   type=''
                   placeholder='Avatar ID'
-                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-white outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300 dark:text-white'
                 />
               </div>
               <div>
                 <input
                   type='Name'
                   placeholder='Full Name'
-                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300 dark:text-white'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -535,7 +535,7 @@ export default function Hero() {
                 <input
                   type='text'
                   placeholder='Job Title'
-                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300 dark:text-white'
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                 />
@@ -544,14 +544,14 @@ export default function Hero() {
                 <input
                   type='address'
                   placeholder='Address'
-                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300 dark:text-white'
                 />
               </div>
               <div>
                 <input
                   type='text'
                   placeholder='Phone Number'
-                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
+                  className='mt-2 w-full rounded-md  bg-white/10 px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300 dark:text-white'
                 />
               </div>
             </div>
