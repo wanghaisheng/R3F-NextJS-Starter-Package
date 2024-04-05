@@ -192,20 +192,22 @@ export default function GitHubCard() {
       {/* Main content */}
       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
         {/* Card container */}
-        <div className='flex flex-col justify-center rounded-2xl border border-slate-800 bg-black/10 bg-clip-padding p-11 shadow-xl shadow-blue-700 backdrop-blur-md hover:shadow-blue-500 '>
+        <div className='flex flex-col justify-center rounded-2xl border border-slate-800 bg-black/10 bg-clip-padding p-11 shadow-xl shadow-purple-700 backdrop-blur-md hover:shadow-violet-500 '>
           {/* Input field */}
-          <input
-            type='text'
-            placeholder='Enter your GitHub username'
-            onChange={(e) => handleChange(e)}
-            className='mx-auto rounded-md bg-blue-950 p-2 text-white focus:outline-none active:bg-blue-700'
-          />
-          <input
-            type='text'
-            placeholder='Enter your secret token'
-            onChange={(e) => handleTokenChange(e)}
-            className='mx-auto rounded-md bg-blue-950 p-2 text-white focus:outline-none active:bg-blue-700'
-          />
+          <div className='flex gap-4'>
+            <input
+              type='text'
+              placeholder='Enter your GitHub username'
+              onChange={(e) => handleChange(e)}
+              className='mx-auto rounded-md bg-blue-950 p-2 text-white focus:outline-none active:bg-blue-700'
+            />
+            <input
+              type='text'
+              placeholder='Enter your secret token'
+              onChange={(e) => handleTokenChange(e)}
+              className='mx-auto rounded-md bg-blue-950 p-2 text-white focus:outline-none active:bg-blue-700'
+            />
+          </div>
 
           {/* Display GitHub chart if username is provided */}
           {username.length !== 0 && (
@@ -216,7 +218,7 @@ export default function GitHubCard() {
 
           <div className=' flex items-center justify-center'>
             <div className='relative mt-10 overflow-x-auto rounded-lg bg-black/10'>
-              <table className='w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400'>
+              <table className='flex w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400'>
                 <tbody>
                   {/* Display Top 5 Languages */}
                   <tr>
@@ -249,6 +251,8 @@ export default function GitHubCard() {
                     </th>
                     <td class='px-6 py-4'>{mostProductiveDay}</td>
                   </tr>
+                </tbody>
+                <tbody>
                   <tr>
                     <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
                       Public Repos
