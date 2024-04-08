@@ -2,7 +2,7 @@ import Card from '@/components/Weather/Card'
 
 // export default async function Hero({ city }: { city: string }) {
 async function Hero() {
-  const city = 'Greece'
+  const city = 'Kathmandu'
 
   const apiKey = process.env.API_KEY
   const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric&q='
