@@ -23,15 +23,14 @@ async function Hero() {
     const weatherDescription = weather[0].description
 
     let backgroundImageUrl
+    let backgroundVideoUrl
 
     switch (weatherStatus) {
       case 'Clouds':
-        backgroundImageUrl =
-          'https://imgs.search.brave.com/LuAAXo9tVzbusaFi5FRiH1HJaxtKHmRwDFIhnOT8Oyk/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTU3/MzM1NDgzL3Bob3Rv/L2ZsdWZmeS13aGl0/ZS1jbG91ZHMtZnJv/bS1hYm92ZS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9ME9o/LTJYc2ZrWWdJaVBu/eUppLVdtNlFOYjJJ/UXJrNGdqZ050bHRi/QTNWND0'
+        backgroundVideoUrl = '/livewallpapers/sunny-clouds-afternoon.mp4'
         break
       case 'Rain':
-        backgroundImageUrl =
-          'https://imgs.search.brave.com/ILbSMDe-Vg7SuIaFtEpbAZpdaYJMFoZclE41dzoXG8c/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAzLzAxLzEwLzQw/LzM2MF9GXzMwMTEw/NDAzNl9vdnRCSkkz/UzM0dzRIQ25CbEh0/OVhxZzk5TXFGZTJG/SS5qcGc'
+        backgroundVideoUrl = 'livewallpapers/rainy.mp4'
         break
       case 'Fog':
         backgroundImageUrl =
@@ -85,13 +84,11 @@ async function Hero() {
 
     return (
       <>
-        <div
-          className='relative h-screen w-screen bg-cover bg-fixed bg-center bg-no-repeat text-white'
-          style={{
-            backgroundImage: `url(${backgroundImageUrl})`,
-          }}
-        >
-          <div className='absolute right-5 top-5'>
+        <div className='relative h-screen w-screen bg-cover bg-fixed bg-center bg-no-repeat text-white'>
+          <video className='absolute h-screen w-screen object-cover object-center' autoPlay loop muted>
+            <source src={backgroundVideoUrl} type='video/mp4' />
+          </video>
+          <div className='fixed right-5 top-24'>
             <Card
               cityName={name}
               humidity={main.humidity}
