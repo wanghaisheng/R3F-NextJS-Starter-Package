@@ -55,7 +55,7 @@ export default function WorksComponent() {
     <div className='mx-20 flex flex-col items-center'>
       <div className='bg-[#F8F8F8]/7 flex h-full w-fit rounded-[30px] border-4 border-[#2E2B3C] px-10 py-4'>
         <div className='flex flex-col '>
-          <div className='flex justify-center text-7xl drop-shadow'>Works</div>
+          <div className='flex justify-center text-7xl drop-shadow'>Experience</div>
 
           <motion.button
             whileHover={{ scale: 1.1 }}
