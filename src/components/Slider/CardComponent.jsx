@@ -1,88 +1,57 @@
 'use client'
 import { motion } from 'framer-motion'
-
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-
 import Image from 'next/image'
 
 export default function CardComponent() {
   return (
-    <div className='mx-20 flex items-center'>
-      <div className='bg-[#F8F8F8]/7 flex h-screen w-fit rounded-[30px] border-4 border-[#2E2B3C] px-10 py-4'>
-        <div className='flex flex-col'>
+    <div className='relative mx-20 flex flex-col items-center'>
+      <div className='flex h-full w-screen rounded-[30px] border-4 border-[#2E2B3C] bg-[#F8F8F8]/10 px-10 py-4'>
+        <div className='flex flex-col '>
           <div className='flex justify-center text-7xl drop-shadow'>Card</div>
 
-          <CardContainer className='hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-            <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className='absolute right-6 top-6 w-1/3 rounded-2xl border-2 p-2 text-white shadow-md '
+          >
+            Add New Card
+          </motion.button>
+
+          <div className='mt-12 flex'>
+            <div className='flex flex-col'>
               <div className='flex'>
-                <CardItem className='mt-4 w-full'>
-                  <Image
-                    src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100'
-                    height='500'
-                    width='500'
-                    className='rounded-xl object-cover group-hover/card:shadow-xl'
-                    alt='thumbnail'
-                  />
-                </CardItem>
-                <div className='flex flex-col'>
-                  <CardItem translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
-                    Ayush Lama
-                  </CardItem>
-                  <CardItem as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                    Jr.CEO
-                  </CardItem>
-                  <div className='mt-20 flex items-center justify-between'>
-                    <CardItem
-                      translateZ={20}
-                      as='button'
-                      className='right-0 rounded-xl bg-black px-4 py-2 text-xs font-bold text-white dark:bg-white dark:text-black'
-                    >
-                      Follow
-                    </CardItem>
-                    <CardItem
-                      translateZ={20}
-                      as='button'
-                      className='ml-2 rounded-xl bg-black px-4 py-2 text-xs font-bold text-white dark:bg-white dark:text-black'
-                    >
-                      Edit
-                    </CardItem>
+                <nav className='my-2 flex justify-center'>
+                  <p className='mx-2'>Educational</p>
+                  <p className='mx-2'>Work</p>
+                  <p className='mx-2'>Gym</p>
+                </nav>
+              </div>
+
+              <div className='rounded-[20px] border-4 border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                <div className='flex px-10 py-4'>
+                  <div className='flex flex-col items-center'>
+                    <Image className=' rounded-t-lg object-cover' src='/image.png' alt='' width={402} height={268} />
+                    <h1 className='mt-4 text-xl font-semibold'>Educational</h1>
+                  </div>
+                  <div className='ml-10'>
+                    <h1 className='text-2xl font-bold'>School/College Name</h1>
+                    <p className='mt-4 '>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo cum fugit corrupti aperiam saepe
+                      fugiat illum ad iure asperiores quod dolores inventore vitae, quasi nulla pariatur, molestiae
+                      animi itaque harum.
+                    </p>
+                    <p className='mt-4'>Date In :</p>
+                    <p className='mt-4'>Date Out :</p>
                   </div>
                 </div>
+                <div className='flex justify-end'>
+                  <button className='rounded-xl bg-black p-2'>Read More</button>
+                </div>
               </div>
-            </CardBody>
-          </CardContainer>
-          <div className='flex justify-end'>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className='rounded-2xl border-2 p-2 text-white shadow-md '
-              href='#'
-            >
-              Create New Avatar &emsp;&emsp; +
-            </motion.a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   )
-}
-
-const Option = ({ text, Icon, setOpen }) => {
-  return (
-    <motion.li
-      variants={itemVariants}
-      onClick={() => setOpen(false)}
-      className='flex w-full cursor-pointer items-center gap-2 whitespace-nowrap rounded-md p-2 text-xs font-medium text-slate-700 transition-colors hover:bg-indigo-100 hover:text-indigo-500'
-    >
-      <motion.span variants={actionIconVariants}>
-        <Icon />
-      </motion.span>
-      <span>{text}</span>
-    </motion.li>
-  )
-}
-
-const actionIconVariants = {
-  open: { scale: 1, y: 0 },
-  closed: { scale: 0, y: -7 },
 }

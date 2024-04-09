@@ -1,52 +1,11 @@
 'use client'
 
-import { FiChevronDown } from 'react-icons/fi'
-import { AiOutlineRadarChart } from 'react-icons/ai'
-import { FaChartPie, FaRegChartBar } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import FormModal from '@/components/FormModal/Modal'
 
 import { Avatar } from 'src/components/Avatar'
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  PolarAngleAxis,
-  PolarGrid,
-  PolarRadiusAxis,
-  Radar,
-  RadarChart,
-  Rectangle,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts'
-
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-medium text-lg'>{label}</p>
-        <p className='text-sm text-indigo-400'>
-          <span className='ml-2'>{payload[0].payload.percentage}</span>%
-        </p>
-      </div>
-    )
-  }
-}
-
 export default function AvatarComponent() {
-  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-
-  const openCardModal = () => {
-    setIsCardModalOpen(true)
-  }
-
-  const [open, setOpen] = useState(false)
-
   return (
     <div className='mx-20 flex items-center'>
       <div className='bg-[#F8F8F8]/7 flex h-screen w-fit rounded-[30px] border-4 border-[#2E2B3C] px-10 py-4'>

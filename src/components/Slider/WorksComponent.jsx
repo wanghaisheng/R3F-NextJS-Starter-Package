@@ -7,35 +7,6 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import FormModal from '@/components/FormModal/Modal'
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  PolarAngleAxis,
-  PolarGrid,
-  PolarRadiusAxis,
-  Radar,
-  RadarChart,
-  Rectangle,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts'
-
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-medium text-lg'>{label}</p>
-        <p className='text-sm text-indigo-400'>
-          <span className='ml-2'>{payload[0].payload.percentage}</span>%
-        </p>
-      </div>
-    )
-  }
-}
-
 export default function WorksComponent() {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
 
