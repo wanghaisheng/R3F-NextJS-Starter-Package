@@ -1,18 +1,6 @@
 'use client'
 
-import {
-  LineChart,
-  AreaChart,
-  Area,
-  Line,
-  ResponsiveContainer,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  CartesianAxis,
-} from 'recharts'
+import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 const ramData = [
   {
@@ -118,7 +106,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-medium text-lg'>{label}</p>
+        <p className='text-lg'>{label}</p>
         <p className='text-sm text-blue-400'>
           currentPerformance:
           <span className='ml-2'>${payload[0].value}</span>
