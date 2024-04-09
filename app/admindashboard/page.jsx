@@ -11,16 +11,17 @@ import SkillsRadarComponent from '@/components/charts/SkillsRadarChart'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { SiFramer, SiTailwindcss, SiReact, SiJavascript, SiCss3 } from 'react-icons/si'
+import { DndContext } from '@dnd-kit/core'
 
 const AdminDashboard = () => {
   return (
-    <>
+    <DndContext>
       <div className='flex bg-slate-900/20 text-slate-100'>
         <SideNav />
         <div className='size-full'>
           <div className='m-4 h-[35px] rounded'>Welcome, Admin</div>
           <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
-            <div className='border-b-1 m-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='m-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Line Chart</h1>
                 <p className='mt-5'>Some description about the chart</p>
@@ -37,7 +38,7 @@ const AdminDashboard = () => {
               </div>
               <LineComponent />
             </div>
-            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Area Chart</h1>
                 <p className='mt-5'>Some description about the chart</p>
@@ -45,28 +46,28 @@ const AdminDashboard = () => {
               </div>
               <AreaChartComponent />
             </div>
-            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Pie Chart</h1>
                 <p className='mt-5'>Some description about the chart</p>
               </div>
               <PieChartComponent />
             </div>
-            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Radar Chart for comparision</h1>
                 <p className='mt-5'>Some description about the chart</p>
               </div>
               <RadarChartComponent />
             </div>
-            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Radar Chart for comparision</h1>
                 <p className='mt-5'>Some description about the chart</p>
               </div>
               <DonutComponent />
             </div>
-            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Radar Chart for comparision</h1>
                 <p className='mt-5'>Some description about the chart</p>
@@ -74,13 +75,13 @@ const AdminDashboard = () => {
               <SkillsRadarComponent />
             </div>
           </div>
-          <div className='border-b-1 m-4 flex size-fit flex-col justify-center rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+          <div className='m-4 flex size-fit flex-col justify-center rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
             <div>Login Data Of Ram of a week</div>
             <BubbleChartComponent />
           </div>
         </div>
       </div>
-    </>
+    </DndContext>
   )
 }
 
