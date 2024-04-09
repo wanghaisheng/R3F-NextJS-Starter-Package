@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { Avatar } from 'src/components/Avatar'
-import { useState } from 'react'
 import FormModal from '@/components/FormModal/Modal'
 import { motion } from 'framer-motion'
 import { LogosFacebook } from '@/logo/LogosFacebook'
@@ -19,6 +18,8 @@ import { LogosApple } from '@/logo/LogosApple'
 import { LogosFigma } from '@/logo/LogosFigma'
 import { LogosTwitch } from '@/logo/LogosTwitch'
 import { SkillIconsGithubDark } from '@/logo/SkillIconsGithubDark'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 // For the card flip QR code
 import QRCode from 'qrcode'
@@ -41,7 +42,20 @@ import {
   YAxis,
 } from 'recharts'
 
-const data = [
+// get all skills
+async function getSkills() {
+  try {
+    const response = await fetch('http://localhost:3000/api/skills/')
+    if (!response.ok) {
+      throw new Error('failed to fetch the skills')
+    }
+    return response.json()
+  } catch (error) {
+    console.error('Error fetching skills:', error)
+  }
+}
+
+const skill_data = [
   {
     skill: 'Python',
     percentage: 76,
@@ -102,6 +116,22 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
 
 export default function Hero() {
+  const [skills, setSkills] = useState([])
+  useEffect(() => {
+    async function fetchSkills() {
+      try {
+        const fetchedSkills = await getSkills()
+        setSkills(fetchedSkills)
+      } catch (error) {
+        console.error('Error fetching skills:', error)
+      }
+    }
+
+    fetchSkills()
+  }, [])
+
+  console.log(skills)
+
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false)
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
@@ -358,12 +388,12 @@ export default function Hero() {
                 <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
                   <div className=' '>
                     {/* Condition for changing barchart chart and radar chart*/}
-                    {data.length < 6 ? (
+                    {skill_data.length < 6 ? (
                       <ResponsiveContainer width={400} height={250}>
                         <BarChart
                           width={400}
                           height={250}
-                          data={data}
+                          data={skill_data}
                           margin={{
                             top: 5,
                             right: 30,
@@ -392,7 +422,7 @@ export default function Hero() {
                           // outerRadius={150}
                           width={400}
                           height={250}
-                          data={data}
+                          data={skill_data}
                         >
                           <PolarGrid />
                           <PolarAngleAxis dataKey='skill' />
