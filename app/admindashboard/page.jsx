@@ -3,6 +3,10 @@
 import LineComponent from '@/components/charts/LineChart'
 import AreaChartComponent from '@/components/charts/AreaChart'
 import BubbleChartComponent from '@/components/charts/BubbleChart'
+import PieChartComponent from '@/components/charts/PieChart'
+import RadarChartComponent from '@/components/charts/RadarChartComparision'
+import DonutComponent from '@/components/charts/DonutChart'
+import SkillsRadarComponent from '@/components/charts/SkillsRadarChart'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
@@ -15,7 +19,7 @@ const AdminDashboard = () => {
         <SideNav />
         <div className='size-full'>
           <div className='m-4 h-[35px] rounded'>Welcome, Admin</div>
-          <div className=' grid grid-flow-row grid-cols-2 gap-4'>
+          <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
             <div className='border-b-1 m-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Line Chart</h1>
@@ -33,22 +37,41 @@ const AdminDashboard = () => {
               </div>
               <LineComponent />
             </div>
-            <div className='border-b-1 m-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Area Chart</h1>
                 <p className='mt-5'>Some description about the chart</p>
-                <p className='mt-5 text-justify'>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit laborum hic rem voluptate minima, nam
-                  quasi sunt maiores delectus ducimus praesentium quam ea at fugiat perferendis provident! Nostrum,
-                  obcaecati nisi!
-                </p>
-                <p className='mt-5 text-justify'>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum iure illo molestias cum expedita,
-                  atque ullam omnis modi doloremque animi excepturi sunt magni sequi exercitationem asperiores error
-                  explicabo vitae dicta.
-                </p>
+                <p className='mt-5 text-justify'>Lorem ipsum dolor,</p>
               </div>
               <AreaChartComponent />
+            </div>
+            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Pie Chart</h1>
+                <p className='mt-5'>Some description about the chart</p>
+              </div>
+              <PieChartComponent />
+            </div>
+            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Radar Chart for comparision</h1>
+                <p className='mt-5'>Some description about the chart</p>
+              </div>
+              <RadarChartComponent />
+            </div>
+            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Radar Chart for comparision</h1>
+                <p className='mt-5'>Some description about the chart</p>
+              </div>
+              <DonutComponent />
+            </div>
+            <div className='border-b-1 m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Radar Chart for comparision</h1>
+                <p className='mt-5'>Some description about the chart</p>
+              </div>
+              <SkillsRadarComponent />
             </div>
           </div>
           <div className='border-b-1 m-4 flex size-fit flex-col justify-center rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>

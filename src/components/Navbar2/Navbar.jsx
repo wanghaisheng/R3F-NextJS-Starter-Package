@@ -33,23 +33,32 @@ const Navbar = () => {
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className='border-b-1 container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 shadow-md shadow-[#6B37CA] backdrop-blur-md '
+        className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '
       >
-        <div className='container mx-auto flex h-20 items-center justify-between px-4 py-2'>
+        <div className='container mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           <Link href='' className='relative flex items-center justify-center pl-1'>
             <img src='/aa.png' className='h-20 rounded-full p-2'></img>
           </Link>
 
           <div className='hidden md:flex'>
-            <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md md:gap-14'>
+            <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
                 Home
               </Link>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Skills
+                Cards
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Map
               </Link>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
                 Profile
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Avatar
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Security
               </Link>
             </div>
           </div>
@@ -145,13 +154,31 @@ const Navbar = () => {
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                Skills
+                Cards
+              </Link>
+              <Link
+                href='#'
+                className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+              >
+                Map
               </Link>
               <Link
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 Profile
+              </Link>
+              <Link
+                href='#'
+                className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+              >
+                Avatar
+              </Link>
+              <Link
+                href='#'
+                className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+              >
+                Security
               </Link>
               <Link
                 href='#'
