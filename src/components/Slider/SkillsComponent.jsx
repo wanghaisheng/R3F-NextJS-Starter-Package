@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-medium text-lg'>{label}</p>
+        <p className='text-lg'>{label}</p>
         <p className='text-sm text-indigo-400'>
           <span className='ml-2'>{payload[0].payload.percentage}</span>%
         </p>
@@ -76,7 +76,7 @@ export default function SkillsComponent() {
 
   return (
     <div className='mx-20 flex flex-col items-center'>
-      <div className='bg-[#F8F8F8]/7 flex h-full w-fit rounded-[30px] border-4 border-[#2E2B3C] px-10 py-4'>
+      <div className='flex h-full w-fit rounded-[30px] border-4 border-[#2E2B3C] bg-[#F8F8F8]/10 px-10 py-4'>
         <div className='flex flex-col '>
           <div className='flex justify-center text-7xl drop-shadow'>Skills</div>
 

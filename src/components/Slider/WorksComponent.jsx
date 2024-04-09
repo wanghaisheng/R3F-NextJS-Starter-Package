@@ -24,7 +24,7 @@ export default function WorksComponent() {
 
   return (
     <div className='mx-20 flex flex-col items-center'>
-      <div className='bg-[#F8F8F8]/7 flex h-full w-fit rounded-[30px] border-4 border-[#2E2B3C] px-10 py-4'>
+      <div className='flex h-full w-fit rounded-[30px] border-4 border-[#2E2B3C] bg-[#F8F8F8]/10 px-10 py-4'>
         <div className='flex flex-col '>
           <div className='flex justify-center text-7xl drop-shadow'>Experience</div>
 
@@ -40,12 +40,12 @@ export default function WorksComponent() {
           </motion.button>
           <FormModal show={isWorkModalOpen} onClick={openWorkModal} onclose={setIsWorkModalOpen}>
             <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
-              <div className='image-preview w-50 object-fit relative mb-10 h-44 overflow-hidden rounded-md bg-white'>
+              <div className=' relative mb-10 h-44 w-fit overflow-hidden rounded-md bg-white'>
                 <img src={`/${cardBackground}`} />
-                <div className='avatar-img absolute right-2 top-0 z-10 h-20 w-40'>
+                <div className='absolute right-2 top-0 z-10 h-20 w-40'>
                   <img src={`/${cardAvatar}`} />
                 </div>
-                <div id='name-preview' className='bw-full absolute bottom-0 rounded-lg p-3 backdrop-blur-2xl'>
+                <div id='name-preview' className='absolute bottom-0 w-full rounded-lg p-3 backdrop-blur-2xl'>
                   {name}
                 </div>
                 <div id='description-preview' className='absolute top-0 w-full rounded-t-sm p-3'>
