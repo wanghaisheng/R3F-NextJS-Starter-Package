@@ -80,35 +80,33 @@ const ramData = [
 export default function LineComponent() {
   return (
     <>
-      <div className='mt-20 flex flex-col justify-center'>
+      <div className='flex flex-col justify-center'>
         {/* For Line chart */}
-        <div className='mx-auto flex min-h-48 flex-col rounded-2xl border border-slate-800 bg-black bg-opacity-10 bg-clip-padding p-11 px-4 shadow-xl shadow-blue-700 backdrop-blur-md hover:bg-opacity-25 hover:shadow-blue-500 md:px-8 xl:px-10'>
-          <div className='ml-7 text-blue-300'>Performance Data Of Ram of 2023</div>
-          <div className='mt-10'>
-            <ResponsiveContainer width={650} height={450}>
-              <LineChart data={ramData} margin={{ right: 30 }}>
-                <XAxis dataKey='name' padding={{ left: 5, right: 20 }} />
-                <YAxis width={50} orientation='left' tickCount={5} />
 
-                <CartesianGrid vertical={false} strokeDasharray='6 6' />
+        <div>
+          <ResponsiveContainer width={350} height={250}>
+            <LineChart data={ramData} margin={{ right: 30 }}>
+              <XAxis dataKey='name' padding={{ left: 5, right: 20 }} />
+              <YAxis width={50} orientation='left' tickCount={5} />
 
-                <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                {/* <Legend /> */}
-                <Legend
-                  width={300}
-                  wrapperStyle={{
-                    top: -40,
-                    right: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    borderRadius: 3,
-                  }}
-                />
+              <CartesianGrid vertical={false} strokeDasharray='6 6' />
 
-                <Line type='monotone' dataKey='currentPerformance' stroke='#36F097' />
-                <Line type='monotone' dataKey='expected' stroke='#268AFF' strokeDasharray='7 7' />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+              <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+
+              <Line type='monotone' dataKey='currentPerformance' stroke='#36F097' />
+              <Line type='monotone' dataKey='expected' stroke='#268AFF' strokeDasharray='7 7' />
+              {/* <Legend /> */}
+              <Legend
+                width={300}
+                wrapperStyle={{
+                  bottom: 0,
+                  right: 0,
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  borderRadius: 3,
+                }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </>

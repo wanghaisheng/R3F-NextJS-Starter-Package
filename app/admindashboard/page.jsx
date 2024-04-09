@@ -1,6 +1,8 @@
 'use client'
 
 import LineComponent from '@/components/charts/LineChart'
+import AreaChartComponent from '@/components/charts/AreaChart'
+import BubbleChartComponent from '@/components/charts/BubbleChart'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
@@ -9,26 +11,49 @@ import { SiFramer, SiTailwindcss, SiReact, SiJavascript, SiCss3 } from 'react-ic
 const AdminDashboard = () => {
   return (
     <>
-      <div className='flex bg-slate-900 text-slate-100'>
+      <div className='flex bg-slate-900/20 text-slate-100'>
         <SideNav />
-        <div className='h-screen w-full'>
+        <div className='size-full'>
           <div className='m-4 h-[35px] rounded'>Welcome, Admin</div>
-          <div className=' grid grid-flow-col grid-rows-4 gap-4'>
-            <div className='m-4 h-40 w-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'>
+          <div className=' grid grid-flow-row grid-cols-2 gap-4'>
+            <div className='border-b-1 m-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Line Chart</h1>
+                <p className='mt-5'>Some description about the chart</p>
+                <p className='mt-5 text-justify'>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit laborum hic rem voluptate minima, nam
+                  quasi sunt maiores delectus ducimus praesentium quam ea at fugiat perferendis provident! Nostrum,
+                  obcaecati nisi!
+                </p>
+                <p className='mt-5 text-justify'>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum iure illo molestias cum expedita,
+                  atque ullam omnis modi doloremque animi excepturi sunt magni sequi exercitationem asperiores error
+                  explicabo vitae dicta.
+                </p>
+              </div>
               <LineComponent />
             </div>
-            <div className='m-4 h-40 w-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
-            <div className='m-4 size-20 rounded border-2 border-dashed border-slate-600 bg-slate-800'></div>
+            <div className='border-b-1 m-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Area Chart</h1>
+                <p className='mt-5'>Some description about the chart</p>
+                <p className='mt-5 text-justify'>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit laborum hic rem voluptate minima, nam
+                  quasi sunt maiores delectus ducimus praesentium quam ea at fugiat perferendis provident! Nostrum,
+                  obcaecati nisi!
+                </p>
+                <p className='mt-5 text-justify'>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum iure illo molestias cum expedita,
+                  atque ullam omnis modi doloremque animi excepturi sunt magni sequi exercitationem asperiores error
+                  explicabo vitae dicta.
+                </p>
+              </div>
+              <AreaChartComponent />
+            </div>
+          </div>
+          <div className='border-b-1 m-4 flex size-fit flex-col justify-center rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+            <div>Login Data Of Ram of a week</div>
+            <BubbleChartComponent />
           </div>
         </div>
       </div>
@@ -40,7 +65,7 @@ const SideNav = () => {
   const [selected, setSelected] = useState(0)
 
   return (
-    <nav className='top-20 flex h-screen w-fit flex-col items-center gap-2 bg-slate-950 p-4'>
+    <nav className='top-20 flex size-fit flex-col items-center gap-2 bg-slate-950 p-4'>
       {/* Temp logo from https://logoipsum.com/ */}
       <svg width='40' height='28' viewBox='0 0 40 28' fill='none' xmlns='http://www.w3.org/2000/svg' className='mb-4'>
         <path
