@@ -8,10 +8,10 @@ const Slider = () => {
   return (
     <>
       <div className='flex items-start justify-start'>
-        {/* <WelcomeComponent />
-        <AvatarComponent /> */}
+        <WelcomeComponent />
+        {/* <AvatarComponent /> */}
         {/* <CardComponent /> */}
-        <ExperienceComponent />
+        {/* <ExperienceComponent /> */}
         {/* <SkillsComponent /> */}
       </div>
     </>
