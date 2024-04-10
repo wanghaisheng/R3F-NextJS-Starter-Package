@@ -43,17 +43,17 @@ import {
 } from 'recharts'
 
 // get all skills
-async function getSkills() {
-  try {
-    const response = await fetch('http://localhost:3000/api/skills/')
-    if (!response.ok) {
-      throw new Error('failed to fetch the skills')
-    }
-    return response.json()
-  } catch (error) {
-    console.error('Error fetching skills:', error)
-  }
-}
+// async function getSkills() {
+//   try {
+//     const res = await fetch('http://localhost:3000/api/skills/')
+//     if (!res.ok) {
+//       throw new Error('failed to fetch the skills')
+//     }
+//     return res.json()
+//   } catch (error) {
+//     console.error('Error fetching skills:', error)
+//   }
+// }
 
 const skill_data = [
   {
@@ -116,21 +116,22 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
 
 export default function Hero() {
-  const [skills, setSkills] = useState([])
+  const [skillData, setSkillData] = useState(null)
+  console.log(skillData)
+
   useEffect(() => {
-    async function fetchSkills() {
+    const fetchData = async () => {
       try {
-        const fetchedSkills = await getSkills()
-        setSkills(fetchedSkills)
+        const response = await fetch('http://localhost:3000/api/skills')
+        const jsonData = await response.json()
+        setSkillData(jsonData)
       } catch (error) {
         console.error('Error fetching skills:', error)
       }
     }
 
-    fetchSkills()
+    fetchData()
   }, [])
-
-  console.log(skills)
 
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false)
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
