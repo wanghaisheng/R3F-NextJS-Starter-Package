@@ -7,12 +7,12 @@ import CardComponent from '@/components/Slider/CardComponent'
 const Slider = () => {
   return (
     <>
-      <div className='flex items-start justify-start'>
+      <div className='flex flex-col'>
         <WelcomeComponent />
-        {/* <AvatarComponent /> */}
-        {/* <CardComponent /> */}
-        {/* <ExperienceComponent /> */}
-        {/* <SkillsComponent /> */}
+        <AvatarComponent />
+        <CardComponent />
+        <ExperienceComponent />
+        <SkillsComponent />
       </div>
     </>
   )

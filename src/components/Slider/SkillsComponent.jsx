@@ -75,7 +75,7 @@ export default function SkillsComponent() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className='mx-20 flex flex-col items-center'>
+    <div className='flex flex-col items-center'>
       <div className='flex h-full w-fit rounded-[30px] border-4 border-[#2E2B3C] bg-[#F8F8F8]/10 px-10 py-4'>
         <div className='flex flex-col '>
           <div className='flex justify-center text-7xl drop-shadow'>Skills</div>
