@@ -276,7 +276,7 @@ export default function BubbleChartComponent() {
             <div>
               {/* Chart for Sunday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,
@@ -326,7 +326,7 @@ export default function BubbleChartComponent() {
 
               {/* Chart for Monday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,
@@ -376,7 +376,7 @@ export default function BubbleChartComponent() {
 
               {/* Chart for Tuesday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,
@@ -426,7 +426,7 @@ export default function BubbleChartComponent() {
 
               {/* Chart for Wednesday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,
@@ -476,7 +476,7 @@ export default function BubbleChartComponent() {
 
               {/* Chart for Thursday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,
@@ -526,7 +526,7 @@ export default function BubbleChartComponent() {
 
               {/* Chart for Friday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,
@@ -576,7 +576,7 @@ export default function BubbleChartComponent() {
 
               {/* Chart for Saturday */}
               <ScatterChart
-                width={1000}
+                width={900}
                 height={60}
                 margin={{
                   top: 10,

@@ -25,7 +25,7 @@ export default async function WeatherBackground({ city }) {
 
     switch (weatherStatus) {
       case 'Clouds':
-        backgroundVideoUrl = 'blob:https%3A//www.youtube.com/23aea5c8-9ae2-40dc-9417-e675ea99b386'
+        backgroundVideoUrl = 'https://www.youtube.com/embed/eIkvfjdOKIs'
         break
       case 'Rain':
         backgroundVideoUrl = 'livewallpapers/sunny-clouds.mp4'
@@ -86,6 +86,7 @@ export default async function WeatherBackground({ city }) {
           <video className='absolute h-screen w-full object-cover object-center' autoPlay loop muted>
             <source src={backgroundVideoUrl} type='video/mp4' />
           </video>
+
           <div className='fixed right-5 top-24'>
             <Card
               cityName={name}

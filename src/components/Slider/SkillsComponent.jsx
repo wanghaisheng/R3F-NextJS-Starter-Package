@@ -44,10 +44,6 @@ export default function SkillsComponent() {
     { name: 'JavaScript', percentage: 90 },
   ])
 
-  const openSkillModal = () => {
-    setIsSkillModalOpen(true)
-  }
-
   const handleSkillNameChange = (index, newName) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
