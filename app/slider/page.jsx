@@ -31,16 +31,16 @@ const SliderPage = () => {
           <WelcomeComponent />
         </div>
         <div>
-          <SkillsComponent />
+          <AvatarComponent />
         </div>
         <div>
-          <AvatarComponent />
+          <CardComponent />
         </div>
         <div>
           <ExperienceComponent />
         </div>
         <div>
-          <CardComponent />
+          <SkillsComponent />
         </div>
       </Slider>
       <ChipTabs />

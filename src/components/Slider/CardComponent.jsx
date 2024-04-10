@@ -1,5 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
 
 export default function CardComponent() {
   return (
@@ -16,35 +18,83 @@ export default function CardComponent() {
             Add New Card
           </motion.button>
 
-          <div className='mt-12 flex'>
-            <nav className='my-2 flex justify-center'>
-              <p className='mx-2'>Educational</p>
-              <p className='mx-2'>Work</p>
-              <p className='mx-2'>Gym</p>
-            </nav>
-          </div>
+          <Tabs>
+            <TabList>
+              <Tab>Educational</Tab>
+              <Tab>Work</Tab>
+              <Tab>Gym</Tab>
+            </TabList>
 
-          <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-            <div className='flex justify-between gap-x-5'>
-              <div className='flex flex-col items-center'>
-                <img className=' rounded-t-lg object-cover' src='/image.png' alt='' />
-                <h1 className='mt-4 text-xl font-semibold'>Educational</h1>
+            <TabPanel>
+              <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                <div className='flex justify-between gap-x-5'>
+                  <div className='flex flex-col items-center'>
+                    <img className=' rounded-t-lg object-cover' src='/image.png' alt='' />
+                    <h1 className='mt-4 text-xl font-semibold'>Educational</h1>
+                  </div>
+                  <div>
+                    <h1 className='text-2xl font-bold'>School/College Name</h1>
+                    <p className='mt-4 '>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo cum fugit corrupti aperiam saepe
+                      fugiat illum ad iure asperiores quod dolores inventore vitae, quasi nulla pariatur, molestiae
+                      animi itaque harum.
+                    </p>
+                    <p className='mt-4'>Date In :</p>
+                    <p className='mt-4'>Date Out :</p>
+                  </div>
+                </div>
+                <div className='flex justify-end'>
+                  <button className='rounded-xl bg-black p-2 hover:bg-white/20'>Read More</button>
+                </div>
               </div>
-              <div>
-                <h1 className='text-2xl font-bold'>School/College Name</h1>
-                <p className='mt-4 '>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo cum fugit corrupti aperiam saepe fugiat
-                  illum ad iure asperiores quod dolores inventore vitae, quasi nulla pariatur, molestiae animi itaque
-                  harum.
-                </p>
-                <p className='mt-4'>Date In :</p>
-                <p className='mt-4'>Date Out :</p>
+            </TabPanel>
+            <TabPanel>
+              <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                <div className='flex justify-between gap-x-5'>
+                  <div className='flex flex-col items-center'>
+                    <img className=' rounded-t-lg object-cover' src='/image.png' alt='' />
+                    <h1 className='mt-4 text-xl font-semibold'>Work</h1>
+                  </div>
+                  <div>
+                    <h1 className='text-2xl font-bold'>Office Name</h1>
+                    <p className='mt-4 '>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo cum fugit corrupti aperiam saepe
+                      fugiat illum ad iure asperiores quod dolores inventore vitae, quasi nulla pariatur, molestiae
+                      animi itaque harum.
+                    </p>
+                    <p className='mt-4'>Date In :</p>
+                    <p className='mt-4'>Date Out :</p>
+                  </div>
+                </div>
+                <div className='flex justify-end'>
+                  <button className='rounded-xl bg-black p-2 hover:bg-white/20'>Read More</button>
+                </div>
               </div>
-            </div>
-            <div className='flex justify-end'>
-              <button className='rounded-xl bg-black p-2 hover:bg-white/20'>Read More</button>
-            </div>
-          </div>
+            </TabPanel>
+            <TabPanel>
+              <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                <div className='flex justify-between gap-x-5'>
+                  <div className='flex flex-col items-center'>
+                    <img className=' rounded-t-lg object-cover' src='/image.png' alt='' />
+                    <h1 className='mt-4 text-xl font-semibold'>Gym</h1>
+                  </div>
+                  <div>
+                    <h1 className='text-2xl font-bold'>Gym Name</h1>
+                    <p className='mt-4 '>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo cum fugit corrupti aperiam saepe
+                      fugiat illum ad iure asperiores quod dolores inventore vitae, quasi nulla pariatur, molestiae
+                      animi itaque harum.
+                    </p>
+                    <p className='mt-4'>Date In :</p>
+                    <p className='mt-4'>Date Out :</p>
+                  </div>
+                </div>
+                <div className='flex justify-end'>
+                  <button className='rounded-xl bg-black p-2 hover:bg-white/20'>Read More</button>
+                </div>
+              </div>
+            </TabPanel>
+          </Tabs>
         </div>
       </div>
     </div>
