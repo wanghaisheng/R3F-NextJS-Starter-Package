@@ -86,9 +86,9 @@ const SignIn = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className='signin md:h-2/4py flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
         >
-          <div className='card flex h-auto flex-col items-center justify-center gap-2 rounded-3xl shadow-md shadow-purple-700 backdrop-blur-sm lg:w-2/4'>
+          <div className='card flex h-auto flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-purple-700 backdrop-blur-sm lg:w-3/5'>
             <div className='card-title m-0 mb-5 rounded-t-3xl p-2 shadow-sm backdrop-blur-3xl'>
-              <h2 className='p-2 text-center text-xl text-purple-900'>LOGIN</h2>
+              <h2 className='p-2 text-center text-xl text-purple-900'>Signin</h2>
             </div>
             <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
               <label htmlFor='' className='labels text-xl font-semibold '>

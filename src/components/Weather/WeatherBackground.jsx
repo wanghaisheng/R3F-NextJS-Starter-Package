@@ -1,9 +1,7 @@
 import Card from '@/components/Weather/Card'
 
 // export default async function Hero({ city }: { city: string }) {
-export default async function WeatherBackground() {
-  const city = 'Kathmandu'
-
+export default async function WeatherBackground({ city }) {
   const apiKey = process.env.API_KEY
   const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric&q='
 
@@ -27,10 +25,10 @@ export default async function WeatherBackground() {
 
     switch (weatherStatus) {
       case 'Clouds':
-        backgroundVideoUrl = '/livewallpapers/sunny-clouds-afternoon.mp4'
+        backgroundVideoUrl = 'blob:https%3A//www.youtube.com/23aea5c8-9ae2-40dc-9417-e675ea99b386'
         break
       case 'Rain':
-        backgroundVideoUrl = 'livewallpapers/rainy.mp4'
+        backgroundVideoUrl = 'livewallpapers/sunny-clouds.mp4'
         break
       case 'Fog':
         backgroundImageUrl =
@@ -84,8 +82,8 @@ export default async function WeatherBackground() {
 
     return (
       <>
-        <div className='relative h-screen w-screen bg-cover bg-fixed bg-center bg-no-repeat text-white'>
-          <video className='absolute h-screen w-screen object-cover object-center' autoPlay loop muted>
+        <div className='relative h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat text-white'>
+          <video className='absolute h-screen w-full object-cover object-center' autoPlay loop muted>
             <source src={backgroundVideoUrl} type='video/mp4' />
           </video>
           <div className='fixed right-5 top-24'>
