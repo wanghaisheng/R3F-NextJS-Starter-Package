@@ -83,7 +83,7 @@ export default function SkillsComponent() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className='w-1/5 rounded-2xl border-2 p-2 text-white shadow-md '
+            className='absolute right-6 top-6 w-56 rounded-2xl border p-2 text-white shadow-md '
             onClick={() => {
               openCardModal(true)
             }}
@@ -122,28 +122,28 @@ export default function SkillsComponent() {
             ))}
           </FormModal>
 
-          <div className='flex'>
-            <div className='flex flex-col'>
-              <div className='flex'>
-                {skills.map((skill, index) => (
-                  <div key={index}>
-                    <nav className='my-2 flex justify-center'>
-                      <p className='mx-2'>{skill.name}</p>
-                    </nav>
-                  </div>
-                ))}
+          <div className='mt-12 flex'>
+            {skills.map((skill, index) => (
+              <div key={index}>
+                <nav className='my-2 flex justify-center'>
+                  <p className='mx-2'>{skill.name}</p>
+                </nav>
               </div>
-              <div className='mr-10 w-96 rounded-[20px] border-4 border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                <p>React</p>
-                <p>
+            ))}
+          </div>
+          <div className='flex gap-x-4'>
+            <div className='flex flex-col'>
+              <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                <p className='text-2xl'>React</p>
+                <p className='mt-5 text-sm'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consectetur dolores, veniam
                   reprehenderit dolore deleniti iure veritatis natus hic, minima quibusdam qui assumenda. Quod eum
                   veritatis, quos est illo iusto.
                 </p>
-                <p>Certifications: </p>
+                <p className='mt-5 text-xl'>Certifications: </p>
               </div>
             </div>
-            <div className='flex h-full w-[40%] flex-col justify-between rounded-[30px] bg-[#D9D9D9]/20  py-4'>
+            <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
               <p className='pl-4'>Specifications</p>
               {/* Condition for changing barchart chart and radar chart*/}
               {skills.length < 6 ? (

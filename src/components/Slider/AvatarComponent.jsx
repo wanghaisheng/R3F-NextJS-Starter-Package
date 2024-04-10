@@ -11,20 +11,34 @@ export default function AvatarComponent() {
         <div className='flex flex-col'>
           <div className='flex justify-center text-7xl drop-shadow'>My Avatar</div>
 
-          <Avatar
-            modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-            shadows
-            animationSrc='/male-idle-3.fbx'
-            style={{ background: 'rgb(9,20,26)' }}
-            fov={40}
-            cameraTarget={1.5}
-            cameraInitialDistance={30}
-            effects={{
-              ambientOcclusion: true,
-            }}
-          />
-          <div>Hello</div>
-          <div>Hello</div>
+          <div className='mt-7 flex justify-between'>
+            <Avatar
+              modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+              shadows
+              animationSrc='/male-idle-3.fbx'
+              style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px' }}
+              fov={40}
+              cameraTarget={1.5}
+              cameraInitialDistance={30}
+              effects={{
+                ambientOcclusion: true,
+              }}
+            />
+            <div className='grid h-fit grid-cols-3 gap-4'>
+              <div className='rounded-lg bg-white/20'>
+                <img src='/aa.png' alt='' height='120px' width='120px' />
+              </div>
+              <div className='rounded-lg bg-white/20'>
+                <img src='/aa.png' alt='' height='120px' width='120px' />
+              </div>
+              <div className='rounded-lg bg-white/20'>
+                <img src='/aa.png' alt='' height='120px' width='120px' />
+              </div>
+              <div className='rounded-lg bg-white/20'>
+                <img src='/aa.png' alt='' height='120px' width='120px' />
+              </div>
+            </div>
+          </div>
           <div className='flex justify-end'>
             <motion.a
               whileHover={{ scale: 1.1 }}
