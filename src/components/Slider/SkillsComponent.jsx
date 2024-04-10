@@ -7,6 +7,9 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import FormModal2 from '@/components/FormModal/Modal2'
 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+
 import {
   Bar,
   BarChart,
@@ -86,6 +89,7 @@ export default function SkillsComponent() {
           >
             Add New Skill
           </motion.button>
+
           <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
             <motion.div
               initial={{ opacity: 0, scaleY: 0 }}
@@ -118,109 +122,113 @@ export default function SkillsComponent() {
             ))}
           </FormModal2>
 
-          <div className='mt-12 flex'>
-            {skills.map((skill, index) => (
-              <div key={index}>
-                <nav className='my-2 flex justify-center'>
-                  <p className='mx-2'>{skill.name}</p>
-                </nav>
-              </div>
-            ))}
-          </div>
-          <div className='flex gap-x-4'>
-            <div className='flex flex-col'>
+          <Tabs>
+            <TabList>
+              {skills.map((skill, index) => (
+                <Tab key={index}> {skill.name}</Tab>
+              ))}
+            </TabList>
+            <div className='flex gap-x-5'>
+              {skills.map((skill, index) => (
+                <TabPanel key={index}>
+                  <div className='flex gap-x-4'>
+                    <div className='flex flex-col'>
+                      <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                        <p className='text-2xl'>{skill.name}</p>
+                        <p className='mt-5 text-sm'>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consectetur dolores, veniam
+                          reprehenderit dolore deleniti iure veritatis natus hic, minima quibusdam qui assumenda. Quod
+                          eum veritatis, quos est illo iusto.
+                        </p>
+                        <p className='mt-5 text-xl'>Certifications: </p>
+                      </div>
+                    </div>
+                  </div>
+                </TabPanel>
+              ))}
               <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                <p className='text-2xl'>React</p>
-                <p className='mt-5 text-sm'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consectetur dolores, veniam
-                  reprehenderit dolore deleniti iure veritatis natus hic, minima quibusdam qui assumenda. Quod eum
-                  veritatis, quos est illo iusto.
-                </p>
-                <p className='mt-5 text-xl'>Certifications: </p>
-              </div>
-            </div>
-            <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-              <p className='pl-4'>Specifications</p>
-              {/* Condition for changing barchart chart and radar chart*/}
-              {skills.length < 6 ? (
-                <ResponsiveContainer width={278} height={287}>
-                  <BarChart
-                    width={278}
-                    height={287}
-                    data={skills}
-                    margin={{
-                      top: 5,
-                      right: 20,
-                      left: 0,
-                      bottom: 5,
-                    }}
-                  >
-                    <XAxis dataKey='name' padding={{ left: 20, right: 20 }} />
-                    <YAxis domain={[0, 100]} />
-                    <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                    <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                    <Bar
-                      name='Ram'
-                      dataKey='percentage'
-                      fill='#6E29F7'
-                      activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                // Radar chart
-                <ResponsiveContainer width={278} height={287}>
-                  <RadarChart
-                    // cx={300}
-                    // cy={250}
-                    // outerRadius={150}
-                    width={278}
-                    height={287}
-                    data={skills}
-                  >
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey='name' />
-                    <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                    <Radar
-                      name='Ram'
-                      dataKey='percentage'
-                      stroke='#28B5E1'
-                      strokeWidth={4}
-                      fill='#28B5E1'
-                      fillOpacity={0.4}
-                    />
-                    {/* <Tooltip /> */}
-                    {/* <Legend values="100%" /> */}
-                    <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                  </RadarChart>
-                </ResponsiveContainer>
-              )}
-              <div className='flex items-center justify-center'>
-                <motion.div animate={open ? 'open' : 'closed'} className='relative'>
-                  <button
-                    onClick={() => setOpen((pv) => !pv)}
-                    className='flex items-center gap-2 rounded-md bg-indigo-500 px-3 py-2 text-indigo-50 transition-colors hover:bg-indigo-500'
-                  >
-                    <span className='text-sm font-medium'>Select View</span>
-                    <motion.span variants={iconVariants}>
-                      <FiChevronDown />
-                    </motion.span>
-                  </button>
+                <p className='pl-4'>Specifications</p>
+                {/* Condition for changing barchart chart and radar chart*/}
+                {skills.length < 6 ? (
+                  <ResponsiveContainer width={278} height={287}>
+                    <BarChart
+                      width={278}
+                      height={287}
+                      data={skills}
+                      margin={{
+                        top: 5,
+                        right: 20,
+                        left: 0,
+                        bottom: 5,
+                      }}
+                    >
+                      <XAxis dataKey='name' padding={{ left: 20, right: 20 }} />
+                      <YAxis domain={[0, 100]} />
+                      <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                      <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                      <Bar
+                        name='Ram'
+                        dataKey='percentage'
+                        fill='#6E29F7'
+                        activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  // Radar chart
+                  <ResponsiveContainer width={278} height={287}>
+                    <RadarChart
+                      // cx={300}
+                      // cy={250}
+                      // outerRadius={150}
+                      width={278}
+                      height={287}
+                      data={skills}
+                    >
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey='name' />
+                      <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                      <Radar
+                        name='Ram'
+                        dataKey='percentage'
+                        stroke='#28B5E1'
+                        strokeWidth={4}
+                        fill='#28B5E1'
+                        fillOpacity={0.4}
+                      />
+                      {/* <Tooltip /> */}
+                      {/* <Legend values="100%" /> */}
+                      <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                )}
+                <div className='flex items-center justify-center'>
+                  <motion.div animate={open ? 'open' : 'closed'} className='relative'>
+                    <button
+                      onClick={() => setOpen((pv) => !pv)}
+                      className='flex items-center gap-2 rounded-md bg-indigo-500 px-3 py-2 text-indigo-50 transition-colors hover:bg-indigo-500'
+                    >
+                      <span className='text-sm font-medium'>Select View</span>
+                      <motion.span variants={iconVariants}>
+                        <FiChevronDown />
+                      </motion.span>
+                    </button>
 
-                  <motion.ul
-                    initial={wrapperVariants.closed}
-                    variants={wrapperVariants}
-                    style={{ originY: 'top', translateX: '-50%' }}
-                    className='absolute left-[50%] top-[120%] flex w-48 flex-col gap-2 overflow-hidden rounded-lg bg-[#D9D9D9] p-2 shadow-xl'
-                  >
-                    <Option setOpen={setOpen} Icon={AiOutlineRadarChart} text='Radar Chart' />
-                    <Option setOpen={setOpen} Icon={FaChartPie} text='Pie Chart' />
-                    <Option setOpen={setOpen} Icon={FaRegChartBar} text='Bar Chart' />
-                  </motion.ul>
-                </motion.div>
+                    <motion.ul
+                      initial={wrapperVariants.closed}
+                      variants={wrapperVariants}
+                      style={{ originY: 'top', translateX: '-50%' }}
+                      className='absolute left-[50%] top-[120%] flex w-48 flex-col gap-2 overflow-hidden rounded-lg bg-[#D9D9D9] p-2 shadow-xl'
+                    >
+                      <Option setOpen={setOpen} Icon={AiOutlineRadarChart} text='Radar Chart' />
+                      <Option setOpen={setOpen} Icon={FaChartPie} text='Pie Chart' />
+                      <Option setOpen={setOpen} Icon={FaRegChartBar} text='Bar Chart' />
+                    </motion.ul>
+                  </motion.div>
+                </div>
               </div>
             </div>
-          </div>
+          </Tabs>
         </div>
       </div>
     </div>
