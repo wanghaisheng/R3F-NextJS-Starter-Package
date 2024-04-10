@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export default function WelcomeComponent() {
   return (
-    <div className=' mt-10 flex size-full flex-col items-center justify-center'>
+    <div className='mt-10 flex size-full flex-col items-center justify-center'>
       <div className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex flex-col '>
           <div className='mt-10 flex flex-col items-center justify-center drop-shadow'>
