@@ -11,6 +11,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { motion } from 'framer-motion'
 import { UserLogoIcon } from '@/logo/UserLogo'
 import { PasswordLogoIcon } from '@/logo/PasswordLogo'
+import { jwtDecode } from 'jwt-decode'
 
 const { log } = console
 const SignIn = () => {
