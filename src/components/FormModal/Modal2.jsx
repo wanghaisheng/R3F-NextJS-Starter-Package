@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 
-const FormModal = ({ show, onclose, children }) => {
+const FormModal2 = ({ show, onclose, children }) => {
   return (
     <motion.div
       style={{
-        transform: show ? 'translateX(0%)' : 'translateX(-500%)',
+        transform: show ? 'translateY(0%)' : 'translateY(-1000%)',
       }}
       className='absolute left-0 top-5 z-20 size-full transition-all duration-700'
     >
@@ -25,4 +25,4 @@ const FormModal = ({ show, onclose, children }) => {
   )
 }
 
-export default FormModal
+export default FormModal2

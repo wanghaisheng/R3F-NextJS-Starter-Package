@@ -5,7 +5,7 @@ import { AiOutlineRadarChart } from 'react-icons/ai'
 import { FaChartPie, FaRegChartBar } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import FormModal from '@/components/FormModal/Modal'
+import FormModal2 from '@/components/FormModal/Modal2'
 
 import {
   Bar,
@@ -86,7 +86,7 @@ export default function SkillsComponent() {
           >
             Add New Skill
           </motion.button>
-          <FormModal show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
+          <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
             <motion.div
               initial={{ opacity: 0, scaleY: 0 }}
               animate={{ opacity: 1, scaleY: 1 }}
@@ -116,7 +116,7 @@ export default function SkillsComponent() {
                 />
               </div>
             ))}
-          </FormModal>
+          </FormModal2>
 
           <div className='mt-12 flex'>
             {skills.map((skill, index) => (
