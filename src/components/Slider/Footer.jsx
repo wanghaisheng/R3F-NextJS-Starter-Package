@@ -9,7 +9,7 @@ const ChipTabs = () => {
   const [selected, setSelected] = useState(tabs[0])
 
   return (
-    <div className='flex justify-center'>
+    <div className=' flex items-center justify-center'>
       <div className='my-7 flex h-12 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md  shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
         {tabs.map((tab) => (
           <Chip text={tab} selected={selected === tab} setSelected={setSelected} key={tab} />
