@@ -7,11 +7,14 @@ import ExperienceComponent from '@/components/Slider/ExperienceComponent'
 import CardComponent from '@/components/Slider/CardComponent'
 import ChipTabs from '@/components/Slider/Footer'
 
+import Card2Component from '@/components/Slider/Card2Component'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import { IoChevronForwardSharp, IoChevronBack } from 'react-icons/io5'
+import Card2 from '@/card2/page'
 
 const SliderPage = () => {
   const settings = {
@@ -77,9 +80,10 @@ const SliderPage = () => {
     <>
       <div className=' mt-4 flex h-full md:px-10 lg:px-10 xl:px-10 2xl:px-24'>
         <Slider {...settings} className='size-full 2xl:w-full'>
-          <WelcomeComponent />
+          {/* <WelcomeComponent /> */}
           <AvatarComponent />
           <CardComponent />
+          <Card2Component />
           <ExperienceComponent />
           <SkillsComponent />
         </Slider>

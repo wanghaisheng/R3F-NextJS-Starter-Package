@@ -78,7 +78,7 @@ export default function SkillsComponent() {
       <div className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col '>
           <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
-            Experience
+            Skills
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

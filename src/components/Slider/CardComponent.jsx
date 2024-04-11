@@ -108,43 +108,60 @@ export default function CardComponent() {
               <button onClick={handleAddCards}>Add New Card</button>
             </motion.div>
             {cards.map((card, index) => (
-              <div key={index}>
-                <input
-                  type='text'
-                  value={card.type}
-                  onChange={(e) => handleCardTypeChange(index, e.target.value)}
-                  placeholder='Card Type'
-                  className='rounded-md bg-white/20'
-                />
-                <input
-                  type='text'
-                  value={card.name}
-                  onChange={(e) => handleCardNameChange(index, e.target.value)}
-                  placeholder='Card Name'
-                  className='rounded-md bg-white/20'
-                />
-                <input
-                  type='text'
-                  value={card.description}
-                  onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
-                  placeholder='Card Description'
-                  className='rounded-md bg-white/20'
-                />
-                <input
-                  type='text'
-                  value={card.dateIn}
-                  onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                  placeholder='Date In'
-                  className='rounded-md bg-white/20'
-                />
-                <input
-                  type='text'
-                  value={card.dateOut}
-                  onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                  placeholder='Date Out'
-                  className='rounded-md bg-white/20'
-                />
-              </div>
+              <form key={index} className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
+                <div className='flex w-full flex-col gap-y-2 px-4'>
+                  <div className='flex justify-between'>
+                    <label htmlFor=''>Type</label>
+                    <input
+                      type='text'
+                      value={card.type}
+                      onChange={(e) => handleCardTypeChange(index, e.target.value)}
+                      placeholder='Card Type'
+                      className='w-[70%] rounded-md bg-white/20 px-3'
+                    />
+                  </div>
+                  <div className='flex justify-between'>
+                    <label htmlFor=''>Name</label>
+                    <input
+                      type='text'
+                      value={card.name}
+                      onChange={(e) => handleCardNameChange(index, e.target.value)}
+                      placeholder='Card Name'
+                      className='w-[70%] rounded-md bg-white/20 px-3'
+                    />
+                  </div>
+                  <div className='flex justify-between'>
+                    <label htmlFor=''>Description</label>
+                    <input
+                      type='text'
+                      value={card.description}
+                      onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
+                      placeholder='Card Description'
+                      className='w-[70%] rounded-md bg-white/20  px-3'
+                    />
+                  </div>
+                  <div className='flex justify-between'>
+                    <label htmlFor=''>Date In</label>
+                    <input
+                      type='text'
+                      value={card.dateIn}
+                      onChange={(e) => handleCardDateInChange(index, e.target.value)}
+                      placeholder='Date In'
+                      className='w-[70%] rounded-md bg-white/20  px-3'
+                    />
+                  </div>
+                  <div className='flex justify-between'>
+                    <label htmlFor=''>Date Out</label>
+                    <input
+                      type='text'
+                      value={card.dateOut}
+                      onChange={(e) => handleCardDateOutChange(index, e.target.value)}
+                      placeholder='Date Out'
+                      className='w-[70%] rounded-md bg-white/20  px-3'
+                    />
+                  </div>
+                </div>
+              </form>
             ))}
           </FormModal2>
 
@@ -179,6 +196,7 @@ export default function CardComponent() {
                       <p className='mt-4'>Date Out : {card.dateOut}</p>
                     </div>
                   </div>
+
                   {/* <div className='flex justify-end'>
                     <button className='rounded-xl bg-black p-2 hover:bg-white/20'>Read More</button>
                   </div> */}
