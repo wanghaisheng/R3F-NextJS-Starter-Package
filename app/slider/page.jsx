@@ -52,31 +52,31 @@ const SliderPage = () => {
       },
     ],
 
-    // customize next arrow and previous arrow colors
-    nextArrow: (
-      <div>
-        <button className='me -5 size-10 rounded-full text-2xl text-gray-500'>
-          <i className='fas fa-chevron-right text-5xl'>
-            <IoChevronForwardSharp />
-          </i>
-        </button>
-      </div>
-    ),
-    prevArrow: (
-      <div className=''>
-        <button className='size-10 rounded-full text-2xl text-gray-500'>
-          <i className='fas fa-chevron-right text-5xl'>
-            <IoChevronBack />
-          </i>
-        </button>
-      </div>
-    ),
+    // // customize next arrow and previous arrow colors
+    // nextArrow: (
+    //   <div>
+    //     <button className='me -5 size-10 rounded-full text-2xl text-gray-500'>
+    //       <i className='fas fa-chevron-right text-5xl'>
+    //         <IoChevronForwardSharp />
+    //       </i>
+    //     </button>
+    //   </div>
+    // ),
+    // prevArrow: (
+    //   <div className=''>
+    //     <button className='size-10 rounded-full text-2xl text-gray-500'>
+    //       <i className='fas fa-chevron-right text-5xl'>
+    //         <IoChevronBack />
+    //       </i>
+    //     </button>
+    //   </div>
+    // ),
   }
 
   return (
     <>
       <div className=' mt-4 flex h-full md:px-10 lg:px-10 xl:px-10 2xl:px-24'>
-        <Slider {...settings} className='w-full 2xl:w-full'>
+        <Slider {...settings} className='size-full 2xl:w-full'>
           <WelcomeComponent />
           <AvatarComponent />
           <CardComponent />

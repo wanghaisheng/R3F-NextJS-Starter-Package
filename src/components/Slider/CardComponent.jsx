@@ -49,7 +49,7 @@ export default function CardComponent() {
   }
 
   const handleCardDescriptionChange = (index, newDescription) => {
-    setProjects((prevCards) => {
+    setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].description = newDescription
       return updatedCards
@@ -57,7 +57,7 @@ export default function CardComponent() {
   }
 
   const handleCardDateInChange = (index, newDateIn) => {
-    setProjects((prevCards) => {
+    setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].dateIn = newDateIn
       return updatedCards
@@ -65,7 +65,7 @@ export default function CardComponent() {
   }
 
   const handleCardDateOutChange = (index, newDateOut) => {
-    setProjects((prevCards) => {
+    setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].dateOut = newDateOut
       return updatedCards
@@ -73,7 +73,7 @@ export default function CardComponent() {
   }
 
   const handleAddCards = () => {
-    setProjects((prevCards) => [...prevCards, { type: '', name: '', description: '', dateIn: '', dateOut: '' }])
+    setCards((prevCards) => [...prevCards, { type: '', name: '', description: '', dateIn: '', dateOut: '' }])
   }
 
   const openCardModal = () => {
@@ -84,7 +84,7 @@ export default function CardComponent() {
     <div className='mt-2 flex flex-col items-center'>
       <div className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col'>
-          <div className='relative my-8 flex justify-center text-7xl drop-shadow'>
+          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
             Card
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -149,9 +149,12 @@ export default function CardComponent() {
           </FormModal2>
 
           <Tabs>
-            <TabList>
+            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {cards.map((card, index) => (
-                <Tab key={index}> {card.type}</Tab>
+                <Tab key={index} className='flex pl-1 pr-5'>
+                  {' '}
+                  {card.type}
+                </Tab>
               ))}
             </TabList>
 

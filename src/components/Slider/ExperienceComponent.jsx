@@ -61,7 +61,7 @@ export default function ExperienceComponent() {
     <div className='mt-2 flex flex-col items-center'>
       <div className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col '>
-          <div className='relative my-8 flex justify-center text-7xl drop-shadow'>
+          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
             Experience
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -119,9 +119,12 @@ export default function ExperienceComponent() {
           </FormModal2>
 
           <Tabs>
-            <TabList>
+            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {projects.map((project, index) => (
-                <Tab key={index}> {project.name}</Tab>
+                <Tab key={index} className='flex pl-1 pr-5 '>
+                  {' '}
+                  {project.name}
+                </Tab>
               ))}
             </TabList>
             <div className='relative mt-6 flex h-72 w-full'>

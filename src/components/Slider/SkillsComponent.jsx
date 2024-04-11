@@ -76,19 +76,20 @@ export default function SkillsComponent() {
   return (
     <div className='mt-2 flex flex-col items-center justify-center'>
       <div className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
-        <div className='flex flex-col '>
-          <div className='flex justify-center text-7xl drop-shadow'>Skills</div>
-
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className='absolute right-6 top-6 w-56 rounded-2xl border p-2 text-white shadow-md '
-            onClick={() => {
-              openCardModal(true)
-            }}
-          >
-            Add New Skill
-          </motion.button>
+        <div className='flex w-full flex-col '>
+          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
+            Experience
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
+              onClick={() => {
+                openCardModal(true)
+              }}
+            >
+              Add New Project &emsp;&emsp; +
+            </motion.button>
+          </div>
 
           <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
             <motion.div
@@ -123,11 +124,14 @@ export default function SkillsComponent() {
           </FormModal2>
 
           <Tabs>
-            <TabList>
+            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {skills.map((skill, index) => (
-                <Tab key={index}> {skill.name}</Tab>
+                <Tab key={index} className='flex pl-1 pr-5'>
+                  {skill.name}
+                </Tab>
               ))}
             </TabList>
+
             <div className='flex gap-x-5'>
               {skills.map((skill, index) => (
                 <TabPanel key={index}>
