@@ -1,30 +1,30 @@
 'use client'
-import { AvatarCreator, AvatarCreatorConfig, AvatarExportedEvent } from '@readyplayerme/react-avatar-creator';
-import { useRouter } from 'next/navigation';
+import { AvatarCreator, AvatarCreatorConfig, AvatarExportedEvent } from '@readyplayerme/react-avatar-creator'
+import { useRouter } from 'next/navigation'
 
-import { useState } from "react";
+import { useState } from 'react'
 import axios from 'axios'
-import { useUser } from '@/context/UserContext/UserContext';
+import { useUser } from '@/context/UserContext/UserContext'
 
 const config: AvatarCreatorConfig = {
   clearCache: false,
   bodyType: 'fullbody',
   quickStart: false,
   language: 'en',
-};
+}
 
-const style = { width: '100%', height: '100vh', border: 'none' };
+const style = { width: '100%', height: '100vh', border: 'none' }
 
 export default function App() {
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('')
   const router = useRouter()
   const handleOnAvatarExported = (event: AvatarExportedEvent) => {
-    router.push('/hero')
-    setAvatarUrl(event.data.url);
-  };
+    router.push('/slider')
+    setAvatarUrl(event.data.url)
+  }
 
   const { log } = console
-  const { user } = useUser();
+  const { user } = useUser()
   // const userId = user.gg_id;
   console.log(avatarUrl)
   console.log(user)
@@ -50,8 +50,8 @@ export default function App() {
   // }
 
   return (
-      <>
-        <AvatarCreator subdomain="gguser" config={config} style={style} onAvatarExported={handleOnAvatarExported} />
-      </>
-  );
+    <>
+      <AvatarCreator subdomain='gguser' config={config} style={style} onAvatarExported={handleOnAvatarExported} />
+    </>
+  )
 }

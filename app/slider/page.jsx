@@ -7,6 +7,7 @@ import ExperienceComponent from '@/components/Slider/ExperienceComponent'
 import CardComponent from '@/components/Slider/CardComponent'
 import ChipTabs from '@/components/Slider/Footer'
 
+import UserInfoComponent from '@/components/Slider/UserInfoComponent'
 import Card2Component from '@/components/Slider/Card2Component'
 
 import Slider from 'react-slick'
@@ -23,7 +24,7 @@ const SliderPage = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    adaptiveHeight: true,
+    adaptiveHeight: false,
     centerMode: true,
     draggable: false,
     focusonSelect: true,
@@ -82,7 +83,8 @@ const SliderPage = () => {
         <Slider {...settings} className='size-full 2xl:w-full'>
           {/* <WelcomeComponent /> */}
           <AvatarComponent />
-          <CardComponent />
+          {/* <CardComponent /> */}
+          <UserInfoComponent />
           <Card2Component />
           <ExperienceComponent />
           <SkillsComponent />
