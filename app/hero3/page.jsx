@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { Avatar } from 'src/components/Avatar'
-import { useState } from 'react'
 import FormModal from '@/components/FormModal/Modal'
 import { motion } from 'framer-motion'
 import { LogosFacebook } from '@/logo/LogosFacebook'
@@ -19,6 +18,9 @@ import { LogosApple } from '@/logo/LogosApple'
 import { LogosFigma } from '@/logo/LogosFigma'
 import { LogosTwitch } from '@/logo/LogosTwitch'
 import { SkillIconsGithubDark } from '@/logo/SkillIconsGithubDark'
+import { useState, useEffect } from 'react'
+import { useUser } from '@/context/UserContext/UserContext'
+import axios from 'axios'
 
 // For the card flip QR code
 import QRCode from 'qrcode'
@@ -40,33 +42,58 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { ConstantColorFactor } from 'three'
 
-const data = [
-  {
-    skill: 'Python',
-    percentage: 76,
-  },
-  {
-    skill: 'Java',
-    percentage: 78,
-  },
-  {
-    skill: 'Django',
-    percentage: 56,
-  },
-  {
-    skill: 'PHP',
-    percentage: 59,
-  },
-  {
-    skill: 'HTML',
-    percentage: 75,
-  },
-  {
-    skill: 'CSS',
-    percentage: 65,
-  },
-]
+// const skillsData = [
+//   {
+//     skill: 'Python',
+//     percentage: 76,
+//   },
+//   {
+//     skill: 'Java',
+//     percentage: 78,
+//   },
+//   {
+//     skill: 'Django',
+//     percentage: 56,
+//   },
+//   {
+//     skill: 'PHP',
+//     percentage: 59,
+//   },
+//   {
+//     skill: 'HTML',
+//     percentage: 75,
+//   },
+//   {
+//     skill: 'CSS',
+//     percentage: 65,
+//   },
+// ]
+
+async function getSkills() {
+  try {
+    const res = await fetch('http://localhost:3000/api/skills')
+    if (!res.ok) {
+      throw new Error('failed to fetch the skills')
+    }
+    return res.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+// getSkills()
+//   .then((res) => {
+//     // Access the resolved value here
+//     // console.log(res)
+//     const testData = res
+//     console.log(testData)
+//   })
+//   .catch((error) => {
+//     // Handle any errors that occurred during the promise execution
+//     console.error(error)
+//   })
 
 // Custom tooltip component
 const CustomTooltip = ({ active, payload, label }) => {
@@ -102,6 +129,92 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
 
 export default function Hero() {
+  const { user } = useUser()
+  const [skillsData, setSkillsData] = useState(null)
+
+  useEffect(() => {
+    const fetchSkillsData = async () => {
+      try {
+        const testData = await getSkills() // Fetch skills data
+        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
+        setSkillsData(filteredData) // Set the filtered data
+      } catch (error) {
+        console.error('Error fetching skills data:', error)
+      }
+    }
+
+    if (user) {
+      fetchSkillsData() // Fetch data only if user is available
+    }
+  }, [user])
+
+  // --------------------------------------------------------------------------------------------------------------------------
+  // getSkills()
+  //   .then(async (res) => {
+  //     // Access the resolved value here
+  //     // console.log(res)
+  //     const testData = await res
+  //     while (!user) {
+  //       await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for 100 milliseconds before checking again
+  //     }
+
+  //     const filteredData = testData.filter((element) => element.gg_id === user.gg_id)
+  //     // console.log(filteredData)
+  //     setSkillsData(filteredData) // Set the filtered data
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors that occurred during the promise execution
+  //     console.error(error)
+  //   })
+  // --------------------------------------------------------------------------------------------------------------------------
+  // useEffect(() => {
+  //   async function fetchSkills() {
+  //     try {
+  //       const res = await fetch('http://localhost:3000/api/skills')
+  //       if (!res.ok) {
+  //         throw new Error('Failed to fetch skills')
+  //       }
+  //       const data = await res.json()
+  //       // Filter the data based on your condition
+  // const filteredData = await data.filter((element) => element.gg_id === user.gg_id)
+  // setSkillsData(filteredData) // Set the filtered data
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   fetchSkills()
+  // }, [])
+  // -------------------------------------------------------------------------------------------------------------------------
+  // const [skillsData, setSkillsData] = useState(null)
+  // useEffect(() => {
+  //   async function fetchSkills() {
+  //     try {
+  //       const res = await fetch('http://localhost:3000/api/skills')
+  //       if (!res.ok) {
+  //         throw new Error('Failed to fetch skills')
+  //       }
+  //       const data = await res.json()
+  //       if (data) {
+  //         data.forEach(compareIds)
+  //         const new_data = []
+  //         function compareIds(element) {
+  //           let count = 0
+  //           if (element.gg_id === user.gg_id) {
+  //             new_data[count] = {
+  //               skill: element.skill,
+  //               percentage: element.percentage,
+  //             }
+  //           }
+  //         }
+  //       }
+  //       setSkillsData(new_data)
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   fetchSkills()
+  // }, [])
+
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false)
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
@@ -176,34 +289,65 @@ export default function Hero() {
       />
 
       {/* <EnvironmentModel environment="spaceStation" scale={1} /> */}
-      <div className='right-[30%] top-[32%] size-full md:absolute'>
-        <div className='ml-[12%] flex flex-col items-center justify-center'>
-          <h2 className='mb-12 text-4xl font-extrabold'>Ayush Lama</h2>
-          <nav className='flex flex-col space-y-4'>
-            <div className='flex items-center space-x-2'>
-              <LaptopIcon className='size-6' />
-              <div>
-                <h3 className='text-lg font-medium '>Web Development</h3>
-                <p className='text-sm text-gray-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      {user ? (
+        <div className='right-[30%] top-[32%] size-full md:absolute'>
+          <div className='ml-[12%] flex flex-col items-center justify-center'>
+            <h2 className='mb-12 text-4xl font-extrabold'>{user.first_name + ' ' + user.last_name}</h2>
+            <nav className='flex flex-col space-y-4'>
+              <div className='flex items-center space-x-2'>
+                <LaptopIcon className='size-6' />
+                <div>
+                  <h3 className='text-lg font-medium '>Web Development</h3>
+                  <p className='text-sm text-gray-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
               </div>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <SplineIcon className='size-6' />
-              <div>
-                <h3 className='text-lg font-medium'>UI/UX Design</h3>
-                <p className='text-sm text-gray-500'>Figma Design and Brand Design.</p>
+              <div className='flex items-center space-x-2'>
+                <SplineIcon className='size-6' />
+                <div>
+                  <h3 className='text-lg font-medium'>UI/UX Design</h3>
+                  <p className='text-sm text-gray-500'>Figma Design and Brand Design.</p>
+                </div>
               </div>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <ReplyIcon className='size-6' />
-              <div>
-                <h3 className='text-lg font-medium'>Development</h3>
-                <p className='text-sm text-gray-500'>Development Project Lead in Various Section</p>
+              <div className='flex items-center space-x-2'>
+                <ReplyIcon className='size-6' />
+                <div>
+                  <h3 className='text-lg font-medium'>Development</h3>
+                  <p className='text-sm text-gray-500'>Development Project Lead in Various Section</p>
+                </div>
               </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className='right-[30%] top-[32%] size-full md:absolute'>
+          <div className='ml-[12%] flex flex-col items-center justify-center'>
+            <h2 className='mb-12 text-4xl font-extrabold'>Ayush Lama</h2>
+            <nav className='flex flex-col space-y-4'>
+              <div className='flex items-center space-x-2'>
+                <LaptopIcon className='size-6' />
+                <div>
+                  <h3 className='text-lg font-medium '>Web Development</h3>
+                  <p className='text-sm text-gray-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+              </div>
+              <div className='flex items-center space-x-2'>
+                <SplineIcon className='size-6' />
+                <div>
+                  <h3 className='text-lg font-medium'>UI/UX Design</h3>
+                  <p className='text-sm text-gray-500'>Figma Design and Brand Design.</p>
+                </div>
+              </div>
+              <div className='flex items-center space-x-2'>
+                <ReplyIcon className='size-6' />
+                <div>
+                  <h3 className='text-lg font-medium'>Development</h3>
+                  <p className='text-sm text-gray-500'>Development Project Lead in Various Section</p>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
 
       <div className='left-[30%] top-[10%] size-full md:absolute '>
         <div className='flex flex-col items-center justify-center'>
@@ -298,62 +442,67 @@ export default function Hero() {
             <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
               <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
                 <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                  <div className=' '>
-                    {/* Condition for changing barchart chart and radar chart*/}
-                    {data.length < 6 ? (
-                      <ResponsiveContainer width={400} height={250}>
-                        <BarChart
-                          width={400}
-                          height={250}
-                          data={data}
-                          margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                          }}
-                        >
-                          <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
-                          <YAxis domain={[0, 100]} />
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                          <Bar
-                            name='Ram'
-                            dataKey='percentage'
-                            fill='#6E29F7'
-                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    ) : (
-                      // Radar chart
-                      <ResponsiveContainer width={400} height={250}>
-                        <RadarChart
-                          // cx={300}
-                          // cy={250}
-                          // outerRadius={150}
-                          width={400}
-                          height={250}
-                          data={data}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey='skill' />
-                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                          <Radar
-                            name='Ram'
-                            dataKey='percentage'
-                            stroke='#28B5E1'
-                            strokeWidth={4}
-                            fill='#28B5E1'
-                            fillOpacity={0.4}
-                          />
-                          {/* <Tooltip /> */}
-                          {/* <Legend values="100%" /> */}
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                        </RadarChart>
-                      </ResponsiveContainer>
-                    )}
-                  </div>
+                  {skillsData ? (
+                    <div className=' '>
+                      {/* Condition for changing barchart chart and radar chart*/}
+                      {skillsData.length < 6 ? (
+                        <ResponsiveContainer width={400} height={250}>
+                          <BarChart
+                            width={400}
+                            height={250}
+                            data={skillsData}
+                            margin={{
+                              top: 5,
+                              right: 30,
+                              left: 20,
+                              bottom: 5,
+                            }}
+                          >
+                            <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                            <YAxis domain={[0, 100]} />
+                            <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                            <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                            <Bar
+                              name='Ram'
+                              dataKey='percentage'
+                              fill='#6E29F7'
+                              activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                            />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        // Radar chart
+                        <ResponsiveContainer width={400} height={250}>
+                          <RadarChart
+                            // cx={300}
+                            // cy={250}
+                            // outerRadius={150}
+                            width={400}
+                            height={250}
+                            data={skillsData}
+                          >
+                            <PolarGrid />
+                            <PolarAngleAxis dataKey='skill' />
+                            <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                            <Radar
+                              name='Ram'
+                              dataKey='percentage'
+                              stroke='#28B5E1'
+                              strokeWidth={4}
+                              fill='#28B5E1'
+                              fillOpacity={0.4}
+                            />
+                            {/* <Tooltip /> */}
+                            {/* <Legend values="100%" /> */}
+                            <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                          </RadarChart>
+                        </ResponsiveContainer>
+                      )}
+                    </div>
+                  ) : (
+                    // Render loading indicator or placeholder while data is being fetched
+                    <div>Loading...</div>
+                  )}
                 </div>
               </CardBody>
             </CardContainer>

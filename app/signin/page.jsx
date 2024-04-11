@@ -45,6 +45,7 @@ const SignIn = () => {
       log('Error: ', error)
     }
   }
+
   return (
     <>
       <main className='relative flex min-h-full flex-col items-center justify-around md:flex-row'>
