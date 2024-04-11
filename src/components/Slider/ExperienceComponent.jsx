@@ -58,21 +58,22 @@ export default function ExperienceComponent() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className='mt-10 flex size-full flex-col items-center'>
-      <div className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
+    <div className='mt-2 flex flex-col items-center'>
+      <div className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col '>
-          <div className='flex justify-center text-7xl drop-shadow'>Experience</div>
-
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className='absolute right-6 top-6 w-56 rounded-2xl border p-2 text-white shadow-md '
-            onClick={() => {
-              openCardModal(true)
-            }}
-          >
-            Add New Project
-          </motion.button>
+          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
+            Experience
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
+              onClick={() => {
+                openCardModal(true)
+              }}
+            >
+              Add New Project &emsp;&emsp; +
+            </motion.button>
+          </div>
 
           <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
             <motion.div
@@ -118,19 +119,28 @@ export default function ExperienceComponent() {
           </FormModal2>
 
           <Tabs>
-            <TabList>
+            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {projects.map((project, index) => (
-                <Tab key={index}> {project.name}</Tab>
+                <Tab key={index} className='flex pl-1 pr-5 '>
+                  {' '}
+                  {project.name}
+                </Tab>
               ))}
             </TabList>
-            <div className='relative flex h-80 w-full gap-x-5 '>
+            <div className='relative mt-6 flex h-72 w-full'>
               {projects.map((project, index) => (
                 <TabPanel key={index}>
-                  <div className='absolute flex w-full justify-between gap-x-5 rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                  <div className='absolute flex h-auto w-full  justify-between gap-x-5 rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                     <div>
-                      <img className=' rounded-t-lg object-cover' src='/image.png' alt='' width='400px' />
+                      <img
+                        className=' rounded-t-lg object-cover'
+                        src='/image.png'
+                        alt=''
+                        width='400px'
+                        height='268px'
+                      />
                     </div>
-                    <div className='w-[50%]'>
+                    <div className='w-[65%]'>
                       <div className='flex justify-between'>
                         <h1 className='text-2xl font-bold'>{project.name}</h1>
 
@@ -139,11 +149,6 @@ export default function ExperienceComponent() {
                       <p className='mt-4 '>{project.description}</p>
                       <p className='mt-4'>Skills : {project.skills}</p>
                       <p className='mt-4'>Tools and Tech : {project.tools}</p>
-                      <p className='mt-5 text-sm'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consectetur dolores, veniam
-                        reprehenderit dolore deleniti iure veritatis natus hic, minima quibusdam qui assumenda. Quod eum
-                        veritatis, quos est illo iusto.
-                      </p>
                     </div>
                   </div>
                 </TabPanel>

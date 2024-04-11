@@ -14,35 +14,76 @@ import 'slick-carousel/slick/slick-theme.css'
 import { IoChevronForwardSharp, IoChevronBack } from 'react-icons/io5'
 
 const SliderPage = () => {
-  let settings = {
+  const settings = {
     dots: false,
-    arrows: false,
-    lazyLoad: true,
+    // arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1,
+    adaptiveHeight: true,
+    centerMode: true,
+    draggable: false,
+    focusonSelect: true,
+    responsive: [
+      {
+        breakpoint: 1536,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+
+    // // customize next arrow and previous arrow colors
+    // nextArrow: (
+    //   <div>
+    //     <button className='me -5 size-10 rounded-full text-2xl text-gray-500'>
+    //       <i className='fas fa-chevron-right text-5xl'>
+    //         <IoChevronForwardSharp />
+    //       </i>
+    //     </button>
+    //   </div>
+    // ),
+    // prevArrow: (
+    //   <div className=''>
+    //     <button className='size-10 rounded-full text-2xl text-gray-500'>
+    //       <i className='fas fa-chevron-right text-5xl'>
+    //         <IoChevronBack />
+    //       </i>
+    //     </button>
+    //   </div>
+    // ),
   }
 
   return (
     <>
-      <Slider {...settings} className='w-full'>
-        <div>
+      <div className=' mt-4 flex h-full md:px-10 lg:px-10 xl:px-10 2xl:px-24'>
+        <Slider {...settings} className='size-full 2xl:w-full'>
           <WelcomeComponent />
-        </div>
-        <div>
           <AvatarComponent />
-        </div>
-        <div>
           <CardComponent />
-        </div>
-        <div>
           <ExperienceComponent />
-        </div>
-        <div>
           <SkillsComponent />
-        </div>
-      </Slider>
+        </Slider>
+      </div>
       <ChipTabs />
     </>
   )
