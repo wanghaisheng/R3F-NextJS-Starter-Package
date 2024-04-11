@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react'
 import Hero from '@/hero/page'
 import { useUser } from '@/context/UserContext/UserContext'
+import { useRouter } from 'next/navigation'
 import styles from './createavatar.module.css'
 
 const CreateAvatar = () => {
   const [avatars, setAvatars] = useState([])
+  const router = useRouter()
   const { user } = useUser()
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const CreateAvatar = () => {
         </div>
       )
     } else {
-      return <Hero />
+      return router.push('/hero3')
     }
   } else {
     return (

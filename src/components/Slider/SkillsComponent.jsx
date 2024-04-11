@@ -4,8 +4,10 @@ import { FiChevronDown } from 'react-icons/fi'
 import { AiOutlineRadarChart } from 'react-icons/ai'
 import { FaChartPie, FaRegChartBar } from 'react-icons/fa'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FormModal2 from '@/components/FormModal/Modal2'
+import { useUser } from '@/context/UserContext/UserContext'
+import { useRouter } from 'next/navigation'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
@@ -39,13 +41,43 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
+async function getSkills() {
+  try {
+    const res = await fetch('http://localhost:3000/api/skills')
+    if (!res.ok) {
+      throw new Error('failed to fetch the skills')
+    }
+    return res.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function SkillsComponent() {
+  const { user } = useUser()
+  const router = useRouter()
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-  const [skills, setSkills] = useState([
-    { name: 'HTML', percentage: 80 },
-    { name: 'CSS', percentage: 75 },
-    { name: 'JavaScript', percentage: 90 },
-  ])
+  const [skills, setSkills] = useState([{ skill: 'skill1', percentage: 0 }])
+  const [originalLength, setOriginalLength] = useState(0)
+
+  useEffect(() => {
+    const fetchSkillsData = async () => {
+      try {
+        const testData = await getSkills() // Fetch skills data
+        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
+        if (filteredData.length != 0) {
+          setSkills(filteredData) // Set the filtered data
+          setOriginalLength(filteredData.length)
+        }
+      } catch (error) {
+        console.error('Error fetching skills data:', error)
+      }
+    }
+
+    if (user) {
+      fetchSkillsData() // Fetch data only if user is available
+    }
+  }, [user])
 
   const handleSkillNameChange = (index, newName) => {
     setSkills((prevSkills) => {
@@ -73,12 +105,36 @@ export default function SkillsComponent() {
 
   const [open, setOpen] = useState(false)
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault()
+
+  //   try {
+  //     const res = await fetch('http://localhost:3000/api/skills', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         skill: skills.name,
+  //         percentage: skills.percentage,
+  //         gg_id: user.gg_id,
+  //       }),
+  //     })
+  //     if (!res.ok) {
+  //       throw new Error('failed to submit the form')
+  //     }
+  //     router.refresh()
+  //   } catch (error) {
+  //     console.error('Error: ', error)
+  //   }
+  // }
+
   return (
     <div className='mt-2 flex flex-col items-center justify-center'>
       <div className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col '>
           <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
-            Experience
+            Skills
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -100,23 +156,31 @@ export default function SkillsComponent() {
             >
               <button onClick={handleAddSkill}>Add New Skill</button>
             </motion.div>
-            {skills.map((skill, index) => (
+            {/* <motion.div
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              transition={{ duration: 0.3 }}
+              className='my-4 flex w-fit items-center rounded-[20px] bg-black px-4 py-2 shadow-sm shadow-white'
+            >
+              <button onClick={handleSubmit}>submit</button>
+            </motion.div> */}
+            {skills.map((element, index) => (
               <div key={index}>
                 <input
                   type='text'
-                  value={skill.name}
+                  value={element.skill}
                   onChange={(e) => handleSkillNameChange(index, e.target.value)}
                   placeholder='Skill Name'
                   className='rounded-md bg-white/20'
                 />
                 <p>
-                  {skill.name}: {skill.percentage}%
+                  {element.name}: {element.percentage}%
                 </p>
                 <input
                   type='range'
                   min='0'
                   max='100'
-                  value={skill.percentage}
+                  value={element.percentage}
                   onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                 />
               </div>
@@ -125,20 +189,20 @@ export default function SkillsComponent() {
 
           <Tabs>
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
-              {skills.map((skill, index) => (
+              {skills.map((element, index) => (
                 <Tab key={index} className='flex pl-1 pr-5'>
-                  {skill.name}
+                  {element.skill}
                 </Tab>
               ))}
             </TabList>
 
             <div className='flex gap-x-5'>
-              {skills.map((skill, index) => (
+              {skills.map((element, index) => (
                 <TabPanel key={index}>
                   <div className='flex gap-x-4'>
                     <div className='flex flex-col'>
                       <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                        <p className='text-2xl'>{skill.name}</p>
+                        <p className='text-2xl'>{element.skill}</p>
                         <p className='mt-5 text-sm'>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consectetur dolores, veniam
                           reprehenderit dolore deleniti iure veritatis natus hic, minima quibusdam qui assumenda. Quod
@@ -166,7 +230,7 @@ export default function SkillsComponent() {
                         bottom: 5,
                       }}
                     >
-                      <XAxis dataKey='name' padding={{ left: 20, right: 20 }} />
+                      <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
                       <YAxis domain={[0, 100]} />
                       <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
                       <CartesianGrid vertical={false} strokeDasharray='6 6' />
@@ -190,7 +254,7 @@ export default function SkillsComponent() {
                       data={skills}
                     >
                       <PolarGrid />
-                      <PolarAngleAxis dataKey='name' />
+                      <PolarAngleAxis dataKey='skill' />
                       <PolarRadiusAxis opacity={0} domain={[0, 100]} />
                       <Radar
                         name='Ram'
