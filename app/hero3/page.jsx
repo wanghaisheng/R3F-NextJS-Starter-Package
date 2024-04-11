@@ -71,22 +71,24 @@ import { ConstantColorFactor } from 'three'
 //   },
 // ]
 
-// async function getSkills() {
-//   try {
-//     const res = await fetch('http://localhost:3000/api/skills')
-//     if (!res.ok) {
-//       throw new Error('failed to fetch the skills')
-//     }
-//     return res.json()
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+async function getSkills() {
+  try {
+    const res = await fetch('http://localhost:3000/api/skills')
+    if (!res.ok) {
+      throw new Error('failed to fetch the skills')
+    }
+    return res.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 // getSkills()
 //   .then((res) => {
 //     // Access the resolved value here
-//     console.log(res)
+//     // console.log(res)
+//     const testData = res
+//     console.log(testData)
 //   })
 //   .catch((error) => {
 //     // Handle any errors that occurred during the promise execution
@@ -129,25 +131,60 @@ const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => 
 export default function Hero() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
+
   useEffect(() => {
-    async function fetchSkills() {
+    const fetchSkillsData = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/skills')
-        if (!res.ok) {
-          throw new Error('Failed to fetch skills')
-        }
-        const data = await res.json()
-        // Filter the data based on your condition
-        const filteredData = await data.filter((element) => element.gg_id === user.gg_id)
+        const testData = await getSkills() // Fetch skills data
+        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
         setSkillsData(filteredData) // Set the filtered data
       } catch (error) {
-        console.error(error)
+        console.error('Error fetching skills data:', error)
       }
     }
 
-    fetchSkills()
-  }, [])
-  console.log(user)
+    if (user) {
+      fetchSkillsData() // Fetch data only if user is available
+    }
+  }, [user])
+
+  // --------------------------------------------------------------------------------------------------------------------------
+  // getSkills()
+  //   .then(async (res) => {
+  //     // Access the resolved value here
+  //     // console.log(res)
+  //     const testData = await res
+  //     while (!user) {
+  //       await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for 100 milliseconds before checking again
+  //     }
+
+  //     const filteredData = testData.filter((element) => element.gg_id === user.gg_id)
+  //     // console.log(filteredData)
+  //     setSkillsData(filteredData) // Set the filtered data
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors that occurred during the promise execution
+  //     console.error(error)
+  //   })
+  // --------------------------------------------------------------------------------------------------------------------------
+  // useEffect(() => {
+  //   async function fetchSkills() {
+  //     try {
+  //       const res = await fetch('http://localhost:3000/api/skills')
+  //       if (!res.ok) {
+  //         throw new Error('Failed to fetch skills')
+  //       }
+  //       const data = await res.json()
+  //       // Filter the data based on your condition
+  // const filteredData = await data.filter((element) => element.gg_id === user.gg_id)
+  // setSkillsData(filteredData) // Set the filtered data
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   fetchSkills()
+  // }, [])
+  // -------------------------------------------------------------------------------------------------------------------------
   // const [skillsData, setSkillsData] = useState(null)
   // useEffect(() => {
   //   async function fetchSkills() {
@@ -175,7 +212,6 @@ export default function Hero() {
   //       console.error(error)
   //     }
   //   }
-
   //   fetchSkills()
   // }, [])
 
