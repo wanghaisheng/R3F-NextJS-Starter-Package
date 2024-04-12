@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { useState } from 'react'
-import FlipCard2 from '../card/flipCard2'
+import CardsFlipCard from '../card/cardsFlipCard'
 
 export default function CardComponent() {
   const [cards, setCards] = useState([
@@ -75,7 +75,7 @@ export default function CardComponent() {
             {/* TabList */}
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start'>
               {cards.map((card, index) => (
-                <Tab key={index} className='flex pl-1 pr-5'>
+                <Tab key={index} className='flex pl-1 pr-5 '>
                   {card.type}
                 </Tab>
               ))}
@@ -106,7 +106,7 @@ export default function CardComponent() {
                     </div> */}
 
                     <div className='flex'>
-                      <FlipCard2 type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
+                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
                     </div>
 
                     {/* Form for user input */}

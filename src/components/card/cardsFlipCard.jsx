@@ -8,7 +8,7 @@ import { useState } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function FlipCard2({ type, name, dateIn, dateOut }) {
+export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()

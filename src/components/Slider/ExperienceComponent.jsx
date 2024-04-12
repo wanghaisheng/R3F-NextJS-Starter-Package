@@ -6,6 +6,8 @@ import 'react-tabs/style/react-tabs.css'
 
 import { useState } from 'react'
 
+import ExperienceFlipCard from '../card/experienceFlipCard'
+
 export default function ExperienceComponent() {
   const [projects, setProjects] = useState([
     { name: 'Project 1', type: 'Educational', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
@@ -99,7 +101,7 @@ export default function ExperienceComponent() {
                 <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                   <div className='flex justify-between'>
                     {/* Card Image / Container */}
-                    <div className='flex w-[50%] flex-col rounded-xl bg-black p-4 '>
+                    {/* <div className='flex w-[50%] flex-col rounded-xl bg-black p-4 '>
                       <div translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
                         {project.name}
                       </div>
@@ -115,6 +117,15 @@ export default function ExperienceComponent() {
                       <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
                         Tools and Tech : {project.tools}
                       </div>
+                    </div> */}
+
+                    <div className='flex'>
+                      <ExperienceFlipCard
+                        type={project.type}
+                        projectName={project.name}
+                        skills={project.skills}
+                        toolsAndTech={project.tools}
+                      />
                     </div>
 
                     {/* Form for user input */}
