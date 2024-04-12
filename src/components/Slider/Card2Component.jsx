@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { useState } from 'react'
+import FlipCard2 from '../card/flipCard2'
 
 export default function CardComponent() {
   const [cards, setCards] = useState([
@@ -86,7 +87,7 @@ export default function CardComponent() {
                 <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                   <div className='flex justify-between'>
                     {/* Card Image / Container */}
-                    <div className='flex w-[50%] flex-col rounded-xl bg-black p-4'>
+                    {/* <div className='flex w-[50%] flex-col rounded-xl bg-black p-4'>
                       <div translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
                         {card.type}
                       </div>
@@ -102,6 +103,10 @@ export default function CardComponent() {
                       <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
                         Date Out : {card.dateOut}
                       </div>
+                    </div> */}
+
+                    <div className='flex'>
+                      <FlipCard2 type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
                     </div>
 
                     {/* Form for user input */}
