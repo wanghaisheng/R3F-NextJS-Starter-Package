@@ -77,7 +77,7 @@ export default function UserInfoComponent() {
           transformStyle: 'preserve-3d',
           transform,
         }}
-        className='relative h-64 w-full rounded-xl bg-gradient-to-br from-purple-700 to-violet-700'
+        className='relative h-60 w-full rounded-xl bg-gradient-to-br from-purple-700 to-violet-700'
       >
         <div
           style={{
