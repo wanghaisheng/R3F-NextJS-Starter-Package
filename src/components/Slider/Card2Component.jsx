@@ -121,6 +121,7 @@ export default function CardComponent() {
                               onChange={(e) => handleCardTypeChange(index, e.target.value)}
                               placeholder='Card Type'
                               className='w-[70%] rounded-md bg-white/20 px-3'
+                              required
                             />
                           </div>
                           <div className='flex justify-between'>
@@ -131,6 +132,7 @@ export default function CardComponent() {
                               onChange={(e) => handleCardNameChange(index, e.target.value)}
                               placeholder='Card Name'
                               className='w-[70%] rounded-md bg-white/20 px-3'
+                              required
                             />
                           </div>
                           <div className='flex justify-between'>
@@ -145,7 +147,7 @@ export default function CardComponent() {
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Date In</label>
-                            <input type='date' className='w-[70%] rounded-md bg-white/20  px-3' />
+                            <input type='date' className='w-[70%] rounded-md bg-white/20  px-3' required />
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Date Out</label>

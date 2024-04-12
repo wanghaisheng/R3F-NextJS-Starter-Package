@@ -1,5 +1,4 @@
 'use client'
-
 import { motion } from 'framer-motion'
 
 import { Avatar } from 'src/components/Avatar'
@@ -14,7 +13,7 @@ async function getAvatarById(id) {
   try {
     const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
     if (!res.ok) {
-      throw new Error('failed to fetch the avatar')
+      throw new Error('failed to fetch the avatars')
     }
     return res.json()
   } catch (error) {
@@ -25,8 +24,7 @@ async function getAvatarById(id) {
 export default function AvatarComponent() {
   const router = useRouter()
   const { user } = useUser()
-  const [avatarsData, setAvatarsData] = useState(null)
-  // const [avatarUrl, setAvatarUrl] = useState(null)
+  const [avatarsData, setAvatarsData] = useState([])
 
   useEffect(() => {
     const fetchAvatarsData = async () => {
@@ -49,7 +47,7 @@ export default function AvatarComponent() {
         <div className='flex flex-col'>
           <div className='relative my-8 flex justify-center text-7xl drop-shadow'>My Avatars</div>
 
-          {avatarsData != null ? (
+          {avatarsData.length != 0 ? (
             <div className='mt-7 flex justify-between'>
               <div>
                 <Avatar
@@ -69,7 +67,13 @@ export default function AvatarComponent() {
                 {avatarsData.map((avatar) => (
                   <div className='rounded-lg bg-white/20'>
                     {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
-                    <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' />
+                    {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
+                    <img
+                      src={`${avatar.avatar_url.replace('glb', 'png?size=1024?quality=100')}`}
+                      alt=''
+                      height='120px'
+                      width='120px'
+                    />
                   </div>
                 ))}
               </div>
@@ -89,11 +93,7 @@ export default function AvatarComponent() {
                 }}
               />
               <div className='grid h-fit grid-cols-3 gap-4'>
-                <div className='rounded-lg bg-white/20'>
-                  <div className='rounded-lg'>
-                    <img src='/aa.png' alt='' height='120px' width='120px' />
-                  </div>
-                </div>
+                <div className='rounded-lg'>...loading</div>
               </div>
             </div>
           )}

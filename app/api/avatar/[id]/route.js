@@ -47,3 +47,18 @@ export async function PUT(request, { params }) {
     return NextResponse.error('Internal Server Error', 500)
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const id = params.id
+    const avatar = await prisma.avatar.delete({
+      where: {
+        avatar_id: id,
+      },
+    })
+    return NextResponse.json(avatar)
+  } catch (error) {
+    console.error('Error deleting the avatar', error)
+    return NextResponse.error('Internal server Error', 500)
+  }
+}
