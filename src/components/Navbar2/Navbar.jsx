@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useUser } from '@/context/UserContext/UserContext'
 
+import { LuLogOut } from 'react-icons/lu'
+
 const Navbar = () => {
   const [isToggled, setToggle] = useState(false)
 
@@ -35,11 +37,8 @@ const Navbar = () => {
         transition={{ duration: 0.5 }}
         className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '
       >
-        <div className='container mx-auto flex h-20 items-center justify-between px-4 py-2 '>
-          <Link href='' className='relative flex items-center justify-center pl-1'>
-            <img src='/aa.png' className='h-20 rounded-full p-2'></img>
-          </Link>
-
+        {/* For desktop view nav bar */}
+        <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
           <div className='hidden md:flex'>
             <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
@@ -62,7 +61,20 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <div className='relative flex items-center justify-center'>
+        </div>
+
+        {/* Logo and Sign In/Sign Out */}
+        <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
+          {/* Logo */}
+          <Link href='' className='flex items-center justify-center pl-1 '>
+            <img
+              src='/GGlogo.png'
+              className='h-20 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+            ></img>
+          </Link>
+
+          {/* SignIn, SignOut and Logout */}
+          <div className='flex items-center justify-center'>
             {user ? (
               user.first_name != null ? (
                 <div className='flex'>
@@ -73,15 +85,7 @@ const Navbar = () => {
                     className='group z-10 hidden items-center justify-end rounded-full hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800 focus:outline-none md:flex'
                     id='user-menu-button'
                   >
-                    <svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'>
-                      <path
-                        fill='currentColor'
-                        fill-rule='evenodd'
-                        d='M3.5 9.568v4.864c0 2.294 0 3.44.722 4.153c.655.647 1.674.706 3.596.712c-.101-.675-.122-1.48-.128-2.428a.734.734 0 0 1 .735-.734a.735.735 0 0 1 .744.726c.006 1.064.033 1.818.14 2.39c.103.552.267.87.507 1.108c.273.27.656.445 1.38.54c.744.1 1.73.101 3.145.101h.985c1.415 0 2.401-.002 3.146-.1c.723-.096 1.106-.272 1.378-.541c.273-.27.451-.648.548-1.362c.1-.734.102-1.709.102-3.105V8.108c0-1.397-.002-2.37-.102-3.105c-.097-.714-.275-1.093-.547-1.362c-.273-.27-.656-.445-1.38-.54C17.728 3 16.742 3 15.327 3h-.985c-1.415 0-2.401.002-3.146.1c-.723.096-1.106.272-1.379.541c-.24.237-.404.556-.507 1.108c-.107.572-.134 1.326-.14 2.39a.735.735 0 0 1-.744.726a.734.734 0 0 1-.735-.734c.006-.948.027-1.753.128-2.428c-1.922.006-2.94.065-3.596.712c-.722.713-.722 1.86-.722 4.153m2.434 2.948a.723.723 0 0 1 0-1.032l1.97-1.946a.746.746 0 0 1 1.046 0a.723.723 0 0 1 0 1.032l-.71.7h7.086c.408 0 .74.327.74.73c0 .403-.332.73-.74.73H8.24l.71.7a.723.723 0 0 1 0 1.032a.746.746 0 0 1-1.046 0z'
-                        clip-rule='evenodd'
-                      />
-                    </svg>
-                    <span className='hidden text-sm font-semibold group-hover:flex'>Logout</span>
+                    <LuLogOut className='mr-4 size-6 text-red-500' />
                   </Link>
                   <button className='md:hidden' id='nav-hamburger' onClick={() => setToggle(!isToggled)}>
                     <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
@@ -105,15 +109,7 @@ const Navbar = () => {
                     className='group z-10 hidden items-center justify-end rounded-full hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800 focus:outline-none md:flex'
                     id='user-menu-button'
                   >
-                    <svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'>
-                      <path
-                        fill='currentColor'
-                        fill-rule='evenodd'
-                        d='M3.5 9.568v4.864c0 2.294 0 3.44.722 4.153c.655.647 1.674.706 3.596.712c-.101-.675-.122-1.48-.128-2.428a.734.734 0 0 1 .735-.734a.735.735 0 0 1 .744.726c.006 1.064.033 1.818.14 2.39c.103.552.267.87.507 1.108c.273.27.656.445 1.38.54c.744.1 1.73.101 3.145.101h.985c1.415 0 2.401-.002 3.146-.1c.723-.096 1.106-.272 1.378-.541c.273-.27.451-.648.548-1.362c.1-.734.102-1.709.102-3.105V8.108c0-1.397-.002-2.37-.102-3.105c-.097-.714-.275-1.093-.547-1.362c-.273-.27-.656-.445-1.38-.54C17.728 3 16.742 3 15.327 3h-.985c-1.415 0-2.401.002-3.146.1c-.723.096-1.106.272-1.379.541c-.24.237-.404.556-.507 1.108c-.107.572-.134 1.326-.14 2.39a.735.735 0 0 1-.744.726a.734.734 0 0 1-.735-.734c.006-.948.027-1.753.128-2.428c-1.922.006-2.94.065-3.596.712c-.722.713-.722 1.86-.722 4.153m2.434 2.948a.723.723 0 0 1 0-1.032l1.97-1.946a.746.746 0 0 1 1.046 0a.723.723 0 0 1 0 1.032l-.71.7h7.086c.408 0 .74.327.74.73c0 .403-.332.73-.74.73H8.24l.71.7a.723.723 0 0 1 0 1.032a.746.746 0 0 1-1.046 0z'
-                        clip-rule='evenodd'
-                      />
-                    </svg>
-                    <span className='hidden text-sm font-semibold group-hover:flex'>Logout</span>
+                    <LuLogOut className='mr-4 size-6 text-red-500' />
                   </Link>
                   <button className='md:hidden' id='nav-hamburger' onClick={() => setToggle(!isToggled)}>
                     <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
@@ -135,6 +131,8 @@ const Navbar = () => {
             )}
           </div>
         </div>
+
+        {/* For mobile view nav bar */}
         {isToggled && (
           <motion.div
             className='mobile-nav-items w-full md:hidden'
@@ -187,12 +185,11 @@ const Navbar = () => {
                 <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
                   <path
                     fill='currentColor'
-                    fill-rule='evenodd'
+                    fillRule='evenodd'
                     d='M3.5 9.568v4.864c0 2.294 0 3.44.722 4.153c.655.647 1.674.706 3.596.712c-.101-.675-.122-1.48-.128-2.428a.734.734 0 0 1 .735-.734a.735.735 0 0 1 .744.726c.006 1.064.033 1.818.14 2.39c.103.552.267.87.507 1.108c.273.27.656.445 1.38.54c.744.1 1.73.101 3.145.101h.985c1.415 0 2.401-.002 3.146-.1c.723-.096 1.106-.272 1.378-.541c.273-.27.451-.648.548-1.362c.1-.734.102-1.709.102-3.105V8.108c0-1.397-.002-2.37-.102-3.105c-.097-.714-.275-1.093-.547-1.362c-.273-.27-.656-.445-1.38-.54C17.728 3 16.742 3 15.327 3h-.985c-1.415 0-2.401.002-3.146.1c-.723.096-1.106.272-1.379.541c-.24.237-.404.556-.507 1.108c-.107.572-.134 1.326-.14 2.39a.735.735 0 0 1-.744.726a.734.734 0 0 1-.735-.734c.006-.948.027-1.753.128-2.428c-1.922.006-2.94.065-3.596.712c-.722.713-.722 1.86-.722 4.153m2.434 2.948a.723.723 0 0 1 0-1.032l1.97-1.946a.746.746 0 0 1 1.046 0a.723.723 0 0 1 0 1.032l-.71.7h7.086c.408 0 .74.327.74.73c0 .403-.332.73-.74.73H8.24l.71.7a.723.723 0 0 1 0 1.032a.746.746 0 0 1-1.046 0z'
                     clip-rule='evenodd'
                   />
                 </svg>
-                Logout
               </Link>
             </div>
           </motion.div>
