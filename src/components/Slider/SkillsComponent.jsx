@@ -82,7 +82,7 @@ export default function SkillsComponent() {
   const handleSkillNameChange = (index, newName) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
-      updatedSkills[index].name = newName
+      updatedSkills[index].skill = newName
       return updatedSkills
     })
   }

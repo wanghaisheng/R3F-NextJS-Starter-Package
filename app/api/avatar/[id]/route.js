@@ -3,6 +3,24 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+export async function GET(request, { params }) {
+  try {
+    const id = params.id
+    const avatars = await prisma.avatar.findMany({
+      where: {
+        gg_id: id,
+      },
+    })
+
+    if (!avatars) {
+      return NextResponse.error('no avatar of this user exits', 400)
+    }
+    return NextResponse.json(avatars)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export async function PUT(request, { params }) {
   try {
     const data = await request.json()
