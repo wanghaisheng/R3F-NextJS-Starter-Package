@@ -11,8 +11,8 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 
 export default function UserInfoComponent() {
-  const router = useRouter()
   const { user } = useUser()
+  const router = useRouter()
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -44,23 +44,12 @@ export default function UserInfoComponent() {
       dob,
     }
     try {
-      // const res = await fetch(`http://localhost:3000/api/users/${user.gg_id}`, {
-      //   method: 'PUT',
-      //   headers: {
-      //     'Content-type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ first_name, last_name, email, phone_number, address, dob }),
-      // })
-      const res = await axios({
+      await axios({
         url: `/api/users/${user.gg_id}`,
         method: 'put',
         data: submit,
       })
-      if (!res.ok) {
-        throw new Error('failed to save the user info')
-      }
-      console.log(res.json())
-      router.refresh()
+      router.push('/hero3')
     } catch (error) {
       console.error(error)
     }
@@ -212,7 +201,10 @@ export default function UserInfoComponent() {
 
               {/* form */}
               <div className='w-[50%]'>
-                <form className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
+                <form
+                  onSubmit={handleSubmit}
+                  className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'
+                >
                   <div className='flex w-full flex-col gap-y-2 px-4'>
                     <div className='flex justify-between'>
                       <label htmlFor=''>First Name</label>
@@ -281,7 +273,6 @@ export default function UserInfoComponent() {
                   {/* Submit button */}
                   <button
                     type='submit'
-                    onSubmit={handleSubmit}
                     className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
                   >
                     Generate
