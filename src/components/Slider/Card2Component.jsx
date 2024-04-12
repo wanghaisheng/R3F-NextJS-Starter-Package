@@ -4,19 +4,13 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { useState } from 'react'
-import FormModal2 from '@/components/FormModal/Modal2'
-import FormModal from '../FormModal/Modal'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-
-import Image from 'next/image'
+import CardsFlipCard from '../card/cardsFlipCard'
 
 export default function CardComponent() {
-  const [startDate, setStartDate] = useState(new Date())
-  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [cards, setCards] = useState([
-    { type: 'Educational', name: 'School/College Name', description: 'lorem', dateIn: 'calendar', dateOut: 'calendar' },
-    { type: 'Work', name: 'Office Name', description: 'lorem', dateIn: 'calendar', dateOut: 'calendar' },
-    { type: 'Gym', name: 'Gym Name', description: 'lorem', dateIn: 'calendar', dateOut: 'calendar' },
+    { type: 'Educational', name: 'School/College Name', description: 'lorem', dateIn: '', dateOut: '' },
+    { type: 'Work', name: 'Office Name', description: 'lorem', dateIn: '', dateOut: '' },
+    { type: 'Gym', name: 'Gym Name', description: 'lorem', dateIn: '', dateOut: '' },
   ])
 
   const handleCardTypeChange = (index, newType) => {
@@ -59,36 +53,29 @@ export default function CardComponent() {
     })
   }
 
-  const handleAddCards = () => {
-    setCards((prevCards) => [...prevCards, { type: '', name: '', description: '', dateIn: '', dateOut: '' }])
-  }
-
-  const openCardModal = () => {
-    setIsCardModalOpen(true)
-  }
-
   return (
     <div className='mt-2 flex flex-col items-center'>
       <div className='relative flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col'>
-          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
+          {/* heading */}
+          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
             Card
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
-              onClick={() => {
-                openCardModal(true)
-              }}
+              // onClick={() => {
+              // }}
             >
               Add New Card &emsp;&emsp; +
             </motion.button>
           </div>
 
           <Tabs>
+            {/* TabList */}
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start'>
               {cards.map((card, index) => (
-                <Tab key={index} className='flex pl-1 pr-5'>
+                <Tab key={index} className='flex pl-1 pr-5 '>
                   {card.type}
                 </Tab>
               ))}
@@ -100,13 +87,26 @@ export default function CardComponent() {
                 <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                   <div className='flex justify-between'>
                     {/* Card Image / Container */}
-                    <div className='flex w-[50%] flex-col rounded-xl bg-black p-4 '>
+                    {/* <div className='flex w-[50%] flex-col rounded-xl bg-black p-4'>
                       <div translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
                         {card.type}
                       </div>
                       <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
                         {card.name}
                       </div>
+                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                        {card.description}
+                      </div>
+                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                        Date In : {card.dateIn}
+                      </div>
+                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                        Date Out : {card.dateOut}
+                      </div>
+                    </div> */}
+
+                    <div className='flex'>
+                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
                     </div>
 
                     {/* Form for user input */}
@@ -147,11 +147,20 @@ export default function CardComponent() {
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Date In</label>
-                            <input type='date' className='w-[70%] rounded-md bg-white/20  px-3' required />
+                            <input
+                              type='date'
+                              className='w-[70%] rounded-md bg-white/20  px-3'
+                              onChange={(e) => handleCardDateInChange(index, e.target.value)}
+                              required
+                            />
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Date Out</label>
-                            <input type='date' className='w-[70%] rounded-md bg-white/20  px-3' />
+                            <input
+                              type='date'
+                              className='w-[70%] rounded-md bg-white/20  px-3'
+                              onChange={(e) => handleCardDateOutChange(index, e.target.value)}
+                            />
                           </div>
                         </div>
                         {/* Submit button */}

@@ -15,7 +15,6 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import { IoChevronForwardSharp, IoChevronBack } from 'react-icons/io5'
-import Card2 from '@/card2/page'
 
 const SliderPage = () => {
   const settings = {
