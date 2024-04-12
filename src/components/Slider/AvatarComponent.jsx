@@ -1,5 +1,4 @@
 'use client'
-
 import { motion } from 'framer-motion'
 
 import { Avatar } from 'src/components/Avatar'
@@ -12,19 +11,21 @@ export default function AvatarComponent() {
           <div className='relative my-8 flex justify-center text-7xl drop-shadow'>My Avatars</div>
 
           <div className='mt-7 flex justify-between'>
-            <Avatar
-              modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-              // shadows
-              animationSrc='/male-idle-3.fbx'
-              style={{ background: 'rgb(9,20,26)', width: '400px', height: '300px' }}
-              fov={40}
-              cameraTarget={1.5}
-              cameraInitialDistance={30}
-              effects={{
-                ambientOcclusion: true,
-              }}
-            />
-            <div className='grid h-fit grid-cols-3 gap-4'>
+            <div>
+              <Avatar
+                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+                // shadows
+                animationSrc='/male-idle-3.fbx'
+                style={{ background: 'rgb(9,20,26)', height: '300px', width: '300px' }}
+                fov={40}
+                cameraTarget={1.5}
+                cameraInitialDistance={30}
+                effects={{
+                  ambientOcclusion: true,
+                }}
+              />
+            </div>
+            <div className='grid h-fit w-[50%] grid-cols-3 gap-4'>
               <div className='rounded-lg bg-white/20'>
                 <img src='/aa.png' alt='' height='120px' width='120px' />
               </div>

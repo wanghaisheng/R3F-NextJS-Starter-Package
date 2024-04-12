@@ -1,209 +1,224 @@
 'use client'
-import { motion } from 'framer-motion'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion'
 import 'react-tabs/style/react-tabs.css'
 
-import { useState } from 'react'
-import FormModal2 from '@/components/FormModal/Modal2'
+import { useState, useRef } from 'react'
 
 export default function UserInfoComponent() {
-  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-  const [cards, setCards] = useState([
-    {
-      type: 'Educational',
-      name: 'School/College Name',
-      description: 'lorem',
-      dateIn: 'calendar',
-      dateOut: 'calendar',
-    },
-    {
-      type: 'Work',
-      name: 'Office Name',
-      description: 'lorem',
-      dateIn: 'calendar',
-      dateOut: 'calendar',
-    },
-    {
-      type: 'Gym',
-      name: 'Gym Name',
-      description: 'lorem',
-      dateIn: 'calendar',
-      dateOut: 'calendar',
-    },
-  ])
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
+  const [address, setAddress] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [dob, setDob] = useState('')
 
-  const handleCardTypeChange = (index, newType) => {
-    setCards((prevCards) => {
-      const updatedCards = [...prevCards]
-      updatedCards[index].type = newType
-      return updatedCards
-    })
+  const handleFirstNameChange = (newFirstName) => {
+    setFirstName(newFirstName)
   }
 
-  const handleCardNameChange = (index, newName) => {
-    setCards((prevCards) => {
-      const updatedCards = [...prevCards]
-      updatedCards[index].name = newName
-      return updatedCards
-    })
+  const handleLastNameChange = (newLastName) => {
+    setLastName(newLastName)
   }
 
-  const handleCardDescriptionChange = (index, newDescription) => {
-    setCards((prevCards) => {
-      const updatedCards = [...prevCards]
-      updatedCards[index].description = newDescription
-      return updatedCards
-    })
+  const handleAddressChange = (newAddress) => {
+    setAddress(newAddress)
   }
 
-  const handleCardDateInChange = (index, newDateIn) => {
-    setCards((prevCards) => {
-      const updatedCards = [...prevCards]
-      updatedCards[index].dateIn = newDateIn
-      return updatedCards
-    })
+  const handlePhoneNumberChange = (newPhoneNumber) => {
+    setPhoneNumber(newPhoneNumber)
   }
 
-  const handleCardDateOutChange = (index, newDateOut) => {
-    setCards((prevCards) => {
-      const updatedCards = [...prevCards]
-      updatedCards[index].dateOut = newDateOut
-      return updatedCards
-    })
+  const handleDOBChange = (newDob) => {
+    setDob(newDob)
   }
 
-  const handleAddCards = () => {
-    setCards((prevCards) => [...prevCards, { type: '', name: '', description: '', dateIn: '', dateOut: '' }])
-  }
+  const ROTATION_RANGE = 32.5
+  const HALF_ROTATION_RANGE = 32.5 / 2
 
-  const openCardModal = () => {
-    setIsCardModalOpen(true)
+  const TiltCard = () => {
+    const ref = useRef(null)
+
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+
+    const xSpring = useSpring(x)
+    const ySpring = useSpring(y)
+
+    const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`
+
+    const handleMouseMove = (e) => {
+      if (!ref.current) return [0, 0]
+
+      const rect = ref.current.getBoundingClientRect()
+
+      const width = rect.width
+      const height = rect.height
+
+      const mouseX = (e.clientX - rect.left) * ROTATION_RANGE
+      const mouseY = (e.clientY - rect.top) * ROTATION_RANGE
+
+      const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1
+      const rY = mouseX / width - HALF_ROTATION_RANGE
+
+      x.set(rX)
+      y.set(rY)
+    }
+
+    const handleMouseLeave = () => {
+      x.set(0)
+      y.set(0)
+    }
+
+    return (
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transformStyle: 'preserve-3d',
+          transform,
+        }}
+        className='relative h-64 w-full rounded-xl bg-gradient-to-br from-purple-700 to-violet-700'
+      >
+        <div
+          style={{
+            transform: 'translateZ(75px)',
+            transformStyle: 'preserve-3d',
+          }}
+          className='absolute inset-1 flex flex-col rounded-xl bg-black p-4 shadow-lg'
+        >
+          <p
+            style={{
+              transform: 'translateZ(50px)',
+            }}
+            className='text-3xl font-bold text-purple-700'
+          >
+            {firstname} {lastname}
+          </p>
+          <p
+            style={{
+              transform: 'translateZ(50px)',
+            }}
+            className=' text-xl'
+          >
+            {address}
+          </p>
+          <p
+            style={{
+              transform: 'translateZ(50px)',
+            }}
+            className=' text-xl'
+          >
+            {phoneNumber}
+          </p>
+          <p
+            style={{
+              transform: 'translateZ(50px)',
+            }}
+            className='text-xl'
+          >
+            Birth Date : {dob}
+          </p>
+        </div>
+      </motion.div>
+    )
   }
 
   return (
     <div className='mt-2 flex flex-col items-center'>
       <div className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
         <div className='flex w-full flex-col'>
-          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
-            User Info
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
-              onClick={() => {
-                openCardModal(true)
-              }}
-            >
-              Add New Project &emsp;&emsp; +
-            </motion.button>
-          </div>
+          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>User Info</div>
 
-          <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              transition={{ duration: 0.3 }}
-              className='my-4 flex w-fit items-center rounded-[20px] bg-black px-4 py-2 shadow-sm shadow-white'
-            >
-              <button onClick={handleAddCards}>Add New Card</button>
-            </motion.div>
-            {cards.map((card, index) => (
-              <form key={index} className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
-                <div className='flex w-full flex-col gap-y-2 px-4'>
-                  <div className='flex justify-between'>
-                    <label htmlFor=''>Type</label>
-                    <input
-                      type='text'
-                      value={card.type}
-                      onChange={(e) => handleCardTypeChange(index, e.target.value)}
-                      placeholder='Card Type'
-                      className='w-[70%] rounded-md bg-white/20 px-3'
-                    />
+          <div className='mt-5 rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+            <div className='flex justify-between'>
+              {/* Card Image / Container */}
+              <div className='w-[50%] rounded-xl bg-black p-4 '>
+                <TiltCard />
+              </div>
+
+              {/* <div className='flex w-[50%] justify-between rounded-xl bg-black p-4 '>
+                <div>Img of Avatar</div>
+                <div className='w-[50%]'>
+                  <div translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
+                    {name}
                   </div>
-                  <div className='flex justify-between'>
-                    <label htmlFor=''>Name</label>
-                    <input
-                      type='text'
-                      value={card.name}
-                      onChange={(e) => handleCardNameChange(index, e.target.value)}
-                      placeholder='Card Name'
-                      className='w-[70%] rounded-md bg-white/20 px-3'
-                    />
+                  <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                    {address}
                   </div>
-                  <div className='flex justify-between'>
-                    <label htmlFor=''>Description</label>
-                    <input
-                      type='text'
-                      value={card.description}
-                      onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
-                      placeholder='Card Description'
-                      className='w-[70%] rounded-md bg-white/20  px-3'
-                    />
-                  </div>
-                  <div className='flex justify-between'>
-                    <label htmlFor=''>Date In</label>
-                    <input
-                      type='text'
-                      value={card.dateIn}
-                      onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                      placeholder='Date In'
-                      className='w-[70%] rounded-md bg-white/20  px-3'
-                    />
-                  </div>
-                  <div className='flex justify-between'>
-                    <label htmlFor=''>Date Out</label>
-                    <input
-                      type='text'
-                      value={card.dateOut}
-                      onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                      placeholder='Date Out'
-                      className='w-[70%] rounded-md bg-white/20  px-3'
-                    />
+                  <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                    DOB: {dob}
                   </div>
                 </div>
-              </form>
-            ))}
-          </FormModal2>
+              </div> */}
 
-          <Tabs>
-            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
-              {cards.map((card, index) => (
-                <Tab key={index} className='flex pl-1 pr-5'>
-                  {' '}
-                  {card.type}
-                </Tab>
-              ))}
-            </TabList>
-
-            {cards.map((card, index) => (
-              <TabPanel key={index}>
-                <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                  <div className='flex justify-between gap-x-5'>
-                    <div className='flex flex-col items-center'>
-                      <img
-                        className=' rounded-t-lg object-cover'
-                        src='/image.png'
-                        alt=''
-                        width='400px'
-                        height='268px'
+              {/* form */}
+              <div className='w-[50%]'>
+                <form className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
+                  <div className='flex w-full flex-col gap-y-2 px-4'>
+                    <div className='flex justify-between'>
+                      <label htmlFor=''>First Name</label>
+                      <input
+                        type='text'
+                        value={firstname}
+                        onChange={(e) => handleFirstNameChange(e.target.value)}
+                        placeholder='First Name'
+                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        required
                       />
-                      <h1 className='mt-4 text-xl font-semibold'>{card.type}</h1>
                     </div>
-                    <div className='w-[65%]'>
-                      <h1 className='text-2xl font-bold'>{card.name}</h1>
-                      <p className='mt-4 '>{card.description}</p>
-                      <p className='mt-4'>Date In : {card.dateIn}</p>
-                      <p className='mt-4'>Date Out : {card.dateOut}</p>
+                    <div className='flex justify-between'>
+                      <label htmlFor=''>Last Name</label>
+                      <input
+                        type='text'
+                        value={lastname}
+                        onChange={(e) => handleLastNameChange(e.target.value)}
+                        placeholder='Last Name'
+                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        required
+                      />
+                    </div>
+                    <div className='flex justify-between'>
+                      <label htmlFor=''>Address</label>
+                      <input
+                        type='text'
+                        value={address}
+                        onChange={(e) => handleAddressChange(e.target.value)}
+                        placeholder='Address'
+                        className='w-[70%] rounded-md bg-white/20 px-3'
+                      />
+                    </div>
+                    <div className='flex justify-between'>
+                      <label htmlFor=''>Phone Number</label>
+                      <input
+                        type='text'
+                        value={phoneNumber}
+                        onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                        placeholder='Phone Number'
+                        className='w-[70%] rounded-md bg-white/20 px-3'
+                      />
+                    </div>
+                    <div className='flex justify-between'>
+                      <label htmlFor=''>DOB</label>
+                      <input
+                        type='date'
+                        value={dob}
+                        onChange={(e) => handleDOBChange(e.target.value)}
+                        className='w-[70%] rounded-md bg-white/20  px-3'
+                        required
+                      />
                     </div>
                   </div>
-
-                  {/* <div className='flex justify-end'>
-                    <button className='rounded-xl bg-black p-2 hover:bg-white/20'>Read More</button>
-                  </div> */}
-                </div>
-              </TabPanel>
-            ))}
-          </Tabs>
+                  {/* Submit button */}
+                  <button
+                    // type='submit'
+                    className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                  >
+                    Generate
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
