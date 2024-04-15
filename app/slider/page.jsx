@@ -83,10 +83,10 @@ const SliderPage = () => {
               <SkillsComponent />
             </div>
           </div>
-          <button className='embla__prev' onClick={scrollPrev}>
+          <button className='absolute left-10 top-56 text-5xl' onClick={scrollPrev}>
             <MdNavigateBefore />
           </button>
-          <button className='embla__next' onClick={scrollNext}>
+          <button className='absolute right-10 top-56 text-5xl' onClick={scrollNext}>
             <MdNavigateNext />
           </button>
         </div>
