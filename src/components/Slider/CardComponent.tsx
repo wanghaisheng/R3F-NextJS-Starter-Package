@@ -6,6 +6,8 @@ import 'react-tabs/style/react-tabs.css'
 import { useState } from 'react'
 import FormModal2 from '@/components/FormModal/Modal2'
 
+import Image from 'next/image'
+
 export default function CardComponent() {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [cards, setCards] = useState([
@@ -91,14 +93,14 @@ export default function CardComponent() {
               whileTap={{ scale: 0.9 }}
               className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
               onClick={() => {
-                openCardModal(true)
+                openCardModal()
               }}
             >
               Add New Project &emsp;&emsp; +
             </motion.button>
           </div>
 
-          <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
+          <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
             <motion.div
               initial={{ opacity: 0, scaleY: 0 }}
               animate={{ opacity: 1, scaleY: 1 }}
@@ -180,13 +182,7 @@ export default function CardComponent() {
                 <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                   <div className='flex justify-between gap-x-5'>
                     <div className='flex flex-col items-center'>
-                      <img
-                        className=' rounded-t-lg object-cover'
-                        src='/image.png'
-                        alt=''
-                        width='400px'
-                        height='268px'
-                      />
+                      <Image className=' rounded-t-lg object-cover' src='/image.png' alt='' width={400} height={268} />
                       <h1 className='mt-4 text-xl font-semibold'>{card.type}</h1>
                     </div>
                     <div className='w-[65%]'>

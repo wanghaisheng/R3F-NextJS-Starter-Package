@@ -8,26 +8,26 @@ export default function UserInfoComponent() {
   const [firstname, setFirstName] = useState('')
   const [lastname, setLastName] = useState('')
   const [address, setAddress] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState(0)
   const [dob, setDob] = useState('')
 
-  const handleFirstNameChange = (newFirstName) => {
+  const handleFirstNameChange = (newFirstName: string) => {
     setFirstName(newFirstName)
   }
 
-  const handleLastNameChange = (newLastName) => {
+  const handleLastNameChange = (newLastName: string) => {
     setLastName(newLastName)
   }
 
-  const handleAddressChange = (newAddress) => {
+  const handleAddressChange = (newAddress: string) => {
     setAddress(newAddress)
   }
 
-  const handlePhoneNumberChange = (newPhoneNumber) => {
+  const handlePhoneNumberChange = (newPhoneNumber: number) => {
     setPhoneNumber(newPhoneNumber)
   }
 
-  const handleDOBChange = (newDob) => {
+  const handleDOBChange = (newDob: string) => {
     setDob(newDob)
   }
 
@@ -188,11 +188,11 @@ export default function UserInfoComponent() {
                       />
                     </div>
                     <div className='flex justify-between'>
-                      <label htmlFor=''>Phone Number</label>
+                      <label htmlFor=''>Contact</label>
                       <input
                         type='text'
                         value={phoneNumber}
-                        onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                        onChange={(e) => handlePhoneNumberChange(parseInt(e.target.value, 10))}
                         placeholder='Phone Number'
                         className='w-[70%] rounded-md bg-white/20 px-3'
                       />

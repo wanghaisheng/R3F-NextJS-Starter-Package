@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 
 import { Avatar } from 'src/components/Avatar'
+import Image from 'next/image'
 
 export default function AvatarComponent() {
   return (
@@ -27,13 +28,13 @@ export default function AvatarComponent() {
             </div>
             <div className='grid h-fit w-[50%] grid-cols-3 gap-4'>
               <div className='rounded-lg bg-white/20'>
-                <img src='/aa.png' alt='' height='120px' width='120px' />
+                <Image src='/aa.png' alt='' height={120} width={120} />
               </div>
               <div className='rounded-lg bg-white/20'>
-                <img src='/aa.png' alt='' height='120px' width='120px' />
+                <Image src='/aa.png' alt='' height={120} width={120} />
               </div>
               <div className='rounded-lg bg-white/20'>
-                <img src='/aa.png' alt='' height='120px' width='120px' />
+                <Image src='/aa.png' alt='' height={120} width={120} />
               </div>
             </div>
           </div>

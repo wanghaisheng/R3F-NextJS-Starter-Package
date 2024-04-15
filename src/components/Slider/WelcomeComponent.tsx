@@ -1,7 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
 export default function WelcomeComponent() {
   return (
     <div className='mt-2 flex flex-col items-center justify-center'>
@@ -19,14 +17,14 @@ export default function WelcomeComponent() {
             <div>
               <ol>
                 <div className='flex items-center gap-x-5'>
-                  <span class='mr-2 inline-flex size-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-500'>
+                  <span className='mr-2 inline-flex size-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-500'>
                     <svg
                       fill='none'
                       stroke='currentColor'
                       stroke-linecap='round'
                       stroke-linejoin='round'
                       stroke-width='3'
-                      class='size-3'
+                      className='size-3'
                       viewBox='0 0 24 24'
                     >
                       <path d='M20 6L9 17l-5-5'></path>
@@ -38,14 +36,14 @@ export default function WelcomeComponent() {
                   </div>
                 </div>
                 <div className='flex items-center gap-x-5'>
-                  <span class='mr-2 inline-flex size-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-500'>
+                  <span className='mr-2 inline-flex size-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-500'>
                     <svg
                       fill='none'
                       stroke='currentColor'
                       stroke-linecap='round'
                       stroke-linejoin='round'
                       stroke-width='3'
-                      class='size-3'
+                      className='size-3'
                       viewBox='0 0 24 24'
                     >
                       <path d='M20 6L9 17l-5-5'></path>
@@ -57,14 +55,14 @@ export default function WelcomeComponent() {
                   </div>
                 </div>
                 <div className='flex items-center gap-x-5'>
-                  <span class='mr-2 inline-flex size-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-500'>
+                  <span className='mr-2 inline-flex size-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-500'>
                     <svg
                       fill='none'
                       stroke='currentColor'
                       stroke-linecap='round'
                       stroke-linejoin='round'
                       stroke-width='3'
-                      class='size-3'
+                      className='size-3'
                       viewBox='0 0 24 24'
                     >
                       <path d='M20 6L9 17l-5-5'></path>

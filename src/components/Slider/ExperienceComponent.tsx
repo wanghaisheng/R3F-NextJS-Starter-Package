@@ -144,7 +144,7 @@ export default function ExperienceComponent() {
                             />
                           </div>
                           <div className='flex justify-between'>
-                            <label htmlFor=''>Project Name</label>
+                            <label htmlFor=''>Name</label>
                             <input
                               type='text'
                               value={project.name}

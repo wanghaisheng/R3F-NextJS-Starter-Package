@@ -49,7 +49,7 @@ async function getSkills() {
     }
     return res.json()
   } catch (error) {
-    console.error(error)
+    throw new Error('failed to fetch the skills')
   }
 }
 
@@ -70,7 +70,7 @@ export default function SkillsComponent() {
           setOriginalLength(filteredData.length)
         }
       } catch (error) {
-        console.error('Error fetching skills data:', error)
+        throw new Error('failed to fetch the skills data')
       }
     }
 
@@ -79,15 +79,15 @@ export default function SkillsComponent() {
     }
   }, [user])
 
-  const handleSkillNameChange = (index, newName) => {
+  const handleSkillNameChange = (index: number, newName: string) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
-      updatedSkills[index].name = newName
+      updatedSkills[index].skill = newName
       return updatedSkills
     })
   }
 
-  const handleSliderChange = (index, newValue) => {
+  const handleSliderChange = (index: number, newValue: number) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
       updatedSkills[index].percentage = newValue
@@ -96,7 +96,7 @@ export default function SkillsComponent() {
   }
 
   const handleAddSkill = () => {
-    setSkills((prevSkills) => [...prevSkills, { name: '', percentage: 0 }])
+    setSkills((prevSkills) => [...prevSkills, { skill: '', percentage: 0 }])
   }
 
   const openCardModal = () => {
@@ -140,14 +140,14 @@ export default function SkillsComponent() {
               whileTap={{ scale: 0.9 }}
               className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
               onClick={() => {
-                openCardModal(true)
+                openCardModal()
               }}
             >
               Add New Project &emsp;&emsp; +
             </motion.button>
           </div>
 
-          <FormModal2 show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
+          <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
             <motion.div
               initial={{ opacity: 0, scaleY: 0 }}
               animate={{ opacity: 1, scaleY: 1 }}
@@ -174,7 +174,7 @@ export default function SkillsComponent() {
                   className='rounded-md bg-white/20'
                 />
                 <p>
-                  {element.name}: {element.percentage}%
+                  {element.skill}: {element.percentage}%
                 </p>
                 <input
                   type='range'
