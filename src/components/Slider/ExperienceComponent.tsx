@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { useState } from 'react'
+import { TiDelete } from 'react-icons/ti'
 
 import ExperienceFlipCard from '../card/experienceFlipCard'
 
@@ -74,6 +75,14 @@ export default function ExperienceComponent() {
     ])
   }
 
+  const handleDeleteProject = (index) => {
+    setProjects((prevProjects) => {
+      const updatedProjects = [...prevProjects]
+      updatedProjects.splice(index, 1)
+      return updatedProjects
+    })
+  }
+
   return (
     <div className='mt-2 flex flex-col items-center'>
       <div className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
@@ -99,6 +108,9 @@ export default function ExperienceComponent() {
                 <Tab key={index} className='flex pl-1 pr-5 '>
                   {' '}
                   {project.name}
+                  <button className='ml-2 text-black' onClick={() => handleDeleteProject(index)}>
+                    <TiDelete />
+                  </button>
                 </Tab>
               ))}
             </TabList>
