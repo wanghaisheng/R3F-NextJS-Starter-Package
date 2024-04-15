@@ -267,7 +267,7 @@ export default function Hero() {
 
   return (
     <div className='h-screen w-full'>
-      <div className='flex items-center bg-none'>
+      <div className='sticky top-20 flex items-center bg-none'>
         <View className='flex h-20 w-full flex-col items-center justify-center bg-none'>
           <Suspense fallback={null}>
             <Type scale={2} position={[0, 0, 0]} />
@@ -275,18 +275,20 @@ export default function Hero() {
           </Suspense>
         </View>
       </div>
-      <Avatar
-        modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-        shadows
-        animationSrc='/male-idle-3.fbx'
-        style={{ background: 'rgb(9,20,26)' }}
-        fov={40}
-        cameraTarget={1.5}
-        cameraInitialDistance={30}
-        effects={{
-          ambientOcclusion: true,
-        }}
-      />
+      <div className='fixed top-40'>
+        <Avatar
+          modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+          shadows
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      </div>
 
       {/* <EnvironmentModel environment="spaceStation" scale={1} /> */}
       {user ? (

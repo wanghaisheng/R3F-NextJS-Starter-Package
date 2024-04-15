@@ -16,7 +16,11 @@ import 'slick-carousel/slick/slick-theme.css'
 
 import { IoChevronForwardSharp, IoChevronBack } from 'react-icons/io5'
 
+import { useState } from 'react'
+
 const SliderPage = () => {
+  const [activeTab, setActiveTab] = useState('Home')
+
   const settings = {
     dots: false,
     // arrows: false,
@@ -54,6 +58,27 @@ const SliderPage = () => {
         },
       },
     ],
+    afterChange: (index) => {
+      switch (index) {
+        case 0:
+          setActiveTab('Avatar')
+          break
+        case 1:
+          setActiveTab('Genius ID')
+          break
+        case 2:
+          setActiveTab('Card')
+          break
+        case 3:
+          setActiveTab('Experience')
+          break
+        case 4:
+          setActiveTab('Skills')
+          break
+        default:
+          setActiveTab('Avatar')
+      }
+    },
 
     // // customize next arrow and previous arrow colors
     // nextArrow: (
@@ -89,7 +114,7 @@ const SliderPage = () => {
           <SkillsComponent />
         </Slider>
       </div>
-      <ChipTabs />
+      <ChipTabs activeTab={activeTab} setActiveTab={setActiveTab} />
     </>
   )
 }
