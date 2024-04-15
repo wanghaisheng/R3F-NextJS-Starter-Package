@@ -1,18 +1,30 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const tabs = ['Home', 'Cards', 'Map', 'Profile', 'Avatar', 'Security']
+const tabs = ['Avatar', 'Genius ID', 'Card', 'Experience', 'Skills']
 
-const ChipTabs = () => {
+const ChipTabs = ({ activeTab, setActiveTab }) => {
   const [selected, setSelected] = useState(tabs[0])
 
+  useEffect(() => {
+    setSelected(activeTab)
+  }, [activeTab])
+
   return (
-    <div className=' flex items-center justify-center'>
-      <div className='my-7 flex h-12 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md  shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
+    <div className='flex items-center justify-center'>
+      <div className='my-7 flex h-12 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
         {tabs.map((tab) => (
-          <Chip text={tab} selected={selected === tab} setSelected={setSelected} key={tab} />
+          <Chip
+            text={tab}
+            selected={selected === tab}
+            setSelected={() => {
+              setSelected(tab)
+              setActiveTab(tab)
+            }}
+            key={tab}
+          />
         ))}
       </div>
     </div>
@@ -22,7 +34,7 @@ const ChipTabs = () => {
 const Chip = ({ text, selected, setSelected }) => {
   return (
     <button
-      onClick={() => setSelected(text)}
+      onClick={setSelected}
       className={`${
         selected ? 'text-white' : 'text-slate-200 hover:bg-slate-700 hover:text-slate-200'
       } relative rounded-md px-2.5 py-0.5 text-sm transition-colors`}

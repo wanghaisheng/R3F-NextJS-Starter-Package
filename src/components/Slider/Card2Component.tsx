@@ -6,6 +6,8 @@ import 'react-tabs/style/react-tabs.css'
 import { useState } from 'react'
 import CardsFlipCard from '../card/cardsFlipCard'
 
+import { TiDelete } from 'react-icons/ti'
+
 export default function CardComponent() {
   const [cards, setCards] = useState([
     { type: 'Educational', name: 'School/College Name', description: 'lorem', dateIn: '', dateOut: '' },
@@ -53,6 +55,18 @@ export default function CardComponent() {
     })
   }
 
+  const handleAddCard = () => {
+    setCards((prevCards) => [...prevCards, { type: 'Education', name: '', description: '', dateIn: '', dateOut: '' }])
+  }
+
+  const handleDeleteCard = (index) => {
+    setCards((prevCards) => {
+      const updatedCards = [...prevCards]
+      updatedCards.splice(index, 1)
+      return updatedCards
+    })
+  }
+
   return (
     <div className='mt-2 flex flex-col items-center'>
       <div className='relative flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
@@ -64,8 +78,9 @@ export default function CardComponent() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
-              // onClick={() => {
-              // }}
+              onClick={() => {
+                handleAddCard()
+              }}
             >
               Add New Card &emsp;&emsp; +
             </motion.button>
@@ -77,6 +92,9 @@ export default function CardComponent() {
               {cards.map((card, index) => (
                 <Tab key={index} className='flex pl-1 pr-5 '>
                   {card.type}
+                  <button className='ml-2 text-black' onClick={() => handleDeleteCard(index)}>
+                    <TiDelete />
+                  </button>
                 </Tab>
               ))}
             </TabList>

@@ -67,6 +67,13 @@ export default function ExperienceComponent() {
     })
   }
 
+  const handleAddProject = () => {
+    setProjects((prevProjects) => [
+      ...prevProjects,
+      { name: 'Project Name', type: '', description: '', skills: [], tools: [] },
+    ])
+  }
+
   return (
     <div className='mt-2 flex flex-col items-center'>
       <div className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
@@ -77,8 +84,9 @@ export default function ExperienceComponent() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
-              // onClick={() => {
-              // }}
+              onClick={() => {
+                handleAddProject()
+              }}
             >
               Add New Project &emsp;&emsp; +
             </motion.button>
