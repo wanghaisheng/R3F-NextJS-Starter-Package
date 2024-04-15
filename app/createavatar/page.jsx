@@ -1,16 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Hero from '@/hero/page'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useRouter } from 'next/navigation'
 import styles from './createavatar.module.css'
+import SliderPage from '@/slider/page'
+import Hero from '@/hero3/page'
 
 const CreateAvatar = () => {
   const [avatars, setAvatars] = useState([])
   const router = useRouter()
   const { user } = useUser()
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -26,14 +26,11 @@ const CreateAvatar = () => {
     }
     fetchData()
   }, [])
-
   if (user) {
     function checkUserInAvatar(element) {
       return element.gg_id === user.gg_id
     }
-
     const userHasAvatar = avatars.some(checkUserInAvatar) // check whether at least one element in the array passes the condition or not returns boolean value
-
     if (!userHasAvatar) {
       return (
         <div className='flex size-full flex-col items-center justify-center'>
@@ -50,6 +47,7 @@ const CreateAvatar = () => {
       )
     } else {
       return router.push('/slider')
+      // return <SliderPage />
     }
   } else {
     return (
