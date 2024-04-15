@@ -82,7 +82,7 @@ const Navbar = () => {
                   <Link
                     href='/signin'
                     onClick={logout}
-                    className='group z-10 hidden items-center justify-end rounded-full hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800 focus:outline-none md:flex'
+                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none md:flex'
                     id='user-menu-button'
                   >
                     <LuLogOut className='mr-4 size-6 text-red-500' />
@@ -106,7 +106,7 @@ const Navbar = () => {
                   <Link
                     href='/signin'
                     onClick={logout}
-                    className='group z-10 hidden items-center justify-end rounded-full hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800 focus:outline-none md:flex'
+                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105  focus:outline-none md:flex'
                     id='user-menu-button'
                   >
                     <LuLogOut className='mr-4 size-6 text-red-500' />
