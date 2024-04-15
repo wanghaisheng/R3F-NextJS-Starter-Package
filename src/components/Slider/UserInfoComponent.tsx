@@ -81,7 +81,10 @@ export default function UserInfoComponent() {
 
   return (
     <div className='mt-2 flex flex-col items-center'>
-      <div className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
+      <div
+        id='geniusId'
+        className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+      >
         <div className='flex w-full flex-col'>
           <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
 

@@ -69,7 +69,10 @@ export default function CardComponent() {
 
   return (
     <div className='mt-2 flex flex-col items-center'>
-      <div className='relative flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
+      <div
+        id='card'
+        className='relative flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+      >
         <div className='flex w-full flex-col'>
           {/* heading */}
           <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
@@ -105,23 +108,6 @@ export default function CardComponent() {
                 <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                   <div className='flex justify-between'>
                     {/* Card Image / Container */}
-                    {/* <div className='flex w-[50%] flex-col rounded-xl bg-black p-4'>
-                      <div translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
-                        {card.type}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        {card.name}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        {card.description}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        Date In : {card.dateIn}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        Date Out : {card.dateOut}
-                      </div>
-                    </div> */}
 
                     <div className='flex'>
                       <CardsFlipCard type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />

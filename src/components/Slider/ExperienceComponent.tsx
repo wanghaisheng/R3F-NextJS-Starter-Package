@@ -85,7 +85,10 @@ export default function ExperienceComponent() {
 
   return (
     <div className='mt-2 flex flex-col items-center'>
-      <div className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
+      <div
+        id='experience'
+        className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+      >
         <div className='flex w-full flex-col '>
           <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
             Experience
@@ -121,24 +124,6 @@ export default function ExperienceComponent() {
                 <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
                   <div className='flex justify-between'>
                     {/* Card Image / Container */}
-                    {/* <div className='flex w-[50%] flex-col rounded-xl bg-black p-4 '>
-                      <div translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
-                        {project.name}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        {project.type}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        {project.description}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        Skills : {project.skills}
-                      </div>
-                      <div as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                        Tools and Tech : {project.tools}
-                      </div>
-                    </div> */}
-
                     <div className='flex'>
                       <ExperienceFlipCard
                         type={project.type}
@@ -189,7 +174,7 @@ export default function ExperienceComponent() {
                             <input
                               type='text'
                               value={project.skills}
-                              onChange={(e) => handleProjectSkillsChange(index, e.target.value)}
+                              onChange={(e) => handleProjectSkillsChange(index, e.target.value.split(','))}
                               placeholder='Project Skills'
                               className='w-[70%] rounded-md bg-white/20  px-3'
                             />

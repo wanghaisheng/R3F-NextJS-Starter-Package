@@ -43,7 +43,10 @@ export default function AvatarComponent() {
 
   return (
     <div className='mt-2 flex flex-col items-center justify-center'>
-      <div className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'>
+      <div
+        id='avatar'
+        className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+      >
         <div className='flex flex-col'>
           <div className='relative my-8 flex justify-center text-7xl drop-shadow'>My Avatars</div>
 
@@ -65,7 +68,7 @@ export default function AvatarComponent() {
               </div>
               <div className='grid h-fit w-[50%] grid-cols-3 gap-4'>
                 {avatarsData.map((avatar) => (
-                  <div className='rounded-lg bg-white/20'>
+                  <div className='rounded-lg bg-white/20' key={avatar}>
                     {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
                     {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
                     <img
