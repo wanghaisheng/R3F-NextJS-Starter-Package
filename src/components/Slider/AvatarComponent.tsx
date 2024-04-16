@@ -47,7 +47,7 @@ export default function AvatarComponent() {
         <div className='flex flex-col'>
           <div className='relative my-8 flex justify-center text-7xl drop-shadow'>My Avatars</div>
 
-          {avatarsData.length != 0 ? (
+          {avatarsData && avatarsData.length != 0 ? (
             <div className='mt-7 flex justify-between'>
               <div>
                 <Avatar
