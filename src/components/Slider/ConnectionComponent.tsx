@@ -10,20 +10,16 @@ export default function ConnectionComponent() {
   const [connections, setConnections] = useState([])
 
   const handleLogoClick = (logo) => {
-    setSelectedLogo(logo)
+    if (!connections.some((connection) => connection.src === logo.src)) {
+      const newConnection = { src: logo.src, alt: logo.alt, link: '' }
+      setConnections([...connections, newConnection])
+    }
   }
 
   const handleInputChange = (e, index) => {
     const updatedConnections = [...connections]
     updatedConnections[index] = { ...updatedConnections[index], link: e.target.value }
     setConnections(updatedConnections)
-  }
-
-  const handleAddConnection = () => {
-    if (selectedLogo) {
-      setConnections([...connections, selectedLogo])
-      setSelectedLogo(null)
-    }
   }
 
   const handleRemoveConnection = (index) => {
@@ -51,25 +47,29 @@ export default function ConnectionComponent() {
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Connection</div>
-          <div className='flex justify-center gap-x-10'>
-            {logos.map((logo, index) => (
-              <div key={index} onClick={() => handleLogoClick(logo)}>
-                <Image src={logo.src} alt={logo.alt} width={50} height={50} />
+          {connections.length < 4 ? (
+            <div>
+              <p className='mt-2 flex justify-center'>{4 - connections.length} remaining</p>
+              <div className='mt-5 flex justify-center gap-x-10'>
+                {logos.map((logo, index) => (
+                  <div key={index} onClick={() => handleLogoClick(logo)}>
+                    <Image src={logo.src} alt={logo.alt} width={50} height={50} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {selectedLogo && (
-            <div className='mt-20 flex justify-center'>
-              <button
-                className='rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
-                onClick={handleAddConnection}
-              >
-                Add Connection
-              </button>
+            </div>
+          ) : (
+            <div className='mt-5 flex justify-center gap-x-10'>
+              {logos.map((logo, index) => (
+                <div key={index} style={{ filter: 'grayscale(100%)' }}>
+                  <Image src={logo.src} alt={logo.alt} width={50} height={50} />
+                </div>
+              ))}
             </div>
           )}
+
           {connections.length > 0 && (
-            <div className='mt-20 flex flex-wrap justify-center gap-4'>
+            <div className='mt-10 flex flex-wrap justify-center gap-4'>
               {connections.map((connection, index) => (
                 <div key={index} className='flex w-full items-center justify-center'>
                   <Image src={connection.src} alt={connection.alt} width={45} height={45} />
@@ -90,6 +90,20 @@ export default function ConnectionComponent() {
               ))}
             </div>
           )}
+          <div className='flex items-center justify-center gap-x-2'>
+            <button
+              type='submit'
+              className='mt-4 w-36 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+            >
+              Submit
+            </button>
+            <button
+              type='submit'
+              className='mt-4 w-36 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+            >
+              Skip
+            </button>
+          </div>
         </div>
       </div>
     </div>

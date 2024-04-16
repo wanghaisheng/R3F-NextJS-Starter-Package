@@ -137,8 +137,7 @@ export default function Hero() {
     const fetchSkillsData = async () => {
       try {
         const testData = await getSkills() // Fetch skills data
-        const filteredData = testData ? testData.filter((element) => element.gg_id === user.gg_id) : []
-        // Filter data based on user
+        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
         setSkillsData(filteredData) // Set the filtered data
       } catch (error) {
         console.error('Error fetching skills data:', error)
