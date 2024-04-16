@@ -17,16 +17,23 @@ export async function POST(request) {
       return NextResponse.error('User not found', 404)
     }
 
-    // Create the skill for the user
-    const newSkill = await prisma.skills.create({
-      data: {
-        skill,
-        percentage,
-        gg_id,
-      },
+    const existingSkill = await prisma.skills.findUnique({
+      where: { gg_id, skill },
     })
 
-    return NextResponse.json(newSkill)
+    if (!existingSkill) {
+      // Create the skill for the user
+      const newSkill = await prisma.skills.create({
+        data: {
+          skill,
+          percentage,
+          gg_id,
+        },
+      })
+      return NextResponse.json(newSkill)
+    } else {
+      return NextResponse.error('The skill already exists', 404)
+    }
   } catch (error) {
     console.error('Error Creating Skill', error)
     return NextResponse.error('Internal Server Error', 500)

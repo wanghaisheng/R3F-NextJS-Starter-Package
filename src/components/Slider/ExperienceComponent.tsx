@@ -27,7 +27,7 @@ async function getExpInfo() {
 export default function ExperienceComponent() {
   const { user } = useUser()
   const [projects, setProjects] = useState([
-    { name: 'Project 1', type: 'Educational', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
+    { type: 'Educational', name: 'Project 1', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
   ])
 
   useEffect(() => {
@@ -48,6 +48,29 @@ export default function ExperienceComponent() {
       fetchExpData() // Fetch data only if user is available
     }
   }, [user])
+
+  const handleSkillSubmit = async (e: any, index: number) => {
+    const submit = {
+      gg_id: user.gg_id,
+      type: projects[index].type,
+      name: projects[index].name,
+      description: projects[index].description,
+      skills: projects[index].skills,
+      tools: projects[index].tools,
+    }
+    try {
+      await axios({
+        url: `/api/skill`,
+        method: 'POST',
+        data: submit,
+      })
+      alert('card info saved')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const handleProjectNameChange = (index, newName) => {
     setProjects((prevProjects) => {
