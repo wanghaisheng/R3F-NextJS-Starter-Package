@@ -48,7 +48,9 @@ import {
 } from 'recharts'
 import { ConstantColorFactor } from 'three'
 
+// Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
+import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 
 async function getSkills() {
   try {
@@ -146,73 +148,6 @@ export default function Hero() {
     }
   }, [user])
 
-  // --------------------------------------------------------------------------------------------------------------------------
-  // getSkills()
-  //   .then(async (res) => {
-  //     // Access the resolved value here
-  //     // console.log(res)
-  //     const testData = await res
-  //     while (!user) {
-  //       await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for 100 milliseconds before checking again
-  //     }
-
-  //     const filteredData = testData.filter((element) => element.gg_id === user.gg_id)
-  //     // console.log(filteredData)
-  //     setSkillsData(filteredData) // Set the filtered data
-  //   })
-  //   .catch((error) => {
-  //     // Handle any errors that occurred during the promise execution
-  //     console.error(error)
-  //   })
-  // --------------------------------------------------------------------------------------------------------------------------
-  // useEffect(() => {
-  //   async function fetchSkills() {
-  //     try {
-  //       const res = await fetch('http://localhost:3000/api/skills')
-  //       if (!res.ok) {
-  //         throw new Error('Failed to fetch skills')
-  //       }
-  //       const data = await res.json()
-  //       // Filter the data based on your condition
-  // const filteredData = await data.filter((element) => element.gg_id === user.gg_id)
-  // setSkillsData(filteredData) // Set the filtered data
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-  //   fetchSkills()
-  // }, [])
-  // -------------------------------------------------------------------------------------------------------------------------
-  // const [skillsData, setSkillsData] = useState(null)
-  // useEffect(() => {
-  //   async function fetchSkills() {
-  //     try {
-  //       const res = await fetch('http://localhost:3000/api/skills')
-  //       if (!res.ok) {
-  //         throw new Error('Failed to fetch skills')
-  //       }
-  //       const data = await res.json()
-  //       if (data) {
-  //         data.forEach(compareIds)
-  //         const new_data = []
-  //         function compareIds(element) {
-  //           let count = 0
-  //           if (element.gg_id === user.gg_id) {
-  //             new_data[count] = {
-  //               skill: element.skill,
-  //               percentage: element.percentage,
-  //             }
-  //           }
-  //         }
-  //       }
-  //       setSkillsData(new_data)
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-  //   fetchSkills()
-  // }, [])
-
   // Flip Card QR
   const [isFlipped, setIsFlipped] = useState(false)
   const [imgSrc, setImgSrc] = useState('')
@@ -248,96 +183,223 @@ export default function Hero() {
         }}
       />
 
-      <div className='absolute top-10 flex size-full justify-between px-4'>
-        <div className='h-full w-[33%] rounded-xl bg-white/20'>
-          {user ? (
-            <div className='flex flex-col items-center justify-center'>
-              <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
-              <GeniusIDFlipCard
-                first_name='Person'
-                last_name='Name'
-                email='email'
-                dob='date of birth'
-                contact='number'
-                address='address'
-              />
-            </div>
-          ) : (
-            <div>
-              <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
-            </div>
-          )}
-        </div>
+      {/* Carousel */}
+      <div
+        className='top-10 flex size-full justify-between px-4 md:absolute'
+        style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
+      >
+        <div className='overflow-hidden' ref={emblaRef}>
+          <div className='flex md:flex-row'>
+            {/* Slide 1 */}
+            <div className='w-full shrink-0 grow md:min-w-0 '>
+              <div className='flex size-full justify-between px-4'>
+                <div className='h-full w-[33%] rounded-xl '>
+                  {user ? (
+                    <div className='flex flex-col items-center justify-center'>
+                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                        Genius ID
+                      </div>
 
-        <div className='h-full w-[33%] rounded-xl bg-white/20'>
-          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
-          <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-            <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
-              <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                {skillsData ? (
-                  <div className=' '>
-                    {/* Condition for changing barchart chart and radar chart*/}
-                    {skillsData.length < 6 ? (
-                      <ResponsiveContainer width={400} height={250}>
-                        <BarChart
-                          width={400}
-                          height={250}
-                          data={skillsData}
-                          margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                          }}
-                        >
-                          <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
-                          <YAxis domain={[0, 100]} />
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                          <Bar
-                            name='Ram'
-                            dataKey='percentage'
-                            fill='#6E29F7'
-                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    ) : (
-                      // Radar chart
-                      <ResponsiveContainer width={400} height={250}>
-                        <RadarChart
-                          // cx={300}
-                          // cy={250}
-                          // outerRadius={150}
-                          width={400}
-                          height={250}
-                          data={skillsData}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey='skill' />
-                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                          <Radar
-                            name='Ram'
-                            dataKey='percentage'
-                            stroke='#28B5E1'
-                            strokeWidth={4}
-                            fill='#28B5E1'
-                            fillOpacity={0.4}
-                          />
-                          {/* <Tooltip /> */}
-                          {/* <Legend values="100%" /> */}
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                        </RadarChart>
-                      </ResponsiveContainer>
-                    )}
-                  </div>
-                ) : (
-                  // Render loading indicator or placeholder while data is being fetched
-                  <div>Loading...</div>
-                )}
+                      <GeniusIDFlipCard
+                        first_name='Person'
+                        last_name='Name'
+                        email='email'
+                        dob='date of birth'
+                        contact='number'
+                        address='address'
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                        Genius ID
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className='h-full w-[33%] rounded-xl '>
+                  <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
+                  <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+                    <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+                      <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                        {skillsData ? (
+                          <div className=' '>
+                            {/* Condition for changing barchart chart and radar chart*/}
+                            {skillsData.length < 6 ? (
+                              <ResponsiveContainer width={400} height={250}>
+                                <BarChart
+                                  width={400}
+                                  height={250}
+                                  data={skillsData}
+                                  margin={{
+                                    top: 5,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5,
+                                  }}
+                                >
+                                  <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                                  <YAxis domain={[0, 100]} />
+                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                                  <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                                  <Bar
+                                    name='Ram'
+                                    dataKey='percentage'
+                                    fill='#6E29F7'
+                                    activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                                  />
+                                </BarChart>
+                              </ResponsiveContainer>
+                            ) : (
+                              // Radar chart
+                              <ResponsiveContainer width={400} height={250}>
+                                <RadarChart
+                                  // cx={300}
+                                  // cy={250}
+                                  // outerRadius={150}
+                                  width={400}
+                                  height={250}
+                                  data={skillsData}
+                                >
+                                  <PolarGrid />
+                                  <PolarAngleAxis dataKey='skill' />
+                                  <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                                  <Radar
+                                    name='Ram'
+                                    dataKey='percentage'
+                                    stroke='#28B5E1'
+                                    strokeWidth={4}
+                                    fill='#28B5E1'
+                                    fillOpacity={0.4}
+                                  />
+                                  {/* <Tooltip /> */}
+                                  {/* <Legend values="100%" /> */}
+                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                                </RadarChart>
+                              </ResponsiveContainer>
+                            )}
+                          </div>
+                        ) : (
+                          // Render loading indicator or placeholder while data is being fetched
+                          <div>Loading...</div>
+                        )}
+                      </div>
+                    </CardBody>
+                  </CardContainer>
+                </div>
               </div>
-            </CardBody>
-          </CardContainer>
+            </div>
+            {/* Slide 2 */}
+            <div className='w-full shrink-0 grow md:min-w-0'>
+              <div className='flex size-full justify-between px-4'>
+                <div className='h-full w-[33%] rounded-xl '>
+                  {user ? (
+                    <div className='flex flex-col items-center justify-center'>
+                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                        Experience
+                      </div>
+                      <ExperienceFlipCard
+                        type='TYPE'
+                        projectName='Name'
+                        skills='skill1, skill2'
+                        toolsAndTech='vscode, blender'
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                        Experience
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className='h-full w-[33%] rounded-xl '>
+                  <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Skills</div>
+                  <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+                    <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-2 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+                      <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                        {skillsData ? (
+                          <div className=' '>
+                            {/* Condition for changing barchart chart and radar chart*/}
+                            {skillsData.length < 6 ? (
+                              <ResponsiveContainer width={400} height={250}>
+                                <BarChart
+                                  width={400}
+                                  height={250}
+                                  data={skillsData}
+                                  margin={{
+                                    top: 5,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5,
+                                  }}
+                                >
+                                  <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                                  <YAxis domain={[0, 100]} />
+                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                                  <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                                  <Bar
+                                    name='Ram'
+                                    dataKey='percentage'
+                                    fill='#6E29F7'
+                                    activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                                  />
+                                </BarChart>
+                              </ResponsiveContainer>
+                            ) : (
+                              // Radar chart
+                              <ResponsiveContainer width={400} height={250}>
+                                <RadarChart
+                                  // cx={300}
+                                  // cy={250}
+                                  // outerRadius={150}
+                                  width={400}
+                                  height={250}
+                                  data={skillsData}
+                                >
+                                  <PolarGrid />
+                                  <PolarAngleAxis dataKey='skill' />
+                                  <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                                  <Radar
+                                    name='Ram'
+                                    dataKey='percentage'
+                                    stroke='#28B5E1'
+                                    strokeWidth={4}
+                                    fill='#28B5E1'
+                                    fillOpacity={0.4}
+                                  />
+                                  {/* <Tooltip /> */}
+                                  {/* <Legend values="100%" /> */}
+                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                                </RadarChart>
+                              </ResponsiveContainer>
+                            )}
+                          </div>
+                        ) : (
+                          // Render loading indicator or placeholder while data is being fetched
+                          <div>Loading...</div>
+                        )}
+                      </div>
+                    </CardBody>
+                  </CardContainer>
+                </div>
+              </div>
+            </div>
+            {/* Slide 3 */}
+            <div className='w-full shrink-0 grow md:min-w-0 '>
+              <p>sawgwaghawa</p>
+            </div>
+            {/* Slide 4 */}
+            <div className='w-full shrink-0 grow md:min-w-0 '>tjerjker</div>
+          </div>
+          <button className='left-10 top-56 text-5xl md:absolute' onClick={scrollPrev}>
+            <MdNavigateBefore />
+          </button>
+          <button className='right-10 top-56 text-5xl md:absolute' onClick={scrollNext}>
+            <MdNavigateNext />
+          </button>
         </div>
       </div>
     </div>
