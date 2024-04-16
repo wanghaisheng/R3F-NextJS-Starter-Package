@@ -56,7 +56,7 @@ model experience {
   gg_id         String?  @db.Uuid
   type          String?  @db.VarChar(50)
   name          String?  @db.VarChar(50)
-  description   String?  @db.VarChar(255)
+  description   String?
   tools         String[]
   users         users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -66,7 +66,7 @@ model cards {
   gg_id       String? @db.Uuid
   type        String? @db.VarChar(50)
   name        String? @db.VarChar(50)
-  description String? @db.VarChar(255)
+  description String?
   date_in     String? @db.VarChar
   date_out    String? @db.VarChar
   users       users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction, map: "card_gg_id_fkey")

@@ -4,29 +4,50 @@ import { motion } from 'framer-motion'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useUser } from '@/context/UserContext/UserContext'
 import { TiDelete } from 'react-icons/ti'
 
 import ExperienceFlipCard from '../card/experienceFlipCard'
 
+import axios from 'axios'
+
+async function getExpInfo() {
+  try {
+    const res = await fetch('http://localhost:3000/api/card')
+    if (!res.ok) {
+      throw new Error('failed to fetch the skills')
+    }
+    return res.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function ExperienceComponent() {
+  const { user } = useUser()
   const [projects, setProjects] = useState([
     { name: 'Project 1', type: 'Educational', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
-    {
-      name: 'Project 2',
-      type: 'Work',
-      description: 'lorem',
-      skills: ['REACT.JS', 'NEXT.JS'],
-      tools: ['VSCODE', 'FIGMA'],
-    },
-    {
-      name: 'Project 3',
-      type: 'Educational',
-      description: 'lorem',
-      skills: ['JS', 'VUE'],
-      tools: ['VSCODE', 'FIGMA', 'BLENDER'],
-    },
   ])
+
+  useEffect(() => {
+    const fetchExpData = async () => {
+      try {
+        const testData = await getExpInfo() // Fetch cards data
+        const filteredData = testData.filter((element: any) => element.gg_id === user.gg_id) // Filter data based on user
+
+        if (filteredData.length != 0) {
+          setProjects(filteredData) // Set the filtered data
+        }
+      } catch (error) {
+        console.error('Error fetching cards data:', error)
+      }
+    }
+
+    if (user) {
+      fetchExpData() // Fetch data only if user is available
+    }
+  }, [user])
 
   const handleProjectNameChange = (index, newName) => {
     setProjects((prevProjects) => {

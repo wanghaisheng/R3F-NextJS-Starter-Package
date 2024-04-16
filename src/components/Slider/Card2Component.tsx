@@ -79,13 +79,13 @@ export default function CardComponent() {
   const handleUpdate = async (e: any, id: any, index: number) => {
     e.preventDefault()
     const submit = {
-      gg_id: user.gg_id,
       type: cards[index].type,
       name: cards[index].name,
       description: cards[index].description,
       dateIn: cards[index].dateIn,
       dateOut: cards[index].dateOut,
     }
+    console.log('type: ', typeof submit.dateIn, ': ', submit.dateIn)
     try {
       await axios({
         url: `/api/card/${id}`,
@@ -100,7 +100,7 @@ export default function CardComponent() {
     }
   }
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: any) => {
     try {
       await axios({
         url: `/api/card/${id}`,
@@ -114,7 +114,7 @@ export default function CardComponent() {
     }
   }
 
-  const handleCardTypeChange = (index, newType) => {
+  const handleCardTypeChange = (index: number, newType: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].type = newType
@@ -122,7 +122,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardNameChange = (index, newName) => {
+  const handleCardNameChange = (index: number, newName: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].name = newName
@@ -130,7 +130,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardDescriptionChange = (index, newDescription) => {
+  const handleCardDescriptionChange = (index: number, newDescription: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].description = newDescription
@@ -138,7 +138,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardDateInChange = (index, newDateIn) => {
+  const handleCardDateInChange = (index: number, newDateIn: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].dateIn = newDateIn
@@ -146,7 +146,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardDateOutChange = (index, newDateOut) => {
+  const handleCardDateOutChange = (index: number, newDateOut: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].dateOut = newDateOut
@@ -161,7 +161,7 @@ export default function CardComponent() {
     ])
   }
 
-  const handleDeleteCard = (index, card_id) => {
+  const handleDeleteCard = (index: number, card_id: any) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards.splice(index, 1)

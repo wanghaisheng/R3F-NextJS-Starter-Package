@@ -25,13 +25,13 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { gg_id, type, name, description, tools } = await request.json()
+    const { type, name, description, date_in, date_out } = await request.json()
     const id = params.id
 
     // Update the cards
     const updatedcard = await prisma.cards.update({
       where: { card_id: id },
-      data: { gg_id, type, name, description, tools },
+      data: { type, name, description, date_in, date_out },
     })
 
     return NextResponse.json(updatedcard)
