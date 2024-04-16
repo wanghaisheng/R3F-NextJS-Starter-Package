@@ -12,6 +12,8 @@ import { useRouter } from 'next/navigation'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
+import { TiDelete } from 'react-icons/ti'
+
 import {
   Bar,
   BarChart,
@@ -56,7 +58,6 @@ async function getSkills() {
 export default function SkillsComponent() {
   const { user } = useUser()
   const router = useRouter()
-  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [skills, setSkills] = useState([{ skill: 'skill1', percentage: 0 }])
   const [originalLength, setOriginalLength] = useState(0)
 
@@ -96,11 +97,15 @@ export default function SkillsComponent() {
   }
 
   const handleAddSkill = () => {
-    setSkills((prevSkills) => [...prevSkills, { skill: '', percentage: 0 }])
+    setSkills((prevSkills) => [...prevSkills, { skill: 'skill', percentage: 0 }])
   }
 
-  const openCardModal = () => {
-    setIsCardModalOpen(true)
+  const handleDeleteSkill = (index) => {
+    setSkills((prevSkills) => {
+      const updatedSkills = [...prevSkills]
+      updatedSkills.splice(index, 1)
+      return updatedSkills
+    })
   }
 
   const [open, setOpen] = useState(false)
@@ -143,159 +148,168 @@ export default function SkillsComponent() {
               whileTap={{ scale: 0.9 }}
               className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
               onClick={() => {
-                openCardModal()
+                handleAddSkill()
               }}
             >
               Add New Project &emsp;&emsp; +
             </motion.button>
           </div>
 
-          <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              transition={{ duration: 0.3 }}
-              className='my-4 flex w-fit items-center rounded-[20px] bg-black px-4 py-2 shadow-sm shadow-white'
-            >
-              <button onClick={handleAddSkill}>Add New Skill</button>
-            </motion.div>
-            {/* <motion.div
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              transition={{ duration: 0.3 }}
-              className='my-4 flex w-fit items-center rounded-[20px] bg-black px-4 py-2 shadow-sm shadow-white'
-            >
-              <button onClick={handleSubmit}>submit</button>
-            </motion.div> */}
-            {skills.map((element, index) => (
-              <div key={index}>
-                <input
-                  type='text'
-                  value={element.skill}
-                  onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                  placeholder='Skill Name'
-                  className='rounded-md bg-white/20'
-                />
-                <p>
-                  {element.skill}: {element.percentage}%
-                </p>
-                <input
-                  type='range'
-                  min='0'
-                  max='100'
-                  value={element.percentage}
-                  onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                />
-              </div>
-            ))}
-          </FormModal2>
-
           <Tabs>
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {skills.map((element, index) => (
                 <Tab key={index} className='flex pl-1 pr-5'>
                   {element.skill}
+                  <button className='ml-2 text-black' onClick={() => handleDeleteSkill(index)}>
+                    <TiDelete />
+                  </button>
                 </Tab>
               ))}
             </TabList>
 
             <div className='flex gap-x-5'>
-              {skills.map((element, index) => (
-                <TabPanel key={index}>
-                  <div className='flex gap-x-4'>
-                    <div className='flex flex-col'>
-                      <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                        <p className='text-2xl'>{element.skill}</p>
-                        <p className='mt-5 text-sm'>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consectetur dolores, veniam
-                          reprehenderit dolore deleniti iure veritatis natus hic, minima quibusdam qui assumenda. Quod
-                          eum veritatis, quos est illo iusto.
-                        </p>
-                        <p className='mt-5 text-xl'>Certifications: </p>
-                      </div>
-                    </div>
-                  </div>
-                </TabPanel>
-              ))}
-              <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                <p className='pl-4'>Specifications</p>
-                {/* Condition for changing barchart chart and radar chart*/}
-                {skills.length < 6 ? (
-                  <ResponsiveContainer width={278} height={220}>
-                    <BarChart
-                      width={278}
-                      height={287}
-                      data={skills}
-                      margin={{
-                        top: 5,
-                        right: 20,
-                        left: 0,
-                        bottom: 5,
-                      }}
-                    >
-                      <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
-                      <YAxis domain={[0, 100]} />
-                      <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                      <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                      <Bar
-                        name='Ram'
-                        dataKey='percentage'
-                        fill='#6E29F7'
-                        activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
-                ) : (
-                  // Radar chart
-                  <ResponsiveContainer width={278} height={220}>
-                    <RadarChart
-                      // cx={300}
-                      // cy={250}
-                      // outerRadius={150}
-                      width={278}
-                      height={287}
-                      data={skills}
-                    >
-                      <PolarGrid />
-                      <PolarAngleAxis dataKey='skill' />
-                      <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                      <Radar
-                        name='Ram'
-                        dataKey='percentage'
-                        stroke='#28B5E1'
-                        strokeWidth={4}
-                        fill='#28B5E1'
-                        fillOpacity={0.4}
-                      />
-                      {/* <Tooltip /> */}
-                      {/* <Legend values="100%" /> */}
-                      <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                    </RadarChart>
-                  </ResponsiveContainer>
-                )}
-                <div className='flex items-center justify-center'>
-                  <motion.div animate={open ? 'open' : 'closed'} className='relative'>
-                    <button
-                      onClick={() => setOpen((pv) => !pv)}
-                      className='flex items-center gap-2 rounded-md bg-indigo-500 px-3 py-2 text-indigo-50 transition-colors hover:bg-indigo-500'
-                    >
-                      <span className='text-sm font-medium'>Select View</span>
-                      <motion.span variants={iconVariants}>
-                        <FiChevronDown />
-                      </motion.span>
-                    </button>
+              <div className='flex w-full justify-between'>
+                <div className='w-[60%]'>
+                  {skills.map((element, index) => (
+                    <TabPanel key={index}>
+                      <div className='size-full rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                        <div className='flex justify-between'>
+                          <div className='w-[60%]'>
+                            <input
+                              type='text'
+                              value={element.skill}
+                              onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                              placeholder='Skill Name'
+                              className='w-full rounded-md bg-white/20 p-1'
+                            />
 
-                    <motion.ul
-                      initial={wrapperVariants.closed}
-                      variants={wrapperVariants}
-                      style={{ originY: 'top', translateX: '-50%' }}
-                      className='absolute left-[50%] top-[120%] flex w-48 flex-col gap-2 overflow-hidden rounded-lg bg-[#D9D9D9] p-2 shadow-xl'
-                    >
-                      <Option setOpen={setOpen} Icon={AiOutlineRadarChart} text='Radar Chart' />
-                      <Option setOpen={setOpen} Icon={FaChartPie} text='Pie Chart' />
-                      <Option setOpen={setOpen} Icon={FaRegChartBar} text='Bar Chart' />
-                    </motion.ul>
-                  </motion.div>
+                            <div className='my-5 flex'>
+                              <input
+                                type='range'
+                                min='0'
+                                max='100'
+                                value={element.percentage}
+                                className='w-full rounded-md text-purple-700'
+                                onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                              />
+                              <p className='px-2 text-sm text-purple-300'>{element.percentage}%</p>
+                            </div>
+                          </div>
+                          <div className='flex justify-start'>
+                            <motion.div animate={open ? 'open' : 'closed'} className='relative'>
+                              <button
+                                onClick={() => setOpen((pv) => !pv)}
+                                className='flex items-center gap-2 rounded-md bg-purple-700 px-3 py-2 text-indigo-50 transition-colors hover:bg-purple-900'
+                              >
+                                <span className='text-sm font-medium'>Select View</span>
+                                <motion.span variants={iconVariants}>
+                                  <FiChevronDown />
+                                </motion.span>
+                              </button>
+
+                              <motion.ul
+                                initial={wrapperVariants.closed}
+                                variants={wrapperVariants}
+                                style={{ originY: 'top', translateX: '-50%' }}
+                                className='absolute left-[50%] top-[50%] flex w-36 flex-col gap-2 overflow-hidden rounded-lg bg-purple-700 p-2  shadow-xl'
+                              >
+                                <Option setOpen={setOpen} Icon={AiOutlineRadarChart} text='Radar Chart' />
+                                <Option setOpen={setOpen} Icon={FaChartPie} text='Pie Chart' />
+                                <Option setOpen={setOpen} Icon={FaRegChartBar} text='Bar Chart' />
+                              </motion.ul>
+                            </motion.div>
+                          </div>
+                        </div>
+                        <p>
+                          Work Project{' '}
+                          <input
+                            type='text'
+                            value={element.skill}
+                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                            placeholder='Skill Name'
+                            className='w-full rounded-md bg-white/20 p-1'
+                          />
+                        </p>
+                        <p>
+                          Education Project{' '}
+                          <input
+                            type='text'
+                            value={element.skill}
+                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                            placeholder='Skill Name'
+                            className='w-full rounded-md bg-white/20 p-1'
+                          />
+                        </p>
+                        <label className=' text-gray-900 dark:text-white' htmlFor='file_input'>
+                          Certifications
+                        </label>
+                        <input
+                          className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                          id='file_input'
+                          type='file'
+                        />
+                      </div>
+                    </TabPanel>
+                  ))}
+                </div>
+
+                <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-3'>
+                  <p className='mb-2 flex justify-center'>Specification</p>
+
+                  {/* Condition for changing barchart chart and radar chart*/}
+                  {skills.length < 6 ? (
+                    <ResponsiveContainer width={278} height={220}>
+                      <BarChart
+                        width={278}
+                        height={287}
+                        data={skills}
+                        margin={{
+                          top: 5,
+                          right: 20,
+                          left: 0,
+                          bottom: 5,
+                        }}
+                      >
+                        <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                        <YAxis domain={[0, 100]} />
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                        <Bar
+                          name='Ram'
+                          dataKey='percentage'
+                          fill='#6E29F7'
+                          activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    // Radar chart
+                    <ResponsiveContainer width={278} height={220}>
+                      <RadarChart
+                        // cx={300}
+                        // cy={250}
+                        // outerRadius={150}
+                        width={278}
+                        height={287}
+                        data={skills}
+                      >
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey='skill' />
+                        <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                        <Radar
+                          name='Ram'
+                          dataKey='percentage'
+                          stroke='#28B5E1'
+                          strokeWidth={4}
+                          fill='#28B5E1'
+                          fillOpacity={0.4}
+                        />
+                        {/* <Tooltip /> */}
+                        {/* <Legend values="100%" /> */}
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  )}
                 </div>
               </div>
             </div>
@@ -311,7 +325,7 @@ const Option = ({ text, Icon, setOpen }) => {
     <motion.li
       variants={itemVariants}
       onClick={() => setOpen(false)}
-      className='flex w-full cursor-pointer items-center gap-2 whitespace-nowrap rounded-md p-2 text-xs font-medium text-slate-700 transition-colors hover:bg-indigo-100 hover:text-indigo-500'
+      className='flex w-full cursor-pointer items-center gap-2 whitespace-nowrap rounded-md p-2 text-xs font-medium text-white transition-colors hover:bg-purple-900'
     >
       <motion.span variants={actionIconVariants}>
         <Icon />
