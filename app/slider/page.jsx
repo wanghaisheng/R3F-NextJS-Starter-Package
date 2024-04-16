@@ -7,9 +7,6 @@ import ConnectionComponent from '@/components/Slider/ConnectionComponent'
 import UserInfoComponent from '@/components/Slider/UserInfoComponent'
 import Card2Component from '@/components/Slider/Card2Component'
 
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useState, useRef } from 'react'
 
@@ -63,7 +60,7 @@ const SliderPage = () => {
   return (
     <>
       <div
-        className='max-w-48rem mx-auto'
+        className='mx-auto max-w-7xl'
         style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
       >
         <div className='overflow-hidden' ref={emblaRef}>
