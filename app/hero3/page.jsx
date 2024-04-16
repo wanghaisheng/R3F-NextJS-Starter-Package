@@ -18,13 +18,17 @@ import { LogosApple } from '@/logo/LogosApple'
 import { LogosFigma } from '@/logo/LogosFigma'
 import { LogosTwitch } from '@/logo/LogosTwitch'
 import { SkillIconsGithubDark } from '@/logo/SkillIconsGithubDark'
-import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import axios from 'axios'
+import { useCallback, useEffect, useState } from 'react'
 
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
+
+// For the carousel
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
+import useEmblaCarousel from 'embla-carousel-react'
 
 import {
   Bar,
@@ -43,6 +47,8 @@ import {
   YAxis,
 } from 'recharts'
 import { ConstantColorFactor } from 'three'
+
+import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 
 async function getSkills() {
   try {
@@ -104,6 +110,25 @@ const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => 
 export default function Hero() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
+
+  // Carousel
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+
+  useEffect(() => {
+    if (emblaApi) {
+      console.log(emblaApi.slideNodes()) // Access API
+    }
+  }, [emblaApi])
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  // --------------------------------------------------------------------------------------------------------------------------
 
   useEffect(() => {
     const fetchSkillsData = async () => {
@@ -202,7 +227,7 @@ export default function Hero() {
 
   return (
     <div className='h-screen w-full'>
-      <div className='sticky top-20 flex items-center bg-none'>
+      <div className='flex items-center bg-none'>
         <View className='flex h-20 w-full flex-col items-center justify-center bg-none'>
           <Suspense fallback={null}>
             <Type scale={2} position={[0, 0, 0]} />
@@ -223,130 +248,97 @@ export default function Hero() {
         }}
       />
 
-      {/* <EnvironmentModel environment="spaceStation" scale={1} /> */}
-      {user ? (
-        <div className='absolute left-5 top-10 h-full w-[33%] bg-white/20'>
-          <div className='ml-[12%] flex flex-col items-center justify-center'>Okay</div>
+      <div className='absolute top-10 flex size-full justify-between px-4'>
+        <div className='h-full w-[33%] rounded-xl bg-white/20'>
+          {user ? (
+            <div className='flex flex-col items-center justify-center'>
+              <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
+              <GeniusIDFlipCard
+                first_name='Person'
+                last_name='Name'
+                email='email'
+                dob='date of birth'
+                contact='number'
+                address='address'
+              />
+            </div>
+          ) : (
+            <div>
+              <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className='absolute left-5 top-10 h-full w-[33%] bg-white/20'>
-          <div className='flex w-full flex-col items-center justify-center '>No user</div>
-        </div>
-      )}
 
-      {/* <div className='left-[30%] top-[10%] size-full md:absolute '>
-        <div className='flex flex-col items-center justify-center'>
-          <CardContainer className='hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+        <div className='h-full w-[33%] rounded-xl bg-white/20'>
+          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
+          <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
             <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
-              <div className='flex'>
-                <CardItem className='mt-4 w-full'>
-                  <Image
-                    src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100'
-                    height='500'
-                    width='500'
-                    className='rounded-xl object-cover group-hover/card:shadow-xl'
-                    alt='thumbnail'
-                  />
-                </CardItem>
-                <div className='flex flex-col'>
-                  <CardItem translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
-                    Ayush Lama
-                  </CardItem>
-                  <CardItem as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
-                    Jr.CEO
-                  </CardItem>
-                  <div className='mt-20 flex items-center justify-between'>
-                    <CardItem
-                      translateZ={20}
-                      as='button'
-                      className='right-0 rounded-xl bg-black px-4 py-2 text-xs font-bold text-white dark:bg-white dark:text-black'
-                    >
-                      Follow
-                    </CardItem>
-                    <CardItem
-                      translateZ={20}
-                      as='button'
-                      className='ml-2 rounded-xl bg-black px-4 py-2 text-xs font-bold text-white dark:bg-white dark:text-black'
-                    >
-                      Edit
-                    </CardItem>
+              <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                {skillsData ? (
+                  <div className=' '>
+                    {/* Condition for changing barchart chart and radar chart*/}
+                    {skillsData.length < 6 ? (
+                      <ResponsiveContainer width={400} height={250}>
+                        <BarChart
+                          width={400}
+                          height={250}
+                          data={skillsData}
+                          margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                          }}
+                        >
+                          <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                          <YAxis domain={[0, 100]} />
+                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                          <Bar
+                            name='Ram'
+                            dataKey='percentage'
+                            fill='#6E29F7'
+                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      // Radar chart
+                      <ResponsiveContainer width={400} height={250}>
+                        <RadarChart
+                          // cx={300}
+                          // cy={250}
+                          // outerRadius={150}
+                          width={400}
+                          height={250}
+                          data={skillsData}
+                        >
+                          <PolarGrid />
+                          <PolarAngleAxis dataKey='skill' />
+                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                          <Radar
+                            name='Ram'
+                            dataKey='percentage'
+                            stroke='#28B5E1'
+                            strokeWidth={4}
+                            fill='#28B5E1'
+                            fillOpacity={0.4}
+                          />
+                          {/* <Tooltip /> */}
+                          {/* <Legend values="100%" /> */}
+                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        </RadarChart>
+                      </ResponsiveContainer>
+                    )}
                   </div>
-                </div>
+                ) : (
+                  // Render loading indicator or placeholder while data is being fetched
+                  <div>Loading...</div>
+                )}
               </div>
             </CardBody>
           </CardContainer>
         </div>
-      </div> */}
-
-      <div className='absolute right-5 top-10 h-full w-[33%] bg-white/20'>
-        <div className='flex w-full flex-col items-center justify-center '>No user</div>
-        <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-          <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
-            <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-              {skillsData ? (
-                <div className=' '>
-                  {/* Condition for changing barchart chart and radar chart*/}
-                  {skillsData.length < 6 ? (
-                    <ResponsiveContainer width={400} height={250}>
-                      <BarChart
-                        width={400}
-                        height={250}
-                        data={skillsData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 20,
-                          bottom: 5,
-                        }}
-                      >
-                        <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
-                        <YAxis domain={[0, 100]} />
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                        <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                        <Bar
-                          name='Ram'
-                          dataKey='percentage'
-                          fill='#6E29F7'
-                          activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                        />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  ) : (
-                    // Radar chart
-                    <ResponsiveContainer width={400} height={250}>
-                      <RadarChart
-                        // cx={300}
-                        // cy={250}
-                        // outerRadius={150}
-                        width={400}
-                        height={250}
-                        data={skillsData}
-                      >
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey='skill' />
-                        <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                        <Radar
-                          name='Ram'
-                          dataKey='percentage'
-                          stroke='#28B5E1'
-                          strokeWidth={4}
-                          fill='#28B5E1'
-                          fillOpacity={0.4}
-                        />
-                        {/* <Tooltip /> */}
-                        {/* <Legend values="100%" /> */}
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                      </RadarChart>
-                    </ResponsiveContainer>
-                  )}
-                </div>
-              ) : (
-                // Render loading indicator or placeholder while data is being fetched
-                <div>Loading...</div>
-              )}
-            </div>
-          </CardBody>
-        </CardContainer>
       </div>
     </div>
   )
