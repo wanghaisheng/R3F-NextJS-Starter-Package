@@ -31,7 +31,14 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
             ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
             onClick={handleFlip}
           >
-            <div className='absolute inset-0 rounded-xl bg-black text-white'>
+            <div
+              className='absolute inset-0 rounded-xl bg-black text-white'
+              style={{
+                backgroundImage: 'url(/card/abstract2.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
               <div className='flex w-full justify-end'>
                 <p className='pr-3 pt-1 font-bold text-purple-600'>GENIUS ID</p>
               </div>

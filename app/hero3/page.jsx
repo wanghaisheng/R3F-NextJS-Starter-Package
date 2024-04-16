@@ -193,7 +193,7 @@ export default function Hero() {
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow md:min-w-0 '>
               <div className='flex size-full justify-between px-4'>
-                <div className='h-full w-[33%] rounded-xl bg-white/20'>
+                <div className='h-full w-[33%] rounded-xl '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
@@ -218,7 +218,7 @@ export default function Hero() {
                   )}
                 </div>
 
-                <div className='h-full w-[33%] rounded-xl bg-white/20'>
+                <div className='h-full w-[33%] rounded-xl '>
                   <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
                   <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
@@ -293,7 +293,7 @@ export default function Hero() {
             {/* Slide 2 */}
             <div className='w-full shrink-0 grow md:min-w-0'>
               <div className='flex size-full justify-between px-4'>
-                <div className='h-full w-[33%] rounded-xl bg-white/20'>
+                <div className='h-full w-[33%] rounded-xl '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
@@ -315,10 +315,10 @@ export default function Hero() {
                   )}
                 </div>
 
-                <div className='h-full w-[33%] rounded-xl bg-white/20'>
+                <div className='h-full w-[33%] rounded-xl '>
                   <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Skills</div>
                   <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-                    <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+                    <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-2 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
                         {skillsData ? (
                           <div className=' '>
