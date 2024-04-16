@@ -29,6 +29,7 @@ import { usePathname } from 'next/navigation'
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
+import AvatarImageComponent from '@/components/avatarImage/page'
 
 import {
   Bar,
@@ -220,73 +221,9 @@ export default function Hero() {
 
                 <div className='h-full w-[33%] rounded-xl '>
                   <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
-                  <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-                    <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
-                      <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                        {skillsData ? (
-                          <div className=' '>
-                            {/* Condition for changing barchart chart and radar chart*/}
-                            {skillsData.length < 6 ? (
-                              <ResponsiveContainer width={400} height={250}>
-                                <BarChart
-                                  width={400}
-                                  height={250}
-                                  data={skillsData}
-                                  margin={{
-                                    top: 5,
-                                    right: 30,
-                                    left: 20,
-                                    bottom: 5,
-                                  }}
-                                >
-                                  <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
-                                  <YAxis domain={[0, 100]} />
-                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                                  <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                                  <Bar
-                                    name='Ram'
-                                    dataKey='percentage'
-                                    fill='#6E29F7'
-                                    activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                                  />
-                                </BarChart>
-                              </ResponsiveContainer>
-                            ) : (
-                              // Radar chart
-                              <ResponsiveContainer width={400} height={250}>
-                                <RadarChart
-                                  // cx={300}
-                                  // cy={250}
-                                  // outerRadius={150}
-                                  width={400}
-                                  height={250}
-                                  data={skillsData}
-                                >
-                                  <PolarGrid />
-                                  <PolarAngleAxis dataKey='skill' />
-                                  <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                                  <Radar
-                                    name='Ram'
-                                    dataKey='percentage'
-                                    stroke='#28B5E1'
-                                    strokeWidth={4}
-                                    fill='#28B5E1'
-                                    fillOpacity={0.4}
-                                  />
-                                  {/* <Tooltip /> */}
-                                  {/* <Legend values="100%" /> */}
-                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                                </RadarChart>
-                              </ResponsiveContainer>
-                            )}
-                          </div>
-                        ) : (
-                          // Render loading indicator or placeholder while data is being fetched
-                          <div>Loading...</div>
-                        )}
-                      </div>
-                    </CardBody>
-                  </CardContainer>
+                  <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                    <AvatarImageComponent />
+                  </div>
                 </div>
               </div>
             </div>
