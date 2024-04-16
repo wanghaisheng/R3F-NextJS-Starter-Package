@@ -221,7 +221,7 @@ export default function CardComponent() {
                       {user && checkActiveCard(card) != true ? (
                         <form
                           onSubmit={(e) => handleSubmit(e, index)}
-                          className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'
+                          className='mx-auto  mt-4  flex w-full max-w-lg flex-col items-center justify-center'
                         >
                           <div className='flex w-full flex-col gap-y-2 px-4'>
                             <div className='flex justify-between'>

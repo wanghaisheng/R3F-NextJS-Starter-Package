@@ -65,17 +65,17 @@ async function getSkills() {
   }
 }
 
-// getSkills()
-//   .then((res) => {
-//     // Access the resolved value here
-//     // console.log(res)
-//     const testData = res
-//     console.log(testData)
-//   })
-//   .catch((error) => {
-//     // Handle any errors that occurred during the promise execution
-//     console.error(error)
-//   })
+async function getAvatarById(id) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
+    if (!res.ok) {
+      throw new Error('failed to fetch the avatars')
+    }
+    return res.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 // Custom tooltip component
 const CustomTooltip = ({ active, payload, label }) => {
@@ -113,6 +113,7 @@ const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => 
 export default function Hero() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
+  const [avatarsData, setAvatarsData] = useState([])
 
   // Carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
@@ -131,8 +132,9 @@ export default function Hero() {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
 
-  // --------------------------------------------------------------------------------------------------------------------------
+  // ------------------------------------------------------------
 
+  // Fetch skills data
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
@@ -149,6 +151,8 @@ export default function Hero() {
     }
   }, [user])
 
+  // ------------------------------------------------------------
+
   // Flip Card QR
   const [isFlipped, setIsFlipped] = useState(false)
   const [imgSrc, setImgSrc] = useState('')
@@ -161,6 +165,22 @@ export default function Hero() {
     setIsFlipped(!isFlipped)
   }
 
+  // Avatar
+  useEffect(() => {
+    const fetchAvatarsData = async () => {
+      try {
+        const testData = await getAvatarById(user.gg_id)
+        setAvatarsData(testData)
+      } catch (error) {
+        console.error('Error fetching avatars data:', error)
+      }
+    }
+
+    if (user) {
+      fetchAvatarsData() // Fetch data only if user is available
+    }
+  }, [user])
+
   return (
     <div className='h-screen w-full'>
       <div className='flex items-center bg-none'>
@@ -171,18 +191,33 @@ export default function Hero() {
           </Suspense>
         </View>
       </div>
-      <Avatar
-        modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-        shadows
-        animationSrc='/male-idle-3.fbx'
-        style={{ background: 'rgb(9,20,26)' }}
-        fov={40}
-        cameraTarget={1.5}
-        cameraInitialDistance={30}
-        effects={{
-          ambientOcclusion: true,
-        }}
-      />
+      {avatarsData && avatarsData.length != 0 ? (
+        <Avatar
+          modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+          // shadows
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      ) : (
+        <Avatar
+          modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+          shadows
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      )}
 
       {/* Carousel */}
       <div
