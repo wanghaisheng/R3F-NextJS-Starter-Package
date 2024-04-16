@@ -287,7 +287,6 @@ export default function Hero() {
           effects={{
             ambientOcclusion: true,
           }}
-          id='avatar'
         />
       </div>
 

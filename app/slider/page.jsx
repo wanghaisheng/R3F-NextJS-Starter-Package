@@ -15,8 +15,6 @@ import { useCallback, useEffect, useState, useRef } from 'react'
 
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 
-import './slider.css'
-
 import useEmblaCarousel from 'embla-carousel-react'
 
 const tabs = ['Avatar', 'Genius ID', 'Card', 'Experience', 'Skills']
@@ -64,22 +62,25 @@ const SliderPage = () => {
 
   return (
     <>
-      <div className='embla'>
-        <div className='embla__viewport' ref={emblaRef}>
-          <div className='embla__container'>
-            <div className='embla__slide'>
+      <div
+        className='max-w-48rem mx-auto'
+        style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
+      >
+        <div className='overflow-hidden' ref={emblaRef}>
+          <div className='flex'>
+            <div className='w-full min-w-0 shrink-0 grow'>
               <AvatarComponent />
             </div>
-            <div className='embla__slide'>
+            <div className='w-full min-w-0 shrink-0 grow'>
               <UserInfoComponent />
             </div>
-            <div className='embla__slide'>
+            <div className='w-full min-w-0 shrink-0 grow'>
               <Card2Component />
             </div>
-            <div className='embla__slide'>
+            <div className='w-full min-w-0 shrink-0 grow'>
               <ExperienceComponent />
             </div>
-            <div className='embla__slide'>
+            <div className='w-full min-w-0 shrink-0 grow'>
               <SkillsComponent />
             </div>
           </div>
