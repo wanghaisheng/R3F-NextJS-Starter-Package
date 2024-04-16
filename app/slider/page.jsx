@@ -3,7 +3,7 @@
 import SkillsComponent from '@/components/Slider/SkillsComponent'
 import AvatarComponent from '@/components/Slider/AvatarComponent'
 import ExperienceComponent from '@/components/Slider/ExperienceComponent'
-
+import ConnectionComponent from '@/components/Slider/ConnectionComponent'
 import UserInfoComponent from '@/components/Slider/UserInfoComponent'
 import Card2Component from '@/components/Slider/Card2Component'
 
@@ -17,7 +17,7 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 
 import useEmblaCarousel from 'embla-carousel-react'
 
-const tabs = ['Avatar', 'Genius ID', 'Card', 'Experience', 'Skills']
+const tabs = ['Avatar', 'Genius ID', 'Connection', 'Card', 'Experience', 'Skills']
 
 const SliderPage = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
@@ -73,6 +73,9 @@ const SliderPage = () => {
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
               <UserInfoComponent />
+            </div>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <ConnectionComponent />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
               <Card2Component />
