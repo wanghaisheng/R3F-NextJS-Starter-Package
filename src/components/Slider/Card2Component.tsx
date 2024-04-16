@@ -3,19 +3,118 @@ import { motion } from 'framer-motion'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useUser } from '@/context/UserContext/UserContext'
 import CardsFlipCard from '../card/cardsFlipCard'
 
 import { TiDelete } from 'react-icons/ti'
 
+import axios from 'axios'
+
+async function getCardInfo() {
+  try {
+    const res = await fetch('http://localhost:3000/api/card')
+    if (!res.ok) {
+      throw new Error('failed to fetch the skills')
+    }
+    return res.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function CardComponent() {
+  const { user } = useUser()
   const [cards, setCards] = useState([
-    { type: 'Educational', name: 'School/College Name', description: 'lorem', dateIn: '', dateOut: '' },
-    { type: 'Work', name: 'Office Name', description: 'lorem', dateIn: '', dateOut: '' },
-    { type: 'Gym', name: 'Gym Name', description: 'lorem', dateIn: '', dateOut: '' },
+    { card_id: '', type: 'newCard', name: '', description: '', dateIn: '', dateOut: '' },
   ])
 
-  const handleCardTypeChange = (index, newType) => {
+  useEffect(() => {
+    const fetchCardsData = async () => {
+      try {
+        const testData = await getCardInfo() // Fetch cards data
+        const filteredData = testData.filter((element: any) => element.gg_id === user.gg_id) // Filter data based on user
+
+        if (filteredData.length != 0) {
+          setCards(filteredData) // Set the filtered data
+        }
+      } catch (error) {
+        console.error('Error fetching cards data:', error)
+      }
+    }
+
+    if (user) {
+      fetchCardsData() // Fetch data only if user is available
+    }
+  }, [user])
+
+  const checkActiveCard = (element: any) => {
+    return element.gg_id === user.gg_id
+  }
+
+  const handleSubmit = async (e: any, index: number) => {
+    e.preventDefault()
+    const submit = {
+      gg_id: user.gg_id,
+      type: cards[index].type,
+      name: cards[index].name,
+      description: cards[index].description,
+      dateIn: cards[index].dateIn,
+      dateOut: cards[index].dateOut,
+    }
+    try {
+      await axios({
+        url: `/api/card`,
+        method: 'POST',
+        data: submit,
+      })
+      alert('card info saved')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleUpdate = async (e: any, id: any, index: number) => {
+    e.preventDefault()
+    const submit = {
+      type: cards[index].type,
+      name: cards[index].name,
+      description: cards[index].description,
+      dateIn: cards[index].dateIn,
+      dateOut: cards[index].dateOut,
+    }
+    console.log('type: ', typeof submit.dateIn, ': ', submit.dateIn)
+    try {
+      await axios({
+        url: `/api/card/${id}`,
+        method: 'PUT',
+        data: submit,
+      })
+      alert('card info updated')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleDelete = async (id: any) => {
+    try {
+      await axios({
+        url: `/api/card/${id}`,
+        method: 'DELETE',
+      })
+      alert('card info deleted')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleCardTypeChange = (index: number, newType: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].type = newType
@@ -23,7 +122,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardNameChange = (index, newName) => {
+  const handleCardNameChange = (index: number, newName: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].name = newName
@@ -31,7 +130,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardDescriptionChange = (index, newDescription) => {
+  const handleCardDescriptionChange = (index: number, newDescription: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].description = newDescription
@@ -39,7 +138,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardDateInChange = (index, newDateIn) => {
+  const handleCardDateInChange = (index: number, newDateIn: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].dateIn = newDateIn
@@ -47,7 +146,7 @@ export default function CardComponent() {
     })
   }
 
-  const handleCardDateOutChange = (index, newDateOut) => {
+  const handleCardDateOutChange = (index: number, newDateOut: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].dateOut = newDateOut
@@ -56,13 +155,17 @@ export default function CardComponent() {
   }
 
   const handleAddCard = () => {
-    setCards((prevCards) => [...prevCards, { type: 'Education', name: '', description: '', dateIn: '', dateOut: '' }])
+    setCards((prevCards) => [
+      ...prevCards,
+      { card_id: '', type: 'newCard', name: '', description: '', dateIn: '', dateOut: '' },
+    ])
   }
 
-  const handleDeleteCard = (index) => {
+  const handleDeleteCard = (index: number, card_id: any) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards.splice(index, 1)
+      handleDelete(card_id)
       return updatedCards
     })
   }
@@ -95,7 +198,7 @@ export default function CardComponent() {
               {cards.map((card, index) => (
                 <Tab key={index} className='flex pl-1 pr-5 '>
                   {card.type}
-                  <button className='ml-2 text-black' onClick={() => handleDeleteCard(index)}>
+                  <button className='ml-2 text-black' onClick={() => handleDeleteCard(index, card.card_id)}>
                     <TiDelete />
                   </button>
                 </Tab>
@@ -115,66 +218,139 @@ export default function CardComponent() {
 
                     {/* Form for user input */}
                     <div className='w-[50%]'>
-                      <form className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
-                        <div className='flex w-full flex-col gap-y-2 px-4'>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Type</label>
-                            <input
-                              type='text'
-                              value={card.type}
-                              onChange={(e) => handleCardTypeChange(index, e.target.value)}
-                              placeholder='Card Type'
-                              className='w-[70%] rounded-md bg-white/20 px-3'
-                              required
-                            />
-                          </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Name</label>
-                            <input
-                              type='text'
-                              value={card.name}
-                              onChange={(e) => handleCardNameChange(index, e.target.value)}
-                              placeholder='Card Name'
-                              className='w-[70%] rounded-md bg-white/20 px-3'
-                              required
-                            />
-                          </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Description</label>
-                            <input
-                              type='text'
-                              value={card.description}
-                              onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
-                              placeholder='Card Description'
-                              className='w-[70%] rounded-md bg-white/20  px-3'
-                            />
-                          </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Date In</label>
-                            <input
-                              type='date'
-                              className='w-[70%] rounded-md bg-white/20  px-3'
-                              onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                              required
-                            />
-                          </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Date Out</label>
-                            <input
-                              type='date'
-                              className='w-[70%] rounded-md bg-white/20  px-3'
-                              onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                            />
-                          </div>
-                        </div>
-                        {/* Submit button */}
-                        <button
-                          type='submit'
-                          className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                      {user && checkActiveCard(card) != true ? (
+                        <form
+                          onSubmit={(e) => handleSubmit(e, index)}
+                          className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'
                         >
-                          Generate
-                        </button>
-                      </form>
+                          <div className='flex w-full flex-col gap-y-2 px-4'>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Type</label>
+                              <input
+                                type='text'
+                                value={card.type}
+                                onChange={(e) => handleCardTypeChange(index, e.target.value)}
+                                placeholder='Card Type'
+                                className='w-[70%] rounded-md bg-white/20 px-3'
+                                required
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Name</label>
+                              <input
+                                type='text'
+                                value={card.name}
+                                onChange={(e) => handleCardNameChange(index, e.target.value)}
+                                placeholder='Card Name'
+                                className='w-[70%] rounded-md bg-white/20 px-3'
+                                required
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Description</label>
+                              <input
+                                type='text'
+                                value={card.description}
+                                onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
+                                placeholder='Card Description'
+                                className='w-[70%] rounded-md bg-white/20  px-3'
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Date In</label>
+                              <input
+                                type='date'
+                                value={card.dateIn}
+                                className='w-[70%] rounded-md bg-white/20  px-3'
+                                onChange={(e) => handleCardDateInChange(index, e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Date Out</label>
+                              <input
+                                type='date'
+                                value={card.dateOut}
+                                className='w-[70%] rounded-md bg-white/20  px-3'
+                                onChange={(e) => handleCardDateOutChange(index, e.target.value)}
+                              />
+                            </div>
+                          </div>
+                          {/* Submit button */}
+                          <button
+                            type='submit'
+                            className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                          >
+                            Generate
+                          </button>
+                        </form>
+                      ) : (
+                        <form
+                          onSubmit={(e) => handleUpdate(e, card.card_id, index)}
+                          className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'
+                        >
+                          <div className='flex w-full flex-col gap-y-2 px-4'>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Type</label>
+                              <input
+                                type='text'
+                                value={card.type}
+                                onChange={(e) => handleCardTypeChange(index, e.target.value)}
+                                placeholder='Card Type'
+                                className='w-[70%] rounded-md bg-white/20 px-3'
+                                required
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Name</label>
+                              <input
+                                type='text'
+                                value={card.name}
+                                onChange={(e) => handleCardNameChange(index, e.target.value)}
+                                placeholder='Card Name'
+                                className='w-[70%] rounded-md bg-white/20 px-3'
+                                required
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Description</label>
+                              <input
+                                type='text'
+                                value={card.description}
+                                onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
+                                placeholder='Card Description'
+                                className='w-[70%] rounded-md bg-white/20  px-3'
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Date In</label>
+                              <input
+                                type='date'
+                                value={card.dateIn}
+                                className='w-[70%] rounded-md bg-white/20  px-3'
+                                onChange={(e) => handleCardDateInChange(index, e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div className='flex justify-between'>
+                              <label htmlFor=''>Date Out</label>
+                              <input
+                                type='date'
+                                value={card.dateOut}
+                                className='w-[70%] rounded-md bg-white/20  px-3'
+                                onChange={(e) => handleCardDateOutChange(index, e.target.value)}
+                              />
+                            </div>
+                          </div>
+                          {/* Submit button */}
+                          <button
+                            type='submit'
+                            className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                          >
+                            Generate
+                          </button>
+                        </form>
+                      )}
                     </div>
                   </div>
                 </div>

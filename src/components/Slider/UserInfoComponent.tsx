@@ -49,7 +49,9 @@ export default function UserInfoComponent() {
         method: 'put',
         data: submit,
       })
-      router.push('/hero3')
+      alert('user info saved')
+      window.location.reload()
+      return
     } catch (error) {
       throw new Error(error)
     }

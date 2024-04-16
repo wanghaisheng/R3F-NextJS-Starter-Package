@@ -65,7 +65,7 @@ export default function SkillsComponent() {
     const fetchSkillsData = async () => {
       try {
         const testData = await getSkills() // Fetch skills data
-        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
+        const filteredData = testData.filter((element: any) => element.gg_id === user.gg_id) // Filter data based on user
         if (filteredData.length != 0) {
           setSkills(filteredData) // Set the filtered data
           setOriginalLength(filteredData.length)

@@ -29,6 +29,7 @@ import { usePathname } from 'next/navigation'
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
+import AvatarImageComponent from '@/components/avatarImage/page'
 
 import {
   Bar,
@@ -136,7 +137,8 @@ export default function Hero() {
     const fetchSkillsData = async () => {
       try {
         const testData = await getSkills() // Fetch skills data
-        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
+        const filteredData = testData ? testData.filter((element) => element.gg_id === user.gg_id) : []
+        // Filter data based on user
         setSkillsData(filteredData) // Set the filtered data
       } catch (error) {
         console.error('Error fetching skills data:', error)
@@ -220,8 +222,9 @@ export default function Hero() {
 
                 <div className='h-full w-[33%] rounded-xl '>
                   <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
-
-                  <div className='flex justify-center'>Avatars </div>
+                  <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                    <AvatarImageComponent />
+                  </div>
                 </div>
               </div>
             </div>

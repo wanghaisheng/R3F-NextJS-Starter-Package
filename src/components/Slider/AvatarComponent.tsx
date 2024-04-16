@@ -8,6 +8,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect } from 'react'
 
 import { useRouter } from 'next/navigation'
+import AvatarImageComponent from '../avatarImage/page'
 
 async function getAvatarById(id: string) {
   try {
@@ -50,7 +51,7 @@ export default function AvatarComponent() {
         <div className='flex flex-col'>
           <div className='relative my-8 flex justify-center text-7xl drop-shadow'>My Avatars</div>
 
-          {avatarsData.length != 0 ? (
+          {avatarsData && avatarsData.length != 0 ? (
             <div className='mt-7 flex justify-between'>
               <div>
                 <Avatar
@@ -67,18 +68,7 @@ export default function AvatarComponent() {
                 />
               </div>
               <div className='grid h-fit w-[50%] grid-cols-3 gap-4'>
-                {avatarsData.map((avatar) => (
-                  <div className='rounded-lg bg-white/20' key={avatar}>
-                    {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
-                    {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
-                    <img
-                      src={`${avatar.avatar_url.replace('glb', 'png?size=1024?quality=100')}`}
-                      alt=''
-                      height='120px'
-                      width='120px'
-                    />
-                  </div>
-                ))}
+                <AvatarImageComponent />
               </div>
             </div>
           ) : (
