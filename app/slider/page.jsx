@@ -1,121 +1,140 @@
 'use client'
 
-import WelcomeComponent from '@/components/Slider/WelcomeComponent'
 import SkillsComponent from '@/components/Slider/SkillsComponent'
 import AvatarComponent from '@/components/Slider/AvatarComponent'
 import ExperienceComponent from '@/components/Slider/ExperienceComponent'
-import CardComponent from '@/components/Slider/CardComponent'
-import ChipTabs from '@/components/Slider/Footer'
-
+import ConnectionComponent from '@/components/Slider/ConnectionComponent'
 import UserInfoComponent from '@/components/Slider/UserInfoComponent'
 import Card2Component from '@/components/Slider/Card2Component'
 
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import { motion } from 'framer-motion'
+import { useCallback, useEffect, useState, useRef } from 'react'
 
-import { IoChevronForwardSharp, IoChevronBack } from 'react-icons/io5'
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 
-import { useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+const tabs = ['Avatar', 'Genius ID', 'Connection', 'Card', 'Experience', 'Skills']
 
 const SliderPage = () => {
-  const [activeTab, setActiveTab] = useState('Home')
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const settings = {
-    dots: false,
-    // arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    adaptiveHeight: false,
-    centerMode: true,
-    draggable: false,
-    focusonSelect: true,
-    responsive: [
-      {
-        breakpoint: 1536,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
 
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-    afterChange: (index) => {
-      switch (index) {
-        case 0:
-          setActiveTab('Avatar')
-          break
-        case 1:
-          setActiveTab('Genius ID')
-          break
-        case 2:
-          setActiveTab('Card')
-          break
-        case 3:
-          setActiveTab('Experience')
-          break
-        case 4:
-          setActiveTab('Skills')
-          break
-        default:
-          setActiveTab('Avatar')
-      }
-    },
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
-    // // customize next arrow and previous arrow colors
-    // nextArrow: (
-    //   <div>
-    //     <button className='me -5 size-10 rounded-full text-2xl text-gray-500'>
-    //       <i className='fas fa-chevron-right text-5xl'>
-    //         <IoChevronForwardSharp />
-    //       </i>
-    //     </button>
-    //   </div>
-    // ),
-    // prevArrow: (
-    //   <div className=''>
-    //     <button className='size-10 rounded-full text-2xl text-gray-500'>
-    //       <i className='fas fa-chevron-right text-5xl'>
-    //         <IoChevronBack />
-    //       </i>
-    //     </button>
-    //   </div>
-    // ),
+  const [selected, setSelected] = useState(tabs[0])
+
+  const [slideIndex, setSlideIndex] = useState(0)
+  const [activeTab, setActiveTab] = useState('Avatar')
+
+  useEffect(() => {
+    setSelected(activeTab)
+  }, [activeTab])
+
+  useEffect(() => {
+    if (emblaApi) {
+      console.log(emblaApi.slideNodes()) // Access API
+    }
+  }, [emblaApi])
+
+  const handleChangeSlide = (index) => {
+    setSlideIndex(index)
+    if (emblaApi) emblaApi.scrollTo(index)
   }
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on('select', () => {
+        const index = emblaApi.selectedScrollSnap()
+        setSlideIndex(index)
+        setActiveTab(tabs[index])
+      })
+    }
+  }, [emblaApi, tabs])
 
   return (
     <>
-      <div className=' mt-4 flex h-full md:px-10 lg:px-10 xl:px-10 2xl:px-24'>
-        <Slider {...settings} className='size-full 2xl:w-full'>
-          {/* <WelcomeComponent /> */}
-          <AvatarComponent />
-          {/* <CardComponent /> */}
-          <UserInfoComponent />
-          <Card2Component />
-          <ExperienceComponent />
-          <SkillsComponent />
-        </Slider>
+      <div
+        className='mx-auto max-w-7xl'
+        style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
+      >
+        <div className='overflow-hidden' ref={emblaRef}>
+          <div className='flex'>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <AvatarComponent />
+            </div>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <UserInfoComponent />
+            </div>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <ConnectionComponent />
+            </div>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <Card2Component />
+            </div>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <ExperienceComponent />
+            </div>
+            <div className='w-full min-w-0 shrink-0 grow'>
+              <SkillsComponent />
+            </div>
+          </div>
+          <button className='absolute left-10 top-56 text-5xl' onClick={scrollPrev}>
+            <MdNavigateBefore />
+          </button>
+          <button className='absolute right-10 top-56 text-5xl' onClick={scrollNext}>
+            <MdNavigateNext />
+          </button>
+        </div>
       </div>
-      <ChipTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      <div className='flex items-center justify-center'>
+        <div className='my-7 flex h-12 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
+          {tabs.map((tab, index) => (
+            <Chip
+              text={tab}
+              selected={selected === tab}
+              setSelected={setSelected}
+              setActiveTab={setActiveTab}
+              key={tab}
+              index={index}
+              handleChangeSlide={handleChangeSlide}
+            />
+          ))}
+        </div>
+      </div>
     </>
+  )
+}
+
+const Chip = ({ text, selected, setSelected, setActiveTab, index, handleChangeSlide }) => {
+  const handleClick = () => {
+    setSelected(text)
+    setActiveTab(text) // Update the active tab
+    handleChangeSlide(index)
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className={`${
+        selected ? 'bg-purple-600 text-white' : 'text-slate-200 hover:bg-slate-700 hover:text-slate-200'
+      } relative rounded-full px-2.5 py-0.5 text-sm transition-colors`}
+    >
+      <span className='relative z-10 pt-4'>{text}</span>
+      {selected && (
+        <motion.span
+          layoutId='pill-tab'
+          transition={{ type: 'spring', duration: 0.5 }}
+          className='absolute inset-0 z-0 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600'
+        ></motion.span>
+      )}
+    </button>
   )
 }
 

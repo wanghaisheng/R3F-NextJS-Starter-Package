@@ -37,7 +37,7 @@ const Chip = ({ text, selected, setSelected }) => {
       onClick={setSelected}
       className={`${
         selected ? 'text-white' : 'text-slate-200 hover:bg-slate-700 hover:text-slate-200'
-      } relative rounded-md px-2.5 py-0.5 text-sm transition-colors`}
+      } relative rounded-full px-2.5 py-0.5 text-sm transition-colors`}
     >
       <span className='relative z-10 pt-4'>{text}</span>
       {selected && (

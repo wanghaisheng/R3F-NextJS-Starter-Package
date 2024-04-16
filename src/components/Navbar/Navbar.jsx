@@ -37,39 +37,13 @@ const Navbar = () => {
         transition={{ duration: 0.5 }}
         className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '
       >
-        {/* For desktop view nav bar */}
-        <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
-          <div className='hidden md:flex'>
-            <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Home
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Cards
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Map
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Profile
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Avatar
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Security
-              </Link>
-            </div>
-          </div>
-        </div>
-
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
           <Link href='' className='flex items-center justify-center pl-1 '>
             <img
               src='/GGlogo.png'
-              className='h-20 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+              className='h-24 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
             ></img>
           </Link>
 
@@ -82,7 +56,7 @@ const Navbar = () => {
                   <Link
                     href='/signin'
                     onClick={logout}
-                    className='group z-10 hidden items-center justify-end rounded-full hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800 focus:outline-none md:flex'
+                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none md:flex'
                     id='user-menu-button'
                   >
                     <LuLogOut className='mr-4 size-6 text-red-500' />
@@ -106,7 +80,7 @@ const Navbar = () => {
                   <Link
                     href='/signin'
                     onClick={logout}
-                    className='group z-10 hidden items-center justify-end rounded-full hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800 focus:outline-none md:flex'
+                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105  focus:outline-none md:flex'
                     id='user-menu-button'
                   >
                     <LuLogOut className='mr-4 size-6 text-red-500' />
@@ -129,6 +103,31 @@ const Navbar = () => {
             ) : (
               <Link href='/signin'>Sign-In</Link>
             )}
+          </div>
+        </div>
+        {/* For desktop view nav bar */}
+        <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
+          <div className='hidden md:flex'>
+            <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Home
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Cards
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Map
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Profile
+              </Link>
+              <Link href='#avatar' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Avatar
+              </Link>
+              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                Security
+              </Link>
+            </div>
           </div>
         </div>
 
