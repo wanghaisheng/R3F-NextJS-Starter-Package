@@ -13,8 +13,10 @@ export default function ConnectionComponent() {
     setSelectedLogo(logo)
   }
 
-  const handleInputChange = (e) => {
-    setSelectedLogo({ ...selectedLogo, link: e.target.value })
+  const handleInputChange = (e, index) => {
+    const updatedConnections = [...connections]
+    updatedConnections[index] = { ...updatedConnections[index], link: e.target.value }
+    setConnections(updatedConnections)
   }
 
   const handleAddConnection = () => {
@@ -73,12 +75,13 @@ export default function ConnectionComponent() {
                   <Image src={connection.src} alt={connection.alt} width={45} height={45} />
                   <input
                     type='text'
-                    className='ml-2 w-1/2 rounded-md bg-white/20'
+                    className='ml-2 w-1/2 rounded-md bg-white/20 p-2'
                     value={connection.link || ''}
-                    onChange={handleInputChange}
+                    onChange={(e) => handleInputChange(e, index)}
+                    placeholder='Enter link here'
                   />
                   <button
-                    className='rounded  px-2 py-1 font-bold text-white hover:text-red-700'
+                    className='rounded px-2 py-1 font-bold text-white hover:text-red-700'
                     onClick={() => handleRemoveConnection(index)}
                   >
                     <TiDelete />
