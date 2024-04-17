@@ -66,7 +66,7 @@ export default function UserInfoComponent() {
   }
 
   const handleEmailChange = (newEmail: string) => {
-    setLastName(newEmail)
+    setEmail(newEmail)
   }
 
   const handleAddressChange = (newAddress: string) => {
@@ -90,7 +90,7 @@ export default function UserInfoComponent() {
         <div className='flex w-full flex-col'>
           <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
 
-          <div className='mt-5 rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+          <div className='mt-5 rounded-[20px] '>
             <div className='flex justify-between'>
               {/* Card Image / Container */}
 
@@ -107,7 +107,7 @@ export default function UserInfoComponent() {
               <div className='w-[50%]'>
                 <form
                   onSubmit={handleSubmit}
-                  className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'
+                  className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                 >
                   <div className='flex w-full flex-col gap-y-2 px-4'>
                     <div className='flex justify-between'>
@@ -177,7 +177,7 @@ export default function UserInfoComponent() {
                   {/* Submit button */}
                   <button
                     type='submit'
-                    className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                    className='mt-4 rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
                   >
                     Generate
                   </button>

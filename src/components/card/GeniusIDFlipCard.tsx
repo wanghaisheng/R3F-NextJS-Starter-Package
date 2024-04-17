@@ -40,7 +40,7 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
               }}
             >
               <div className='flex w-full justify-end'>
-                <p className='pr-3 pt-1 font-bold text-purple-600'>GENIUS ID</p>
+                <p className='pr-3 pt-1 font-bold text-purple-200'>GENIUS ID</p>
               </div>
               {/* Card Details */}
               <div className='flex flex-col p-5 text-sm text-white'>

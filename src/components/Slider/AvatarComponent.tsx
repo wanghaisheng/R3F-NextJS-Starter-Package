@@ -72,12 +72,12 @@ export default function AvatarComponent() {
               </div>
             </div>
           ) : (
-            <div className='mt-7 flex justify-between'>
+            <div className='mt-2 flex justify-between'>
               <Avatar
                 modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
                 // shadows
                 animationSrc='/male-idle-3.fbx'
-                style={{ background: 'rgb(9,20,26)', width: '400px', height: '300px' }}
+                style={{ background: 'rgb(9,20,26)', width: '300px', height: '300px' }}
                 fov={40}
                 cameraTarget={1.5}
                 cameraInitialDistance={30}
@@ -85,7 +85,7 @@ export default function AvatarComponent() {
                   ambientOcclusion: true,
                 }}
               />
-              <div className='grid h-fit grid-cols-3 gap-4'>
+              <div className='mt-5 grid h-fit grid-cols-3 gap-4'>
                 <div className='rounded-lg'>...loading</div>
               </div>
             </div>
@@ -95,10 +95,10 @@ export default function AvatarComponent() {
             <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className='rounded-2xl border-2 p-2 text-white shadow-md '
+              className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               href='/avatar'
             >
-              Create New Avatar &emsp;&emsp; +
+              Create New Avatar &emsp; +
             </motion.a>
           </div>
         </div>

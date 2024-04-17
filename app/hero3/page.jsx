@@ -61,7 +61,7 @@ async function getSkills() {
     }
     return res.json()
   } catch (error) {
-    console.error(error)
+    throw new Error('failed to fetch the skills', error)
   }
 }
 
@@ -73,7 +73,7 @@ async function getAvatarById(id) {
     }
     return res.json()
   } catch (error) {
-    console.error(error)
+    throw new Error('failed to fetch the avatars', error)
   }
 }
 
@@ -142,7 +142,7 @@ export default function Hero() {
         const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
         setSkillsData(filteredData) // Set the filtered data
       } catch (error) {
-        console.error('Error fetching skills data:', error)
+        throw new Error('Error fetching skills data:', error)
       }
     }
 
@@ -172,7 +172,7 @@ export default function Hero() {
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        console.error('Error fetching avatars data:', error)
+        throw new Error('Error fetching avatars data:', error)
       }
     }
 

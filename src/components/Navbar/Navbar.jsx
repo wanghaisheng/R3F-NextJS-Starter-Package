@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { useUser } from '@/context/UserContext/UserContext'
 
 import { LuLogOut } from 'react-icons/lu'
+import Image from 'next/image'
 
 const Navbar = () => {
   const [isToggled, setToggle] = useState(false)
@@ -41,10 +42,13 @@ const Navbar = () => {
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
           <Link href='' className='flex items-center justify-center pl-1 '>
-            <img
+            <Image
               src='/GGlogo.png'
-              className='h-24 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-            ></img>
+              className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+              height={95}
+              width={95}
+              alt='GG Logo'
+            />
           </Link>
 
           {/* SignIn, SignOut and Logout */}
@@ -101,7 +105,12 @@ const Navbar = () => {
                 </div>
               )
             ) : (
-              <Link href='/signin'>Sign-In</Link>
+              <Link
+                href='/signin'
+                className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900  '
+              >
+                Sign-In
+              </Link>
             )}
           </div>
         </div>

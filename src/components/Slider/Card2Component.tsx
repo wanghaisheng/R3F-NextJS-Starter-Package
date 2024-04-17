@@ -183,7 +183,7 @@ export default function CardComponent() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
+              className='absolute bottom-0 right-0 w-fit rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
               onClick={() => {
                 handleAddCard()
               }}
@@ -196,9 +196,12 @@ export default function CardComponent() {
             {/* TabList */}
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start'>
               {cards.map((card, index) => (
-                <Tab key={index} className='flex pl-1 pr-5 '>
+                <Tab key={index} className='ml-4 flex px-1 '>
                   {card.type}
-                  <button className='ml-2 text-black' onClick={() => handleDeleteCard(index, card.card_id)}>
+                  <button
+                    className='ml-2 text-white hover:text-red-500'
+                    onClick={() => handleDeleteCard(index, card.card_id)}
+                  >
                     <TiDelete />
                   </button>
                 </Tab>
@@ -208,7 +211,8 @@ export default function CardComponent() {
             {/* TabPanel */}
             {cards.map((card, index) => (
               <TabPanel key={index}>
-                <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                {/* <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'> */}
+                <div>
                   <div className='flex justify-between'>
                     {/* Card Image / Container */}
 
@@ -287,7 +291,7 @@ export default function CardComponent() {
                       ) : (
                         <form
                           onSubmit={(e) => handleUpdate(e, card.card_id, index)}
-                          className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'
+                          className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                         >
                           <div className='flex w-full flex-col gap-y-2 px-4'>
                             <div className='flex justify-between'>
@@ -345,7 +349,7 @@ export default function CardComponent() {
                           {/* Submit button */}
                           <button
                             type='submit'
-                            className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                            className='mt-4 rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
                           >
                             Generate
                           </button>
