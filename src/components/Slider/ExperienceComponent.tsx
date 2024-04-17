@@ -43,7 +43,7 @@ export default function ExperienceComponent() {
           setProjects(filteredData) // Set the filtered data
         }
       } catch (error) {
-        throw new Error('Error fetching cards data:', error)
+        console.log('Error fetching cards data:', error)
       }
     }
 
@@ -184,30 +184,48 @@ export default function ExperienceComponent() {
                     <div className='w-[50%]'>
                       <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
                         <div className='flex w-full flex-col gap-y-2 px-4'>
-                          <div className='flex justify-between'>
-                            <label htmlFor='type'>Type</label>
-                            <select
-                              id='type'
-                              name='type'
-                              value={project.type}
-                              className='w-[70%] rounded-md bg-white/20 px-2'
-                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              required
-                            >
-                              <option value='' className='bg-black text-gray-600' selected>
-                                Select Type
-                              </option>
-                              <option value='educational' className='bg-black'>
+                          <div className='flex items-center justify-between '>
+                            <div>
+                              <input
+                                type='radio'
+                                id='educational'
+                                name='type'
+                                value='educational'
+                                checked={project.type === 'educational'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                              />
+                              <label htmlFor='educational' className='ml-2 text-white'>
                                 Educational
-                              </option>
-                              <option value='work' className='bg-black'>
+                              </label>
+                            </div>
+                            <div>
+                              <input
+                                type='radio'
+                                id='work'
+                                name='type'
+                                value='work'
+                                checked={project.type === 'work'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                              />
+                              <label htmlFor='work' className='ml-2 text-white'>
                                 Work
-                              </option>
-                              <option value='gym' className='bg-black'>
+                              </label>
+                            </div>
+                            <div>
+                              <input
+                                type='radio'
+                                id='gym'
+                                name='type'
+                                value='gym'
+                                checked={project.type === 'gym'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                              />
+                              <label htmlFor='gym' className='ml-2 text-white'>
                                 Gym
-                              </option>
-                            </select>
+                              </label>
+                            </div>
                           </div>
+
                           <div className='flex justify-between'>
                             <label htmlFor=''>Name</label>
                             <input
@@ -227,6 +245,16 @@ export default function ExperienceComponent() {
                               onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
                               placeholder='Project Description'
                               className='w-[70%] rounded-md bg-white/20  px-3'
+                            />
+                          </div>
+                          <div className='flex justify-between'>
+                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                              ProjPic
+                            </label>
+                            <input
+                              className='block w-[70%] cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              id='file_input'
+                              type='file'
                             />
                           </div>
                           <div className='flex justify-between'>

@@ -229,15 +229,28 @@ export default function CardComponent() {
                         >
                           <div className='flex w-full flex-col gap-y-2 px-4'>
                             <div className='flex justify-between'>
-                              <label htmlFor=''>Type</label>
-                              <input
-                                type='text'
+                              <label htmlFor='type'>Type</label>
+                              <select
+                                id='type'
+                                name='type'
                                 value={card.type}
+                                className='w-[70%] rounded-md bg-white/20 px-2'
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
-                                placeholder='Card Type'
-                                className='w-[70%] rounded-md bg-white/20 px-3'
                                 required
-                              />
+                              >
+                                <option value='' className='bg-black text-gray-600' selected>
+                                  Select Type
+                                </option>
+                                <option value='Educational' className='bg-black'>
+                                  Educational
+                                </option>
+                                <option value='Work' className='bg-black'>
+                                  Work
+                                </option>
+                                <option value='Gym' className='bg-black'>
+                                  Gym
+                                </option>
+                              </select>
                             </div>
                             <div className='flex justify-between'>
                               <label htmlFor=''>Name</label>
@@ -283,7 +296,7 @@ export default function CardComponent() {
                           {/* Submit button */}
                           <button
                             type='submit'
-                            className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                            className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
                           >
                             Generate
                           </button>
@@ -349,7 +362,7 @@ export default function CardComponent() {
                           {/* Submit button */}
                           <button
                             type='submit'
-                            className='mt-4 rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+                            className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
                           >
                             Generate
                           </button>

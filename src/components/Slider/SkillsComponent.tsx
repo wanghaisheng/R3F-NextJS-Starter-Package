@@ -190,10 +190,10 @@ export default function SkillsComponent() {
                                 min='0'
                                 max='100'
                                 value={element.percentage}
-                                className='w-full rounded-md text-purple-700'
+                                className='w-full rounded-md bg-purple-600'
                                 onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                               />
-                              <p className='px-2 text-sm text-purple-300'>{element.percentage}%</p>
+                              <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
                             </div>
                           </div>
                           <div className='flex justify-start'>
