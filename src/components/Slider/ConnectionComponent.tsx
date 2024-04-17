@@ -22,7 +22,8 @@ export default function ConnectionComponent() {
     setConnections(updatedConnections)
   }
 
-  const handleRemoveConnection = (index) => {
+  const handleRemoveConnection = (index, event) => {
+    event.preventDefault() // To prevent form submission and reload of the page
     setConnections(connections.filter((_, i) => i !== index))
   }
 
@@ -83,7 +84,7 @@ export default function ConnectionComponent() {
                     />
                     <button
                       className='rounded px-2 py-1 font-bold text-white hover:text-red-700'
-                      onClick={() => handleRemoveConnection(index)}
+                      onClick={(e) => handleRemoveConnection(index, e)}
                     >
                       <TiDelete />
                     </button>
@@ -94,13 +95,13 @@ export default function ConnectionComponent() {
             <div className='flex items-center justify-center gap-x-2'>
               <button
                 type='submit'
-                className='mt-4 w-36 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                className='mt-4 rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               >
                 Submit
               </button>
               <a
                 href='/hero3'
-                className='mt-4 flex w-36 justify-center rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               >
                 Skip
               </a>

@@ -13,6 +13,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { TiDelete } from 'react-icons/ti'
+import Link from 'next/link'
 
 import {
   Bar,
@@ -146,21 +147,21 @@ export default function SkillsComponent() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
+              className='absolute bottom-0 right-0 w-fit rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
               onClick={() => {
                 handleAddSkill()
               }}
             >
-              Add New Project &emsp;&emsp; +
+              Add New Project &emsp; +
             </motion.button>
           </div>
 
           <Tabs>
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {skills.map((element, index) => (
-                <Tab key={index} className='flex pl-1 pr-5'>
+                <Tab key={index} className='flex px-1'>
                   {element.skill}
-                  <button className='ml-2 text-black' onClick={() => handleDeleteSkill(index)}>
+                  <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
                     <TiDelete />
                   </button>
                 </Tab>
@@ -183,7 +184,7 @@ export default function SkillsComponent() {
                               className='w-full rounded-md bg-white/20 p-1'
                             />
 
-                            <div className='my-5 flex'>
+                            <div className='my-4 flex'>
                               <input
                                 type='range'
                                 min='0'
@@ -199,7 +200,7 @@ export default function SkillsComponent() {
                             <motion.div animate={open ? 'open' : 'closed'} className='relative'>
                               <button
                                 onClick={() => setOpen((pv) => !pv)}
-                                className='flex items-center gap-2 rounded-md bg-purple-700 px-3 py-2 text-indigo-50 transition-colors hover:bg-purple-900'
+                                className='flex items-center gap-2 rounded-2xl bg-purple-700/50 px-3 py-2 text-indigo-50 transition-colors hover:bg-purple-900'
                               >
                                 <span className='text-sm font-medium'>Select View</span>
                                 <motion.span variants={iconVariants}>
@@ -220,7 +221,7 @@ export default function SkillsComponent() {
                             </motion.div>
                           </div>
                         </div>
-                        <p>
+                        {/* <p>
                           Work Project{' '}
                           <input
                             type='text'
@@ -239,8 +240,13 @@ export default function SkillsComponent() {
                             placeholder='Skill Name'
                             className='w-full rounded-md bg-white/20 p-1'
                           />
+                        </p> */}
+                        <p className='mb-4'>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
+                          saepe repudiandae accusamus temporibus, autem dicta quidem a omnis quas optio nemo? Officia
+                          totam autem nam ex quis?
                         </p>
-                        <label className=' text-gray-900 dark:text-white' htmlFor='file_input'>
+                        <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                           Certifications
                         </label>
                         <input
@@ -314,6 +320,20 @@ export default function SkillsComponent() {
               </div>
             </div>
           </Tabs>
+          <div className='flex justify-center gap-x-2'>
+            <button
+              type='submit'
+              className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+            >
+              Generate
+            </button>
+            <Link
+              href='/hero3'
+              className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+            >
+              Skip
+            </Link>
+          </div>
         </div>
       </div>
     </div>

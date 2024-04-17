@@ -11,6 +11,7 @@ import { TiDelete } from 'react-icons/ti'
 import ExperienceFlipCard from '../card/experienceFlipCard'
 
 import axios from 'axios'
+import Link from 'next/link'
 
 async function getExpInfo() {
   try {
@@ -139,12 +140,12 @@ export default function ExperienceComponent() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className='absolute bottom-0 right-0 w-fit rounded-lg bg-black p-2 text-sm text-white shadow-md '
+              className='absolute bottom-0 right-0 w-fit rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
               onClick={() => {
                 handleAddProject()
               }}
             >
-              Add New Project &emsp;&emsp; +
+              Add New Project &emsp; +
             </motion.button>
           </div>
 
@@ -152,10 +153,10 @@ export default function ExperienceComponent() {
             {/* TabList */}
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {projects.map((project, index) => (
-                <Tab key={index} className='flex pl-1 pr-5 '>
+                <Tab key={index} className='flex px-1 '>
                   {' '}
                   {project.name}
-                  <button className='ml-2 text-black' onClick={() => handleDeleteProject(index)}>
+                  <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteProject(index)}>
                     <TiDelete />
                   </button>
                 </Tab>
@@ -235,19 +236,19 @@ export default function ExperienceComponent() {
                           </div>
                         </div>
                         {/* Submit button */}
-                        <div>
-                          <a
-                            href='/hero3'
-                            className='mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
-                          >
-                            Skip
-                          </a>
+                        <div className='flex gap-x-2'>
                           <button
                             type='submit'
-                            className='ml-4 mt-4 rounded-xl bg-purple-700 px-4 py-2 font-bold text-white hover:bg-purple-500'
+                            className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
                           >
                             Generate
                           </button>
+                          <Link
+                            href='/hero3'
+                            className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+                          >
+                            Skip
+                          </Link>
                         </div>
                       </form>
                     </div>
