@@ -57,8 +57,8 @@ export default function AvatarImageComponent() {
           </div>
         ))
       ) : (
-        <div className='grid h-fit grid-cols-3 gap-4'>
-          <div className='rounded-lg'>...loading</div>
+        <div className='grid h-fit gap-4'>
+          <div className='rounded-lg'>No Avatar to show</div>
         </div>
       )}
     </div>

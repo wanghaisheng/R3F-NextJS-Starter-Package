@@ -246,10 +246,18 @@ export default function Hero() {
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
                         Genius ID
                       </div>
+                      <GeniusIDFlipCard
+                        first_name='DEFAULT'
+                        last_name='DEFAULT'
+                        email='DEFAULT@'
+                        dob='DEFAULT'
+                        contact='DEFAULT'
+                        address='DEFAULT'
+                      />
                     </div>
                   )}
                 </div>
@@ -279,10 +287,16 @@ export default function Hero() {
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
                         Experience
                       </div>
+                      <ExperienceFlipCard
+                        type='DEFAULT'
+                        projectName='DEFAULT'
+                        skills='DEFAULT'
+                        toolsAndTech='DEFAULT'
+                      />
                     </div>
                   )}
                 </div>
@@ -351,7 +365,7 @@ export default function Hero() {
                           </div>
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched
-                          <div>Loading...</div>
+                          <div>No Skill to show</div>
                         )}
                       </div>
                     </CardBody>

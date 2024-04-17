@@ -30,7 +30,7 @@ async function getExpInfo() {
 export default function ExperienceComponent() {
   const { user } = useUser()
   const [projects, setProjects] = useState([
-    { type: 'Educational', name: 'Project 1', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
+    { type: '', name: 'Project 1', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
   ])
 
   useEffect(() => {
