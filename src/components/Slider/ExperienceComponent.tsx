@@ -13,6 +13,8 @@ import ExperienceFlipCard from '../card/experienceFlipCard'
 import axios from 'axios'
 import Link from 'next/link'
 
+import { WithContext as ReactTags } from 'react-tag-input'
+
 async function getExpInfo() {
   try {
     const res = await fetch('http://localhost:3000/api/card')
@@ -21,7 +23,7 @@ async function getExpInfo() {
     }
     return res.json()
   } catch (error) {
-    console.error(error)
+    throw new Error('failed to fetch the skills')
   }
 }
 
@@ -41,7 +43,7 @@ export default function ExperienceComponent() {
           setProjects(filteredData) // Set the filtered data
         }
       } catch (error) {
-        console.error('Error fetching cards data:', error)
+        throw new Error('Error fetching cards data:', error)
       }
     }
 
@@ -69,7 +71,7 @@ export default function ExperienceComponent() {
       window.location.reload()
       return
     } catch (error) {
-      console.error(error)
+      throw new Error('failed to save the card info')
     }
   }
 
@@ -100,7 +102,7 @@ export default function ExperienceComponent() {
   const handleProjectSkillsChange = (index, newSkills) => {
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects]
-      updatedProjects[index].skills = newSkills
+      updatedProjects[index].skills = newSkills.split(',')
       return updatedProjects
     })
   }
@@ -153,7 +155,7 @@ export default function ExperienceComponent() {
             {/* TabList */}
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {projects.map((project, index) => (
-                <Tab key={index} className='flex px-1 '>
+                <Tab key={index} className='flex cursor-pointer px-1'>
                   {' '}
                   {project.name}
                   <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteProject(index)}>
@@ -183,15 +185,28 @@ export default function ExperienceComponent() {
                       <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
                         <div className='flex w-full flex-col gap-y-2 px-4'>
                           <div className='flex justify-between'>
-                            <label htmlFor=''>Type</label>
-                            <input
-                              type='text'
+                            <label htmlFor='type'>Type</label>
+                            <select
+                              id='type'
+                              name='type'
                               value={project.type}
+                              className='w-[70%] rounded-md bg-white/20 px-2'
                               onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              placeholder='Card Type'
-                              className='w-[70%] rounded-md bg-white/20 px-3'
                               required
-                            />
+                            >
+                              <option value='' className='bg-black text-gray-600' selected>
+                                Select Type
+                              </option>
+                              <option value='educational' className='bg-black'>
+                                Educational
+                              </option>
+                              <option value='work' className='bg-black'>
+                                Work
+                              </option>
+                              <option value='gym' className='bg-black'>
+                                Gym
+                              </option>
+                            </select>
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Name</label>
@@ -222,6 +237,7 @@ export default function ExperienceComponent() {
                               onChange={(e) => handleProjectSkillsChange(index, e.target.value.split(','))}
                               placeholder='Project Skills'
                               className='w-[70%] rounded-md bg-white/20  px-3'
+                              required
                             />
                           </div>
                           <div className='flex justify-between'>
@@ -232,6 +248,7 @@ export default function ExperienceComponent() {
                               onChange={(e) => handleProjectToolsChange(index, e.target.value)}
                               placeholder='Project Description'
                               className='w-[70%] rounded-md bg-white/20  px-3'
+                              required
                             />
                           </div>
                         </div>

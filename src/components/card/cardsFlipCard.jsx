@@ -32,7 +32,7 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
             onClick={handleFlip}
           >
             <div
-              className='absolute inset-0 rounded-xl bg-black text-white'
+              className='absolute inset-0 cursor-default rounded-xl bg-black text-white'
               style={{
                 backgroundImage: 'url(/card/abstract4.png)',
                 backgroundSize: 'cover',

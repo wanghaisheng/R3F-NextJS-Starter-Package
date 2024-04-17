@@ -32,7 +32,7 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
             onClick={handleFlip}
           >
             <div
-              className='absolute inset-0 rounded-xl bg-black text-white'
+              className='absolute inset-0 cursor-default rounded-xl bg-black text-white'
               style={{
                 backgroundImage: 'url(/card/abstract1.png)',
                 backgroundSize: 'cover',
@@ -43,7 +43,7 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
                 <p className='pr-3 pt-1 font-bold text-pink-300'>{type.toUpperCase()}</p>
               </div>
               {/* Card Details */}
-              <div className='flex flex-col p-5 text-sm text-white'>
+              <div className='flex flex-col p-5 text-sm text-white '>
                 <nav className='mb-1 flex list-none flex-wrap'>
                   <li className='mb-2 w-full text-xl font-semibold'>
                     <p>{projectName.toUpperCase()}</p>
