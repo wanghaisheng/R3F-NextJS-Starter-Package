@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { SiFramer, SiTailwindcss, SiReact, SiJavascript, SiCss3 } from 'react-icons/si'
 import { DndContext } from '@dnd-kit/core'
 
-const AdminDnd = () => {
+const AdminDashboard = () => {
   return (
     <DndContext>
       <div className='flex bg-slate-900/20 text-slate-100'>
@@ -136,4 +136,4 @@ const NavItem = ({ children, selected, id, setSelected }) => {
   )
 }
 
-export default AdminDnd
+export default AdminDashboard

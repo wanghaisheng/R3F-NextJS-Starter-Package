@@ -331,7 +331,7 @@ export default function SkillsComponent() {
               href='/hero3'
               className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
             >
-              Skip
+              Go To Home
             </Link>
           </div>
         </div>
