@@ -88,10 +88,10 @@ export default function UserInfoComponent() {
         className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Genius ID</div>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>Genius ID</div>
 
           <div className='mt-5 rounded-[20px] '>
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:flex-row md:justify-between'>
               {/* Card Image / Container */}
 
               <GeniusIDFlipCard
@@ -104,72 +104,72 @@ export default function UserInfoComponent() {
               />
 
               {/* form */}
-              <div className='w-[50%]'>
+              <div className='w-full md:w-[50%]'>
                 <form
                   onSubmit={handleSubmit}
                   className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                 >
                   <div className='flex w-full flex-col gap-y-2 px-4'>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row md:justify-between'>
                       <label htmlFor=''>First Name</label>
                       <input
                         type='text'
                         value={first_name}
                         onChange={(e) => handleFirstNameChange(e.target.value)}
                         placeholder='First Name'
-                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        className='rounded-md bg-white/20 px-3 md:w-[70%]'
                         required
                       />
                     </div>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row md:justify-between'>
                       <label htmlFor=''>Last Name</label>
                       <input
                         type='text'
                         value={last_name}
                         onChange={(e) => handleLastNameChange(e.target.value)}
                         placeholder='Last Name'
-                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        className='rounded-md bg-white/20 px-3 md:w-[70%]'
                         required
                       />
                     </div>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row md:justify-between'>
                       <label htmlFor=''>Email</label>
                       <input
                         type='text'
                         value={email}
                         onChange={(e) => handleEmailChange(e.target.value)}
                         placeholder='Email'
-                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        className='rounded-md bg-white/20 px-3 md:w-[70%]'
                         required
                       />
                     </div>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row md:justify-between'>
                       <label htmlFor=''>Address</label>
                       <input
                         type='text'
                         value={address}
                         onChange={(e) => handleAddressChange(e.target.value)}
                         placeholder='Address'
-                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        className='rounded-md bg-white/20 px-3 md:w-[70%]'
                       />
                     </div>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row md:justify-between'>
                       <label htmlFor=''>Contact</label>
                       <input
                         type='text'
                         value={phone_number}
                         onChange={(e) => handlePhoneNumberChange(e.target.value)}
                         placeholder='Phone Number'
-                        className='w-[70%] rounded-md bg-white/20 px-3'
+                        className='rounded-md bg-white/20 px-3 md:w-[70%]'
                       />
                     </div>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col md:flex-row md:justify-between'>
                       <label htmlFor=''>DOB</label>
                       <input
                         type='date'
                         value={dob}
                         onChange={(e) => handleDOBChange(e.target.value)}
-                        className='w-[70%] rounded-md bg-white/20  px-3'
+                        className='rounded-md bg-white/20 px-3  md:w-[70%]'
                         required
                       />
                     </div>

@@ -224,15 +224,15 @@ export default function Hero() {
         className='top-10 flex size-full justify-between px-4 md:absolute'
         style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
       >
-        <div className='overflow-hidden' ref={emblaRef}>
+        <div className='md:overflow-hidden' ref={emblaRef}>
           <div className='flex md:flex-row'>
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow md:min-w-0 '>
-              <div className='flex size-full justify-between px-4'>
+              <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
                 <div className='h-full w-[33%] rounded-xl '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                         Genius ID
                       </div>
 
@@ -247,7 +247,7 @@ export default function Hero() {
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                         Genius ID
                       </div>
                       <GeniusIDFlipCard
@@ -263,7 +263,7 @@ export default function Hero() {
                 </div>
 
                 <div className='h-full w-[33%] rounded-xl '>
-                  <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Avatar</div>
+                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>Avatar</div>
                   <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
                     <AvatarImageComponent />
                   </div>
@@ -272,11 +272,11 @@ export default function Hero() {
             </div>
             {/* Slide 2 */}
             <div className='w-full shrink-0 grow md:min-w-0'>
-              <div className='flex size-full justify-between px-4'>
+              <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
                 <div className='h-full w-[33%] rounded-xl '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                         Experience
                       </div>
                       <ExperienceFlipCard
@@ -288,7 +288,7 @@ export default function Hero() {
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                         Experience
                       </div>
                       <ExperienceFlipCard
@@ -302,7 +302,7 @@ export default function Hero() {
                 </div>
 
                 <div className='h-full w-[33%] rounded-xl '>
-                  <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Skills</div>
+                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>Skills</div>
                   <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative rounded-xl border border-black/[0.1] bg-gray-50 p-2 dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
@@ -374,11 +374,43 @@ export default function Hero() {
               </div>
             </div>
             {/* Slide 3 */}
-            <div className='w-full shrink-0 grow md:min-w-0 '>
-              <p>sawgwaghawa</p>
+            <div className='w-full shrink-0 grow md:min-w-0'>
+              <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
+                <div className='h-full w-[33%] rounded-xl '>
+                  {user ? (
+                    <div className='flex flex-col items-center justify-center'>
+                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                        Achievements
+                      </div>
+                      <ExperienceFlipCard
+                        type='TYPE'
+                        projectName='Name'
+                        skills='skill1, skill2'
+                        toolsAndTech='vscode, blender'
+                      />
+                    </div>
+                  ) : (
+                    <div className='flex flex-col items-center justify-center'>
+                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                        Achievements
+                      </div>
+                      <ExperienceFlipCard
+                        type='DEFAULT'
+                        projectName='DEFAULT'
+                        skills='DEFAULT'
+                        toolsAndTech='DEFAULT'
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div className='h-full w-[33%] rounded-xl '>
+                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                    Recommendations
+                  </div>
+                </div>
+              </div>
             </div>
-            {/* Slide 4 */}
-            <div className='w-full shrink-0 grow md:min-w-0 '>tjerjker</div>
           </div>
           <button className='left-10 top-56 text-5xl md:absolute' onClick={scrollPrev}>
             <MdNavigateBefore />

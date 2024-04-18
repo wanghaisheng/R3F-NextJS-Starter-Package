@@ -49,10 +49,10 @@ export default function AvatarComponent() {
         className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex flex-col'>
-          <div className='relative my-8 flex justify-center text-7xl drop-shadow'>My Avatars</div>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>My Avatars</div>
 
           {avatarsData && avatarsData.length != 0 ? (
-            <div className='mt-7 flex justify-between'>
+            <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>
               <div>
                 <Avatar
                   modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -67,12 +67,12 @@ export default function AvatarComponent() {
                   }}
                 />
               </div>
-              <div className='grid h-fit w-[50%] grid-cols-3 gap-4'>
+              <div className='flex justify-center gap-4 md:grid md:h-fit md:w-[50%] md:grid-cols-3'>
                 <AvatarImageComponent />
               </div>
             </div>
           ) : (
-            <div className='mt-2 flex justify-between'>
+            <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>
               <Avatar
                 modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
                 // shadows
@@ -85,13 +85,13 @@ export default function AvatarComponent() {
                   ambientOcclusion: true,
                 }}
               />
-              <div className='mt-5 grid h-fit grid-cols-3 gap-4'>
+              <div className='mt-5 flex justify-center md:grid md:h-fit  md:grid-cols-3 md:gap-4'>
                 <div className='rounded-lg'>...loading</div>
               </div>
             </div>
           )}
 
-          <div className='absolute bottom-6 right-4'>
+          <div className='absolute right-4 top-20 md:bottom-6 md:right-4'>
             <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
