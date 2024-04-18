@@ -29,6 +29,9 @@ import { usePathname } from 'next/navigation'
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
+
+// For carousel inside slide 1
+
 import AvatarImageComponent from '@/components/avatarImage/page'
 
 import {
@@ -52,6 +55,7 @@ import { ConstantColorFactor } from 'three'
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
+import CardsFlipCard from '@/components/card/cardsFlipCard'
 
 async function getSkills() {
   try {
@@ -77,7 +81,7 @@ async function getAvatarById(id) {
   }
 }
 
-// Custom tooltip component
+// Custom tooltip component for chart
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
@@ -131,6 +135,22 @@ export default function Hero() {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
+
+  const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: true })
+
+  useEffect(() => {
+    if (emblaApi2) {
+      console.log(emblaApi2.slideNodes()) // Access API
+    }
+  }, [emblaApi])
+
+  const scrollPrev2 = useCallback(() => {
+    if (emblaApi2) emblaApi2.scrollPrev()
+  }, [emblaApi2])
+
+  const scrollNext2 = useCallback(() => {
+    if (emblaApi2) emblaApi2.scrollNext()
+  }, [emblaApi2])
 
   // ------------------------------------------------------------
 
@@ -236,28 +256,71 @@ export default function Hero() {
                         Genius ID
                       </div>
 
-                      <GeniusIDFlipCard
-                        first_name='Person'
-                        last_name='Name'
-                        email='email'
-                        dob='date of birth'
-                        contact='number'
-                        address='address'
-                      />
+                      <div className='w-full overflow-hidden' ref={emblaRef2}>
+                        <div className='flex items-center'>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex justify-center'>
+                              <GeniusIDFlipCard
+                                first_name='Person'
+                                last_name='Name'
+                                email='email'
+                                dob='date of birth'
+                                contact='number'
+                                address='address'
+                              />
+                            </div>
+                          </div>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex justify-center'>
+                              <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
+                            </div>
+                          </div>
+                        </div>
+                        <div className='flex justify-center text-xl'>
+                          <button className='' onClick={scrollPrev2}>
+                            <MdNavigateBefore />
+                          </button>
+                          <button className='' onClick={scrollNext2}>
+                            <MdNavigateNext />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                         Genius ID
                       </div>
-                      <GeniusIDFlipCard
-                        first_name='DEFAULT'
-                        last_name='DEFAULT'
-                        email='DEFAULT@'
-                        dob='DEFAULT'
-                        contact='DEFAULT'
-                        address='DEFAULT'
-                      />
+
+                      <div className='w-full overflow-hidden' ref={emblaRef2}>
+                        <div className='flex items-center'>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex justify-center'>
+                              <GeniusIDFlipCard
+                                first_name='DEFAULT'
+                                last_name='DEFAULT'
+                                email='DEFAULT@'
+                                dob='DEFAULT'
+                                contact='DEFAULT'
+                                address='DEFAULT'
+                              />
+                            </div>
+                          </div>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex justify-center'>
+                              <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
+                            </div>
+                          </div>
+                        </div>
+                        <div className='flex justify-center text-xl'>
+                          <button className='' onClick={scrollPrev2}>
+                            <MdNavigateBefore />
+                          </button>
+                          <button className='' onClick={scrollNext2}>
+                            <MdNavigateNext />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -382,24 +445,14 @@ export default function Hero() {
                       <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                         Achievements
                       </div>
-                      <ExperienceFlipCard
-                        type='TYPE'
-                        projectName='Name'
-                        skills='skill1, skill2'
-                        toolsAndTech='vscode, blender'
-                      />
+                      <p>Logged In users Achievements</p>
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
-                        Achievements
+                        <p>Achievements</p>
                       </div>
-                      <ExperienceFlipCard
-                        type='DEFAULT'
-                        projectName='DEFAULT'
-                        skills='DEFAULT'
-                        toolsAndTech='DEFAULT'
-                      />
+                      Awards
                     </div>
                   )}
                 </div>
