@@ -13,7 +13,16 @@ import ExperienceFlipCard from '../card/experienceFlipCard'
 import axios from 'axios'
 import Link from 'next/link'
 
-import { WithContext as ReactTags } from 'react-tag-input'
+// import { WithContext as ReactTags } from 'react-tag-input'
+import { TagsInput } from 'react-tag-input-component'
+
+// // Specifies which characters should terminate tags input. An array of character codes.
+// const KeyCodes = {
+//   comma: 188,
+//   enter: 13,
+// }
+
+// const delimiters = [KeyCodes.comma, KeyCodes.enter]
 
 async function getExpInfo() {
   try {
@@ -29,9 +38,14 @@ async function getExpInfo() {
 
 export default function ExperienceComponent() {
   const { user } = useUser()
-  const [projects, setProjects] = useState([
-    { type: '', name: 'Project 1', description: 'lorem', skills: ['CSS', 'HTML'], tools: ['VSCODE'] },
-  ])
+
+  // For skills tag
+  const [skills, setSkills] = useState([])
+
+  // For tools tag
+  const [tools, setTools] = useState([])
+
+  const [projects, setProjects] = useState([{ type: '', name: 'Project 1', description: 'lorem' }])
 
   useEffect(() => {
     const fetchExpData = async () => {
@@ -58,8 +72,6 @@ export default function ExperienceComponent() {
       type: projects[index].type,
       name: projects[index].name,
       description: projects[index].description,
-      skills: projects[index].skills,
-      tools: projects[index].tools,
     }
     try {
       await axios({
@@ -95,22 +107,6 @@ export default function ExperienceComponent() {
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects]
       updatedProjects[index].description = newDescription
-      return updatedProjects
-    })
-  }
-
-  const handleProjectSkillsChange = (index, newSkills) => {
-    setProjects((prevProjects) => {
-      const updatedProjects = [...prevProjects]
-      updatedProjects[index].skills = newSkills.split(',')
-      return updatedProjects
-    })
-  }
-
-  const handleProjectToolsChange = (index, newTools) => {
-    setProjects((prevProjects) => {
-      const updatedProjects = [...prevProjects]
-      updatedProjects[index].tools = newTools
       return updatedProjects
     })
   }
@@ -175,8 +171,8 @@ export default function ExperienceComponent() {
                       <ExperienceFlipCard
                         type={project.type}
                         projectName={project.name}
-                        skills={project.skills}
-                        toolsAndTech={project.tools}
+                        skills={skills.map((skill) => skill).join(', ')}
+                        toolsAndTech={tools.map((tool) => tool).join(', ')}
                       />
                     </div>
 
@@ -259,25 +255,11 @@ export default function ExperienceComponent() {
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Skills</label>
-                            <input
-                              type='text'
-                              value={project.skills}
-                              onChange={(e) => handleProjectSkillsChange(index, e.target.value.split(','))}
-                              placeholder='Project Skills'
-                              className='w-[70%] rounded-md bg-white/20  px-3'
-                              required
-                            />
+                            <TagsInput value={skills} onChange={setSkills} name='skills' placeHolder='enter skills' />
                           </div>
                           <div className='flex justify-between'>
                             <label htmlFor=''>Tools</label>
-                            <input
-                              type='text'
-                              value={project.tools}
-                              onChange={(e) => handleProjectToolsChange(index, e.target.value)}
-                              placeholder='Project Description'
-                              className='w-[70%] rounded-md bg-white/20  px-3'
-                              required
-                            />
+                            <TagsInput value={tools} onChange={setTools} name='tools' placeHolder='enter tools' />
                           </div>
                         </div>
                         {/* Submit button */}
