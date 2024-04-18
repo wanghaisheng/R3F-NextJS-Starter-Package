@@ -151,7 +151,7 @@ export default function ExperienceComponent() {
             {/* TabList */}
             <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
               {projects.map((project, index) => (
-                <Tab key={index} className='flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-3 flex cursor-pointer px-1'>
                   {' '}
                   {project.name}
                   <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteProject(index)}>
@@ -164,121 +164,135 @@ export default function ExperienceComponent() {
             {/* TabPanel */}
             {projects.map((project, index) => (
               <TabPanel key={index}>
-                <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                  <div className='flex justify-between'>
-                    {/* Card Image / Container */}
-                    <div className='flex'>
-                      <ExperienceFlipCard
-                        type={project.type}
-                        projectName={project.name}
-                        skills={skills.map((skill) => skill).join(', ')}
-                        toolsAndTech={tools.map((tool) => tool).join(', ')}
-                      />
-                    </div>
+                <div className='flex justify-between'>
+                  {/* Card Image / Container */}
+                  <div className='flex'>
+                    <ExperienceFlipCard
+                      type={project.type}
+                      projectName={project.name}
+                      skills={skills.map((skill) => skill).join(', ')}
+                      toolsAndTech={tools.map((tool) => tool).join(', ')}
+                    />
+                  </div>
 
-                    {/* Form for user input */}
-                    <div className='w-[50%]'>
-                      <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
-                        <div className='flex w-full flex-col gap-y-2 px-4'>
-                          <div className='flex items-center justify-between '>
-                            <div>
-                              <input
-                                type='radio'
-                                id='educational'
-                                name='type'
-                                value='educational'
-                                checked={project.type === 'educational'}
-                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              />
-                              <label htmlFor='educational' className='ml-2 text-white'>
-                                Educational
-                              </label>
-                            </div>
-                            <div>
-                              <input
-                                type='radio'
-                                id='work'
-                                name='type'
-                                value='work'
-                                checked={project.type === 'work'}
-                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              />
-                              <label htmlFor='work' className='ml-2 text-white'>
-                                Work
-                              </label>
-                            </div>
-                            <div>
-                              <input
-                                type='radio'
-                                id='gym'
-                                name='type'
-                                value='gym'
-                                checked={project.type === 'gym'}
-                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              />
-                              <label htmlFor='gym' className='ml-2 text-white'>
-                                Gym
-                              </label>
-                            </div>
-                          </div>
-
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Name</label>
-                            <input
-                              type='text'
-                              value={project.name}
-                              onChange={(e) => handleProjectNameChange(index, e.target.value)}
-                              placeholder='Project Name'
-                              className='w-[70%] rounded-md bg-white/20 px-3'
-                              required
-                            />
-                          </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Description</label>
-                            <input
-                              type='text'
-                              value={project.description}
-                              onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
-                              placeholder='Project Description'
-                              className='w-[70%] rounded-md bg-white/20  px-3'
-                            />
-                          </div>
-                          <div className='flex justify-between'>
-                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
-                              ProjPic
+                  {/* Form for user input */}
+                  <div className='w-[50%]'>
+                    <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
+                      <div className='flex w-full flex-col gap-y-2 px-4'>
+                        <div className='flex items-center justify-between '>
+                          <div>
+                            <label
+                              htmlFor='educational'
+                              className={`text-white ${project.type === 'educational' ? 'font-semibold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                            >
+                              Educational
                             </label>
                             <input
-                              className='block w-[70%] cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
-                              id='file_input'
-                              type='file'
+                              type='radio'
+                              id='educational'
+                              name='type'
+                              value='educational'
+                              checked={project.type === 'educational'}
+                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                              className='hidden'
                             />
                           </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Skills</label>
-                            <TagsInput value={skills} onChange={setSkills} name='skills' placeHolder='enter skills' />
+                          <div>
+                            <input
+                              type='radio'
+                              id='work'
+                              name='type'
+                              value='work'
+                              checked={project.type === 'work'}
+                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                              className='hidden'
+                            />
+                            <label
+                              htmlFor='work'
+                              className={`text-white ${project.type === 'work' ? 'font-semibold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                            >
+                              Work
+                            </label>
                           </div>
-                          <div className='flex justify-between'>
-                            <label htmlFor=''>Tools</label>
-                            <TagsInput value={tools} onChange={setTools} name='tools' placeHolder='enter tools' />
+                          <div>
+                            <input
+                              type='radio'
+                              id='gym'
+                              name='type'
+                              value='gym'
+                              checked={project.type === 'gym'}
+                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                              className='hidden'
+                            />
+                            <label
+                              htmlFor='gym'
+                              className={`text-white ${project.type === 'gym' ? 'font-semibold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                            >
+                              Gym
+                            </label>
                           </div>
                         </div>
-                        {/* Submit button */}
-                        <div className='flex gap-x-2'>
-                          <button
-                            type='submit'
-                            className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-                          >
-                            Generate
-                          </button>
-                          <Link
-                            href='/hero3'
-                            className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-                          >
-                            Skip
-                          </Link>
+
+                        <div className='flex justify-between'>
+                          <label htmlFor=''>Name</label>
+                          <input
+                            type='text'
+                            value={project.name}
+                            onChange={(e) => handleProjectNameChange(index, e.target.value)}
+                            placeholder='Project Name'
+                            className='w-[70%] rounded-md bg-white/20 px-3'
+                            required
+                          />
                         </div>
-                      </form>
-                    </div>
+                        <div className='flex justify-between'>
+                          <label htmlFor=''>Description</label>
+                          <input
+                            type='text'
+                            value={project.description}
+                            onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
+                            placeholder='Project Description'
+                            className='w-[70%] rounded-md bg-white/20  px-3'
+                          />
+                        </div>
+                        <div className='flex justify-between'>
+                          <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                            ProjPic
+                          </label>
+                          <input
+                            className='block w-[70%] cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            id='file_input'
+                            type='file'
+                          />
+                        </div>
+                        <div className='flex justify-between'>
+                          <label htmlFor=''>Skills</label>
+                          <div className='w-[70%] bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
+                            <TagsInput value={skills} onChange={setSkills} name='skills' placeHolder='Enter skills' />
+                          </div>
+                        </div>
+                        <div className='flex justify-between'>
+                          <label htmlFor=''>Tools</label>
+                          <div className='w-[70%] bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
+                            <TagsInput value={tools} onChange={setTools} name='tools' placeHolder='Enter tools used' />
+                          </div>
+                        </div>
+                      </div>
+                      {/* Submit button */}
+                      <div className='flex gap-x-2'>
+                        <button
+                          type='submit'
+                          className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+                        >
+                          Generate
+                        </button>
+                        <Link
+                          href='/hero3'
+                          className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+                        >
+                          Skip
+                        </Link>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </TabPanel>
