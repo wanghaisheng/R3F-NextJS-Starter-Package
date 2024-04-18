@@ -142,22 +142,22 @@ export default function SkillsComponent() {
         className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-4 flex justify-center text-7xl drop-shadow'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>
             Skills
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className='absolute bottom-0 right-0 w-fit rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
+              className='absolute top-14 rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900 md:bottom-0 md:right-0 md:size-fit'
               onClick={() => {
                 handleAddSkill()
               }}
             >
-              Add New Project &emsp; +
+              Add Skill &emsp; +
             </motion.button>
           </div>
 
           <Tabs>
-            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
+            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
               {skills.map((element, index) => (
                 <Tab key={index} className='flex px-1'>
                   {element.skill}
@@ -168,14 +168,15 @@ export default function SkillsComponent() {
               ))}
             </TabList>
 
-            <div className='flex gap-x-5'>
-              <div className='flex w-full justify-between'>
-                <div className='w-[60%]'>
+            {/* TabPanel */}
+            <div className='flex gap-y-5 md:gap-x-5 md:gap-y-0'>
+              <div className='flex w-full flex-col md:flex-row md:justify-between'>
+                <div className='md:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
                       <div className='size-full rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
-                        <div className='flex justify-between'>
-                          <div className='w-[60%]'>
+                        <div className='flex flex-col md:flex-row  md:justify-between'>
+                          <div className='md:w-[60%]'>
                             <input
                               type='text'
                               value={element.skill}
@@ -241,7 +242,7 @@ export default function SkillsComponent() {
                             className='w-full rounded-md bg-white/20 p-1'
                           />
                         </p> */}
-                        <p className='mb-4'>
+                        <p className='my-4 md:mt-0'>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
                           saepe repudiandae accusamus temporibus, autem dicta quidem a omnis quas optio nemo? Officia
                           totam autem nam ex quis?
@@ -259,63 +260,65 @@ export default function SkillsComponent() {
                   ))}
                 </div>
 
-                <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-3'>
+                <div className='mt-4 rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-3 md:mt-0'>
                   <p className='mb-2 flex justify-center'>Specification</p>
 
                   {/* Condition for changing barchart chart and radar chart*/}
-                  {skills.length < 6 ? (
-                    <ResponsiveContainer width={278} height={220}>
-                      <BarChart
-                        width={278}
-                        height={287}
-                        data={skills}
-                        margin={{
-                          top: 5,
-                          right: 20,
-                          left: 0,
-                          bottom: 5,
-                        }}
-                      >
-                        <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
-                        <YAxis domain={[0, 100]} />
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                        <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                        <Bar
-                          name='Ram'
-                          dataKey='percentage'
-                          fill='#6E29F7'
-                          activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                        />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  ) : (
-                    // Radar chart
-                    <ResponsiveContainer width={278} height={220}>
-                      <RadarChart
-                        // cx={300}
-                        // cy={250}
-                        // outerRadius={150}
-                        width={278}
-                        height={287}
-                        data={skills}
-                      >
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey='skill' />
-                        <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                        <Radar
-                          name='Ram'
-                          dataKey='percentage'
-                          stroke='#28B5E1'
-                          strokeWidth={4}
-                          fill='#28B5E1'
-                          fillOpacity={0.4}
-                        />
-                        {/* <Tooltip /> */}
-                        {/* <Legend values="100%" /> */}
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                      </RadarChart>
-                    </ResponsiveContainer>
-                  )}
+                  <div className='md:block md:w-full'>
+                    {skills.length < 6 ? (
+                      <ResponsiveContainer width='100%' height={220}>
+                        <BarChart
+                          width={100}
+                          height={287}
+                          data={skills}
+                          margin={{
+                            top: 5,
+                            right: 20,
+                            left: -20,
+                            bottom: 5,
+                          }}
+                        >
+                          <XAxis dataKey='skill' />
+                          <YAxis domain={[0, 100]} />
+                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                          <Bar
+                            name='Ram'
+                            dataKey='percentage'
+                            fill='#6E29F7'
+                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      // Radar chart
+                      <ResponsiveContainer width='100%' height={220}>
+                        <RadarChart
+                          // cx={300}
+                          // cy={250}
+                          // outerRadius={150}
+                          width={100}
+                          height={287}
+                          data={skills}
+                        >
+                          <PolarGrid />
+                          <PolarAngleAxis dataKey='skill' />
+                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                          <Radar
+                            name='Ram'
+                            dataKey='percentage'
+                            stroke='#28B5E1'
+                            strokeWidth={4}
+                            fill='#28B5E1'
+                            fillOpacity={0.4}
+                          />
+                          {/* <Tooltip /> */}
+                          {/* <Legend values="100%" /> */}
+                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        </RadarChart>
+                      </ResponsiveContainer>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

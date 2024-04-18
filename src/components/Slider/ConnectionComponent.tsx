@@ -47,10 +47,10 @@ export default function ConnectionComponent() {
         className='flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>Connection</div>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>Connection</div>
           {connections.length < 4 ? (
             <div>
-              <div className='mt-5 flex justify-center gap-x-10'>
+              <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
                 {logos.map((logo, index) => (
                   <div key={index} onClick={() => handleLogoClick(logo)}>
                     <Image src={logo.src} alt={logo.alt} width={50} height={50} />
@@ -60,7 +60,7 @@ export default function ConnectionComponent() {
               <p className='mt-2 flex justify-center'>{4 - connections.length} remaining</p>
             </div>
           ) : (
-            <div className='mt-5 flex justify-center gap-x-10'>
+            <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
               {logos.map((logo, index) => (
                 <div key={index} style={{ filter: 'grayscale(100%)' }}>
                   <Image src={logo.src} alt={logo.alt} width={50} height={50} />

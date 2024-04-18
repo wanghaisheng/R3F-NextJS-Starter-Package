@@ -133,23 +133,23 @@ export default function ExperienceComponent() {
         className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-4 flex justify-center text-7xl font-semibold drop-shadow'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>
             Experience
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className='absolute bottom-0 right-0 w-fit rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
+              className='absolute top-14 rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900 md:bottom-0 md:right-0 md:size-fit'
               onClick={() => {
                 handleAddProject()
               }}
             >
-              Add New Project &emsp; +
+              Add Project &emsp; +
             </motion.button>
           </div>
 
           <Tabs>
             {/* TabList */}
-            <TabList className='my-6 flex flex-col sm:flex-row sm:items-start sm:justify-start '>
+            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
               {projects.map((project, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1'>
                   {' '}
@@ -164,7 +164,7 @@ export default function ExperienceComponent() {
             {/* TabPanel */}
             {projects.map((project, index) => (
               <TabPanel key={index}>
-                <div className='flex justify-between'>
+                <div className='flex flex-col md:flex-row md:justify-between'>
                   {/* Card Image / Container */}
                   <div className='flex'>
                     <ExperienceFlipCard
@@ -176,14 +176,14 @@ export default function ExperienceComponent() {
                   </div>
 
                   {/* Form for user input */}
-                  <div className='w-[50%]'>
+                  <div className='w-full md:w-[50%]'>
                     <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
                       <div className='flex w-full flex-col gap-y-2 px-4'>
-                        <div className='flex items-center justify-between '>
+                        <div className='flex flex-col items-center md:flex-row md:justify-between'>
                           <div>
                             <label
                               htmlFor='educational'
-                              className={`text-white ${project.type === 'educational' ? 'font-semibold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              className={` ${project.type === 'educational' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
                             >
                               Educational
                             </label>
@@ -209,7 +209,7 @@ export default function ExperienceComponent() {
                             />
                             <label
                               htmlFor='work'
-                              className={`text-white ${project.type === 'work' ? 'font-semibold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              className={`${project.type === 'work' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
                             >
                               Work
                             </label>
@@ -226,53 +226,53 @@ export default function ExperienceComponent() {
                             />
                             <label
                               htmlFor='gym'
-                              className={`text-white ${project.type === 'gym' ? 'font-semibold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              className={` ${project.type === 'gym' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
                             >
                               Gym
                             </label>
                           </div>
                         </div>
 
-                        <div className='flex justify-between'>
+                        <div className='mt-4 flex flex-col md:mt-0 md:flex-row md:justify-between'>
                           <label htmlFor=''>Name</label>
                           <input
                             type='text'
                             value={project.name}
                             onChange={(e) => handleProjectNameChange(index, e.target.value)}
                             placeholder='Project Name'
-                            className='w-[70%] rounded-md bg-white/20 px-3'
+                            className='rounded-md bg-white/20 px-3 md:w-[70%]'
                             required
                           />
                         </div>
-                        <div className='flex justify-between'>
+                        <div className='flex flex-col md:flex-row md:justify-between'>
                           <label htmlFor=''>Description</label>
                           <input
                             type='text'
                             value={project.description}
                             onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
                             placeholder='Project Description'
-                            className='w-[70%] rounded-md bg-white/20  px-3'
+                            className='rounded-md bg-white/20 px-3  md:w-[70%]'
                           />
                         </div>
-                        <div className='flex justify-between'>
+                        <div className='flex flex-col md:flex-row md:justify-between'>
                           <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                             ProjPic
                           </label>
                           <input
-                            className='block w-[70%] cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            className='block cursor-pointer rounded-lg bg-gray-50  text-sm text-gray-900 focus:outline-none md:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
                             id='file_input'
                             type='file'
                           />
                         </div>
-                        <div className='flex justify-between'>
+                        <div className='flex flex-col md:flex-row md:justify-between'>
                           <label htmlFor=''>Skills</label>
-                          <div className='w-[70%] bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
+                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none md:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
                             <TagsInput value={skills} onChange={setSkills} name='skills' placeHolder='Enter skills' />
                           </div>
                         </div>
-                        <div className='flex justify-between'>
+                        <div className='flex flex-col md:flex-row md:justify-between'>
                           <label htmlFor=''>Tools</label>
-                          <div className='w-[70%] bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
+                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none md:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
                             <TagsInput value={tools} onChange={setTools} name='tools' placeHolder='Enter tools used' />
                           </div>
                         </div>
