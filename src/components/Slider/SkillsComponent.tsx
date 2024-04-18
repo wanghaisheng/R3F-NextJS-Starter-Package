@@ -159,7 +159,7 @@ export default function SkillsComponent() {
           <Tabs>
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='flex px-1'>
+                <Tab key={index} className='flex cursor-pointer px-1'>
                   {element.skill}
                   <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
                     <TiDelete />
@@ -174,7 +174,7 @@ export default function SkillsComponent() {
                 <div className='md:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
-                      <div className='size-full rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'>
+                      <div className='size-full rounded-[20px]  p-4'>
                         <div className='flex flex-col md:flex-row  md:justify-between'>
                           <div className='md:w-[60%]'>
                             <input
@@ -201,7 +201,7 @@ export default function SkillsComponent() {
                             <motion.div animate={open ? 'open' : 'closed'} className='relative'>
                               <button
                                 onClick={() => setOpen((pv) => !pv)}
-                                className='flex items-center gap-2 rounded-2xl bg-purple-700/50 px-3 py-2 text-indigo-50 transition-colors hover:bg-purple-900'
+                                className='flex items-center gap-2 rounded-2xl bg-purple-700/30 px-3 py-2 text-indigo-50 transition-colors hover:bg-purple-700/50'
                               >
                                 <span className='text-sm font-medium'>Select View</span>
                                 <motion.span variants={iconVariants}>
@@ -260,7 +260,7 @@ export default function SkillsComponent() {
                   ))}
                 </div>
 
-                <div className='mt-4 rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-3 md:mt-0'>
+                <div className='mt-4 rounded-[20px] p-3  md:ml-2 md:mt-0 md:w-[45%]'>
                   <p className='mb-2 flex justify-center'>Specification</p>
 
                   {/* Condition for changing barchart chart and radar chart*/}

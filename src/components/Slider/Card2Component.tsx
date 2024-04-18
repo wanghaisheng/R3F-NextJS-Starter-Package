@@ -196,7 +196,7 @@ export default function CardComponent() {
             {/* TabList */}
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
               {cards.map((card, index) => (
-                <Tab key={index} className='ml-4 flex px-1 '>
+                <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
                   {card.type}
                   <button
                     className='ml-2 text-white hover:text-red-500'
