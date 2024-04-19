@@ -5,9 +5,7 @@ import { AiOutlineRadarChart } from 'react-icons/ai'
 import { FaChartPie, FaRegChartBar } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import FormModal2 from '@/components/FormModal/Modal2'
 import { useUser } from '@/context/UserContext/UserContext'
-import { useRouter } from 'next/navigation'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
@@ -58,7 +56,6 @@ async function getSkills() {
 
 export default function SkillsComponent() {
   const { user } = useUser()
-  const router = useRouter()
   const [skills, setSkills] = useState([{ skill: 'skill1', percentage: 0 }])
   const [originalLength, setOriginalLength] = useState(0)
 
@@ -110,30 +107,6 @@ export default function SkillsComponent() {
   }
 
   const [open, setOpen] = useState(false)
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault()
-
-  //   try {
-  //     const res = await fetch('http://localhost:3000/api/skills', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         skill: skills.name,
-  //         percentage: skills.percentage,
-  //         gg_id: user.gg_id,
-  //       }),
-  //     })
-  //     if (!res.ok) {
-  //       throw new Error('failed to submit the form')
-  //     }
-  //     router.refresh()
-  //   } catch (error) {
-  //     console.error('Error: ', error)
-  //   }
-  // }
 
   return (
     <div className='mt-2 flex flex-col items-center justify-center'>

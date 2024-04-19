@@ -5,14 +5,11 @@ import { useState, useRef, useEffect } from 'react'
 
 import { useUser } from '@/context/UserContext/UserContext'
 
-import { useRouter } from 'next/navigation'
-
 import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 export default function UserInfoComponent() {
   const { user } = useUser()
-  const router = useRouter()
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -93,15 +90,16 @@ export default function UserInfoComponent() {
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col md:flex-row md:justify-between'>
               {/* Card Image / Container */}
-
-              <GeniusIDFlipCard
-                first_name={first_name}
-                last_name={last_name}
-                email={email}
-                dob={dob}
-                contact={phone_number}
-                address={address}
-              />
+              <div className='flex'>
+                <GeniusIDFlipCard
+                  first_name={first_name}
+                  last_name={last_name}
+                  email={email}
+                  dob={dob}
+                  contact={phone_number}
+                  address={address}
+                />
+              </div>
 
               {/* form */}
               <div className='w-full md:w-[50%]'>

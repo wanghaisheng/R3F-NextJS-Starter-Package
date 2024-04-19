@@ -13,16 +13,7 @@ import ExperienceFlipCard from '../card/experienceFlipCard'
 import axios from 'axios'
 import Link from 'next/link'
 
-// import { WithContext as ReactTags } from 'react-tag-input'
 import { TagsInput } from 'react-tag-input-component'
-
-// // Specifies which characters should terminate tags input. An array of character codes.
-// const KeyCodes = {
-//   comma: 188,
-//   enter: 13,
-// }
-
-// const delimiters = [KeyCodes.comma, KeyCodes.enter]
 
 async function getExpInfo() {
   try {
@@ -234,8 +225,9 @@ export default function ExperienceComponent() {
                         </div>
 
                         <div className='mt-4 flex flex-col md:mt-0 md:flex-row md:justify-between'>
-                          <label htmlFor=''>Name</label>
+                          <label htmlFor='projectName'>Name</label>
                           <input
+                            id='projectName'
                             type='text'
                             value={project.name}
                             onChange={(e) => handleProjectNameChange(index, e.target.value)}
@@ -245,8 +237,9 @@ export default function ExperienceComponent() {
                           />
                         </div>
                         <div className='flex flex-col md:flex-row md:justify-between'>
-                          <label htmlFor=''>Description</label>
+                          <label htmlFor='description'>Description</label>
                           <input
+                            id='description'
                             type='text'
                             value={project.description}
                             onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}

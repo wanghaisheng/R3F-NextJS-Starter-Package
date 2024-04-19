@@ -1,12 +1,8 @@
 'use client'
 import { motion } from 'framer-motion'
-
 import { Avatar } from 'src/components/Avatar'
-
 import { useUser } from '@/context/UserContext/UserContext'
-
-import { useState, useEffect } from 'react'
-
+import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import AvatarImageComponent from '../avatarImage/page'
 
@@ -37,21 +33,24 @@ export default function AvatarComponent() {
       }
     }
 
-    if (user) {
+    if (user && avatarsData.length === 0) {
       fetchAvatarsData() // Fetch data only if user is available
     }
-  }, [user])
+  }, [user, avatarsData])
+
+  const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
   return (
-    <div className='mt-2 flex flex-col items-center justify-center'>
+    <div className='mt-2 flex items-center justify-center'>
       <div
         id='avatar'
-        className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='relative flex h-full w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div className='flex flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>My Avatars</div>
+          <div className='relative my-3 flex justify-center text-2xl md:my-8 md:text-5xl'>My Avatars</div>
 
-          {avatarsData && avatarsData.length != 0 ? (
+          {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
             <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>
               <div>
                 <Avatar
@@ -67,7 +66,7 @@ export default function AvatarComponent() {
                   }}
                 />
               </div>
-              <div className='flex justify-center gap-4 md:grid md:h-fit md:w-[50%] md:grid-cols-3'>
+              <div className='flex h-fit justify-center gap-4 md:grid md:w-[50%] md:grid-cols-3'>
                 <AvatarImageComponent />
               </div>
             </div>
@@ -98,7 +97,7 @@ export default function AvatarComponent() {
               className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               href='/avatar'
             >
-              Create New Avatar &emsp; +
+              Create Avatar &emsp; +
             </motion.a>
           </div>
         </div>

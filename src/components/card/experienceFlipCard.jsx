@@ -34,7 +34,7 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
             <div
               className='absolute inset-0 cursor-default rounded-xl bg-black text-white'
               style={{
-                backgroundImage: 'url(/card/abstract1.png)',
+                backgroundImage: 'url(/card/abstract1.webp)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}

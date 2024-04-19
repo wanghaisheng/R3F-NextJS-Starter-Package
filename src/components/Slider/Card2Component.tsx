@@ -253,8 +253,9 @@ export default function CardComponent() {
                               </select>
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Name</label>
+                              <label htmlFor='cardName'>Name</label>
                               <input
+                                id='cardName'
                                 type='text'
                                 value={card.name}
                                 onChange={(e) => handleCardNameChange(index, e.target.value)}
@@ -264,8 +265,9 @@ export default function CardComponent() {
                               />
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Description</label>
+                              <label htmlFor='cardDescription'>Description</label>
                               <input
+                                id='cardDescription'
                                 type='text'
                                 value={card.description}
                                 onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
@@ -274,8 +276,9 @@ export default function CardComponent() {
                               />
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Date In</label>
+                              <label htmlFor='dateIn'>Date In</label>
                               <input
+                                id='dateIn'
                                 type='date'
                                 value={card.dateIn}
                                 className='rounded-md bg-white/20 px-3  md:w-[70%]'
@@ -284,8 +287,9 @@ export default function CardComponent() {
                               />
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Date Out</label>
+                              <label htmlFor='dateOut'>Date Out</label>
                               <input
+                                id='dateOut'
                                 type='date'
                                 value={card.dateOut}
                                 className='rounded-md bg-white/20 px-3  md:w-[70%]'
@@ -332,9 +336,10 @@ export default function CardComponent() {
                               </select>
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Name</label>
+                              <label htmlFor='cardName'>Name</label>
                               <input
                                 type='text'
+                                id='cardName'
                                 value={card.name}
                                 onChange={(e) => handleCardNameChange(index, e.target.value)}
                                 placeholder='Card Name'
@@ -343,9 +348,10 @@ export default function CardComponent() {
                               />
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Description</label>
+                              <label htmlFor='cardDescription'>Description</label>
                               <input
                                 type='text'
+                                id='cardDescription'
                                 value={card.description}
                                 onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
                                 placeholder='Card Description'
@@ -353,9 +359,10 @@ export default function CardComponent() {
                               />
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Date In</label>
+                              <label htmlFor='dateIn'>Date In</label>
                               <input
                                 type='date'
+                                id='dateIn'
                                 value={card.dateIn}
                                 className='rounded-md bg-white/20 px-3  md:w-[70%]'
                                 onChange={(e) => handleCardDateInChange(index, e.target.value)}
@@ -363,8 +370,9 @@ export default function CardComponent() {
                               />
                             </div>
                             <div className='flex flex-col md:flex-row md:justify-between'>
-                              <label htmlFor=''>Date Out</label>
+                              <label htmlFor='dateOut'>Date Out</label>
                               <input
+                                id='dateOut'
                                 type='date'
                                 value={card.dateOut}
                                 className='rounded-md bg-white/20 px-3  md:w-[70%]'

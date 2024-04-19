@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 export default function WelcomeComponent() {
   return (
     <div className='mt-2 flex flex-col items-center justify-center'>
@@ -12,7 +14,7 @@ export default function WelcomeComponent() {
 
           <div className='mt-10 flex justify-between'>
             <div>
-              <img src='/aa.png' alt='' height='300px' width='300px' />
+              <Image src='/aa.png' alt='' height={300} width={300} />
             </div>
             <div>
               <ol>

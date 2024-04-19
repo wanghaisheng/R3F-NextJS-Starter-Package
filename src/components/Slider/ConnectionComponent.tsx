@@ -53,7 +53,7 @@ export default function ConnectionComponent() {
               <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
                 {logos.map((logo, index) => (
                   <div key={index} onClick={() => handleLogoClick(logo)}>
-                    <Image src={logo.src} alt={logo.alt} width={50} height={50} />
+                    <Image src={logo.src} alt={logo.alt} width={50} height={50} loading='lazy' />
                   </div>
                 ))}
               </div>
@@ -75,7 +75,9 @@ export default function ConnectionComponent() {
                 {connections.map((connection, index) => (
                   <div key={index} className='flex w-full items-center justify-center'>
                     <Image src={connection.src} alt={connection.alt} width={45} height={45} />
+                    <label htmlFor='type' className='hidden'></label>
                     <input
+                      id='connection-link'
                       type='text'
                       className='ml-2 w-1/2 rounded-md bg-white/20 p-2'
                       value={connection.link || ''}
@@ -85,6 +87,7 @@ export default function ConnectionComponent() {
                     <button
                       className='rounded px-2 py-1 font-bold text-white hover:text-red-700'
                       onClick={(e) => handleRemoveConnection(index, e)}
+                      id='remove-connection'
                     >
                       <TiDelete />
                     </button>
@@ -94,12 +97,14 @@ export default function ConnectionComponent() {
             )}
             <div className='flex items-center justify-center gap-x-2'>
               <button
+                id='submit-connection'
                 type='submit'
                 className='mt-4 rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               >
                 Submit
               </button>
               <a
+                id='skip-connection'
                 href='/hero3'
                 className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               >

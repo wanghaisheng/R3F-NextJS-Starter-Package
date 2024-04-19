@@ -8,6 +8,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect } from 'react'
 
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 async function getAvatarById(id: string) {
   try {
@@ -48,11 +49,12 @@ export default function AvatarImageComponent() {
           <div className='rounded-lg bg-white/20' key={avatar}>
             {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
             {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
-            <img
+            <Image
               src={`${avatar.avatar_url.replace('glb', 'png?size=1024?quality=100')}`}
               alt=''
-              height='120px'
-              width='120px'
+              height={120}
+              width={120}
+              loading='lazy'
             />
           </div>
         ))

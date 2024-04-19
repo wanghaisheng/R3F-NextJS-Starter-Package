@@ -34,7 +34,7 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
             <div
               className='absolute inset-0 cursor-default rounded-xl bg-black text-white'
               style={{
-                backgroundImage: 'url(/card/abstract4.png)',
+                backgroundImage: 'url(/card/abstract4.webp)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
