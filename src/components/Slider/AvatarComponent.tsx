@@ -47,8 +47,8 @@ export default function AvatarComponent() {
         className='relative flex h-full w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
         style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
-        <div className='flex flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl md:my-8 md:text-5xl'>My Avatars</div>
+        <div>
+          <div className='relative my-3 flex justify-center text-2xl md:my-8 md:text-7xl'>My Avatars</div>
 
           {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
             <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>

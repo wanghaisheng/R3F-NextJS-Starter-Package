@@ -122,15 +122,9 @@ const Navbar = () => {
                 Home
               </Link>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Cards
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
                 Map
               </Link>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Profile
-              </Link>
-              <Link href='#avatar' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
                 Avatar
               </Link>
               <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
@@ -160,19 +154,7 @@ const Navbar = () => {
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                Cards
-              </Link>
-              <Link
-                href='#'
-                className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
-              >
                 Map
-              </Link>
-              <Link
-                href='#'
-                className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
-              >
-                Profile
               </Link>
               <Link
                 href='#'

@@ -157,13 +157,20 @@ export default function ExperienceComponent() {
               <TabPanel key={index}>
                 <div className='flex flex-col md:flex-row md:justify-between'>
                   {/* Card Image / Container */}
-                  <div className='flex'>
-                    <ExperienceFlipCard
-                      type={project.type}
-                      projectName={project.name}
-                      skills={skills.map((skill) => skill).join(', ')}
-                      toolsAndTech={tools.map((tool) => tool).join(', ')}
-                    />
+                  <div className='flex flex-col'>
+                    <div className='flex'>
+                      <ExperienceFlipCard
+                        type={project.type}
+                        projectName={project.name}
+                        skills={skills.map((skill) => skill).join(', ')}
+                        toolsAndTech={tools.map((tool) => tool).join(', ')}
+                      />
+                    </div>
+                    <form className='ml-4 flex'>
+                      {/* <input id='booking' type='checkbox' className='mx-4'></input>
+                      <label htmlFor='booking'>Booking</label> */}
+                      <p>Booking section ... </p>
+                    </form>
                   </div>
 
                   {/* Form for user input */}

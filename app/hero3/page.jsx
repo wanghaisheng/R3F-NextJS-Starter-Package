@@ -10,6 +10,9 @@ import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState } from 'react'
 
+//icons
+import { FaRegEdit } from 'react-icons/fa'
+
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -107,7 +110,7 @@ export default function Hero() {
   const [skillsData, setSkillsData] = useState(null)
   const [avatarsData, setAvatarsData] = useState([])
 
-  // Carousel
+  // Main Carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
   useEffect(() => {
@@ -124,13 +127,14 @@ export default function Hero() {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
 
+  // carousel inside Slide 1
   const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: true })
 
   useEffect(() => {
     if (emblaApi2) {
       console.log(emblaApi2.slideNodes()) // Access API
     }
-  }, [emblaApi])
+  }, [emblaApi2])
 
   const scrollPrev2 = useCallback(() => {
     if (emblaApi2) emblaApi2.scrollPrev()
@@ -139,6 +143,23 @@ export default function Hero() {
   const scrollNext2 = useCallback(() => {
     if (emblaApi2) emblaApi2.scrollNext()
   }, [emblaApi2])
+
+  // Carousel inside slide 2
+  const [emblaRef3, emblaApi3] = useEmblaCarousel({ loop: true })
+
+  useEffect(() => {
+    if (emblaApi3) {
+      console.log(emblaApi3.slideNodes()) // Access API
+    }
+  }, [emblaApi3])
+
+  const scrollPrev3 = useCallback(() => {
+    if (emblaApi3) emblaApi3.scrollPrev()
+  }, [emblaApi3])
+
+  const scrollNext3 = useCallback(() => {
+    if (emblaApi3) emblaApi3.scrollNext()
+  }, [emblaApi3])
 
   // ------------------------------------------------------------
 
@@ -243,27 +264,52 @@ export default function Hero() {
                 <div className='h-full w-[33%] rounded-xl '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
-                        Genius ID
-                      </div>
-
+                      {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex justify-center'>
-                              <GeniusIDFlipCard
-                                first_name='Person'
-                                last_name='Name'
-                                email='email'
-                                dob='date of birth'
-                                contact='number'
-                                address='address'
-                              />
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                Genius ID
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <GeniusIDFlipCard
+                                  first_name='Person'
+                                  last_name='Name'
+                                  email='email'
+                                  dob='date of birth'
+                                  contact='number'
+                                  address='address'
+                                />
+                              </div>
+                              <div className='my-5 flex justify-center'>
+                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
+                                  GG+
+                                  {/* [CALL TO ACTION BUTTON1] */}
+                                </a>
+                              </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex justify-center'>
-                              <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                CARD2
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
+                              </div>
+                              <div className='my-5 flex justify-center'>
+                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
+                                  GG+
+                                  {/* [CALL TO ACTION BUTTON2] */}
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -279,27 +325,52 @@ export default function Hero() {
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
-                        Genius ID
-                      </div>
-
+                      {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex justify-center'>
-                              <GeniusIDFlipCard
-                                first_name='DEFAULT'
-                                last_name='DEFAULT'
-                                email='DEFAULT@'
-                                dob='DEFAULT'
-                                contact='DEFAULT'
-                                address='DEFAULT'
-                              />
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                Genius ID
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <GeniusIDFlipCard
+                                  first_name='DEFAULT'
+                                  last_name='DEFAULT'
+                                  email='DEFAULT@'
+                                  dob='DEFAULT'
+                                  contact='DEFAULT'
+                                  address='DEFAULT'
+                                />
+                              </div>
+                              <div className='my-5 flex justify-center'>
+                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
+                                  GG+
+                                  {/* [CALL TO ACTION BUTTON1] */}
+                                </a>
+                              </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex justify-center'>
-                              <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                CARD2
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
+                              </div>
+                              <div className='my-5 flex justify-center'>
+                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
+                                  GG+
+                                  {/* [CALL TO ACTION BUTTON1] */}
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -317,7 +388,12 @@ export default function Hero() {
                 </div>
 
                 <div className='h-full w-[33%] rounded-xl '>
-                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>Avatar</div>
+                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                    Avatar{' '}
+                    <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                      <FaRegEdit />
+                    </a>
+                  </div>
                   <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
                     <AvatarImageComponent />
                   </div>
@@ -327,36 +403,147 @@ export default function Hero() {
             {/* Slide 2 */}
             <div className='w-full shrink-0 grow md:min-w-0'>
               <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
-                <div className='h-full w-[33%] rounded-xl '>
+                <div className='h-full md:ml-24 md:w-[27%]'>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
-                        Experience
+                      {/* Carousel */}
+                      <div className='w-full overflow-hidden' ref={emblaRef3}>
+                        <div className='flex items-center'>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                Experience
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <ExperienceFlipCard
+                                  type='TYPE'
+                                  projectName='Name'
+                                  skills='skill1, skill2'
+                                  toolsAndTech='vscode, blender'
+                                />
+                              </div>
+                              <div className='mt-3'>
+                                <p>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
+                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
+                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                Exp2
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <ExperienceFlipCard
+                                  type='EDUCATION'
+                                  projectName='Project 2'
+                                  skills='CSS, HTML, JS'
+                                  toolsAndTech='VSCODE, GITHUB'
+                                />
+                              </div>
+                              <div className='mt-3'>
+                                <p>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
+                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
+                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className='flex justify-center text-xl'>
+                          <button className='' onClick={scrollPrev3}>
+                            <MdNavigateBefore />
+                          </button>
+                          <button className='' onClick={scrollNext3}>
+                            <MdNavigateNext />
+                          </button>
+                        </div>
                       </div>
-                      <ExperienceFlipCard
-                        type='TYPE'
-                        projectName='Name'
-                        skills='skill1, skill2'
-                        toolsAndTech='vscode, blender'
-                      />
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
-                        Experience
+                      {/* Carousel */}
+                      <div className='w-full overflow-hidden' ref={emblaRef3}>
+                        <div className='flex items-center'>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                Experience
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <ExperienceFlipCard
+                                type='DEFAULT'
+                                projectName='DEFAULT'
+                                skills='DEFAULT'
+                                toolsAndTech='DEFAULT'
+                              />
+                              <div className='mt-3'>
+                                <p>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
+                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
+                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                            <div className='flex flex-col justify-center'>
+                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                                Exp2
+                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <FaRegEdit />
+                                </a>
+                              </div>
+                              <div className='flex justify-center'>
+                                <ExperienceFlipCard
+                                  type='DEFAULT 2'
+                                  projectName='Project 2'
+                                  skills='DEFAULT'
+                                  toolsAndTech='DEFAULT'
+                                />
+                              </div>
+                              <div className='mt-3'>
+                                <p>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
+                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
+                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className='flex justify-center text-xl'>
+                          <button className='' onClick={scrollPrev3}>
+                            <MdNavigateBefore />
+                          </button>
+                          <button className='' onClick={scrollNext3}>
+                            <MdNavigateNext />
+                          </button>
+                        </div>
                       </div>
-                      <ExperienceFlipCard
-                        type='DEFAULT'
-                        projectName='DEFAULT'
-                        skills='DEFAULT'
-                        toolsAndTech='DEFAULT'
-                      />
                     </div>
                   )}
                 </div>
 
-                <div className='h-full w-[33%] rounded-xl '>
-                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>Skills</div>
+                <div className='h-full md:mr-24 md:w-[25%] '>
+                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                    Skills{' '}
+                    <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                      <FaRegEdit />
+                    </a>
+                  </div>
                   <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative rounded-xl border border-black/[0.1] bg-gray-50 p-2 dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>

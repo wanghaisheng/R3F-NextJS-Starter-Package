@@ -115,7 +115,7 @@ export default function SkillsComponent() {
         className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-4 md:text-7xl'>
             Skills
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -132,7 +132,7 @@ export default function SkillsComponent() {
           <Tabs>
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
                   {element.skill}
                   <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
                     <TiDelete />
