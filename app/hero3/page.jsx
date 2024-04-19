@@ -7,19 +7,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { Avatar } from 'src/components/Avatar'
-import FormModal from '@/components/FormModal/Modal'
-import { motion } from 'framer-motion'
-import { LogosFacebook } from '@/logo/LogosFacebook'
-import { SkillIconsInstagram } from '@/logo/SkillIconsInstagram'
-import { SkillIconsLinkedin } from '@/logo/SkillIconsLinkedin'
-import { LogosGoogleIcon } from '@/logo/LogosGoogleIcon'
-import { LogosYoutubeIcon } from '@/logo/LogosYoutubeIcon'
-import { LogosApple } from '@/logo/LogosApple'
-import { LogosFigma } from '@/logo/LogosFigma'
-import { LogosTwitch } from '@/logo/LogosTwitch'
-import { SkillIconsGithubDark } from '@/logo/SkillIconsGithubDark'
 import { useUser } from '@/context/UserContext/UserContext'
-import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
 // For the card flip QR code
@@ -202,50 +190,53 @@ export default function Hero() {
   }, [user])
 
   return (
-    <div className='h-screen w-full'>
-      <div className='flex items-center bg-none'>
+    <div className='flex flex-col md:size-full'>
+      {/* <div className='flex items-center bg-none'>
         <View className='flex h-20 w-full flex-col items-center justify-center bg-none'>
           <Suspense fallback={null}>
             <Type scale={2} position={[0, 0, 0]} />
             <Common />
           </Suspense>
         </View>
+      </div> */}
+      {/* avatar */}
+      <div style={{ height: '600px', weight: '600px' }}>
+        {avatarsData && avatarsData.length !== 0 ? (
+          <Avatar
+            modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+            shadows
+            animationSrc='/male-idle-3.fbx'
+            style={{ background: 'rgb(9,20,26)' }}
+            fov={40}
+            cameraTarget={1.5}
+            cameraInitialDistance={30}
+            effects={{
+              ambientOcclusion: true,
+            }}
+          />
+        ) : (
+          <Avatar
+            modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+            shadows
+            animationSrc='/male-idle-3.fbx'
+            style={{ background: 'rgb(9,20,26)' }}
+            fov={40}
+            cameraTarget={1.5}
+            cameraInitialDistance={30}
+            effects={{
+              ambientOcclusion: true,
+            }}
+          />
+        )}
       </div>
-      {avatarsData && avatarsData.length != 0 ? (
-        <Avatar
-          modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-          // shadows
-          animationSrc='/male-idle-3.fbx'
-          style={{ background: 'rgb(9,20,26)' }}
-          fov={40}
-          cameraTarget={1.5}
-          cameraInitialDistance={30}
-          effects={{
-            ambientOcclusion: true,
-          }}
-        />
-      ) : (
-        <Avatar
-          modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-          shadows
-          animationSrc='/male-idle-3.fbx'
-          style={{ background: 'rgb(9,20,26)' }}
-          fov={40}
-          cameraTarget={1.5}
-          cameraInitialDistance={30}
-          effects={{
-            ambientOcclusion: true,
-          }}
-        />
-      )}
 
       {/* Carousel */}
       <div
-        className='top-10 flex size-full justify-between px-4 md:absolute'
+        className='top-10 flex size-full justify-between px-4 md:absolute '
         style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
       >
-        <div className='md:overflow-hidden' ref={emblaRef}>
-          <div className='flex md:flex-row'>
+        <div className='overflow-hidden' ref={emblaRef}>
+          <div className='flex '>
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow md:min-w-0 '>
               <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
