@@ -269,7 +269,7 @@ export default function HeroComponent() {
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
@@ -289,7 +289,7 @@ export default function HeroComponent() {
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 CARD2
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
@@ -326,7 +326,7 @@ export default function HeroComponent() {
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
@@ -346,7 +346,7 @@ export default function HeroComponent() {
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 CARD2
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
@@ -358,7 +358,7 @@ export default function HeroComponent() {
                             </div>
                           </div>
                         </div>
-                        <div className='flex justify-center text-xl'>
+                        <div className='my-4 flex justify-between text-2xl'>
                           <button className='' onClick={scrollPrev2}>
                             <MdNavigateBefore />
                           </button>
@@ -379,7 +379,7 @@ export default function HeroComponent() {
                 </div>
 
                 <div className='h-full md:mr-24 md:w-[30%] '>
-                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                  <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Avatar{' '}
                     <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                       <FaRegEdit />
@@ -415,51 +415,51 @@ export default function HeroComponent() {
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Experience
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
                                 </a>
                               </div>
-                              <div className='flex flex-col justify-center'>
+                              <div className='flex justify-center'>
                                 <ExperienceFlipCard
                                   type='TYPE'
                                   projectName='Name'
                                   skills='skill1, skill2'
                                   toolsAndTech='vscode, blender'
                                 />
-                                <div className='my-3'>
-                                  <p className='px-4'>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
-                                    maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
-                                    obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
-                                  </p>
-                                </div>
+                              </div>
+                              <div className='my-3'>
+                                <p className='px-4'>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
+                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
+                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                </p>
                               </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Exp2
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
                                 </a>
                               </div>
-                              <div className='flex flex-col justify-center'>
+                              <div className='flex justify-center'>
                                 <ExperienceFlipCard
                                   type='EDUCATION'
-                                  projectName='Project 2'
-                                  skills='CSS, HTML, JS'
-                                  toolsAndTech='VSCODE, GITHUB'
+                                  projectName='Name2'
+                                  skills='skill3, skil23l2'
+                                  toolsAndTech='vscode, figma'
                                 />
-                                <div className='my-3'>
-                                  <p className='px-4'>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
-                                    maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
-                                    obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
-                                  </p>
-                                </div>
+                              </div>
+                              <div className='my-3'>
+                                <p className='px-4'>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
+                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
+                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -481,20 +481,22 @@ export default function HeroComponent() {
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Experience
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
                                 </a>
                               </div>
-                              <ExperienceFlipCard
-                                type='DEFAULT'
-                                projectName='DEFAULT'
-                                skills='DEFAULT'
-                                toolsAndTech='DEFAULT'
-                              />
-                              <div className='mt-3'>
-                                <p>
+                              <div className='flex justify-center'>
+                                <ExperienceFlipCard
+                                  type='DEFAULT 2'
+                                  projectName='Project 2'
+                                  skills='DEFAULT'
+                                  toolsAndTech='DEFAULT'
+                                />
+                              </div>
+                              <div className='my-3'>
+                                <p className='px-4'>
                                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
                                   maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
                                   obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
@@ -504,7 +506,7 @@ export default function HeroComponent() {
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Exp2
                                 <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                   <FaRegEdit />
@@ -542,7 +544,7 @@ export default function HeroComponent() {
                 </div>
 
                 <div className='h-full md:mr-24 md:w-[30%] '>
-                  <div className='relative my-4 flex justify-center pl-5 text-5xl font-semibold drop-shadow'>
+                  <div className='relative my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
                     Skills{' '}
                     <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                       <FaRegEdit />
@@ -625,14 +627,14 @@ export default function HeroComponent() {
                 <div className='h-full md:ml-24 md:w-[25%] '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                         Achievements
                       </div>
                       <p>Logged In users Achievements</p>
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                         <p>Achievements</p>
                       </div>
                       Awards
@@ -641,7 +643,7 @@ export default function HeroComponent() {
                 </div>
 
                 <div className='h-full md:mr-24 md:w-[25%] '>
-                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                  <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Recommendations
                   </div>
                 </div>

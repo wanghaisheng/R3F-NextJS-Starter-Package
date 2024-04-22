@@ -81,7 +81,7 @@ export default async function WeatherBackground({ city }: { city: string }) {
 
     return (
       <>
-        <div className='relative h-screen w-full'>
+        <div className='relative top-[-82px] h-screen w-full '>
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src={backgroundVideoUrl} type='video/mp4' />
           </video>

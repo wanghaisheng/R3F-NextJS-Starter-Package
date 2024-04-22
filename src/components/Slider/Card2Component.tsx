@@ -199,7 +199,7 @@ export default function CardComponent() {
                 <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
                   {card.type}
                   <button
-                    className='ml-2 text-white hover:text-red-500'
+                    className='ml-2 text-gray-900 hover:text-red-500'
                     onClick={() => handleDeleteCard(index, card.card_id)}
                   >
                     <TiDelete />
