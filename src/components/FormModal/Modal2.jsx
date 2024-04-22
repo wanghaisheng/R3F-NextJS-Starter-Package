@@ -2,8 +2,13 @@ import { motion } from 'framer-motion'
 
 const FormModal2 = ({ show, onclose, children }) => {
   return (
-    <div className={`size-full ${show ? 'block' : 'hidden'} transition-all duration-700`}>
-      <div className='container mx-auto h-auto max-w-2xl rounded-3xl bg-black p-3 shadow-sm shadow-violet-500 backdrop-blur-md'>
+    <motion.div
+      style={{
+        transform: show ? 'translateY(0%)' : 'translateY(-1000%)',
+      }}
+      className='absolute left-0 top-0 z-20 size-full transition-all duration-700'
+    >
+      <div className='container mx-auto h-auto w-full rounded-3xl p-3 shadow-sm shadow-violet-500 backdrop-blur-md'>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.8 }}
@@ -14,9 +19,9 @@ const FormModal2 = ({ show, onclose, children }) => {
         >
           <img src='https://api.iconify.design/material-symbols:cancel-rounded.svg' className='h-6' />
         </motion.button>
-        {show && children}
+        {children}
       </div>
-    </div>
+    </motion.div>
   )
 }
 

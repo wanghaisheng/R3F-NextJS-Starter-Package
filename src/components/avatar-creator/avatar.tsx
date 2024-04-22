@@ -13,7 +13,7 @@ const config: AvatarCreatorConfig = {
   language: 'en',
 }
 
-const style = { width: '100%', height: '100vh', border: 'none' }
+const style = { width: '100%', height: '60vh', border: 'none', borderRadius: '15px' }
 
 export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')

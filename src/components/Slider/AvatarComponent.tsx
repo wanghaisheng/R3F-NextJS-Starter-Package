@@ -5,6 +5,8 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import AvatarImageComponent from '../avatarImage/page'
+import FormModal2 from '../FormModal/Modal2'
+import Avatar_creator from '@/components/avatar-creator/avatar'
 
 async function getAvatarById(id: string) {
   try {
@@ -22,6 +24,12 @@ export default function AvatarComponent() {
   const router = useRouter()
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
+
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+
+  const openCardModal = () => {
+    setIsCardModalOpen(true)
+  }
 
   useEffect(() => {
     const fetchAvatarsData = async () => {
@@ -57,7 +65,7 @@ export default function AvatarComponent() {
                   modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                   // shadows
                   animationSrc='/male-idle-3.fbx'
-                  style={{ background: 'rgb(9,20,26)', width: '300px', height: '300px' }}
+                  style={{ background: 'rgb(9,20,26)', width: '338px', height: '338px' }}
                   fov={40}
                   cameraTarget={1.5}
                   cameraInitialDistance={30}
@@ -76,7 +84,7 @@ export default function AvatarComponent() {
                 modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
                 // shadows
                 animationSrc='/male-idle-3.fbx'
-                style={{ background: 'rgb(9,20,26)', width: '300px', height: '300px' }}
+                style={{ background: 'rgb(9,20,26)', width: '338px', height: '338px' }}
                 fov={40}
                 cameraTarget={1.5}
                 cameraInitialDistance={30}
@@ -91,15 +99,28 @@ export default function AvatarComponent() {
           )}
 
           <div className='absolute right-4 top-20 md:bottom-6 md:right-4'>
-            <motion.a
+            {/* <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
               href='/avatar'
             >
               Create Avatar &emsp; +
-            </motion.a>
+            </motion.a> */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+              onClick={() => {
+                setIsCardModalOpen(true)
+              }}
+            >
+              Create Avatar &emsp; +
+            </motion.button>
           </div>
+          <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
+            <Avatar_creator />
+          </FormModal2>
         </div>
       </div>
     </div>
