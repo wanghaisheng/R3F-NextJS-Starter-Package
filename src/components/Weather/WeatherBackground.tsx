@@ -24,10 +24,10 @@ export default async function WeatherBackground({ city }: { city: string }) {
 
     switch (weatherStatus) {
       case 'Clouds':
-        backgroundVideoUrl = 'livewallpapers/sunny-clouds.mp4'
+        backgroundVideoUrl = 'livewallpapers/cloudsAfternoon.mp4'
         break
       case 'Rain':
-        backgroundVideoUrl = 'livewallpapers/clouds.mp4'
+        backgroundVideoUrl = 'livewallpapers/rainy.mp4'
         break
       case 'Fog':
         backgroundImageUrl =

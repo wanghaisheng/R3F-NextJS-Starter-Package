@@ -105,7 +105,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
 
-export default function Hero() {
+export default function Hero4() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
   const [avatarsData, setAvatarsData] = useState([])
@@ -261,7 +261,7 @@ export default function Hero() {
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow md:min-w-0 '>
               <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
-                <div className='h-full w-[33%] rounded-xl '>
+                <div className='h-full md:ml-24 md:w-[27%]'>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
                       {/* Carousel */}
@@ -285,12 +285,6 @@ export default function Hero() {
                                   address={user.address}
                                 />
                               </div>
-                              <div className='my-5 flex justify-center'>
-                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
-                                  GG+
-                                  {/* [CALL TO ACTION BUTTON1] */}
-                                </a>
-                              </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
@@ -304,22 +298,24 @@ export default function Hero() {
                               <div className='flex justify-center'>
                                 <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
                               </div>
-                              <div className='my-5 flex justify-center'>
-                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
-                                  GG+
-                                  {/* [CALL TO ACTION BUTTON2] */}
-                                </a>
-                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className='flex justify-center text-xl'>
+                        <div className='my-4 flex justify-between text-2xl'>
                           <button className='' onClick={scrollPrev2}>
                             <MdNavigateBefore />
                           </button>
                           <button className='' onClick={scrollNext2}>
                             <MdNavigateNext />
                           </button>
+                        </div>
+
+                        <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
+                          <p>Some premium features for paid users</p>
+                          <a href='#' className='mt-4 rounded-xl bg-black px-2 py-1'>
+                            GG+
+                            {/* [CALL TO ACTION BUTTON2] */}
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -346,12 +342,6 @@ export default function Hero() {
                                   address='DEFAULT'
                                 />
                               </div>
-                              <div className='my-5 flex justify-center'>
-                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
-                                  GG+
-                                  {/* [CALL TO ACTION BUTTON1] */}
-                                </a>
-                              </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
@@ -365,12 +355,6 @@ export default function Hero() {
                               <div className='flex justify-center'>
                                 <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
                               </div>
-                              <div className='my-5 flex justify-center'>
-                                <a href='#' className=' w-fit  rounded-2xl bg-purple-900 px-2 py-1'>
-                                  GG+
-                                  {/* [CALL TO ACTION BUTTON1] */}
-                                </a>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -382,20 +366,40 @@ export default function Hero() {
                             <MdNavigateNext />
                           </button>
                         </div>
+                        <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
+                          <p>Some premium features for paid users</p>
+                          <a href='#' className='mt-4 rounded-xl bg-black px-2 py-1'>
+                            GG+
+                            {/* [CALL TO ACTION BUTTON2] */}
+                          </a>
+                        </div>
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className='h-full w-[33%] rounded-xl '>
+                <div className='h-full md:mr-24 md:w-[30%] '>
                   <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                     Avatar{' '}
                     <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                       <FaRegEdit />
                     </a>
                   </div>
-                  <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                    <AvatarImageComponent />
+                  <div className='flex min-h-48 items-center justify-center px-4'>
+                    {/* <button className='' onClick={scrollPrev2}> */}
+                    <button>
+                      <MdNavigateBefore />
+                    </button>
+                    <div className='flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
+                      <AvatarImageComponent />
+                      <AvatarImageComponent />
+                    </div>
+                    <button>
+                      <MdNavigateNext />
+                    </button>
+                  </div>
+                  <div className='mx-6 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
+                    <p>Avatar Skins OR Connections?</p>
                   </div>
                 </div>
               </div>
@@ -460,7 +464,7 @@ export default function Hero() {
                             </div>
                           </div>
                         </div>
-                        <div className='flex justify-center text-xl'>
+                        <div className='mt-2 flex justify-center text-2xl'>
                           <button className='' onClick={scrollPrev3}>
                             <MdNavigateBefore />
                           </button>
@@ -524,7 +528,7 @@ export default function Hero() {
                             </div>
                           </div>
                         </div>
-                        <div className='flex justify-center text-xl'>
+                        <div className='mt-2 flex justify-center text-2xl'>
                           <button className='' onClick={scrollPrev3}>
                             <MdNavigateBefore />
                           </button>
@@ -537,8 +541,8 @@ export default function Hero() {
                   )}
                 </div>
 
-                <div className='h-full md:mr-24 md:w-[25%] '>
-                  <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                <div className='h-full md:mr-24 md:w-[30%] '>
+                  <div className='relative my-4 flex justify-center pl-5 text-5xl font-semibold drop-shadow'>
                     Skills{' '}
                     <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                       <FaRegEdit />
@@ -551,10 +555,10 @@ export default function Hero() {
                           <div className=' '>
                             {/* Condition for changing barchart chart and radar chart*/}
                             {skillsData.length < 6 ? (
-                              <ResponsiveContainer width={400} height={250}>
+                              <ResponsiveContainer width={420} height={330}>
                                 <BarChart
-                                  width={400}
-                                  height={250}
+                                  width={420}
+                                  height={330}
                                   data={skillsData}
                                   margin={{
                                     top: 5,
@@ -578,13 +582,13 @@ export default function Hero() {
                               </ResponsiveContainer>
                             ) : (
                               // Radar chart
-                              <ResponsiveContainer width={400} height={250}>
+                              <ResponsiveContainer width={420} height={330}>
                                 <RadarChart
                                   // cx={300}
                                   // cy={250}
                                   // outerRadius={150}
-                                  width={400}
-                                  height={250}
+                                  width={420}
+                                  height={330}
                                   data={skillsData}
                                 >
                                   <PolarGrid />
@@ -618,7 +622,7 @@ export default function Hero() {
             {/* Slide 3 */}
             <div className='w-full shrink-0 grow md:min-w-0'>
               <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
-                <div className='h-full w-[33%] rounded-xl '>
+                <div className='h-full md:ml-24 md:w-[25%] '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
                       <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
@@ -636,7 +640,7 @@ export default function Hero() {
                   )}
                 </div>
 
-                <div className='h-full w-[33%] rounded-xl '>
+                <div className='h-full md:mr-24 md:w-[25%] '>
                   <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
                     Recommendations
                   </div>
