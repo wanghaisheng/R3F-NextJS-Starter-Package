@@ -48,7 +48,7 @@ const SignIn = () => {
 
   return (
     <>
-      <main className='relative flex min-h-full flex-col items-center justify-around md:flex-row'>
+      <main className='relative mt-10 flex min-h-full flex-col items-center justify-around md:flex-row'>
         <motion.div
           initial={{ opacity: 0, scale: 0.4 }}
           animate={{ opacity: 1, scale: 1 }}

@@ -59,7 +59,7 @@ const SliderPage = () => {
 
   return (
     <>
-      <div className='mx-auto max-w-7xl'>
+      <div className='mx-auto mt-16 max-w-7xl'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex'>
             <div className='w-full min-w-0 shrink-0 grow'>

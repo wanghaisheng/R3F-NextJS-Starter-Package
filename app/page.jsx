@@ -37,7 +37,7 @@ export default function Page() {
   return (
     <>
       <div className='relative flex size-full flex-col ' id='about-me'>
-        <div className='z-20 flex size-full items-center justify-center p-10'>
+        <div className='z-20 mt-16 flex size-full items-center justify-center p-10'>
           {/* <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

@@ -1,14 +1,26 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useUser } from '@/context/UserContext/UserContext'
 
 import { LuLogOut } from 'react-icons/lu'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
   const [isToggled, setToggle] = useState(false)
+
+  const pathname = usePathname()
+  const [hideMiddleNav, setHideMiddleNav] = useState(false)
+
+  useEffect(() => {
+    if (pathname === '/' || pathname === '/slider' || pathname === '/signin' || pathname === '/signup') {
+      setHideMiddleNav(true)
+    } else {
+      setHideMiddleNav(false)
+    }
+  }, [pathname])
 
   const { user, logout } = useUser()
   const navAnimate = {
@@ -115,24 +127,26 @@ const Navbar = () => {
           </div>
         </div>
         {/* For desktop view nav bar */}
-        <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
-          <div className='hidden md:flex'>
-            <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Home
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Map
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Avatar
-              </Link>
-              <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                Security
-              </Link>
+        {hideMiddleNav ? null : (
+          <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
+            <div className='hidden md:flex'>
+              <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
+                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  Home
+                </Link>
+                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  Map
+                </Link>
+                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  Avatar
+                </Link>
+                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  Security
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* For mobile view nav bar */}
         {isToggled && (
