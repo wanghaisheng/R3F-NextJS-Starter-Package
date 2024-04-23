@@ -117,25 +117,48 @@ export default function ExperienceComponent() {
     })
   }
 
+  // Animated Button
+  const DrawOutlineButton = ({ children, ...rest }) => {
+    return (
+      <button
+        {...rest}
+        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
+      >
+        <span>{children}</span>
+
+        {/* TOP */}
+        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
+
+        {/* RIGHT */}
+        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
+
+        {/* BOTTOM */}
+        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
+
+        {/* LEFT */}
+        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
+      </button>
+    )
+  }
+
   return (
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='experience'
-        className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='flex h-fit w-[68%] rounded-xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>
             Experience
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className='absolute top-14 rounded-full bg-black/10 p-2 text-sm text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900 md:bottom-0 md:right-0 md:size-fit'
-              onClick={() => {
-                handleAddProject()
-              }}
-            >
-              Add Project &emsp; +
-            </motion.button>
+            <div className='absolute right-0 top-10 text-sm'>
+              <DrawOutlineButton
+                onClick={() => {
+                  handleAddProject()
+                }}
+              >
+                Add Project &emsp; +
+              </DrawOutlineButton>
+            </div>
           </div>
 
           <Tabs>
@@ -166,11 +189,16 @@ export default function ExperienceComponent() {
                         toolsAndTech={tools.map((tool) => tool).join(', ')}
                       />
                     </div>
-                    <form className='ml-4 flex'>
-                      {/* <input id='booking' type='checkbox' className='mx-4'></input>
-                      <label htmlFor='booking'>Booking</label> */}
-                      <p>Booking section ... </p>
-                    </form>
+                    <div className='mt-1 flex justify-center'>
+                      {/* <a href='http://www.quickslot.vercel.app/log-in/' target='_blank'>
+                        Booking
+                      </a> */}
+                      <DrawOutlineButton>
+                        <a href='http://www.google.com/' target='_blank'>
+                          Booking
+                        </a>
+                      </DrawOutlineButton>
+                    </div>
                   </div>
 
                   {/* Form for user input */}
@@ -278,19 +306,15 @@ export default function ExperienceComponent() {
                         </div>
                       </div>
                       {/* Submit button */}
-                      <div className='flex gap-x-2'>
-                        <button
-                          type='submit'
-                          className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-                        >
-                          Generate
-                        </button>
-                        <Link
-                          href='/hero3'
-                          className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-                        >
-                          Skip
-                        </Link>
+                      <div className='mt-4 flex gap-x-2'>
+                        <div>
+                          <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
+                        </div>
+                        <div>
+                          <Link href='/hero3'>
+                            <DrawOutlineButton>Skip</DrawOutlineButton>
+                          </Link>
+                        </div>
                       </div>
                     </form>
                   </div>

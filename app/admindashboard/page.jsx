@@ -27,8 +27,8 @@ import { LuGauge } from 'react-icons/lu'
 
 function SideNav({ selected, setSelected }) {
   return (
-    <nav className='top-20 m-3 flex size-fit flex-col gap-2 rounded-xl bg-slate-950/40 md:w-48 lg:w-64'>
-      <div className='fixed flex flex-col gap-2 md:w-48 lg:w-64'>
+    <nav className='top-20 m-3 flex flex-col gap-2 rounded-xl bg-slate-950/40 md:flex-row'>
+      <div className='fixed flex w-[17%] flex-col gap-2'>
         <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
           <div className='flex items-center justify-between'>
             <MdSpaceDashboard />
@@ -91,100 +91,104 @@ const AdminDashboard = () => {
   const [selected, setSelected] = useState(0)
   return (
     <DndContext>
-      <div className='flex bg-slate-900/20 text-slate-100'>
-        <SideNav selected={selected} setSelected={setSelected} />
-        {selected === 0 ? (
-          <div className='mx-4 '>
-            <div className='my-4'>Welcome, Admin</div>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4'>
-              <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div className='flex items-center gap-x-5'>
-                  <FaTasks />
-                  <h1>Total Projects</h1>
+      <div className='mx-4 flex justify-between bg-slate-900/20 text-slate-100 md:mx-8'>
+        <div className='w-[20%]'>
+          <SideNav selected={selected} setSelected={setSelected} />
+        </div>
+        <div className='w-[80%]'>
+          {selected === 0 ? (
+            <div className='mx-4'>
+              <div className='my-4'>Welcome, Admin</div>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4'>
+                <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div className='flex items-center gap-x-5'>
+                    <FaTasks />
+                    <h1>Total Projects</h1>
+                  </div>
+
+                  <p>---</p>
+                </div>
+                <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div className='flex items-center gap-x-5'>
+                    <FaRegClock />
+                    <h1>Hours Logged</h1>
+                  </div>
+                  <p>---</p>
                 </div>
 
-                <p>---</p>
-              </div>
-              <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div className='flex items-center gap-x-5'>
-                  <FaRegClock />
-                  <h1>Hours Logged</h1>
+                <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div className='flex items-center justify-between gap-x-5'>
+                    <MdTask />
+                    <p>Total Tasks Completed</p>
+                  </div>
+                  <p>---</p>
                 </div>
-                <p>---</p>
+                <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div className='flex items-center justify-between gap-x-5'>
+                    <LuGauge />
+                    <p>Performance</p>
+                  </div>
+                  <p>---</p>
+                </div>
               </div>
 
-              <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div className='flex items-center justify-between gap-x-5'>
-                  <MdTask />
-                  <p>Total Tasks Completed</p>
-                </div>
-                <p>---</p>
-              </div>
-              <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div className='flex items-center justify-between gap-x-5'>
-                  <LuGauge />
-                  <p>Performance</p>
-                </div>
-                <p>---</p>
+              <div className='rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <BubbleChartComponent />
               </div>
             </div>
-
-            <div className='rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-              <BubbleChartComponent />
-            </div>
-          </div>
-        ) : selected === 1 ? (
-          <div>Calendar</div>
-        ) : selected === 2 ? (
-          <div>Profile</div>
-        ) : selected === 3 ? (
-          <div>Settings</div>
-        ) : selected === 4 ? (
-          <div>
-            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-              <div>
-                <h1>Radar Chart for comparision</h1>
-                <p className='mt-5'>Some description about the chart</p>
-              </div>
-              <DonutComponent />
-            </div>
-
-            <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
-              <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div>
-                  <h1>Pie Chart</h1>
-                  <p className='mt-5'>Some description about the chart</p>
-                </div>
-                <PieChartComponent />
-              </div>
+          ) : selected === 1 ? (
+            <div>Calendar</div>
+          ) : selected === 2 ? (
+            <div>Profile</div>
+          ) : selected === 3 ? (
+            <div>Settings</div>
+          ) : selected === 4 ? (
+            <div>
               <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
                 <div>
                   <h1>Radar Chart for comparision</h1>
                   <p className='mt-5'>Some description about the chart</p>
                 </div>
-                <RadarChartComponent />
+                <DonutComponent />
               </div>
 
-              <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div>
-                  <h1>Radar Chart for comparision</h1>
-                  <p className='mt-5'>Some description about the chart</p>
+              <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
+                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div>
+                    <h1>Pie Chart</h1>
+                    <p className='mt-5'>Some description about the chart</p>
+                  </div>
+                  <PieChartComponent />
                 </div>
-                <SkillsRadarComponent />
+                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div>
+                    <h1>Radar Chart for comparision</h1>
+                    <p className='mt-5'>Some description about the chart</p>
+                  </div>
+                  <RadarChartComponent />
+                </div>
+
+                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div>
+                    <h1>Radar Chart for comparision</h1>
+                    <p className='mt-5'>Some description about the chart</p>
+                  </div>
+                  <SkillsRadarComponent />
+                </div>
+              </div>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
+                <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <LineComponent />
+                </div>
+                <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <AreaChartComponent />
+                </div>
               </div>
             </div>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
-              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <LineComponent />
-              </div>
-              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <AreaChartComponent />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div>OK</div>
-        )}
+          ) : (
+            <div>OK</div>
+          )}
+        </div>
       </div>
     </DndContext>
   )

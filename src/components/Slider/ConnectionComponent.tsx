@@ -5,6 +5,30 @@ import Image from 'next/image'
 
 import { TiDelete } from 'react-icons/ti'
 
+// Animated Button
+const DrawOutlineButton = ({ children, ...rest }) => {
+  return (
+    <button
+      {...rest}
+      className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
+    >
+      <span>{children}</span>
+
+      {/* TOP */}
+      <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
+
+      {/* RIGHT */}
+      <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
+
+      {/* BOTTOM */}
+      <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
+
+      {/* LEFT */}
+      <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
+    </button>
+  )
+}
+
 export default function ConnectionComponent() {
   const [selectedLogo, setSelectedLogo] = useState(null)
   const [connections, setConnections] = useState([])
@@ -44,7 +68,7 @@ export default function ConnectionComponent() {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='connection'
-        className='flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='flex h-fit w-[68%] rounded-xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>Connection</div>
@@ -107,20 +131,12 @@ export default function ConnectionComponent() {
                 ))}
               </div>
             )}
-            <div className='flex items-center justify-center gap-x-2'>
-              <button
-                id='submit-connection'
-                type='submit'
-                className='mt-4 rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-              >
+            <div className='mt-4 flex items-center justify-center gap-x-2'>
+              <DrawOutlineButton id='submit-connection' type='submit'>
                 Submit
-              </button>
-              <a
-                id='skip-connection'
-                href='/hero3'
-                className='mt-4 flex justify-center rounded-2xl px-4 py-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-              >
-                Skip
+              </DrawOutlineButton>
+              <a id='skip-connection' href='/hero3'>
+                <DrawOutlineButton>Skip</DrawOutlineButton>
               </a>
             </div>
           </form>

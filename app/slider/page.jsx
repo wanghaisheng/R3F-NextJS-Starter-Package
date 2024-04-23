@@ -61,7 +61,7 @@ const SliderPage = () => {
     <>
       <div className='mx-auto mt-16 max-w-7xl'>
         <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex'>
+          <div className='mb-4 flex'>
             <div className='w-full min-w-0 shrink-0 grow'>
               <AvatarComponent />
             </div>
@@ -91,8 +91,8 @@ const SliderPage = () => {
       </div>
 
       {/* Footer Nav */}
-      <footer className=' flex items-center justify-center'>
-        <div className='my-6 flex h-10 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
+      <footer class='fixed inset-x-0 bottom-0 flex justify-center backdrop-blur-md'>
+        <div className='my-2 flex h-10 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
           {tabs.map((tab, index) => (
             <Chip
               text={tab}

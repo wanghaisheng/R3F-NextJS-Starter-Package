@@ -48,15 +48,39 @@ export default function AvatarComponent() {
 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
+  // Animated Button
+  const DrawOutlineButton = ({ children, ...rest }) => {
+    return (
+      <button
+        {...rest}
+        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
+      >
+        <span>{children}</span>
+
+        {/* TOP */}
+        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
+
+        {/* RIGHT */}
+        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
+
+        {/* BOTTOM */}
+        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
+
+        {/* LEFT */}
+        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
+      </button>
+    )
+  }
+
   return (
     <div className='mt-2 flex items-center justify-center'>
       <div
         id='avatar'
-        className='relative flex h-full w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='relative flex h-full w-[68%] items-center justify-center rounded-xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
         style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div>
-          <div className='relative my-3 flex justify-center text-2xl md:my-8 md:text-7xl'>My Avatars</div>
+          <div className='relative my-3 flex justify-center text-2xl md:text-4xl lg:my-6 lg:text-7xl'>My Avatars</div>
 
           {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
             <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>
@@ -65,7 +89,7 @@ export default function AvatarComponent() {
                   modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                   // shadows
                   animationSrc='/male-idle-3.fbx'
-                  style={{ background: 'rgb(9,20,26)', width: '338px', height: '338px' }}
+                  style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px' }}
                   fov={40}
                   cameraTarget={1.5}
                   cameraInitialDistance={30}
@@ -84,7 +108,7 @@ export default function AvatarComponent() {
                 modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
                 // shadows
                 animationSrc='/male-idle-3.fbx'
-                style={{ background: 'rgb(9,20,26)', width: '338px', height: '338px' }}
+                style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px' }}
                 fov={40}
                 cameraTarget={1.5}
                 cameraInitialDistance={30}
@@ -98,7 +122,7 @@ export default function AvatarComponent() {
             </div>
           )}
 
-          <div className='absolute right-4 top-20 md:bottom-6 md:right-4'>
+          <div className='mt-4 flex justify-end md:absolute md:bottom-4 md:right-4'>
             {/* <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -107,16 +131,14 @@ export default function AvatarComponent() {
             >
               Create Avatar &emsp; +
             </motion.a> */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
+
+            <DrawOutlineButton
               onClick={() => {
                 setIsCardModalOpen(true)
               }}
             >
               Create Avatar &emsp; +
-            </motion.button>
+            </DrawOutlineButton>
           </div>
           <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
             <Avatar_creator />
