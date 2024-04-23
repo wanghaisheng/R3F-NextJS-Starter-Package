@@ -27,37 +27,39 @@ import { LuGauge } from 'react-icons/lu'
 
 function SideNav({ selected, setSelected }) {
   return (
-    <nav className='top-20 flex size-fit flex-col gap-2 rounded-xl bg-slate-950/40 md:w-48 lg:w-64'>
-      <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-        <div className='flex items-center justify-between'>
-          <MdSpaceDashboard />
-          <p className='text-sm max-sm:hidden'>Dashboard</p>
-        </div>
-      </NavItem>
-      <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-        <div className='flex items-center justify-between'>
-          <FaCalendarCheck />
-          <p className='text-sm max-sm:hidden'>Calendar</p>
-        </div>
-      </NavItem>
-      <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-        <div className='flex items-center justify-between'>
-          <CgProfile />
-          <p className='text-sm max-sm:hidden'>Profile</p>
-        </div>
-      </NavItem>
-      <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
-        <div className='flex items-center justify-between'>
-          <IoIosSettings />
-          <p className='text-sm max-sm:hidden'>Settings</p>
-        </div>
-      </NavItem>
-      <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
-        <div className='flex items-center justify-between'>
-          <FaRegChartBar />
-          <p className='text-sm max-sm:hidden'>Chart</p>
-        </div>
-      </NavItem>
+    <nav className='top-20 m-3 flex size-fit flex-col gap-2 rounded-xl bg-slate-950/40 md:w-48 lg:w-64'>
+      <div className='fixed flex flex-col gap-2 md:w-48 lg:w-64'>
+        <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <MdSpaceDashboard />
+            <p className='text-sm max-sm:hidden'>Dashboard</p>
+          </div>
+        </NavItem>
+        <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <FaCalendarCheck />
+            <p className='text-sm max-sm:hidden'>Calendar</p>
+          </div>
+        </NavItem>
+        <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <CgProfile />
+            <p className='text-sm max-sm:hidden'>Profile</p>
+          </div>
+        </NavItem>
+        <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <IoIosSettings />
+            <p className='text-sm max-sm:hidden'>Settings</p>
+          </div>
+        </NavItem>
+        <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <FaRegChartBar />
+            <p className='text-sm max-sm:hidden'>Chart</p>
+          </div>
+        </NavItem>
+      </div>
     </nav>
   )
 }
