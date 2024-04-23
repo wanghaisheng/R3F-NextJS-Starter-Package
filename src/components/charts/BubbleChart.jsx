@@ -244,17 +244,17 @@ const renderTooltip = (props) => {
 const Legend = () => (
   <div className='mt-4 flex justify-end space-x-4'>
     <div className='flex items-center'>
-      <div className='mr-2 size-4 rounded-xl bg-[gray]'></div>
-      <span>ClockOut</span>
+      <div className='mr-2 size-3 rounded-xl bg-[gray]'></div>
+      <span className='text-sm'>ClockOut</span>
     </div>
     <div className='flex items-center'>
-      <div className='mr-2 size-4 rounded-xl bg-[#268AFF]'></div>
-      <span>ClockIn</span>
+      <div className='mr-2 size-3 rounded-xl bg-[#268AFF]'></div>
+      <span className='text-sm'>ClockIn</span>
     </div>
 
     <div className='flex items-center'>
-      <div className='mr-2 size-4 rounded-xl bg-[#36F097]'></div>
-      <span>SetTimer</span>
+      <div className='mr-2 size-3 rounded-xl bg-[#36F097]'></div>
+      <span className='text-sm'>SetTimer</span>
     </div>
   </div>
 )
@@ -266,12 +266,8 @@ export default function BubbleChartComponent() {
   return (
     <>
       {/* Main content */}
-      <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+      <div className='flex justify-center'>
         <div>
-          <div className='mb-16'>
-            <Legend />
-          </div>
-
           <ResponsiveContainer>
             <div>
               {/* Chart for Sunday */}
@@ -622,6 +618,9 @@ export default function BubbleChartComponent() {
                   ))}
                 </Scatter>
               </ScatterChart>
+            </div>
+            <div className='mt-5'>
+              <Legend />
             </div>
           </ResponsiveContainer>
         </div>

@@ -23,38 +23,39 @@ import { FaRegChartBar } from 'react-icons/fa'
 import { FaTasks } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa6'
 import { MdTask } from 'react-icons/md'
+import { LuGauge } from 'react-icons/lu'
 
 function SideNav({ selected, setSelected }) {
   return (
-    <nav className='top-20 flex size-fit w-[20%] flex-col gap-2 rounded-xl bg-slate-950/40 p-4'>
+    <nav className='top-20 flex size-fit flex-col gap-2 rounded-xl bg-slate-950/40 md:w-48 lg:w-64'>
       <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
         <div className='flex items-center justify-between'>
           <MdSpaceDashboard />
-          <p>Dashboard</p>
+          <p className='text-sm max-sm:hidden'>Dashboard</p>
         </div>
       </NavItem>
       <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
         <div className='flex items-center justify-between'>
           <FaCalendarCheck />
-          <p>Calendar</p>
+          <p className='text-sm max-sm:hidden'>Calendar</p>
         </div>
       </NavItem>
       <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
         <div className='flex items-center justify-between'>
           <CgProfile />
-          <p>Profile</p>
+          <p className='text-sm max-sm:hidden'>Profile</p>
         </div>
       </NavItem>
       <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
         <div className='flex items-center justify-between'>
           <IoIosSettings />
-          <p>Settings</p>
+          <p className='text-sm max-sm:hidden'>Settings</p>
         </div>
       </NavItem>
       <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
         <div className='flex items-center justify-between'>
           <FaRegChartBar />
-          <p>Chart</p>
+          <p className='text-sm max-sm:hidden'>Chart</p>
         </div>
       </NavItem>
     </nav>
@@ -91,8 +92,8 @@ const AdminDashboard = () => {
       <div className='flex bg-slate-900/20 text-slate-100'>
         <SideNav selected={selected} setSelected={setSelected} />
         {selected === 0 ? (
-          <div className='mx-4 size-full'>
-            <div className='my-4 h-[35px] rounded'>Welcome, Admin</div>
+          <div className='mx-4 '>
+            <div className='my-4'>Welcome, Admin</div>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4'>
               <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
                 <div className='flex items-center gap-x-5'>
@@ -109,13 +110,6 @@ const AdminDashboard = () => {
                 </div>
                 <p>---</p>
               </div>
-              <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div className='flex items-center gap-x-5'>
-                  <MdTask />
-                  <p>Total Tasks Completed</p>
-                </div>
-                <p>---</p>
-              </div>
 
               <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
                 <div className='flex items-center justify-between gap-x-5'>
@@ -124,15 +118,27 @@ const AdminDashboard = () => {
                 </div>
                 <p>---</p>
               </div>
-            </div>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
-              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <LineComponent />
+              <div className='my-4 flex justify-between rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <div className='flex items-center justify-between gap-x-5'>
+                  <LuGauge />
+                  <p>Performance</p>
+                </div>
+                <p>---</p>
               </div>
-              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <AreaChartComponent />
-              </div>
             </div>
+
+            <div className='rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <BubbleChartComponent />
+            </div>
+          </div>
+        ) : selected === 1 ? (
+          <div>Calendar</div>
+        ) : selected === 2 ? (
+          <div>Profile</div>
+        ) : selected === 3 ? (
+          <div>Settings</div>
+        ) : selected === 4 ? (
+          <div>
             <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
               <div>
                 <h1>Radar Chart for comparision</h1>
@@ -165,19 +171,15 @@ const AdminDashboard = () => {
                 <SkillsRadarComponent />
               </div>
             </div>
-            <div className='m-4 flex size-fit flex-col justify-center rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-              <div>Login Data Of Ram of a week</div>
-              <BubbleChartComponent />
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
+              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <LineComponent />
+              </div>
+              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <AreaChartComponent />
+              </div>
             </div>
           </div>
-        ) : selected === 1 ? (
-          <div>Calendar</div>
-        ) : selected === 2 ? (
-          <div>Profile</div>
-        ) : selected === 3 ? (
-          <div>Settings</div>
-        ) : selected === 4 ? (
-          <div>Chart</div>
         ) : (
           <div>OK</div>
         )}
