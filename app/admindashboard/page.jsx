@@ -8,22 +8,25 @@ import RadarChartComponent from '@/components/charts/RadarChartComparision'
 import DonutComponent from '@/components/charts/DonutChart'
 import SkillsRadarComponent from '@/components/charts/SkillsRadarChart'
 
+import GitHubCard from '@/components/card/GitGubCard'
+
 import { DndContext } from '@dnd-kit/core'
 
 import { useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
+
+//icons
 import { MdSpaceDashboard } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
 import { FaCalendarCheck } from 'react-icons/fa'
 import { IoIosSettings } from 'react-icons/io'
 import { FaRegChartBar } from 'react-icons/fa'
-
-//icons
 import { FaTasks } from 'react-icons/fa'
 import { FaRegClock } from 'react-icons/fa6'
 import { MdTask } from 'react-icons/md'
 import { LuGauge } from 'react-icons/lu'
+import { FaGithub } from 'react-icons/fa'
 
 function SideNav({ selected, setSelected }) {
   return (
@@ -57,6 +60,12 @@ function SideNav({ selected, setSelected }) {
           <div className='flex items-center justify-between'>
             <FaRegChartBar />
             <p className='text-sm max-sm:hidden'>Chart</p>
+          </div>
+        </NavItem>
+        <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <FaGithub />
+            <p className='text-sm max-sm:hidden'>GitHub</p>
           </div>
         </NavItem>
       </div>
@@ -185,8 +194,12 @@ const AdminDashboard = () => {
                 </div>
               </div>
             </div>
+          ) : selected === 5 ? (
+            <div className='mt-10'>
+              <GitHubCard />
+            </div>
           ) : (
-            <div>OK</div>
+            <div>Dashboard</div>
           )}
         </div>
       </div>

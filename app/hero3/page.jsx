@@ -10,6 +10,8 @@ import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState } from 'react'
 
+import SpringModal from '@/components/FormModal/SpringModal'
+
 //icons
 import { FaRegEdit } from 'react-icons/fa'
 
@@ -110,6 +112,8 @@ export default function Hero4() {
   const [skillsData, setSkillsData] = useState(null)
   const [avatarsData, setAvatarsData] = useState([])
 
+  const [isOpen, setIsOpen] = useState(false)
+
   // Main Carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
@@ -209,6 +213,30 @@ export default function Hero4() {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
+  // Animated Button
+  const DrawOutlineButton = ({ children, ...rest }) => {
+    return (
+      <button
+        {...rest}
+        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
+      >
+        <span>{children}</span>
+
+        {/* TOP */}
+        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
+
+        {/* RIGHT */}
+        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
+
+        {/* BOTTOM */}
+        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
+
+        {/* LEFT */}
+        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
+      </button>
+    )
+  }
 
   return (
     <div className='flex flex-col md:size-full'>
@@ -311,11 +339,11 @@ export default function Hero4() {
                         </div>
 
                         <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
-                          <p>Some premium features for paid users</p>
-                          <a href='#' className='mt-4 rounded-xl bg-black px-2 py-1'>
-                            GG+
-                            {/* [CALL TO ACTION BUTTON2] */}
-                          </a>
+                          <p className='mb-4'>Some premium features for paid users</p>
+
+                          <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
+                          {/* Spring Pop Up Modal */}
+                          <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
                         </div>
                       </div>
                     </div>
@@ -367,11 +395,10 @@ export default function Hero4() {
                           </button>
                         </div>
                         <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
-                          <p>Some premium features for paid users</p>
-                          <a href='#' className='mt-4 rounded-xl bg-black px-2 py-1'>
-                            GG+
-                            {/* [CALL TO ACTION BUTTON2] */}
-                          </a>
+                          <p className='mb-4'>Some premium features for paid users</p>
+                          <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
+                          {/* Spring Pop Up Modal */}
+                          <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
                         </div>
                       </div>
                     </div>
@@ -398,8 +425,26 @@ export default function Hero4() {
                       <MdNavigateNext />
                     </button>
                   </div>
-                  <div className='mx-6 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
-                    <p>Avatar Skins OR Connections?</p>
+                  <div className='mx-2 my-5 rounded-lg bg-purple-900/50 py-2 md:mx-6'>
+                    <div className='mx-2 flex flex-col items-center justify-center'>
+                      <div
+                        style={{
+                          backgroundImage:
+                            'url(https://cdnb.artstation.com/p/assets/images/images/037/588/885/4k/marcelo-m-prado-female-ninja-black-05.jpg?1621516675)',
+                        }}
+                        className='h-48 w-full rounded-lg bg-gray-300 bg-cover bg-center shadow-md md:h-64'
+                      >
+                        <div className='flex h-full flex-col justify-between'>
+                          <div className='px-3 py-2 text-center font-bold uppercase tracking-wide text-white'>
+                            Skin Name
+                          </div>
+                          <div className='flex items-center justify-between rounded bg-purple-700/60 px-3 py-2'>
+                            <h1 className='font-bold text-white'>$ Price</h1>
+                            <DrawOutlineButton>Add to cart</DrawOutlineButton>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
