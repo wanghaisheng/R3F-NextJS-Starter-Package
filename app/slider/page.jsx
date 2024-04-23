@@ -92,7 +92,7 @@ const SliderPage = () => {
 
       {/* Footer Nav */}
       <footer class='fixed inset-x-0 bottom-0 flex justify-center backdrop-blur-md'>
-        <div className='my-2 flex h-10 w-fit items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] bg-[#D1CACA]/20 p-6 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
+        <div className='flex h-10 w-fit items-center justify-center gap-2 rounded-t-2xl p-6 shadow-inner shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
           {tabs.map((tab, index) => (
             <Chip
               text={tab}

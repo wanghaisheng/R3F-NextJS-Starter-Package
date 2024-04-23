@@ -190,14 +190,12 @@ export default function ExperienceComponent() {
                       />
                     </div>
                     <div className='mt-1 flex justify-center'>
-                      {/* <a href='http://www.quickslot.vercel.app/log-in/' target='_blank'>
-                        Booking
-                      </a> */}
-                      <DrawOutlineButton>
-                        <a href='http://www.google.com/' target='_blank'>
-                          Booking
-                        </a>
-                      </DrawOutlineButton>
+                      <a
+                        href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
+                        target='_blank'
+                      >
+                        <DrawOutlineButton>Booking</DrawOutlineButton>
+                      </a>
                     </div>
                   </div>
 
