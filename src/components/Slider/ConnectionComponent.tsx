@@ -49,21 +49,33 @@ export default function ConnectionComponent() {
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>Connection</div>
           {connections.length < 4 ? (
-            <div>
-              <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
-                {logos.map((logo, index) => (
-                  <div key={index} onClick={() => handleLogoClick(logo)}>
-                    <Image src={logo.src} alt={logo.alt} width={50} height={50} loading='lazy' />
-                  </div>
-                ))}
-              </div>
-              <p className='mt-2 flex justify-center'>{4 - connections.length} remaining</p>
+            <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
+              {logos.map((logo, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleLogoClick(logo)}
+                  style={
+                    connections.some((connection) => connection.src === logo.src)
+                      ? { filter: 'grayscale(100%)', transform: 'scale(0.8)', transition: 'all 0.3s ease-in-out' }
+                      : { transition: 'all 0.3s ease-in-out' }
+                  }
+                >
+                  <Image src={logo.src} alt={logo.alt} width={50} height={50} loading='lazy' />
+                </div>
+              ))}
             </div>
           ) : (
             <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
               {logos.map((logo, index) => (
-                <div key={index} style={{ filter: 'grayscale(100%)' }}>
-                  <Image src={logo.src} alt={logo.alt} width={50} height={50} />
+                <div
+                  key={index}
+                  style={{
+                    transition: 'all 0.3s ease-in-out',
+                    filter: 'grayscale(100%)',
+                    transform: 'scale(0.8)',
+                  }}
+                >
+                  <Image src={logo.src} alt={logo.alt} width={50} height={50} loading='lazy' />
                 </div>
               ))}
             </div>
