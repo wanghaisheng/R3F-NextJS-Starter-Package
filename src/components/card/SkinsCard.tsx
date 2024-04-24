@@ -1,0 +1,108 @@
+'use client'
+
+import { useCallback, useEffect, useState } from 'react'
+
+// For the carousel
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export default function SkinsCard() {
+  const skins = [
+    {
+      name: 'Stealthy Shadow',
+      price: '$4.99',
+      image:
+        'https://cdnb.artstation.com/p/assets/images/images/037/588/885/4k/marcelo-m-prado-female-ninja-black-05.jpg?1621516675',
+    },
+    {
+      name: 'Galactic Warrior',
+      price: '$7.99',
+      image:
+        'https://cdnb.artstation.com/p/assets/images/images/012/345/678/4k/marcelo-m-prado-male-space-marine-01.jpg?1621516675',
+    },
+    {
+      name: 'Mythic Mage',
+      price: '$3.99',
+      image: 'https://i.imgur.com/abcd1234.jpg',
+    },
+    {
+      name: 'Cyberpunk Assassin',
+      price: '$9.99',
+      image:
+        'https://cdnb.artstation.com/p/assets/images/images/045/678/901/4k/marcelo-m-prado-female-cyborg-02.jpg?1621516675',
+    },
+  ]
+
+  // For the carousel
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+
+  useEffect(() => {
+    if (emblaApi) {
+      console.log(emblaApi.slideNodes()) // Access API
+    }
+  }, [emblaApi])
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  // Animated Button
+  const DrawOutlineButton = ({ children, ...rest }) => {
+    return (
+      <button
+        {...rest}
+        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
+      >
+        <span>{children}</span>
+
+        {/* TOP */}
+        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
+
+        {/* RIGHT */}
+        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
+
+        {/* BOTTOM */}
+        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
+
+        {/* LEFT */}
+        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
+      </button>
+    )
+  }
+  return (
+    <div className='mx-2 my-5 flex py-2 md:mx-6'>
+      <button className='' onClick={scrollPrev}>
+        <MdNavigateBefore />
+      </button>
+      <div className='w-full overflow-hidden' ref={emblaRef}>
+        <div className='mx-2 flex items-center'>
+          {skins.map((skin, index) => (
+            <div className='mx-2 flex w-full shrink-0 grow flex-col items-center justify-center md:min-w-0' key={index}>
+              <div
+                style={{
+                  backgroundImage: `url(${skin.image})`,
+                }}
+                className='h-48 w-full rounded-lg bg-gray-300 bg-cover bg-center shadow-md md:h-64'
+              >
+                <div className='flex h-full flex-col justify-between'>
+                  <div className='px-3 py-2 text-center font-bold uppercase tracking-wide text-white'>{skin.name}</div>
+                  <div className='flex items-center justify-between rounded bg-purple-700/60 px-3 py-2'>
+                    <h1 className='font-bold text-white'>{skin.price}</h1>
+                    <DrawOutlineButton>Add to cart</DrawOutlineButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <button className='' onClick={scrollNext}>
+        <MdNavigateNext />
+      </button>
+    </div>
+  )
+}

@@ -49,6 +49,7 @@ import { ConstantColorFactor } from 'three'
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
+import SkinsCard from '@/components/card/SkinsCard'
 
 async function getSkills() {
   try {
@@ -107,7 +108,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
 
-export default function Hero4() {
+export default function Hero3() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
   const [avatarsData, setAvatarsData] = useState([])
@@ -413,39 +414,12 @@ export default function Hero4() {
                     </a>
                   </div>
                   <div className='flex min-h-48 items-center justify-center px-4'>
-                    {/* <button className='' onClick={scrollPrev2}> */}
-                    <button>
-                      <MdNavigateBefore />
-                    </button>
                     <div className='flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
                       <AvatarImageComponent />
-                      <AvatarImageComponent />
-                    </div>
-                    <button>
-                      <MdNavigateNext />
-                    </button>
-                  </div>
-                  <div className='mx-2 my-5 rounded-lg bg-purple-900/50 py-2 md:mx-6'>
-                    <div className='mx-2 flex flex-col items-center justify-center'>
-                      <div
-                        style={{
-                          backgroundImage:
-                            'url(https://cdnb.artstation.com/p/assets/images/images/037/588/885/4k/marcelo-m-prado-female-ninja-black-05.jpg?1621516675)',
-                        }}
-                        className='h-48 w-full rounded-lg bg-gray-300 bg-cover bg-center shadow-md md:h-64'
-                      >
-                        <div className='flex h-full flex-col justify-between'>
-                          <div className='px-3 py-2 text-center font-bold uppercase tracking-wide text-white'>
-                            Skin Name
-                          </div>
-                          <div className='flex items-center justify-between rounded bg-purple-700/60 px-3 py-2'>
-                            <h1 className='font-bold text-white'>$ Price</h1>
-                            <DrawOutlineButton>Add to cart</DrawOutlineButton>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
+                  {/* Skin Card Component */}
+                  <SkinsCard />
                 </div>
               </div>
             </div>
@@ -481,6 +455,14 @@ export default function Hero4() {
                                   obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
                                 </p>
                               </div>
+                              <div className='mt-1 flex justify-center'>
+                                <a
+                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
+                                  target='_blank'
+                                >
+                                  <DrawOutlineButton>Booking</DrawOutlineButton>
+                                </a>
+                              </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
@@ -505,6 +487,14 @@ export default function Hero4() {
                                   maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
                                   obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
                                 </p>
+                              </div>
+                              <div className='mt-1 flex justify-center'>
+                                <a
+                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
+                                  target='_blank'
+                                >
+                                  <DrawOutlineButton>Booking</DrawOutlineButton>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -547,6 +537,14 @@ export default function Hero4() {
                                   obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
                                 </p>
                               </div>
+                              <div className='mt-1 flex justify-center'>
+                                <a
+                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
+                                  target='_blank'
+                                >
+                                  <DrawOutlineButton>Booking</DrawOutlineButton>
+                                </a>
+                              </div>
                             </div>
                           </div>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
@@ -571,6 +569,14 @@ export default function Hero4() {
                                   maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
                                   obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
                                 </p>
+                              </div>
+                              <div className='mt-1 flex justify-center'>
+                                <a
+                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
+                                  target='_blank'
+                                >
+                                  <DrawOutlineButton>Booking</DrawOutlineButton>
+                                </a>
                               </div>
                             </div>
                           </div>

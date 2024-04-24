@@ -2,10 +2,13 @@
 import { motion } from 'framer-motion'
 
 import { Avatar } from 'src/components/Avatar'
+// For the carousel
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
+import useEmblaCarousel from 'embla-carousel-react'
 
 import { useUser } from '@/context/UserContext/UserContext'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -27,6 +30,23 @@ export default function AvatarImageComponent() {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
 
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+
+  useEffect(() => {
+    if (emblaApi) {
+      console.log(emblaApi.slideNodes()) // Access API
+    }
+  }, [emblaApi])
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  // Fetch avatars data
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
@@ -44,25 +64,39 @@ export default function AvatarImageComponent() {
 
   return (
     <div>
-      {avatarsData && avatarsData.length != 0 ? (
-        avatarsData.map((avatar) => (
-          <div className='rounded-lg bg-white/20' key={avatar}>
-            {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
-            {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
-            <Image
-              src={`${avatar.avatar_url.replace('glb', 'png?size=1024?quality=100')}`}
-              alt=''
-              height={120}
-              width={120}
-              loading='lazy'
-            />
-          </div>
-        ))
-      ) : (
-        <div className='grid gap-4'>
-          <div className='rounded-lg'>No Avatar to show</div>
+      <div className='w-full overflow-hidden' ref={emblaRef}>
+        <div className='flex items-center'>
+          {avatarsData && avatarsData.length != 0 ? (
+            avatarsData.map((avatar) => (
+              <div className='w-full shrink-0 grow md:min-w-0' key={avatar}>
+                <div className='rounded-lg bg-white/20' key={avatar}>
+                  {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
+                  {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
+                  <Image
+                    src={`${avatar.avatar_url.replace('glb', 'png?size=1024?quality=100')}`}
+                    alt=''
+                    height={120}
+                    width={120}
+                    loading='lazy'
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className='grid gap-4'>
+              <div className='rounded-lg'>No Avatar to show</div>
+            </div>
+          )}
         </div>
-      )}
+        <div className='my-4 flex justify-between text-2xl'>
+          <button className='' onClick={scrollPrev}>
+            <MdNavigateBefore />
+          </button>
+          <button className='' onClick={scrollNext}>
+            <MdNavigateNext />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

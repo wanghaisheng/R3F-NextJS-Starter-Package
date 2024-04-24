@@ -117,7 +117,7 @@ export default function AvatarComponent() {
                 }}
               />
               <div className='mt-5 flex justify-center md:grid md:h-fit  md:grid-cols-3 md:gap-4'>
-                <div className='rounded-lg'>...loading</div>
+                <AvatarImageComponent />
               </div>
             </div>
           )}

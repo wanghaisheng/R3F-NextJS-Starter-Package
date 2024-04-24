@@ -130,18 +130,21 @@ const Navbar = () => {
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
-              <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-[#6B37CA] px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
+              <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-b-2 border-[#6B37CA] px-20 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
                 <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  Home
+                  MAPS
                 </Link>
                 <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  Map
+                  FACTIONS
+                </Link>
+                <Link href='/hero3' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  HOME
+                </Link>
+                <Link href='/regions' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  REGIONS
                 </Link>
                 <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  Avatar
-                </Link>
-                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  Security
+                  EXP
                 </Link>
               </div>
             </div>
@@ -162,25 +165,31 @@ const Navbar = () => {
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                Home
+                MAPS
               </Link>
               <Link
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                Map
+                FACTIONS
               </Link>
               <Link
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                Avatar
+                HOME
               </Link>
               <Link
                 href='#'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                Security
+                REGIONS
+              </Link>
+              <Link
+                href='#'
+                className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+              >
+                EXP
               </Link>
               <Link
                 href='#'
