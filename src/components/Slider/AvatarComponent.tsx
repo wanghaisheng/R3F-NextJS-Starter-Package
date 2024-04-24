@@ -76,7 +76,7 @@ export default function AvatarComponent() {
     <div className='mt-2 flex items-center justify-center'>
       <div
         id='avatar'
-        className='relative flex h-full w-[68%] items-center justify-center rounded-xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='relative flex h-full w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
         style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div>
@@ -122,7 +122,7 @@ export default function AvatarComponent() {
             </div>
           )}
 
-          <div className='mt-4 flex justify-end md:absolute md:bottom-4 md:right-4'>
+          <div className='mt-4 flex justify-center md:absolute md:bottom-4 md:right-4 md:justify-end'>
             {/* <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

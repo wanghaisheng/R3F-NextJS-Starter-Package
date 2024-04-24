@@ -139,7 +139,7 @@ export default function SkillsComponent() {
         className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-4 md:text-7xl'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-4 lg:text-7xl'>
             Skills
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
@@ -153,7 +153,7 @@ export default function SkillsComponent() {
           </div>
 
           <Tabs>
-            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
+            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {skills.map((element, index) => (
                 <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
                   {element.skill}
@@ -165,14 +165,14 @@ export default function SkillsComponent() {
             </TabList>
 
             {/* TabPanel */}
-            <div className='flex gap-y-5 md:gap-x-5 md:gap-y-0'>
-              <div className='flex w-full flex-col md:flex-row md:justify-between'>
-                <div className='md:w-[60%]'>
+            <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
+              <div className='flex w-full flex-col lg:flex-row lg:justify-between'>
+                <div className='lg:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
                       <div className='size-full rounded-[20px]  p-4'>
-                        <div className='flex flex-col md:flex-row  md:justify-between'>
-                          <div className='md:w-[60%]'>
+                        <div className='flex flex-col lg:flex-row  lg:justify-between'>
+                          <div className='lg:w-[60%]'>
                             <input
                               type='text'
                               value={element.skill}
@@ -238,7 +238,7 @@ export default function SkillsComponent() {
                             className='w-full rounded-md bg-white/20 p-1'
                           />
                         </p> */}
-                        <p className='my-4 md:mt-0'>
+                        <p className='my-4 lg:mt-0'>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
                           saepe repudiandae accusamus temporibus, autem dicta quidem a omnis quas optio nemo? Officia
                           totam autem nam ex quis?
@@ -256,11 +256,11 @@ export default function SkillsComponent() {
                   ))}
                 </div>
 
-                <div className='mt-4 rounded-[20px] p-3  md:ml-2 md:mt-0 md:w-[45%]'>
+                <div className='mt-4 rounded-[20px] p-3  lg:ml-2 lg:mt-0 lg:w-[45%]'>
                   <p className='mb-2 flex justify-center'>Specification</p>
 
                   {/* Condition for changing barchart chart and radar chart*/}
-                  <div className='md:block md:w-full'>
+                  <div className='lg:block lg:w-full'>
                     {skills.length < 6 ? (
                       <ResponsiveContainer width='100%' height={220}>
                         <BarChart

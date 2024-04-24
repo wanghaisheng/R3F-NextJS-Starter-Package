@@ -145,10 +145,10 @@ export default function ExperienceComponent() {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='experience'
-        className='flex h-fit w-[68%] rounded-xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-8 lg:text-7xl'>
             Experience
             <div className='absolute right-0 top-10 text-sm'>
               <DrawOutlineButton
@@ -163,7 +163,7 @@ export default function ExperienceComponent() {
 
           <Tabs>
             {/* TabList */}
-            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start md:my-6'>
+            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {projects.map((project, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1'>
                   {' '}
@@ -178,7 +178,7 @@ export default function ExperienceComponent() {
             {/* TabPanel */}
             {projects.map((project, index) => (
               <TabPanel key={index}>
-                <div className='flex flex-col md:flex-row md:justify-between'>
+                <div className='flex flex-col lg:flex-row lg:justify-between'>
                   {/* Card Image / Container */}
                   <div className='flex flex-col'>
                     <div className='flex'>
@@ -200,10 +200,10 @@ export default function ExperienceComponent() {
                   </div>
 
                   {/* Form for user input */}
-                  <div className='w-full md:w-[50%]'>
+                  <div className='w-full lg:w-[50%]'>
                     <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
                       <div className='flex w-full flex-col gap-y-2 px-4'>
-                        <div className='flex flex-col items-center md:flex-row md:justify-between'>
+                        <div className='flex flex-col items-center lg:flex-row lg:justify-between'>
                           <div>
                             <label
                               htmlFor='educational'
@@ -257,7 +257,7 @@ export default function ExperienceComponent() {
                           </div>
                         </div>
 
-                        <div className='mt-4 flex flex-col md:mt-0 md:flex-row md:justify-between'>
+                        <div className='mt-4 flex flex-col lg:mt-0 lg:flex-row lg:justify-between'>
                           <label htmlFor='projectName'>Name</label>
                           <input
                             id='projectName'
@@ -265,11 +265,11 @@ export default function ExperienceComponent() {
                             value={project.name}
                             onChange={(e) => handleProjectNameChange(index, e.target.value)}
                             placeholder='Project Name'
-                            className='rounded-md bg-white/20 px-3 md:w-[70%]'
+                            className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                             required
                           />
                         </div>
-                        <div className='flex flex-col md:flex-row md:justify-between'>
+                        <div className='flex flex-col lg:flex-row lg:justify-between'>
                           <label htmlFor='description'>Description</label>
                           <input
                             id='description'
@@ -277,28 +277,28 @@ export default function ExperienceComponent() {
                             value={project.description}
                             onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
                             placeholder='Project Description'
-                            className='rounded-md bg-white/20 px-3  md:w-[70%]'
+                            className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                           />
                         </div>
-                        <div className='flex flex-col md:flex-row md:justify-between'>
+                        <div className='flex flex-col lg:flex-row lg:justify-between'>
                           <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                             ProjPic
                           </label>
                           <input
-                            className='block cursor-pointer rounded-lg bg-gray-50  text-sm text-gray-900 focus:outline-none md:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            className='block cursor-pointer rounded-lg bg-gray-50  text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
                             id='file_input'
                             type='file'
                           />
                         </div>
-                        <div className='flex flex-col md:flex-row md:justify-between'>
+                        <div className='flex flex-col lg:flex-row lg:justify-between'>
                           <label htmlFor=''>Skills</label>
-                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none md:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
+                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
                             <TagsInput value={skills} onChange={setSkills} name='skills' placeHolder='Enter skills' />
                           </div>
                         </div>
-                        <div className='flex flex-col md:flex-row md:justify-between'>
+                        <div className='flex flex-col lg:flex-row lg:justify-between'>
                           <label htmlFor=''>Tools</label>
-                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none md:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
+                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
                             <TagsInput value={tools} onChange={setTools} name='tools' placeHolder='Enter tools used' />
                           </div>
                         </div>

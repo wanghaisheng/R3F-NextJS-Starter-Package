@@ -68,12 +68,12 @@ export default function ConnectionComponent() {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='connection'
-        className='flex h-fit w-[68%] rounded-xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow md:my-8 md:text-7xl'>Connection</div>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-8 lg:text-7xl'>Connection</div>
           {connections.length < 4 ? (
-            <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
+            <div className='mt-5 grid grid-cols-3 gap-2 md:grid-cols-4 lg:flex lg:justify-center lg:gap-x-10'>
               {logos.map((logo, index) => (
                 <div
                   key={index}
@@ -89,7 +89,7 @@ export default function ConnectionComponent() {
               ))}
             </div>
           ) : (
-            <div className='mt-5 grid grid-cols-3 gap-2 md:flex md:justify-center md:gap-x-10'>
+            <div className='mt-5 grid grid-cols-3 gap-2 lg:flex lg:justify-center lg:gap-x-10'>
               {logos.map((logo, index) => (
                 <div
                   key={index}

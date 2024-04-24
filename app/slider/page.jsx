@@ -59,7 +59,7 @@ const SliderPage = () => {
 
   return (
     <>
-      <div className='mx-auto mt-16 max-w-7xl'>
+      <div className='mx-auto mb-28 mt-10 max-w-7xl'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-4 flex'>
             <div className='w-full min-w-0 shrink-0 grow'>
@@ -91,19 +91,22 @@ const SliderPage = () => {
       </div>
 
       {/* Footer Nav */}
-      <footer class='fixed inset-x-0 bottom-0 flex justify-center backdrop-blur-md'>
-        <div className='flex h-10 w-fit items-center justify-center gap-2 rounded-t-2xl p-6 shadow-inner shadow-[#6B37CA] backdrop-blur-md md:gap-7'>
-          {tabs.map((tab, index) => (
-            <Chip
-              text={tab}
-              selected={selected === tab}
-              setSelected={setSelected}
-              setActiveTab={setActiveTab}
-              key={tab}
-              index={index}
-              handleChangeSlide={handleChangeSlide}
-            />
-          ))}
+      <footer class='fixed inset-x-0 bottom-4 flex justify-center backdrop-blur-md'>
+        {/* <img src='/footer.png' alt='' className='relative hidden w-[48%] md:block' /> */}
+        <div className='flex items-center justify-center'>
+          <div className='grid w-fit grid-cols-3 gap-2 rounded-3xl p-6 shadow-inner shadow-[#6B37CA] backdrop-blur-md md:flex md:h-10 md:items-center md:justify-center md:gap-7'>
+            {tabs.map((tab, index) => (
+              <Chip
+                text={tab}
+                selected={selected === tab}
+                setSelected={setSelected}
+                setActiveTab={setActiveTab}
+                key={tab}
+                index={index}
+                handleChangeSlide={handleChangeSlide}
+              />
+            ))}
+          </div>
         </div>
       </footer>
     </>
