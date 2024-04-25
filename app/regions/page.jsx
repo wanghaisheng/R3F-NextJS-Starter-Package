@@ -1,11 +1,11 @@
 import RegionHeader from '@/components/Regions/RegionHeader'
-import AddRegion from '@/components/Regions/AddRegion'
+import ShowRegion from '@/components/Regions/ShowRegion'
 
 const Regions = () => {
   return (
     <>
       <RegionHeader />
-      <AddRegion />
+      <ShowRegion />
     </>
   )
 }

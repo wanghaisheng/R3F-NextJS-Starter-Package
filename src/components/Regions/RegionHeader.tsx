@@ -15,7 +15,7 @@ export default function RegionHeader() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
   return (
-    <div className='container mx-auto mt-7 flex h-20 w-full items-center justify-center px-4 py-2 '>
+    <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
       <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
         <div>
           <form className='mx-auto flex max-w-sm items-center'>
@@ -61,7 +61,7 @@ export default function RegionHeader() {
           </div>
         </div>
       </div>
-      <div className='absolute -top-3 flex justify-center gap-x-6 font-semibold text-purple-700 md:top-7 md:text-white'>
+      <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold text-purple-700 md:top-5 md:text-white'>
         {isSmallScreen ? (
           <>
             <a>NA</a>
