@@ -221,7 +221,8 @@ export default function HeroComponent() {
         </View>
       </div> */}
       {/* avatar */}
-      <div className='absolute top-10 sm:right-[35%] lg:right-[40%]' style={{ height: '600px', weight: '600px' }}>
+      <div className='absolute top-10 sm:right-[35%] lg:right-[40%]' style={{ height: '600px', width: '600px' }}>
+        {/* <FloatingModel modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0' /> */}
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -252,10 +253,7 @@ export default function HeroComponent() {
       </div>
 
       {/* Carousel */}
-      <div
-        className='top-10 flex size-full justify-between px-4 md:absolute '
-        style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
-      >
+      <div className='top-10 flex size-full justify-between px-4 md:absolute'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex '>
             {/* Slide 1 */}

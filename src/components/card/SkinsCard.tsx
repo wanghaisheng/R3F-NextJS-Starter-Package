@@ -18,18 +18,18 @@ export default function SkinsCard() {
       name: 'Galactic Warrior',
       price: '$7.99',
       image:
-        'https://cdnb.artstation.com/p/assets/images/images/012/345/678/4k/marcelo-m-prado-male-space-marine-01.jpg?1621516675',
+        'https://media.sketchfab.com/models/65c441d2146c49a1af115bceb1588727/thumbnails/99ed5e82c5a943dc9a11d3c6c7cda128/ab7d63a6b68f4ef18a95dda919163d16.jpeg',
     },
     {
       name: 'Mythic Mage',
       price: '$3.99',
-      image: 'https://i.imgur.com/abcd1234.jpg',
+      image:
+        'https://media.sketchfab.com/models/76eb28a30c4743358822e168a74d4634/thumbnails/3c5aa21988b842e881d0cd4668d5a585/47af80f4c83b46789729c624a1bb63c5.jpeg',
     },
     {
       name: 'Cyberpunk Assassin',
       price: '$9.99',
-      image:
-        'https://cdnb.artstation.com/p/assets/images/images/045/678/901/4k/marcelo-m-prado-female-cyborg-02.jpg?1621516675',
+      image: 'https://design4real.de/wp-content/uploads/2024/01/ar_avatar-1536x878.webp',
     },
   ]
 
