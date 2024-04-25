@@ -1,1 +1,1 @@
-export { FileDropper } from './FileDropper.component';
+export { FileDropper } from './FileDropper.component'

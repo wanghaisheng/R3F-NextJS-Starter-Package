@@ -1,25 +1,25 @@
-import React, { FC } from 'react';
-import { MeshReflectorMaterial } from '@react-three/drei';
+import React, { FC } from 'react'
+import { MeshReflectorMaterial } from '@react-three/drei'
 
 export interface FloorReflectionProps {
-  resolution?: number;
-  mixBlur?: number;
-  mixStrength?: number;
-  metalness?: number;
-  blur?: [number, number] | number;
-  mirror?: number;
-  minDepthThreshold?: number;
-  maxDepthThreshold?: number;
-  depthScale?: number;
-  depthToBlurRatioBias?: number;
-  distortion?: number;
-  mixContrast?: number;
-  reflectorOffset?: number;
-  roughness?: number;
+  resolution?: number
+  mixBlur?: number
+  mixStrength?: number
+  metalness?: number
+  blur?: [number, number] | number
+  mirror?: number
+  minDepthThreshold?: number
+  maxDepthThreshold?: number
+  depthScale?: number
+  depthToBlurRatioBias?: number
+  distortion?: number
+  mixContrast?: number
+  reflectorOffset?: number
+  roughness?: number
   /**
    * The color should match the canvas background color to provide a seamless transition from background to the reflective plane.
    */
-  color: string;
+  color: string
 }
 export const FloorReflection: FC<FloorReflectionProps> = ({
   resolution = 512,
@@ -40,7 +40,7 @@ export const FloorReflection: FC<FloorReflectionProps> = ({
   ...props
 }) => (
   <>
-    <fog attach="fog" args={[color, 2, 6]} />
+    <fog attach='fog' args={[color, 2, 6]} />
     <group position={[0, 0, 0]}>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[20, 10]} />
@@ -66,4 +66,4 @@ export const FloorReflection: FC<FloorReflectionProps> = ({
       </mesh>
     </group>
   </>
-);
+)

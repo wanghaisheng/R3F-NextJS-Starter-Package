@@ -23,7 +23,7 @@ const CustomTooltip = ({ active, payload, label }: { active: boolean; payload: a
   if (active && payload && payload.length) {
     return (
       <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-medium text-lg'>{label}</p>
+        <p className='text-lg'>{label}</p>
         <p className='text-sm text-indigo-400'>
           <span className='ml-2'>{payload[0].payload.percentage}</span>%
         </p>

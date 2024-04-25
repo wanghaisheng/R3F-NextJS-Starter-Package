@@ -153,13 +153,7 @@ const Navbar = () => {
 
         {/* For mobile view nav bar */}
         {isToggled && (
-          <motion.div
-            className='mobile-nav-items w-full md:hidden'
-            variants={navAnimate}
-            initial='hidden'
-            animate='show'
-            exit='exit'
-          >
+          <motion.div className=' w-full md:hidden' variants={navAnimate} initial='hidden' animate='show' exit='exit'>
             <div className='z-10 flex flex-col items-center justify-center gap-4 rounded-b-3xl shadow-md shadow-violet-600 md:gap-8'>
               <Link
                 href='#'

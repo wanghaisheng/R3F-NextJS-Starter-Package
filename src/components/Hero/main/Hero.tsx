@@ -1,19 +1,14 @@
-import HeroContent from "../sub/HeroContent";
+import HeroContent from '../sub/HeroContent'
 
 const Hero = () => {
   return (
-    <div className="relative flex size-full flex-col" id="about-me">
-      <video
-        autoPlay
-        muted
-        loop
-        className="absolute left-0 top-[-320px]  z-[1] size-full rotate-180 object-cover "
-      >
-        <source src="/bg/blackhole.webm" type="video/webm" />
+    <div className='relative flex size-full flex-col' id='about-me'>
+      <video autoPlay muted loop className='absolute left-0 top-[-320px]  z-[1] size-full rotate-180 object-cover '>
+        <source src='/bg/blackhole.webm' type='video/webm' />
       </video>
       <HeroContent />
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

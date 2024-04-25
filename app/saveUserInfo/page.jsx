@@ -9,5 +9,6 @@ import Hero from '@/hero3/page'
 import axios from 'axios'
 
 const saveUserInForm = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { user } = useUser()
 }

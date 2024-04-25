@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 const Card = ({
   cityName,
@@ -64,10 +65,13 @@ const Card = ({
               </div>
 
               <div className='flex flex-col items-center bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-lg font-extrabold text-transparent'>
-                <img
+                <Image
+                  unoptimized
                   src={`
             https://openweathermap.org/img/wn/${icon}@2x.png`}
                   alt='icon'
+                  height={30}
+                  width={30}
                 />
                 <h1 className='text-xl font-bold'>{weatherStatus.charAt(0).toUpperCase() + weatherStatus.slice(1)}</h1>
                 <p className='text-sm '>{weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)}</p>

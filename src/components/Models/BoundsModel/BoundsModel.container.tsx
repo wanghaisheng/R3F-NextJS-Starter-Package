@@ -26,7 +26,7 @@ export const BoundsModelContainer: FC<BoundsModelContainerProps> = ({ modelSrc, 
       React.Children.map(children, (child) =>
         cloneElement(child as ReactElement, { setModelFallback: setFallback, onLoaded: onChildLoaded }),
       ),
-    [modelSrc, children, onChildLoaded],
+    [children, onChildLoaded],
   )
 
   useEffect(() => {

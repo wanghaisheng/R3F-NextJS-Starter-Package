@@ -2,6 +2,7 @@
 
 // GitHubCard.tsx
 import axios from 'axios'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -116,7 +117,7 @@ export default function GitHubCard() {
 
       fetchActivity()
     }
-  }, [gitData.login, token])
+  }, [gitData.login, token, username])
 
   const getDayName = (day: number): string => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -214,7 +215,13 @@ export default function GitHubCard() {
 
           {username.length !== 0 && (
             <div className='mt-10 flex justify-center'>
-              <img width='1050' src={`https://ghchart.rshah.org/${username}`} alt='github chart' />
+              <Image
+                unoptimized
+                width='1050'
+                height='300'
+                src={`https://ghchart.rshah.org/${username}`}
+                alt='github chart'
+              />
             </div>
           )}
 

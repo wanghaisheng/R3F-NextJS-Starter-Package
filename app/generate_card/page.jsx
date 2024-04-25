@@ -43,17 +43,17 @@ const SignIn = () => {
   //   fetchAvatars()
   // }, [])
   return (
-    <div className='flex w-full min-h-screen '>
-      <div className='flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0 bg-black w-full pl-28 pt-5 text-white'>
-        <div className='flex flex-col space-y-8 justify-between pt-5'>
+    <div className='flex min-h-screen w-full '>
+      <div className='flex w-full flex-col space-y-6 bg-black pl-28 pt-5 text-white md:flex-row md:space-x-6 md:space-y-0'>
+        <div className='flex flex-col justify-between space-y-8 pt-5'>
           <div>
-            <h1 className='font-bold text-4xl tracking-wide'> GG Card</h1>
-            <h2 className='pt-2 text-white text-xl'>Welcome!</h2>
-            <p className='pt-2 text-white text-sm'>Please provide us with your information for your</p>
-            <p className='text-yellow-300 text-sm'>Genius Card</p>
+            <h1 className='text-4xl font-bold tracking-wide'> GG Card</h1>
+            <h2 className='pt-2 text-xl text-white'>Welcome!</h2>
+            <p className='pt-2 text-sm text-white'>Please provide us with your information for your</p>
+            <p className='text-sm text-yellow-300'>Genius Card</p>
           </div>
           <div>
-            <CardContainer className='hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl py-0'>
+            <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
               <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
                 <div className='flex'>
                   <CardItem className='mt-4 w-full'>
@@ -100,21 +100,21 @@ const SignIn = () => {
           </div>
 
           <div className={styles.container}>
-            <div className='bg-white rounded-3xl shadow-lg p-8 text-gray-600 '>
-              <h1 className='font-bold text-black justify-center text-center text-3xl'> Generate Your Genius Card</h1>
+            <div className='rounded-3xl bg-white p-8 text-gray-600 shadow-lg '>
+              <h1 className='justify-center text-center text-3xl font-bold text-black'> Generate Your Genius Card</h1>
               <form action='' className='flex flex-col space-y-4 p-5'>
                 <div>
                   <input
                     type=''
                     placeholder='Avatar ID'
-                    className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300'
+                    className='mt-2 w-full rounded-md px-4 py-2 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                   />
                 </div>
                 <div>
                   <input
                     type='Name'
                     placeholder='Full Name'
-                    className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300'
+                    className='mt-2 w-full rounded-md px-4 py-2 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -123,7 +123,7 @@ const SignIn = () => {
                   <input
                     type='text'
                     placeholder='Job Title'
-                    className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300'
+                    className='mt-2 w-full rounded-md px-4 py-2 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                     value={jobTitle}
                     onChange={(e) => setJobTitle(e.target.value)}
                   />
@@ -132,18 +132,18 @@ const SignIn = () => {
                   <input
                     type='address'
                     placeholder='Address'
-                    className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300'
+                    className='mt-2 w-full rounded-md px-4 py-2 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                   />
                 </div>
                 <div>
                   <input
                     type='text'
                     placeholder='Phone Number'
-                    className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300'
+                    className='mt-2 w-full rounded-md px-4 py-2 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                   />
                 </div>
 
-                <button className='inline-block bg-black text-white font-bold rounded-lg px-6 py-2 hover:scale-110 transition duration-500 cursor-pointer'>
+                <button className='inline-block cursor-pointer rounded-lg bg-black px-6 py-2 font-bold text-white transition duration-500 hover:scale-110'>
                   Generate
                 </button>
               </form>

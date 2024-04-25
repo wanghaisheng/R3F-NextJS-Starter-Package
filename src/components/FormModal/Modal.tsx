@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const FormModal = ({ show, onclose, children }) => {
   return (
@@ -17,7 +18,12 @@ const FormModal = ({ show, onclose, children }) => {
           }}
           className='flex size-10 items-center justify-center rounded-full bg-violet-400 backdrop-blur-sm'
         >
-          <img src='https://api.iconify.design/material-symbols:cancel-rounded.svg' className='h-6' />
+          <Image
+            src='https://api.iconify.design/material-symbols:cancel-rounded.svg'
+            alt='form modal img'
+            height={24}
+            width={24}
+          />
         </motion.button>
         {children}
       </div>

@@ -24,7 +24,6 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
   ssr: false,
   loading: () => (
     <div className='flex h-96 w-full flex-col items-center justify-center'>
-      import {SkillIconsLinkedin} from '@/logo/SkillIconsLinkedin'
       <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
         <path
@@ -361,27 +360,27 @@ export default function Hero() {
         </FormModal>
         <FormModal show={isWorkModalOpen} onClick={openWorkModal} onclose={setIsWorkModalOpen}>
           <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
-            <div className='image-preview w-50 object-fit relative mb-10 h-44 overflow-hidden rounded-md bg-white'>
-              <img src={`/${cardBackground}`} />
-              <div className='avatar-img absolute right-2 top-0 z-10 h-20 w-40'>
-                <img src={`/${cardAvatar}`} />
+            <div className='relative mb-10 h-44 w-48 overflow-hidden rounded-md bg-white object-fill'>
+              <Image src={`/${cardBackground}`} alt='card background' fill={true} />
+              <div className='absolute right-2 top-0 z-10 h-20 w-40'>
+                <Image src={`/${cardAvatar}`} alt='cardAvatar' fill={true} />
               </div>
-              <div id='name-preview' className='bw-full absolute bottom-0 rounded-lg p-3 backdrop-blur-2xl'>
+              <div id='name-preview' className='absolute bottom-0 rounded-lg p-3 backdrop-blur-2xl'>
                 {name}
               </div>
               <div id='description-preview' className='absolute top-0 w-full rounded-t-sm p-3'>
                 {description}
               </div>
             </div>
-            <div className='form-section grid- grid grid-cols-3 grid-rows-4 gap-10 text-white'>
-              <div className='upload-images col-start-1 col-end-4 flex'>
-                <div className='avatar-bg text-center'>
+            <div className='grid grid-cols-3 grid-rows-4 gap-10 text-white'>
+              <div className='col-start-1 col-end-4 flex'>
+                <div className='text-center'>
                   <label htmlFor='avatar-bg' className='mx-auto'>
                     Card Background
                   </label>
                   <input type='file' onChange={(e) => setCardBackground(e.target.files[0].name)} />
                 </div>
-                <div className='avatar text-center'>
+                <div className='text-center'>
                   <label htmlFor='avatar-img' className='mx-auto'>
                     Avatar
                   </label>
@@ -389,7 +388,7 @@ export default function Hero() {
                 </div>
               </div>
               <div className='col-span-4 col-start-1 flex flex-col'>
-                <label htmlFor='project-name' className='text- pr-5'>
+                <label htmlFor='project-name' className=' pr-5'>
                   Name
                 </label>
                 <input
@@ -401,7 +400,7 @@ export default function Hero() {
                 />
               </div>
               <div className='col-span-4 col-start-1'>
-                <label htmlFor='project-descrip' className='text- pr-5'>
+                <label htmlFor='project-descrip' className=' pr-5'>
                   Description
                 </label>
                 <textarea
@@ -412,7 +411,7 @@ export default function Hero() {
                 />
               </div>
 
-              <div className='btn col-span-4 col-start-1 flex items-center justify-center' type='submit'>
+              <div className='col-span-4 col-start-1 flex items-center justify-center' type='submit'>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -426,7 +425,7 @@ export default function Hero() {
         </FormModal>
         <FormModal show={isConnectionModalOpen} onClick={openConnectionModal} onclose={setIsConnectionModalOpen}>
           <div
-            className='lg:grid-cols-center m-5 grid grid-cols-3 items-center justify-center gap-6 p-4 md:grid-cols-5 lg:justify-center'
+            className='  m-5 grid grid-cols-3 items-center justify-center gap-6 p-4 md:grid-cols-5 lg:justify-center'
             style={{ fontSize: '50px' }}
           >
             <LogosFacebook className='size-16' />
