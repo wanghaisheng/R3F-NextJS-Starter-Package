@@ -131,21 +131,51 @@ const Navbar = () => {
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
               <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-b-2 border-[#6B37CA] px-20 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
-                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  MAPS
-                </Link>
-                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  FACTIONS
-                </Link>
-                <Link href='/hero3' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  HOME
-                </Link>
-                <Link href='/regions' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  REGIONS
-                </Link>
-                <Link href='#' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
-                  EXP
-                </Link>
+                {pathname === '/maps' ? (
+                  <Link href='/maps' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    MAPS
+                  </Link>
+                ) : (
+                  <Link href='/maps' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                    MAPS
+                  </Link>
+                )}
+                {pathname === '/factions' ? (
+                  <Link href='/factions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    FACTIONS
+                  </Link>
+                ) : (
+                  <Link href='/factions' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                    FACTIONS
+                  </Link>
+                )}
+                {pathname === '/hero3' ? (
+                  <Link href='/hero3' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    HOME
+                  </Link>
+                ) : (
+                  <Link href='/hero3' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                    HOME
+                  </Link>
+                )}
+                {pathname === '/regions' ? (
+                  <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    REGIONS
+                  </Link>
+                ) : (
+                  <Link href='/regions' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                    REGIONS
+                  </Link>
+                )}
+                {pathname === '/experience' ? (
+                  <Link href='/experience' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    EXP
+                  </Link>
+                ) : (
+                  <Link href='/experience' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                    EXP
+                  </Link>
+                )}
               </div>
             </div>
           </div>
