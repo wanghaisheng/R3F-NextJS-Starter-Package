@@ -16,6 +16,8 @@ import { useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
+import AddRegionForm from '@/components/Regions/AddRegionForm'
+
 //icons
 import { MdSpaceDashboard } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
@@ -27,6 +29,7 @@ import { FaRegClock } from 'react-icons/fa6'
 import { MdTask } from 'react-icons/md'
 import { LuGauge } from 'react-icons/lu'
 import { FaGithub } from 'react-icons/fa'
+import { FaFileWaveform } from 'react-icons/fa6'
 
 function SideNav({ selected, setSelected }) {
   return (
@@ -66,6 +69,12 @@ function SideNav({ selected, setSelected }) {
           <div className='flex items-center justify-between'>
             <FaGithub />
             <p className='text-sm max-sm:hidden'>GitHub</p>
+          </div>
+        </NavItem>
+        <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
+          <div className='flex items-center justify-between'>
+            <FaFileWaveform />
+            <p className='text-sm max-sm:hidden'>Add Region</p>
           </div>
         </NavItem>
       </div>
@@ -197,6 +206,10 @@ const AdminDashboard = () => {
           ) : selected === 5 ? (
             <div className='mt-10'>
               <GitHubCard />
+            </div>
+          ) : selected === 6 ? (
+            <div className='flex justify-center'>
+              <AddRegionForm />
             </div>
           ) : (
             <div>Dashboard</div>
