@@ -14,7 +14,7 @@ export const Common = ({ color }) => (
   </Suspense>
 )
 
-const View = forwardRef(({ children, orbit, ...props }, ref) => {
+const View = forwardRef(({ children, orbit, ...props }: { children: React.ReactNode; orbit: boolean }, ref) => {
   const localRef = useRef(null)
   useImperativeHandle(ref, () => localRef.current)
 
@@ -33,4 +33,3 @@ const View = forwardRef(({ children, orbit, ...props }, ref) => {
 View.displayName = 'View'
 
 export { View }
-
