@@ -1,7 +1,11 @@
+import RegionHeader from '@/components/Regions/RegionHeader'
+import AddRegion from '@/components/Regions/AddRegion'
+
 const Regions = () => {
   return (
     <>
-      <div>REGIONS</div>
+      <RegionHeader />
+      <AddRegion />
     </>
   )
 }
