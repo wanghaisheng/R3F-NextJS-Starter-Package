@@ -25,7 +25,7 @@ async function getAvatarById(id: string) {
 export default function AvatarComponent({ onNextButtonClick }) {
   const router = useRouter()
   const { user } = useUser()
-  const [avatarsData, setAvatarsData] = useState<any[]>([])
+  const [avatarsData, setAvatarsData] = useState([])
 
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
 
@@ -43,10 +43,10 @@ export default function AvatarComponent({ onNextButtonClick }) {
       }
     }
 
-    if (user && avatarsData !== undefined && avatarsData.length === 0) {
+    if (user) {
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
-  }, [user, avatarsData])
+  }, [user])
 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 

@@ -254,7 +254,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               </select>
                             </div>
                             <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='cardName'>Name</label>
+                              <label htmlFor='cardName'>Card Name</label>
                               <input
                                 id='cardName'
                                 type='text'
@@ -334,7 +334,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               </select>
                             </div>
                             <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='cardName'>Name</label>
+                              <label htmlFor='cardName'>Card Name</label>
                               <input
                                 type='text'
                                 id='cardName'
