@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-export default function FactionHeader() {
+export default function FactionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   useEffect(() => {
@@ -14,6 +14,11 @@ export default function FactionHeader() {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const handleFilterClick = (filter) => {
+    onFilterChange(filter)
+  }
+
   return (
     <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
       <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
@@ -52,7 +57,12 @@ export default function FactionHeader() {
               Search
             </label>
             <div className='flex w-full items-center'>
-              <p className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'>SORT</p>
+              <a
+                className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'
+                onClick={() => handleFilterClick(null)}
+              >
+                VIEW ALL
+              </a>
               <svg width='23' height='19' viewBox='0 0 23 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M1 7.33247L8 2.05469V19.9991' stroke='white' stroke-width='2' stroke-linecap='round' />
                 <path d='M22 14.7222L15 20L15 2.05555' stroke='white' stroke-width='2' stroke-linecap='round' />
@@ -64,19 +74,19 @@ export default function FactionHeader() {
       <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold text-purple-700 md:top-5 md:text-white'>
         {isSmallScreen ? (
           <>
-            <a>K</a>
-            <a>S</a>
-            <a>V</a>
-            <a>B</a>
-            <a>K</a>
+            <a onClick={() => handleFilterClick('KARUNA')}>K</a>
+            <a onClick={() => handleFilterClick('SHANTI')}>S</a>
+            <a onClick={() => handleFilterClick('VAJRA')}>V</a>
+            <a onClick={() => handleFilterClick('BODHI')}>B</a>
+            <a onClick={() => handleFilterClick('KARMA')}>K</a>
           </>
         ) : (
           <>
-            <a>KARUNA</a>
-            <a>SHANTI</a>
-            <a>VAJRA</a>
-            <a>BODHI</a>
-            <a>KARMA</a>
+            <a onClick={() => handleFilterClick('KARUNA')}>KARUNA</a>
+            <a onClick={() => handleFilterClick('SHANTI')}>SHANTI</a>
+            <a onClick={() => handleFilterClick('VAJRA')}>VAJRA</a>
+            <a onClick={() => handleFilterClick('BODHI')}>BODHI</a>
+            <a onClick={() => handleFilterClick('KARMA')}>KARMA</a>
           </>
         )}
       </div>

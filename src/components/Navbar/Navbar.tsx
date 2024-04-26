@@ -136,7 +136,10 @@ const Navbar = () => {
                     MAPS
                   </Link>
                 ) : (
-                  <Link href='/maps' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  <Link
+                    href='/maps'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
                     MAPS
                   </Link>
                 )}
@@ -145,7 +148,10 @@ const Navbar = () => {
                     FACTIONS
                   </Link>
                 ) : (
-                  <Link href='/factions' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  <Link
+                    href='/factions'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
                     FACTIONS
                   </Link>
                 )}
@@ -154,7 +160,10 @@ const Navbar = () => {
                     HOME
                   </Link>
                 ) : (
-                  <Link href='/hero3' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  <Link
+                    href='/hero3'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
                     HOME
                   </Link>
                 )}
@@ -163,7 +172,10 @@ const Navbar = () => {
                     REGIONS
                   </Link>
                 ) : (
-                  <Link href='/regions' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  <Link
+                    href='/regions'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
                     REGIONS
                   </Link>
                 )}
@@ -172,7 +184,10 @@ const Navbar = () => {
                     EXP
                   </Link>
                 ) : (
-                  <Link href='/experience' className='py-2 font-semibold hover:border-b-2 hover:text-sky-600'>
+                  <Link
+                    href='/experience'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
                     EXP
                   </Link>
                 )}
