@@ -30,6 +30,13 @@ export default function ShowRegion({ filter }: { filter: string }) {
       image:
         'https://imgs.search.brave.com/sdPLZjS3Z9AOVh1q6THgtwaL4UU_ug4VwT_dkE3LZRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmFzc2V0cy50aGVk/aXNjb3ZlcmVyLmNv/bS8yMDE5LzA1L2Jl/YXV0aWZ1bC1hZnJp/Y2EuanBn',
     },
+    {
+      name: 'Sub-Saharan Africa',
+      icon: 'https://cdn-icons-png.flaticon.com/128/15597/15597373.png',
+      continent: 'AFRICA',
+      image:
+        'https://imgs.search.brave.com/G7zOwnpcKRoEWw2tPhmfU7pdbPImUNKWtOSH4eNqslY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vdW5pdGVjaC1n/bG9iYWwtcmVzb3Vy/Y2UvaW1hZ2UvdXBs/b2FkL3YxNTgyNzAw/NTEwL25hbWliaWEx/X2gzMzFxbi5qcGc',
+    },
   ]
 
   const filteredRegions = filter ? regions.filter((region) => region.continent === filter) : regions
@@ -37,20 +44,23 @@ export default function ShowRegion({ filter }: { filter: string }) {
   return (
     <div className='mx-10 mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
       {filteredRegions.map((region, index) => (
-        <div className='flex min-w-0 flex-col items-center justify-center' key={index}>
+        <div
+          className='flex min-w-0 flex-col items-center justify-center transition duration-500 ease-out hover:scale-105'
+          key={index}
+        >
           <div
             style={{
               backgroundImage: `url(${region.image})`,
             }}
-            className='h-48 w-full rounded-lg bg-black bg-cover bg-center shadow-md md:h-56'
+            className='h-48 w-full rounded-bl-lg rounded-tr-lg bg-black bg-cover bg-center shadow-md md:h-56'
           >
             <div className='flex h-full flex-col justify-between'>
-              <div className='h-full rounded-t-lg bg-black/70 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/0'>
+              <div className='h-full rounded-tr-md bg-black/70 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/0'>
                 <div className='flex h-full items-center justify-center transition duration-500 ease-out hover:opacity-0'>
                   <Image unoptimized src={region.icon} alt='region icon' height={60} width={60} />
                 </div>
               </div>
-              <div className='relative flex flex-col items-center rounded-b-lg bg-purple-950 px-3 py-2'>
+              <div className='relative flex flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
                 <h1 className='font-bold text-white transition duration-300 ease-in-out '>{region.name}</h1>
               </div>
             </div>

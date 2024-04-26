@@ -77,31 +77,31 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
         {isSmallScreen ? (
           <>
             <a
-              className={`cursor-pointer ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('KARUNA')}
             >
               K
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('SHANTI')}
             >
               S
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('VAJRA')}
             >
               V
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'BODHI' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BODHI' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('BODHI')}
             >
               B
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'KARMA' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('KARMA')}
             >
               K
@@ -110,31 +110,31 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
         ) : (
           <>
             <a
-              className={`cursor-pointer ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('KARUNA')}
             >
               KARUNA
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('SHANTI')}
             >
               SHANTI
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('VAJRA')}
             >
               VAJRA
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'BODHI' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BODHI' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('BODHI')}
             >
               BODHI
             </a>
             <a
-              className={`cursor-pointer ${activeFilter === 'KARMA' && 'text-purple-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('KARMA')}
             >
               KARMA

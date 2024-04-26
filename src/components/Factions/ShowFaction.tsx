@@ -78,22 +78,25 @@ export default function ShowFaction({ filter }: { filter: string }) {
 
   return (
     <div className='flex justify-center'>
-      <div className='mx-10 mt-6 grid w-[70%] grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+      <div className='mx-10 mt-6 grid w-[66%] grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4'>
         {filteredFactions.map((faction, index) => (
-          <div className='flex min-w-0 flex-col items-center justify-center' key={index}>
+          <div
+            className='flex min-w-0 flex-col items-center justify-center transition duration-500 ease-out hover:scale-105'
+            key={index}
+          >
             <div
               style={{
                 backgroundImage: `url(${faction.avatarimg})`,
               }}
-              className='h-48 w-full rounded-lg bg-black bg-cover bg-center shadow-md md:h-56'
+              className='h-64 w-full rounded-bl-lg rounded-tr-lg bg-black bg-cover bg-center shadow-md md:h-72'
             >
               <div className='flex h-full flex-col justify-between'>
-                <div className='h-full rounded-t-lg bg-black/0 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/70'>
+                <div className='h-full rounded-tr-md bg-black/0 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/70'>
                   <div className='flex h-full items-center justify-center opacity-0 transition duration-500 ease-out hover:opacity-100'>
                     <p>{faction.description}</p>
                   </div>
                 </div>
-                <div className='relative flex flex-col items-center rounded-b-lg bg-purple-950 px-3 py-2'>
+                <div className='relative flex flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
                   <h1 className='font-bold text-white transition duration-300 ease-in-out '>{faction.name}</h1>
                 </div>
               </div>
