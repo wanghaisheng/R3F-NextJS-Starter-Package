@@ -61,7 +61,7 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
                 className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'
                 onClick={() => handleFilterClick(null)}
               >
-                VIEW ALL
+                ALL
               </a>
               <svg width='23' height='19' viewBox='0 0 23 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M1 7.33247L8 2.05469V19.9991' stroke='white' stroke-width='2' stroke-linecap='round' />

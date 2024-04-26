@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-export default function RegionHeader() {
+export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   useEffect(() => {
@@ -14,6 +14,11 @@ export default function RegionHeader() {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const handleFilterClick = (filter) => {
+    onFilterChange(filter)
+  }
+
   return (
     <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
       <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
@@ -52,7 +57,12 @@ export default function RegionHeader() {
               Search
             </label>
             <div className='flex w-full items-center'>
-              <p className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'>SORT</p>
+              <p
+                className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'
+                onClick={() => handleFilterClick(null)}
+              >
+                ALL
+              </p>
               <svg width='23' height='19' viewBox='0 0 23 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M1 7.33247L8 2.05469V19.9991' stroke='white' stroke-width='2' stroke-linecap='round' />
                 <path d='M22 14.7222L15 20L15 2.05555' stroke='white' stroke-width='2' stroke-linecap='round' />
@@ -64,25 +74,25 @@ export default function RegionHeader() {
       <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold text-purple-700 md:top-5 md:text-white'>
         {isSmallScreen ? (
           <>
-            <a>NA</a>
-            <a>SA</a>
-            <a>AF</a>
-            <a>E</a>
-            <a>ME</a>
-            <a>A</a>
-            <a>AU</a>
-            <a>AN</a>
+            <a onClick={() => handleFilterClick('NORTH AMERICA')}>NA</a>
+            <a onClick={() => handleFilterClick('SOUTH AMERICA')}>SA</a>
+            <a onClick={() => handleFilterClick('AFRICA')}>AF</a>
+            <a onClick={() => handleFilterClick('EUROPE')}>E</a>
+            <a onClick={() => handleFilterClick('MIDDLE EAST')}>ME</a>
+            <a onClick={() => handleFilterClick('ASIA')}>A</a>
+            <a onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}>AU</a>
+            <a onClick={() => handleFilterClick('ANTARCTICA')}>AN</a>
           </>
         ) : (
           <>
-            <a>NORTH AMERICA</a>
-            <a>SOUTH AMERICA</a>
-            <a>AFRICA</a>
-            <a>EUROPE</a>
-            <a>MIDDLE EAST</a>
-            <a>ASIA</a>
-            <a>AUSTRALIA & OCEANIA</a>
-            <a>ANTARCTICA</a>
+            <a onClick={() => handleFilterClick('NORTH AMERICA')}>NORTH AMERICA</a>
+            <a onClick={() => handleFilterClick('SOUTH AMERICA')}>SOUTH AMERICA</a>
+            <a onClick={() => handleFilterClick('AFRICA')}>AFRICA</a>
+            <a onClick={() => handleFilterClick('EUROPE')}>EUROPE</a>
+            <a onClick={() => handleFilterClick('MIDDLE EAST')}>MIDDLE EAST</a>
+            <a onClick={() => handleFilterClick('ASIA')}>ASIA</a>
+            <a onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}>AUSTRALIA & OCEANIA</a>
+            <a onClick={() => handleFilterClick('ANTARCTICA')}>ANTARCTICA</a>
           </>
         )}
       </div>
