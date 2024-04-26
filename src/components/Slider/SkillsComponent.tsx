@@ -69,7 +69,7 @@ export default function SkillsComponent() {
           setOriginalLength(filteredData.length)
         }
       } catch (error) {
-        throw new Error('failed to fetch the skills data')
+        console.log('failed to fetch the skills data')
       }
     }
 

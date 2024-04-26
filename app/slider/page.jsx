@@ -57,25 +57,31 @@ const SliderPage = () => {
     }
   }, [emblaApi])
 
+  const handleNextButtonClick = () => {
+    if (emblaApi) {
+      emblaApi.scrollNext()
+    }
+  }
+
   return (
     <>
       <div className='mx-auto mb-28 mt-10 max-w-7xl'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-4 flex'>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <AvatarComponent />
+              <AvatarComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <UserInfoComponent />
+              <UserInfoComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <Card2Component />
+              <Card2Component onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <ConnectionComponent />
+              <ConnectionComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <ExperienceComponent />
+              <ExperienceComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
               <SkillsComponent />
