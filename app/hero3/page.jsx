@@ -55,11 +55,11 @@ async function getSkills() {
   try {
     const res = await fetch('http://localhost:3000/api/skills')
     if (!res.ok) {
-      throw new Error('failed to fetch the skills')
+      console.log('failed to fetch the skills')
     }
     return res.json()
   } catch (error) {
-    throw new Error('failed to fetch the skills', error)
+    console.log('failed to fetch the skills', error)
   }
 }
 
@@ -67,11 +67,11 @@ async function getAvatarById(id) {
   try {
     const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
     if (!res.ok) {
-      throw new Error('failed to fetch the avatars')
+      console.log('failed to fetch the avatars')
     }
     return res.json()
   } catch (error) {
-    throw new Error('failed to fetch the avatars', error)
+    console.log('failed to fetch the avatars', error)
   }
 }
 
@@ -176,7 +176,7 @@ export default function Hero3() {
         const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
         setSkillsData(filteredData) // Set the filtered data
       } catch (error) {
-        throw new Error('Error fetching skills data:', error)
+        console.log('Error fetching skills data:', error)
       }
     }
 
@@ -206,7 +206,7 @@ export default function Hero3() {
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        throw new Error('Error fetching avatars data:', error)
+        console.log('Error fetching avatars data:', error)
       }
     }
 
