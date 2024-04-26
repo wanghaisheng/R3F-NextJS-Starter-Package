@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function FactionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const [activeFilter, setActiveFilter] = useState('')
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,6 +18,7 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
 
   const handleFilterClick = (filter) => {
     onFilterChange(filter)
+    setActiveFilter(filter)
   }
 
   return (
@@ -71,22 +73,72 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
           </div>
         </div>
       </div>
-      <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold text-purple-700 md:top-5 md:text-white'>
+      <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold md:top-5 '>
         {isSmallScreen ? (
           <>
-            <a onClick={() => handleFilterClick('KARUNA')}>K</a>
-            <a onClick={() => handleFilterClick('SHANTI')}>S</a>
-            <a onClick={() => handleFilterClick('VAJRA')}>V</a>
-            <a onClick={() => handleFilterClick('BODHI')}>B</a>
-            <a onClick={() => handleFilterClick('KARMA')}>K</a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('KARUNA')}
+            >
+              K
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('SHANTI')}
+            >
+              S
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('VAJRA')}
+            >
+              V
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'BODHI' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('BODHI')}
+            >
+              B
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'KARMA' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('KARMA')}
+            >
+              K
+            </a>
           </>
         ) : (
           <>
-            <a onClick={() => handleFilterClick('KARUNA')}>KARUNA</a>
-            <a onClick={() => handleFilterClick('SHANTI')}>SHANTI</a>
-            <a onClick={() => handleFilterClick('VAJRA')}>VAJRA</a>
-            <a onClick={() => handleFilterClick('BODHI')}>BODHI</a>
-            <a onClick={() => handleFilterClick('KARMA')}>KARMA</a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('KARUNA')}
+            >
+              KARUNA
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('SHANTI')}
+            >
+              SHANTI
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('VAJRA')}
+            >
+              VAJRA
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'BODHI' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('BODHI')}
+            >
+              BODHI
+            </a>
+            <a
+              className={`cursor-pointer ${activeFilter === 'KARMA' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('KARMA')}
+            >
+              KARMA
+            </a>
           </>
         )}
       </div>
