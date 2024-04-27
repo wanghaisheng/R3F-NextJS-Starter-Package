@@ -45,55 +45,88 @@ const SignIn = () => {
       log('Error: ', error)
     }
   }
+
   return (
     <>
-      <main className='flex relative min-h-full flex-col'>
+      <main className='relative mt-10 flex min-h-full flex-col items-center justify-around md:flex-row'>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.4 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className='hidden items-center justify-center pl-10 sm:flex'
+        >
+          <CardContainer className='px-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+            <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+              <div className='flex'>
+                <CardItem className='mt-4 w-full'>
+                  <Image
+                    src='/aa.png'
+                    height='1000'
+                    width='1000'
+                    className='size-full rounded-xl object-cover group-hover/card:shadow-xl'
+                    alt='thumbnail'
+                  />
+                </CardItem>
+                <div className='flex flex-col'>
+                  <CardItem translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
+                    {email}
+                  </CardItem>
+                  <CardItem as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                    Coming Soon!
+                  </CardItem>
+                  <div className='mt-20 flex items-center justify-between'></div>
+                </div>
+              </div>
+            </CardBody>
+          </CardContainer>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.4 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className='signin flex flex-col items-center rounded-t-3xl sm:h-1/4 lg:h-4/5 p-10 text-white'
+          className='signin flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
         >
-          <div className='card flex flex-col items-center justify-center gap-2 lg:w-2/4 h-auto rounded-3xl backdrop-blur-sm shadow-lg shadow-purple-700'>
-            <div className='card-title m-0 p-2 mb-5 backdrop-blur-3xl border-y-2 rounded-t-3xl shadow-sm bg-[rgba(254,225,255,0.3)]'>
-              <h2 className='p-2 text-xl text-center text-purple-900'>Signin</h2>
+          <div className='card flex h-auto flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-purple-700 backdrop-blur-sm lg:w-3/5'>
+            <div className='card-title m-0 mb-5 rounded-t-3xl p-2 shadow-sm backdrop-blur-3xl'>
+              <h2 className='p-2 text-center text-xl text-purple-900'>Signin</h2>
             </div>
             <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
-              <label htmlFor='' className='labels font-semibold text-xl '>
+              <label htmlFor='' className='text-xl font-semibold '>
                 Email
               </label>
-              <div className='input-group m-2 rounded-md flex '>
-                <div className='input-icon text-black'>
+              <div className='input-group m-2 flex rounded-md '>
+                <div className='input-icon text-black '>
                   <UserLogoIcon />
                 </div>
                 <input
                   type='email'
                   name='email'
-                  className='p-2 rounded-md text-black '
+                  className='rounded-md  p-2 text-black'
                   value={email}
                   placeholder='Email'
                   onChange={({ target }) => setEmail(target?.value)}
                 />
               </div>
 
-              <label htmlFor='' className='labels font-semibold text-xl'>
+              <label htmlFor='' className='text-xl font-semibold'>
                 Password
               </label>
-              <div className='input-group m-2 rounded-md flex'>
+              <div className='input-group m-2 flex rounded-md'>
                 <div className='input-icon text-black'>
                   <PasswordLogoIcon />
                 </div>
                 <input
                   type='password'
                   name='password'
-                  className='p-2 rounded-md text-black'
+                  className='rounded-md p-2 text-black'
                   placeholder='Password'
                   value={password}
                   onChange={({ target }) => setPassword(target?.value)}
                 />
               </div>
               <div className=''>
-                <p className='text-blue-500 text-sm flex justify-between'>
+                <p className='flex justify-between text-sm text-blue-500'>
                   <a href='' className='text-start' style={{ marginRight: '2.75rem' }}>
                     Mobile Sign In
                   </a>
@@ -103,21 +136,21 @@ const SignIn = () => {
                 </p>
               </div>
 
-              <div className='signup-btn w-full p-5 flex items-center justify-center'>
+              <div className='signup-btn flex w-full items-center justify-center p-5'>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSubmit}
-                  className='w-full p-3 px-4 bg-purple-200 rounded-2xl text-black'
+                  className='w-full rounded-2xl bg-purple-200 p-2 px-4 text-black'
                 >
-                  Signin
+                  SignIn
                 </motion.button>
               </div>
             </form>
 
             <div className='flex items-end'>
-              <hr className='border-solid h-1 text-black w-full' />
-              <p className='font-semibold px-5'>or</p>
+              <hr className='h-1 w-full border-solid text-black' />
+              <p className='px-5 font-semibold'>or</p>
               <hr className='h-px' />
             </div>
             <div className='flex justify-center gap-16 p-5'>
@@ -131,10 +164,10 @@ const SignIn = () => {
                 <LogosFacebook className='logos text-2xl' />
               </a>
             </div>
-            <div className='flex items-center justify-center m-5 '>
+            <div className='m-5 flex items-center justify-center '>
               <p className=' text-sm'>
                 Not a Genius User yet?
-                <a href='/signup' className='text-blue-500 ml-1'> 
+                <a href='/signup' className='ml-1 text-blue-500'>
                   Sign Up Now
                 </a>
               </p>

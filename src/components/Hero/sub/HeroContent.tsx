@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const HeroContent = () => {
   return (
     <motion.div
-      initial="hidden"
-      animate="visible"
-      className="z-[20] mt-40 flex w-full flex-row items-center justify-center px-20"
+      initial='hidden'
+      animate='visible'
+      className='z-[20] mt-40 flex w-full flex-row items-center justify-center px-20'
     >
       {/* <div className="m-auto flex size-full flex-col justify-center gap-5 text-start">
         <motion.div
@@ -49,16 +49,16 @@ const HeroContent = () => {
           Learn More!
         </motion.a>
       </div> */}
-      <div className="mr-[-180px] flex size-full flex-col items-end">
+      <div className='mr-[-180px] flex size-full flex-col items-end'>
         <Image
-          src="https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?camera=fullbody&quality=100&size=1024&blendShapes[mouthSmile]=0.3"
-          alt="work icons"
+          src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?camera=fullbody&quality=100&size=1024&blendShapes[mouthSmile]=0.3'
+          alt='work icons'
           height={650}
           width={650}
         />
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default HeroContent;
+export default HeroContent

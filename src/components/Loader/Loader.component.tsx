@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC } from 'react'
 
-import styles from './Loader.module.scss';
+import styles from './Loader.module.scss'
 
 const Loader: FC = () => (
   <div className={styles.loader}>
@@ -10,6 +10,6 @@ const Loader: FC = () => (
       ))}
     </div>
   </div>
-);
+)
 
-export { Loader };
+export { Loader }

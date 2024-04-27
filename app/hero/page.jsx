@@ -24,7 +24,6 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
   ssr: false,
   loading: () => (
     <div className='flex h-96 w-full flex-col items-center justify-center'>
-      import {SkillIconsLinkedin} from '@/logo/SkillIconsLinkedin'
       <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
         <path
@@ -173,11 +172,11 @@ export default function Hero() {
           </CardContainer>
         </div>
       </div>
-      <div className='flex space-x-40 items-center justify-center'>
+      <div className='flex items-center justify-center space-x-40'>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className='rounded-2xl text-white border-2 p-3 px-14 hover:bg-violet-900 shadow-md shadow-violet-600 backdrop-blur-xl'
+          className='rounded-2xl border-2 p-3 px-14 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
             setIsSkillModalOpen(true)
           }}
@@ -187,7 +186,7 @@ export default function Hero() {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className='rounded-2xl text-white border-2 p-3 px-14 hover:bg-violet-900 shadow-md shadow-violet-600 backdrop-blur-xl'
+          className='rounded-2xl border-2 p-3 px-14 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
             setIsCardModalOpen(true)
           }}
@@ -197,7 +196,7 @@ export default function Hero() {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className='rounded-2xl text-white border-2 p-3 px-14 hover:bg-violet-900 shadow-md shadow-violet-600 backdrop-blur-xl'
+          className='rounded-2xl border-2 p-3 px-14 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
             setIsWorkModalOpen(true)
           }}
@@ -207,7 +206,7 @@ export default function Hero() {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className='rounded-2xl text-white border-2 p-3 px-10 hover:bg-violet-900 shadow-md shadow-violet-600 backdrop-blur-xl'
+          className='rounded-2xl border-2 p-3 px-10 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
           onClick={() => {
             setIsConnectionModalOpen(true)
           }}
@@ -217,19 +216,19 @@ export default function Hero() {
       </div>
       <div>
         <FormModal show={isSkillModalOpen} onClick={openSkillModal} onclose={setIsSkillModalOpen}>
-          <form action='#' method='' className='w-full max-w-lg mx-auto flex flex-col items-center justify-center'>
+          <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
             {/* skill chart pending... */}
 
             <div className='flex items-center space-x-4'>
               <input
                 type=''
                 placeholder='Communication'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input
                 type=''
                 placeholder='%'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input type='checkbox' id='checkbox' className='mt-2' />
             </div>
@@ -238,12 +237,12 @@ export default function Hero() {
               <input
                 type=''
                 placeholder='Communication'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input
                 type=''
                 placeholder='%'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input type='checkbox' id='checkbox' className='mt-2' />
             </div>
@@ -252,12 +251,12 @@ export default function Hero() {
               <input
                 type=''
                 placeholder='Communication'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input
                 type=''
                 placeholder='%'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input type='checkbox' id='checkbox' className='mt-2' />
             </div>
@@ -266,24 +265,24 @@ export default function Hero() {
               <input
                 type=''
                 placeholder='Communication'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input
                 type=''
                 placeholder='%'
-                className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+                className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
               />
               <input type='checkbox' id='checkbox' className='mt-2' />
             </div>
 
-            <button className='inline-block bg-[#191970] text-white font-bold rounded-lg mt-2 px-6 py-2 hover:scale-110 transition duration-500 cursor-pointer'>
+            <button className='mt-2 inline-block cursor-pointer rounded-lg bg-[#191970] px-6 py-2 font-bold text-white transition duration-500 hover:scale-110'>
               Generate
             </button>
           </form>
         </FormModal>
         <FormModal show={isCardModalOpen} onClick={openCardModal} onclose={setIsCardModalOpen}>
-          <form action='#' method='' className='w-full max-w-lg mx-auto flex flex-col items-center justify-center'>
-            <CardContainer className='hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl py-0'>
+          <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
+            <CardContainer className='py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
               <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
                 <div className='flex'>
                   <CardItem className='mt-2 w-1/2'>
@@ -318,14 +317,14 @@ export default function Hero() {
               <input
                 type=''
                 placeholder='Avatar ID'
-                className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300 text-gray-800'
+                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
               />
             </div>
             <div>
               <input
                 type='Name'
                 placeholder='Full Name'
-                className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300 text-gray-800'
+                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -334,7 +333,7 @@ export default function Hero() {
               <input
                 type='text'
                 placeholder='Job Title'
-                className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300 text-gray-800'
+                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
               />
@@ -343,80 +342,80 @@ export default function Hero() {
               <input
                 type='address'
                 placeholder='Address'
-                className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300 text-gray-800'
+                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
               />
             </div>
             <div>
               <input
                 type='text'
                 placeholder='Phone Number'
-                className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-yellow-300 text-gray-800'
+                className='mt-2 w-full rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-yellow-300'
               />
             </div>
 
-            <button className='inline-block bg-[#191970] text-white font-bold rounded-lg mt-2 px-6 py-2 hover:scale-110 transition duration-500 cursor-pointer'>
+            <button className='mt-2 inline-block cursor-pointer rounded-lg bg-[#191970] px-6 py-2 font-bold text-white transition duration-500 hover:scale-110'>
               Generate
             </button>
           </form>
         </FormModal>
         <FormModal show={isWorkModalOpen} onClick={openWorkModal} onclose={setIsWorkModalOpen}>
-          <form action='#' method='' className='w-full max-w-lg mx-auto flex flex-col items-center justify-center'>
-            <div className='image-preview relative bg-white h-44 w-50 object-fit overflow-hidden rounded-md mb-10'>
-              <img src={`/${cardBackground}`} />
-              <div className='avatar-img absolute right-2 top-0 h-20 w-40 z-10'>
-                <img src={`/${cardAvatar}`} />
+          <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
+            <div className='relative mb-10 h-44 w-48 overflow-hidden rounded-md bg-white object-fill'>
+              <Image src={`/${cardBackground}`} alt='card background' fill={true} />
+              <div className='absolute right-2 top-0 z-10 h-20 w-40'>
+                <Image src={`/${cardAvatar}`} alt='cardAvatar' fill={true} />
               </div>
-              <div id='name-preview' className='absolute bottom-0 bw-full rounded-lg p-3 backdrop-blur-2xl'>
+              <div id='name-preview' className='absolute bottom-0 rounded-lg p-3 backdrop-blur-2xl'>
                 {name}
               </div>
               <div id='description-preview' className='absolute top-0 w-full rounded-t-sm p-3'>
                 {description}
               </div>
             </div>
-            <div className='form-section grid grid-rows-4 grid-cols-3 gap-10 text-white grid-'>
-              <div className='upload-images flex col-start-1 col-end-4'>
-                <div className='avatar-bg text-center'>
+            <div className='grid grid-cols-3 grid-rows-4 gap-10 text-white'>
+              <div className='col-start-1 col-end-4 flex'>
+                <div className='text-center'>
                   <label htmlFor='avatar-bg' className='mx-auto'>
                     Card Background
                   </label>
                   <input type='file' onChange={(e) => setCardBackground(e.target.files[0].name)} />
                 </div>
-                <div className='avatar text-center'>
+                <div className='text-center'>
                   <label htmlFor='avatar-img' className='mx-auto'>
                     Avatar
                   </label>
                   <input type='file' id='avatar-img' onChange={(e) => setCardAvatar(e.target.files[0].name)} />
                 </div>
               </div>
-              <div className='flex flex-col col-start-1 col-span-4'>
-                <label htmlFor='project-name' className='pr-5 text-'>
+              <div className='col-span-4 col-start-1 flex flex-col'>
+                <label htmlFor='project-name' className=' pr-5'>
                   Name
                 </label>
                 <input
                   type='text'
                   id='project-name'
-                  className='w-80 h-8 p-2 text-black'
+                  className='h-8 w-80 p-2 text-black'
                   placeholder='Project Name'
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-              <div className='col-start-1 col-span-4'>
-                <label htmlFor='project-descrip' className='pr-5 text-'>
+              <div className='col-span-4 col-start-1'>
+                <label htmlFor='project-descrip' className=' pr-5'>
                   Description
                 </label>
                 <textarea
                   id='project-descrip'
-                  className='w-full h-12 p-1 resize-none text-black'
+                  className='h-12 w-full resize-none p-1 text-black'
                   placeholder='Description'
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
 
-              <div className='btn col-start-1 col-span-4 flex items-center justify-center' type='submit'>
+              <div className='col-span-4 col-start-1 flex items-center justify-center' type='submit'>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className='rounded-2xl text-white border-2 p-2 hover:bg-violet-900 shadow-md shadow-violet-600 backdrop-blur-xl'
+                  className='rounded-2xl border-2 p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:bg-violet-900'
                 >
                   Pathaideu
                 </motion.button>
@@ -426,42 +425,42 @@ export default function Hero() {
         </FormModal>
         <FormModal show={isConnectionModalOpen} onClick={openConnectionModal} onclose={setIsConnectionModalOpen}>
           <div
-            className='grid grid-cols-3 md:grid-cols-5 lg:grid-cols-center lg:justify-center gap-6 m-5 p-4 justify-center items-center'
+            className='  m-5 grid grid-cols-3 items-center justify-center gap-6 p-4 md:grid-cols-5 lg:justify-center'
             style={{ fontSize: '50px' }}
           >
-            <LogosFacebook className='w-16 h-16' />
-            <SkillIconsInstagram className='w-16 h-16' />
-            <SkillIconsLinkedin className='w-16 h-16' />
-            <LogosGoogleIcon className='w-16 h-16' />
-            <LogosYoutubeIcon className='w-16 h-16' />
-            <LogosApple className='w-16 h-16' />
-            <LogosFigma className='w-16 h-16' />
-            <LogosTwitch className='w-16 h-16' />
-            <SkillIconsGithubDark className='w-16 h-16' />
+            <LogosFacebook className='size-16' />
+            <SkillIconsInstagram className='size-16' />
+            <SkillIconsLinkedin className='size-16' />
+            <LogosGoogleIcon className='size-16' />
+            <LogosYoutubeIcon className='size-16' />
+            <LogosApple className='size-16' />
+            <LogosFigma className='size-16' />
+            <LogosTwitch className='size-16' />
+            <SkillIconsGithubDark className='size-16' />
           </div>
 
-          <form action='#' method='' className='w-full max-w-lg mx-auto flex flex-col items-center justify-center'>
+          <form action='#' method='' className='mx-auto flex w-full max-w-lg flex-col items-center justify-center'>
             <input
               type=''
               placeholder='Instagram'
-              className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+              className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
             />
             <input
               type=''
               placeholder='Facebook'
-              className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+              className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
             />
             <input
               type=''
               placeholder='Spotify'
-              className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+              className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
             />
             <input
               type=''
               placeholder='Github'
-              className='ring-1 ring-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-purple-300 text-gray-800'
+              className='mt-2 rounded-md px-4 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-purple-300'
             />
-            <button className='inline-block bg-[#191970] text-white font-bold rounded-lg mt-2 px-6 py-2 hover:scale-110 transition duration-500 cursor-pointer'>
+            <button className='mt-2 inline-block cursor-pointer rounded-lg bg-[#191970] px-6 py-2 font-bold text-white transition duration-500 hover:scale-110'>
               Generate
             </button>
           </form>

@@ -1,56 +1,56 @@
-import React, { Suspense, FC, CSSProperties, useMemo, useEffect } from 'react';
-import { PresentationControls, ContactShadows, Bounds } from '@react-three/drei';
-import { Environment } from 'src/components/Scene/Environment.component';
-import { isValidFormat, triggerCallback } from 'src/services';
-import { BaseModelProps, CameraProps, EnvironmentProps } from 'src/types';
-import { FloatingModel } from 'src/components/Models/FloatingModel';
-import { StaticModel } from 'src/components/Models/StaticModel';
-import { BoundsModel } from 'src/components/Models/BoundsModel';
-import { BaseCanvas } from 'src/components/BaseCanvas';
-import Capture, { CaptureType } from 'src/components/Capture/Capture.component';
-import { BackgroundColor } from 'src/components/Background';
+import React, { Suspense, FC, CSSProperties, useMemo, useEffect } from 'react'
+import { PresentationControls, ContactShadows, Bounds } from '@react-three/drei'
+import { Environment } from 'src/components/Scene/Environment.component'
+import { isValidFormat, triggerCallback } from 'src/services'
+import { BaseModelProps, CameraProps, EnvironmentProps } from 'src/types'
+import { FloatingModel } from 'src/components/Models/FloatingModel'
+import { StaticModel } from 'src/components/Models/StaticModel'
+import { BoundsModel } from 'src/components/Models/BoundsModel'
+import { BaseCanvas } from 'src/components/BaseCanvas'
+import Capture, { CaptureType } from 'src/components/Capture/Capture.component'
+import { BackgroundColor } from 'src/components/Background'
 
 export interface ExhibitProps extends CameraProps, EnvironmentProps, Omit<BaseModelProps, 'setModelFallback'> {
   /**
    * Arbitrary binary data (base64 string | Blob) of a `.glb` file or path (URL) to a `.glb` resource.
    */
-  modelSrc: string | Blob;
+  modelSrc: string | Blob
   /**
    * Size of the rendered GLB model.
    */
-  scale?: number;
+  scale?: number
   /**
    * Pass styling to canvas.
    */
-  style?: CSSProperties;
+  style?: CSSProperties
   /**
    * Custom style classes for canvas.
    */
-  className?: string;
+  className?: string
   /**
    * Enables soft shadows.
    */
-  shadows?: boolean;
+  shadows?: boolean
   /**
    * Enables floating idle animation.
    */
-  float?: boolean;
+  float?: boolean
   /**
    * Enables model to fit to available canvas dimensions.
    */
-  fit?: boolean;
+  fit?: boolean
   /**
    * Return base64 image after making screenshot of the canvas.
    */
-  capture?: CaptureType;
+  capture?: CaptureType
   /**
    * Enables snap-back to center after rotating model.
    */
-  snap?: boolean;
+  snap?: boolean
   /**
    * Disables vertical rotation.
    */
-  lockVertical?: boolean;
+  lockVertical?: boolean
 }
 
 /**
@@ -70,21 +70,21 @@ export const Exhibit: FC<ExhibitProps> = ({
   snap = false,
   lockVertical = false,
   onLoaded,
-  onLoading
+  onLoading,
 }) => {
   const model = useMemo(() => {
     if (!isValidFormat(modelSrc)) {
-      return null;
+      return null
     }
 
     if (!float) {
-      return <StaticModel modelSrc={modelSrc} scale={scale} />;
+      return <StaticModel modelSrc={modelSrc} scale={scale} />
     }
 
-    return <FloatingModel modelSrc={modelSrc} scale={scale} />;
-  }, [float, modelSrc, scale]);
+    return <FloatingModel modelSrc={modelSrc} scale={scale} />
+  }, [float, modelSrc, scale])
 
-  useEffect(() => triggerCallback(onLoading), [modelSrc, onLoading]);
+  useEffect(() => triggerCallback(onLoading), [modelSrc, onLoading])
 
   return (
     <BaseCanvas position={position} style={style} className={className}>
@@ -113,5 +113,5 @@ export const Exhibit: FC<ExhibitProps> = ({
       {capture && <Capture {...capture} />}
       {style?.background && <BackgroundColor color={style.background as string} />}
     </BaseCanvas>
-  );
-};
+  )
+}

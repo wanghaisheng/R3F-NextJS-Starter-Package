@@ -1,8 +1,8 @@
-import { useThree } from '@react-three/fiber';
-import { FC, useEffect, useState } from 'react';
-import { LightingProps } from 'src/types';
-import { definedProps } from 'src/utils/props';
-import { Object3D, Vector3 } from 'three';
+import { useThree } from '@react-three/fiber'
+import { FC, useEffect, useState } from 'react'
+import { LightingProps } from 'src/types'
+import { definedProps } from 'src/utils/props'
+import { Object3D, Vector3 } from 'three'
 
 export const LIGHT_CONFIG = Object.freeze({
   fillLightAngle: Math.PI / 3,
@@ -22,9 +22,9 @@ export const LIGHT_CONFIG = Object.freeze({
     backLightIntensity: 2.2,
     backLightColor: '#FFB878',
     backLightPosition: new Vector3(0.5, 1.6, -1.0),
-    lightTarget: new Vector3(0.0, 1.7, 0.0)
-  } as Required<LightingProps>
-});
+    lightTarget: new Vector3(0.0, 1.7, 0.0),
+  } as Required<LightingProps>,
+})
 
 const Lights: FC<LightingProps> = (lightingProps) => {
   // use default props as fallback if no custom lighting settings are provided
@@ -37,25 +37,25 @@ const Lights: FC<LightingProps> = (lightingProps) => {
     backLightIntensity,
     backLightColor,
     backLightPosition,
-    lightTarget
-  } = Object.assign(LIGHT_CONFIG.defaultProps, definedProps(lightingProps));
+    lightTarget,
+  } = Object.assign(LIGHT_CONFIG.defaultProps, definedProps(lightingProps))
 
-  const { scene } = useThree();
+  const { scene } = useThree()
 
   const [targets] = useState<{ head: Object3D; shoe: Object3D }>({
     head: new Object3D(),
-    shoe: new Object3D()
-  });
+    shoe: new Object3D(),
+  })
 
   useEffect(() => {
     // apply provided positions for targets
-    targets.head.position.copy(lightTarget);
-    targets.shoe.position.set(0.0, 0.0, 0.0);
+    targets.head.position.copy(lightTarget)
+    targets.shoe.position.set(0.0, 0.0, 0.0)
 
     // add targets to scene (without the spotlights would not aim at them)
-    scene.add(targets.head);
-    scene.add(targets.shoe);
-  },);
+    scene.add(targets.head)
+    scene.add(targets.shoe)
+  })
 
   return (
     <group>
@@ -102,7 +102,7 @@ const Lights: FC<LightingProps> = (lightingProps) => {
       {/* Dummy directional light for shadow casting from behind avatar. */}
       <directionalLight position={LIGHT_CONFIG.dirLightPosition} target={targets.shoe} castShadow intensity={0.0} />
     </group>
-  );
-};
+  )
+}
 
-export default Lights;
+export default Lights

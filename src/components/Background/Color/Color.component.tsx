@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from 'react'
 
 export type BackgroundColorProps = {
   /**
@@ -6,7 +6,7 @@ export type BackgroundColorProps = {
    * For example: '#000', 'red', 'rgb(255, 0, 0)'.
    * Doesn't support CSS gradients.
    */
-  color: string;
-};
+  color: string
+}
 
-export const BackgroundColor: FC<BackgroundColorProps> = ({ color }) => <color attach="background" args={[color]} />;
+export const BackgroundColor: FC<BackgroundColorProps> = ({ color }) => <color attach='background' args={[color]} />

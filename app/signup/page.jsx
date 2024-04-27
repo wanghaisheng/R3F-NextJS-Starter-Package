@@ -42,7 +42,7 @@ export default function Page() {
   }
 
   return (
-    <main className='relative flex min-h-full flex-col items-center justify-around md:flex-row'>
+    <main className='relative mt-10 flex min-h-full flex-col items-center justify-around md:flex-row'>
       <motion.div
         initial={{ opacity: 0, scale: 0.4 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -74,18 +74,19 @@ export default function Page() {
           </CardBody>
         </CardContainer>
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.4 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
-        className='signup md:h-2/4py flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
+        className='signup flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
       >
         <div className='card flex h-auto flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-purple-700 backdrop-blur-sm lg:w-3/5'>
-          <div className='card-title m-0 mb-5 rounded-t-3xl border-y-2 bg-[rgba(254,225,255,0.3)] p-2 shadow-sm backdrop-blur-3xl'>
+          <div className='card-title m-0 mb-5 rounded-t-3xl p-2 shadow-sm  backdrop-blur-3xl'>
             <h2 className='p-2 text-center text-xl text-purple-900'>Signup</h2>
           </div>
           <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
-            <label htmlFor='' className='labels text-xl font-semibold'>
+            <label htmlFor='' className='text-xl font-semibold'>
               Email
             </label>
             <div className='input-group m-2 flex rounded-md'>
@@ -101,7 +102,7 @@ export default function Page() {
               />
             </div>
 
-            <label htmlFor='' className='labels text-xl font-semibold'>
+            <label htmlFor='' className='text-xl font-semibold'>
               Password
             </label>
             <div className='input-group m-2 flex rounded-md'>
@@ -143,6 +144,14 @@ export default function Page() {
             <a href=''>
               <LogosFacebook className='logos text-2xl' />
             </a>
+          </div>
+          <div className='m-5 flex items-center justify-center '>
+            <p className=' text-sm'>
+              Already a Genius User?
+              <a href='/signin' className='ml-1 text-blue-500'>
+                Sign In Here
+              </a>
+            </p>
           </div>
         </div>
       </motion.div>
