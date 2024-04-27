@@ -1,16 +1,13 @@
-export async function getSkills() {
+export default async function handler(req, res) {
   try {
-    const res = await fetch('http://localhost:3000/api/skills')
-    if (!res.ok) {
-      throw new Error('failed to fetch the skills')
+    const response = await fetch('http://localhost:3000/api/skills');
+    if (!response.ok) {
+      throw new Error('Failed to fetch skills');
     }
-    return res.json()
+    const skills = await response.json();
+    res.status(200).json(skills);
   } catch (error) {
-    console.error(error)
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-}
-
-export async function FetchSkills() {
-  const skills = await getSkills()
-  return skills
 }
