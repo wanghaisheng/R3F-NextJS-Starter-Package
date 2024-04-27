@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   try {
     const response = await fetch('http://localhost:3000/api/skills');
     if (!response.ok) {
@@ -11,3 +11,4 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+export default handler;
