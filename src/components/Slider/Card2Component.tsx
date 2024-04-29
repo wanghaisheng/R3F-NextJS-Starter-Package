@@ -40,7 +40,6 @@ export default function CardComponent({ onNextButtonClick }) {
         if (filteredData.length != 0) {
           setCards(filteredData) // Set the filtered data
         }
-        return cards
       } catch (error) {
         console.error('Error fetching cards data:', error)
       }
