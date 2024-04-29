@@ -13,6 +13,8 @@ import 'react-tabs/style/react-tabs.css'
 import { TiDelete } from 'react-icons/ti'
 import Link from 'next/link'
 
+import axios from 'axios'
+
 import {
   Bar,
   BarChart,
@@ -44,11 +46,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 async function getSkills() {
   try {
-    const res = await fetch('http://localhost:3000/api/skills')
-    if (!res.ok) {
+    const res = await axios.get('/api/skills')
+    if (res.status !== 200) {
       throw new Error('failed to fetch the skills')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     throw new Error('failed to fetch the skills')
   }

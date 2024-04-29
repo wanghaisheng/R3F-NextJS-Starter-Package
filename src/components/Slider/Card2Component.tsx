@@ -15,11 +15,11 @@ import axios from 'axios'
 
 async function getCardInfo() {
   try {
-    const res = await fetch('http://localhost:3000/api/card')
-    if (!res.ok) {
+    const res = await axios.get('/api/card')
+    if (res.status !== 200) {
       throw new Error('failed to fetch the cards')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.error(error)
   }
@@ -28,7 +28,7 @@ async function getCardInfo() {
 export default function CardComponent({ onNextButtonClick }) {
   const { user } = useUser()
   const [cards, setCards] = useState([
-    { card_id: '', type: 'type', name: '', description: '', dateIn: '', dateOut: '' },
+    { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
   ])
 
   useEffect(() => {
@@ -61,8 +61,8 @@ export default function CardComponent({ onNextButtonClick }) {
       type: cards[index].type,
       name: cards[index].name,
       description: cards[index].description,
-      dateIn: cards[index].dateIn,
-      dateOut: cards[index].dateOut,
+      date_in: cards[index].date_in,
+      date_out: cards[index].date_out,
     }
     try {
       await axios({
@@ -84,10 +84,10 @@ export default function CardComponent({ onNextButtonClick }) {
       type: cards[index].type,
       name: cards[index].name,
       description: cards[index].description,
-      dateIn: cards[index].dateIn,
-      dateOut: cards[index].dateOut,
+      date_in: cards[index].date_in,
+      date_out: cards[index].date_out,
     }
-    console.log('type: ', typeof submit.dateIn, ': ', submit.dateIn)
+    console.log(submit)
     try {
       await axios({
         url: `/api/card/${id}`,
@@ -143,7 +143,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleCardDateInChange = (index: number, newDateIn: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
-      updatedCards[index].dateIn = newDateIn
+      updatedCards[index].date_in = newDateIn
       return updatedCards
     })
   }
@@ -151,7 +151,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleCardDateOutChange = (index: number, newDateOut: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
-      updatedCards[index].dateOut = newDateOut
+      updatedCards[index].date_out = newDateOut
       return updatedCards
     })
   }
@@ -159,7 +159,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleAddCard = () => {
     setCards((prevCards) => [
       ...prevCards,
-      { card_id: '', type: 'type', name: '', description: '', dateIn: '', dateOut: '' },
+      { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
     ])
   }
 
@@ -218,7 +218,7 @@ export default function CardComponent({ onNextButtonClick }) {
                     {/* Card Image / Container */}
 
                     <div className='flex justify-center'>
-                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
+                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.date_in} dateOut={card.date_out} />
                     </div>
 
                     {/* Form for user input */}
@@ -281,7 +281,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 id='dateIn'
                                 type='date'
-                                value={card.dateIn}
+                                value={card.date_in}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateInChange(index, e.target.value)}
                                 required
@@ -292,7 +292,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 id='dateOut'
                                 type='date'
-                                value={card.dateOut}
+                                value={card.date_out}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateOutChange(index, e.target.value)}
                               />
@@ -361,7 +361,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 type='date'
                                 id='dateIn'
-                                value={card.dateIn}
+                                value={card.date_in}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateInChange(index, e.target.value)}
                                 required
@@ -372,7 +372,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 id='dateOut'
                                 type='date'
-                                value={card.dateOut}
+                                value={card.date_out}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateOutChange(index, e.target.value)}
                               />

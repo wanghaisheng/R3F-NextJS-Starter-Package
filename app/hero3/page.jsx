@@ -3,6 +3,8 @@
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 // import { Button } from "@/components/ui/button"
 
+import axios from 'axios'
+
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
@@ -53,11 +55,11 @@ import SkinsCard from '@/components/card/SkinsCard'
 
 async function getSkills() {
   try {
-    const res = await fetch('http://localhost:3000/api/skills')
-    if (!res.ok) {
+    const res = await axios.get('/api/skills')
+    if (res.status !== 200) {
       console.log('failed to fetch the skills')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.log('failed to fetch the skills', error)
   }
@@ -65,11 +67,11 @@ async function getSkills() {
 
 async function getAvatarById(id) {
   try {
-    const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
-    if (!res.ok) {
+    const res = await axios.get(`/api/avatar/${id}`)
+    if (res.status !== 200) {
       console.log('failed to fetch the avatars')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.log('failed to fetch the avatars', error)
   }

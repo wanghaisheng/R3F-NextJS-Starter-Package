@@ -19,11 +19,11 @@ import { TagsInput } from 'react-tag-input-component'
 
 async function getExpInfo() {
   try {
-    const res = await fetch('http://localhost:3000/api/card')
-    if (!res.ok) {
+    const res = await axios.get('/api/experience')
+    if (res.status !== 200) {
       throw new Error('failed to fetch the skills')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     throw new Error('failed to fetch the skills')
   }
