@@ -119,7 +119,7 @@ const AdminDashboard = () => {
             <div className='mx-4'>
               <div className='flex flex-col lg:flex-row lg:justify-between'>
                 {/* left side */}
-                <div className='grid w-[58%] grid-cols-1 gap-6 md:grid-cols-2'>
+                <div className='grid grid-cols-2 gap-6 lg:w-[58%]'>
                   {/* 1 */}
                   <div className='flex gap-x-5 rounded-xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
                     <div className='mt-1'>
@@ -175,7 +175,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 {/* right side */}
-                <div className='flex w-[40%] flex-col justify-center rounded-xl p-4 shadow-md shadow-[#6B37CA] backdrop-blur-md lg:mt-0'>
+                <div className='mt-4 flex flex-col justify-center rounded-xl p-4 shadow-md shadow-[#6B37CA] backdrop-blur-md lg:mt-0 lg:w-[40%]'>
                   {/* 1 */}
                   <div className='mx-4 mb-4'>
                     <p className='text-xl font-bold'>
@@ -186,7 +186,7 @@ const AdminDashboard = () => {
                       Expected Avg : <span className='text-green-500'>65%</span>
                     </p>
                     <p>
-                      Achieved Avg : <span className='text-yellow-500'>55%</span>
+                      Achieved Avg : <span className='text-red-400'>55%</span>
                     </p>
                   </div>
                   <AreaChartComponent />

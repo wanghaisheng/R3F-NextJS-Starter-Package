@@ -67,70 +67,67 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
         {isSmallScreen ? (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-red-500'}`}
-              onClick={() => handleFilterClick('KARUNA')} // karuna - compassion
-            >
-              K
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-blue-500'}`}
-              onClick={() => handleFilterClick('SHANTI')} // peace
-            >
-              S
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-yellow-500'}`}
-              onClick={() => handleFilterClick('VAJRA')} // thunderbolt -- gold
-            >
-              V
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PRITHVI' && 'text-green-500'}`}
-              // onClick={() => handleFilterClick('BODHI')} // enlightenment -- yellow
-              onClick={() => handleFilterClick('PRITHVI ')} // earth -- green
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
+              onClick={() => handleFilterClick('PADMA')}
             >
               P
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-500'}`}
-              onClick={() => handleFilterClick('KARMA')} // karma -- purple
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
+              onClick={() => handleFilterClick('VAJRA')}
             >
-              S
+              V
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
+              onClick={() => handleFilterClick('RATNA')}
+            >
+              R
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
+              onClick={() => handleFilterClick('KARMA')}
+            >
+              K
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
+              onClick={() => handleFilterClick('BUDDHA')}
+            >
+              B
             </a>
           </>
         ) : (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' ? 'text-red-500' : 'text-red-200'}`}
-              onClick={() => handleFilterClick('KARUNA')} // coimpassion
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
+              onClick={() => handleFilterClick('PADMA')}
             >
-              KARUNA
+              PADMA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' ? 'text-blue-500' : 'text-blue-200'}`}
-              onClick={() => handleFilterClick('SHANTI')} // peace
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
+              onClick={() => handleFilterClick('VAJRA')}
             >
               SHANTI
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-yellow-500' : 'text-yellow-200'}`}
-              onClick={() => handleFilterClick('VAJRA')} // thunderbolt  -- gold
-              // onClick={() => handleFilterClick('PITAM')} // yellow
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
+              onClick={() => handleFilterClick('RATNA')}
             >
-              VAJRA
+              RATNA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PRITHVI' ? 'text-green-500' : 'text-green-200'}`}
-              // onClick={() => handleFilterClick('BODHI')} // enlightenment
-              onClick={() => handleFilterClick('PRITHVI')} // earth
-            >
-              PRITHVI
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-purple-500' : 'text-purple-200'}`}
-              onClick={() => handleFilterClick('KARMA')} // karma -- purple
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
+              onClick={() => handleFilterClick('KARMA')}
             >
               KARMA
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
+              onClick={() => handleFilterClick('BUDDHA')}
+            >
+              BUDDHA
             </a>
           </>
         )}
