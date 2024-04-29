@@ -216,7 +216,6 @@ export default function Hero3() {
 
     if (user) {
       fetchCardsData() // Fetch data only if user is available
-      console.log(cardsData)
     }
   }, [user])
 
