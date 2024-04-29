@@ -5,7 +5,7 @@ export default function ShowFaction({ filter }: { filter: string }) {
     {
       name: 'Rohit Shrestha',
       description: 'description',
-      faction: 'KARUNA',
+      faction: 'SHANTI',
       avatarimg:
         'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },
@@ -19,7 +19,7 @@ export default function ShowFaction({ filter }: { filter: string }) {
     {
       name: 'Satkar Niraula',
       description: 'description',
-      faction: 'BODHI',
+      faction: 'PRITHVI',
       avatarimg:
         'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },
@@ -54,7 +54,7 @@ export default function ShowFaction({ filter }: { filter: string }) {
     {
       name: 'Satkar Niraula',
       description: 'description',
-      faction: 'BODHI',
+      faction: 'PRITHVI',
       avatarimg:
         'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },

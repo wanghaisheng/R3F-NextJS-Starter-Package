@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { MdClearAll } from 'react-icons/md'
 
 export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -46,7 +47,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
                 type='text'
                 id='simple-search'
                 className='block w-full bg-transparent pl-5 text-sm  text-gray-200 focus:outline-none'
-                placeholder={isSmallScreen ? '' : 'SEARCH'}
+                placeholder={isSmallScreen ? '----' : 'SEARCH'}
                 required
               />
             </div>
@@ -55,20 +56,8 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
 
         <div>
           <div className='mx-auto flex max-w-sm items-center'>
-            <label htmlFor='simple-search' className='sr-only'>
-              Search
-            </label>
-            <div className='flex w-full items-center'>
-              <p
-                className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'
-                onClick={() => handleFilterClick(null)}
-              >
-                ALL
-              </p>
-              <svg width='23' height='19' viewBox='0 0 23 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path d='M1 7.33247L8 2.05469V19.9991' stroke='white' stroke-width='2' stroke-linecap='round' />
-                <path d='M22 14.7222L15 20L15 2.05555' stroke='white' stroke-width='2' stroke-linecap='round' />
-              </svg>
+            <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
+              <MdClearAll />
             </div>
           </div>
         </div>

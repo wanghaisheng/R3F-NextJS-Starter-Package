@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
+import { MdClearAll } from 'react-icons/md'
+
 export default function FactionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
@@ -46,7 +48,7 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
                 type='text'
                 id='simple-search'
                 className='block w-full bg-transparent pl-5 text-sm  text-gray-200 focus:outline-none'
-                placeholder={isSmallScreen ? '' : 'SEARCH'}
+                placeholder={isSmallScreen ? '----' : 'SEARCH'}
                 required
               />
             </div>
@@ -55,20 +57,8 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
 
         <div>
           <div className='mx-auto flex max-w-sm items-center'>
-            <label htmlFor='simple-search' className='sr-only'>
-              Search
-            </label>
-            <div className='flex w-full items-center'>
-              <a
-                className='hidden w-full bg-transparent text-sm text-gray-200 focus:outline-none lg:block'
-                onClick={() => handleFilterClick(null)}
-              >
-                ALL
-              </a>
-              <svg width='23' height='19' viewBox='0 0 23 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path d='M1 7.33247L8 2.05469V19.9991' stroke='white' stroke-width='2' stroke-linecap='round' />
-                <path d='M22 14.7222L15 20L15 2.05555' stroke='white' stroke-width='2' stroke-linecap='round' />
-              </svg>
+            <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
+              <MdClearAll />
             </div>
           </div>
         </div>
@@ -77,65 +67,68 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
         {isSmallScreen ? (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('KARUNA')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-red-500'}`}
+              onClick={() => handleFilterClick('KARUNA')} // karuna - compassion
             >
               K
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('SHANTI')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-blue-500'}`}
+              onClick={() => handleFilterClick('SHANTI')} // peace
             >
               S
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('VAJRA')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-yellow-500'}`}
+              onClick={() => handleFilterClick('VAJRA')} // thunderbolt -- gold
             >
               V
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BODHI' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('BODHI')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PRITHVI' && 'text-green-500'}`}
+              // onClick={() => handleFilterClick('BODHI')} // enlightenment -- yellow
+              onClick={() => handleFilterClick('PRITHVI ')} // earth -- green
             >
-              B
+              P
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('KARMA')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-500'}`}
+              onClick={() => handleFilterClick('KARMA')} // karma -- purple
             >
-              K
+              S
             </a>
           </>
         ) : (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('KARUNA')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-red-500'}`}
+              onClick={() => handleFilterClick('KARUNA')} // coimpassion
             >
               KARUNA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('SHANTI')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-blue-500'}`}
+              onClick={() => handleFilterClick('SHANTI')} // peace
             >
               SHANTI
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('VAJRA')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-yellow-500'}`}
+              onClick={() => handleFilterClick('VAJRA')} // thunderbolt  -- gold
+              // onClick={() => handleFilterClick('PITAM')} // yellow
             >
               VAJRA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BODHI' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('BODHI')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PRITHVI' && 'text-green-500'}`}
+              // onClick={() => handleFilterClick('BODHI')} // enlightenment
+              onClick={() => handleFilterClick('PRITHVI')} // earth
             >
-              BODHI
+              PRITHVI
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-700'}`}
-              onClick={() => handleFilterClick('KARMA')}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-500'}`}
+              onClick={() => handleFilterClick('KARMA')} // karma -- purple
             >
               KARMA
             </a>

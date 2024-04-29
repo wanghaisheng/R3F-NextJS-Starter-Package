@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
       {/* <StarsCanvas /> */}
       {/* <PurpleVoid /> */}
       {children}
-      <Scene
+      {/* <Scene
         style={{
           position: 'fixed',
           top: 0,
@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
         }}
         eventSource={ref}
         eventPrefix='client'
-      />
+      /> */}
     </div>
   )
 }

@@ -68,7 +68,7 @@ const Navbar = () => {
             {user ? (
               user.first_name != null ? (
                 <div className='flex'>
-                  <span className='px-2 text-lg font-medium'>{user.first_name + ' ' + user.last_name}</span>
+                  <span className='px-2 text-sm font-medium'>{user.first_name + ' ' + user.last_name}</span>
                   <Link
                     href='/signin'
                     onClick={logout}
@@ -199,33 +199,33 @@ const Navbar = () => {
         {/* For mobile view nav bar */}
         {isToggled && (
           <motion.div className=' w-full md:hidden' variants={navAnimate} initial='hidden' animate='show' exit='exit'>
-            <div className='z-10 flex flex-col items-center justify-center gap-4 rounded-b-3xl shadow-md shadow-violet-600 md:gap-8'>
+            <div className='z-10 flex flex-col items-center justify-center gap-4 rounded-b-3xl bg-black/85 shadow-md shadow-violet-600 md:gap-8'>
               <Link
-                href='#'
+                href='/maps'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 MAPS
               </Link>
               <Link
-                href='#'
+                href='/factions'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 FACTIONS
               </Link>
               <Link
-                href='#'
+                href='hero3'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 HOME
               </Link>
               <Link
-                href='#'
+                href='regions'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 REGIONS
               </Link>
               <Link
-                href='#'
+                href='experience'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 EXP
