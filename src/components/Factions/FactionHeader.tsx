@@ -4,7 +4,15 @@ import { useEffect, useState } from 'react'
 
 import { MdClearAll } from 'react-icons/md'
 
-export default function FactionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
+export default function FactionHeader({
+  onFilterChange,
+  searchTerm,
+  setSearchTerm,
+}: {
+  onFilterChange: (filter: string) => void
+  searchTerm: string
+  setSearchTerm: (searchTerm: string) => void
+}) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
 
@@ -27,7 +35,7 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
     <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
       <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
         <div>
-          <form className='mx-auto flex max-w-sm items-center'>
+          <div className='mx-auto flex max-w-sm items-center'>
             <svg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
@@ -47,12 +55,13 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
               <input
                 type='text'
                 id='simple-search'
-                className='block w-full bg-transparent pl-5 text-sm  text-gray-200 focus:outline-none'
+                className='block w-full bg-transparent pl-5 text-sm text-gray-200 focus:outline-none'
                 placeholder={isSmallScreen ? '----' : 'SEARCH'}
-                required
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-          </form>
+          </div>
         </div>
 
         <div>
