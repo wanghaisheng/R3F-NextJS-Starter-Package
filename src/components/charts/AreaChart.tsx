@@ -80,12 +80,12 @@ const ramData = [
 const AreaChartComponent = () => {
   return (
     <>
-      <div className=' flex flex-col justify-center'>
+      <div className=' flex w-full flex-col justify-center'>
         {/* For area chart */}
 
         <div>
-          <ResponsiveContainer width={350} height={250}>
-            <AreaChart width={350} height={250} data={ramData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <ResponsiveContainer width='100%' height={200}>
+            <AreaChart data={ramData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id='colorUv' x1='0' y1='0' x2='0' y2='1'>
                   <stop offset='5%' stopColor='#36F097' stopOpacity={0.8} />
@@ -97,19 +97,24 @@ const AreaChartComponent = () => {
                 </linearGradient>
               </defs>
 
-              <XAxis dataKey='name' padding={{ left: 5, right: 20 }} />
-              <YAxis />
-              <CartesianGrid vertical={false} strokeDasharray='6 6' />
+              <XAxis
+                axisLine={false}
+                tickLine={false}
+                dataKey={(data) => data.name.charAt(0)}
+                padding={{ left: 0, right: 0 }}
+              />
+              <YAxis axisLine={false} tickLine={false} />
+              <CartesianGrid vertical={false} strokeDasharray='3 2' />
               <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-              <Legend
+              {/* <Legend
                 width={300}
                 wrapperStyle={{
-                  bottom: 0,
-                  right: 0,
+                  top: -10,
+                  left: 0,
                   backgroundColor: 'rgba(0, 0, 0, 0.5)',
                   borderRadius: 3,
                 }}
-              />
+              /> */}
               <Area type='monotone' dataKey='expected' stroke='#36F097' fillOpacity={1} fill='url(#colorUv)' />
               <Area
                 type='monotone'
@@ -131,14 +136,14 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-lg'>{label}</p>
+        <p className='text-lg'>{payload[0].payload.name}</p>
         <p className='text-sm text-blue-400'>
           currentPerformance:
-          <span className='ml-2'>${payload[0].value}</span>
+          <span className='ml-2'>{payload[0].value}%</span>
         </p>
         <p className='text-sm text-indigo-400'>
           expected:
-          <span className='ml-2'>${payload[1].value}</span>
+          <span className='ml-2'>{payload[1].value}%</span>
         </p>
       </div>
     )
