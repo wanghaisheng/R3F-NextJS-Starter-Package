@@ -65,8 +65,8 @@ export default function AvatarImageComponent() {
   }, [user])
 
   return (
-    <div>
-      <div className='w-full overflow-hidden' ref={emblaRef}>
+    <div className='flex justify-center'>
+      <div className='overflow-hidden lg:w-full' ref={emblaRef}>
         <div className='flex items-center'>
           {avatarsData && avatarsData.length != 0 ? (
             avatarsData.map((avatar) => (

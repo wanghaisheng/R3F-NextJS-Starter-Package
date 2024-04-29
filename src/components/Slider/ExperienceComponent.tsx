@@ -123,10 +123,10 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='experience'
-        className='flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='flex h-fit w-[85%] py-4 md:w-[68%] md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-8 lg:text-7xl'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
             Experience
             <div className='absolute right-0 top-10 text-sm'>
               <DrawOutlineButton
@@ -159,7 +159,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                 <div className='flex flex-col lg:flex-row lg:justify-between'>
                   {/* Card Image / Container */}
                   <div className='flex flex-col'>
-                    <div className='flex'>
+                    <div className='flex justify-center'>
                       <ExperienceFlipCard
                         type={project.type}
                         projectName={project.name}
@@ -293,7 +293,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='-mt-10 flex justify-center'>
+          <div className='mt-2 flex justify-center lg:-mt-10'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
           </div>
         </div>

@@ -3,6 +3,8 @@
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 // import { Button } from "@/components/ui/button"
 
+import axios from 'axios'
+
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
@@ -50,8 +52,6 @@ import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
 import SkinsCard from '@/components/card/SkinsCard'
-
-import axios from 'axios'
 
 async function getSkills() {
   try {
@@ -252,13 +252,13 @@ export default function Hero3() {
         </View>
       </div> */}
       {/* avatar */}
-      <div style={{ height: '600px', weight: '600px' }}>
+      <div className='hidden md:block' style={{ height: '600px', weight: '600px' }}>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
             shadows
             animationSrc='/male-idle-3.fbx'
-            style={{ background: 'rgb(9,20,26)' }}
+            style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
             cameraInitialDistance={30}
@@ -271,7 +271,7 @@ export default function Hero3() {
             modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
             shadows
             animationSrc='/male-idle-3.fbx'
-            style={{ background: 'rgb(9,20,26)' }}
+            style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
             cameraInitialDistance={30}
@@ -703,10 +703,16 @@ export default function Hero3() {
               </div>
             </div>
           </div>
-          <button className='left-10 top-56 text-5xl md:absolute' onClick={scrollPrev}>
+          <button
+            className='absolute bottom-10 left-2 md:left-10 md:top-0 md:text-2xl lg:text-5xl'
+            onClick={scrollPrev}
+          >
             <MdNavigateBefore />
           </button>
-          <button className='right-10 top-56 text-5xl md:absolute' onClick={scrollNext}>
+          <button
+            className='absolute bottom-10 right-2 md:right-10 md:top-0 md:text-2xl lg:text-5xl'
+            onClick={scrollNext}
+          >
             <MdNavigateNext />
           </button>
         </div>
