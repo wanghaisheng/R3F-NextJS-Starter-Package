@@ -7,13 +7,16 @@ import ShowRegion from '@/components/Regions/ShowRegion'
 const Regions = () => {
   const [selectedFilter, setSelectedFilter] = useState(null)
 
+  const [searchTerm, setSearchTerm] = useState('')
+
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter)
+    setSearchTerm('')
   }
   return (
     <>
-      <RegionHeader onFilterChange={handleFilterChange} />
-      <ShowRegion filter={selectedFilter} />
+      <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <ShowRegion filter={selectedFilter} searchTerm={searchTerm} />
     </>
   )
 }

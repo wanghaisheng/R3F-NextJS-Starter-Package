@@ -1,9 +1,3 @@
-'use client'
-
-import { useState } from 'react'
-
-import FactionHeader from './FactionHeader'
-
 export default function ShowFaction({ filter, searchTerm }: { filter: string; searchTerm: string }) {
   const factions = [
     {
