@@ -23,11 +23,11 @@ export default function App() {
     setAvatarUrl(event.data.url)
   }
 
-  const { log } = console
-  const { user } = useUser()
+  // const { log } = console
+  // const { user } = useUser()
   // const userId = user.gg_id;
-  console.log(avatarUrl)
-  console.log(user)
+  // console.log(avatarUrl)
+  // console.log(user)
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault()

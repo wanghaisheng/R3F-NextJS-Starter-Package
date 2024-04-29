@@ -4,6 +4,7 @@ import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
 
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext/UserContext'
 
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -12,6 +13,7 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
+  const { user } = useUser()
   QRCode.toDataURL(pathname).then(setImgSrc)
   // Flip Card QR end
 
@@ -46,7 +48,15 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
               <div className='flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
                   <li className='mb-2 w-full text-xl font-semibold'>
-                    <p>PERSON NAME</p>
+                    {user != null ? (
+                      user.first_name != null ? (
+                        <p>{user.first_name.toUpperCase() + ' ' + user.last_name.toUpperCase()}</p>
+                      ) : (
+                        <p>PERSON NAME</p>
+                      )
+                    ) : (
+                      <p>PERSON NAME</p>
+                    )}
                   </li>
                   <li className='my-2 mb-1 w-full'>
                     <p>{name}</p>

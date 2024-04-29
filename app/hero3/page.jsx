@@ -65,6 +65,18 @@ async function getSkills() {
   }
 }
 
+async function getCards() {
+  try {
+    const res = await axios.get(`/api/card`)
+    if (res.status !== 200) {
+      console.log('failed to fetch the cards')
+    }
+    return res.data
+  } catch (error) {
+    console.log('failed to fetch the cards', error)
+  }
+}
+
 async function getAvatarById(id) {
   try {
     const res = await axios.get(`/api/avatar/${id}`)
@@ -114,6 +126,7 @@ export default function Hero3() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
   const [avatarsData, setAvatarsData] = useState([])
+  const [cardsData, setCardsData] = useState([])
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -174,9 +187,9 @@ export default function Hero3() {
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
-        const testData = await getSkills() // Fetch skills data
-        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
-        setSkillsData(filteredData) // Set the filtered data
+        const skillsData = await getSkills() // Fetch skills data
+        const filteredSkillsData = skillsData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
+        setSkillsData(filteredSkillsData) // Set the filtered data
       } catch (error) {
         console.log('Error fetching skills data:', error)
       }
@@ -188,6 +201,23 @@ export default function Hero3() {
   }, [user])
 
   // ------------------------------------------------------------
+
+  // Cards data
+  useEffect(() => {
+    const fetchCardsData = async () => {
+      try {
+        const cardsData = await getCards() // Fetch cards data
+        const filteredCardsData = cardsData.filter((element) => element.gg_id === user.gg_id)
+        setCardsData(filteredCardsData)
+      } catch (error) {
+        console.log('Error fetching skills data:', error)
+      }
+    }
+
+    if (user) {
+      fetchCardsData() // Fetch data only if user is available
+    }
+  }, [user])
 
   // Flip Card QR
   const [isFlipped, setIsFlipped] = useState(false)
@@ -293,7 +323,7 @@ export default function Hero3() {
             <div className='w-full shrink-0 grow md:min-w-0 '>
               <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
                 <div className='h-full md:ml-24 md:w-[27%]'>
-                  {user ? (
+                  {user && cardsData.length != 0 ? (
                     <div className='flex flex-col items-center justify-center'>
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
@@ -318,19 +348,26 @@ export default function Hero3() {
                               </div>
                             </div>
                           </div>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                CARD2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
+                          {cardsData.map((card) => (
+                            <div key={card.card_id} className='w-full shrink-0 grow md:min-w-0 '>
+                              <div className='flex flex-col justify-center'>
+                                <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                                  {card.type.toUpperCase()}
+                                  <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                    <FaRegEdit />
+                                  </a>
+                                </div>
+                                <div className='flex justify-center'>
+                                  <CardsFlipCard
+                                    type={card.type}
+                                    name={card.name}
+                                    dateIn={card.date_in}
+                                    dateOut={card.date_out}
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
                         <div className='my-4 flex justify-between text-2xl'>
                           <button className='' onClick={scrollPrev2}>
@@ -384,7 +421,13 @@ export default function Hero3() {
                                 </a>
                               </div>
                               <div className='flex justify-center'>
-                                <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
+                                <CardsFlipCard
+                                  personName='Person Name'
+                                  type='DEFAULT'
+                                  name='DEFAULT'
+                                  dateIn='DEFAULT'
+                                  dateOut='DEFAULT'
+                                />
                               </div>
                             </div>
                           </div>
