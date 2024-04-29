@@ -61,32 +61,12 @@ export default function AvatarComponent({ onNextButtonClick }) {
           <div className='relative my-3 flex justify-center text-2xl md:text-4xl lg:my-6 lg:text-7xl'>My Avatars</div>
 
           {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-            <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>
-              <div>
-                <Avatar
-                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-                  // shadows
-                  animationSrc='/male-idle-3.fbx'
-                  style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px' }}
-                  fov={40}
-                  cameraTarget={1.5}
-                  cameraInitialDistance={30}
-                  effects={{
-                    ambientOcclusion: true,
-                  }}
-                />
-              </div>
-              <div className='flex h-fit justify-center gap-4 md:grid md:w-[50%] md:grid-cols-3'>
-                <AvatarImageComponent />
-              </div>
-            </div>
-          ) : (
-            <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between'>
+            <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between md:gap-x-4'>
               <Avatar
-                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                 // shadows
                 animationSrc='/male-idle-3.fbx'
-                style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px' }}
+                style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
                 fov={40}
                 cameraTarget={1.5}
                 cameraInitialDistance={30}
@@ -94,22 +74,27 @@ export default function AvatarComponent({ onNextButtonClick }) {
                   ambientOcclusion: true,
                 }}
               />
-              <div className='mt-5 flex justify-center md:grid md:h-fit  md:grid-cols-3 md:gap-4'>
-                <AvatarImageComponent />
-              </div>
+              <AvatarImageComponent />
+            </div>
+          ) : (
+            <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between md:gap-x-4'>
+              <Avatar
+                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+                // shadows
+                animationSrc='/male-idle-3.fbx'
+                style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
+                fov={40}
+                cameraTarget={1.5}
+                cameraInitialDistance={30}
+                effects={{
+                  ambientOcclusion: true,
+                }}
+              />
+              <AvatarImageComponent />
             </div>
           )}
 
           <div className='mt-4 flex justify-center gap-x-2 md:absolute md:bottom-4 md:right-4 md:justify-end'>
-            {/* <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900'
-              href='/avatar'
-            >
-              Create Avatar &emsp; +
-            </motion.a> */}
-
             <DrawOutlineButton
               onClick={() => {
                 setIsCardModalOpen(true)

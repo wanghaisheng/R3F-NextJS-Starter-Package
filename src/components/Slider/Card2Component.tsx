@@ -217,7 +217,7 @@ export default function CardComponent({ onNextButtonClick }) {
                   <div className='flex flex-col lg:flex-row lg:justify-between'>
                     {/* Card Image / Container */}
 
-                    <div className='flex'>
+                    <div className='flex justify-center'>
                       <CardsFlipCard type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
                     </div>
 
@@ -390,7 +390,7 @@ export default function CardComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='flex justify-center'>
+          <div className='mt-2 flex justify-center lg:mt-0'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
           </div>
         </div>

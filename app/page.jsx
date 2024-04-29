@@ -117,9 +117,9 @@ export default function Page() {
 
           <Link
             className='rounded-2xl border p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900  '
-            href='/signin'
+            href='/slider'
           >
-            Sign-In
+            Slider
           </Link>
         </div>
       </div>

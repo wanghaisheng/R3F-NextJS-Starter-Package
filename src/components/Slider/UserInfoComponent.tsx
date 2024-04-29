@@ -92,7 +92,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Card Image / Container */}
-              <div className='flex'>
+              <div className='flex justify-center'>
                 <GeniusIDFlipCard
                   first_name={first_name}
                   last_name={last_name}
@@ -182,7 +182,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                 </form>
               </div>
             </div>
-            <div className='flex justify-center'>
+            <div className='mt-2 flex justify-center lg:mt-0'>
               <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
             </div>
           </div>
