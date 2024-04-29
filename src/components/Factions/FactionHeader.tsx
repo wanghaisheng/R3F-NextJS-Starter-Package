@@ -58,7 +58,7 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
         <div>
           <div className='mx-auto flex max-w-sm items-center'>
             <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
-              <MdClearAll className='hover:text-purple-400' />
+              <MdClearAll />
             </div>
           </div>
         </div>
@@ -101,33 +101,33 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
         ) : (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' ? 'text-red-500' : 'text-red-200'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARUNA' && 'text-red-500'}`}
               onClick={() => handleFilterClick('KARUNA')} // coimpassion
             >
               KARUNA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' ? 'text-blue-500' : 'text-blue-200'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SHANTI' && 'text-blue-500'}`}
               onClick={() => handleFilterClick('SHANTI')} // peace
             >
               SHANTI
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-yellow-500' : 'text-yellow-200'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' && 'text-yellow-500'}`}
               onClick={() => handleFilterClick('VAJRA')} // thunderbolt  -- gold
               // onClick={() => handleFilterClick('PITAM')} // yellow
             >
               VAJRA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PRITHVI' ? 'text-green-500' : 'text-green-200'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PRITHVI' && 'text-green-500'}`}
               // onClick={() => handleFilterClick('BODHI')} // enlightenment
               onClick={() => handleFilterClick('PRITHVI')} // earth
             >
               PRITHVI
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-purple-500' : 'text-purple-200'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' && 'text-purple-500'}`}
               onClick={() => handleFilterClick('KARMA')} // karma -- purple
             >
               KARMA

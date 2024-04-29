@@ -57,7 +57,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
         <div>
           <div className='mx-auto flex max-w-sm items-center'>
             <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
-              <MdClearAll className='hover:text-purple-400' />
+              <MdClearAll />
             </div>
           </div>
         </div>
@@ -66,43 +66,49 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
         {isSmallScreen ? (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-orange-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
             >
               NA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'text-pink-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('SOUTH AMERICA')}
             >
               SA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-green-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
               AF
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-red-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
               E
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-yellow-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'MIDDLE EAST' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('MIDDLE EAST')}
+            >
+              ME
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
               A
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-emerald-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
               AU
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-gray-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('ANTARCTICA')}
             >
               AN
@@ -111,43 +117,49 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
         ) : (
           <>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-orange-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
             >
               NORTH AMERICA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'text-pink-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('SOUTH AMERICA')}
             >
               SOUTH AMERICA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-green-700'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
               AFRICA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-red-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
               EUROPE
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-yellow-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'MIDDLE EAST' && 'text-purple-700'}`}
+              onClick={() => handleFilterClick('MIDDLE EAST')}
+            >
+              MIDDLE EAST
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
               ASIA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-emerald-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
               AUSTRALIA & OCEANIA
             </a>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-gray-500'}`}
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-purple-700'}`}
               onClick={() => handleFilterClick('ANTARCTICA')}
             >
               ANTARCTICA

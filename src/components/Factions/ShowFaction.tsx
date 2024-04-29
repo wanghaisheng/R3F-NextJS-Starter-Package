@@ -35,14 +35,14 @@ export default function ShowFaction({ filter }: { filter: string }) {
       description: 'description',
       faction: 'SHANTI',
       avatarimg:
-        'https://imgs.search.brave.com/MTrgAlI9IUNEazHqY3oTjmPK5aFCx9PFNP-9KGZL35w/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5za2V0Y2hmYWIu/Y29tL21vZGVscy8w/NDgxOGI0NWEwMmM0/NDIwYWM1YzE3OGU0/YmMwZjI5OC90aHVt/Ym5haWxzLzI5MWZi/Y2MyZTJiNTRhNWE4/MjBjMGZlNzRiMzli/YWZkLzdhZjc5MDM5/NTY5YTQ0ZmE4ZGQ1/YzhjZDFjY2NmYTA3/LmpwZWc',
+        'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },
     {
       name: 'Rohit Shrestha',
       description: 'description',
       faction: 'KARUNA',
       avatarimg:
-        'https://imgs.search.brave.com/XRbhstNA1e7oLafHVCD8UrDlVh3_IBPHGKeS3c757cE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTIvQXZh/dGFyLVBORy1IRC1J/bWFnZS5wbmc',
+        'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },
     {
       name: 'Ram Kumar',
@@ -66,11 +66,11 @@ export default function ShowFaction({ filter }: { filter: string }) {
         'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },
     {
-      name: 'John Doe',
+      name: 'Hari Bahadur',
       description: 'description',
       faction: 'KARUNA',
       avatarimg:
-        'https://imgs.search.brave.com/k6UIriBBSu_f_YXaz1n3Ncap5wTcfFLPSrPW0-hnMPQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5za2V0Y2hmYWIu/Y29tL21vZGVscy80/OTBkZmNjODkwNjk0/YzNjYjcxMTg2OWZk/OWY5OGU0Yi90aHVt/Ym5haWxzLzE1Yjc2/YTE2MDRhOTQwMGVh/Zjc1NzdkNDgxNjI4/NTk5L2VlN2RlODdk/MmJiZjQ1ZTNiZGM4/N2QyYTE0NDE2OWUy/LmpwZWc',
+        'https://imgs.search.brave.com/buW9tya4CqszAbLkeozF7lkb6O5wYW7bkugJuWq6McU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdnJzY291/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjEvMDIvUmVh/bFBsYXllck1lRmVh/dHVyZS5wbmc_Zml0/PTgxMCw0NjImc3Ns/PTE',
     },
   ]
 
@@ -88,7 +88,7 @@ export default function ShowFaction({ filter }: { filter: string }) {
               style={{
                 backgroundImage: `url(${faction.avatarimg})`,
               }}
-              className='h-64 w-full rounded-bl-lg rounded-tr-lg bg-purple-900/25 bg-cover bg-center shadow-md md:h-72'
+              className='h-64 w-full rounded-bl-lg rounded-tr-lg bg-black bg-cover bg-center shadow-md md:h-72'
             >
               <div className='flex h-full flex-col justify-between'>
                 <div className='h-full rounded-tr-md bg-black/0 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/70'>
@@ -97,11 +97,7 @@ export default function ShowFaction({ filter }: { filter: string }) {
                   </div>
                 </div>
                 <div className='relative flex flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
-                  <h1
-                    className={`font-bold transition duration-300 ease-in-out ${faction.faction === 'KARUNA' ? 'text-red-300' : faction.faction === 'SHANTI' ? 'text-blue-300' : faction.faction === 'VAJRA' ? 'text-yellow-300' : faction.faction === 'PRITHVI' ? 'text-green-300' : faction.faction === 'KARMA' ? 'text-purple-300' : 'text-white'}`}
-                  >
-                    {faction.name}
-                  </h1>
+                  <h1 className='font-bold text-white transition duration-300 ease-in-out '>{faction.name}</h1>
                 </div>
               </div>
             </div>
