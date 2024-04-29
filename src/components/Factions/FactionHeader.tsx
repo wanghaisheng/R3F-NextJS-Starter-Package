@@ -30,8 +30,8 @@ export default function FactionHeader({ onFilterChange }: { onFilterChange: (fil
           <form className='mx-auto flex max-w-sm items-center'>
             <svg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M25 13C25 19.0751 20.0751 24 14 24C7.92487 24 3 19.0751 3 13C3 6.92487 7.92487 2 14 2C20.0751 2 25 6.92487 25 13ZM26 13C26 19.6274 20.6274 25 14 25C10.8685 25 8.01707 23.8005 5.88027 21.8358L1.95431 26.2666C1.77118 26.4733 1.45518 26.4924 1.24849 26.3093C1.04181 26.1261 1.02272 25.8101 1.20585 25.6034L5.17157 21.1278C3.20254 18.9901 2 16.1355 2 13C2 6.37258 7.37258 1 14 1C20.6274 1 26 6.37258 26 13Z'
                 fill='white'
               />

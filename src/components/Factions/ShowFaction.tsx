@@ -97,7 +97,11 @@ export default function ShowFaction({ filter }: { filter: string }) {
                   </div>
                 </div>
                 <div className='relative flex flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
-                  <h1 className='font-bold text-white transition duration-300 ease-in-out '>{faction.name}</h1>
+                  <h1
+                    className={`font-bold transition duration-300 ease-in-out ${faction.faction === 'KARUNA' ? 'text-red-300' : faction.faction === 'SHANTI' ? 'text-blue-300' : faction.faction === 'VAJRA' ? 'text-yellow-300' : faction.faction === 'PRITHVI' ? 'text-green-300' : faction.faction === 'KARMA' ? 'text-purple-300' : 'text-white'}`}
+                  >
+                    {faction.name}
+                  </h1>
                 </div>
               </div>
             </div>
