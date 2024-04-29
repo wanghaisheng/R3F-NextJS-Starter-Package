@@ -57,7 +57,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
         <div>
           <div className='mx-auto flex max-w-sm items-center'>
             <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
-              <MdClearAll />
+              <MdClearAll className='hover:text-purple-400' />
             </div>
           </div>
         </div>
