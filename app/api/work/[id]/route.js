@@ -6,7 +6,6 @@ const prisma = new PrismaClient()
 export async function PUT(request, { params }) {
   try {
     const data = await request.json()
-    console.log(data)
     const { image_url, description } = data
     const id = params.id
 
