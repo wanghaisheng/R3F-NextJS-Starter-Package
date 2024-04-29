@@ -57,8 +57,8 @@ const Navbar = () => {
             <Image
               src='/GGlogo.png'
               className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-              height={95}
-              width={95}
+              height={85}
+              width={85}
               alt='GG Logo'
             />
           </Link>

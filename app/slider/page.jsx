@@ -65,7 +65,7 @@ const SliderPage = () => {
 
   return (
     <>
-      <div className='mx-auto mb-28 mt-10 max-w-7xl'>
+      <div className='mx-auto mb-28 mt-16 max-w-7xl md:mt-10'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-4 flex'>
             <div className='w-full min-w-0 shrink-0 grow'>
@@ -87,10 +87,18 @@ const SliderPage = () => {
               <SkillsComponent />
             </div>
           </div>
-          <button id='prevBtn' className='absolute left-10 top-56 text-5xl' onClick={scrollPrev}>
+          <button
+            id='prevBtn'
+            className='absolute left-10 top-56 hidden md:block md:text-2xl lg:text-5xl'
+            onClick={scrollPrev}
+          >
             <MdNavigateBefore />
           </button>
-          <button id='nextBtn' className='absolute right-10 top-56 text-5xl' onClick={scrollNext}>
+          <button
+            id='nextBtn'
+            className='absolute right-10 top-56 hidden md:block md:text-2xl lg:text-5xl'
+            onClick={scrollNext}
+          >
             <MdNavigateNext />
           </button>
         </div>

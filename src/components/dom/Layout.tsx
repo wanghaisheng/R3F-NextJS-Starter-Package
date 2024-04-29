@@ -25,8 +25,8 @@ const Layout = ({ children }) => {
       }}
     >
       <Navbar />
-      <StarsCanvas />
-      <PurpleVoid />
+      {/* <StarsCanvas /> */}
+      {/* <PurpleVoid /> */}
       {children}
       <Scene
         style={{

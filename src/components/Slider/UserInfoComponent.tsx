@@ -84,10 +84,10 @@ export default function UserInfoComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='geniusId'
-        className='relative flex h-fit w-[68%] rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='relative flex h-fit w-[85%] py-4 md:w-[68%] md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-8 lg:text-7xl'>Genius ID</div>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Genius ID</div>
 
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
