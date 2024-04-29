@@ -51,13 +51,15 @@ import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
 import SkinsCard from '@/components/card/SkinsCard'
 
+import axios from 'axios'
+
 async function getSkills() {
   try {
-    const res = await fetch('http://localhost:3000/api/skills')
-    if (!res.ok) {
+    const res = await axios.get('/api/skills')
+    if (res.status !== 200) {
       console.log('failed to fetch the skills')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.log('failed to fetch the skills', error)
   }
@@ -65,11 +67,11 @@ async function getSkills() {
 
 async function getAvatarById(id) {
   try {
-    const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
-    if (!res.ok) {
+    const res = await axios.get(`/api/avatar/${id}`)
+    if (res.status !== 200) {
       console.log('failed to fetch the avatars')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.log('failed to fetch the avatars', error)
   }

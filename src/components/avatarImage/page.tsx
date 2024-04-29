@@ -13,13 +13,15 @@ import { useCallback, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
+import axios from 'axios'
+
 async function getAvatarById(id: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
-    if (!res.ok) {
+    const res = await axios.get(`/api/avatar/${id}`)
+    if (res.status !== 200) {
       throw new Error('failed to fetch the avatars')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.error(error)
   }

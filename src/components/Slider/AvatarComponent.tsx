@@ -7,16 +7,16 @@ import { useRouter } from 'next/navigation'
 import AvatarImageComponent from '../avatarImage/page'
 import FormModal2 from '../FormModal/Modal2'
 import Avatar_creator from '@/components/avatar-creator/avatar'
-
+import axios from 'axios'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 async function getAvatarById(id: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
-    if (!res.ok) {
+    const res = await axios.get(`/api/avatar/${id}`)
+    if (res.status !== 200) {
       throw new Error('failed to fetch the avatars')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.error(error)
   }
