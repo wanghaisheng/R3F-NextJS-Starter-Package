@@ -87,7 +87,6 @@ export default function CardComponent({ onNextButtonClick }) {
       date_in: cards[index].date_in,
       date_out: cards[index].date_out,
     }
-    console.log(submit)
     try {
       await axios({
         url: `/api/card/${id}`,

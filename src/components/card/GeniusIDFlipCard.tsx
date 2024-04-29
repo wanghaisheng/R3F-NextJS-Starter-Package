@@ -46,9 +46,7 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
               <div className='flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
                   <li className='mb-1 w-full text-xl font-semibold'>
-                    <p>
-                      {first_name.toUpperCase()} {last_name.toUpperCase()}
-                    </p>
+                    <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
                   </li>
                   <li className='mb-1 w-full'>
                     <p className='text-purple-500'>{email}</p>
