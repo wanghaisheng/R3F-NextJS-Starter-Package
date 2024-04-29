@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function ShowRegion({ filter }: { filter: string }) {
+export default function ShowRegion({ filter, searchTerm }: { filter: string; searchTerm: string }) {
   const regions = [
     {
       name: 'East Asia',
@@ -41,9 +41,13 @@ export default function ShowRegion({ filter }: { filter: string }) {
 
   const filteredRegions = filter ? regions.filter((region) => region.continent === filter) : regions
 
+  const filteredAndSearchedRegions = filteredRegions.filter((region) =>
+    region.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
+
   return (
     <div className='mx-10 mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-      {filteredRegions.map((region, index) => (
+      {filteredAndSearchedRegions.map((region, index) => (
         <div
           className='flex min-w-0 flex-col items-center justify-center transition duration-500 ease-out hover:scale-105'
           key={index}

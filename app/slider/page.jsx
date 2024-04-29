@@ -105,7 +105,7 @@ const SliderPage = () => {
       </div>
 
       {/* Footer Nav */}
-      <footer class='fixed inset-x-0 bottom-4 flex justify-center'>
+      <footer className='fixed inset-x-0 bottom-4 flex justify-center'>
         {/* <img src='/footer.png' alt='' className='relative hidden w-[48%] md:block' /> */}
         <div className='flex items-center justify-center'>
           <div className='grid w-fit grid-cols-3 gap-2 rounded-3xl p-6 shadow-inner shadow-[#6B37CA] backdrop-blur-md md:flex md:h-10 md:items-center md:justify-center md:gap-7'>
