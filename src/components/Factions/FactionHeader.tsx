@@ -118,7 +118,7 @@ export default function FactionHeader({
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
               onClick={() => handleFilterClick('VAJRA')}
             >
-              SHANTI
+              VAJRA
             </a>
             <a
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
