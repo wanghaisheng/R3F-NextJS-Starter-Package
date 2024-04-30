@@ -8,7 +8,9 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
-import { Avatar } from 'src/components/Avatar'
+
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -273,7 +275,7 @@ export default function Hero3() {
 
   return (
     <div className='flex flex-col md:size-full'>
-      {/* <div className='flex items-center bg-none'>
+      {/* <div className='hidden items-center bg-none md:flex'>
         <View className='flex h-20 w-full flex-col items-center justify-center bg-none'>
           <Suspense fallback={null}>
             <Type scale={2} position={[0, 0, 0]} />
@@ -451,7 +453,7 @@ export default function Hero3() {
                   )}
                 </div>
 
-                <div className='h-full md:mr-24 md:w-[30%] '>
+                <div className='h-full md:mr-20 md:w-[30%] '>
                   <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Avatar{' '}
                     <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
@@ -464,7 +466,9 @@ export default function Hero3() {
                     </div>
                   </div>
                   {/* Skin Card Component */}
-                  <SkinsCard />
+                  <div className='w-full'>
+                    <SkinsCard />
+                  </div>
                 </div>
               </div>
             </div>

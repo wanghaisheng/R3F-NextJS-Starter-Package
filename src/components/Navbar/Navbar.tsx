@@ -143,16 +143,16 @@ const Navbar = () => {
                     MAPS
                   </Link>
                 )}
-                {pathname === '/factions' ? (
-                  <Link href='/factions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    FACTIONS
+                {pathname === '/guilds' ? (
+                  <Link href='/guilds' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    GUILDS
                   </Link>
                 ) : (
                   <Link
-                    href='/factions'
+                    href='/guilds'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    FACTIONS
+                    GUILDS
                   </Link>
                 )}
                 {pathname === '/hero3' ? (
@@ -207,10 +207,10 @@ const Navbar = () => {
                 MAPS
               </Link>
               <Link
-                href='/factions'
+                href='/guilds'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                FACTIONS
+                GUILDS
               </Link>
               <Link
                 href='hero3'

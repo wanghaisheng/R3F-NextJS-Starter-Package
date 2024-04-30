@@ -23,7 +23,6 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
   return (
     <>
       <CardBody>
-        {/* Event Image  */}
         <div className='group h-[239px] p-3 [prespective:1000px]'>
           {/* Flip the card when clicked */}
           <div

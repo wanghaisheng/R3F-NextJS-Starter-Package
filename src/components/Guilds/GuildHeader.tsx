@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { MdClearAll } from 'react-icons/md'
 
-export default function FactionHeader({
+export default function GuildHeader({
   onFilterChange,
   searchTerm,
   setSearchTerm,

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import FactionHeader from '@/components/Factions/FactionHeader'
-import ShowFaction from '@/components/Factions/ShowFaction'
+import GuildHeader from '@/components/Guilds/GuildHeader'
+import ShowGuild from '@/components/Guilds/ShowGuild'
 
 const Factions = () => {
   const [selectedFilter, setSelectedFilter] = useState(null)
@@ -14,8 +14,8 @@ const Factions = () => {
   }
   return (
     <>
-      <FactionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <ShowFaction filter={selectedFilter} searchTerm={searchTerm} />
+      <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <ShowGuild filter={selectedFilter} searchTerm={searchTerm} />
     </>
   )
 }
