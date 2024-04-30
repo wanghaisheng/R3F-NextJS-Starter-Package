@@ -262,7 +262,7 @@ export default function Hero3() {
         </View>
       </div> */}
       {/* avatar */}
-      <div className='absolute top-[40%] flex size-[360px] items-center justify-center lg:relative lg:h-[600px] lg:w-full'>
+      <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -413,8 +413,7 @@ export default function Hero3() {
                     </div>
                   )}
                   <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-5'>
-                    <p className='mb-4'>Some premium features for paid users</p>
-                    <p className='mb-4'>A</p>
+                    <p className='mb-4 text-center'>Some premium features for paid users</p>
                     <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
                     {/* Spring Pop Up Modal */}
                     <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -429,7 +428,7 @@ export default function Hero3() {
                     </a>
                   </div>
                   <div className='flex min-h-48 items-center justify-center px-4'>
-                    <div className='flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8  xl:px-10'>
+                    <div className='mb-7 flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
                       <AvatarImageComponent />
                     </div>
                   </div>

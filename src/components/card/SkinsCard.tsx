@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
 
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
@@ -53,35 +54,42 @@ export default function SkinsCard() {
   }, [emblaApi])
 
   return (
-    <div className='mx-2 my-5 flex py-2 md:mx-6'>
-      <button className='' onClick={scrollPrev}>
-        <MdNavigateBefore />
-      </button>
-      <div className='w-full overflow-hidden' ref={emblaRef}>
-        <div className='mx-2 flex items-center'>
-          {skins.map((skin, index) => (
-            <div className='mx-2 flex w-full shrink-0 grow flex-col items-center justify-center md:min-w-0' key={index}>
+    <div className='flex justify-center'>
+      <div className='mx-2 my-5 flex h-[250px] w-[300px] py-2 md:mx-6'>
+        <button id='skinback' aria-label='prevskin' onClick={scrollPrev}>
+          <MdNavigateBefore />
+        </button>
+        <div className='w-full overflow-hidden' ref={emblaRef}>
+          <div className='mx-2 flex items-center'>
+            {skins.map((skin, index) => (
               <div
-                style={{
-                  backgroundImage: `url(${skin.image})`,
-                }}
-                className='h-48 w-full rounded-lg bg-gray-300 bg-cover bg-center shadow-md md:h-64'
+                className='mx-2 flex w-full shrink-0 grow flex-col items-center justify-center md:min-w-0'
+                key={index}
               >
-                <div className='flex h-full flex-col justify-between'>
-                  <div className='px-3 py-2 text-center font-bold uppercase tracking-wide text-white'>{skin.name}</div>
-                  <div className='flex items-center justify-between rounded bg-purple-700/60 px-3 py-2'>
-                    <h1 className='font-bold text-white'>{skin.price}</h1>
-                    <DrawOutlineButton>Add to cart</DrawOutlineButton>
+                <div
+                  style={{
+                    backgroundImage: `url(${skin.image})`,
+                  }}
+                  className='h-48 w-full rounded-lg bg-gray-300 bg-cover bg-center shadow-md md:h-56'
+                >
+                  <div className='flex h-full flex-col justify-between'>
+                    <div className='px-3 py-2 text-center font-bold uppercase tracking-wide text-white'>
+                      {skin.name}
+                    </div>
+                    <div className='flex items-center justify-between rounded bg-purple-700/60 px-3 py-2'>
+                      <h1 className='font-bold text-white'>{skin.price}</h1>
+                      <DrawOutlineButton>Add to cart</DrawOutlineButton>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        <button id='skinnext' aria-label='nextskin' onClick={scrollNext}>
+          <MdNavigateNext />
+        </button>
       </div>
-      <button className='' onClick={scrollNext}>
-        <MdNavigateNext />
-      </button>
     </div>
   )
 }
