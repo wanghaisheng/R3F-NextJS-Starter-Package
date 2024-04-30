@@ -67,11 +67,11 @@ export default function AvatarImageComponent() {
   return (
     <div className='flex justify-center'>
       <div className='overflow-hidden lg:w-full' ref={emblaRef}>
-        <div className='flex items-center'>
+        <div className='flex items-center gap-x-2 '>
           {avatarsData && avatarsData.length != 0 ? (
             avatarsData.map((avatar) => (
-              <div className='w-full shrink-0 grow md:min-w-0' key={avatar}>
-                <div className='rounded-lg bg-white/20' key={avatar}>
+              <div className='w-[50%] shrink-0 grow md:min-w-0' key={avatar}>
+                <div className='rounded-lg bg-purple-900/20'>
                   {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
                   {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
                   <Image
@@ -90,7 +90,7 @@ export default function AvatarImageComponent() {
             </div>
           )}
         </div>
-        <div className='my-4 flex justify-between text-2xl'>
+        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
           <button className='' onClick={scrollPrev}>
             <MdNavigateBefore />
           </button>

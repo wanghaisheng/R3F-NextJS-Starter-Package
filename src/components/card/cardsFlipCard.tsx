@@ -47,27 +47,25 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
               {/* Card Details */}
               <div className='flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
-                  <li className='mb-2 w-full text-xl font-semibold'>
+                  <ul className='mb-2 w-full text-xl font-semibold'>
                     {user != null ? (
                       user.first_name != null ? (
-                        <p>{user.first_name.toUpperCase() + ' ' + user.last_name.toUpperCase()}</p>
+                        <li>{user.first_name.toUpperCase() + ' ' + user.last_name.toUpperCase()}</li>
                       ) : (
-                        <p>PERSON NAME</p>
+                        <li>PERSON NAME</li>
                       )
                     ) : (
-                      <p>PERSON NAME</p>
+                      <li>PERSON NAME</li>
                     )}
-                  </li>
-                  <li className='my-2 mb-1 w-full'>
-                    <p>{name}</p>
-                  </li>
+                  </ul>
+                  <ul>
+                    <li className='my-2 mb-1 w-full'>{name}</li>
+                  </ul>
                   <div className='flex w-full justify-between'>
-                    <li className='my-2 mb-1 w-full'>
-                      <p>Date In : {dateIn}</p>
-                    </li>
-                    <li className='my-2 mb-1 w-full'>
-                      <p>Date Out : {dateOut}</p>
-                    </li>
+                    <ul>
+                      <li className='my-2 mb-1 w-full'>Date In : {dateIn}</li>
+                      <li className='my-2 mb-1 w-full'>Date Out : {dateOut}</li>
+                    </ul>
                   </div>
                 </nav>
               </div>

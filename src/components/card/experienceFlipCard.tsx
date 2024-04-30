@@ -45,15 +45,17 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
               {/* Card Details */}
               <div className='flex flex-col p-5 text-sm text-white '>
                 <nav className='mb-1 flex list-none flex-wrap'>
-                  <li className='mb-2 w-full text-xl font-semibold'>
-                    <p>{projectName.toUpperCase()}</p>
-                  </li>
-                  <li className='my-2 mb-1 w-full'>
-                    <p>Skills : {skills}</p>
-                  </li>
-                  <li className='my-2 mb-1 w-full'>
-                    <p>Tools : {toolsAndTech}</p>
-                  </li>
+                  <ul>
+                    <li className='mb-2 w-full text-xl font-semibold'>
+                      <p>{projectName.toUpperCase()}</p>
+                    </li>
+                    <li className='my-2 mb-1 w-full'>
+                      <p>Skills : {skills}</p>
+                    </li>
+                    <li className='my-2 mb-1 w-full'>
+                      <p>Tools : {toolsAndTech}</p>
+                    </li>
+                  </ul>
                 </nav>
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>

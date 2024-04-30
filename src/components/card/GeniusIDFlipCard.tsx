@@ -44,21 +44,23 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
               {/* Card Details */}
               <div className='flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
-                  <li className='mb-1 w-full text-xl font-semibold'>
-                    <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
-                  </li>
-                  <li className='mb-1 w-full'>
-                    <p className='text-purple-500'>{email}</p>
-                  </li>
-                  <li className='w-full'>
-                    <p>DOB : {dob}</p>
-                  </li>
-                  <li className='w-full'>
-                    <p>Address : {address}</p>
-                  </li>
-                  <li className='w-full'>
-                    <p>Contact : {contact}</p>
-                  </li>
+                  <ul>
+                    <li className='mb-1 w-full text-xl font-semibold'>
+                      <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
+                    </li>
+                    <li className='mb-1 w-full'>
+                      <p className='text-purple-500'>{email}</p>
+                    </li>
+                    <li className='w-full'>
+                      <p>DOB : {dob}</p>
+                    </li>
+                    <li className='w-full'>
+                      <p>Address : {address}</p>
+                    </li>
+                    <li className='w-full'>
+                      <p>Contact : {contact}</p>
+                    </li>
+                  </ul>
                 </nav>
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
@@ -73,7 +75,7 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
                 <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
+                <div className='text-base font-semibold text-purple-600'>GOING GENIUS</div>
                 <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
               </div>
             </div>
