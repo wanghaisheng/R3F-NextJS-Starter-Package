@@ -466,9 +466,7 @@ export default function Hero3() {
                     </div>
                   </div>
                   {/* Skin Card Component */}
-                  <div className='w-full'>
-                    <SkinsCard />
-                  </div>
+                  <SkinsCard />
                 </div>
               </div>
             </div>
