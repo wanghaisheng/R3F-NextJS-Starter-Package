@@ -46,31 +46,33 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
   )
 
   return (
-    <div className='mx-10 mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-      {filteredAndSearchedRegions.map((region, index) => (
-        <div
-          className='flex min-w-0 flex-col items-center justify-center transition duration-500 ease-out hover:scale-105'
-          key={index}
-        >
-          <div
-            style={{
-              backgroundImage: `url(${region.image})`,
-            }}
-            className='h-48 w-full rounded-bl-lg rounded-tr-lg bg-black bg-cover bg-center shadow-md md:h-56'
+    <div className='flex justify-center'>
+      <div className='mx-10 my-6 grid grid-cols-1 gap-5  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        {filteredAndSearchedRegions.map((region, index) => (
+          <a
+            href='#'
+            className='relative flex h-[230px] w-[350px] min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
+            key={index}
           >
-            <div className='flex h-full flex-col justify-between'>
-              <div className='h-full rounded-tr-md bg-black/70 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/0'>
-                <div className='flex h-full items-center justify-center transition duration-500 ease-out hover:opacity-0'>
-                  <Image unoptimized src={region.icon} alt='region icon' height={60} width={60} />
-                </div>
-              </div>
-              <div className='relative flex flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
-                <h1 className='font-bold text-white transition duration-300 ease-in-out '>{region.name}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+            <span className='absolute top-0 flex size-full rounded-bl-lg rounded-tr-lg '>
+              <Image src={region.image} alt='' layout='fill' objectFit='cover' unoptimized loading='lazy' />
+            </span>
+            <span className='absolute top-0 flex size-full items-center justify-center bg-black/80 opacity-100 transition duration-700 ease-out hover:opacity-0'>
+              <Image
+                unoptimized
+                src={region.icon}
+                alt='region icon'
+                height={50}
+                width={50}
+                className='absolute top-[35%] '
+              />
+            </span>
+            <span className='absolute bottom-0 flex w-full flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
+              <h1>{region.name}</h1>
+            </span>
+          </a>
+        ))}
+      </div>
     </div>
   )
 }
