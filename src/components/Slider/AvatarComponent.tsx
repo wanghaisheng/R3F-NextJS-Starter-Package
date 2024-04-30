@@ -62,7 +62,7 @@ export default function AvatarComponent({ onNextButtonClick }) {
         <div className='relative my-3 flex justify-center text-2xl md:text-4xl lg:my-5 lg:text-7xl'>My Avatars</div>
 
         {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-          <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between md:gap-x-4'>
+          <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
             <Avatar
               modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
               // shadows
@@ -78,7 +78,7 @@ export default function AvatarComponent({ onNextButtonClick }) {
             <AvatarImageComponent />
           </div>
         ) : (
-          <div className='mt-8 flex flex-col justify-center md:mt-7 md:flex-row md:justify-between md:gap-x-4'>
+          <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
             <Avatar
               modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
               // shadows

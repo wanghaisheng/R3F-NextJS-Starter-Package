@@ -498,7 +498,7 @@ export default function Hero3() {
                           </div>
                         </div>
                       </div>
-                      <div className='mt-2 flex justify-center text-2xl'>
+                      <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
                         <button onClick={scrollPrev3} id='prevbtn3'>
                           <MdNavigateBefore />
                         </button>
@@ -563,7 +563,7 @@ export default function Hero3() {
                             </div>
                           </div>
                         </div>
-                        <div className='mt-2 flex justify-center text-2xl'>
+                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
                           <button onClick={scrollPrev3} id='prevbtn4'>
                             <MdNavigateBefore />
                           </button>
