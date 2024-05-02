@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import dynamic from 'next/dynamic'
 import StarsCanvas from '@/components/StarsCanvas/StarBackground'
 import Navbar from '@/components/Navbar/Navbar'
+import Hud from '@/components/Hud/Hud'
 
 import PurpleVoid from '@/components/PurpleVoid/PurpleVoid'
 
@@ -40,6 +41,12 @@ const Layout = ({ children }) => {
         eventSource={ref}
         eventPrefix='client'
       /> */}
+
+      <div className='absolute bottom-0 w-full '>
+        <div className='flex justify-center'>
+          <Hud />
+        </div>
+      </div>
     </div>
   )
 }
