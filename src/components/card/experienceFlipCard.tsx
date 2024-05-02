@@ -31,20 +31,11 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
             ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
             onClick={handleFlip}
           >
-            <div className='absolute inset-0 cursor-default rounded-xl bg-black text-white'>
-              <span>
-                <Image
-                  unoptimized
-                  src='/card/abstract3.webp'
-                  alt='Experience'
-                  fill
-                  sizes='(max-width: 400px) 100vw, (max-width: 1023px) 50vw, 33vw'
-                  className='rounded-lg'
-                />
-              </span>
-              <div className='absolute top-0 flex w-full justify-end'>
-                <p className='pr-3 pt-1 font-bold text-pink-300'>{type.toUpperCase()}</p>
-              </div>
+            <Image unoptimized src='/card/abstract3.webp' alt='Experience' fill className='rounded-lg object-cover' />
+            <div className='absolute top-0 flex w-full justify-end'>
+              <p className='pr-3 pt-1 font-bold text-pink-300'>{type.toUpperCase()}</p>
+            </div>
+            <div className='absolute inset-0 cursor-default rounded-xl '>
               {/* Card Details */}
               <div className='absolute top-5 flex flex-col p-5 text-sm text-white '>
                 <nav className='mb-1 flex list-none flex-wrap'>
@@ -61,10 +52,10 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
                   </ul>
                 </nav>
               </div>
-              <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                <div className='text-base font-bold text-purple-300'>GOING GENIUS</div>
-                <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
-              </div>
+            </div>
+            <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
+              <div className='text-base font-bold text-purple-300'>GOING GENIUS</div>
+              <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
             </div>
 
             {/* QRCode */}

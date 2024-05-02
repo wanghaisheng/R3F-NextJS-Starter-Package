@@ -71,17 +71,13 @@ export default function SkinsCard() {
                   className='relative flex size-full min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out'
                   key={index}
                 >
-                  <span className='absolute top-0 flex size-full rounded-bl-lg rounded-tr-lg '>
-                    <Image
-                      unoptimized
-                      src={skin.image}
-                      alt={skin.name}
-                      fill
-                      sizes='(max-width: 400px) 100vw, (max-width: 1023px) 50vw, 33vw'
-                      objectFit='cover'
-                      className='rounded-bl-lg rounded-tr-lg'
-                    />
-                  </span>
+                  <Image
+                    unoptimized
+                    src={skin.image}
+                    alt={skin.name}
+                    fill
+                    className='rounded-bl-lg rounded-tr-lg object-cover'
+                  />
                   <span className='absolute top-0 flex w-full flex-col items-center rounded-tr-md px-3 py-2 transition duration-300 hover:text-purple-400'>
                     <h1 className='font-bold'>{skin.name}</h1>
                   </span>

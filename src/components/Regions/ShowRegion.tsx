@@ -47,24 +47,22 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
 
   return (
     <div className='flex justify-center'>
-      <div className='mx-10 my-6 grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      <div className='mx-10 my-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {filteredAndSearchedRegions.map((region, index) => (
           <a
             href='#'
-            className='relative flex min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
+            className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
             key={index}
-            style={{ width: '95%', height: '230px', maxWidth: '350px' }}
           >
-            <span className='flex size-full rounded-bl-lg rounded-tr-lg '>
-              <Image
-                src={region.image}
-                alt=''
-                width={350}
-                height={230}
-                className='rounded-bl-lg rounded-tr-lg'
-                style={{ objectFit: 'cover' }}
-              />
-            </span>
+            <Image
+              className='aspect-[300/230] w-[300px] rounded-bl-lg rounded-tr-lg'
+              src={region.image}
+              alt=''
+              width={300}
+              height={230}
+              style={{ objectFit: 'cover' }}
+            />
+            {/* Symbol */}
             <span className='absolute top-0 flex size-full items-center justify-center rounded-bl-lg rounded-tr-lg bg-black/80 opacity-100 transition duration-700 ease-out hover:opacity-0'>
               <Image src={region.icon} alt='region icon' height={50} width={50} className='absolute top-[35%] ' />
             </span>

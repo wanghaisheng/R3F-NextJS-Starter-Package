@@ -79,12 +79,17 @@ export default function ShowGuild({ filter, searchTerm }: { filter: string; sear
             <a
               href='#'
               key={index}
-              className='relative flex h-[280px] w-[240px] min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
-              // style={{ width: '95%', height: '280px', maxWidth: '350px' }}
+              className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
             >
-              <span className='absolute top-0 rounded-bl-lg rounded-tr-lg '>
-                <Image src={guild.avatarimg} alt='' width={240} height={280} />
-              </span>
+              <Image
+                className='absolute top-0 w-[240px] rounded-bl-lg rounded-tr-lg'
+                src={guild.avatarimg}
+                alt=''
+                width={240}
+                height={280}
+                style={{ objectFit: 'cover' }}
+              />
+
               <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
                 <p>{guild.description}</p>
               </span>
