@@ -91,10 +91,10 @@ export default function AvatarImageComponent() {
           )}
         </div>
         <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-          <button className='' onClick={scrollPrev}>
+          <button aria-label='Previous Slide' onClick={scrollPrev}>
             <MdNavigateBefore />
           </button>
-          <button className='' onClick={scrollNext}>
+          <button aria-label='Next Slide' onClick={scrollNext}>
             <MdNavigateNext />
           </button>
         </div>

@@ -309,7 +309,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -330,7 +334,11 @@ export default function Hero3() {
                               <div className='flex flex-col justify-center'>
                                 <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                   {card.type.toUpperCase()}
-                                  <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                  <a
+                                    className=' px-2 py-1 text-sm text-black dark:text-white'
+                                    aria-label='edit button'
+                                    href='/slider'
+                                  >
                                     <FaRegEdit />
                                   </a>
                                 </div>
@@ -347,10 +355,10 @@ export default function Hero3() {
                           ))}
                         </div>
                         <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button id='prevbtn1' onClick={scrollPrev2}>
+                          <button aria-label='previos button' onClick={scrollPrev2}>
                             <MdNavigateBefore />
                           </button>
-                          <button id='nextbtn1' onClick={scrollNext2}>
+                          <button aria-label='next button' onClick={scrollNext2}>
                             <MdNavigateNext />
                           </button>
                         </div>
@@ -365,7 +373,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -385,7 +397,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 CARD2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -402,10 +418,10 @@ export default function Hero3() {
                           </div>
                         </div>
                         <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button id='prevbtn2' onClick={scrollPrev2}>
+                          <button aria-label='Previous btn' onClick={scrollPrev2}>
                             <MdNavigateBefore />
                           </button>
-                          <button id='nextbtn2' onClick={scrollNext2}>
+                          <button aria-label='Next btn' onClick={scrollNext2}>
                             <MdNavigateNext />
                           </button>
                         </div>
@@ -423,7 +439,11 @@ export default function Hero3() {
                 <div className='mt-60 h-full lg:mr-20 lg:mt-0 lg:w-[30%] '>
                   <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Avatar
-                    <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                    <a
+                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                      aria-label='edit button'
+                      href='/slider'
+                    >
                       <FaRegEdit />
                     </a>
                   </div>
@@ -450,7 +470,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Experience
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -475,7 +499,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Exp2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -499,10 +527,10 @@ export default function Hero3() {
                         </div>
                       </div>
                       <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                        <button onClick={scrollPrev3} id='prevbtn3'>
+                        <button onClick={scrollPrev3} aria-label='prev button'>
                           <MdNavigateBefore />
                         </button>
-                        <button onClick={scrollNext3} id='nextbtn3'>
+                        <button onClick={scrollNext3} aria-label='next button'>
                           <MdNavigateNext />
                         </button>
                       </div>
@@ -516,7 +544,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Experience
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -541,7 +573,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Exp2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -564,10 +600,10 @@ export default function Hero3() {
                           </div>
                         </div>
                         <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button onClick={scrollPrev3} id='prevbtn4'>
+                          <button onClick={scrollPrev3} aria-label='previous button'>
                             <MdNavigateBefore />
                           </button>
-                          <button onClick={scrollNext3} id='nextbtn4'>
+                          <button onClick={scrollNext3} aria-label='next button'>
                             <MdNavigateNext />
                           </button>
                         </div>
@@ -578,6 +614,7 @@ export default function Hero3() {
                     <a
                       href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
                       target='_blank'
+                      aria-label='Booking button'
                     >
                       <DrawOutlineButton>Booking</DrawOutlineButton>
                     </a>
@@ -587,7 +624,11 @@ export default function Hero3() {
                 <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
                   <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
                     Skills
-                    <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                    <a
+                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                      aria-label='edit button'
+                      href='/slider'
+                    >
                       <FaRegEdit />
                     </a>
                   </div>
@@ -695,14 +736,14 @@ export default function Hero3() {
           <button
             className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
             onClick={scrollPrev}
-            id='prevbtn5'
+            aria-label='Previous Slide'
           >
             <MdNavigateBefore />
           </button>
           <button
             className='absolute hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
             onClick={scrollNext}
-            id='nxtbtn5'
+            aria-label='Next Slide'
           >
             <MdNavigateNext />
           </button>
