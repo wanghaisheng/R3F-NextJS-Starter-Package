@@ -32,7 +32,14 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
           >
             <div className='absolute inset-0 cursor-default rounded-xl'>
               <span>
-                <Image unoptimized src='/card/abstract1.webp' alt='GID' fill className='rounded-lg' />
+                <Image
+                  // placeholder='blur'
+                  src='/card/abstract1.webp'
+                  alt='GID'
+                  fill
+                  sizes='(max-width: 400px) 100vw, (max-width: 1023px) 50vw, 33vw'
+                  className='rounded-lg'
+                />
               </span>
               <div className='absolute top-0 flex w-full justify-end'>
                 <p className='pr-3 pt-1 font-bold text-purple-200'>GENIUS ID</p>

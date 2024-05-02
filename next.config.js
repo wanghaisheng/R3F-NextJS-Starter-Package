@@ -18,7 +18,33 @@ const nextConfig = {
   // },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   images: {
-    domains: ['models.readyplayer.me'] 
+    // domains: ['models.readyplayer.me'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'models.readyplayer.me',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i0.wp.com',
+        port: '',
+        pathname: '/vrscout.com/wp-content/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn-icons-png.flaticon.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'imgs.search.brave.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   webpack(config, { isServer }) {
     if (!isServer) {
@@ -56,32 +82,32 @@ const nextConfig = {
 }
 
 const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
-const path = require('path');
+const { hostname } = require('os')
+const path = require('path')
 module.exports = (_phase, { defaultConfig }) => {
-  
-  const plugins = [[withPWA], [withBundleAnalyzer, {}]];
+  const plugins = [[withPWA], [withBundleAnalyzer, {}]]
 
   const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
     ...defaultConfig,
     ...nextConfig,
-  });
+  })
 
   // Additional configuration
   const additionalConfig = {
     sassOptions: {
       includePaths: [path.join(__dirname, 'styles')],
     },
-  };
+  }
 
-  const finalConfig = { ...wConfig, ...additionalConfig };
+  const finalConfig = { ...wConfig, ...additionalConfig }
 
   // Optionally, if you want to omit certain keys
-  const KEYS_TO_OMIT = []; // Add keys you want to omit here if needed
+  const KEYS_TO_OMIT = [] // Add keys you want to omit here if needed
   Object.keys(finalConfig).forEach((key) => {
     if (!KEYS_TO_OMIT.includes(key)) {
-      finalConfig[key] = wConfig[key];
+      finalConfig[key] = wConfig[key]
     }
-  });
-  
-  return finalConfig;
-};
+  })
+
+  return finalConfig
+}

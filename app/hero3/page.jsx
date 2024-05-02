@@ -428,9 +428,11 @@ export default function Hero3() {
                       </div>
                     </div>
                   )}
-                  <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-5'>
-                    <p className='mb-4 text-center'>Some premium features for paid users</p>
-                    <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
+                  <div className='my-5 flex flex-col items-center py-5'>
+                    <div className='rounded-lg bg-purple-900/50 p-5'>
+                      <p className='mb-4 text-center'>Some premium features for paid users</p>
+                      <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
+                    </div>
                     {/* Spring Pop Up Modal */}
                     <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
                   </div>

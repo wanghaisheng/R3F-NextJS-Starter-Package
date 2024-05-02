@@ -33,7 +33,14 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
           >
             <div className='absolute inset-0 cursor-default rounded-xl bg-black text-white'>
               <span>
-                <Image unoptimized src='/card/abstract3.webp' alt='Experience' fill className='rounded-lg' />
+                <Image
+                  unoptimized
+                  src='/card/abstract3.webp'
+                  alt='Experience'
+                  fill
+                  sizes='(max-width: 400px) 100vw, (max-width: 1023px) 50vw, 33vw'
+                  className='rounded-lg'
+                />
               </span>
               <div className='absolute top-0 flex w-full justify-end'>
                 <p className='pr-3 pt-1 font-bold text-pink-300'>{type.toUpperCase()}</p>

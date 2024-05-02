@@ -12,7 +12,8 @@ export default function ShowGuild({ filter, searchTerm }: { filter: string; sear
       name: 'Ram Kumar',
       description: 'description',
       guild: 'KARMA',
-      avatarimg: 'https://models.readyplayer.me/6630d7f8168713af984b742e.png',
+      // avatarimg: 'https://models.readyplayer.me/6630d7f8168713af984b742e.png',
+      avatarimg: 'https://i0.wp.com/vrscout.com/wp-content/uploads/2021/10/TimmuToke_4.png?ssl=1',
     },
     {
       name: 'Siri',
@@ -78,10 +79,11 @@ export default function ShowGuild({ filter, searchTerm }: { filter: string; sear
             <a
               href='#'
               key={index}
-              className='relative flex h-[300px] w-[240px] min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
+              className='relative flex h-[280px] w-[240px] min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
+              // style={{ width: '95%', height: '280px', maxWidth: '350px' }}
             >
-              <span className='absolute top-0 flex size-full rounded-bl-lg rounded-tr-lg '>
-                <Image src={guild.avatarimg} alt='' layout='fill' objectFit='cover' unoptimized loading='lazy' />
+              <span className='absolute top-0 rounded-bl-lg rounded-tr-lg '>
+                <Image src={guild.avatarimg} alt='' width={240} height={280} />
               </span>
               <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
                 <p>{guild.description}</p>

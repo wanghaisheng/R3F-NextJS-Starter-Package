@@ -35,7 +35,14 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
           >
             <div className='absolute inset-0 cursor-default rounded-xl '>
               <span>
-                <Image unoptimized src='/card/abstract4.webp' alt='Card Front' fill className='rounded-lg' />
+                <Image
+                  unoptimized
+                  src='/card/abstract4.webp'
+                  alt='Card Front'
+                  fill
+                  sizes='(max-width: 400px) 100vw, (max-width: 1023px) 50vw, 33vw'
+                  className='rounded-lg'
+                />
               </span>
               <div className='absolute top-0 flex w-full justify-end'>
                 <p className='pr-3 pt-1 font-bold text-purple-600'>{type.toUpperCase()}</p>

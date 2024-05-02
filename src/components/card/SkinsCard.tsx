@@ -76,9 +76,9 @@ export default function SkinsCard() {
                       unoptimized
                       src={skin.image}
                       alt={skin.name}
-                      layout='fill'
+                      fill
+                      sizes='(max-width: 400px) 100vw, (max-width: 1023px) 50vw, 33vw'
                       objectFit='cover'
-                      loading='lazy'
                       className='rounded-bl-lg rounded-tr-lg'
                     />
                   </span>
