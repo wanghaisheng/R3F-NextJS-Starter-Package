@@ -352,7 +352,7 @@ export default function Hero3() {
                             <div key={card.card_id} className='w-full shrink-0 grow md:min-w-0 '>
                               <div className='flex flex-col justify-center'>
                                 <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                  {card.type.toUpperCase()}
+                                  {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
                                   <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
                                     <FaRegEdit />
                                   </a>
