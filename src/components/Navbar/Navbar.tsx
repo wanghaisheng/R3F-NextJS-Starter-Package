@@ -44,12 +44,7 @@ const Navbar = () => {
 
   return (
     <>
-      <motion.nav
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '
-      >
+      <motion.nav className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
@@ -182,7 +177,7 @@ const Navbar = () => {
                     HOME
                   </Link>
                 )}
-                {pathname === '/regions' ? (
+                {pathname.startsWith('/regions') ? (
                   <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     REGIONS
                   </Link>

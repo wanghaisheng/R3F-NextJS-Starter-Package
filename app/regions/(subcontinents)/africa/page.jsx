@@ -4,7 +4,7 @@ import { useState } from 'react'
 import GuildHeader from '@/components/Guilds/GuildHeader'
 import ShowGuild from '@/components/Guilds/ShowGuild'
 
-const Factions = () => {
+const Africa = () => {
   const [selectedFilter, setSelectedFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -82,6 +82,8 @@ const Factions = () => {
     },
   ]
 
+  const filteredUser = guilds.filter((user) => user.continent === 'AFRICA')
+
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter)
     setSearchTerm('')
@@ -89,9 +91,9 @@ const Factions = () => {
   return (
     <>
       <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <ShowGuild users={guilds} filter={selectedFilter} searchTerm={searchTerm} />
+      <ShowGuild users={filteredUser} filter={selectedFilter} searchTerm={searchTerm} />
     </>
   )
 }
 
-export default Factions
+export default Africa

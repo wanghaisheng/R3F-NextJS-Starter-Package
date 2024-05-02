@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function ShowGuild({ users, filter, searchTerm }: { users: any; filter: string; searchTerm: string }) {
+export default function ShowUsers({ users, filter, searchTerm }: { users: any; filter: string; searchTerm: string }) {
   const filteredFactions = filter ? users.filter((user) => user.guild === filter) : users
 
   const filteredAndSearchedFactions = filteredFactions.filter((user) =>
