@@ -38,10 +38,9 @@ export default function GuildHeader({
   return (
     <div className='relative'>
       <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
-        {/* <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'> */}
         <div className='flex h-12 w-[80%] items-center justify-between px-5 py-2 md:gap-14 lg:w-full'>
           {/* search */}
-          <div className='mx-auto flex max-w-sm items-center lg:pl-24'>
+          <div className='mx-auto flex max-w-sm items-center lg:pl-32'>
             <svg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
@@ -62,7 +61,7 @@ export default function GuildHeader({
                 type='text'
                 id='simple-search'
                 className='block w-full bg-transparent pl-5 text-sm text-gray-200 focus:outline-none'
-                placeholder={isSmallScreen ? '----' : 'SEARCH'}
+                placeholder='SEARCH'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -77,7 +76,7 @@ export default function GuildHeader({
         </div>
 
         {isSmallScreen && (
-          <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold '>
+          <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
             <a
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
               onClick={() => handleFilterClick('BUDDHA')}

@@ -47,8 +47,8 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
 
   return (
     <>
-      <div className='flex justify-center'>
-        <div className='mx-10 my-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      <div className='flex'>
+        <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:ml-24 lg:justify-start'>
           {filteredAndSearchedRegions.map((region, index) => (
             <a
               href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
