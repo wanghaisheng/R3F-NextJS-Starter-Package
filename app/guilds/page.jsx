@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import GuildHeader from '@/components/Guilds/GuildHeader'
 import ShowGuild from '@/components/Guilds/ShowGuild'
+import Image from 'next/image'
 
 const Factions = () => {
   const [selectedFilter, setSelectedFilter] = useState(null)
@@ -20,8 +21,8 @@ const Factions = () => {
       name: 'Ram Kumar',
       description: 'description',
       guild: 'KARMA',
-      // avatarimg: 'https://models.readyplayer.me/6630d7f8168713af984b742e.png',
-      avatarimg: 'https://i0.wp.com/vrscout.com/wp-content/uploads/2021/10/TimmuToke_4.png?ssl=1',
+      avatarimg: 'https://models.readyplayer.me/6630d85ee2cc95da16c0484b.png',
+      // avatarimg: 'https://i0.wp.com/vrscout.com/wp-content/uploads/2021/10/TimmuToke_4.png?ssl=1',
       continent: 'EAST ASIA',
     },
     {
@@ -89,7 +90,10 @@ const Factions = () => {
   return (
     <>
       <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <ShowGuild users={guilds} filter={selectedFilter} searchTerm={searchTerm} />
+
+      <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
+        <ShowGuild users={guilds} filter={selectedFilter} searchTerm={searchTerm} />
+      </div>
     </>
   )
 }

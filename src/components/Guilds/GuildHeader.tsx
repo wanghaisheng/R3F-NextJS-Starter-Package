@@ -3,6 +3,10 @@
 import { useEffect, useState } from 'react'
 
 import { MdClearAll } from 'react-icons/md'
+import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
+import { FaDiamond } from 'react-icons/fa6'
+import { BsOctagonFill } from 'react-icons/bs'
+import { MdHexagon } from 'react-icons/md'
 
 export default function GuildHeader({
   onFilterChange,
@@ -32,10 +36,12 @@ export default function GuildHeader({
   }
 
   return (
-    <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
-      <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'>
-        <div>
-          <div className='mx-auto flex max-w-sm items-center'>
+    <div className='relative'>
+      <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
+        {/* <div className='flex h-12 w-[80%] items-center justify-between rounded-full border-x-2 border-b-2 border-[#6B37CA] px-5 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md  md:gap-14'> */}
+        <div className='flex h-12 w-[80%] items-center justify-between px-5 py-2 md:gap-14 lg:w-full'>
+          {/* search */}
+          <div className='mx-auto flex max-w-sm items-center lg:pl-24'>
             <svg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
@@ -62,84 +68,99 @@ export default function GuildHeader({
               />
             </div>
           </div>
-        </div>
-
-        <div>
+          {/* filter */}
           <div className='mx-auto flex max-w-sm items-center'>
             <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
               <MdClearAll className='hover:text-purple-400' />
             </div>
           </div>
         </div>
+
+        {isSmallScreen && (
+          <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold '>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
+              onClick={() => handleFilterClick('BUDDHA')}
+            >
+              <MdHexagon />
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
+              onClick={() => handleFilterClick('VAJRA')}
+            >
+              <BsOctagonFill />
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
+              onClick={() => handleFilterClick('KARMA')}
+            >
+              <FaDiamond />
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
+              onClick={() => handleFilterClick('RATNA')}
+            >
+              <IoCubeSharp />
+            </a>
+            <a
+              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
+              onClick={() => handleFilterClick('PADMA')}
+            >
+              <IoTriangleSharp />
+            </a>
+          </div>
+        )}
       </div>
-      <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold md:top-5 '>
-        {isSmallScreen ? (
-          <>
+
+      {/* Sidebar */}
+      <div className='fixed top-0 hidden items-center justify-start font-semibold md:top-5 lg:flex'>
+        <ul className='mt-[60%] flex h-[800px] w-[310px] flex-col gap-y-7'>
+          <li>
             <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
-              onClick={() => handleFilterClick('PADMA')}
-            >
-              P
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
-              onClick={() => handleFilterClick('VAJRA')}
-            >
-              V
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
-              onClick={() => handleFilterClick('RATNA')}
-            >
-              R
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
-              onClick={() => handleFilterClick('KARMA')}
-            >
-              K
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'bg-gradient-to-r from-white text-gray-800' : 'text-gray-300'}`}
               onClick={() => handleFilterClick('BUDDHA')}
             >
-              B
-            </a>
-          </>
-        ) : (
-          <>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
-              onClick={() => handleFilterClick('PADMA')}
-            >
-              PADMA
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
-              onClick={() => handleFilterClick('VAJRA')}
-            >
-              VAJRA
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
-              onClick={() => handleFilterClick('RATNA')}
-            >
-              RATNA
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
-              onClick={() => handleFilterClick('KARMA')}
-            >
-              KARMA
-            </a>
-            <a
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
-              onClick={() => handleFilterClick('BUDDHA')}
-            >
+              <MdHexagon />
               BUDDHA
             </a>
-          </>
-        )}
+          </li>
+          <li>
+            <a
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'bg-gradient-to-r from-blue-300 text-blue-800' : 'text-blue-200'}`}
+              onClick={() => handleFilterClick('VAJRA')}
+            >
+              <BsOctagonFill />
+              VAJRA
+            </a>
+          </li>
+          <li>
+            <a
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'bg-gradient-to-r from-green-300 text-green-800' : 'text-green-200'}`}
+              onClick={() => handleFilterClick('KARMA')}
+            >
+              <FaDiamond />
+              KARMA
+            </a>
+          </li>
+          <li>
+            <a
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'bg-gradient-to-r from-yellow-300 text-yellow-800' : 'text-yellow-200'}`}
+              onClick={() => handleFilterClick('RATNA')}
+            >
+              <IoCubeSharp />
+              RATNA
+            </a>
+          </li>
+          <li>
+            <a
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'bg-gradient-to-r from-red-300 text-red-800' : 'text-red-200'}`}
+              onClick={() => handleFilterClick('PADMA')}
+            >
+              <IoTriangleSharp />
+              PADMA
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   )

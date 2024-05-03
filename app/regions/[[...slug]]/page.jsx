@@ -24,7 +24,7 @@ const Regions = ({ params }) => {
       ) : params.slug?.length === 1 ? (
         <div>
           <RegionDetails continent={params.slug[0]} />
-          View of region {params.slug[0]}
+          <div className='mx-10 flex justify-end'>{params.slug[0].toUpperCase()}</div>
         </div>
       ) : (
         <>

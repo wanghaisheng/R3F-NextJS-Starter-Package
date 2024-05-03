@@ -91,7 +91,10 @@ const RegionDetails = ({ continent }: { continent: string }) => {
   return (
     <>
       <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <ShowGuild users={filteredUser} filter={selectedFilter} searchTerm={searchTerm} />
+
+      <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
+        <ShowGuild users={filteredUser} filter={selectedFilter} searchTerm={searchTerm} />
+      </div>
     </>
   )
 }
