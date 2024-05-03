@@ -13,7 +13,7 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
         <div className='mx-10 my-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {filteredAndSearchedFactions.map((user, index) => (
             <a
-              href='#'
+              href={`/regions/${user.name.toLowerCase().replace(' ', '-')}`}
               key={index}
               className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
             >

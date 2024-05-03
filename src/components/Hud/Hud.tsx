@@ -17,7 +17,7 @@ const Hud = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const pathname = usePathname()
-  const [hideMiddleNav, setHideMiddleNav] = useState(false)
+  const [hideMiddleNav, setHideMiddleNav] = useState(true)
 
   useEffect(() => {
     if (
@@ -26,7 +26,8 @@ const Hud = () => {
       pathname === '/signin' ||
       pathname === '/signup' ||
       pathname === '/guilds' ||
-      pathname === '/regions'
+      pathname === '/regions' ||
+      pathname.match(/^\/regions\/.*/)
     ) {
       setHideMiddleNav(true)
     } else {
