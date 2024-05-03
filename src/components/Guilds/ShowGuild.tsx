@@ -63,16 +63,14 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
                   {user.name.toUpperCase()}
                   {user.continent.toUpperCase() === 'EAST-ASIA' ? (
                     <p className='size-2 rounded-full bg-green-500'></p>
-                  ) : user.guild === 'VAJRA' ? (
-                    ''
-                  ) : user.guild === 'RATNA' ? (
+                  ) : user.continent.toUpperCase() === 'SOUTH-ASIA' ? (
+                    <p className='size-2 rounded-full bg-blue-500'></p>
+                  ) : user.continent.toUpperCase() === 'MESO-AMERICA' ? (
                     <p className='size-2 rounded-full bg-yellow-500'></p>
-                  ) : user.guild === 'KARMA' ? (
-                    ''
-                  ) : user.guild === 'BUDDHA' ? (
-                    ''
+                  ) : user.continent.toUpperCase() === 'SUB-SAHARAN-AFRICA' ? (
+                    <p className='size-2 rounded-full bg-pink-500'></p>
                   ) : (
-                    ''
+                    <p className='size-2 rounded-full bg-white'></p>
                   )}
                 </h1>
               </span>
