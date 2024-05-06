@@ -59,25 +59,19 @@ export default function SkinsCard() {
         <button id='skinback' aria-label='prevskin' onClick={scrollPrev}>
           <MdNavigateBefore />
         </button>
-        <div className='size-full overflow-hidden rounded-bl-lg rounded-tr-lg' ref={emblaRef}>
+        <div className='size-full overflow-hidden rounded-lg' ref={emblaRef}>
           <div className='mx-2 flex size-full items-center '>
             {skins.map((skin, index) => (
               <div
-                className='mx-2 flex size-full shrink-0 grow flex-col items-center justify-center rounded-bl-lg rounded-tr-lg md:min-w-0'
+                className='mx-2 flex size-full shrink-0 grow flex-col items-center justify-center rounded-lg md:min-w-0'
                 key={index}
               >
                 <a
                   href='#'
-                  className='relative flex size-full min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out'
+                  className='relative flex size-full min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out'
                   key={index}
                 >
-                  <Image
-                    unoptimized
-                    src={skin.image}
-                    alt={skin.name}
-                    fill
-                    className='rounded-bl-lg rounded-tr-lg object-cover'
-                  />
+                  <Image unoptimized src={skin.image} alt={skin.name} fill className='rounded-lg object-cover' />
                   <span className='absolute top-0 flex w-full flex-col items-center rounded-tr-md px-3 py-2 transition duration-300 hover:text-purple-400'>
                     <h1 className='font-bold'>{skin.name}</h1>
                   </span>

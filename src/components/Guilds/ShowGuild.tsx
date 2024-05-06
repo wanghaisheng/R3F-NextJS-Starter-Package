@@ -20,10 +20,10 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
             <a
               href={`/regions/${user.name.toLowerCase().replace(' ', '-')}`}
               key={index}
-              className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-950/20 transition duration-500 ease-out'
+              className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-lg shadow-sm backdrop-blur-md transition duration-500 ease-out'
             >
               <Image
-                className='absolute top-0 w-[240px] rounded-tr-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
+                className='absolute top-0 w-[240px] rounded-t-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
                 src={user.avatarimg}
                 alt=''
                 width={240}
@@ -63,32 +63,31 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
               {/* <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
                 <p>{user.description}</p>
               </span> */}
-              <span className='absolute right-2 top-2 transition duration-500 ease-out hover:scale-150'>
-                {user.guild.toUpperCase() === 'PADMA' ? (
-                  <p className='text-red-500'>
-                    <IoTriangleSharp />
-                  </p>
-                ) : user.guild.toUpperCase() === 'VAJRA' ? (
-                  <p className=' text-blue-500'>
-                    <BsOctagonFill />
-                  </p>
-                ) : user.guild.toUpperCase() === 'KARMA' ? (
-                  <p className=' text-green-500'>
-                    <FaDiamond />
-                  </p>
-                ) : user.guild.toUpperCase() === 'RATNA' ? (
-                  <p className=' text-yellow-500'>
-                    <IoCubeSharp />
-                  </p>
-                ) : (
-                  <p className='text-white'>
-                    <MdHexagon />
-                  </p>
-                )}
-              </span>
-              <span className={`absolute bottom-0 flex w-full items-center rounded-bl-md bg-purple-950 px-3 py-2`}>
+
+              <span className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950 px-3 py-2`}>
                 <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out hover:text-purple-300'>
                   {user.name.toUpperCase()}
+                  {user.guild.toUpperCase() === 'PADMA' ? (
+                    <p className='text-red-500'>
+                      <IoTriangleSharp />
+                    </p>
+                  ) : user.guild.toUpperCase() === 'VAJRA' ? (
+                    <p className=' text-blue-500'>
+                      <BsOctagonFill />
+                    </p>
+                  ) : user.guild.toUpperCase() === 'KARMA' ? (
+                    <p className=' text-green-500'>
+                      <FaDiamond />
+                    </p>
+                  ) : user.guild.toUpperCase() === 'RATNA' ? (
+                    <p className=' text-yellow-500'>
+                      <IoCubeSharp />
+                    </p>
+                  ) : (
+                    <p className='text-white'>
+                      <MdHexagon />
+                    </p>
+                  )}
                 </h1>
               </span>
             </a>

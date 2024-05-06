@@ -54,11 +54,11 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
           {filteredAndSearchedRegions.map((region, index) => (
             <a
               href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
-              className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-bl-lg rounded-tr-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
+              className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
               key={index}
             >
               <Image
-                className='aspect-[300/230] w-[300px] rounded-bl-lg rounded-tr-lg'
+                className='aspect-[300/230] w-[300px] rounded-lg'
                 src={region.image}
                 alt=''
                 width={300}
@@ -66,10 +66,10 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
                 style={{ objectFit: 'cover' }}
               />
               {/* Symbol */}
-              <span className='absolute top-0 flex size-full items-center justify-center rounded-bl-lg rounded-tr-lg bg-black/80 opacity-100 transition duration-700 ease-out hover:opacity-0'>
+              <span className='absolute top-0 flex size-full items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
                 <Image src={region.icon} alt='region icon' height={50} width={50} className='absolute top-[35%] ' />
               </span>
-              <span className='absolute bottom-0 flex w-full flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
+              <span className='absolute bottom-0 flex w-full flex-col items-center rounded-b-md bg-purple-950 px-3 py-2'>
                 <h1>{region.name}</h1>
               </span>
             </a>

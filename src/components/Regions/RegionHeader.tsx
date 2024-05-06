@@ -83,7 +83,7 @@ export default function RegionHeader({
         )}
       </div>
       {/* Sidebar */}
-      <div className='fixed top-0 hidden items-center justify-start font-semibold md:top-5 lg:flex'>
+      <div className='fixed top-0 hidden items-center justify-start  font-semibold md:top-5 lg:flex'>
         <ul className='mt-[40%] flex h-[800px] w-[330px] flex-col gap-y-7'>
           <li>
             <a
