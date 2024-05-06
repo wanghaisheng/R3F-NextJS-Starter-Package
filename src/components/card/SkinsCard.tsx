@@ -1,10 +1,13 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
+import Image from 'next/image'
 
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
+
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 export default function SkinsCard() {
   const skins = [
@@ -50,59 +53,41 @@ export default function SkinsCard() {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
 
-  // Animated Button
-  const DrawOutlineButton = ({ children, ...rest }) => {
-    return (
-      <button
-        {...rest}
-        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
-      >
-        <span>{children}</span>
-
-        {/* TOP */}
-        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
-
-        {/* RIGHT */}
-        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
-
-        {/* BOTTOM */}
-        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
-
-        {/* LEFT */}
-        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
-      </button>
-    )
-  }
   return (
-    <div className='mx-2 my-5 flex py-2 md:mx-6'>
-      <button className='' onClick={scrollPrev}>
-        <MdNavigateBefore />
-      </button>
-      <div className='w-full overflow-hidden' ref={emblaRef}>
-        <div className='mx-2 flex items-center'>
-          {skins.map((skin, index) => (
-            <div className='mx-2 flex w-full shrink-0 grow flex-col items-center justify-center md:min-w-0' key={index}>
+    <div className='flex justify-center'>
+      <div className='mx-2 my-5 flex h-[250px] w-[360px] py-2 md:mx-6'>
+        <button id='skinback' aria-label='prevskin' onClick={scrollPrev}>
+          <MdNavigateBefore />
+        </button>
+        <div className='size-full overflow-hidden rounded-lg' ref={emblaRef}>
+          <div className='mx-2 flex size-full items-center '>
+            {skins.map((skin, index) => (
               <div
-                style={{
-                  backgroundImage: `url(${skin.image})`,
-                }}
-                className='h-48 w-full rounded-lg bg-gray-300 bg-cover bg-center shadow-md md:h-64'
+                className='mx-2 flex size-full shrink-0 grow flex-col items-center justify-center rounded-lg md:min-w-0'
+                key={index}
               >
-                <div className='flex h-full flex-col justify-between'>
-                  <div className='px-3 py-2 text-center font-bold uppercase tracking-wide text-white'>{skin.name}</div>
-                  <div className='flex items-center justify-between rounded bg-purple-700/60 px-3 py-2'>
+                <a
+                  href='#'
+                  className='relative flex size-full min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out'
+                  key={index}
+                >
+                  <Image unoptimized src={skin.image} alt={skin.name} fill className='rounded-lg object-cover' />
+                  <span className='absolute top-0 flex w-full flex-col items-center rounded-tr-md px-3 py-2 transition duration-300 hover:text-purple-400'>
+                    <h1 className='font-bold'>{skin.name}</h1>
+                  </span>
+                  <span className='absolute bottom-0 flex w-full items-center justify-between rounded-bl-md bg-purple-950 px-3 py-2'>
                     <h1 className='font-bold text-white'>{skin.price}</h1>
                     <DrawOutlineButton>Add to cart</DrawOutlineButton>
-                  </div>
-                </div>
+                  </span>
+                </a>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        <button id='skinnext' aria-label='nextskin' onClick={scrollNext} className='ml-1'>
+          <MdNavigateNext />
+        </button>
       </div>
-      <button className='' onClick={scrollNext}>
-        <MdNavigateNext />
-      </button>
     </div>
   )
 }

@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useRouter } from 'next/navigation'
-import styles from './createavatar.module.css'
-import SliderPage from '@/slider/page'
-import Hero from '@/hero3/page'
+import axios from 'axios'
 
 const CreateAvatar = () => {
   const [avatars, setAvatars] = useState([])
@@ -14,11 +12,11 @@ const CreateAvatar = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('http://localhost:3000/api/avatar')
-        if (!res.ok) {
+        const res = await axios.get('/api/avatar')
+        if (res.status !== 200) {
           throw new Error('Failed to fetch avatars')
         }
-        const data = await res.json()
+        const data = await res.data
         setAvatars(data)
       } catch (error) {
         console.error(error)

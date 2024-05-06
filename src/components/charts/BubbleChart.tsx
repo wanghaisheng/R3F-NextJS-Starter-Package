@@ -267,365 +267,359 @@ export default function BubbleChartComponent() {
     <>
       {/* Main content */}
       <div className='flex justify-center'>
-        <div>
-          <ResponsiveContainer>
-            <div>
-              <div>
-                {/* Chart for Sunday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    interval={0}
-                    tick={{ fontSize: 0 }}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+        <ResponsiveContainer width='100%' minHeight={400}>
+          <>
+            {/* Chart for Sunday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                interval={0}
+                tick={{ fontSize: 0 }}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                name='sunday'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'SUN', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey={'value'} domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_sunday} fill="#8884d8 " /> */}
+              <Scatter data={ram_sunday} fill='#8884d8'>
+                {ram_sunday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    name='sunday'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Sunday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey={'value'} domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_sunday} fill="#8884d8 " /> */}
-                  <Scatter data={ram_sunday} fill='#8884d8'>
-                    {ram_sunday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
+                ))}
+              </Scatter>
+            </ScatterChart>
 
-                {/* Chart for Monday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    name='hour'
-                    interval={0}
-                    tick={{ fontSize: 0 }}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+            {/* Chart for Monday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                name='hour'
+                interval={0}
+                tick={{ fontSize: 0 }}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'MON', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey='value' domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_monday} fill="#8884d8" /> */}
+              <Scatter data={ram_monday} fill='#8884d8'>
+                {ram_monday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Monday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey='value' domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_monday} fill="#8884d8" /> */}
-                  <Scatter data={ram_monday} fill='#8884d8'>
-                    {ram_monday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
+                ))}
+              </Scatter>
+            </ScatterChart>
 
-                {/* Chart for Tuesday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    name='hour'
-                    interval={0}
-                    tick={{ fontSize: 0 }}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+            {/* Chart for Tuesday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                name='hour'
+                interval={0}
+                tick={{ fontSize: 0 }}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'TUE', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey='value' domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_tuesday} fill="#8884d8" /> */}
+              <Scatter data={ram_tuesday} fill='#8884d8'>
+                {ram_tuesday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Tuesday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey='value' domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_tuesday} fill="#8884d8" /> */}
-                  <Scatter data={ram_tuesday} fill='#8884d8'>
-                    {ram_tuesday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
+                ))}
+              </Scatter>
+            </ScatterChart>
 
-                {/* Chart for Wednesday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    name='hour'
-                    interval={0}
-                    tick={{ fontSize: 0 }}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+            {/* Chart for Wednesday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                name='hour'
+                interval={0}
+                tick={{ fontSize: 0 }}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'WED', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey='value' domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_wednesday} fill="#8884d8" /> */}
+              <Scatter data={ram_wednesday} fill='#8884d8'>
+                {ram_wednesday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Wednesday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey='value' domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_wednesday} fill="#8884d8" /> */}
-                  <Scatter data={ram_wednesday} fill='#8884d8'>
-                    {ram_wednesday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
+                ))}
+              </Scatter>
+            </ScatterChart>
 
-                {/* Chart for Thursday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    name='hour'
-                    interval={0}
-                    tick={{ fontSize: 0 }}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+            {/* Chart for Thursday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                name='hour'
+                interval={0}
+                tick={{ fontSize: 0 }}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'THU', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey='value' domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_thursday} fill="#8884d8" /> */}
+              <Scatter data={ram_thursday} fill='#8884d8'>
+                {ram_thursday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Thursday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey='value' domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_thursday} fill="#8884d8" /> */}
-                  <Scatter data={ram_thursday} fill='#8884d8'>
-                    {ram_thursday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
+                ))}
+              </Scatter>
+            </ScatterChart>
 
-                {/* Chart for Friday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    name='hour'
-                    interval={0}
-                    tick={{ fontSize: 0 }}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+            {/* Chart for Friday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                name='hour'
+                interval={0}
+                tick={{ fontSize: 0 }}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'FRI', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey='value' domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_friday} fill="#8884d8" /> */}
+              <Scatter data={ram_friday} fill='#8884d8'>
+                {ram_friday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Friday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey='value' domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_friday} fill="#8884d8" /> */}
-                  <Scatter data={ram_friday} fill='#8884d8'>
-                    {ram_friday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
+                ))}
+              </Scatter>
+            </ScatterChart>
 
-                {/* Chart for Saturday */}
-                <ScatterChart
-                  width={900}
-                  height={60}
-                  margin={{
-                    top: 10,
-                    right: 0,
-                    bottom: 0,
-                    left: 20,
-                  }}
-                >
-                  <XAxis
-                    type='category'
-                    dataKey='hour'
-                    name='hour'
-                    interval={0}
-                    tickLine={{ transform: 'translate(0, -6)' }}
+            {/* Chart for Saturday */}
+            <ScatterChart
+              width={800}
+              height={60}
+              margin={{
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 20,
+              }}
+            >
+              <XAxis
+                type='category'
+                dataKey='hour'
+                name='hour'
+                interval={0}
+                tickLine={{ transform: 'translate(0, -6)' }}
+              />
+              <YAxis
+                type='number'
+                dataKey='index'
+                height={10}
+                width={80}
+                tick={false}
+                tickLine={false}
+                axisLine={false}
+                label={{ value: 'SAT', position: 'insideRight' }}
+              />
+              <ZAxis type='number' dataKey='value' domain={domain} range={range} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
+              {/* <Scatter data={ram_saturday} fill="#8884d8" /> */}
+              <Scatter data={ram_saturday} fill='#8884d8'>
+                {ram_saturday.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.value < 30
+                        ? 'gray'
+                        : entry.value < 50
+                          ? '#268AFF'
+                          : entry.value < 60
+                            ? '#268AFF'
+                            : '#36F097'
+                    }
                   />
-                  <YAxis
-                    type='number'
-                    dataKey='index'
-                    height={10}
-                    width={80}
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                    label={{ value: 'Saturday', position: 'insideRight' }}
-                  />
-                  <ZAxis type='number' dataKey='value' domain={domain} range={range} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={renderTooltip} />
-                  {/* <Scatter data={ram_saturday} fill="#8884d8" /> */}
-                  <Scatter data={ram_saturday} fill='#8884d8'>
-                    {ram_saturday.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={
-                          entry.value < 30
-                            ? 'gray'
-                            : entry.value < 50
-                              ? '#268AFF'
-                              : entry.value < 60
-                                ? '#268AFF'
-                                : '#36F097'
-                        }
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
-              </div>
-              <div className='mt-5'>
-                <Legend />
-              </div>
-            </div>
-          </ResponsiveContainer>
-        </div>
+                ))}
+              </Scatter>
+            </ScatterChart>
+            <Legend />
+          </>
+        </ResponsiveContainer>
       </div>
     </>
   )

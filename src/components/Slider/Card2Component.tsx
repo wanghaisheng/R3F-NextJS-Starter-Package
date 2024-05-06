@@ -15,11 +15,11 @@ import axios from 'axios'
 
 async function getCardInfo() {
   try {
-    const res = await fetch('http://localhost:3000/api/card')
-    if (!res.ok) {
+    const res = await axios.get('/api/card')
+    if (res.status !== 200) {
       throw new Error('failed to fetch the cards')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.error(error)
   }
@@ -28,7 +28,7 @@ async function getCardInfo() {
 export default function CardComponent({ onNextButtonClick }) {
   const { user } = useUser()
   const [cards, setCards] = useState([
-    { card_id: '', type: 'type', name: '', description: '', dateIn: '', dateOut: '' },
+    { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
   ])
 
   useEffect(() => {
@@ -61,8 +61,8 @@ export default function CardComponent({ onNextButtonClick }) {
       type: cards[index].type,
       name: cards[index].name,
       description: cards[index].description,
-      dateIn: cards[index].dateIn,
-      dateOut: cards[index].dateOut,
+      date_in: cards[index].date_in,
+      date_out: cards[index].date_out,
     }
     try {
       await axios({
@@ -84,10 +84,9 @@ export default function CardComponent({ onNextButtonClick }) {
       type: cards[index].type,
       name: cards[index].name,
       description: cards[index].description,
-      dateIn: cards[index].dateIn,
-      dateOut: cards[index].dateOut,
+      date_in: cards[index].date_in,
+      date_out: cards[index].date_out,
     }
-    console.log('type: ', typeof submit.dateIn, ': ', submit.dateIn)
     try {
       await axios({
         url: `/api/card/${id}`,
@@ -143,7 +142,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleCardDateInChange = (index: number, newDateIn: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
-      updatedCards[index].dateIn = newDateIn
+      updatedCards[index].date_in = newDateIn
       return updatedCards
     })
   }
@@ -151,7 +150,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleCardDateOutChange = (index: number, newDateOut: string) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
-      updatedCards[index].dateOut = newDateOut
+      updatedCards[index].date_out = newDateOut
       return updatedCards
     })
   }
@@ -159,7 +158,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleAddCard = () => {
     setCards((prevCards) => [
       ...prevCards,
-      { card_id: '', type: 'type', name: '', description: '', dateIn: '', dateOut: '' },
+      { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
     ])
   }
 
@@ -176,11 +175,11 @@ export default function CardComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='card'
-        className='relative flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='relative flex h-fit w-[85%] py-4 md:w-[68%] md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
           {/* heading */}
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-8 lg:text-7xl'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
             Card
             <div className='absolute right-0 top-10 text-sm'>
               <DrawOutlineButton
@@ -217,8 +216,8 @@ export default function CardComponent({ onNextButtonClick }) {
                   <div className='flex flex-col lg:flex-row lg:justify-between'>
                     {/* Card Image / Container */}
 
-                    <div className='flex'>
-                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.dateIn} dateOut={card.dateOut} />
+                    <div className='flex justify-center'>
+                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.date_in} dateOut={card.date_out} />
                     </div>
 
                     {/* Form for user input */}
@@ -239,7 +238,7 @@ export default function CardComponent({ onNextButtonClick }) {
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option value='' className='bg-black text-gray-600' selected>
+                                <option defaultValue='' className='bg-black text-gray-600'>
                                   Select Type
                                 </option>
                                 <option value='Educational' className='bg-black'>
@@ -281,7 +280,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 id='dateIn'
                                 type='date'
-                                value={card.dateIn}
+                                value={card.date_in}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateInChange(index, e.target.value)}
                                 required
@@ -292,7 +291,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 id='dateOut'
                                 type='date'
-                                value={card.dateOut}
+                                value={card.date_out}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateOutChange(index, e.target.value)}
                               />
@@ -319,7 +318,7 @@ export default function CardComponent({ onNextButtonClick }) {
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option value='' className='bg-black text-gray-600' selected>
+                                <option defaultValue='' className='bg-black text-gray-600'>
                                   Select Type
                                 </option>
                                 <option value='Educational' className='bg-black'>
@@ -361,7 +360,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 type='date'
                                 id='dateIn'
-                                value={card.dateIn}
+                                value={card.date_in}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateInChange(index, e.target.value)}
                                 required
@@ -372,7 +371,7 @@ export default function CardComponent({ onNextButtonClick }) {
                               <input
                                 id='dateOut'
                                 type='date'
-                                value={card.dateOut}
+                                value={card.date_out}
                                 className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                                 onChange={(e) => handleCardDateOutChange(index, e.target.value)}
                               />
@@ -390,7 +389,7 @@ export default function CardComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='flex justify-center'>
+          <div className='mt-2 flex justify-center lg:mt-0'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
           </div>
         </div>

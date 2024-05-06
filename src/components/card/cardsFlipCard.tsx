@@ -4,6 +4,7 @@ import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
 
 import { useState } from 'react'
+import { useUser } from '@/context/UserContext/UserContext'
 
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -12,6 +13,7 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
+  const { user } = useUser()
   QRCode.toDataURL(pathname).then(setImgSrc)
   // Flip Card QR end
 
@@ -31,40 +33,40 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
             ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
             onClick={handleFlip}
           >
-            <div
-              className='absolute inset-0 cursor-default rounded-xl bg-black text-white'
-              style={{
-                backgroundImage: 'url(/card/abstract4.webp)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              <div className='flex w-full justify-end'>
-                <p className='pr-3 pt-1 font-bold text-purple-600'>{type.toUpperCase()}</p>
-              </div>
+            <Image unoptimized src='/card/abstract4.webp' alt='Card Front' fill className='rounded-lg object-cover' />
+            <div className='absolute top-0 flex w-full justify-end'>
+              <p className='pr-3 pt-1 font-bold text-purple-600'>{type.toUpperCase()}</p>
+            </div>
+            <div className='absolute inset-0 cursor-default rounded-xl '>
               {/* Card Details */}
-              <div className='flex flex-col p-5 text-sm text-white'>
+              <div className='absolute top-5 flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
-                  <li className='mb-2 w-full text-xl font-semibold'>
-                    <p>PERSON NAME</p>
-                  </li>
-                  <li className='my-2 mb-1 w-full'>
-                    <p>{name}</p>
-                  </li>
+                  <ul className='mb-2 w-full text-xl font-semibold'>
+                    {user != null ? (
+                      user.first_name != null ? (
+                        <li>{user.first_name.toUpperCase() + ' ' + user.last_name.toUpperCase()}</li>
+                      ) : (
+                        <li>PERSON NAME</li>
+                      )
+                    ) : (
+                      <li>PERSON NAME</li>
+                    )}
+                  </ul>
+                  <ul>
+                    <li className='my-2 mb-1 w-full'>{name}</li>
+                  </ul>
                   <div className='flex w-full justify-between'>
-                    <li className='my-2 mb-1 w-full'>
-                      <p>Date In : {dateIn}</p>
-                    </li>
-                    <li className='my-2 mb-1 w-full'>
-                      <p>Date Out : {dateOut}</p>
-                    </li>
+                    <ul>
+                      <li className='my-2 mb-1 w-full'>Date In : {dateIn}</li>
+                      <li className='my-2 mb-1 w-full'>Date Out : {dateOut}</li>
+                    </ul>
                   </div>
                 </nav>
               </div>
-              <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
-                <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
-              </div>
+            </div>
+            <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
+              <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
+              <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
             </div>
 
             {/* QRCode */}

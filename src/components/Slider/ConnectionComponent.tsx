@@ -46,12 +46,12 @@ export default function ConnectionComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='connection'
-        className='flex h-fit w-[68%] rounded-3xl border border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='flex h-fit w-[85%] py-4 md:w-[68%] md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-8 lg:text-7xl'>Connection</div>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Connection</div>
           {connections.length < 4 ? (
-            <div className='mt-5 grid grid-cols-3 gap-2 md:grid-cols-4 lg:flex lg:justify-center lg:gap-x-10'>
+            <div className='mt-3 flex flex-wrap justify-center gap-x-10 gap-y-5'>
               {logos.map((logo, index) => (
                 <div
                   key={index}
@@ -62,12 +62,12 @@ export default function ConnectionComponent({ onNextButtonClick }) {
                       : { transition: 'all 0.3s ease-in-out' }
                   }
                 >
-                  <Image src={logo.src} alt={logo.alt} width={50} height={50} loading='lazy' />
+                  <Image src={logo.src} alt={logo.alt} width={40} height={40} loading='lazy' />
                 </div>
               ))}
             </div>
           ) : (
-            <div className='mt-5 grid grid-cols-3 gap-2 lg:flex lg:justify-center lg:gap-x-10'>
+            <div className='mt-3 flex flex-wrap justify-center gap-x-10 gap-y-5'>
               {logos.map((logo, index) => (
                 <div
                   key={index}
@@ -77,7 +77,7 @@ export default function ConnectionComponent({ onNextButtonClick }) {
                     transform: 'scale(0.8)',
                   }}
                 >
-                  <Image src={logo.src} alt={logo.alt} width={50} height={50} loading='lazy' />
+                  <Image src={logo.src} alt={logo.alt} width={40} height={40} loading='lazy' />
                 </div>
               ))}
             </div>
@@ -88,7 +88,7 @@ export default function ConnectionComponent({ onNextButtonClick }) {
               <div className='mt-10 flex flex-wrap justify-center gap-4'>
                 {connections.map((connection, index) => (
                   <div key={index} className='flex w-full items-center justify-center'>
-                    <Image src={connection.src} alt={connection.alt} width={45} height={45} />
+                    <Image src={connection.src} alt={connection.alt} width={30} height={30} />
                     <label htmlFor='type' className='hidden'></label>
                     <input
                       id='connection-link'

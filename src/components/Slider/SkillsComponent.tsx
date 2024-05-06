@@ -13,6 +13,8 @@ import 'react-tabs/style/react-tabs.css'
 import { TiDelete } from 'react-icons/ti'
 import Link from 'next/link'
 
+import axios from 'axios'
+
 import {
   Bar,
   BarChart,
@@ -44,11 +46,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 async function getSkills() {
   try {
-    const res = await fetch('http://localhost:3000/api/skills')
-    if (!res.ok) {
+    const res = await axios.get('/api/skills')
+    if (res.status !== 200) {
       throw new Error('failed to fetch the skills')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     throw new Error('failed to fetch the skills')
   }
@@ -136,10 +138,10 @@ export default function SkillsComponent() {
     <div className='mt-2 flex flex-col items-center justify-center'>
       <div
         id='skills'
-        className='relative flex h-fit w-[68%] items-center justify-center rounded-3xl border  border-[#a5a4a8]/40 bg-[#F8F8F8]/10 px-10 py-4 shadow-md shadow-purple-700 backdrop-blur-md'
+        className='relative flex h-fit w-[85%] items-center justify-center py-4 md:w-[68%] md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
       >
         <div className='flex w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-4 lg:text-7xl'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
             Skills
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
@@ -172,7 +174,7 @@ export default function SkillsComponent() {
                     <TabPanel key={index}>
                       <div className='size-full rounded-[20px]  p-4'>
                         <div className='flex flex-col lg:flex-row  lg:justify-between'>
-                          <div className='lg:w-[60%]'>
+                          <div className='w-full'>
                             <input
                               type='text'
                               value={element.skill}
@@ -192,30 +194,6 @@ export default function SkillsComponent() {
                               />
                               <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
                             </div>
-                          </div>
-                          <div className='flex justify-start'>
-                            <motion.div animate={open ? 'open' : 'closed'} className='relative'>
-                              <button
-                                onClick={() => setOpen((pv) => !pv)}
-                                className='flex items-center gap-2 rounded-xl bg-purple-700/30 px-3 py-2 text-indigo-50 transition-colors hover:bg-purple-700/50'
-                              >
-                                <span className='text-sm font-medium'>Select View</span>
-                                <motion.span variants={iconVariants}>
-                                  <FiChevronDown />
-                                </motion.span>
-                              </button>
-
-                              <motion.ul
-                                initial={wrapperVariants.closed}
-                                variants={wrapperVariants}
-                                style={{ originY: 'top', translateX: '-50%' }}
-                                className='absolute left-[50%] top-[50%] flex w-36 flex-col gap-2 overflow-hidden rounded-lg bg-purple-700 p-2  shadow-xl'
-                              >
-                                <Option setOpen={setOpen} Icon={AiOutlineRadarChart} text='Radar Chart' />
-                                <Option setOpen={setOpen} Icon={FaChartPie} text='Pie Chart' />
-                                <Option setOpen={setOpen} Icon={FaRegChartBar} text='Bar Chart' />
-                              </motion.ul>
-                            </motion.div>
                           </div>
                         </div>
                         {/* <p>

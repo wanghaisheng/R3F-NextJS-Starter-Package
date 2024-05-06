@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function ShowRegion({ filter }: { filter: string }) {
+export default function ShowRegion({ filter, searchTerm }: { filter: string; searchTerm: string }) {
   const regions = [
     {
       name: 'East Asia',
@@ -39,34 +39,43 @@ export default function ShowRegion({ filter }: { filter: string }) {
     },
   ]
 
-  const filteredRegions = filter ? regions.filter((region) => region.continent === filter) : regions
+  const filteredRegions = filter
+    ? regions.filter((region) => region.continent === filter)
+    : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
+
+  const filteredAndSearchedRegions = filteredRegions.filter((region) =>
+    region.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
   return (
-    <div className='mx-10 mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-      {filteredRegions.map((region, index) => (
-        <div
-          className='flex min-w-0 flex-col items-center justify-center transition duration-500 ease-out hover:scale-105'
-          key={index}
-        >
-          <div
-            style={{
-              backgroundImage: `url(${region.image})`,
-            }}
-            className='h-48 w-full rounded-bl-lg rounded-tr-lg bg-black bg-cover bg-center shadow-md md:h-56'
-          >
-            <div className='flex h-full flex-col justify-between'>
-              <div className='h-full rounded-tr-md bg-black/70 px-3 py-2 text-center font-bold uppercase tracking-wide text-white transition duration-300 ease-out hover:bg-black/0'>
-                <div className='flex h-full items-center justify-center transition duration-500 ease-out hover:opacity-0'>
-                  <Image unoptimized src={region.icon} alt='region icon' height={60} width={60} />
-                </div>
-              </div>
-              <div className='relative flex flex-col items-center rounded-bl-md bg-purple-950 px-3 py-2'>
-                <h1 className='font-bold text-white transition duration-300 ease-in-out '>{region.name}</h1>
-              </div>
-            </div>
-          </div>
+    <>
+      <div className='relative flex'>
+        <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:ml-24 lg:justify-start'>
+          {filteredAndSearchedRegions.map((region, index) => (
+            <a
+              href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
+              className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105 '
+              key={index}
+            >
+              <Image
+                className='aspect-[300/230] w-[300px] rounded-lg'
+                src={region.image}
+                alt=''
+                width={300}
+                height={230}
+                style={{ objectFit: 'cover' }}
+              />
+              {/* Symbol */}
+              <span className='absolute top-0 flex size-full items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
+                <Image src={region.icon} alt='region icon' height={50} width={50} className='absolute top-[35%] ' />
+              </span>
+              <span className='absolute bottom-0 flex w-full flex-col items-center rounded-b-md bg-purple-950 px-3 py-2'>
+                <h1>{region.name}</h1>
+              </span>
+            </a>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   )
 }

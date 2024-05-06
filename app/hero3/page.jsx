@@ -3,10 +3,15 @@
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 // import { Button } from "@/components/ui/button"
 
+import axios from 'axios'
+
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
-import { Avatar } from 'src/components/Avatar'
+
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
+
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -24,8 +29,9 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 
 // For carousel inside slide 1
-
 import AvatarImageComponent from '@/components/avatarImage/page'
+
+import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 
 import {
   Bar,
@@ -43,33 +49,45 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+
 import { ConstantColorFactor } from 'three'
 
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
-import SkinsCard from '@/components/card/SkinsCard'
 
 async function getSkills() {
   try {
-    const res = await fetch('http://localhost:3000/api/skills')
-    if (!res.ok) {
+    const res = await axios.get('/api/skills')
+    if (res.status !== 200) {
       console.log('failed to fetch the skills')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.log('failed to fetch the skills', error)
   }
 }
 
+async function getCards() {
+  try {
+    const res = await axios.get(`/api/card`)
+    if (res.status !== 200) {
+      console.log('failed to fetch the cards')
+    }
+    return res.data
+  } catch (error) {
+    console.log('failed to fetch the cards', error)
+  }
+}
+
 async function getAvatarById(id) {
   try {
-    const res = await fetch(`http://localhost:3000/api/avatar/${id}`)
-    if (!res.ok) {
+    const res = await axios.get(`/api/avatar/${id}`)
+    if (res.status !== 200) {
       console.log('failed to fetch the avatars')
     }
-    return res.json()
+    return res.data
   } catch (error) {
     console.log('failed to fetch the avatars', error)
   }
@@ -112,6 +130,7 @@ export default function Hero3() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState(null)
   const [avatarsData, setAvatarsData] = useState([])
+  const [cardsData, setCardsData] = useState([])
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -172,9 +191,9 @@ export default function Hero3() {
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
-        const testData = await getSkills() // Fetch skills data
-        const filteredData = testData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
-        setSkillsData(filteredData) // Set the filtered data
+        const skillsData = await getSkills() // Fetch skills data
+        const filteredSkillsData = skillsData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
+        setSkillsData(filteredSkillsData) // Set the filtered data
       } catch (error) {
         console.log('Error fetching skills data:', error)
       }
@@ -186,6 +205,23 @@ export default function Hero3() {
   }, [user])
 
   // ------------------------------------------------------------
+
+  // Cards data
+  useEffect(() => {
+    const fetchCardsData = async () => {
+      try {
+        const cardsData = await getCards() // Fetch cards data
+        const filteredCardsData = cardsData.filter((element) => element.gg_id === user.gg_id)
+        setCardsData(filteredCardsData)
+      } catch (error) {
+        console.log('Error fetching skills data:', error)
+      }
+    }
+
+    if (user) {
+      fetchCardsData() // Fetch data only if user is available
+    }
+  }, [user])
 
   // Flip Card QR
   const [isFlipped, setIsFlipped] = useState(false)
@@ -215,33 +251,9 @@ export default function Hero3() {
     }
   }, [user])
 
-  // Animated Button
-  const DrawOutlineButton = ({ children, ...rest }) => {
-    return (
-      <button
-        {...rest}
-        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
-      >
-        <span>{children}</span>
-
-        {/* TOP */}
-        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
-
-        {/* RIGHT */}
-        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
-
-        {/* BOTTOM */}
-        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
-
-        {/* LEFT */}
-        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
-      </button>
-    )
-  }
-
   return (
-    <div className='flex flex-col md:size-full'>
-      {/* <div className='flex items-center bg-none'>
+    <div className='relative flex flex-col lg:size-full'>
+      {/* <div className='hidden items-center bg-none md:flex'>
         <View className='flex h-20 w-full flex-col items-center justify-center bg-none'>
           <Suspense fallback={null}>
             <Type scale={2} position={[0, 0, 0]} />
@@ -250,13 +262,13 @@ export default function Hero3() {
         </View>
       </div> */}
       {/* avatar */}
-      <div style={{ height: '600px', weight: '600px' }}>
+      <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
             shadows
             animationSrc='/male-idle-3.fbx'
-            style={{ background: 'rgb(9,20,26)' }}
+            style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
             cameraInitialDistance={30}
@@ -269,7 +281,7 @@ export default function Hero3() {
             modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
             shadows
             animationSrc='/male-idle-3.fbx'
-            style={{ background: 'rgb(9,20,26)' }}
+            style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
             cameraInitialDistance={30}
@@ -281,26 +293,27 @@ export default function Hero3() {
       </div>
 
       {/* Carousel */}
-      <div
-        className='top-10 flex size-full justify-between px-4 md:absolute '
-        style={{ '--slide-height': '19rem', '--slide-spacing': '1rem', '--slide-size': '65%' }}
-      >
+      <div className='top-10 flex size-full justify-between px-4 lg:absolute'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex '>
             {/* Slide 1 */}
-            <div className='w-full shrink-0 grow md:min-w-0 '>
-              <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
-                <div className='h-full md:ml-24 md:w-[27%]'>
-                  {user ? (
+            <div className='w-full shrink-0 grow lg:min-w-0 '>
+              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
+                <div className='h-full lg:ml-24 lg:w-[27%]'>
+                  {user && cardsData.length != 0 ? (
                     <div className='flex flex-col items-center justify-center'>
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                              <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -316,35 +329,38 @@ export default function Hero3() {
                               </div>
                             </div>
                           </div>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                CARD2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
+                          {cardsData.map((card) => (
+                            <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
+                              <div className='flex flex-col justify-center'>
+                                <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                                  {card.type.toUpperCase()}
+                                  <a
+                                    className=' px-2 py-1 text-sm text-black dark:text-white'
+                                    aria-label='edit button'
+                                    href='/slider'
+                                  >
+                                    <FaRegEdit />
+                                  </a>
+                                </div>
+                                <div className='flex justify-center'>
+                                  <CardsFlipCard
+                                    type={card.type}
+                                    name={card.name}
+                                    dateIn={card.date_in}
+                                    dateOut={card.date_out}
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
-                        <div className='my-4 flex justify-between text-2xl'>
-                          <button className='' onClick={scrollPrev2}>
+                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
+                          <button aria-label='previos button' onClick={scrollPrev2}>
                             <MdNavigateBefore />
                           </button>
-                          <button className='' onClick={scrollNext2}>
+                          <button aria-label='next button' onClick={scrollNext2}>
                             <MdNavigateNext />
                           </button>
-                        </div>
-
-                        <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
-                          <p className='mb-4'>Some premium features for paid users</p>
-
-                          <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
-                          {/* Spring Pop Up Modal */}
-                          <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
                         </div>
                       </div>
                     </div>
@@ -357,7 +373,11 @@ export default function Hero3() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -373,48 +393,64 @@ export default function Hero3() {
                               </div>
                             </div>
                           </div>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                          <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 CARD2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
                               <div className='flex justify-center'>
-                                <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
+                                <CardsFlipCard
+                                  personName='Person Name'
+                                  type='DEFAULT'
+                                  name='DEFAULT'
+                                  dateIn='DEFAULT'
+                                  dateOut='DEFAULT'
+                                />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className='my-4 flex justify-between text-2xl'>
-                          <button className='' onClick={scrollPrev2}>
+                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
+                          <button aria-label='Previous btn' onClick={scrollPrev2}>
                             <MdNavigateBefore />
                           </button>
-                          <button className='' onClick={scrollNext2}>
+                          <button aria-label='Next btn' onClick={scrollNext2}>
                             <MdNavigateNext />
                           </button>
-                        </div>
-                        <div className='mx-4 my-5 flex flex-col items-center rounded-lg bg-purple-900/50 py-4'>
-                          <p className='mb-4'>Some premium features for paid users</p>
-                          <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
-                          {/* Spring Pop Up Modal */}
-                          <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
                         </div>
                       </div>
                     </div>
                   )}
+                  <div className='my-5 flex flex-col items-center py-5'>
+                    <div className='rounded-lg bg-purple-900/50 p-5'>
+                      <p className='mb-4 px-4 text-center'>Some premium features for paid users</p>
+                      <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
+                    </div>
+                    {/* Spring Pop Up Modal */}
+                    <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
+                  </div>
                 </div>
 
-                <div className='h-full md:mr-24 md:w-[30%] '>
-                  <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                    Avatar{' '}
-                    <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                <div className='mt-60 h-full lg:mr-20 lg:mt-0 lg:w-[30%] '>
+                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                    Avatar
+                    <a
+                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                      aria-label='edit button'
+                      href='/slider'
+                    >
                       <FaRegEdit />
                     </a>
                   </div>
                   <div className='flex min-h-48 items-center justify-center px-4'>
-                    <div className='flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
+                    <div className='mb-7 flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
                       <AvatarImageComponent />
                     </div>
                   </div>
@@ -424,19 +460,23 @@ export default function Hero3() {
               </div>
             </div>
             {/* Slide 2 */}
-            <div className='w-full shrink-0 grow md:min-w-0'>
-              <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
-                <div className='h-full md:ml-24 md:w-[27%]'>
+            <div className='w-full shrink-0 grow lg:min-w-0'>
+              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
+                <div className='h-full lg:ml-24 lg:w-[27%]'>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef3}>
                         <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                          <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Experience
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -450,26 +490,22 @@ export default function Hero3() {
                               </div>
                               <div className='my-3'>
                                 <p className='px-4'>
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
-                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
-                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
+                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
+                                  blanditiis sed!
                                 </p>
-                              </div>
-                              <div className='mt-1 flex justify-center'>
-                                <a
-                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
-                                  target='_blank'
-                                >
-                                  <DrawOutlineButton>Booking</DrawOutlineButton>
-                                </a>
                               </div>
                             </div>
                           </div>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                          <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Exp2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -483,28 +519,20 @@ export default function Hero3() {
                               </div>
                               <div className='my-3'>
                                 <p className='px-4'>
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
-                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
-                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
+                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
+                                  blanditiis sed!
                                 </p>
-                              </div>
-                              <div className='mt-1 flex justify-center'>
-                                <a
-                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
-                                  target='_blank'
-                                >
-                                  <DrawOutlineButton>Booking</DrawOutlineButton>
-                                </a>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className='mt-2 flex justify-center text-2xl'>
-                        <button className='' onClick={scrollPrev3}>
+                      <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
+                        <button onClick={scrollPrev3} aria-label='prev button'>
                           <MdNavigateBefore />
                         </button>
-                        <button className='' onClick={scrollNext3}>
+                        <button onClick={scrollNext3} aria-label='next button'>
                           <MdNavigateNext />
                         </button>
                       </div>
@@ -514,11 +542,15 @@ export default function Hero3() {
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef3}>
                         <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                          <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Experience
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -532,26 +564,22 @@ export default function Hero3() {
                               </div>
                               <div className='my-3'>
                                 <p className='px-4'>
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
-                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
-                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
+                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
+                                  blanditiis sed!
                                 </p>
-                              </div>
-                              <div className='mt-1 flex justify-center'>
-                                <a
-                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
-                                  target='_blank'
-                                >
-                                  <DrawOutlineButton>Booking</DrawOutlineButton>
-                                </a>
                               </div>
                             </div>
                           </div>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
+                          <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Exp2
-                                <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                                <a
+                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                  aria-label='edit button'
+                                  href='/slider'
+                                >
                                   <FaRegEdit />
                                 </a>
                               </div>
@@ -565,39 +593,44 @@ export default function Hero3() {
                               </div>
                               <div className='mt-3'>
                                 <p>
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nostrum consequuntur
-                                  maxime consectetur dolor ratione, in harum explicabo voluptates distinctio magni,
-                                  obcaecati minus aperiam pariatur. Ratione fuga quia blanditiis sed!
+                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
+                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
+                                  blanditiis sed!
                                 </p>
-                              </div>
-                              <div className='mt-1 flex justify-center'>
-                                <a
-                                  href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
-                                  target='_blank'
-                                >
-                                  <DrawOutlineButton>Booking</DrawOutlineButton>
-                                </a>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className='mt-2 flex justify-center text-2xl'>
-                          <button className='' onClick={scrollPrev3}>
+                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
+                          <button onClick={scrollPrev3} aria-label='previous button'>
                             <MdNavigateBefore />
                           </button>
-                          <button className='' onClick={scrollNext3}>
+                          <button onClick={scrollNext3} aria-label='next button'>
                             <MdNavigateNext />
                           </button>
                         </div>
                       </div>
                     </div>
                   )}
+                  <div className='mt-4 flex justify-center'>
+                    <a
+                      href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
+                      target='_blank'
+                      aria-label='Booking button'
+                    >
+                      <DrawOutlineButton>Booking</DrawOutlineButton>
+                    </a>
+                  </div>
                 </div>
 
-                <div className='h-full md:mr-24 md:w-[30%] '>
-                  <div className='relative my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
-                    Skills{' '}
-                    <a className=' px-2 py-1 text-sm text-black dark:text-white' href='/slider'>
+                <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
+                  <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
+                    Skills
+                    <a
+                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                      aria-label='edit button'
+                      href='/slider'
+                    >
                       <FaRegEdit />
                     </a>
                   </div>
@@ -608,7 +641,7 @@ export default function Hero3() {
                           <div className=' '>
                             {/* Condition for changing barchart chart and radar chart*/}
                             {skillsData.length < 6 ? (
-                              <ResponsiveContainer width={420} height={330}>
+                              <ResponsiveContainer width={380} height={330}>
                                 <BarChart
                                   width={420}
                                   height={330}
@@ -616,7 +649,7 @@ export default function Hero3() {
                                   margin={{
                                     top: 5,
                                     right: 30,
-                                    left: 20,
+                                    left: 0,
                                     bottom: 5,
                                   }}
                                 >
@@ -673,18 +706,19 @@ export default function Hero3() {
               </div>
             </div>
             {/* Slide 3 */}
-            <div className='w-full shrink-0 grow md:min-w-0'>
-              <div className='flex size-full flex-col px-4 md:flex-row md:justify-between'>
-                <div className='h-full md:ml-24 md:w-[25%] '>
+            <div className='w-full shrink-0 grow lg:min-w-0'>
+              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
+                <div className='h-full lg:ml-24 lg:w-[30%] '>
                   {user ? (
                     <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center text-5xl font-semibold drop-shadow'>
+                      <div className='relative my-4 flex justify-center  text-xl font-semibold drop-shadow lg:text-5xl'>
                         Achievements
                       </div>
                       <p>Logged In users Achievements</p>
+                      <div className='mt-20 h-96 w-52 rounded-xl bg-purple-900/20'></div>
                     </div>
                   ) : (
-                    <div className='flex flex-col items-center justify-center'>
+                    <div className='flex flex-col items-center justify-center '>
                       <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                         <p>Achievements</p>
                       </div>
@@ -693,7 +727,7 @@ export default function Hero3() {
                   )}
                 </div>
 
-                <div className='h-full md:mr-24 md:w-[25%] '>
+                <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%]'>
                   <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Recommendations
                   </div>
@@ -701,10 +735,18 @@ export default function Hero3() {
               </div>
             </div>
           </div>
-          <button className='left-10 top-56 text-5xl md:absolute' onClick={scrollPrev}>
+          <button
+            className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
+            onClick={scrollPrev}
+            aria-label='Previous Slide'
+          >
             <MdNavigateBefore />
           </button>
-          <button className='right-10 top-56 text-5xl md:absolute' onClick={scrollNext}>
+          <button
+            className='absolute hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
+            onClick={scrollNext}
+            aria-label='Next Slide'
+          >
             <MdNavigateNext />
           </button>
         </div>

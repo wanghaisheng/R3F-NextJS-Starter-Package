@@ -26,7 +26,6 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     const data = await request.json()
-    console.log(data)
     const { admin_username, admin_email } = data
     const id = params.id
 
