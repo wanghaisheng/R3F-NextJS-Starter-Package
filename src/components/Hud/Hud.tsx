@@ -45,60 +45,65 @@ const Hud = () => {
             <div className='hidden md:flex'>
               <div className='flex h-10 items-center justify-center gap-2 rounded-full px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-[#6B37CA] backdrop-blur-md md:gap-7 lg:gap-14'>
                 {pathname === '/slider' ? (
-                  <Link href='/slider' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='/slider' aria-label='Go to slider' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     <TbSwipe />
                   </Link>
                 ) : (
                   <Link
                     href='/slider'
+                    aria-label='Go to slider'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     <TbSwipe />
                   </Link>
                 )}
                 {pathname === '#' ? (
-                  <Link href='#' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='#' aria-label='' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     A
                   </Link>
                 ) : (
                   <Link
                     href='/#'
+                    aria-label=''
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     A
                   </Link>
                 )}
                 {pathname === '#' ? (
-                  <Link href='#' className='py-2 text-2xl font-bold text-[#AD00FF]' aria-label='Slider'>
+                  <Link href='#' className='py-2 text-2xl font-bold text-[#AD00FF]' aria-label='swipe'>
                     <MdSwipe />
                   </Link>
                 ) : (
                   <Link
                     href='#'
+                    aria-label='swipe'
                     className='py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     <MdSwipe />
                   </Link>
                 )}
                 {pathname === '#' ? (
-                  <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='#' aria-label='' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     <SiExpertsexchange onClick={() => setIsOpen(true)} />
                   </Link>
                 ) : (
                   <Link
                     href='#'
+                    aria-label='G'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     <SiExpertsexchange onClick={() => setIsOpen(true)} />
                   </Link>
                 )}
                 {pathname === '#' ? (
-                  <Link href='#' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='#' aria-label='' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     D
                   </Link>
                 ) : (
                   <Link
                     href='#'
+                    aria-label=''
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     D

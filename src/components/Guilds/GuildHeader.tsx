@@ -120,7 +120,7 @@ export default function GuildHeader({
         <ul className='mt-[60%] flex h-[800px] w-[310px] flex-col gap-y-7'>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'bg-gradient-to-r from-white text-gray-800' : 'text-gray-300'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'bg-gradient-to-r from-white/70' : 'text-gray-300'}`}
               onClick={() => handleFilterClick('BUDDHA')}
             >
               <MdHexagon />
@@ -129,7 +129,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'bg-gradient-to-r from-blue-300 text-blue-800' : 'text-blue-200'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'bg-gradient-to-r from-blue-500/70' : 'text-blue-200'}`}
               onClick={() => handleFilterClick('VAJRA')}
             >
               <BsOctagonFill />
@@ -138,7 +138,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'bg-gradient-to-r from-green-300 text-green-800' : 'text-green-200'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'bg-gradient-to-r from-green-500/70' : 'text-green-200'}`}
               onClick={() => handleFilterClick('KARMA')}
             >
               <FaDiamond />
@@ -147,7 +147,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'bg-gradient-to-r from-yellow-300 text-yellow-800' : 'text-yellow-200'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'bg-gradient-to-r from-yellow-500/70' : 'text-yellow-200'}`}
               onClick={() => handleFilterClick('RATNA')}
             >
               <IoCubeSharp />
@@ -156,7 +156,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'bg-gradient-to-r from-red-300 text-red-800' : 'text-red-200'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'bg-gradient-to-r from-red-500/70' : 'text-red-200'}`}
               onClick={() => handleFilterClick('PADMA')}
             >
               <IoTriangleSharp />

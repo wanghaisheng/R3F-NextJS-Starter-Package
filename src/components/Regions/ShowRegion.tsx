@@ -49,12 +49,12 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
 
   return (
     <>
-      <div className='flex'>
+      <div className='relative flex'>
         <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:ml-24 lg:justify-start'>
           {filteredAndSearchedRegions.map((region, index) => (
             <a
               href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
-              className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105'
+              className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105 '
               key={index}
             >
               <Image

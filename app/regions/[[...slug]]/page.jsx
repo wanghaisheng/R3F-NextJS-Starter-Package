@@ -12,7 +12,9 @@ const Regions = ({ params }) => {
 
   const [searchTerm, setSearchTerm] = useState('')
 
-  const [backgroundImage, setBackgroundImage] = useState('')
+  const [backgroundImage, setBackgroundImage] = useState(
+    'https://imgs.search.brave.com/UJlFq2-QeOeMj6KkDAOZrJ0dKdwRbCdgP5ts7Ets3RM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWxsZXJzd29ybGR3/aWRlLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wNi9z/aHV0dGVyc3RvY2tf/NjMyOTQxMDMxLWUx/Njg2NTk2OTI1OTcy/LnBuZw',
+  )
 
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter)
@@ -21,9 +23,10 @@ const Regions = ({ params }) => {
     setBackgroundImage(getBackgroundImageForFilter(filter))
   }
 
+  // Function to get background image based on selected filter
   const getBackgroundImageForFilter = (selectedFilter) => {
     if (selectedFilter.toUpperCase() === 'NORTH AMERICA') {
-      return ''
+      return 'https://imgs.search.brave.com/UJlFq2-QeOeMj6KkDAOZrJ0dKdwRbCdgP5ts7Ets3RM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWxsZXJzd29ybGR3/aWRlLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wNi9z/aHV0dGVyc3RvY2tf/NjMyOTQxMDMxLWUx/Njg2NTk2OTI1OTcy/LnBuZw'
     } else if (selectedFilter.toUpperCase() === 'SOUTH AMERICA') {
       return 'DEFAULT_BACKGROUND_IMAGE_URL'
     } else if (selectedFilter.toUpperCase() === 'EUROPE') {
@@ -53,6 +56,7 @@ const Regions = ({ params }) => {
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            filter: 'blur(7px)',
           }}
         ></div>
 
