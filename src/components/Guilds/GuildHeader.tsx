@@ -69,8 +69,12 @@ export default function GuildHeader({
           </div>
           {/* filter */}
           <div className='mx-auto flex max-w-sm items-center'>
-            <div className='flex w-full cursor-pointer items-center text-3xl' onClick={() => handleFilterClick(null)}>
-              <MdClearAll className='hover:text-purple-400' />
+            <div
+              className='flex w-full cursor-pointer items-center text-3xl hover:text-purple-400'
+              onClick={() => handleFilterClick(null)}
+            >
+              <p className='mr-1 text-sm'>ALL</p>
+              <MdClearAll />
             </div>
           </div>
         </div>

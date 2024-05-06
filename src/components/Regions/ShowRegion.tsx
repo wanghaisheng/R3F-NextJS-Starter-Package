@@ -39,7 +39,9 @@ export default function ShowRegion({ filter, searchTerm }: { filter: string; sea
     },
   ]
 
-  const filteredRegions = filter ? regions.filter((region) => region.continent === filter) : regions
+  const filteredRegions = filter
+    ? regions.filter((region) => region.continent === filter)
+    : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
 
   const filteredAndSearchedRegions = filteredRegions.filter((region) =>
     region.name.toLowerCase().includes(searchTerm.toLowerCase()),

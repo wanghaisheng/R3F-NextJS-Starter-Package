@@ -1,5 +1,10 @@
 import Image from 'next/image'
 
+import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
+import { FaDiamond } from 'react-icons/fa6'
+import { BsOctagonFill } from 'react-icons/bs'
+import { MdHexagon } from 'react-icons/md'
+
 export default function ShowGuild({ users, filter, searchTerm }: { users: any; filter: string; searchTerm: string }) {
   const filteredFactions = filter ? users.filter((user) => user.guild === filter) : users
 
@@ -58,20 +63,32 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
               {/* <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
                 <p>{user.description}</p>
               </span> */}
+              <span className='absolute right-2 top-2 transition duration-500 ease-out hover:scale-150'>
+                {user.guild.toUpperCase() === 'PADMA' ? (
+                  <p className='text-red-500'>
+                    <IoTriangleSharp />
+                  </p>
+                ) : user.guild.toUpperCase() === 'VAJRA' ? (
+                  <p className=' text-blue-500'>
+                    <BsOctagonFill />
+                  </p>
+                ) : user.guild.toUpperCase() === 'KARMA' ? (
+                  <p className=' text-green-500'>
+                    <FaDiamond />
+                  </p>
+                ) : user.guild.toUpperCase() === 'RATNA' ? (
+                  <p className=' text-yellow-500'>
+                    <IoCubeSharp />
+                  </p>
+                ) : (
+                  <p className='text-white'>
+                    <MdHexagon />
+                  </p>
+                )}
+              </span>
               <span className={`absolute bottom-0 flex w-full items-center rounded-bl-md bg-purple-950 px-3 py-2`}>
-                <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out'>
+                <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out hover:text-purple-300'>
                   {user.name.toUpperCase()}
-                  {user.continent.toUpperCase() === 'EAST-ASIA' ? (
-                    <p className='size-2 rounded-full bg-green-500'></p>
-                  ) : user.continent.toUpperCase() === 'SOUTH-ASIA' ? (
-                    <p className='size-2 rounded-full bg-blue-500'></p>
-                  ) : user.continent.toUpperCase() === 'MESO-AMERICA' ? (
-                    <p className='size-2 rounded-full bg-yellow-500'></p>
-                  ) : user.continent.toUpperCase() === 'SUB-SAHARAN-AFRICA' ? (
-                    <p className='size-2 rounded-full bg-pink-500'></p>
-                  ) : (
-                    <p className='size-2 rounded-full bg-white'></p>
-                  )}
                 </h1>
               </span>
             </a>
