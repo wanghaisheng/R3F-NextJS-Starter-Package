@@ -17,10 +17,6 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
 
-  if (requestUrl.startsWith('/signin') && token) {
-    return NextResponse.redirect(new URL('/createavatar', request.url))
-  }
-
   if (!token) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
