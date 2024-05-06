@@ -5,7 +5,7 @@ import GuildHeader from '@/components/Guilds/GuildHeader'
 import ShowGuild from '@/components/Guilds/ShowGuild'
 import Image from 'next/image'
 
-const Factions = () => {
+const Factions = ({ params }) => {
   const [selectedFilter, setSelectedFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -89,11 +89,24 @@ const Factions = () => {
   }
   return (
     <>
-      <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {params.slug?.length === 2 ? (
+        <div>
+          View of region {params.slug[0]} and Concept {params.slug[1]}
+        </div>
+      ) : params.slug?.length === 1 ? (
+        <div>
+          {/* <RegionDetails continent={params.slug[0]} /> */}
+          <div className='mx-10 flex justify-end'>{params.slug[0].toUpperCase()}</div>
+        </div>
+      ) : (
+        <>
+          <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
-        <ShowGuild users={guilds} filter={selectedFilter} searchTerm={searchTerm} />
-      </div>
+          <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
+            <ShowGuild users={guilds} filter={selectedFilter} searchTerm={searchTerm} />
+          </div>
+        </>
+      )}
     </>
   )
 }

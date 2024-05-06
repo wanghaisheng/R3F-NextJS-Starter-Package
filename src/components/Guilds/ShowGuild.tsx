@@ -18,7 +18,7 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
         <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:justify-start'>
           {filteredAndSearchedFactions.map((user, index) => (
             <a
-              href={`/regions/${user.name.toLowerCase().replace(' ', '-')}`}
+              href={`/guilds/${user.name.toLowerCase().replace(' ', '-')}`}
               key={index}
               className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-lg shadow-sm backdrop-blur-md transition duration-500 ease-out'
             >
@@ -64,8 +64,10 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
                 <p>{user.description}</p>
               </span> */}
 
-              <span className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950 px-3 py-2`}>
-                <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out hover:text-purple-300'>
+              <span
+                className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
+              >
+                <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out'>
                   {user.name.toUpperCase()}
                   {user.guild.toUpperCase() === 'PADMA' ? (
                     <p className='text-red-500'>
