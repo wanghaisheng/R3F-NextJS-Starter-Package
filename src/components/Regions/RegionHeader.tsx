@@ -5,15 +5,7 @@ import { useEffect, useState } from 'react'
 import { MdClearAll } from 'react-icons/md'
 import { FaDiamond } from 'react-icons/fa6'
 
-export default function RegionHeader({
-  onFilterChange,
-  searchTerm,
-  setSearchTerm,
-}: {
-  onFilterChange: (filter: string) => void
-  searchTerm: string
-  setSearchTerm: (searchTerm: string) => void
-}) {
+export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeFilter, setActiveFilter] = useState('NORTH AMERICA') // Default filter
 
@@ -83,11 +75,11 @@ export default function RegionHeader({
         )}
       </div>
       {/* Sidebar */}
-      <div className='fixed top-0 hidden items-center justify-start  font-semibold md:top-5 lg:flex'>
-        <ul className='mt-[40%] flex h-[800px] w-[330px] flex-col gap-y-7 text-white'>
-          <li>
+      <div className='fixed top-0 hidden items-center justify-start  font-semibold lg:flex'>
+        <ul className='flex h-[800px] w-[330px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40% text-white'>
+          <li className='mt-[40%]'>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
             >
               <FaDiamond />
@@ -96,7 +88,7 @@ export default function RegionHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('SOUTH AMERICA')}
             >
               <FaDiamond />
@@ -105,7 +97,7 @@ export default function RegionHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
               <FaDiamond />
@@ -114,7 +106,7 @@ export default function RegionHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
               <FaDiamond />
@@ -123,7 +115,7 @@ export default function RegionHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
               <FaDiamond />
@@ -132,7 +124,7 @@ export default function RegionHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
               <FaDiamond />
@@ -141,7 +133,7 @@ export default function RegionHeader({
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'gap-x-12 bg-gradient-to-r from-black/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('ANTARCTICA')}
             >
               <FaDiamond />

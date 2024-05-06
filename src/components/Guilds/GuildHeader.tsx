@@ -116,9 +116,9 @@ export default function GuildHeader({
       </div>
 
       {/* Sidebar */}
-      <div className='fixed top-0 hidden items-center justify-start font-semibold md:top-5 lg:flex'>
-        <ul className='mt-[60%] flex h-[800px] w-[310px] flex-col gap-y-7'>
-          <li>
+      <div className='fixed top-0 hidden items-center justify-start font-semibold lg:flex'>
+        <ul className='flex h-[800px] w-[310px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40%'>
+          <li className='mt-[60%]'>
             <a
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'bg-gradient-to-r from-white/70' : 'text-gray-300'}`}
               onClick={() => handleFilterClick('BUDDHA')}

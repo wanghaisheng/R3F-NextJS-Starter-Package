@@ -56,7 +56,7 @@ const Regions = ({ params }) => {
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'blur(7px)',
+            filter: 'blur(8px)',
           }}
         ></div>
 

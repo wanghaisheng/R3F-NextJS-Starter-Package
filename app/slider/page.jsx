@@ -14,7 +14,7 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 
 import useEmblaCarousel from 'embla-carousel-react'
 
-const tabs = ['Avatar', 'Genius ID', 'Card', 'Connection', 'Experience', 'Skills']
+const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
 
 const SliderPage = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
@@ -30,7 +30,7 @@ const SliderPage = () => {
   const [selected, setSelected] = useState(tabs[0])
 
   const [slideIndex, setSlideIndex] = useState(0)
-  const [activeTab, setActiveTab] = useState('Avatar')
+  const [activeTab, setActiveTab] = useState('Genius ID')
 
   useEffect(() => {
     setSelected(activeTab)
@@ -81,10 +81,10 @@ const SliderPage = () => {
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-4 flex'>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <AvatarComponent onNextButtonClick={handleNextButtonClick} />
+              <UserInfoComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <UserInfoComponent onNextButtonClick={handleNextButtonClick} />
+              <AvatarComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
               <Card2Component onNextButtonClick={handleNextButtonClick} />
