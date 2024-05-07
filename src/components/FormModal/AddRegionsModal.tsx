@@ -38,7 +38,7 @@ const RadialMenuComponent = (props) => {
   )
 }
 
-const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
+const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
   const [close, setClose] = useState(false)
   const items = ['Add Guild', 'Add Region', 'Rion', 'Reon', 'Regn', 'nd']
 
@@ -49,12 +49,12 @@ const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
   return (
     <>
       <AnimatePresence>
-        {isOpen && (
+        {regionIsOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={() => setRegionIsOpen(false)}
             className='fixed inset-0 z-50 grid cursor-pointer place-items-center p-8'
           >
             <motion.div
@@ -62,25 +62,25 @@ const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
               animate={{ scale: 1, rotate: '0deg' }}
               exit={{ scale: 0, rotate: '0deg' }}
               onClick={(e) => e.stopPropagation()}
-              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 p-6 text-white shadow-xl'
+              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-black to-purple-600/50 p-6 text-white shadow-xl'
             >
               <div className='relative z-10 h-96'>
                 <div className='my-4 flex flex-col items-center justify-center'>
-                  <h1>Do you want to add Regions and Guilds?</h1>
+                  <h1>Do you want to add Regions?</h1>
                   {/* Radial Menu */}
-                  <div className='mt-20'>
+                  <div className='mt-36'>
                     <RadialMenuComponent />
                   </div>
                 </div>
                 <div className='absolute bottom-2 flex w-full gap-2'>
                   <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setRegionIsOpen(false)}
                     className='w-full rounded bg-transparent py-2 font-semibold text-white transition-colors hover:bg-white/10'
                   >
                     Nah, go back
                   </button>
                   <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setRegionIsOpen(false)}
                     className='w-full rounded bg-white py-2 font-semibold text-indigo-600 transition-opacity hover:opacity-90'
                   >
                     Add
@@ -95,4 +95,4 @@ const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
   )
 }
 
-export default GuildsAndRegionsModal
+export default AddRegionsModal

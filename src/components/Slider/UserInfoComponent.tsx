@@ -9,7 +9,9 @@ import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
-import GuildsAndRegionsModal from '../FormModal/GuildsAndRegionsModal'
+
+import AddRegionModal from '../FormModal/AddRegionsModal'
+import AddGuildsModal from '../FormModal/AddGuildsModal'
 
 export default function UserInfoComponent({ onNextButtonClick }) {
   const { user } = useUser()
@@ -20,7 +22,8 @@ export default function UserInfoComponent({ onNextButtonClick }) {
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [guildIsOpen, setGuildIsOpen] = useState(false)
+  const [regionIsOpen, setRegionIsOpen] = useState(false)
 
   useEffect(() => {
     const setUserInfo = () => {
@@ -179,9 +182,14 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         required
                       />
                     </div>
-                    <DrawOutlineButton type='button' onClick={() => setIsOpen(true)}>
-                      Add Guilds And Regions
-                    </DrawOutlineButton>
+                    <div className='flex w-full justify-center gap-x-2'>
+                      <DrawOutlineButton type='button' onClick={() => setGuildIsOpen(true)}>
+                        Add Guilds
+                      </DrawOutlineButton>
+                      <DrawOutlineButton type='button' onClick={() => setRegionIsOpen(true)}>
+                        Add Regions
+                      </DrawOutlineButton>
+                    </div>
                   </div>
                   {/* Submit button */}
                   <div className='mt-4'>
@@ -196,7 +204,8 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           </div>
         </div>
       </div>
-      <GuildsAndRegionsModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddGuildsModal guildIsOpen={guildIsOpen} setGuildIsOpen={setGuildIsOpen} />
+      <AddRegionModal regionIsOpen={regionIsOpen} setRegionIsOpen={setRegionIsOpen} />
     </div>
   )
 }
