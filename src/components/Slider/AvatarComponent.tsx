@@ -1,9 +1,8 @@
 'use client'
-import { motion } from 'framer-motion'
+
 import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect, useMemo } from 'react'
-import { useRouter } from 'next/navigation'
 import AvatarImageComponent from '../avatarImage/page'
 import FormModal2 from '../FormModal/Modal2'
 import Avatar_creator from '@/components/avatar-creator/avatar'
@@ -25,7 +24,6 @@ async function getAvatarById(id: string) {
 }
 
 export default function AvatarComponent({ onNextButtonClick }) {
-  const router = useRouter()
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
 
@@ -55,7 +53,7 @@ export default function AvatarComponent({ onNextButtonClick }) {
   return (
     <div className='mt-2 flex items-center justify-center'>
       <div
-        id='avatar'
+        id='Avatar'
         className='relative flex w-[68%] flex-col items-center justify-center px-10 py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
         style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
@@ -105,9 +103,15 @@ export default function AvatarComponent({ onNextButtonClick }) {
           </DrawOutlineButton>
           <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
         </div>
-        <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
-          <Avatar_creator />
-        </FormModal2>
+
+        {/* facing problem cuz of this */}
+        {isCardModalOpen && (
+          <div className='absolute left-0 top-0 flex size-full items-center justify-center'>
+            <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
+              <Avatar_creator />
+            </FormModal2>
+          </div>
+        )}
       </div>
     </div>
   )
