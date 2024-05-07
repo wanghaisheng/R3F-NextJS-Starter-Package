@@ -1,73 +1,97 @@
 'use client'
 
+import { Menu } from '@material-tailwind/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FiAlertCircle } from 'react-icons/fi'
+
+import { useState, useEffect } from 'react'
+
+import { CircleMenu, CircleMenuItem, TooltipPlacement } from 'react-circular-menu'
+
+// Radial Menu Component
+const RadialMenuComponent = (props) => {
+  return (
+    <CircleMenu
+      startAngle={-90}
+      rotationAngle={360}
+      itemSize={2}
+      radius={5}
+      /**
+       * rotationAngleInclusive (default true)
+       * Whether to include the ending angle in rotation because an
+       * item at 360deg is the same as an item at 0deg if inclusive.
+       * Leave this prop for angles other than 360deg unless otherwise desired.
+       */
+      rotationAngleInclusive={false}
+    >
+      <CircleMenuItem
+        onClick={() => alert('Clicked the item')}
+        tooltip='Email'
+        tooltipPlacement={TooltipPlacement.Right}
+      >
+        Icon
+      </CircleMenuItem>
+      <CircleMenuItem tooltip='Help'>2</CircleMenuItem>
+      <CircleMenuItem tooltip='Location'>3</CircleMenuItem>
+      <CircleMenuItem tooltip='Info'>4</CircleMenuItem>
+      <CircleMenuItem tooltip='Guild'>5</CircleMenuItem>
+    </CircleMenu>
+  )
+}
 
 const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
+  const [close, setClose] = useState(false)
+  const items = ['Add Guild', 'Add Region', 'Rion', 'Reon', 'Regn', 'nd']
+
+  const handleClose = () => {
+    setClose(!close)
+  }
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setIsOpen(false)}
-          className='fixed inset-0 z-50 grid cursor-pointer place-items-center p-8'
-        >
+    <>
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
-            initial={{ scale: 0, rotate: '12.5deg' }}
-            animate={{ scale: 1, rotate: '0deg' }}
-            exit={{ scale: 0, rotate: '0deg' }}
-            onClick={(e) => e.stopPropagation()}
-            className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 p-6 text-white shadow-xl'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className='fixed inset-0 z-50 grid cursor-pointer place-items-center p-8'
           >
-            <div className='relative z-10 h-96'>
-              <div className='my-4 flex flex-col items-center justify-center'>
-                <h1>Do you want to add Regions and Guilds?</h1>
-                <button className='relative mt-5 size-12 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none'>
-                  <div className='absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center opacity-0 hover:opacity-100'>
-                    <a
-                      href='/slider'
-                      className='mb-2 flex size-10 items-center justify-center rounded-full bg-green-500 text-white'
-                    >
-                      Slider
-                    </a>
-                    <div className='mb-2 flex size-10 items-center justify-center rounded-full bg-green-500 text-white'>
-                      2
-                    </div>
-                    <div className='mb-2 flex size-10 items-center justify-center rounded-full bg-green-500 text-white'>
-                      3
-                    </div>
-                    <div className='mb-2 flex size-10 items-center justify-center rounded-full bg-green-500 text-white'>
-                      4
-                    </div>
-                    <div className='mb-2 flex size-10 items-center justify-center rounded-full bg-green-500 text-white'>
-                      5
-                    </div>
+            <motion.div
+              initial={{ scale: 0, rotate: '12.5deg' }}
+              animate={{ scale: 1, rotate: '0deg' }}
+              exit={{ scale: 0, rotate: '0deg' }}
+              onClick={(e) => e.stopPropagation()}
+              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 p-6 text-white shadow-xl'
+            >
+              <div className='relative z-10 h-96'>
+                <div className='my-4 flex flex-col items-center justify-center'>
+                  <h1>Do you want to add Regions and Guilds?</h1>
+                  {/* Radial Menu */}
+                  <div className='mt-20'>
+                    <RadialMenuComponent />
                   </div>
-                  {/* Add this div for the hover effect */}
-                  <div className='pointer-events-none absolute size-full rounded-full border-4 border-blue-600 opacity-0 hover:opacity-100'></div>
-                </button>
+                </div>
+                <div className='absolute bottom-2 flex w-full gap-2'>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className='w-full rounded bg-transparent py-2 font-semibold text-white transition-colors hover:bg-white/10'
+                  >
+                    Nah, go back
+                  </button>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className='w-full rounded bg-white py-2 font-semibold text-indigo-600 transition-opacity hover:opacity-90'
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
-              <div className='absolute bottom-2 flex w-full gap-2'>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className='w-full rounded bg-transparent py-2 font-semibold text-white transition-colors hover:bg-white/10'
-                >
-                  Nah, go back
-                </button>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className='w-full rounded bg-white py-2 font-semibold text-indigo-600 transition-opacity hover:opacity-90'
-                >
-                  Add
-                </button>
-              </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 

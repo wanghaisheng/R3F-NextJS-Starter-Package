@@ -96,7 +96,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Card Image / Container */}
-              <div className='flex justify-center'>
+              <div className='flex flex-col items-center justify-center'>
                 <GeniusIDFlipCard
                   first_name={first_name}
                   last_name={last_name}
@@ -105,6 +105,8 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                   contact={phone_number}
                   address={address}
                 />
+
+                <p>Symbols for guilds and regions</p>
               </div>
 
               {/* form */}
@@ -188,7 +190,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                 </form>
               </div>
             </div>
-            <div className='mt-2 flex justify-center gap-x-2 lg:mt-0'>
+            <div className='mt-5 flex justify-center gap-x-2'>
               <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
             </div>
           </div>
