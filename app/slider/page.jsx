@@ -14,7 +14,7 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 
 import useEmblaCarousel from 'embla-carousel-react'
 
-const tabs = ['Avatar', 'Genius ID', 'Card', 'Connection', 'Experience', 'Skills']
+const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
 
 const SliderPage = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
@@ -30,7 +30,7 @@ const SliderPage = () => {
   const [selected, setSelected] = useState(tabs[0])
 
   const [slideIndex, setSlideIndex] = useState(0)
-  const [activeTab, setActiveTab] = useState('Avatar')
+  const [activeTab, setActiveTab] = useState('Genius ID')
 
   useEffect(() => {
     setSelected(activeTab)
@@ -63,16 +63,28 @@ const SliderPage = () => {
     }
   }
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 766) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <>
       <div className='mx-auto mb-28 mt-16 max-w-7xl md:mt-10'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-4 flex'>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <AvatarComponent onNextButtonClick={handleNextButtonClick} />
+              <UserInfoComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
-              <UserInfoComponent onNextButtonClick={handleNextButtonClick} />
+              <AvatarComponent onNextButtonClick={handleNextButtonClick} />
             </div>
             <div className='w-full min-w-0 shrink-0 grow'>
               <Card2Component onNextButtonClick={handleNextButtonClick} />
@@ -108,10 +120,10 @@ const SliderPage = () => {
       <footer className='fixed inset-x-0 bottom-4 flex justify-center'>
         {/* <img src='/footer.png' alt='' className='relative hidden w-[48%] md:block' /> */}
         <div className='flex items-center justify-center'>
-          <div className='grid w-fit grid-cols-3 gap-2 rounded-3xl p-6 shadow-inner shadow-[#6B37CA] backdrop-blur-md md:flex md:h-10 md:items-center md:justify-center md:gap-7'>
+          <div className='flex gap-2 rounded-3xl p-2 shadow-md shadow-[#6B37CA] backdrop-blur-md  md:h-10 md:items-center md:justify-center md:gap-7'>
             {tabs.map((tab, index) => (
               <Chip
-                text={tab}
+                text={isSmallScreen ? tab.charAt(0).toUpperCase() + tab.slice(-1) : tab}
                 selected={selected === tab}
                 setSelected={setSelected}
                 setActiveTab={setActiveTab}

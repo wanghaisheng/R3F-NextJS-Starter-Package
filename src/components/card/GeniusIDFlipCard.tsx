@@ -23,7 +23,6 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
   return (
     <>
       <CardBody>
-        {/* Event Image  */}
         <div className='group h-[239px] p-3 [prespective:1000px]'>
           {/* Flip the card when clicked */}
           <div
@@ -31,41 +30,43 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
             ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
             onClick={handleFlip}
           >
-            <div
-              className='absolute inset-0 cursor-default rounded-xl bg-black text-white'
-              style={{
-                backgroundImage: 'url(/card/abstract2.webp)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              <div className='flex w-full justify-end'>
-                <p className='pr-3 pt-1 font-bold text-purple-200'>GENIUS ID</p>
-              </div>
+            <Image
+              // placeholder='blur'
+              src='/card/abstract1.webp'
+              alt='GID'
+              fill
+              className='rounded-lg object-cover'
+            />
+            <div className='absolute top-0 flex w-full justify-end'>
+              <p className='pr-3 pt-1 font-bold text-purple-200'>GENIUS ID</p>
+            </div>
+            <div className='absolute inset-0 cursor-default rounded-xl'>
               {/* Card Details */}
-              <div className='flex flex-col p-5 text-sm text-white'>
+              <div className='absolute top-5 flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
-                  <li className='mb-1 w-full text-xl font-semibold'>
-                    <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
-                  </li>
-                  <li className='mb-1 w-full'>
-                    <p className='text-purple-500'>{email}</p>
-                  </li>
-                  <li className='w-full'>
-                    <p>DOB : {dob}</p>
-                  </li>
-                  <li className='w-full'>
-                    <p>Address : {address}</p>
-                  </li>
-                  <li className='w-full'>
-                    <p>Contact : {contact}</p>
-                  </li>
+                  <ul>
+                    <li className='mb-1 w-full text-xl font-semibold'>
+                      <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
+                    </li>
+                    <li className='mb-1 w-full'>
+                      <p className='text-purple-500'>{email}</p>
+                    </li>
+                    <li className='w-full'>
+                      <p>DOB : {dob}</p>
+                    </li>
+                    <li className='w-full'>
+                      <p>Address : {address}</p>
+                    </li>
+                    <li className='w-full'>
+                      <p>Contact : {contact}</p>
+                    </li>
+                  </ul>
                 </nav>
               </div>
-              <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
-                <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
-              </div>
+            </div>
+            <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
+              <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
+              <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
             </div>
 
             {/* QRCode */}
@@ -74,7 +75,7 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
                 <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
+                <div className='text-base font-semibold text-purple-600'>GOING GENIUS</div>
                 <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
               </div>
             </div>

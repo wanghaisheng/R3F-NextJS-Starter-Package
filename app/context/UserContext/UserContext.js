@@ -35,7 +35,7 @@ export const UserProvider = ({ children }) => {
   }
 
   const logout = () => {
-    Cookies.set('token', '')
+    Cookies.set('token', '', { expires: new Date(0) })
     setUser(null)
   }
 

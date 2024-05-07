@@ -9,6 +9,7 @@ import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import GuildsAndRegionsModal from '../FormModal/GuildsAndRegionsModal'
 
 export default function UserInfoComponent({ onNextButtonClick }) {
   const { user } = useUser()
@@ -18,6 +19,9 @@ export default function UserInfoComponent({ onNextButtonClick }) {
   const [address, setAddress] = useState('')
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
+
+  const [isOpen, setIsOpen] = useState(false)
+
   useEffect(() => {
     const setUserInfo = () => {
       setFirstName(user.first_name ? user.first_name : '')
@@ -173,21 +177,24 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         required
                       />
                     </div>
+                    <DrawOutlineButton type='button' onClick={() => setIsOpen(true)}>
+                      Add Guilds And Regions
+                    </DrawOutlineButton>
                   </div>
                   {/* Submit button */}
-
                   <div className='mt-4'>
                     <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
                   </div>
                 </form>
               </div>
             </div>
-            <div className='mt-2 flex justify-center lg:mt-0'>
+            <div className='mt-2 flex justify-center gap-x-2 lg:mt-0'>
               <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
             </div>
           </div>
         </div>
       </div>
+      <GuildsAndRegionsModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   )
 }

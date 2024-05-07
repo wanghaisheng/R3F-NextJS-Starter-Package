@@ -44,12 +44,7 @@ const Navbar = () => {
 
   return (
     <>
-      <motion.nav
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '
-      >
+      <motion.nav className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
@@ -117,12 +112,27 @@ const Navbar = () => {
                 </div>
               )
             ) : (
-              <Link
-                href='/signin'
-                className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900  '
-              >
-                Sign-In
-              </Link>
+              <div>
+                <Link
+                  href='/signin'
+                  className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900  '
+                >
+                  Sign-In
+                </Link>
+                <button className='md:hidden' id='nav-hamburger' onClick={() => setToggle(!isToggled)}>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
+                    <path
+                      fill='currentColor'
+                      d='M12 22c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22'
+                      opacity='.5'
+                    />
+                    <path
+                      fill='currentColor'
+                      d='M18.75 8a.75.75 0 0 1-.75.75H6a.75.75 0 0 1 0-1.5h12a.75.75 0 0 1 .75.75m0 4a.75.75 0 0 1-.75.75H6a.75.75 0 0 1 0-1.5h12a.75.75 0 0 1 .75.75m0 4a.75.75 0 0 1-.75.75H6a.75.75 0 0 1 0-1.5h12a.75.75 0 0 1 .75.75'
+                    />
+                  </svg>
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -130,7 +140,7 @@ const Navbar = () => {
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
-              <div className='flex h-16 items-center justify-center gap-2 rounded-full border-x-2 border-b-2 border-[#6B37CA] px-20 py-2 shadow-sm shadow-[#6B37CA] backdrop-blur-md md:gap-7 lg:gap-14'>
+              <div className='flex h-16 items-center justify-center gap-2 rounded-full px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7 lg:gap-14'>
                 {pathname === '/maps' ? (
                   <Link href='/maps' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     MAPS
@@ -143,16 +153,16 @@ const Navbar = () => {
                     MAPS
                   </Link>
                 )}
-                {pathname === '/factions' ? (
-                  <Link href='/factions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    FACTIONS
+                {pathname === '/guilds' ? (
+                  <Link href='/guilds' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    GUILDS
                   </Link>
                 ) : (
                   <Link
-                    href='/factions'
+                    href='/guilds'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    FACTIONS
+                    GUILDS
                   </Link>
                 )}
                 {pathname === '/hero3' ? (
@@ -167,7 +177,7 @@ const Navbar = () => {
                     HOME
                   </Link>
                 )}
-                {pathname === '/regions' ? (
+                {pathname.startsWith('/regions') ? (
                   <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     REGIONS
                   </Link>
@@ -198,7 +208,7 @@ const Navbar = () => {
 
         {/* For mobile view nav bar */}
         {isToggled && (
-          <motion.div className=' w-full md:hidden' variants={navAnimate} initial='hidden' animate='show' exit='exit'>
+          <motion.div className='w-full md:hidden' variants={navAnimate} initial='hidden' animate='show' exit='exit'>
             <div className='z-10 flex flex-col items-center justify-center gap-4 rounded-b-3xl bg-black/85 shadow-md shadow-violet-600 md:gap-8'>
               <Link
                 href='/maps'
@@ -207,10 +217,10 @@ const Navbar = () => {
                 MAPS
               </Link>
               <Link
-                href='/factions'
+                href='/guilds'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                FACTIONS
+                GUILDS
               </Link>
               <Link
                 href='hero3'
@@ -231,7 +241,8 @@ const Navbar = () => {
                 EXP
               </Link>
               <Link
-                href='#'
+                href='/signin'
+                onClick={logout}
                 className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
                 <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
