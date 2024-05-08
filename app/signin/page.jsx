@@ -39,7 +39,7 @@ const SignIn = () => {
       if (token) {
         sessionStorage.setItem('token', token) // Store token in sessionStorage
         updateUser(token)
-        router.push('/createavatar')
+        router.push('/slider')
       }
     } catch (error) {
       log('Error: ', error)

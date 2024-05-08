@@ -5,53 +5,49 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { useState, useEffect } from 'react'
 
-import { CircleMenu, CircleMenuItem, TooltipPlacement } from 'react-circular-menu'
-
-// Radial Menu Component
-const RadialMenuComponent = (props) => {
-  return (
-    <CircleMenu
-      startAngle={-90}
-      rotationAngle={360}
-      itemSize={2}
-      radius={5}
-      /**
-       * rotationAngleInclusive (default true)
-       * Whether to include the ending angle in rotation because an
-       * item at 360deg is the same as an item at 0deg if inclusive.
-       * Leave this prop for angles other than 360deg unless otherwise desired.
-       */
-      rotationAngleInclusive={false}
-    >
-      <CircleMenuItem
-        onClick={() => alert('You clicked on BUDDHA')}
-        tooltip='BUDDHA'
-        // tooltipPlacement={TooltipPlacement.Right}
-        style={{ background: '#FFF', color: '#000' }}
-      >
-        B
-      </CircleMenuItem>
-      <CircleMenuItem
-        style={{ background: '#007090', color: '#000' }}
-        onClick={() => alert('You clicked on VAJRA')}
-        tooltip='VAJRA'
-      >
-        V
-      </CircleMenuItem>
-      <CircleMenuItem onClick={() => alert('You clicked on KARMA')} tooltip='KARMA'>
-        K
-      </CircleMenuItem>
-      <CircleMenuItem onClick={() => alert('You clicked on RATNA')} tooltip='RATNA'>
-        R
-      </CircleMenuItem>
-      <CircleMenuItem onClick={() => alert('You clicked on PADMA')} tooltip='PADMA'>
-        P
-      </CircleMenuItem>
-    </CircleMenu>
-  )
-}
+import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
+import { FaDiamond } from 'react-icons/fa6'
+import { BsOctagonFill } from 'react-icons/bs'
+import { MdHexagon } from 'react-icons/md'
 
 const AddGuildsModal = ({ isOpen, setIsOpen }) => {
+  const data = [
+    {
+      imgelink:
+        'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+      guildName: 'BUDDHA',
+      guildSymbol: <MdHexagon />,
+    },
+    {
+      imgelink:
+        'https://images.unsplash.com/photo-1432462770865-65b70566d673?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+      guildName: 'VAJRA',
+      guildSymbol: <BsOctagonFill />,
+    },
+    {
+      imgelink:
+        'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80',
+      guildName: 'KARMA',
+      guildSymbol: <FaDiamond />,
+    },
+    {
+      imgelink:
+        'https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80',
+      guildName: 'RATNA',
+      guildSymbol: <IoCubeSharp />,
+    },
+    {
+      imgelink:
+        'https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80',
+      guildName: 'PADMA',
+      guildSymbol: <IoTriangleSharp />,
+    },
+  ]
+
+  const [active, setActive] = useState(
+    'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+  )
+
   return (
     <>
       <AnimatePresence>
@@ -68,29 +64,32 @@ const AddGuildsModal = ({ isOpen, setIsOpen }) => {
               animate={{ scale: 1, rotate: '0deg' }}
               exit={{ scale: 0, rotate: '0deg' }}
               onClick={(e) => e.stopPropagation()}
-              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 p-6 text-white shadow-xl'
+              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-black p-6 text-white shadow-xl'
             >
-              <div className='relative z-10 h-96'>
+              <div className='relative z-10'>
                 <div className='my-4 flex flex-col items-center justify-center'>
-                  <h1>Do you want to add Regions and Guilds?</h1>
-                  {/* Radial Menu */}
-                  <div className='mt-20'>
-                    <RadialMenuComponent />
+                  <div className='grid gap-4'>
+                    <div>
+                      <img
+                        className='h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[280px]'
+                        src={active}
+                        alt=''
+                      />
+                    </div>
+                    <div className='grid grid-cols-5 gap-4'>
+                      {data.map(({ imgelink, guildName, guildSymbol }, index) => (
+                        <div key={index}>
+                          <div
+                            onClick={() => setActive(imgelink)}
+                            className='flex h-20 max-w-full cursor-pointer items-center justify-center rounded-lg object-cover object-center transition-transform duration-300 ease-in-out hover:scale-105'
+                          >
+                            <p>{guildSymbol}</p>
+                          </div>
+                          <p className='flex justify-center'>{guildName}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className='absolute bottom-2 flex w-full gap-2'>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className='w-full rounded bg-transparent py-2 font-semibold text-white transition-colors hover:bg-white/10'
-                  >
-                    Nah, go back
-                  </button>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className='w-full rounded bg-white py-2 font-semibold text-indigo-600 transition-opacity hover:opacity-90'
-                  >
-                    Add
-                  </button>
                 </div>
               </div>
             </motion.div>

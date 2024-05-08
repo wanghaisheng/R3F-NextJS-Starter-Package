@@ -12,7 +12,7 @@ const Navbar = () => {
   const [isToggled, setToggle] = useState(false)
 
   const pathname = usePathname()
-  const [hideMiddleNav, setHideMiddleNav] = useState(false)
+  const [hideMiddleNav, setHideMiddleNav] = useState(true)
 
   useEffect(() => {
     if (pathname === '/' || pathname === '/slider' || pathname === '/signin' || pathname === '/signup') {

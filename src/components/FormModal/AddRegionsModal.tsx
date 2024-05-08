@@ -10,144 +10,634 @@ import { useState, useEffect } from 'react'
 const RadialMenuComponent = () => {
   const [isOpen, setIsOpen] = useState(false)
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <div>
-      <Planet
-        centerContent={
-          <div
-            style={{
-              height: 50,
-              width: 50,
-              borderRadius: '50%',
-              backgroundColor: '#1da8a4',
-            }}
-          />
-        }
-        open
-        autoClose
-        orbitRadius={150}
-        rotation={30}
-        mass={4}
-        tension={500}
-        friction={19}
-        hideOrbit
-      >
-        <div className='group relative flex size-5 items-center justify-center rounded-full bg-purple-600'>
-          <span className='invisible absolute -left-1/2 bottom-full -translate-x-1/2 rounded-md bg-black px-2 py-1 text-xs text-white group-hover:visible'>
-            BUDDHA
-          </span>
-          <p>B</p>
-        </div>
-
-        <div
-          style={{
-            height: 20,
-            width: 20,
-            borderRadius: '50%',
-            backgroundColor: '#9257ad',
-          }}
-        />
-        <div
-          style={{
-            height: 20,
-            width: 20,
-            borderRadius: '50%',
-            backgroundColor: '#9257ad',
-          }}
-        />
-
+      {isSmallScreen ? (
         <Planet
           centerContent={
             <div
               style={{
-                height: 20,
-                width: 20,
+                height: 60,
+                width: 60,
                 borderRadius: '50%',
                 backgroundColor: '#1da8a4',
               }}
             />
           }
           autoClose
-          orbitRadius={60}
-          rotation={60}
-          mass={4}
-          tension={500}
-          friction={19}
-          // hideOrbit
+          orbitRadius={90}
+          rotation={30}
+          hideOrbit
         >
-          <div
-            style={{
-              height: 20,
-              width: 20,
-              borderRadius: '50%',
-              backgroundColor: '#9257ad',
-            }}
-          />
-          <div
-            style={{
-              height: 20,
-              width: 20,
-              borderRadius: '50%',
-              backgroundColor: '#9257ad',
-            }}
-          />
-          <div
-            style={{
-              height: 20,
-              width: 20,
-              borderRadius: '50%',
-              backgroundColor: '#9257ad',
-            }}
-          />
-        </Planet>
+          {/* <div className='group relative flex size-5 items-center justify-center rounded-full bg-purple-600'>
+          <span className='invisible absolute -left-1/2 bottom-full -translate-x-1/2 rounded-md bg-black px-2 py-1 text-xs text-white group-hover:visible'>
+            BUDDHA
+          </span>
+          <p>B</p>
+        </div> */}
 
-        <Planet
-          centerContent={
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-green-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-green-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
             <div
               style={{
                 height: 20,
                 width: 20,
                 borderRadius: '50%',
-                // backgroundColor: isOpen ? 'black' : 'yellow',
+                backgroundColor: '#9257ad',
               }}
-              className={`bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
-              onClick={() => setIsOpen(!isOpen)}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  backgroundColor: '#1da8a4',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-pink-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-pink-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+        </Planet>
+      ) : (
+        <Planet
+          centerContent={
+            <div
+              style={{
+                height: 60,
+                width: 60,
+                borderRadius: '50%',
+                backgroundColor: '#1da8a4',
+              }}
             />
           }
+          // open
           autoClose
-          orbitRadius={60}
-          rotation={60}
-          mass={4}
-          tension={500}
-          friction={19}
-          // hideOrbit
+          orbitRadius={150}
+          rotation={30}
+          hideOrbit
         >
-          <div
-            style={{
-              height: 20,
-              width: 20,
-              borderRadius: '50%',
-              backgroundColor: '#9257ad',
-            }}
-          />
-          <div
-            style={{
-              height: 20,
-              width: 20,
-              borderRadius: '50%',
-              backgroundColor: '#9257ad',
-            }}
-          />
-          <div
-            style={{
-              height: 20,
-              width: 20,
-              borderRadius: '50%',
-              backgroundColor: '#9257ad',
-            }}
-          />
+          {/* <div className='group relative flex size-5 items-center justify-center rounded-full bg-purple-600'>
+          <span className='invisible absolute -left-1/2 bottom-full -translate-x-1/2 rounded-md bg-black px-2 py-1 text-xs text-white group-hover:visible'>
+            BUDDHA
+          </span>
+          <p>B</p>
+        </div> */}
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-green-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-green-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  backgroundColor: '#1da8a4',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
+
+          <Planet
+            centerContent={
+              <div
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: '50%',
+                  // backgroundColor: isOpen ? 'black' : 'yellow',
+                }}
+                className={`absolute left-[-15px] top-[-15px] bg-pink-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-pink-300'}`}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            }
+            autoClose
+            orbitRadius={60}
+            rotation={60}
+            // mass={4}
+            // tension={500}
+            // friction={19}
+            // hideOrbit
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#9257ad',
+              }}
+            />
+          </Planet>
         </Planet>
-      </Planet>
+      )}
     </div>
   )
 }
@@ -169,17 +659,13 @@ const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
               animate={{ scale: 1, rotate: '0deg' }}
               exit={{ scale: 0, rotate: '0deg' }}
               onClick={(e) => e.stopPropagation()}
-              className='relative size-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-black to-purple-600/50 p-6 text-white shadow-xl'
+              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 p-6 text-white shadow-xl'
             >
-              <div className='relative z-10 h-96'>
-                <div className='my-4 flex flex-col items-center justify-center'>
-                  <h1>Do you want to add Regions?</h1>
-                  {/* Radial Menu */}
-                  <div className='mt-36'>
-                    <RadialMenuComponent />
-                  </div>
+              <div className='relative z-10'>
+                <div className='mb-60 ml-[-50px] mt-48 flex justify-center'>
+                  <RadialMenuComponent />
                 </div>
-                {/* <div className='absolute bottom-2 flex w-full gap-2'>
+                {/* <div className='mt-36 flex gap-2'>
                   <button
                     onClick={() => setRegionIsOpen(false)}
                     className='w-full rounded bg-transparent py-2 font-semibold text-white transition-colors hover:bg-white/10'
@@ -190,7 +676,7 @@ const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
                     onClick={() => setRegionIsOpen(false)}
                     className='w-full rounded bg-white py-2 font-semibold text-indigo-600 transition-opacity hover:opacity-90'
                   >
-                    Add
+                    Understood!
                   </button>
                 </div> */}
               </div>

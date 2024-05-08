@@ -1,7 +1,7 @@
 'use client'
 import 'react-tabs/style/react-tabs.css'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useUser } from '@/context/UserContext/UserContext'
 
@@ -10,10 +10,42 @@ import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
-import AddRegionsModal from '../FormModal/AddRegionsModal'
-import AddGuildsModal from '../FormModal/AddGuildsModal'
-
 export default function UserInfoComponent({ onNextButtonClick }) {
+  const guildData = [
+    {
+      name: 'Vairochana',
+      symbol: 'Symbol for Vairochana',
+      color: '#FFFFFF',
+      description: 'Guild of the Vairochana family',
+    },
+    {
+      name: 'Akshobhya',
+      symbol: 'Symbol for Akshobhya',
+      color: '#FFFFFF',
+      description: 'Guild of the Akshobhya family',
+    },
+    {
+      name: 'Ratnasambhava',
+      symbol: 'Symbol for Ratnasambhava',
+      color: '#FFFFFF',
+      description: 'Guild of the Ratnasambhava family',
+    },
+    {
+      name: 'Amitabha',
+      symbol: 'Symbol for Amitabha',
+      color: '#FFFFFF',
+      description: 'Guild of the Amitabha family',
+    },
+    {
+      name: 'Amoghasiddhi',
+      symbol: 'Symbol for Amoghasiddhi',
+      color: '#FFFFFF',
+      description: 'Guild of the Amoghasiddhi family',
+    },
+  ]
+
+  const [selectedGuild, setSelectedGuild] = useState('')
+
   const { user } = useUser()
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
@@ -21,9 +53,6 @@ export default function UserInfoComponent({ onNextButtonClick }) {
   const [address, setAddress] = useState('')
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
-
-  const [isGuildOpen, setIsGuildOpen] = useState(false)
-  const [isRegionOpen, setIsRegionOpen] = useState(false)
 
   useEffect(() => {
     const setUserInfo = () => {
@@ -182,13 +211,36 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         required
                       />
                     </div>
-                    <div className='flex justify-center gap-x-2'>
-                      <DrawOutlineButton type='button' onClick={() => setIsGuildOpen(true)}>
-                        Add Guilds
-                      </DrawOutlineButton>
-                      <DrawOutlineButton type='button' onClick={() => setIsRegionOpen(true)}>
-                        Add Regions
-                      </DrawOutlineButton>
+
+                    {/* GUILDS SELECTION */}
+                    <div className='flex flex-col lg:flex-row lg:justify-between'>
+                      <label htmlFor='guilds'>Add Guilds</label>
+                      <div className='flex justify-between gap-x-2 px-4 lg:w-[70%]'>
+                        {guildData.map((guild, index) => (
+                          <div key={index} className='relative'>
+                            <input
+                              type='radio'
+                              id={guild.name.toString()}
+                              name='guild'
+                              value={`Guild ${guild.name}`}
+                              className='hidden'
+                              checked={selectedGuild === guild.name}
+                              onChange={() => setSelectedGuild(guild.name)}
+                            />
+                            <label
+                              htmlFor={guild.name}
+                              className={`group cursor-pointer ${
+                                selectedGuild === guild.name ? 'text-blue-500' : 'text-white'
+                              }`}
+                            >
+                              {guild.name.charAt(0).toUpperCase()}
+                              <div className='absolute -left-4 -top-28 hidden -translate-x-1/2 rounded-md bg-green-700 p-2 text-white group-hover:block'>
+                                {`${guild.description}`}
+                              </div>
+                            </label>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   {/* Submit button */}
@@ -204,8 +256,6 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           </div>
         </div>
       </div>
-      <AddGuildsModal isOpen={isGuildOpen} setIsOpen={setIsGuildOpen} />
-      <AddRegionsModal regionIsOpen={isRegionOpen} setRegionIsOpen={setIsRegionOpen} />
     </div>
   )
 }

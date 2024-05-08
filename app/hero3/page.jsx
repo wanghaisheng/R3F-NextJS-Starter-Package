@@ -6,8 +6,8 @@ import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import axios from 'axios'
 
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { Suspense } from 'react'
+// import Image from 'next/image'
+// import { Suspense } from 'react'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
@@ -50,7 +50,7 @@ import {
   YAxis,
 } from 'recharts'
 
-import { ConstantColorFactor } from 'three'
+// import { ConstantColorFactor } from 'three'
 
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
@@ -107,24 +107,24 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
-  ssr: false,
-  loading: () => (
-    <div className='flex h-96 w-full flex-col items-center justify-center'>
-      {/* import {SkillIconsLinkedin} from '@/logo/SkillIconsLinkedin' */}
-      <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
-        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
-        <path
-          className='opacity-75'
-          fill='currentColor'
-          d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-        />
-      </svg>
-    </div>
-  ),
-})
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
-const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
+// const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
+//   ssr: false,
+//   loading: () => (
+//     <div className='flex h-96 w-full flex-col items-center justify-center'>
+//       {/* import {SkillIconsLinkedin} from '@/logo/SkillIconsLinkedin' */}
+//       <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
+//         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
+//         <path
+//           className='opacity-75'
+//           fill='currentColor'
+//           d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+//         />
+//       </svg>
+//     </div>
+//   ),
+// })
+// const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+// const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
 
 export default function Hero3() {
   const { user } = useUser()
