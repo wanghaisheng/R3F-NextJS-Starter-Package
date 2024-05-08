@@ -9,6 +9,7 @@ import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import Image from 'next/image'
 
 export default function UserInfoComponent({ onNextButtonClick }) {
   const guildData = [
@@ -17,33 +18,37 @@ export default function UserInfoComponent({ onNextButtonClick }) {
       symbol: 'Symbol for Vairochana',
       color: '#FFFFFF',
       description: 'Guild of the Vairochana family',
+      image: '/image.png',
     },
     {
       name: 'Akshobhya',
       symbol: 'Symbol for Akshobhya',
       color: '#FFFFFF',
       description: 'Guild of the Akshobhya family',
+      image: '/image.png',
     },
     {
       name: 'Ratnasambhava',
       symbol: 'Symbol for Ratnasambhava',
       color: '#FFFFFF',
       description: 'Guild of the Ratnasambhava family',
+      image: '/image.png',
     },
     {
       name: 'Amitabha',
       symbol: 'Symbol for Amitabha',
       color: '#FFFFFF',
       description: 'Guild of the Amitabha family',
+      image: '/image.png',
     },
     {
       name: 'Amoghasiddhi',
       symbol: 'Symbol for Amoghasiddhi',
       color: '#FFFFFF',
-      description: 'Guild of the Amoghasiddhi family',
+      description: 'Guild of the Amoghasiddhi family selihgosadilnho uiogcseou voshdof',
+      image: '/image.png',
     },
   ]
-
   const [selectedGuild, setSelectedGuild] = useState('')
 
   const { user } = useUser()
@@ -214,10 +219,10 @@ export default function UserInfoComponent({ onNextButtonClick }) {
 
                     {/* GUILDS SELECTION */}
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
-                      <label htmlFor='guilds'>Add Guilds</label>
-                      <div className='flex justify-between gap-x-2 px-4 lg:w-[70%]'>
+                      <label htmlFor='guilds'>Guilds</label>
+                      <div className='relative flex justify-between gap-x-2 px-4 lg:w-[70%]'>
                         {guildData.map((guild, index) => (
-                          <div key={index} className='relative'>
+                          <div key={index} className='lg:relative'>
                             <input
                               type='radio'
                               id={guild.name.toString()}
@@ -234,8 +239,11 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                               }`}
                             >
                               {guild.name.charAt(0).toUpperCase()}
-                              <div className='absolute -left-4 -top-28 hidden -translate-x-1/2 rounded-md bg-green-700 p-2 text-white group-hover:block'>
-                                {`${guild.description}`}
+                              <div className='absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-2 text-white group-hover:block'>
+                                <div style={{ width: '150px' }}>
+                                  <Image src={guild.image} alt={guild.name} width={150} height={50} />
+                                </div>
+                                <p className='text-xs'>{guild.description}</p>
                               </div>
                             </label>
                           </div>
