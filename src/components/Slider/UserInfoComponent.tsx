@@ -138,7 +138,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                   address={address}
                 />
 
-                <p>Symbols for guilds and regions</p>
+                <p>{selectedGuild}</p>
               </div>
 
               {/* form */}
