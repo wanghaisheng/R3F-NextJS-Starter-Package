@@ -9,6 +9,8 @@ import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+
+import AddRegionsModal from '../FormModal/AddRegionsModal'
 import GuildsAndRegionsModal from '../FormModal/GuildsAndRegionsModal'
 
 export default function UserInfoComponent({ onNextButtonClick }) {
@@ -20,7 +22,8 @@ export default function UserInfoComponent({ onNextButtonClick }) {
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isGuildOpen, setIsGuildOpen] = useState(false)
+  const [isRegionOpen, setIsRegionOpen] = useState(false)
 
   useEffect(() => {
     const setUserInfo = () => {
@@ -179,9 +182,14 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         required
                       />
                     </div>
-                    <DrawOutlineButton type='button' onClick={() => setIsOpen(true)}>
-                      Add Guilds And Regions
-                    </DrawOutlineButton>
+                    <div className='flex justify-center gap-x-2'>
+                      <DrawOutlineButton type='button' onClick={() => setIsGuildOpen(true)}>
+                        Add Guilds
+                      </DrawOutlineButton>
+                      <DrawOutlineButton type='button' onClick={() => setIsRegionOpen(true)}>
+                        Add Regions
+                      </DrawOutlineButton>
+                    </div>
                   </div>
                   {/* Submit button */}
                   <div className='mt-4'>
@@ -196,7 +204,8 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           </div>
         </div>
       </div>
-      <GuildsAndRegionsModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <GuildsAndRegionsModal isOpen={isGuildOpen} setIsOpen={setIsGuildOpen} />
+      <AddRegionsModal regionIsOpen={isRegionOpen} setRegionIsOpen={setIsRegionOpen} />
     </div>
   )
 }
