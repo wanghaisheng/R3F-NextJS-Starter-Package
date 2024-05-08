@@ -11,7 +11,7 @@ import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import AddRegionsModal from '../FormModal/AddRegionsModal'
-import GuildsAndRegionsModal from '../FormModal/GuildsAndRegionsModal'
+import AddGuildsModal from '../FormModal/AddGuildsModal'
 
 export default function UserInfoComponent({ onNextButtonClick }) {
   const { user } = useUser()
@@ -204,7 +204,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           </div>
         </div>
       </div>
-      <GuildsAndRegionsModal isOpen={isGuildOpen} setIsOpen={setIsGuildOpen} />
+      <AddGuildsModal isOpen={isGuildOpen} setIsOpen={setIsGuildOpen} />
       <AddRegionsModal regionIsOpen={isRegionOpen} setRegionIsOpen={setIsRegionOpen} />
     </div>
   )

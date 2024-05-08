@@ -51,13 +51,7 @@ const RadialMenuComponent = (props) => {
   )
 }
 
-const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
-  const [close, setClose] = useState(false)
-
-  const handleClose = () => {
-    setClose(!close)
-  }
-
+const AddGuildsModal = ({ isOpen, setIsOpen }) => {
   return (
     <>
       <AnimatePresence>
@@ -107,4 +101,4 @@ const GuildsAndRegionsModal = ({ isOpen, setIsOpen }) => {
   )
 }
 
-export default GuildsAndRegionsModal
+export default AddGuildsModal

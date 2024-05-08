@@ -73,7 +73,7 @@ const RadialMenuComponent = () => {
           mass={4}
           tension={500}
           friction={19}
-          hideOrbit
+          // hideOrbit
         >
           <div
             style={{
@@ -120,7 +120,7 @@ const RadialMenuComponent = () => {
           mass={4}
           tension={500}
           friction={19}
-          hideOrbit
+          // hideOrbit
         >
           <div
             style={{
@@ -153,12 +153,6 @@ const RadialMenuComponent = () => {
 }
 
 const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
-  const [close, setClose] = useState(false)
-
-  const handleClose = () => {
-    setClose(!close)
-  }
-
   return (
     <>
       <AnimatePresence>
