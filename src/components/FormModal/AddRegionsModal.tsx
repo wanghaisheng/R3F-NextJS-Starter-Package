@@ -1,46 +1,159 @@
 'use client'
 
-import { Menu } from '@material-tailwind/react'
 import { AnimatePresence, motion } from 'framer-motion'
+
+import { Planet } from 'react-planet'
 
 import { useState, useEffect } from 'react'
 
-import { CircleMenu, CircleMenuItem, TooltipPlacement } from 'react-circular-menu'
-
 // Radial Menu Component
-const RadialMenuComponent = (props) => {
+const RadialMenuComponent = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <CircleMenu
-      startAngle={-90}
-      rotationAngle={360}
-      itemSize={2}
-      radius={5}
-      /**
-       * rotationAngleInclusive (default true)
-       * Whether to include the ending angle in rotation because an
-       * item at 360deg is the same as an item at 0deg if inclusive.
-       * Leave this prop for angles other than 360deg unless otherwise desired.
-       */
-      rotationAngleInclusive={false}
-    >
-      <CircleMenuItem
-        onClick={() => alert('Clicked the item')}
-        tooltip='Email'
-        tooltipPlacement={TooltipPlacement.Right}
+    <div>
+      <Planet
+        centerContent={
+          <div
+            style={{
+              height: 50,
+              width: 50,
+              borderRadius: '50%',
+              backgroundColor: '#1da8a4',
+            }}
+          />
+        }
+        open
+        autoClose
+        orbitRadius={150}
+        rotation={30}
+        mass={4}
+        tension={500}
+        friction={19}
+        hideOrbit
       >
-        Icon
-      </CircleMenuItem>
-      <CircleMenuItem tooltip='Help'>2</CircleMenuItem>
-      <CircleMenuItem tooltip='Location'>3</CircleMenuItem>
-      <CircleMenuItem tooltip='Info'>4</CircleMenuItem>
-      <CircleMenuItem tooltip='Guild'>5</CircleMenuItem>
-    </CircleMenu>
+        <div className='group relative flex size-5 items-center justify-center rounded-full bg-purple-600'>
+          <span className='invisible absolute -left-1/2 bottom-full -translate-x-1/2 rounded-md bg-black px-2 py-1 text-xs text-white group-hover:visible'>
+            BUDDHA
+          </span>
+          <p>B</p>
+        </div>
+
+        <div
+          style={{
+            height: 20,
+            width: 20,
+            borderRadius: '50%',
+            backgroundColor: '#9257ad',
+          }}
+        />
+        <div
+          style={{
+            height: 20,
+            width: 20,
+            borderRadius: '50%',
+            backgroundColor: '#9257ad',
+          }}
+        />
+
+        <Planet
+          centerContent={
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                backgroundColor: '#1da8a4',
+              }}
+            />
+          }
+          autoClose
+          orbitRadius={60}
+          rotation={60}
+          mass={4}
+          tension={500}
+          friction={19}
+          hideOrbit
+        >
+          <div
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: '50%',
+              backgroundColor: '#9257ad',
+            }}
+          />
+          <div
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: '50%',
+              backgroundColor: '#9257ad',
+            }}
+          />
+          <div
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: '50%',
+              backgroundColor: '#9257ad',
+            }}
+          />
+        </Planet>
+
+        <Planet
+          centerContent={
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: '50%',
+                // backgroundColor: isOpen ? 'black' : 'yellow',
+              }}
+              className={`bg-blue-300 hover:bg-white active:bg-blue-800 ${isOpen ? 'bg-yellow-400' : 'bg-blue-300'}`}
+              onClick={() => setIsOpen(!isOpen)}
+            />
+          }
+          autoClose
+          orbitRadius={60}
+          rotation={60}
+          mass={4}
+          tension={500}
+          friction={19}
+          hideOrbit
+        >
+          <div
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: '50%',
+              backgroundColor: '#9257ad',
+            }}
+          />
+          <div
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: '50%',
+              backgroundColor: '#9257ad',
+            }}
+          />
+          <div
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: '50%',
+              backgroundColor: '#9257ad',
+            }}
+          />
+        </Planet>
+      </Planet>
+    </div>
   )
 }
 
 const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
   const [close, setClose] = useState(false)
-  const items = ['Add Guild', 'Add Region', 'Rion', 'Reon', 'Regn', 'nd']
 
   const handleClose = () => {
     setClose(!close)
@@ -62,7 +175,7 @@ const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
               animate={{ scale: 1, rotate: '0deg' }}
               exit={{ scale: 0, rotate: '0deg' }}
               onClick={(e) => e.stopPropagation()}
-              className='relative w-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-black to-purple-600/50 p-6 text-white shadow-xl'
+              className='relative size-full max-w-lg cursor-default overflow-hidden rounded-lg bg-gradient-to-br from-black to-purple-600/50 p-6 text-white shadow-xl'
             >
               <div className='relative z-10 h-96'>
                 <div className='my-4 flex flex-col items-center justify-center'>
@@ -72,7 +185,7 @@ const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
                     <RadialMenuComponent />
                   </div>
                 </div>
-                <div className='absolute bottom-2 flex w-full gap-2'>
+                {/* <div className='absolute bottom-2 flex w-full gap-2'>
                   <button
                     onClick={() => setRegionIsOpen(false)}
                     className='w-full rounded bg-transparent py-2 font-semibold text-white transition-colors hover:bg-white/10'
@@ -85,7 +198,7 @@ const AddRegionsModal = ({ regionIsOpen, setRegionIsOpen }) => {
                   >
                     Add
                   </button>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           </motion.div>
