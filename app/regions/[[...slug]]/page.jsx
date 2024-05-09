@@ -5,6 +5,8 @@ import RegionHeader from '@/components/Regions/RegionHeader'
 import ShowRegion from '@/components/Regions/ShowRegion'
 import RegionDetails from '@/components/Regions/RegionDetails'
 
+import ShowRegion2 from '@/components/Regions/ShowRegion2'
+
 import Image from 'next/image'
 import GetUserLocation from '@/components/Regions/GetUserLocation'
 
@@ -89,7 +91,8 @@ const Regions = ({ params }) => {
             <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
             <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
-              <ShowRegion filter={selectedFilter} searchTerm={searchTerm} />
+              {/* <ShowRegion filter={selectedFilter} searchTerm={searchTerm} /> */}
+              <ShowRegion2 filter={selectedFilter} searchTerm={searchTerm} />
             </div>
           </>
         )}
