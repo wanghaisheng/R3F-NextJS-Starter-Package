@@ -14,39 +14,39 @@ import Image from 'next/image'
 export default function UserInfoComponent({ onNextButtonClick }) {
   const guildData = [
     {
-      name: 'Vairochana',
+      name: 'BUDDHA',
       symbol: 'Symbol for Vairochana',
-      color: '#FFFFFF',
-      description: 'Guild of the Vairochana family',
-      image: '/image.png',
+      color: 'FFFFFF',
+      description: ' WHITE Guild of the Vairochana family',
+      image: '/svgs/vairocana.svg',
     },
     {
-      name: 'Akshobhya',
+      name: 'VAJRA',
       symbol: 'Symbol for Akshobhya',
-      color: '#FFFFFF',
-      description: 'Guild of the Akshobhya family',
-      image: '/image.png',
+      color: '0000FF',
+      description: ' BLUE Guild of the Akshobhya family',
+      image: '/svgs/akshobhya.svg',
     },
     {
-      name: 'Ratnasambhava',
-      symbol: 'Symbol for Ratnasambhava',
-      color: '#FFFFFF',
-      description: 'Guild of the Ratnasambhava family',
-      image: '/image.png',
-    },
-    {
-      name: 'Amitabha',
-      symbol: 'Symbol for Amitabha',
-      color: '#FFFFFF',
-      description: 'Guild of the Amitabha family',
-      image: '/image.png',
-    },
-    {
-      name: 'Amoghasiddhi',
+      name: 'KARMA',
       symbol: 'Symbol for Amoghasiddhi',
-      color: '#FFFFFF',
-      description: 'Guild of the Amoghasiddhi family selihgosadilnho uiogcseou voshdof',
-      image: '/image.png',
+      color: '00FF00',
+      description: ' Green Guild of the Amoghasiddhi family selihgosadilnho uiogcseou voshdof',
+      image: '/svgs/amoghasiddhi.svg',
+    },
+    {
+      name: 'RATNA',
+      symbol: 'Symbol for Ratnasambhava',
+      color: 'FFF200',
+      description: ' YELLOW/GOLD Guild of the Ratnasambhava family',
+      image: '/svgs/ratnasambhava.svg',
+    },
+    {
+      name: 'PADMA',
+      symbol: 'Symbol for Amitabha',
+      color: 'FF0000',
+      description: ' RED Guild of the Amitabha family',
+      image: '/svgs/amitabha.svg',
     },
   ]
   const [selectedGuild, setSelectedGuild] = useState('')
@@ -234,12 +234,16 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                             />
                             <label
                               htmlFor={guild.name}
-                              className={`group cursor-pointer ${
-                                selectedGuild === guild.name ? 'text-blue-500' : 'text-white'
-                              }`}
+                              className={'group cursor-pointer'}
+                              style={{
+                                color: selectedGuild === guild.name ? `#${guild.color}` : `#FFFFFF`,
+                                fontWeight: selectedGuild === guild.name ? 'bold' : 'normal',
+                              }}
                             >
                               {guild.name.charAt(0).toUpperCase()}
-                              <div className='absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-2 text-white group-hover:block'>
+                              <div
+                                className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-2 text-white group-hover:block`}
+                              >
                                 <div style={{ width: '150px' }}>
                                   <Image src={guild.image} alt={guild.name} width={150} height={50} />
                                 </div>
