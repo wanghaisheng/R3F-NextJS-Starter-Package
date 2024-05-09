@@ -6,6 +6,7 @@ import ShowRegion from '@/components/Regions/ShowRegion'
 import RegionDetails from '@/components/Regions/RegionDetails'
 
 import Image from 'next/image'
+import GetUserLocation from '@/components/Regions/GetUserLocation'
 
 const Regions = ({ params }) => {
   const [selectedFilter, setSelectedFilter] = useState(null)
@@ -45,33 +46,46 @@ const Regions = ({ params }) => {
   return (
     <>
       <div className='relative'>
-        {/* Render background image */}
-        <div
-          style={{
-            position: 'absolute',
-            top: -110,
-            left: 0,
-            width: '100%',
-            height: '100vh',
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(8px)',
-          }}
-        ></div>
-
         {/* Render other content over the background */}
         {params.slug?.length === 2 ? (
-          <div>
-            View of region {params.slug[0]} and Concept {params.slug[1]}
+          <div className='flex justify-center'>
+            <GetUserLocation />
           </div>
         ) : params.slug?.length === 1 ? (
           <div>
+            {/* Render background image */}
+            <div
+              style={{
+                position: 'absolute',
+                top: -110,
+                left: 0,
+                width: '100%',
+                height: '100vh',
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'blur(8px)',
+              }}
+            ></div>
             <RegionDetails continent={params.slug[0]} />
             <div className='mx-10 flex justify-end'>{params.slug[0].toUpperCase()}</div>
           </div>
         ) : (
           <>
+            {/* Render background image */}
+            <div
+              style={{
+                position: 'absolute',
+                top: -110,
+                left: 0,
+                width: '100%',
+                height: '100vh',
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'blur(8px)',
+              }}
+            ></div>
             <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
             <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
