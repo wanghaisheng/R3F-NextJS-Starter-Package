@@ -11,39 +11,44 @@ import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import Image from 'next/image'
 
+import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
+import { FaDiamond } from 'react-icons/fa6'
+import { BsOctagonFill } from 'react-icons/bs'
+import { MdHexagon } from 'react-icons/md'
+
 export default function UserInfoComponent({ onNextButtonClick }) {
   const guildData = [
     {
       name: 'BUDDHA',
-      symbol: 'Symbol for Vairochana',
+      symbol: <MdHexagon />,
       color: 'FFFFFF',
       description: ' WHITE Guild of the Vairochana family',
       image: '/svgs/vairocana.svg',
     },
     {
       name: 'VAJRA',
-      symbol: 'Symbol for Akshobhya',
+      symbol: <BsOctagonFill />,
       color: '0000FF',
       description: ' BLUE Guild of the Akshobhya family',
       image: '/svgs/akshobhya.svg',
     },
     {
       name: 'KARMA',
-      symbol: 'Symbol for Amoghasiddhi',
+      symbol: <FaDiamond />,
       color: '00FF00',
       description: ' Green Guild of the Amoghasiddhi family selihgosadilnho uiogcseou voshdof',
       image: '/svgs/amoghasiddhi.svg',
     },
     {
       name: 'RATNA',
-      symbol: 'Symbol for Ratnasambhava',
+      symbol: <IoCubeSharp />,
       color: 'FFF200',
       description: ' YELLOW/GOLD Guild of the Ratnasambhava family',
       image: '/svgs/ratnasambhava.svg',
     },
     {
       name: 'PADMA',
-      symbol: 'Symbol for Amitabha',
+      symbol: <IoTriangleSharp />,
       color: 'FF0000',
       description: ' RED Guild of the Amitabha family',
       image: '/svgs/amitabha.svg',
@@ -125,7 +130,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='Genius ID'
-        className='relative flex h-fit w-[85%] py-4 md:w-[68%] md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
+        className='relative flex h-fit py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Genius ID</div>
@@ -220,7 +225,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                     {/* GUILDS SELECTION */}
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
                       <label htmlFor='guilds'>Guilds</label>
-                      <div className='relative flex justify-between gap-x-2 px-4 lg:w-[70%]'>
+                      <div className='relative flex items-center justify-between gap-x-2 px-4 lg:w-[70%]'>
                         {guildData.map((guild, index) => (
                           <div key={index} className='lg:relative'>
                             <input
@@ -237,16 +242,25 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                               className={'group cursor-pointer'}
                               style={{
                                 color: selectedGuild === guild.name ? `#${guild.color}` : `#FFFFFF`,
-                                fontWeight: selectedGuild === guild.name ? 'bold' : 'normal',
+                                fontSize: selectedGuild === guild.name ? '1.2em' : '1em',
+                                transition: 'font-size 0.2s ease',
                               }}
                             >
-                              {guild.name.charAt(0).toUpperCase()}
+                              {guild.symbol}
                               <div
                                 className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-2 text-white group-hover:block`}
                               >
                                 <div style={{ width: '150px' }}>
                                   <Image src={guild.image} alt={guild.name} width={150} height={50} />
                                 </div>
+                                <p
+                                  className='flex justify-center text-xs font-bold'
+                                  style={{
+                                    color: `#${guild.color}`,
+                                  }}
+                                >
+                                  {guild.name}
+                                </p>
                                 <p className='text-xs'>{guild.description}</p>
                               </div>
                             </label>

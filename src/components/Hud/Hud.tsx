@@ -23,6 +23,7 @@ const Hud = () => {
     if (
       pathname === '/' ||
       pathname === '/slider' ||
+      pathname === '/slider2' ||
       pathname === '/signin' ||
       pathname === '/signup' ||
       pathname === '/guilds' ||

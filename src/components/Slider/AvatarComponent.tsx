@@ -51,67 +51,79 @@ export default function AvatarComponent({ onNextButtonClick }) {
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
   return (
-    <div className='mt-2 flex items-center justify-center'>
+    <div className='mt-2 flex flex-col items-center'>
       <div
-        id='Avatar'
-        className='relative flex w-[68%] flex-col items-center justify-center px-10 py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
-        style={{ minHeight: '300px' }} //Reserve space for dynamic content
+        id='My Avatar'
+        className='relative flex h-fit py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
+        // style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
-        <div className='relative my-3 flex justify-center text-2xl md:text-4xl lg:my-5 lg:text-7xl'>My Avatars</div>
+        <div className='flex w-full flex-col'>
+          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>My Avatars</div>
 
-        {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-          <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
-            <Avatar
-              modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-              // shadows
-              animationSrc='/male-idle-3.fbx'
-              style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
-              fov={40}
-              cameraTarget={1.5}
-              cameraInitialDistance={30}
-              effects={{
-                ambientOcclusion: true,
-              }}
-            />
-            <AvatarImageComponent />
-          </div>
-        ) : (
-          <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
-            <Avatar
-              modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-              // shadows
-              animationSrc='/male-idle-3.fbx'
-              style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
-              fov={40}
-              cameraTarget={1.5}
-              cameraInitialDistance={30}
-              effects={{
-                ambientOcclusion: true,
-              }}
-            />
-            <AvatarImageComponent />
-          </div>
-        )}
+          <div className='mt-5 rounded-[20px] '>
+            <div className='flex flex-col lg:flex-row lg:justify-between'>
+              {/* Card Image / Container */}
+              <div className='flex flex-col items-center justify-center'>
+                {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
+                  <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
+                    <Avatar
+                      modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                      // shadows
+                      animationSrc='/male-idle-3.fbx'
+                      style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
+                      fov={40}
+                      cameraTarget={1.5}
+                      cameraInitialDistance={30}
+                      effects={{
+                        ambientOcclusion: true,
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
+                    <Avatar
+                      modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+                      // shadows
+                      animationSrc='/male-idle-3.fbx'
+                      style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
+                      fov={40}
+                      cameraTarget={1.5}
+                      cameraInitialDistance={30}
+                      effects={{
+                        ambientOcclusion: true,
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
 
-        <div className='mt-4 flex justify-center gap-x-2 md:absolute md:bottom-4 md:right-4 md:justify-end'>
-          <DrawOutlineButton
-            onClick={() => {
-              setIsCardModalOpen(true)
-            }}
-          >
-            Create Avatar &emsp; +
-          </DrawOutlineButton>
-          <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+              <div className='w-full lg:w-[50%]'>
+                <AvatarImageComponent />
+              </div>
+            </div>
+            {/* <div className='mt-5 flex justify-center gap-x-2'>
+              <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+            </div> */}
+            <div className='mt-4 flex justify-center gap-x-2 md:absolute md:bottom-4 md:right-4 md:justify-end'>
+              <DrawOutlineButton
+                onClick={() => {
+                  setIsCardModalOpen(true)
+                }}
+              >
+                Create Avatar &emsp; +
+              </DrawOutlineButton>
+              <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+            </div>
+
+            {isCardModalOpen && (
+              <div className='absolute left-0 top-0 flex size-full items-center justify-center'>
+                <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
+                  <Avatar_creator />
+                </FormModal2>
+              </div>
+            )}
+          </div>
         </div>
-
-        {/* facing problem cuz of this */}
-        {isCardModalOpen && (
-          <div className='absolute left-0 top-0 flex size-full items-center justify-center'>
-            <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
-              <Avatar_creator />
-            </FormModal2>
-          </div>
-        )}
       </div>
     </div>
   )
