@@ -23,6 +23,7 @@ const Hud = () => {
     if (
       pathname === '/' ||
       pathname === '/slider' ||
+      pathname === '/slider2' ||
       pathname === '/signin' ||
       pathname === '/signup' ||
       pathname === '/guilds' ||
@@ -37,7 +38,7 @@ const Hud = () => {
 
   return (
     <>
-      <motion.nav className='container sticky bottom-0 z-50 mx-auto flex flex-col items-center justify-center rounded-2xl text-slate-50 '>
+      <motion.nav className='container fixed bottom-0 z-50 mx-auto flex flex-col items-center justify-center rounded-2xl text-slate-50 '>
         {/* HUD */}
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-16 items-center justify-center px-0 py-2 '>

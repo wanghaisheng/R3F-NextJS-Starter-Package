@@ -40,7 +40,7 @@ const SignIn = () => {
       if (token) {
         Cookies.set('token', token)
         updateUser(token)
-        router.push('/createavatar')
+        router.push('/slider')
       }
     } catch (error) {
       log('Error: ', error)

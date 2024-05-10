@@ -11,6 +11,13 @@ export async function GET(request, { params }) {
     // Fetch the user by ID
     const user = await prisma.users.findUnique({
       where: { gg_id: id },
+      // manage the access of the relations
+      include: {
+        skills: true,
+        cards: true,
+        experience: true,
+        avatar: true,
+      },
     })
 
     if (!user) {

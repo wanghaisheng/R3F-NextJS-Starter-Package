@@ -15,7 +15,13 @@ const Navbar = () => {
   const [hideMiddleNav, setHideMiddleNav] = useState(false)
 
   useEffect(() => {
-    if (pathname === '/' || pathname === '/slider' || pathname === '/signin' || pathname === '/signup') {
+    if (
+      pathname === '/' ||
+      pathname === '/slider' ||
+      pathname === '/signin' ||
+      pathname === '/signup' ||
+      pathname === '/slider2'
+    ) {
       setHideMiddleNav(true)
     } else {
       setHideMiddleNav(false)
