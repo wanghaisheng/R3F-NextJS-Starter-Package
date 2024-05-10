@@ -129,7 +129,7 @@ export default function SkillsComponent() {
           </div>
 
           <Tabs>
-            <TabList className='mt-20 flex flex-col md:flex-row md:items-start md:justify-start lg:my-6'>
+            <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
                   {element.skill}
@@ -271,11 +271,11 @@ export default function SkillsComponent() {
             </div>
           </Tabs>
           <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-            <div className='mt-0'>
+            <div className='-mt-2'>
               <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
             </div>
           </div>
-          <div className='absolute bottom-4 right-4'>
+          <div className='absolute bottom-4 right-0 lg:right-4'>
             <Link href='/hero3'>
               <DrawOutlineButton>Go To Home</DrawOutlineButton>
             </Link>

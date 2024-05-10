@@ -283,7 +283,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                       </div>
                       {/* Submit button */}
                       <div className='relative mt-4 flex gap-x-2'>
-                        <div>
+                        <div className='mt-1'>
                           <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
                         </div>
                       </div>
@@ -293,7 +293,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='absolute bottom-4 right-4 mt-4'>
+          <div className='absolute bottom-4 right-4'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
           </div>
         </div>
