@@ -127,10 +127,10 @@ export default function UserInfoComponent({ onNextButtonClick }) {
   }
 
   return (
-    <div className='mt-2 flex flex-col items-center'>
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
       <div
         id='Genius ID'
-        className='relative flex h-[550px] py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md'
+        className='relative flex h-[900px] w-[300px] py-4 md:w-[500px] md:rounded-3xl md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Genius ID</div>
@@ -138,17 +138,19 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Card Image / Container */}
-              <div className='flex flex-col items-center justify-center'>
-                <GeniusIDFlipCard
-                  first_name={first_name}
-                  last_name={last_name}
-                  email={email}
-                  dob={dob}
-                  contact={phone_number}
-                  address={address}
-                />
+              <div className='flex flex-col'>
+                <div className='flex justify-center'>
+                  <GeniusIDFlipCard
+                    first_name={first_name}
+                    last_name={last_name}
+                    email={email}
+                    dob={dob}
+                    contact={phone_number}
+                    address={address}
+                  />
+                </div>
 
-                <p>{selectedGuild}</p>
+                <p className='flex justify-center'>{selectedGuild}</p>
               </div>
 
               {/* form */}
@@ -276,8 +278,10 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                 </form>
               </div>
             </div>
-            <div className='mt-5 flex justify-center gap-x-2'>
-              <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+            <div className='mt-2 flex justify-center gap-x-2'>
+              <DrawOutlineButton onClick={onNextButtonClick}>
+                <p className='px-4'>Next</p>
+              </DrawOutlineButton>
             </div>
           </div>
         </div>

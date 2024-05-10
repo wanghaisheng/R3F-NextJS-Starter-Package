@@ -120,10 +120,10 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   }
 
   return (
-    <div className='mt-2 flex flex-col items-center'>
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
       <div
         id='experience'
-        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex w-full flex-col '>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
@@ -181,7 +181,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                   <div className='w-full lg:w-[50%]'>
                     <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
                       <div className='flex w-full flex-col gap-y-2 px-4'>
-                        <div className='flex flex-col items-center lg:flex-row lg:justify-between'>
+                        <div className='flex flex-row items-center justify-between'>
                           <div>
                             <label
                               htmlFor='educational'
@@ -293,7 +293,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='mt-2 flex justify-center lg:-mt-10'>
+          <div className='-mt-10 flex justify-end lg:-mt-10'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
           </div>
         </div>
