@@ -1,9 +1,5 @@
 'use client'
 
-import { FiChevronDown } from 'react-icons/fi'
-import { AiOutlineRadarChart } from 'react-icons/ai'
-import { FaChartPie, FaRegChartBar } from 'react-icons/fa'
-import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 
@@ -113,12 +109,12 @@ export default function SkillsComponent() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className='mt-2 flex flex-col items-center justify-center'>
+    <div className='mt-2 flex flex-col items-center'>
       <div
         id='skills'
-        className='relative flex h-fit py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
+        className='relative flex h-[550px] py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md'
       >
-        <div className='flex w-full flex-col '>
+        <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
             Skills
             <div className='absolute right-0 top-10 text-sm '>
@@ -135,7 +131,7 @@ export default function SkillsComponent() {
           <Tabs>
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
                   {element.skill}
                   <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
                     <TiDelete />
@@ -146,7 +142,7 @@ export default function SkillsComponent() {
 
             {/* TabPanel */}
             <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
-              <div className='flex w-full flex-col lg:flex-row lg:justify-between'>
+              <div className='flex w-[300px] flex-col md:w-[600px] lg:w-[800px] lg:flex-row lg:justify-between'>
                 <div className='lg:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
@@ -289,63 +285,4 @@ export default function SkillsComponent() {
       </div>
     </div>
   )
-}
-
-const Option = ({ text, Icon, setOpen }) => {
-  return (
-    <motion.li
-      variants={itemVariants}
-      onClick={() => setOpen(false)}
-      className='flex w-full cursor-pointer items-center gap-2 whitespace-nowrap rounded-md p-2 text-xs font-medium text-white transition-colors hover:bg-purple-900'
-    >
-      <motion.span variants={actionIconVariants}>
-        <Icon />
-      </motion.span>
-      <span>{text}</span>
-    </motion.li>
-  )
-}
-
-const wrapperVariants = {
-  open: {
-    scaleY: 1,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.1,
-    },
-  },
-  closed: {
-    scaleY: 0,
-    transition: {
-      when: 'afterChildren',
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const iconVariants = {
-  open: { rotate: 180 },
-  closed: { rotate: 0 },
-}
-
-const itemVariants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      when: 'beforeChildren',
-    },
-  },
-  closed: {
-    opacity: 0,
-    y: -15,
-    transition: {
-      when: 'afterChildren',
-    },
-  },
-}
-
-const actionIconVariants = {
-  open: { scale: 1, y: 0 },
-  closed: { scale: 0, y: -7 },
 }
