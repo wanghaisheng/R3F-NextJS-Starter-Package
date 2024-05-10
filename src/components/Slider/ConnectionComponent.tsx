@@ -46,9 +46,9 @@ export default function ConnectionComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='connection'
-        className='relative flex h-[550px] py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md'
+        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
       >
-        <div className='flex  w-[300px] flex-col md:w-[600px] lg:w-[800px]'>
+        <div className='flex flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Connection</div>
           {connections.length < 4 ? (
             <div className='mt-3 flex flex-wrap justify-center gap-x-10 gap-y-5'>

@@ -112,7 +112,7 @@ export default function SkillsComponent() {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='skills'
-        className='relative flex h-[550px] py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md'
+        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
@@ -142,7 +142,7 @@ export default function SkillsComponent() {
 
             {/* TabPanel */}
             <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
-              <div className='flex w-[300px] flex-col md:w-[600px] lg:w-[800px] lg:flex-row lg:justify-between'>
+              <div className='flex flex-col lg:flex-row lg:justify-between'>
                 <div className='lg:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
@@ -272,10 +272,10 @@ export default function SkillsComponent() {
             </div>
           </Tabs>
           <div className='flex justify-center gap-x-2'>
-            <div className='mt-4 '>
+            <div className='mt-0'>
               <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
             </div>
-            <div className='mt-4 '>
+            <div className='mt-0'>
               <Link href='/hero3'>
                 <DrawOutlineButton>Go To Home</DrawOutlineButton>
               </Link>

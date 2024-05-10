@@ -77,7 +77,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   return (
     <>
-      <section className='mx-auto w-full'>
+      <section className='mx-auto mt-20 w-full'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex'>
             <div className='w-[900px] min-w-0 flex-none pl-4'>

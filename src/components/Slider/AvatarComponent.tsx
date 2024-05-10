@@ -54,7 +54,7 @@ export default function AvatarComponent({ onNextButtonClick }) {
     <div className='mt-2 flex flex-col items-center'>
       <div
         id='My Avatar'
-        className='relative flex h-[550px] py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md'
+        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
         // style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div className='flex w-full flex-col'>
