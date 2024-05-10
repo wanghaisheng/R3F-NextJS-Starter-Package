@@ -192,8 +192,7 @@ export default function SkillsComponent() {
                         </p> */}
                         <p className='my-4 lg:mt-0'>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
-                          saepe repudiandae accusamus temporibus, autem dicta quidem a omnis quas optio nemo? Officia
-                          totam autem nam ex quis?
+                          saepe repudiandae accusamus temporibus, autem
                         </p>
                         <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                           Certifications
@@ -275,11 +274,11 @@ export default function SkillsComponent() {
             <div className='mt-0'>
               <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
             </div>
-            <div className='mt-0'>
-              <Link href='/hero3'>
-                <DrawOutlineButton>Go To Home</DrawOutlineButton>
-              </Link>
-            </div>
+          </div>
+          <div className='absolute bottom-4 right-4'>
+            <Link href='/hero3'>
+              <DrawOutlineButton>Go To Home</DrawOutlineButton>
+            </Link>
           </div>
         </div>
       </div>

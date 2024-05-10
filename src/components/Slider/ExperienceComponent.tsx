@@ -293,7 +293,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='-mt-10 flex justify-end lg:-mt-10'>
+          <div className='absolute bottom-4 right-4 mt-4'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
           </div>
         </div>

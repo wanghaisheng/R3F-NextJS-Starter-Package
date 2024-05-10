@@ -278,7 +278,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                 </form>
               </div>
             </div>
-            <div className='mt-2 flex justify-center gap-x-2'>
+            <div className='absolute bottom-4 right-4 mt-4'>
               <DrawOutlineButton onClick={onNextButtonClick}>
                 <p className='px-4'>Next</p>
               </DrawOutlineButton>
