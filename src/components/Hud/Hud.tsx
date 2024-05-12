@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 import { MdSwipe } from 'react-icons/md'
@@ -13,7 +12,6 @@ import { SiExpertsexchange } from 'react-icons/si'
 import SpringModal from '../FormModal/SpringModal'
 
 const Hud = () => {
-  const [isToggled, setToggle] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   const pathname = usePathname()
@@ -23,11 +21,13 @@ const Hud = () => {
     if (
       pathname === '/' ||
       pathname === '/slider' ||
+      pathname === '/slider2' ||
       pathname === '/signin' ||
       pathname === '/signup' ||
       pathname === '/guilds' ||
-      pathname === '/regions' ||
-      pathname.match(/^\/regions\/.*/)
+      pathname === '/regions'
+      // ||
+      // pathname.match(/^\/regions\/.*/)
     ) {
       setHideMiddleNav(true)
     } else {
@@ -37,7 +37,7 @@ const Hud = () => {
 
   return (
     <>
-      <motion.nav className='container sticky bottom-0 z-50 mx-auto flex flex-col items-center justify-center rounded-2xl text-slate-50 '>
+      <motion.nav className='container fixed bottom-0 z-50 mx-auto flex flex-col items-center justify-center rounded-2xl text-slate-50 '>
         {/* HUD */}
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-16 items-center justify-center px-0 py-2 '>

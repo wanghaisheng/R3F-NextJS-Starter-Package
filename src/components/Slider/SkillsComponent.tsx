@@ -1,11 +1,9 @@
 'use client'
 
-import { FiChevronDown } from 'react-icons/fi'
-import { AiOutlineRadarChart } from 'react-icons/ai'
-import { FaChartPie, FaRegChartBar } from 'react-icons/fa'
-import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
+
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
@@ -108,39 +106,15 @@ export default function SkillsComponent() {
     })
   }
 
-  // Animated Button
-  const DrawOutlineButton = ({ children, ...rest }) => {
-    return (
-      <button
-        {...rest}
-        className='group relative rounded-md bg-purple-400/20 px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-purple-300'
-      >
-        <span>{children}</span>
-
-        {/* TOP */}
-        <span className='absolute left-0 top-0 h-[2px] w-0 bg-purple-300 transition-all duration-100 group-hover:w-full' />
-
-        {/* RIGHT */}
-        <span className='absolute right-0 top-0 h-0 w-[2px] bg-purple-300 transition-all delay-100 duration-100 group-hover:h-full' />
-
-        {/* BOTTOM */}
-        <span className='absolute bottom-0 right-0 h-[2px] w-0 bg-purple-300 transition-all delay-200 duration-100 group-hover:w-full' />
-
-        {/* LEFT */}
-        <span className='absolute bottom-0 left-0 h-0 w-[2px] bg-purple-300 transition-all delay-300 duration-100 group-hover:h-full' />
-      </button>
-    )
-  }
-
   const [open, setOpen] = useState(false)
 
   return (
-    <div className='mt-2 flex flex-col items-center justify-center'>
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
-        id='skills'
-        className='relative flex h-fit w-[85%] items-center justify-center py-4 md:w-[68%] md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md'
+        id='card'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
-        <div className='flex w-full flex-col '>
+        <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
             Skills
             <div className='absolute right-0 top-10 text-sm '>
@@ -155,9 +129,9 @@ export default function SkillsComponent() {
           </div>
 
           <Tabs>
-            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
+            <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
                   {element.skill}
                   <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
                     <TiDelete />
@@ -168,8 +142,8 @@ export default function SkillsComponent() {
 
             {/* TabPanel */}
             <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
-              <div className='flex w-full flex-col lg:flex-row lg:justify-between'>
-                <div className='lg:w-[60%]'>
+              <div className='flex flex-col lg:flex-row lg:justify-between'>
+                <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
                       <div className='size-full rounded-[20px]  p-4'>
@@ -218,8 +192,7 @@ export default function SkillsComponent() {
                         </p> */}
                         <p className='my-4 lg:mt-0'>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
-                          saepe repudiandae accusamus temporibus, autem dicta quidem a omnis quas optio nemo? Officia
-                          totam autem nam ex quis?
+                          saepe repudiandae accusamus temporibus, autem
                         </p>
                         <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                           Certifications
@@ -234,7 +207,7 @@ export default function SkillsComponent() {
                   ))}
                 </div>
 
-                <div className='mt-4 rounded-[20px] p-3  lg:ml-2 lg:mt-0 lg:w-[45%]'>
+                <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
                   <p className='mb-2 flex justify-center'>Specification</p>
 
                   {/* Condition for changing barchart chart and radar chart*/}
@@ -297,77 +270,18 @@ export default function SkillsComponent() {
               </div>
             </div>
           </Tabs>
-          <div className='flex justify-center gap-x-2'>
-            <div className='mt-4 '>
+          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
+            <div className='-mt-2'>
               <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
             </div>
-            <div className='mt-4 '>
-              <Link href='/hero3'>
-                <DrawOutlineButton>Go To Home</DrawOutlineButton>
-              </Link>
-            </div>
+          </div>
+          <div className='absolute bottom-4 right-0 lg:right-4'>
+            <Link href='/hero3'>
+              <DrawOutlineButton>Go To Home</DrawOutlineButton>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   )
-}
-
-const Option = ({ text, Icon, setOpen }) => {
-  return (
-    <motion.li
-      variants={itemVariants}
-      onClick={() => setOpen(false)}
-      className='flex w-full cursor-pointer items-center gap-2 whitespace-nowrap rounded-md p-2 text-xs font-medium text-white transition-colors hover:bg-purple-900'
-    >
-      <motion.span variants={actionIconVariants}>
-        <Icon />
-      </motion.span>
-      <span>{text}</span>
-    </motion.li>
-  )
-}
-
-const wrapperVariants = {
-  open: {
-    scaleY: 1,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.1,
-    },
-  },
-  closed: {
-    scaleY: 0,
-    transition: {
-      when: 'afterChildren',
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const iconVariants = {
-  open: { rotate: 180 },
-  closed: { rotate: 0 },
-}
-
-const itemVariants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      when: 'beforeChildren',
-    },
-  },
-  closed: {
-    opacity: 0,
-    y: -15,
-    transition: {
-      when: 'afterChildren',
-    },
-  },
-}
-
-const actionIconVariants = {
-  open: { scale: 1, y: 0 },
-  closed: { scale: 0, y: -7 },
 }
