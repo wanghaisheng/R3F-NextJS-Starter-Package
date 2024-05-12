@@ -4,13 +4,14 @@ import { LogosApple } from '@/logo/LogosApple'
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/UserContext/UserContext'
 import { motion } from 'framer-motion'
 import { UserLogoIcon } from '@/logo/UserLogo'
 import { PasswordLogoIcon } from '@/logo/PasswordLogo'
+import Cookies from 'js-cookie'
 
 const { log } = console
 const SignIn = () => {
@@ -37,7 +38,7 @@ const SignIn = () => {
       log('Response:', data)
       const token = data.token
       if (token) {
-        sessionStorage.setItem('token', token) // Store token in sessionStorage
+        Cookies.set('token', token)
         updateUser(token)
         router.push('/slider')
       }
@@ -154,7 +155,7 @@ const SignIn = () => {
               <hr className='h-px' />
             </div>
             <div className='flex justify-center gap-16 p-5'>
-              <a href=''>
+              <a href='/api/auth/signin'>
                 <LogosGoogleIcon className='logos text-2xl' />
               </a>
               <a href=''>
