@@ -11,7 +11,7 @@ import Image from 'next/image'
 import GetUserLocation from '@/components/Regions/GetUserLocation'
 
 const Regions = ({ params }) => {
-  const [selectedFilter, setSelectedFilter] = useState(null)
+  const [selectedFilter, setSelectedFilter] = useState('NORTH AMERICA')
 
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -75,7 +75,7 @@ const Regions = ({ params }) => {
         ) : (
           <>
             {/* Render background image */}
-            <div
+            {/* <div
               style={{
                 position: 'absolute',
                 top: -110,
@@ -87,12 +87,12 @@ const Regions = ({ params }) => {
                 backgroundPosition: 'center',
                 filter: 'blur(8px)',
               }}
-            ></div>
+            ></div> */}
             <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
             <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
               {/* <ShowRegion filter={selectedFilter} searchTerm={searchTerm} /> */}
-              <ShowRegion2 filter={selectedFilter} searchTerm={searchTerm} />
+              <ShowRegion2 filter={selectedFilter} />
             </div>
           </>
         )}

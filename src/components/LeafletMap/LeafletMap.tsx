@@ -1,55 +1,44 @@
+'use client'
+
 import 'leaflet/dist/leaflet.css'
-import { LatLngBoundsExpression } from 'leaflet'
-import Image from 'next/image'
-import L from 'leaflet'
+import { useState, useEffect } from 'react'
+import { MapContainer, TileLayer, GeoJSON, useMap, useMapEvent, Rectangle } from 'react-leaflet'
 
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
+const MapComponent = ({ filteredContinent }: { filteredContinent: string }) => {
+  const [mapCenter, setMapCenter] = useState<[number, number]>([0, 20]) // Initial map center
 
-import { FaMapMarker } from 'react-icons/fa'
-
-import { renderToString } from 'react-dom/server' // Import the renderToString function from react-dom/server
-export default function MapComponent() {
-  const mapBounds: LatLngBoundsExpression = [
-    [51.49, -0.08],
-    [51.5, -0.06],
-  ]
-
-  const customIcon = L.divIcon({
-    html: renderToString(<FaMapMarker color='red' size={24} />), // Render the React Icon component to HTML using renderToString
-    iconSize: [24, 24], // Set the icon size
-    className: 'leaflet-div-icon', // Set the class name for styling (required)
-  })
-
-  const onCountryClick = (event) => {
-    // You can handle the click event here
-    console.log(event.target.feature.properties.name)
+  const handleFlyTo = (center: [number, number]) => {
+    setMapCenter(center) // Update the map center state
   }
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (filteredContinent === 'NORTH AMERICA') {
+        handleFlyTo([47.0902, -115.7129])
+      } else if (filteredContinent === 'ASIA') {
+        handleFlyTo([30, 100])
+      } else if (filteredContinent === 'AFRICA') {
+        handleFlyTo([0, 20])
+      } else if (filteredContinent === 'SOUTH AMERICA') {
+        handleFlyTo([-25.235, -56.9253])
+      } else if (filteredContinent === 'EUROPE') {
+        handleFlyTo([54.526, 15.2551])
+      } else if (filteredContinent === 'AUSTRALIA & OCEANIA') {
+        handleFlyTo([-25.2744, 133.7751])
+      } else if (filteredContinent === 'ANTARCTICA') {
+        handleFlyTo([-62.8628, 135])
+      }
+    }
+  }, [filteredContinent])
+
   return (
-    <div className='h-[500px] w-full'>
-      {/* <MapContainer center={[51.505, -0.09]} zoom={5} className='h-full'>
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        <ImageOverlay url='/card/abstract4.webp' bounds={mapBounds} />
-        <Marker position={[51.505, -0.09]} icon={customIcon}>
-          <Popup>
-            <div>
-              <h2>Popup Title</h2>
-              <p>A description of the popup.</p>
-              <Image src='/card/abstract2.webp' alt='Image Alt Text' height={200} width={300} />
-            </div>
-          </Popup>
-        </Marker>
-      </MapContainer> */}
-
-      {/* Africa Map */}
-      <MapContainer center={[0, 20]} zoom={3} className='h-full'>
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-      </MapContainer>
-
-      {/* Asia Map */}
-      <MapContainer center={[30, 100]} zoom={3} className='h-full'>
+    <div className='h-[550px] w-full'>
+      {/* Map */}
+      <MapContainer key={mapCenter[0]} center={mapCenter} zoom={3} className='h-[550px] rounded-lg'>
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
       </MapContainer>
     </div>
   )
 }
+
+export default MapComponent
