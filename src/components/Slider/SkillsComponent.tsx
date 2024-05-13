@@ -122,6 +122,7 @@ export default function SkillsComponent() {
                 onClick={() => {
                   handleAddSkill()
                 }}
+                aria-label='add skill button'
               >
                 Add Skill &emsp; +
               </DrawOutlineButton>
@@ -133,7 +134,11 @@ export default function SkillsComponent() {
               {skills.map((element, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
                   {element.skill}
-                  <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
+                  <button
+                    aria-label='delete'
+                    className='ml-2 text-gray-900 hover:text-red-500'
+                    onClick={() => handleDeleteSkill(index)}
+                  >
                     <TiDelete />
                   </button>
                 </Tab>
@@ -155,6 +160,7 @@ export default function SkillsComponent() {
                               onChange={(e) => handleSkillNameChange(index, e.target.value)}
                               placeholder='Skill Name'
                               className='w-full rounded-md bg-white/20 p-1'
+                              aria-label='skill name'
                             />
 
                             <div className='my-4 flex'>
@@ -165,6 +171,7 @@ export default function SkillsComponent() {
                                 value={element.percentage}
                                 className='w-full rounded-md bg-purple-600'
                                 onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                aria-label='slider'
                               />
                               <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
                             </div>
@@ -201,6 +208,7 @@ export default function SkillsComponent() {
                           className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
                           id='file_input'
                           type='file'
+                          aria-label='file input'
                         />
                       </div>
                     </TabPanel>
@@ -272,12 +280,14 @@ export default function SkillsComponent() {
           </Tabs>
           <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
             <div className='-mt-2'>
-              <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
+              <DrawOutlineButton type='submit' aria-label='generate button'>
+                Generate
+              </DrawOutlineButton>
             </div>
           </div>
           <div className='absolute bottom-4 right-0 lg:right-4'>
             <Link href='/hero3'>
-              <DrawOutlineButton>Go To Home</DrawOutlineButton>
+              <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
             </Link>
           </div>
         </div>

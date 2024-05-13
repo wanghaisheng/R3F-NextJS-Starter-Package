@@ -169,6 +169,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         placeholder='First Name'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                         required
+                        aria-label='First Name'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -180,6 +181,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         placeholder='Last Name'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                         required
+                        aria-label='Last Name'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -191,6 +193,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         placeholder='Email'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                         required
+                        aria-label='Email'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -201,6 +204,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         onChange={(e) => handleAddressChange(e.target.value)}
                         placeholder='Address'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                        aria-label='Address'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -211,6 +215,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         onChange={(e) => handlePhoneNumberChange(e.target.value)}
                         placeholder='Phone Number'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                        aria-label='Phone Number'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -221,6 +226,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         onChange={(e) => handleDOBChange(e.target.value)}
                         className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                         required
+                        aria-label='Date of Birth'
                       />
                     </div>
 
@@ -238,6 +244,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                               className='hidden'
                               checked={selectedGuild === guild.name}
                               onChange={() => setSelectedGuild(guild.name)}
+                              aria-label='Guild Selection'
                             />
                             <label
                               htmlFor={guild.name}
@@ -273,13 +280,15 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                   </div>
                   {/* Submit button */}
                   <div className='mt-4'>
-                    <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
+                    <DrawOutlineButton type='submit' aria-label='generate'>
+                      Generate
+                    </DrawOutlineButton>
                   </div>
                 </form>
               </div>
             </div>
             <div className='absolute bottom-4 right-4 mt-4'>
-              <DrawOutlineButton onClick={onNextButtonClick}>
+              <DrawOutlineButton onClick={onNextButtonClick} aria-label='next'>
                 <p className='px-4'>Next</p>
               </DrawOutlineButton>
             </div>

@@ -186,6 +186,7 @@ export default function CardComponent({ onNextButtonClick }) {
                 onClick={() => {
                   handleAddCard()
                 }}
+                aria-label='Add Card'
               >
                 Add Card &emsp; +
               </DrawOutlineButton>
@@ -201,6 +202,7 @@ export default function CardComponent({ onNextButtonClick }) {
                   <button
                     className='ml-2 text-gray-900 hover:text-red-500'
                     onClick={() => handleDeleteCard(index, card.card_id)}
+                    aria-label='Delete Card'
                   >
                     <TiDelete />
                   </button>
