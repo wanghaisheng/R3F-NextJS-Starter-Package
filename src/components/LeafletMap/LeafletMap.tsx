@@ -1,126 +1,55 @@
-import { useEffect, useRef } from 'react'
-import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { LatLngBoundsExpression } from 'leaflet'
+import Image from 'next/image'
+import L from 'leaflet'
 
-const LeafletMap = ({
-  provinceData,
-  province_1,
-  province_2,
-  province_3,
-  province_4,
-  province_5,
-  province_6,
-  province_7,
-}) => {
-  const mapRef = useRef(null)
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 
-  useEffect(() => {
-    const map = L.map(mapRef.current, {
-      scrollWheelZoom: false,
-      touchZoom: false,
-      doubleClickZoom: false,
-      zoomControl: true,
-      dragging: true,
-    }).setView([28.3949, 84.124], 8)
+import { FaMapMarker } from 'react-icons/fa'
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map)
+import { renderToString } from 'react-dom/server' // Import the renderToString function from react-dom/server
+export default function MapComponent() {
+  const mapBounds: LatLngBoundsExpression = [
+    [51.49, -0.08],
+    [51.5, -0.06],
+  ]
 
-    const provinceGeoJson = L.geoJson(provinceData, {
-      style: style,
-      onEachFeature: onEachFeature,
-    }).addTo(map)
+  const customIcon = L.divIcon({
+    html: renderToString(<FaMapMarker color='red' size={24} />), // Render the React Icon component to HTML using renderToString
+    iconSize: [24, 24], // Set the icon size
+    className: 'leaflet-div-icon', // Set the class name for styling (required)
+  })
 
-    const bound = provinceGeoJson.getBounds()
-    map.fitBounds(bound)
+  const onCountryClick = (event) => {
+    // You can handle the click event here
+    console.log(event.target.feature.properties.name)
+  }
 
-    function style(feature) {
-      return {
-        weight: 2,
-        opacity: 1,
-        color: '#FFF',
-        dashArray: '1',
-        fillOpacity: 0.7,
-        fillColor: getProvinceColor(feature.properties.Province),
-      }
-    }
+  return (
+    <div className='h-[500px] w-full'>
+      {/* <MapContainer center={[51.505, -0.09]} zoom={5} className='h-full'>
+        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+        <ImageOverlay url='/card/abstract4.webp' bounds={mapBounds} />
+        <Marker position={[51.505, -0.09]} icon={customIcon}>
+          <Popup>
+            <div>
+              <h2>Popup Title</h2>
+              <p>A description of the popup.</p>
+              <Image src='/card/abstract2.webp' alt='Image Alt Text' height={200} width={300} />
+            </div>
+          </Popup>
+        </Marker>
+      </MapContainer> */}
 
-    function getProvinceColor(province) {
-      switch (province) {
-        case 1:
-          return 'red'
-        case 2:
-          return 'green'
-        case 3:
-          return 'blue'
-        case 4:
-          return 'lightblue'
-        case 5:
-          return 'lightgreen'
-        case 6:
-          return 'yellow'
-        case 7:
-          return 'orange'
-        default:
-          return 'skyblue'
-      }
-    }
+      {/* Africa Map */}
+      <MapContainer center={[0, 20]} zoom={3} className='h-full'>
+        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+      </MapContainer>
 
-    function onEachFeature(feature, layer) {
-      layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToProvince,
-      })
-    }
-
-    function highlightFeature(e) {
-      const layer = e.target
-
-      layer.setStyle({
-        weight: 2,
-        color: 'black',
-        dashArray: '',
-        fillOpacity: 0.7,
-        fillColor: '#fff',
-      })
-
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront()
-      }
-    }
-
-    function resetHighlight(e) {
-      provinceGeoJson.resetStyle(e.target)
-    }
-
-    function zoomToProvince(e) {
-      const province_number = e.target.feature.properties.Province
-
-      map.fitBounds(e.target.getBounds())
-
-      const json = eval(`province_${province_number}`)
-
-      if (json) {
-        const stateGeoJson = L.geoJson(json, {
-          style: style,
-          onEachFeature: onEachFeature,
-        }).addTo(map)
-
-        stateGeoJson.eachLayer(function (layer) {
-          layer
-            .bindTooltip(layer.feature.properties.DISTRICT, {
-              permanent: true,
-              direction: 'center',
-            })
-            .openTooltip()
-        })
-      }
-    }
-  }, [])
-
-  return <div ref={mapRef} className='h-screen w-full' />
+      {/* Asia Map */}
+      <MapContainer center={[30, 100]} zoom={3} className='h-full'>
+        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+      </MapContainer>
+    </div>
+  )
 }
-
-export default LeafletMap
