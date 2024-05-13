@@ -11,6 +11,9 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   disable: process.env.NODE_ENV === 'development',
 })
 
+const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 const nextConfig = {
   // uncomment the following snippet if using styled components
   // compiler: {
@@ -50,6 +53,38 @@ const nextConfig = {
     if (!isServer) {
       // We're in the browser build, so we can safely exclude the sharp module
       config.externals.push('sharp')
+      config.optimization.minimizer.forEach((minimizer) => {
+        if (minimizer.constructor.name === 'TerserPlugin') {
+          minimizer.options.terserOptions.module = true
+        }
+      })
+      config.plugins.push(
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/Workers'),
+              to: '../public/Cesium/Workers',
+            },
+            {
+              from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/ThirdParty'),
+              to: '../public/Cesium/ThirdParty',
+            },
+            {
+              from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/Assets'),
+              to: '../public/Cesium/Assets',
+            },
+            {
+              from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/Widgets'),
+              to: '../public/Cesium/Widgets',
+            },
+          ],
+        }),
+      )
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          CESIUM_BASE_URL: JSON.stringify('/Cesium'),
+        }),
+      )
     }
     // audio support
     config.module.rules.push({
@@ -84,6 +119,7 @@ const nextConfig = {
 const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
 const { hostname } = require('os')
 const path = require('path')
+
 module.exports = (_phase, { defaultConfig }) => {
   const plugins = [[withPWA], [withBundleAnalyzer, {}]]
 
