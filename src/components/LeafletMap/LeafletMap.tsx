@@ -2,6 +2,10 @@
 
 import 'leaflet/dist/leaflet.css'
 import { useState, useEffect } from 'react'
+import worldGeoJSON from 'geojson-world-map'
+
+import { GeoJsonObject } from 'geojson'
+
 import { MapContainer, TileLayer, GeoJSON, useMap, useMapEvent, Rectangle } from 'react-leaflet'
 
 const MapComponent = ({ filteredContinent }: { filteredContinent: string }) => {
@@ -34,7 +38,22 @@ const MapComponent = ({ filteredContinent }: { filteredContinent: string }) => {
   return (
     <div className='h-[550px] w-full'>
       {/* Map */}
-      <MapContainer key={mapCenter[0]} center={mapCenter} zoom={3} className='h-[550px] rounded-lg'>
+      <MapContainer
+        key={mapCenter[0]}
+        center={mapCenter}
+        zoom={3}
+        className='h-[550px] rounded-lg'
+        // scrollWheelZoom={false}
+      >
+        <GeoJSON
+          data={worldGeoJSON as GeoJsonObject} // Cast worldGeoJSON to GeoJsonObject
+          style={() => ({
+            color: '#4a83ec',
+            weight: 0.5,
+            fillColor: '#1a1d62',
+            fillOpacity: 0,
+          })}
+        />
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
       </MapContainer>
     </div>
