@@ -91,7 +91,10 @@ const Regions = ({ params }) => {
             <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
             <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
+              {/* Old Component */}
               {/* <ShowRegion filter={selectedFilter} searchTerm={searchTerm} /> */}
+
+              {/* New Component */}
               <ShowRegion2 filter={selectedFilter} />
             </div>
           </>
