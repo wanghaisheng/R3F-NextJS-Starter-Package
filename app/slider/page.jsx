@@ -1,4 +1,4 @@
-import EmblaCarousel from '@/components/Slider2/EmblaCarousel'
+import EmblaCarousel from '@/components/Slider/EmblaCarousel'
 
 const OPTIONS = { loop: true }
 
