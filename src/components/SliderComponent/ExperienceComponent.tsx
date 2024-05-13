@@ -17,18 +17,6 @@ import Link from 'next/link'
 
 import { TagsInput } from 'react-tag-input-component'
 
-async function getExpInfo() {
-  try {
-    const res = await axios.get('/api/experience')
-    if (res.status !== 200) {
-      throw new Error('failed to fetch the skills')
-    }
-    return res.data
-  } catch (error) {
-    throw new Error('failed to fetch the skills')
-  }
-}
-
 export default function ExperienceComponent({ onNextButtonClick }) {
   const { user } = useUser()
 
@@ -38,16 +26,14 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   // For tools tag
   const [tools, setTools] = useState([])
 
-  const [projects, setProjects] = useState([{ type: '', name: 'Project 1', description: 'lorem' }])
+  const [projects, setProjects] = useState([{ type: '', name: '', description: '', tools, skills }])
 
+  // fetch experience data
   useEffect(() => {
-    const fetchExpData = async () => {
+    const fetchExpData = () => {
       try {
-        const testData = await getExpInfo() // Fetch cards data
-        const filteredData = testData.filter((element: any) => element.gg_id === user.gg_id) // Filter data based on user
-
-        if (filteredData.length != 0) {
-          setProjects(filteredData) // Set the filtered data
+        if (user.experience != 0) {
+          setProjects(user.experience)
         }
       } catch (error) {
         console.log('Error fetching cards data:', error)
@@ -120,11 +106,8 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   }
 
   return (
-    <div className='mt-2 flex flex-col items-center'>
-      <div
-        id='experience'
-        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
-      >
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
+      <div className='relative flex flex-col py-4 md:w-[600px] md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'>
         <div className='flex w-full flex-col '>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
             Experience
@@ -133,6 +116,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                 onClick={() => {
                   handleAddProject()
                 }}
+                aria-label='add project button'
               >
                 Add Project &emsp; +
               </DrawOutlineButton>
@@ -144,9 +128,12 @@ export default function ExperienceComponent({ onNextButtonClick }) {
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {projects.map((project, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1'>
-                  {' '}
                   {project.name}
-                  <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteProject(index)}>
+                  <button
+                    className='ml-2 text-gray-900 hover:text-red-500'
+                    aria-label='delete button'
+                    onClick={() => handleDeleteProject(index)}
+                  >
                     <TiDelete />
                   </button>
                 </Tab>
@@ -171,8 +158,9 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                       <a
                         href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
                         target='_blank'
+                        aria-label='booking button'
                       >
-                        <DrawOutlineButton>Booking</DrawOutlineButton>
+                        <DrawOutlineButton aria-label='booking button'>Booking</DrawOutlineButton>
                       </a>
                     </div>
                   </div>
@@ -181,7 +169,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                   <div className='w-full lg:w-[50%]'>
                     <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
                       <div className='flex w-full flex-col gap-y-2 px-4'>
-                        <div className='flex flex-col items-center lg:flex-row lg:justify-between'>
+                        <div className='flex flex-row items-center justify-between'>
                           <div>
                             <label
                               htmlFor='educational'
@@ -191,6 +179,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                             </label>
                             <input
                               type='radio'
+                              aria-label='educational'
                               id='educational'
                               name='type'
                               value='educational'
@@ -202,6 +191,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                           <div>
                             <input
                               type='radio'
+                              aria-label='work'
                               id='work'
                               name='type'
                               value='work'
@@ -219,6 +209,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                           <div>
                             <input
                               type='radio'
+                              aria-label='gym'
                               id='gym'
                               name='type'
                               value='gym'
@@ -239,6 +230,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                           <label htmlFor='projectName'>Name</label>
                           <input
                             id='projectName'
+                            aria-label='projectName'
                             type='text'
                             value={project.name}
                             onChange={(e) => handleProjectNameChange(index, e.target.value)}
@@ -251,6 +243,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                           <label htmlFor='description'>Description</label>
                           <input
                             id='description'
+                            aria-label='description'
                             type='text'
                             value={project.description}
                             onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
@@ -263,28 +256,43 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                             ProjPic
                           </label>
                           <input
-                            className='block cursor-pointer rounded-lg bg-gray-50  text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            className='block cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-black/30 dark:text-white dark:placeholder:text-white'
                             id='file_input'
                             type='file'
+                            aria-label='file_input'
                           />
                         </div>
                         <div className='flex flex-col lg:flex-row lg:justify-between'>
                           <label htmlFor=''>Skills</label>
-                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
-                            <TagsInput value={skills} onChange={setSkills} name='skills' placeHolder='Enter skills' />
+                          <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                            <TagsInput
+                              value={project.skills.map((element) => element.skill)}
+                              onChange={setSkills}
+                              aria-label='skills_input'
+                              name='skills'
+                              placeHolder='Enter skills'
+                            />
                           </div>
                         </div>
                         <div className='flex flex-col lg:flex-row lg:justify-between'>
                           <label htmlFor=''>Tools</label>
-                          <div className='bg-gray-50 text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'>
-                            <TagsInput value={tools} onChange={setTools} name='tools' placeHolder='Enter tools used' />
+                          <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                            <TagsInput
+                              value={project.tools.map((element) => element)}
+                              onChange={setTools}
+                              aria-label='tools_input'
+                              name='tools'
+                              placeHolder='Enter tools used'
+                            />
                           </div>
                         </div>
                       </div>
                       {/* Submit button */}
                       <div className='relative mt-4 flex gap-x-2'>
-                        <div>
-                          <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
+                        <div className='mt-1'>
+                          <DrawOutlineButton aria-label='generate button' type='submit'>
+                            Generate
+                          </DrawOutlineButton>
                         </div>
                       </div>
                     </form>
@@ -293,8 +301,10 @@ export default function ExperienceComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='mt-2 flex justify-center lg:-mt-10'>
-            <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+          <div className='absolute bottom-4 right-4'>
+            <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
+              Next
+            </DrawOutlineButton>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 // create new card
 export async function POST(request) {
   try {
-    const { gg_id, type, name, description, tools } = await request.json()
+    const { gg_id, type, name, description, tools, skills } = await request.json()
 
     // Check if the user exists
     const existingUser = await prisma.users.findUnique({
@@ -24,6 +24,7 @@ export async function POST(request) {
         name,
         description,
         tools,
+        skills,
       },
     })
 

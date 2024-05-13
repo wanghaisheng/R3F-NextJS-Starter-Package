@@ -127,10 +127,10 @@ export default function UserInfoComponent({ onNextButtonClick }) {
   }
 
   return (
-    <div className='mt-2 flex flex-col items-center'>
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
       <div
         id='Genius ID'
-        className='relative flex h-[550px] py-4  md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md'
+        className='relative flex h-[900px] w-[300px] py-4 md:w-[500px] md:rounded-3xl md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Genius ID</div>
@@ -138,17 +138,19 @@ export default function UserInfoComponent({ onNextButtonClick }) {
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Card Image / Container */}
-              <div className='flex flex-col items-center justify-center'>
-                <GeniusIDFlipCard
-                  first_name={first_name}
-                  last_name={last_name}
-                  email={email}
-                  dob={dob}
-                  contact={phone_number}
-                  address={address}
-                />
+              <div className='flex flex-col'>
+                <div className='flex justify-center'>
+                  <GeniusIDFlipCard
+                    first_name={first_name}
+                    last_name={last_name}
+                    email={email}
+                    dob={dob}
+                    contact={phone_number}
+                    address={address}
+                  />
+                </div>
 
-                <p>{selectedGuild}</p>
+                <p className='flex justify-center'>{selectedGuild}</p>
               </div>
 
               {/* form */}
@@ -167,6 +169,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         placeholder='First Name'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                         required
+                        aria-label='First Name'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -178,6 +181,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         placeholder='Last Name'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                         required
+                        aria-label='Last Name'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -189,6 +193,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         placeholder='Email'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                         required
+                        aria-label='Email'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -199,6 +204,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         onChange={(e) => handleAddressChange(e.target.value)}
                         placeholder='Address'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                        aria-label='Address'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -209,6 +215,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         onChange={(e) => handlePhoneNumberChange(e.target.value)}
                         placeholder='Phone Number'
                         className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                        aria-label='Phone Number'
                       />
                     </div>
                     <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -219,6 +226,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                         onChange={(e) => handleDOBChange(e.target.value)}
                         className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                         required
+                        aria-label='Date of Birth'
                       />
                     </div>
 
@@ -236,6 +244,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                               className='hidden'
                               checked={selectedGuild === guild.name}
                               onChange={() => setSelectedGuild(guild.name)}
+                              aria-label='Guild Selection'
                             />
                             <label
                               htmlFor={guild.name}
@@ -271,13 +280,17 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                   </div>
                   {/* Submit button */}
                   <div className='mt-4'>
-                    <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
+                    <DrawOutlineButton type='submit' aria-label='generate'>
+                      Generate
+                    </DrawOutlineButton>
                   </div>
                 </form>
               </div>
             </div>
-            <div className='mt-5 flex justify-center gap-x-2'>
-              <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+            <div className='absolute bottom-4 right-4 mt-4'>
+              <DrawOutlineButton onClick={onNextButtonClick} aria-label='next'>
+                <p className='px-4'>Next</p>
+              </DrawOutlineButton>
             </div>
           </div>
         </div>

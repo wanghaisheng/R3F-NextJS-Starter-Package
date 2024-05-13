@@ -109,10 +109,10 @@ export default function SkillsComponent() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className='mt-2 flex flex-col items-center'>
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
-        id='skills'
-        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
+        id='card'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
@@ -122,6 +122,7 @@ export default function SkillsComponent() {
                 onClick={() => {
                   handleAddSkill()
                 }}
+                aria-label='add skill button'
               >
                 Add Skill &emsp; +
               </DrawOutlineButton>
@@ -129,11 +130,15 @@ export default function SkillsComponent() {
           </div>
 
           <Tabs>
-            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
+            <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
                   {element.skill}
-                  <button className='ml-2 text-gray-900 hover:text-red-500' onClick={() => handleDeleteSkill(index)}>
+                  <button
+                    aria-label='delete'
+                    className='ml-2 text-gray-900 hover:text-red-500'
+                    onClick={() => handleDeleteSkill(index)}
+                  >
                     <TiDelete />
                   </button>
                 </Tab>
@@ -143,7 +148,7 @@ export default function SkillsComponent() {
             {/* TabPanel */}
             <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
               <div className='flex flex-col lg:flex-row lg:justify-between'>
-                <div className='lg:w-[60%]'>
+                <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
                   {skills.map((element, index) => (
                     <TabPanel key={index}>
                       <div className='size-full rounded-[20px]  p-4'>
@@ -155,6 +160,7 @@ export default function SkillsComponent() {
                               onChange={(e) => handleSkillNameChange(index, e.target.value)}
                               placeholder='Skill Name'
                               className='w-full rounded-md bg-white/20 p-1'
+                              aria-label='skill name'
                             />
 
                             <div className='my-4 flex'>
@@ -165,6 +171,7 @@ export default function SkillsComponent() {
                                 value={element.percentage}
                                 className='w-full rounded-md bg-purple-600'
                                 onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                aria-label='slider'
                               />
                               <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
                             </div>
@@ -192,8 +199,7 @@ export default function SkillsComponent() {
                         </p> */}
                         <p className='my-4 lg:mt-0'>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
-                          saepe repudiandae accusamus temporibus, autem dicta quidem a omnis quas optio nemo? Officia
-                          totam autem nam ex quis?
+                          saepe repudiandae accusamus temporibus, autem
                         </p>
                         <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                           Certifications
@@ -202,13 +208,14 @@ export default function SkillsComponent() {
                           className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
                           id='file_input'
                           type='file'
+                          aria-label='file input'
                         />
                       </div>
                     </TabPanel>
                   ))}
                 </div>
 
-                <div className='mt-4 rounded-[20px] p-3  lg:ml-2 lg:mt-0 lg:w-[45%]'>
+                <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
                   <p className='mb-2 flex justify-center'>Specification</p>
 
                   {/* Condition for changing barchart chart and radar chart*/}
@@ -271,15 +278,17 @@ export default function SkillsComponent() {
               </div>
             </div>
           </Tabs>
-          <div className='flex justify-center gap-x-2'>
-            <div className='mt-0'>
-              <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
+          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
+            <div className='-mt-2'>
+              <DrawOutlineButton type='submit' aria-label='generate button'>
+                Generate
+              </DrawOutlineButton>
             </div>
-            <div className='mt-0'>
-              <Link href='/hero3'>
-                <DrawOutlineButton>Go To Home</DrawOutlineButton>
-              </Link>
-            </div>
+          </div>
+          <div className='absolute bottom-4 right-0 lg:right-4'>
+            <Link href='/hero3'>
+              <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
+            </Link>
           </div>
         </div>
       </div>

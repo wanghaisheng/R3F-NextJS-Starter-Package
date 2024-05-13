@@ -1,0 +1,20 @@
+Login
+    Redirect to the user Id:
+    If Shared Session->fill Genius Id/Card
+        session should provide the respective data to fill the user forms, 
+            mainly: user email and user contact 
+    
+    Genius Id (required)
+    Cards (required)
+    Experience (optional)
+    Skills (optional)
+
+    If Genius Id and Cards, Hero/Profile section access granted
+        the user cards are displayed in profiling section
+
+
+    If Experience and Skills -> display
+         booking button-> Single Sign On -> Session Share to extension application
+
+
+         

@@ -51,10 +51,10 @@ export default function AvatarComponent({ onNextButtonClick }) {
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
   return (
-    <div className='mt-2 flex flex-col items-center'>
+    <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='My Avatar'
-        className='relative flex h-[550px] w-[300px] flex-col py-4 md:w-[600px]  md:rounded-3xl  md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
         // style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div className='flex w-full flex-col'>
@@ -65,7 +65,7 @@ export default function AvatarComponent({ onNextButtonClick }) {
               {/* Card Image / Container */}
               <div className='flex flex-col items-center justify-center'>
                 {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-                  <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
+                  <div className='mt-8 flex flex-col justify-center lg:mt-3 lg:flex-row lg:justify-between lg:gap-x-4'>
                     <Avatar
                       modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                       // shadows
@@ -78,9 +78,12 @@ export default function AvatarComponent({ onNextButtonClick }) {
                         ambientOcclusion: true,
                       }}
                     />
+                    <div className='w-full lg:w-[50%]'>
+                      <AvatarImageComponent />
+                    </div>
                   </div>
                 ) : (
-                  <div className='mt-8 flex flex-col justify-center md:mt-3 md:flex-row md:justify-between md:gap-x-4'>
+                  <div className='mt-8 flex flex-col justify-center lg:mt-3 lg:flex-row lg:justify-between lg:gap-x-4'>
                     <Avatar
                       modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
                       // shadows
@@ -93,18 +96,17 @@ export default function AvatarComponent({ onNextButtonClick }) {
                         ambientOcclusion: true,
                       }}
                     />
+                    <div className='w-full lg:w-[50%]'>
+                      <AvatarImageComponent />
+                    </div>
                   </div>
                 )}
-              </div>
-
-              <div className='w-full lg:w-[50%]'>
-                <AvatarImageComponent />
               </div>
             </div>
             {/* <div className='mt-5 flex justify-center gap-x-2'>
               <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
             </div> */}
-            <div className='mt-4 flex justify-center gap-x-2 md:absolute md:bottom-4 md:right-4 md:justify-end'>
+            <div className='absolute bottom-4 right-4 mt-4 flex justify-center gap-x-2 '>
               <DrawOutlineButton
                 onClick={() => {
                   setIsCardModalOpen(true)

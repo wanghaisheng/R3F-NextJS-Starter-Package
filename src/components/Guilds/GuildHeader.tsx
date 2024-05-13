@@ -82,30 +82,35 @@ export default function GuildHeader({
         {isSmallScreen && (
           <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
             <a
+              href='#'
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
               onClick={() => handleFilterClick('BUDDHA')}
             >
               <MdHexagon />
             </a>
             <a
+              href='#'
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
               onClick={() => handleFilterClick('VAJRA')}
             >
               <BsOctagonFill />
             </a>
             <a
+              href='#'
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
               onClick={() => handleFilterClick('KARMA')}
             >
               <FaDiamond />
             </a>
             <a
+              href='#'
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
               onClick={() => handleFilterClick('RATNA')}
             >
               <IoCubeSharp />
             </a>
             <a
+              href='#'
               className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
               onClick={() => handleFilterClick('PADMA')}
             >
@@ -120,6 +125,7 @@ export default function GuildHeader({
         <ul className='flex h-[800px] w-[310px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40%'>
           <li className='mt-[60%]'>
             <a
+              href='#'
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'bg-gradient-to-r from-white/70' : 'text-gray-300'}`}
               onClick={() => handleFilterClick('BUDDHA')}
             >
@@ -129,6 +135,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
+              href='#'
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'bg-gradient-to-r from-blue-500/70' : 'text-blue-200'}`}
               onClick={() => handleFilterClick('VAJRA')}
             >
@@ -138,6 +145,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
+              href='#'
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'bg-gradient-to-r from-green-500/70' : 'text-green-200'}`}
               onClick={() => handleFilterClick('KARMA')}
             >
@@ -147,6 +155,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
+              href='#'
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'bg-gradient-to-r from-yellow-500/70' : 'text-yellow-200'}`}
               onClick={() => handleFilterClick('RATNA')}
             >
@@ -156,6 +165,7 @@ export default function GuildHeader({
           </li>
           <li>
             <a
+              href='#'
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'bg-gradient-to-r from-red-500/70' : 'text-red-200'}`}
               onClick={() => handleFilterClick('PADMA')}
             >

@@ -58,6 +58,7 @@ model experience {
   name          String?  @db.VarChar(50)
   description   String?
   tools         String[]
+  skills        Json[]
   users         users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
 }
 

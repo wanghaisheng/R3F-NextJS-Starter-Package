@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 import { MdSwipe } from 'react-icons/md'
@@ -13,7 +12,6 @@ import { SiExpertsexchange } from 'react-icons/si'
 import SpringModal from '../FormModal/SpringModal'
 
 const Hud = () => {
-  const [isToggled, setToggle] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   const pathname = usePathname()
@@ -27,8 +25,9 @@ const Hud = () => {
       pathname === '/signin' ||
       pathname === '/signup' ||
       pathname === '/guilds' ||
-      pathname === '/regions' ||
-      pathname.match(/^\/regions\/.*/)
+      pathname === '/regions'
+      // ||
+      // pathname.match(/^\/regions\/.*/)
     ) {
       setHideMiddleNav(true)
     } else {

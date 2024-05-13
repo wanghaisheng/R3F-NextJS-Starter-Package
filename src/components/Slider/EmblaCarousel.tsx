@@ -8,13 +8,13 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
-import SkillsComponent from '@/components/Slider/SkillsComponent'
-import AvatarComponent from '@/components/Slider/AvatarComponent'
+import SkillsComponent from '@/components/SliderComponent/SkillsComponent'
+import AvatarComponent from '@/components/SliderComponent/AvatarComponent'
 
-import ExperienceComponent from '@/components/Slider/ExperienceComponent'
-import ConnectionComponent from '@/components/Slider/ConnectionComponent'
-import UserInfoComponent from '@/components/Slider/UserInfoComponent'
-import Card2Component from '@/components/Slider/Card2Component'
+import ExperienceComponent from '@/components/SliderComponent/ExperienceComponent'
+import ConnectionComponent from '@/components/SliderComponent/ConnectionComponent'
+import UserInfoComponent from '@/components/SliderComponent/UserInfoComponent'
+import Card2Component from '@/components/SliderComponent/Card2Component'
 
 type PropType = {
   slides: number[]
