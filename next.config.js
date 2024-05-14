@@ -13,6 +13,28 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
+
+const copyPlugin = new CopyWebpackPlugin({
+  patterns: [
+    {
+      from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/Workers'),
+      to: '../public/Cesium/Workers',
+    },
+    {
+      from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/ThirdParty'),
+      to: '../public/Cesium/ThirdParty',
+    },
+    {
+      from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/Assets'),
+      to: '../public/Cesium/Assets',
+    },
+    {
+      from: path.join(__dirname, 'node_modules/cesium/Build/Cesium/Widgets'),
+      to: '../public/Cesium/Widgets',
+    },
+  ],
+})
 
 const nextConfig = {
   // uncomment the following snippet if using styled components
@@ -118,15 +140,20 @@ const nextConfig = {
 
 const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
 const { hostname } = require('os')
-const path = require('path')
 
 module.exports = (_phase, { defaultConfig }) => {
   const plugins = [[withPWA], [withBundleAnalyzer, {}]]
 
-  const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
-    ...defaultConfig,
-    ...nextConfig,
-  })
+  const wConfig = plugins.reduce(
+    (acc, [plugin, config]) => {
+      const plugins = Array.isArray(acc.plugins) ? [...acc.plugins] : []
+      return plugin({ ...acc, ...config, plugins: [...plugins, copyPlugin] })
+    },
+    {
+      ...defaultConfig,
+      ...nextConfig,
+    },
+  )
 
   // Additional configuration
   const additionalConfig = {
