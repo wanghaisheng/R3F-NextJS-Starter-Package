@@ -75,6 +75,7 @@ const Navbar = () => {
                     onClick={logout}
                     className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none md:flex'
                     id='user-menu-button'
+                    aria-label='Sign Out'
                   >
                     <LuLogOut className='mr-4 size-6 text-red-500' />
                   </Link>
@@ -148,15 +149,15 @@ const Navbar = () => {
             <div className='hidden md:flex'>
               <div className='flex h-16 items-center justify-center gap-2 rounded-full px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7 lg:gap-14'>
                 {pathname === '/maps' ? (
-                  <Link href='/maps' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    MAPS
+                  <Link href='/avatars' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    AVATARS
                   </Link>
                 ) : (
                   <Link
-                    href='/maps'
+                    href='/avatars'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    MAPS
+                    AVATARS
                   </Link>
                 )}
                 {pathname === '/guilds' ? (
@@ -217,10 +218,10 @@ const Navbar = () => {
           <motion.div className='w-full md:hidden' variants={navAnimate} initial='hidden' animate='show' exit='exit'>
             <div className='z-10 flex flex-col items-center justify-center gap-4 rounded-b-3xl bg-black/85 shadow-md shadow-violet-600 md:gap-8'>
               <Link
-                href='/maps'
+                href='/avatars'
                 className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
               >
-                MAPS
+                AVATARS
               </Link>
               <Link
                 href='/guilds'
@@ -250,6 +251,7 @@ const Navbar = () => {
                 href='/signin'
                 onClick={logout}
                 className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+                aria-label='Sign Out'
               >
                 <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
                   <path
