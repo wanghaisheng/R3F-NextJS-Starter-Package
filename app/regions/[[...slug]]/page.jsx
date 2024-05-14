@@ -6,6 +6,7 @@ import ShowRegion from '@/components/Regions/ShowRegion'
 import RegionDetails from '@/components/Regions/RegionDetails'
 
 import ShowRegion2 from '@/components/Regions/ShowRegion2'
+import ShowRegionCesium from '@/components/Regions/ShowRegionCesium'
 
 import Image from 'next/image'
 import GetUserLocation from '@/components/Regions/GetUserLocation'
@@ -95,7 +96,8 @@ const Regions = ({ params }) => {
               {/* <ShowRegion filter={selectedFilter} searchTerm={searchTerm} /> */}
 
               {/* New Component */}
-              <ShowRegion2 filter={selectedFilter} />
+              {/* <ShowRegion2 filter={selectedFilter} /> */}
+              <ShowRegionCesium filter={selectedFilter} />
             </div>
           </>
         )}
