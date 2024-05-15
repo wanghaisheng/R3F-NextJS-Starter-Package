@@ -34,11 +34,8 @@ export default function CardComponent({ onNextButtonClick }) {
   useEffect(() => {
     const fetchCardsData = async () => {
       try {
-        const testData = await getCardInfo() // Fetch cards data
-        const filteredData = testData.filter((element: any) => element.gg_id === user.gg_id) // Filter data based on user
-
-        if (filteredData.length != 0) {
-          setCards(filteredData) // Set the filtered data
+        if (user.cards.length != 0) {
+          setCards(user.cards) // Set the filtered data
         }
       } catch (error) {
         console.error('Error fetching cards data:', error)

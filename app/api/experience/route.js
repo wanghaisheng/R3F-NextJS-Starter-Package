@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 // create new card
 export async function POST(request) {
   try {
-    const { gg_id, type, name, description, tools } = await request.json()
+    const { gg_id, type, name, description, tools, skills } = await request.json()
 
     // Check if the user exists
     const existingUser = await prisma.users.findUnique({
@@ -17,6 +17,13 @@ export async function POST(request) {
       return NextResponse.error('User not found', 404)
     }
 
+    // Create skills data
+    const skillData = skills.map((skillObj) => ({
+      skill: skillObj.skill,
+      percentage: skillObj.percentage,
+    }))
+
+    // Create new experience with skills
     const newExperience = await prisma.experience.create({
       data: {
         gg_id,
@@ -24,6 +31,7 @@ export async function POST(request) {
         name,
         description,
         tools,
+        skills: skillData,
       },
     })
 

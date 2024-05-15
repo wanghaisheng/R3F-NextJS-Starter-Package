@@ -7,6 +7,7 @@ export async function middleware(request) {
   const userId = token ? jwtDecode(token).id : ''
 
   // an array of protected routes
+
   const protectedRoutes = ['/slider', '/hero3', '/createavatar']
 
   // Check if the requested URL matches any of the protected routes

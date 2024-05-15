@@ -43,7 +43,7 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
                 <nav className='mb-1 flex list-none flex-wrap'>
                   <ul className='mb-2 w-full text-xl font-semibold'>
                     {user != null ? (
-                      user.first_name != null ? (
+                      user.first_name != null && user.last_name != null ? (
                         <li>{user.first_name.toUpperCase() + ' ' + user.last_name.toUpperCase()}</li>
                       ) : (
                         <li>PERSON NAME</li>
