@@ -3,6 +3,13 @@ import CesiumMap from '../LeafletMap/CesiumMap'
 import Image from 'next/image'
 import { Suspense } from 'react'
 
+async function getCountries() {
+  // const response = await fetch('https://restcountries.com/v3.1/all')
+  const response = await fetch('https://restcountries.com/v3.1/region/asia')
+  const data = await response.json()
+  return data
+}
+
 export default function ShowRegionCesium({ filter }: { filter: string }) {
   const regions = [
     {
@@ -42,15 +49,24 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
     },
   ]
 
+  // const countries = await getCountries()
+
   const filteredRegions = filter
     ? regions.filter((region) => region.continent === filter)
     : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
 
   return (
     <>
-      <div className='relative flex flex-col'>
-        <div className='flex w-full justify-end pr-5'>
-          <div className='h-[550px] w-[50%]'>
+      <div className='relative flex-1'>
+        <div className='flex w-full flex-col justify-center lg:flex-row lg:justify-end lg:pr-5'>
+          {/* <div>
+            {countries.map((country) => (
+              <div key={country.name.common}>
+                <h1>{country.name.common}</h1>
+              </div>
+            ))}
+          </div> */}
+          <div className='h-[600px] lg:w-[50%]'>
             <Suspense fallback={<div>Loading map...</div>}>
               <div style={{ position: 'relative', width: '100%', height: '550px' }}>
                 <div
@@ -68,7 +84,7 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
           </div>
-          <div className='mx-10 flex w-[30%] flex-col items-center justify-center '>
+          <div className='mx-10 flex flex-col items-center justify-center lg:w-[30%] '>
             <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:ml-24 lg:justify-start'>
               {filteredRegions.map((region, index) => (
                 <a
