@@ -16,24 +16,22 @@ import axios from 'axios'
 import Link from 'next/link'
 
 import { TagsInput } from 'react-tag-input-component'
+import dynamic from 'next/dynamic'
 
 export default function ExperienceComponent({ onNextButtonClick }) {
   const { user } = useUser()
-
-  // For skills tag
-  const [skills, setSkills] = useState([])
-
-  // For tools tag
-  const [tools, setTools] = useState([])
-
-  const [projects, setProjects] = useState([{ type: '', name: '', description: '', tools, skills }])
+  const [projects, setProjects] = useState([{ type: '', name: '', description: '', tools: [], skills: [] }])
 
   // fetch experience data
   useEffect(() => {
     const fetchExpData = () => {
       try {
-        if (user.experience != 0) {
-          setProjects(user.experience)
+        if (user.experience.length !== 0) {
+          const modifiedProjects = user.experience.map((exp) => ({
+            ...exp, // Keep all properties of the original experience object
+            skills: exp.skills.map((skill) => skill.skill), // Modify the 'skills' property
+          }))
+          setProjects(modifiedProjects)
         }
       } catch (error) {
         console.log('Error fetching cards data:', error)
@@ -45,16 +43,22 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     }
   }, [user])
 
-  const handleSkillSubmit = async (e: any, index: number) => {
+  const handleExpSubmit = async (e: any, index: number) => {
+    e.preventDefault()
     const submit = {
       gg_id: user.gg_id,
       type: projects[index].type,
       name: projects[index].name,
       description: projects[index].description,
+      tools: projects[index].tools,
+      skills: projects[index].skills.map((skill) => ({
+        skill: skill,
+        percentage: 0,
+      })),
     }
     try {
       await axios({
-        url: `/api/skill`,
+        url: `/api/experience`,
         method: 'POST',
         data: submit,
       })
@@ -105,6 +109,21 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     })
   }
 
+  const handleSkillsChange = (index, newSkills) => {
+    setProjects((prevProjects) => {
+      const updatedProjects = [...prevProjects]
+      updatedProjects[index].skills = newSkills
+      return updatedProjects
+    })
+  }
+  const handleToolsChange = (index, newTools) => {
+    setProjects((prevProjects) => {
+      const updatedProjects = [...prevProjects]
+      updatedProjects[index].tools = newTools
+      return updatedProjects
+    })
+  }
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
       <div className='relative flex flex-col py-4 md:w-[600px] md:rounded-3xl md:border md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'>
@@ -147,12 +166,14 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                   {/* Card Image / Container */}
                   <div className='flex flex-col'>
                     <div className='flex justify-center'>
-                      <ExperienceFlipCard
-                        type={project.type}
-                        projectName={project.name}
-                        skills={skills.map((skill) => skill).join(', ')}
-                        toolsAndTech={tools.map((tool) => tool).join(', ')}
-                      />
+                      {project.skills && (
+                        <ExperienceFlipCard
+                          type={project.type}
+                          projectName={project.name}
+                          skills={project.skills.join(', ')}
+                          toolsAndTech={project.tools.join(', ')}
+                        />
+                      )}
                     </div>
                     <div className='mt-1 flex justify-center'>
                       <a
@@ -167,7 +188,10 @@ export default function ExperienceComponent({ onNextButtonClick }) {
 
                   {/* Form for user input */}
                   <div className='w-full lg:w-[50%]'>
-                    <form className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'>
+                    <form
+                      onSubmit={(e) => handleExpSubmit(e, index)}
+                      className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
+                    >
                       <div className='flex w-full flex-col gap-y-2 px-4'>
                         <div className='flex flex-row items-center justify-between'>
                           <div>
@@ -266,8 +290,8 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                           <label htmlFor=''>Skills</label>
                           <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
                             <TagsInput
-                              value={project.skills.map((element) => element.skill)}
-                              onChange={setSkills}
+                              value={project.skills}
+                              onChange={(tags) => handleSkillsChange(index, tags)}
                               aria-label='skills_input'
                               name='skills'
                               placeHolder='Enter skills'
@@ -278,8 +302,8 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                           <label htmlFor=''>Tools</label>
                           <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
                             <TagsInput
-                              value={project.tools.map((element) => element)}
-                              onChange={setTools}
+                              value={project.tools}
+                              onChange={(tags) => handleToolsChange(index, tags)}
                               aria-label='tools_input'
                               name='tools'
                               placeHolder='Enter tools used'

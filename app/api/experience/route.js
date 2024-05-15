@@ -17,6 +17,13 @@ export async function POST(request) {
       return NextResponse.error('User not found', 404)
     }
 
+    // Create skills data
+    const skillData = skills.map((skill) => ({
+      skill: skill.skill,
+      percentage: skill.percentage,
+    }))
+
+    // Create new experience with skills
     const newExperience = await prisma.experience.create({
       data: {
         gg_id,
@@ -24,7 +31,9 @@ export async function POST(request) {
         name,
         description,
         tools,
-        skills,
+        skills: {
+          create: skillData, // Pass the created skills data here
+        },
       },
     })
 

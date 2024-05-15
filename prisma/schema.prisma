@@ -8,11 +8,11 @@ datasource db {
 }
 
 model skills {
-  skill_id   String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  skill      String? @db.VarChar(100)
-  percentage Int?
-  gg_id      String? @db.Uuid
-  users      users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
+  skill_id      String      @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  skill         String?     @db.VarChar(100)
+  percentage    Int?
+  experience_id String?     @db.Uuid
+  experience    experience? @relation(fields: [experience_id], references: [experience_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users {
@@ -33,7 +33,6 @@ model users {
   avatar         avatar[]
   cards          cards[]
   experience     experience[]
-  skills         skills[]
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -58,8 +57,8 @@ model experience {
   name          String?  @db.VarChar(50)
   description   String?
   tools         String[]
-  skills        Json[]
   users         users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
+  skills        skills[]
 }
 
 model cards {

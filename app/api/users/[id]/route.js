@@ -13,9 +13,14 @@ export async function GET(request, { params }) {
       where: { gg_id: id },
       // manage the access of the relations
       include: {
-        skills: true,
         cards: true,
-        experience: true,
+        experience: {
+          include: {
+            skills: {
+              select: { skill: true, percentage: true }, // Include only the 'skill' field
+            },
+          },
+        },
         avatar: true,
       },
     })
