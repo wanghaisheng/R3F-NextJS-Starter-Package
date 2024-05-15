@@ -20,7 +20,9 @@ import dynamic from 'next/dynamic'
 
 export default function ExperienceComponent({ onNextButtonClick }) {
   const { user } = useUser()
-  const [projects, setProjects] = useState([{ type: '', name: '', description: '', tools: [], skills: [] }])
+  const [projects, setProjects] = useState([
+    { experience_id: '', type: '', name: '', description: '', tools: [], skills: [] },
+  ])
 
   // fetch experience data
   useEffect(() => {
@@ -66,11 +68,53 @@ export default function ExperienceComponent({ onNextButtonClick }) {
         method: 'POST',
         data: submit,
       })
-      alert('card info saved')
+      alert('exp info saved')
       window.location.reload()
       return
     } catch (error) {
-      throw new Error('failed to save the card info')
+      throw new Error('failed to save the exp info')
+    }
+  }
+  const handleExpUpdate = async (e: any, index: number, experience_id) => {
+    e.preventDefault()
+    const submit = {
+      gg_id: user.gg_id,
+      type: projects[index].type,
+      name: projects[index].name,
+      description: projects[index].description,
+      tools: projects[index].tools,
+      skills: projects[index].skills.map((skill) => ({
+        skill: skill,
+        percentage: 0,
+      })),
+    }
+    try {
+      await axios({
+        url: `/api/experience/${experience_id}`,
+        method: 'PUT',
+        data: submit,
+      })
+      alert('exp info updated')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+      throw new Error('failed to update the exp info')
+    }
+  }
+
+  const handleExpDelete = async (experience_id) => {
+    try {
+      await axios({
+        url: `/api/experience/${experience_id}`,
+        method: 'DELETE',
+      })
+      alert('exp info deleted')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+      throw new Error('failed to delete the exp info')
     }
   }
 
@@ -101,14 +145,15 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   const handleAddProject = () => {
     setProjects((prevProjects) => [
       ...prevProjects,
-      { name: 'Project Name', type: '', description: '', skills: [], tools: [] },
+      { experience_id: '', type: '', name: 'Project Name', description: '', skills: [], tools: [] },
     ])
   }
 
-  const handleDeleteProject = (index) => {
+  const handleDeleteProject = (index, experience_id) => {
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects]
       updatedProjects.splice(index, 1)
+      handleExpDelete(experience_id)
       return updatedProjects
     })
   }
@@ -155,7 +200,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                   <button
                     className='ml-2 text-gray-900 hover:text-red-500'
                     aria-label='delete button'
-                    onClick={() => handleDeleteProject(index)}
+                    onClick={() => handleDeleteProject(index, project.experience_id)}
                   >
                     <TiDelete />
                   </button>
@@ -192,138 +237,273 @@ export default function ExperienceComponent({ onNextButtonClick }) {
 
                   {/* Form for user input */}
                   <div className='w-full lg:w-[50%]'>
-                    <form
-                      onSubmit={(e) => handleExpSubmit(e, index)}
-                      className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
-                    >
-                      <div className='flex w-full flex-col gap-y-2 px-4'>
-                        <div className='flex flex-row items-center justify-between'>
-                          <div>
-                            <label
-                              htmlFor='educational'
-                              className={` ${project.type === 'educational' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
-                            >
-                              Educational
-                            </label>
-                            <input
-                              type='radio'
-                              aria-label='educational'
-                              id='educational'
-                              name='type'
-                              value='educational'
-                              checked={project.type === 'educational'}
-                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              className='hidden'
-                            />
+                    {user && checkActiveExp(project) != true ? (
+                      <form
+                        onSubmit={(e) => handleExpSubmit(e, index)}
+                        className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
+                      >
+                        <div className='flex w-full flex-col gap-y-2 px-4'>
+                          <div className='flex flex-row items-center justify-between'>
+                            <div>
+                              <label
+                                htmlFor='educational'
+                                className={` ${project.type === 'educational' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              >
+                                Educational
+                              </label>
+                              <input
+                                type='radio'
+                                aria-label='educational'
+                                id='educational'
+                                name='type'
+                                value='educational'
+                                checked={project.type === 'educational'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                                className='hidden'
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type='radio'
+                                aria-label='work'
+                                id='work'
+                                name='type'
+                                value='work'
+                                checked={project.type === 'work'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                                className='hidden'
+                              />
+                              <label
+                                htmlFor='work'
+                                className={`${project.type === 'work' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              >
+                                Work
+                              </label>
+                            </div>
+                            <div>
+                              <input
+                                type='radio'
+                                aria-label='gym'
+                                id='gym'
+                                name='type'
+                                value='gym'
+                                checked={project.type === 'gym'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                                className='hidden'
+                              />
+                              <label
+                                htmlFor='gym'
+                                className={` ${project.type === 'gym' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              >
+                                Gym
+                              </label>
+                            </div>
                           </div>
-                          <div>
-                            <input
-                              type='radio'
-                              aria-label='work'
-                              id='work'
-                              name='type'
-                              value='work'
-                              checked={project.type === 'work'}
-                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              className='hidden'
-                            />
-                            <label
-                              htmlFor='work'
-                              className={`${project.type === 'work' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
-                            >
-                              Work
-                            </label>
-                          </div>
-                          <div>
-                            <input
-                              type='radio'
-                              aria-label='gym'
-                              id='gym'
-                              name='type'
-                              value='gym'
-                              checked={project.type === 'gym'}
-                              onChange={(e) => handleProjectTypeChange(index, e.target.value)}
-                              className='hidden'
-                            />
-                            <label
-                              htmlFor='gym'
-                              className={` ${project.type === 'gym' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
-                            >
-                              Gym
-                            </label>
-                          </div>
-                        </div>
 
-                        <div className='mt-4 flex flex-col lg:mt-0 lg:flex-row lg:justify-between'>
-                          <label htmlFor='projectName'>Name</label>
-                          <input
-                            id='projectName'
-                            aria-label='projectName'
-                            type='text'
-                            value={project.name}
-                            onChange={(e) => handleProjectNameChange(index, e.target.value)}
-                            placeholder='Project Name'
-                            className='rounded-md bg-white/20 px-3 lg:w-[70%]'
-                            required
-                          />
-                        </div>
-                        <div className='flex flex-col lg:flex-row lg:justify-between'>
-                          <label htmlFor='description'>Description</label>
-                          <input
-                            id='description'
-                            aria-label='description'
-                            type='text'
-                            value={project.description}
-                            onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
-                            placeholder='Project Description'
-                            className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                          />
-                        </div>
-                        <div className='flex flex-col lg:flex-row lg:justify-between'>
-                          <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
-                            ProjPic
-                          </label>
-                          <input
-                            className='block cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-black/30 dark:text-white dark:placeholder:text-white'
-                            id='file_input'
-                            type='file'
-                            aria-label='file_input'
-                          />
-                        </div>
-                        <div className='flex flex-col lg:flex-row lg:justify-between'>
-                          <label htmlFor=''>Skills</label>
-                          <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
-                            <TagsInput
-                              value={project.skills}
-                              onChange={(tags) => handleSkillsChange(index, tags)}
-                              aria-label='skills_input'
-                              name='skills'
-                              placeHolder='Enter skills'
+                          <div className='mt-4 flex flex-col lg:mt-0 lg:flex-row lg:justify-between'>
+                            <label htmlFor='projectName'>Name</label>
+                            <input
+                              id='projectName'
+                              aria-label='projectName'
+                              type='text'
+                              value={project.name}
+                              onChange={(e) => handleProjectNameChange(index, e.target.value)}
+                              placeholder='Project Name'
+                              className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                              required
                             />
                           </div>
-                        </div>
-                        <div className='flex flex-col lg:flex-row lg:justify-between'>
-                          <label htmlFor=''>Tools</label>
-                          <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
-                            <TagsInput
-                              value={project.tools}
-                              onChange={(tags) => handleToolsChange(index, tags)}
-                              aria-label='tools_input'
-                              name='tools'
-                              placeHolder='Enter tools used'
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label htmlFor='description'>Description</label>
+                            <input
+                              id='description'
+                              aria-label='description'
+                              type='text'
+                              value={project.description}
+                              onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
+                              placeholder='Project Description'
+                              className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                             />
                           </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                              ProjPic
+                            </label>
+                            <input
+                              className='block cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-black/30 dark:text-white dark:placeholder:text-white'
+                              id='file_input'
+                              type='file'
+                              aria-label='file_input'
+                            />
+                          </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label htmlFor=''>Skills</label>
+                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                              <TagsInput
+                                value={project.skills}
+                                onChange={(tags) => handleSkillsChange(index, tags)}
+                                aria-label='skills_input'
+                                name='skills'
+                                placeHolder='Enter skills'
+                              />
+                            </div>
+                          </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label htmlFor=''>Tools</label>
+                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                              <TagsInput
+                                value={project.tools}
+                                onChange={(tags) => handleToolsChange(index, tags)}
+                                aria-label='tools_input'
+                                name='tools'
+                                placeHolder='Enter tools used'
+                              />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      {/* Submit button */}
-                      <div className='relative mt-4 flex gap-x-2'>
-                        <div className='mt-1'>
-                          <DrawOutlineButton aria-label='generate button' type='submit'>
-                            Generate
-                          </DrawOutlineButton>
+                        {/* Submit button */}
+                        <div className='relative mt-4 flex gap-x-2'>
+                          <div className='mt-1'>
+                            <DrawOutlineButton aria-label='generate button' type='submit'>
+                              Generate
+                            </DrawOutlineButton>
+                          </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    ) : (
+                      <form
+                        onSubmit={(e) => handleExpUpdate(e, index, project.experience_id)}
+                        className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
+                      >
+                        <div className='flex w-full flex-col gap-y-2 px-4'>
+                          <div className='flex flex-row items-center justify-between'>
+                            <div>
+                              <label
+                                htmlFor='educational'
+                                className={` ${project.type === 'educational' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              >
+                                Educational
+                              </label>
+                              <input
+                                type='radio'
+                                aria-label='educational'
+                                id='educational'
+                                name='type'
+                                value='educational'
+                                checked={project.type === 'educational'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                                className='hidden'
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type='radio'
+                                aria-label='work'
+                                id='work'
+                                name='type'
+                                value='work'
+                                checked={project.type === 'work'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                                className='hidden'
+                              />
+                              <label
+                                htmlFor='work'
+                                className={`${project.type === 'work' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              >
+                                Work
+                              </label>
+                            </div>
+                            <div>
+                              <input
+                                type='radio'
+                                aria-label='gym'
+                                id='gym'
+                                name='type'
+                                value='gym'
+                                checked={project.type === 'gym'}
+                                onChange={(e) => handleProjectTypeChange(index, e.target.value)}
+                                className='hidden'
+                              />
+                              <label
+                                htmlFor='gym'
+                                className={` ${project.type === 'gym' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                              >
+                                Gym
+                              </label>
+                            </div>
+                          </div>
+
+                          <div className='mt-4 flex flex-col lg:mt-0 lg:flex-row lg:justify-between'>
+                            <label htmlFor='projectName'>Name</label>
+                            <input
+                              id='projectName'
+                              aria-label='projectName'
+                              type='text'
+                              value={project.name}
+                              onChange={(e) => handleProjectNameChange(index, e.target.value)}
+                              placeholder='Project Name'
+                              className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                              required
+                            />
+                          </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label htmlFor='description'>Description</label>
+                            <input
+                              id='description'
+                              aria-label='description'
+                              type='text'
+                              value={project.description}
+                              onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
+                              placeholder='Project Description'
+                              className='rounded-md bg-white/20 px-3  lg:w-[70%]'
+                            />
+                          </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                              ProjPic
+                            </label>
+                            <input
+                              className='block cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-black/30 dark:text-white dark:placeholder:text-white'
+                              id='file_input'
+                              type='file'
+                              aria-label='file_input'
+                            />
+                          </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label htmlFor=''>Skills</label>
+                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                              <TagsInput
+                                value={project.skills}
+                                onChange={(tags) => handleSkillsChange(index, tags)}
+                                aria-label='skills_input'
+                                name='skills'
+                                placeHolder='Enter skills'
+                              />
+                            </div>
+                          </div>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
+                            <label htmlFor=''>Tools</label>
+                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                              <TagsInput
+                                value={project.tools}
+                                onChange={(tags) => handleToolsChange(index, tags)}
+                                aria-label='tools_input'
+                                name='tools'
+                                placeHolder='Enter tools used'
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        {/* Submit button */}
+                        <div className='relative mt-4 flex gap-x-2'>
+                          <div className='mt-1'>
+                            <DrawOutlineButton aria-label='generate button' type='submit'>
+                              Generate
+                            </DrawOutlineButton>
+                          </div>
+                        </div>
+                      </form>
+                    )}
                   </div>
                 </div>
               </TabPanel>

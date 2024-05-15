@@ -14,13 +14,7 @@ export async function GET(request, { params }) {
       // manage the access of the relations
       include: {
         cards: true,
-        experience: {
-          include: {
-            skills: {
-              select: { skill: true, percentage: true }, // Include only the 'skill' field
-            },
-          },
-        },
+        experience: true,
         avatar: true,
       },
     })

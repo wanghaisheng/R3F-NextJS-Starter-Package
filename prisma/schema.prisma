@@ -8,11 +8,9 @@ datasource db {
 }
 
 model skills {
-  skill_id      String      @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  skill         String?     @db.VarChar(100)
-  percentage    Int?
-  experience_id String?     @db.Uuid
-  experience    experience? @relation(fields: [experience_id], references: [experience_id], onDelete: NoAction, onUpdate: NoAction)
+  skill_id   String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  skill      String? @db.VarChar(100)
+  percentage Int?
 }
 
 model users {
@@ -57,8 +55,8 @@ model experience {
   name          String?  @db.VarChar(50)
   description   String?
   tools         String[]
+  skills        Json[]
   users         users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
-  skills        skills[]
 }
 
 model cards {

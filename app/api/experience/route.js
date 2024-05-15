@@ -31,9 +31,7 @@ export async function POST(request) {
         name,
         description,
         tools,
-        skills: {
-          create: skillData, // Pass the created skills data here
-        },
+        skills: skillData,
       },
     })
 
