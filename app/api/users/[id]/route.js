@@ -13,6 +13,7 @@ export async function GET(request, { params }) {
       where: { gg_id: id },
       // manage the access of the relations
       include: {
+        skills: true,
         cards: true,
         experience: true,
         avatar: true,
