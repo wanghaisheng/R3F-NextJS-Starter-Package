@@ -43,22 +43,22 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
                   }))`,
                 }}
                 //On hover remove the drop shadow
-                onMouseOver={(e) => {
-                  e.currentTarget.style.filter = 'none'
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.filter = `drop-shadow(-1px -2px 4px rgba(${
-                    user.guild === 'PADMA'
-                      ? '255, 0, 0, 0.5'
-                      : user.guild === 'VAJRA'
-                        ? '0, 0, 255, 0.5'
-                        : user.guild === 'RATNA'
-                          ? '255, 255, 0, 0.5'
-                          : user.guild === 'KARMA'
-                            ? '0, 255, 0, 0.5'
-                            : '255, 255, 255, 0.5'
-                  }))`
-                }}
+                // onMouseOver={(e) => {
+                //   e.currentTarget.style.filter = 'none'
+                // }}
+                // onMouseOut={(e) => {
+                //   e.currentTarget.style.filter = `drop-shadow(-1px -2px 4px rgba(${
+                //     user.guild === 'PADMA'
+                //       ? '255, 0, 0, 0.5'
+                //       : user.guild === 'VAJRA'
+                //         ? '0, 0, 255, 0.5'
+                //         : user.guild === 'RATNA'
+                //           ? '255, 255, 0, 0.5'
+                //           : user.guild === 'KARMA'
+                //             ? '0, 255, 0, 0.5'
+                //             : '255, 255, 255, 0.5'
+                //   }))`
+                // }}
               />
               {/* <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
                 <p>{user.description}</p>
