@@ -12,14 +12,13 @@ import {
   Math,
   Terrain,
   Viewer,
-  createGooglePhotorealistic3DTileset,
   createOsmBuildingsAsync,
 } from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import { useEffect } from 'react'
 import './css/main.css'
 
-const CloudsCesium = () => {
+export default function CloudsCesium() {
   useEffect(() => {
     const initializeCesiumViewer = async () => {
       // CesiumJS has a default access token built in but it's not meant for active use.
@@ -62,22 +61,13 @@ const CloudsCesium = () => {
       // for blue sky effect
       viewer.scene.globe.depthTestAgainstTerrain = true
 
-      // Add Photorealistic 3D Tiles
-      // try {
-      //   const tileset = await createGooglePhotorealistic3DTileset();
-      //   viewer.scene.primitives.add(tileset);
-      // } catch (error) {
-      //   console.log(`Error loading Photorealistic 3D Tiles tileset.
-      //   ${error}`);
-      // }
-
       // // Add Cesium OSM Buildings, a global 3D buildings layer.
       const osmBuildingsTileset = await createOsmBuildingsAsync()
       viewer.scene.primitives.add(osmBuildingsTileset)
 
       // Create clouds
       Math.setRandomNumberSeed(2.5)
-      function getRandomNumberInRange(minValue: number, maxValue: number) {
+      function getRandomNumberInRange(minValue, maxValue) {
         return minValue + Math.nextRandomNumber() * (maxValue - minValue)
       }
 
@@ -138,15 +128,7 @@ const CloudsCesium = () => {
       let long, lat, height, scaleX, scaleY, aspectRatio, cloudHeight, depth, slice
 
       // randomly generate clouds in a certain area
-      function createRandomClouds(
-        numClouds: number,
-        startLong: number,
-        stopLong: number,
-        startLat: number,
-        stopLat: number,
-        minHeight: number,
-        maxHeight: number,
-      ) {
+      function createRandomClouds(numClouds, startLong, stopLong, startLat, stopLat, minHeight, maxHeight) {
         const rangeLong = stopLong - startLong
         const rangeLat = stopLat - startLat
         for (let i = 0; i < numClouds; i++) {
@@ -209,12 +191,14 @@ const CloudsCesium = () => {
       // Any cleanup code if needed
     }
   }, []) // Empty dependency array to run the effect only once
-
   return (
-    <div id='cesiumContainer' style={{ width: '100%', height: '100vh' }}>
-      {/* Cesium Viewer container */}
-    </div>
+    <>
+      <div className='absolute size-96'>
+        <p>Loading ...</p>
+      </div>
+      <div id='cesiumContainer' className='h-screen w-full'>
+        {/* Cesium Viewer container */}
+      </div>
+    </>
   )
 }
-
-export default CloudsCesium

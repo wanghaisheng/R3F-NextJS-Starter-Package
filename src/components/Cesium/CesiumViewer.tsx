@@ -2,6 +2,7 @@ import CloudsCesium from './CloudsCesium'
 import VehicleCesium from './VehicleCesium'
 import HumanModalCesium from './HumanModalCesium'
 import AirCraftCesium from './AirCraftCesium'
+import GPX from './GPX'
 
 // import BarChartPage from './component/charts/barchart/page'
 // import TestDiv from './component/charts/testdiv/page'
@@ -25,8 +26,10 @@ const CesiumViewer = () => {
           {/* <VehicleCesiumViewer /> */}
           {/* <AircraftCesiumViewer /> */}
 
+          <GPX />
+
           {/* Includes cesium widget, day-night effect, clouds, fly to certain place effect, weather */}
-          <CloudsCesium />
+          {/* <CloudsCesium /> */}
         </div>
 
         {/* <Navbar /> */}

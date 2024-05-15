@@ -11,52 +11,69 @@ import {
   ClockStep,
   ClockViewModel,
   Terrain,
-  SampledPositionProperty,
+  createOsmBuildingsAsync,
+  Math,
 } from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import { useEffect } from 'react'
 import './css/main.css'
 
-const VehicleCesium = () => {
+export default function VehicleCesium() {
   useEffect(() => {
     const initializeCesiumViewer = async () => {
+      // CesiumJS has a default access token built in but it's not meant for active use.
+      // Please set your own access token can be found at: https://cesium.com/ion/tokens.
+      // Ion.defaultAccessToken = "YOUR TOKEN HERE";
+
       Ion.defaultAccessToken =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZGUzY2FhOC00M2ViLTQ2ZmQtYWQ1Yy1kYzNhYzFhZmVkZjIiLCJpZCI6MjAwOTU1LCJpYXQiOjE3MTAyMjkxNDF9.09cBca1kjkwB2lSOjuJMFMjOUV1DWT75cHXqT3zGxIU'
 
       const clock = new Clock({
-        startTime: JulianDate.fromIso8601('2017-07-11T00:00:00Z'),
-        stopTime: JulianDate.fromIso8601('2017-07-11T24:00:00Z'),
-        currentTime: JulianDate.fromIso8601('2017-07-11T10:00:00Z'),
-        clockRange: ClockRange.LOOP_STOP,
+        // adjust time so scene is lit by sun
+        startTime: JulianDate.fromIso8601('2013-12-25'),
+        currentTime: JulianDate.fromIso8601('2013-12-25'),
+        stopTime: JulianDate.fromIso8601('2013-12-26'),
+        clockRange: ClockRange.LOOP_STOP, // loop when we hit the end time
         clockStep: ClockStep.SYSTEM_CLOCK_MULTIPLIER,
-        multiplier: 1000,
-        shouldAnimate: true,
+        multiplier: 1, // how much time to advance each tick
+        shouldAnimate: true, // Animation on by default
       })
 
+      // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
       const viewer = new Viewer('cesiumContainer', {
-        clockViewModel: new ClockViewModel(clock),
-        // // show terrain
-        // terrain: Terrain.fromWorldTerrain({
-        // // for day-night effect
-        //   requestWaterMask: true,
-        //   requestVertexNormals: true,
-        // }),
+        // // show terrain // currently disabled don't know the altitude for the ground to put the human avatar
+        terrain: Terrain.fromWorldTerrain({
+          // for day-night effect
+          requestWaterMask: true, // required for water effects
+          requestVertexNormals: true, // required for terrain lighting
+        }),
+
+        clockViewModel: new ClockViewModel(clock), // Shows the clock
+        infoBox: false,
         selectionIndicator: false,
         shadows: true,
         shouldAnimate: true,
       })
 
+      // Enable rendering the sky
+      viewer.scene.skyAtmosphere.show = true
+
+      // set lighting to true
       viewer.scene.globe.enableLighting = true
-      viewer.scene.globe.depthTestAgainstTerrain = true // for blue sky effect
 
-      const position = Cartesian3.fromDegrees(85.28472, 27.688835, 0)
+      // for blue sky effect
+      viewer.scene.globe.depthTestAgainstTerrain = true
 
+      viewer.entities.removeAll()
+
+      const position = Cartesian3.fromDegrees(85.28472, 27.688835, 1255.5)
       const heading = (210 * Math.PI) / 180
       const pitch = 0
       const roll = 0
       const hpr = new HeadingPitchRoll(heading, pitch, roll)
       const orientation = Transforms.headingPitchRollQuaternion(position, hpr)
 
+      //Vehicle Modals
       // const url = "mclaren.glb";
       const url = 'honda_twister_300.glb'
       // const url = "carblack.glb";
@@ -70,6 +87,19 @@ const VehicleCesium = () => {
         },
       })
       viewer.trackedEntity = entity
+
+      // // // Add Cesium OSM Buildings, a global 3D buildings layer.
+      const osmBuildingsTileset = await createOsmBuildingsAsync()
+      viewer.scene.primitives.add(osmBuildingsTileset)
+
+      // Fly the camera
+      // viewer.camera.flyTo({
+      //   destination: Cartesian3.fromDegrees(85.28472, 27.688835, 1300),
+      //   orientation: {
+      //     heading: Math.toRadians(0.0),
+      //     pitch: Math.toRadians(-15.0),
+      //   },
+      // })
     }
 
     initializeCesiumViewer()
@@ -79,12 +109,14 @@ const VehicleCesium = () => {
       // Any cleanup code if needed
     }
   }, []) // Empty dependency array to run the effect only once
-
   return (
-    <div id='cesiumContainer' style={{ width: '100%', height: '100vh' }}>
-      {/* Cesium Viewer container */}
-    </div>
+    <>
+      <div className='absolute size-96'>
+        <p>Loading ...</p>
+      </div>
+      <div id='cesiumContainer' className='h-screen w-full'>
+        {/* Cesium Viewer container */}
+      </div>
+    </>
   )
 }
-
-export default VehicleCesium
