@@ -18,9 +18,9 @@ export async function POST(request) {
     }
 
     // Create skills data
-    const skillData = skills.map((skill) => ({
-      skill: skill.skill,
-      percentage: skill.percentage,
+    const skillData = skills.map((skillObj) => ({
+      skill: skillObj.skill,
+      percentage: skillObj.percentage,
     }))
 
     // Create new experience with skills

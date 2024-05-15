@@ -43,6 +43,10 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     }
   }, [user])
 
+  function checkActiveExp(element) {
+    return element.gg_id === user.gg_id
+  }
+
   const handleExpSubmit = async (e: any, index: number) => {
     e.preventDefault()
     const submit = {
