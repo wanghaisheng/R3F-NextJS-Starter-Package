@@ -4,7 +4,7 @@ import AreaChartComponent from '../../charts/AreaChart'
 import LineComponent from '../../charts/LineChart'
 import PieChartComponent from '../../charts/PieChart'
 
-const CesiumWidgetViewer = () => {
+const CesiumCloudsViewer = () => {
   return (
     <>
       <div style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -40,4 +40,4 @@ const CesiumWidgetViewer = () => {
   )
 }
 
-export default CesiumWidgetViewer
+export default CesiumCloudsViewer

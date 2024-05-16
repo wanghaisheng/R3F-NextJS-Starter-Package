@@ -2,8 +2,14 @@
 
 //Cesium
 import CesiumWidgetViewer from '@/components/Cesium/CesiumViewingComponents/CesiumWidgetViewer'
+import CesiumAirCraftViewer from '@/components/Cesium/CesiumViewingComponents/CesiumAirCraftViewer'
+import CesiumHumanModalViewer from '@/components/Cesium/CesiumViewingComponents/CesiumHumanModalViewer'
+import CesiumVehicleViewer from '@/components/Cesium/CesiumViewingComponents/CesiumVehicleViewer'
+import CesiumGPXViewer from '@/components/Cesium/CesiumViewingComponents/CesiumGPXViewer'
+import CesiumCloudsViewer from '@/components/Cesium/CesiumViewingComponents/CesiumCloudsViewer'
 //Cesium
 
+//Charts
 import LineComponent from '@/components/charts/LineChart'
 import AreaChartComponent from '@/components/charts/AreaChart'
 import BubbleChartComponent from '@/components/charts/BubbleChart'
@@ -11,14 +17,19 @@ import PieChartComponent from '@/components/charts/PieChart'
 import RadarChartComponent from '@/components/charts/RadarChartComparision'
 import DonutComponent from '@/components/charts/DonutChart'
 import SkillsRadarComponent from '@/components/charts/SkillsRadarChart'
+//Charts
 
+//GitHub Card
 import GitHubCard from '@/components/card/GitGubCard'
+//GitHub Card
 
 import { useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
+//Forms
 import AddRegionForm from '@/components/Regions/AddRegionForm'
+//Forms
 
 //icons
 import { MdSpaceDashboard } from 'react-icons/md'
@@ -30,9 +41,15 @@ import { FaGithub } from 'react-icons/fa'
 import { FaFileWaveform } from 'react-icons/fa6'
 import { MdNavigateNext } from 'react-icons/md'
 import { BsGlobe } from 'react-icons/bs'
+//icons
 
+//Pages
 import AdminDashboard from '@/components/AdminPageComponents/AdminDashboard'
+import Profile from '@/components/AdminPageComponents/Profile'
+import Settings from '@/components/AdminPageComponents/Settings'
+//Pages
 
+//SideBar
 function SideNav({ selected, setSelected }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -42,7 +59,7 @@ function SideNav({ selected, setSelected }) {
 
   return (
     <div>
-      <div className='fixed left-0 top-24'>
+      <div className='fixed left-0 top-20'>
         <div onClick={handleToggle}>
           <p className={`ml-2 text-2xl text-pink-500 ${isOpen ? 'rotate-180' : ''}`}>
             <MdNavigateNext />
@@ -56,7 +73,7 @@ function SideNav({ selected, setSelected }) {
           animate={{ width: isOpen ? '192px' : '10px', transform: isOpen ? 'translateX(0)' : 'translateX(-200%)' }}
           exit={{ transform: 'translateX(-200%)' }}
           transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-32 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
         >
           <div>
             <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
@@ -121,32 +138,46 @@ function SideNav({ selected, setSelected }) {
                 <BsGlobe />
                 {isOpen && <p className='ml-4 text-sm'>Cesium</p>}
               </div>
-              {isOpen && selected === 7 && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className='absolute left-6 top-10 ml-2 mt-1 rounded-md bg-black shadow-lg'
-                >
-                  <div>
-                    <SubNavItem selected={selected === 8} id={8} setSelected={setSelected}>
-                      <div className='flex items-center'>
-                        <BsGlobe />
-                        <p className='ml-2 text-sm'>Subtab 1</p>
-                      </div>
-                    </SubNavItem>
-                  </div>
-                  <div>
-                    <SubNavItem selected={selected === 9} id={9} setSelected={setSelected}>
-                      <div className='flex items-center'>
-                        <BsGlobe />
-                        <p className='ml-2 text-sm'>Subtab 2</p>
-                      </div>
-                    </SubNavItem>
-                  </div>
-                </motion.div>
-              )}
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+                {isOpen && <p className='ml-4 text-sm'>Cesium Human</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+                {isOpen && <p className='ml-4 text-sm'>Cesium Aircraft</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+                {isOpen && <p className='ml-4 text-sm'>Cesium Vehicle</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+                {isOpen && <p className='ml-4 text-sm'>Cesium GPX</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+                {isOpen && <p className='ml-4 text-sm'>Cesium Clouds</p>}
+              </div>
             </NavItem>
           </div>
         </motion.div>
@@ -158,7 +189,7 @@ function SideNav({ selected, setSelected }) {
           animate={{ width: !isOpen ? '48px' : '36px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
           exit={{ transform: 'translateX(-300%)' }}
           transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-32 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
         >
           <div>
             <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
@@ -215,30 +246,41 @@ function SideNav({ selected, setSelected }) {
               <div className='flex items-center'>
                 <BsGlobe />
               </div>
-              {!isOpen && selected === 7 && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className='absolute left-6 top-10 ml-2 mt-1 rounded-md bg-black shadow-lg'
-                >
-                  <div>
-                    <SubNavItem selected={selected === 8} id={8} setSelected={setSelected}>
-                      <div className='flex items-center'>
-                        <BsGlobe />
-                      </div>
-                    </SubNavItem>
-                  </div>
-                  <div>
-                    <SubNavItem selected={selected === 9} id={9} setSelected={setSelected}>
-                      <div className='flex items-center'>
-                        <BsGlobe />
-                      </div>
-                    </SubNavItem>
-                  </div>
-                </motion.div>
-              )}
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <BsGlobe />
+              </div>
             </NavItem>
           </div>
         </motion.div>
@@ -246,6 +288,7 @@ function SideNav({ selected, setSelected }) {
     </div>
   )
 }
+//SideBar
 
 const NavItem = ({ children, selected, id, setSelected }) => {
   return (
@@ -270,19 +313,6 @@ const NavItem = ({ children, selected, id, setSelected }) => {
   )
 }
 
-const SubNavItem = ({ children, selected, id, setSelected }) => {
-  return (
-    <motion.div
-      className='cursor-pointer p-2 pl-4 hover:bg-purple-800'
-      onClick={() => setSelected(id)}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
 const AdminPage = () => {
   const [selected, setSelected] = useState(0)
   return (
@@ -297,9 +327,9 @@ const AdminPage = () => {
         ) : selected === 1 ? (
           <div>Calendar</div>
         ) : selected === 2 ? (
-          <div>Profile</div>
+          <Profile />
         ) : selected === 3 ? (
-          <div>Settings</div>
+          <Settings />
         ) : selected === 4 ? (
           <div>
             <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
@@ -352,6 +382,16 @@ const AdminPage = () => {
           <AddRegionForm />
         ) : selected === 7 ? (
           <CesiumWidgetViewer />
+        ) : selected === 8 ? (
+          <CesiumHumanModalViewer />
+        ) : selected === 9 ? (
+          <CesiumAirCraftViewer />
+        ) : selected === 10 ? (
+          <CesiumVehicleViewer />
+        ) : selected === 11 ? (
+          <CesiumGPXViewer />
+        ) : selected === 12 ? (
+          <CesiumCloudsViewer />
         ) : (
           <div>Dashboard</div>
         )}
