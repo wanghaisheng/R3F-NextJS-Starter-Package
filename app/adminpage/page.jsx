@@ -1,7 +1,7 @@
 'use client'
 
 //Cesium
-import CesiumViewer from '@/components/Cesium/CesiumViewer'
+import CesiumWidgetViewer from '@/components/Cesium/CesiumViewingComponents/CesiumWidgetViewer'
 //Cesium
 
 import LineComponent from '@/components/charts/LineChart'
@@ -129,7 +129,7 @@ function SideNav({ selected, setSelected }) {
       <AnimatePresence>
         <motion.div
           initial={{ transform: 'translateX(-300%)' }}
-          animate={{ width: !isOpen ? '48px' : '10px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
+          animate={{ width: !isOpen ? '48px' : '36px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
           exit={{ transform: 'translateX(-300%)' }}
           transition={{ duration: 0.2 }}
           className={`fixed left-0 top-32 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
@@ -288,7 +288,7 @@ const AdminPage = () => {
         ) : selected === 6 ? (
           <AddRegionForm />
         ) : selected === 7 ? (
-          <CesiumViewer />
+          <CesiumWidgetViewer />
         ) : (
           <div>Dashboard</div>
         )}
