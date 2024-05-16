@@ -4,7 +4,6 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import FormModal from '@/components/FormModal/Modal'
 import { motion } from 'framer-motion'
-
 import Link from 'next/link'
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
@@ -34,6 +33,7 @@ export default function Page() {
   const [description, setDescription] = useState('')
   const [cardBackground, setCardBackground] = useState('project-card-bg.jpg')
   const [cardAvatar, setCardAvatar] = useState('aa.png')
+
   return (
     <>
       <div className='relative flex size-full flex-col ' id='about-me'>

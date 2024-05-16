@@ -47,21 +47,20 @@ const CreateAvatar = () => {
       return router.push('/slider')
       // return <SliderPage />
     }
-  } else {
-    return (
-      <div className='flex size-full flex-col items-center justify-center'>
-        <p className='mb-8 text-5xl text-white'>Create Your Avatar</p>
-        <div className='flex'>
-          <button className='mr-4 inline-block rounded-lg bg-white px-6 py-2 font-bold text-black'>
-            <a href='/avatar'>Create Avatar</a>
-          </button>
-          <button className='inline-block rounded-lg bg-[#E5FF25] px-6 py-2 font-bold text-black'>
-            <a href='https://gguser.readyplayer.me/avatar?frameApi'>Edit Avatar</a>
-          </button>
-        </div>
-      </div>
-    )
   }
+  return (
+    <div className='flex size-full flex-col items-center justify-center'>
+      <p className='mb-8 text-5xl text-white'>Create Your Avatar</p>
+      <div className='flex'>
+        <button className='mr-4 inline-block rounded-lg bg-white px-6 py-2 font-bold text-black'>
+          <a href='/avatar'>Create Avatar</a>
+        </button>
+        <button className='inline-block rounded-lg bg-[#E5FF25] px-6 py-2 font-bold text-black'>
+          <a href='https://gguser.readyplayer.me/avatar?frameApi'>Edit Avatar</a>
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default CreateAvatar

@@ -72,6 +72,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
       setAddress(user.address ? user.address : '')
       setPhoneNumber(user.phone_number ? user.phone_number : '')
       setDob(user.dob ? user.dob : '')
+      console.log(email)
     }
     if (user) {
       setUserInfo()

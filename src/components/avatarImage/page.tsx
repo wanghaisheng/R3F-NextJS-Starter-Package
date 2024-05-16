@@ -13,20 +13,6 @@ import { useCallback, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-import axios from 'axios'
-
-async function getAvatarById(id: string) {
-  try {
-    const res = await axios.get(`/api/avatar/${id}`)
-    if (res.status !== 200) {
-      throw new Error('failed to fetch the avatars')
-    }
-    return res.data
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export default function AvatarImageComponent() {
   const router = useRouter()
   const { user } = useUser()
@@ -52,8 +38,7 @@ export default function AvatarImageComponent() {
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
-        const testData = await getAvatarById(user.gg_id)
-        setAvatarsData(testData)
+        setAvatarsData(user.avatar)
       } catch (error) {
         console.error('Error fetching avatars data:', error)
       }

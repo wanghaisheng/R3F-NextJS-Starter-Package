@@ -57,42 +57,6 @@ import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
 
-async function getSkills() {
-  try {
-    const res = await axios.get('/api/skills')
-    if (res.status !== 200) {
-      console.log('failed to fetch the skills')
-    }
-    return res.data
-  } catch (error) {
-    console.log('failed to fetch the skills', error)
-  }
-}
-
-async function getCards() {
-  try {
-    const res = await axios.get(`/api/card`)
-    if (res.status !== 200) {
-      console.log('failed to fetch the cards')
-    }
-    return res.data
-  } catch (error) {
-    console.log('failed to fetch the cards', error)
-  }
-}
-
-async function getAvatarById(id) {
-  try {
-    const res = await axios.get(`/api/avatar/${id}`)
-    if (res.status !== 200) {
-      console.log('failed to fetch the avatars')
-    }
-    return res.data
-  } catch (error) {
-    console.log('failed to fetch the avatars', error)
-  }
-}
-
 // Custom tooltip component for chart
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -107,28 +71,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-// const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
-//   ssr: false,
-//   loading: () => (
-//     <div className='flex h-96 w-full flex-col items-center justify-center'>
-//       {/* import {SkillIconsLinkedin} from '@/logo/SkillIconsLinkedin' */}
-//       <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
-//         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
-//         <path
-//           className='opacity-75'
-//           fill='currentColor'
-//           d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-//         />
-//       </svg>
-//     </div>
-//   ),
-// })
-// const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
-// const Type = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Type), { ssr: false })
-
 export default function Hero3() {
   const { user } = useUser()
-  const [skillsData, setSkillsData] = useState(null)
+  const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
 
@@ -191,9 +136,7 @@ export default function Hero3() {
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
-        const skillsData = await getSkills() // Fetch skills data
-        const filteredSkillsData = skillsData.filter((element) => element.gg_id === user.gg_id) // Filter data based on user
-        setSkillsData(filteredSkillsData) // Set the filtered data
+        setSkillsData(user.skills)
       } catch (error) {
         console.log('Error fetching skills data:', error)
       }
@@ -210,9 +153,7 @@ export default function Hero3() {
   useEffect(() => {
     const fetchCardsData = async () => {
       try {
-        const cardsData = await getCards() // Fetch cards data
-        const filteredCardsData = cardsData.filter((element) => element.gg_id === user.gg_id)
-        setCardsData(filteredCardsData)
+        setCardsData(user.cards)
       } catch (error) {
         console.log('Error fetching skills data:', error)
       }
@@ -239,8 +180,7 @@ export default function Hero3() {
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
-        const testData = await getAvatarById(user.gg_id)
-        setAvatarsData(testData)
+        setAvatarsData(user.avatar)
       } catch (error) {
         console.log('Error fetching avatars data:', error)
       }
@@ -253,15 +193,6 @@ export default function Hero3() {
 
   return (
     <div className='relative flex flex-col lg:size-full'>
-      {/* <div className='hidden items-center bg-none md:flex'>
-        <View className='flex h-20 w-full flex-col items-center justify-center bg-none'>
-          <Suspense fallback={null}>
-            <Type scale={2} position={[0, 0, 0]} />
-            <Common />
-          </Suspense>
-        </View>
-      </div> */}
-      {/* avatar */}
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
@@ -333,7 +264,7 @@ export default function Hero3() {
                             <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
                               <div className='flex flex-col justify-center'>
                                 <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                  {card.type.toUpperCase()}
+                                  {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
                                   <a
                                     className=' px-2 py-1 text-sm text-black dark:text-white'
                                     aria-label='edit button'
