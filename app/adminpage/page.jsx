@@ -121,6 +121,32 @@ function SideNav({ selected, setSelected }) {
                 <BsGlobe />
                 {isOpen && <p className='ml-4 text-sm'>Cesium</p>}
               </div>
+              {isOpen && selected === 7 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className='absolute left-6 top-10 ml-2 mt-1 rounded-md bg-black shadow-lg'
+                >
+                  <div>
+                    <SubNavItem selected={selected === 8} id={8} setSelected={setSelected}>
+                      <div className='flex items-center'>
+                        <BsGlobe />
+                        <p className='ml-2 text-sm'>Subtab 1</p>
+                      </div>
+                    </SubNavItem>
+                  </div>
+                  <div>
+                    <SubNavItem selected={selected === 9} id={9} setSelected={setSelected}>
+                      <div className='flex items-center'>
+                        <BsGlobe />
+                        <p className='ml-2 text-sm'>Subtab 2</p>
+                      </div>
+                    </SubNavItem>
+                  </div>
+                </motion.div>
+              )}
             </NavItem>
           </div>
         </motion.div>
@@ -128,7 +154,7 @@ function SideNav({ selected, setSelected }) {
       {/* Onclose */}
       <AnimatePresence>
         <motion.div
-          initial={{ transform: 'translateX(-300%)' }}
+          initial={{ transform: 'translateX(0%)' }}
           animate={{ width: !isOpen ? '48px' : '36px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
           exit={{ transform: 'translateX(-300%)' }}
           transition={{ duration: 0.2 }}
@@ -189,6 +215,30 @@ function SideNav({ selected, setSelected }) {
               <div className='flex items-center'>
                 <BsGlobe />
               </div>
+              {!isOpen && selected === 7 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className='absolute left-6 top-10 ml-2 mt-1 rounded-md bg-black shadow-lg'
+                >
+                  <div>
+                    <SubNavItem selected={selected === 8} id={8} setSelected={setSelected}>
+                      <div className='flex items-center'>
+                        <BsGlobe />
+                      </div>
+                    </SubNavItem>
+                  </div>
+                  <div>
+                    <SubNavItem selected={selected === 9} id={9} setSelected={setSelected}>
+                      <div className='flex items-center'>
+                        <BsGlobe />
+                      </div>
+                    </SubNavItem>
+                  </div>
+                </motion.div>
+              )}
             </NavItem>
           </div>
         </motion.div>
@@ -216,6 +266,19 @@ const NavItem = ({ children, selected, id, setSelected }) => {
           ></motion.span>
         )}
       </AnimatePresence>
+    </motion.div>
+  )
+}
+
+const SubNavItem = ({ children, selected, id, setSelected }) => {
+  return (
+    <motion.div
+      className='cursor-pointer p-2 pl-4 hover:bg-purple-800'
+      onClick={() => setSelected(id)}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {children}
     </motion.div>
   )
 }

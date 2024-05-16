@@ -66,9 +66,9 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
               </div>
             ))}
           </div> */}
-          <div className='h-[600px] lg:w-[50%]'>
+          <div className='size-full'>
             <Suspense fallback={<div>Loading map...</div>}>
-              <div style={{ position: 'relative', width: '100%', height: '550px' }}>
+              <div className='absolute -top-20 h-screen w-full'>
                 <div
                   style={{
                     position: 'absolute',
