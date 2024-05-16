@@ -29,6 +29,7 @@ import { FaRegChartBar } from 'react-icons/fa'
 import { FaGithub } from 'react-icons/fa'
 import { FaFileWaveform } from 'react-icons/fa6'
 import { MdNavigateNext } from 'react-icons/md'
+import { BsGlobe } from 'react-icons/bs'
 
 import AdminDashboard from '@/components/AdminPageComponents/AdminDashboard'
 
@@ -117,7 +118,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
               <div className='flex items-center'>
-                <FaFileWaveform />
+                <BsGlobe />
                 {isOpen && <p className='ml-4 text-sm'>Cesium</p>}
               </div>
             </NavItem>
@@ -186,7 +187,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
               <div className='flex items-center'>
-                <FaFileWaveform />
+                <BsGlobe />
               </div>
             </NavItem>
           </div>
