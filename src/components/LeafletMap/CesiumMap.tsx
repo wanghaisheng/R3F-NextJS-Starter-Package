@@ -8,6 +8,8 @@ import './css/main.css'
 const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
   const cesiumRef = useRef<CesiumWidget | null>(null)
 
+  const cameraZoom: number = 9500000
+
   useEffect(() => {
     const initializeCesiumViewer = async () => {
       // Check if the CesiumWidget has already been initialized
@@ -38,7 +40,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
@@ -64,7 +66,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
@@ -90,7 +92,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
@@ -116,7 +118,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
@@ -142,7 +144,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
@@ -168,7 +170,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
@@ -194,7 +196,7 @@ const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
         )
 
         // Add a margin to ensure the entire continent is visible
-        const margin = 1000000 // Adjust this as needed
+        const margin = cameraZoom // Adjust this as needed
         const altitude = diagonalDistance + margin
 
         const centerLongitude = (west + east) / 2
