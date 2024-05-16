@@ -1,10 +1,10 @@
-import CesiumWidgetComponent from '../CesiumWidgetComponent'
+import VehicleCesium from '../VehicleCesium'
 
 import AreaChartComponent from '../../charts/AreaChart'
 import LineComponent from '../../charts/LineChart'
 import PieChartComponent from '../../charts/PieChart'
 
-const CesiumWidgetViewer = () => {
+const CesiumVehicleViewer = () => {
   return (
     <>
       <div style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -19,7 +19,7 @@ const CesiumWidgetViewer = () => {
           }}
         >
           {/* Cesium */}
-          <CesiumWidgetComponent />
+          <VehicleCesium />
         </div>
 
         <div className='absolute left-0 top-0 bg-purple-900/20'>
@@ -39,4 +39,4 @@ const CesiumWidgetViewer = () => {
   )
 }
 
-export default CesiumWidgetViewer
+export default CesiumVehicleViewer

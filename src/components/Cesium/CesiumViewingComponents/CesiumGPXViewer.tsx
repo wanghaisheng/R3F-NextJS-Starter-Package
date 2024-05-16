@@ -1,4 +1,4 @@
-import CesiumWidgetComponent from '../CesiumWidgetComponent'
+import GPX from '../GPX'
 
 import AreaChartComponent from '../../charts/AreaChart'
 import LineComponent from '../../charts/LineChart'
@@ -19,7 +19,7 @@ const CesiumWidgetViewer = () => {
           }}
         >
           {/* Cesium */}
-          <CesiumWidgetComponent />
+          <GPX />
         </div>
 
         <div className='absolute left-0 top-0 bg-purple-900/20'>

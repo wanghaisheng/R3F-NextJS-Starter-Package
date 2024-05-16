@@ -8,7 +8,7 @@ import './css/main.css'
 const CesiumMap = ({ filteredContinent }: { filteredContinent: string }) => {
   const cesiumRef = useRef<CesiumWidget | null>(null)
 
-  const cameraZoom: number = 9500000
+  const cameraZoom: number = 9500000 // Adjust this as needed
 
   useEffect(() => {
     const initializeCesiumViewer = async () => {

@@ -1,4 +1,4 @@
-import CesiumWidgetComponent from '../CesiumWidgetComponent'
+import CloudsCesium from '../CloudsCesium'
 
 import AreaChartComponent from '../../charts/AreaChart'
 import LineComponent from '../../charts/LineChart'
@@ -19,7 +19,8 @@ const CesiumWidgetViewer = () => {
           }}
         >
           {/* Cesium */}
-          <CesiumWidgetComponent />
+          {/* Includes cesium widget, day-night effect, clouds, fly to certain place effect, weather */}
+          <CloudsCesium />
         </div>
 
         <div className='absolute left-0 top-0 bg-purple-900/20'>
