@@ -51,8 +51,8 @@ export default function PieChartComponent() {
     <>
       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
         <div>
-          <ResponsiveContainer width={300} height={400}>
-            <PieChart width={300} height={400}>
+          <ResponsiveContainer width={300} height={300}>
+            <PieChart width={300} height={300}>
               <Pie
                 data={data}
                 dataKey='value' // Add the dataKey property with a valid value
@@ -64,8 +64,8 @@ export default function PieChartComponent() {
                   <Cell key={`cell-${index}`} fill={colors[index]} />
                 ))}
               </Pie>
-              {/* <Legend /> */}
-              <Legend
+              <Legend />
+              {/* <Legend
                 width={150}
                 wrapperStyle={{
                   bottom: 0,
@@ -74,7 +74,7 @@ export default function PieChartComponent() {
                   // border: "1px solid #000FDC",
                   borderRadius: 4,
                 }}
-              />
+              /> */}
               {/* <Tooltip /> */}
               <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
             </PieChart>

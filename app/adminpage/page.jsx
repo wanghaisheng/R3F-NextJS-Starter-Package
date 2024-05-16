@@ -290,6 +290,7 @@ function SideNav({ selected, setSelected }) {
 }
 //SideBar
 
+//NavItem
 const NavItem = ({ children, selected, id, setSelected }) => {
   return (
     <motion.div
@@ -312,16 +313,16 @@ const NavItem = ({ children, selected, id, setSelected }) => {
     </motion.div>
   )
 }
+//NavItem
 
+// Main Page
 const AdminPage = () => {
   const [selected, setSelected] = useState(0)
   return (
-    <div className='flex h-screen flex-row'>
-      <div>
-        <SideNav selected={selected} setSelected={setSelected} />
-      </div>
+    <div className='flex h-full flex-row'>
       <div className='ml-16 basis-full'>
         <div className='m-4'>Welcome, Admin</div>
+
         {selected === 0 ? (
           <AdminDashboard />
         ) : selected === 1 ? (
@@ -396,8 +397,12 @@ const AdminPage = () => {
           <div>Dashboard</div>
         )}
       </div>
+      <div>
+        <SideNav selected={selected} setSelected={setSelected} />
+      </div>
     </div>
   )
 }
+// Main Page
 
 export default AdminPage

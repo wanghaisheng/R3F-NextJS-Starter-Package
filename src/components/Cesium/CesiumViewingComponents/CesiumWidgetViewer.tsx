@@ -7,7 +7,7 @@ import PieChartComponent from '../../charts/PieChart'
 const CesiumWidgetViewer = () => {
   return (
     <>
-      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <div className='absolute -top-20 left-0 h-screen w-full'>
         {/* CesiumViewer as background */}
         <div
           style={{
@@ -22,16 +22,16 @@ const CesiumWidgetViewer = () => {
           <CesiumWidgetComponent />
         </div>
 
-        <div className='absolute left-0 top-0 bg-purple-900/20'>
+        <div className='absolute left-24 top-24 bg-purple-900/20'>
           <LineComponent />
         </div>
-        <div className='absolute right-10 top-10 w-[300px] bg-purple-900/20'>
+        <div className='absolute right-10 top-24 w-[300px] bg-purple-900/20'>
           <AreaChartComponent />
         </div>
-        <div className='absolute bottom-10 right-10 w-[300px] bg-purple-900/20'>
+        <div className='absolute bottom-24 right-10 w-[300px] bg-purple-900/20'>
           <PieChartComponent />
         </div>
-        <div className='absolute bottom-10 left-10 w-[300px] bg-purple-900/20'>
+        <div className='absolute bottom-24 left-24 h-[250px] w-[350px] bg-purple-900/20'>
           <AreaChartComponent />
         </div>
       </div>
