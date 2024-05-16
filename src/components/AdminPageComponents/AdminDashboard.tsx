@@ -5,8 +5,8 @@ import { LuGauge } from 'react-icons/lu'
 
 export default function AdminDashboard() {
   return (
-    <div className='mx-4'>
-      <div className='flex flex-col lg:flex-row lg:justify-between'>
+    <div className='flex'>
+      <div className='flex basis-full flex-col lg:flex-row lg:justify-between'>
         {/* left side */}
         <div className='grid grid-cols-2 gap-6 lg:w-[58%]'>
           {/* 1 */}
@@ -81,6 +81,8 @@ export default function AdminDashboard() {
           <AreaChartComponent />
         </div>
       </div>
+
+      <div className='basis-1/4'>Card</div>
     </div>
   )
 }

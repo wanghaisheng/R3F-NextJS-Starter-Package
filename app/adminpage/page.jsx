@@ -14,8 +14,6 @@ import SkillsRadarComponent from '@/components/charts/SkillsRadarChart'
 
 import GitHubCard from '@/components/card/GitGubCard'
 
-import { DndContext } from '@dnd-kit/core'
-
 import { useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
@@ -30,171 +28,271 @@ import { IoIosSettings } from 'react-icons/io'
 import { FaRegChartBar } from 'react-icons/fa'
 import { FaGithub } from 'react-icons/fa'
 import { FaFileWaveform } from 'react-icons/fa6'
+import { MdNavigateNext } from 'react-icons/md'
 
 import AdminDashboard from '@/components/AdminPageComponents/AdminDashboard'
 
 function SideNav({ selected, setSelected }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  function handleToggle() {
+    setIsOpen(!isOpen)
+  }
+
   return (
-    <nav className='top-20 m-3 flex flex-col gap-2 rounded-xl bg-slate-950/40 md:flex-row'>
-      <div className='fixed flex w-[17%] flex-col gap-2'>
-        <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <MdSpaceDashboard />
-            <p className='text-sm max-sm:hidden'>Dashboard</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <FaCalendarCheck />
-            <p className='text-sm max-sm:hidden'>Calendar</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <CgProfile />
-            <p className='text-sm max-sm:hidden'>Profile</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <IoIosSettings />
-            <p className='text-sm max-sm:hidden'>Settings</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <FaRegChartBar />
-            <p className='text-sm max-sm:hidden'>Chart</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <FaGithub />
-            <p className='text-sm max-sm:hidden'>GitHub</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <FaFileWaveform />
-            <p className='text-sm max-sm:hidden'>Add Region</p>
-          </div>
-        </NavItem>
-        <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
-          <div className='flex items-center justify-between'>
-            <FaFileWaveform />
-            <p className='text-sm max-sm:hidden'>Cesium</p>
-          </div>
-        </NavItem>
+    <div>
+      <div className='fixed left-0 top-24'>
+        <div onClick={handleToggle}>
+          <p className={`ml-2 text-2xl text-pink-500 ${isOpen ? 'rotate-180' : ''}`}>
+            <MdNavigateNext />
+          </p>
+        </div>
       </div>
-    </nav>
+      {/* Open */}
+      <AnimatePresence>
+        <motion.div
+          initial={{ transform: 'translateX(-200%)' }}
+          animate={{ width: isOpen ? '192px' : '10px', transform: isOpen ? 'translateX(0)' : 'translateX(-200%)' }}
+          exit={{ transform: 'translateX(-200%)' }}
+          transition={{ duration: 0.2 }}
+          className={`fixed left-0 top-32 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+        >
+          <div>
+            <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
+              <div className='flex items-center'>
+                {/* Icon */}
+                <MdSpaceDashboard />
+                {isOpen && <p className='ml-4 text-sm'>Dashboard</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaCalendarCheck />
+                {isOpen && <p className='ml-4 text-sm'>Calendar</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <CgProfile />
+                {isOpen && <p className='ml-4 text-sm'>Profile</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <IoIosSettings />
+                {isOpen && <p className='ml-4 text-sm'>Settings</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaRegChartBar />
+                {isOpen && <p className='ml-4 text-sm'>Chart</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaGithub />
+                {isOpen && <p className='ml-4 text-sm'>GitHub</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaFileWaveform />
+                {isOpen && <p className='ml-4 text-sm'>Add Region</p>}
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaFileWaveform />
+                {isOpen && <p className='ml-4 text-sm'>Cesium</p>}
+              </div>
+            </NavItem>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+      {/* Onclose */}
+      <AnimatePresence>
+        <motion.div
+          initial={{ transform: 'translateX(-300%)' }}
+          animate={{ width: !isOpen ? '48px' : '10px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
+          exit={{ transform: 'translateX(-300%)' }}
+          transition={{ duration: 0.2 }}
+          className={`fixed left-0 top-32 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+        >
+          <div>
+            <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
+              <div className='flex items-center'>
+                {/* Icon */}
+                <MdSpaceDashboard />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaCalendarCheck />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <CgProfile />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <IoIosSettings />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaRegChartBar />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaGithub />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaFileWaveform />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <FaFileWaveform />
+              </div>
+            </NavItem>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
   )
 }
 
 const NavItem = ({ children, selected, id, setSelected }) => {
   return (
-    <motion.button
-      className='relative rounded-md bg-slate-800 p-3 text-xl transition-colors hover:bg-slate-700'
+    <motion.div
+      className='relative h-full bg-slate-800 p-3 text-xl transition-colors hover:bg-slate-700'
       onClick={() => setSelected(id)}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      <span className='relative z-10 block'>{children}</span>
+      <span className='relative z-10 block w-full'>{children}</span>
       <AnimatePresence>
         {selected && (
           <motion.span
-            className='absolute inset-0 z-0 rounded-md bg-indigo-600'
+            className='absolute inset-0 z-0 bg-indigo-600'
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
           ></motion.span>
         )}
       </AnimatePresence>
-    </motion.button>
+    </motion.div>
   )
 }
 
 const AdminPage = () => {
   const [selected, setSelected] = useState(0)
   return (
-    <DndContext>
-      <div className='mx-4 flex justify-between bg-slate-900/20 text-slate-100 md:mx-8'>
-        <div className='w-[20%]'>
-          <SideNav selected={selected} setSelected={setSelected} />
-        </div>
-        <div className='w-[80%]'>
-          <div className='m-4'>Welcome, Admin</div>
-          {selected === 0 ? (
-            <AdminDashboard />
-          ) : selected === 1 ? (
-            <div>Calendar</div>
-          ) : selected === 2 ? (
-            <div>Profile</div>
-          ) : selected === 3 ? (
-            <div>Settings</div>
-          ) : selected === 4 ? (
-            <div>
+    <div className='flex h-screen flex-row'>
+      <div>
+        <SideNav selected={selected} setSelected={setSelected} />
+      </div>
+      <div className='ml-16 basis-full'>
+        <div className='m-4'>Welcome, Admin</div>
+        {selected === 0 ? (
+          <AdminDashboard />
+        ) : selected === 1 ? (
+          <div>Calendar</div>
+        ) : selected === 2 ? (
+          <div>Profile</div>
+        ) : selected === 3 ? (
+          <div>Settings</div>
+        ) : selected === 4 ? (
+          <div>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <div>
+                <h1>Radar Chart for comparision</h1>
+                <p className='mt-5'>Some description about the chart</p>
+              </div>
+              <DonutComponent />
+            </div>
+            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+              <BubbleChartComponent />
+            </div>
+
+            <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
+              <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <div>
+                  <h1>Pie Chart</h1>
+                  <p className='mt-5'>Some description about the chart</p>
+                </div>
+                <PieChartComponent />
+              </div>
               <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
                 <div>
                   <h1>Radar Chart for comparision</h1>
                   <p className='mt-5'>Some description about the chart</p>
                 </div>
-                <DonutComponent />
+                <RadarChartComponent />
               </div>
+
               <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <BubbleChartComponent />
-              </div>
-
-              <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
-                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                  <div>
-                    <h1>Pie Chart</h1>
-                    <p className='mt-5'>Some description about the chart</p>
-                  </div>
-                  <PieChartComponent />
+                <div>
+                  <h1>Radar Chart for comparision</h1>
+                  <p className='mt-5'>Some description about the chart</p>
                 </div>
-                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                  <div>
-                    <h1>Radar Chart for comparision</h1>
-                    <p className='mt-5'>Some description about the chart</p>
-                  </div>
-                  <RadarChartComponent />
-                </div>
-
-                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                  <div>
-                    <h1>Radar Chart for comparision</h1>
-                    <p className='mt-5'>Some description about the chart</p>
-                  </div>
-                  <SkillsRadarComponent />
-                </div>
-              </div>
-              <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
-                <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                  <LineComponent />
-                </div>
-                <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                  <AreaChartComponent />
-                </div>
+                <SkillsRadarComponent />
               </div>
             </div>
-          ) : selected === 5 ? (
-            <div className='mt-10'>
-              <GitHubCard />
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
+              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <LineComponent />
+              </div>
+              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <AreaChartComponent />
+              </div>
             </div>
-          ) : selected === 6 ? (
-            <div className='flex justify-center'>
-              <AddRegionForm />
-            </div>
-          ) : selected === 7 ? (
-            <div className='mb-20 flex justify-center'>
-              <CesiumViewer />
-            </div>
-          ) : (
-            <div>Dashboard</div>
-          )}
-        </div>
+          </div>
+        ) : selected === 5 ? (
+          <GitHubCard />
+        ) : selected === 6 ? (
+          <AddRegionForm />
+        ) : selected === 7 ? (
+          <CesiumViewer />
+        ) : (
+          <div>Dashboard</div>
+        )}
       </div>
-    </DndContext>
+    </div>
   )
 }
 
