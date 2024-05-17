@@ -35,7 +35,7 @@ export default function CloudsCesium() {
         stopTime: JulianDate.fromIso8601('2013-12-26'),
         clockRange: ClockRange.LOOP_STOP, // loop when we hit the end time
         clockStep: ClockStep.SYSTEM_CLOCK_MULTIPLIER,
-        multiplier: 400, // how much time to advance each tick
+        multiplier: 1, // how much time to advance each tick
         shouldAnimate: true, // Animation on by default
       })
 
