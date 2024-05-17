@@ -41,6 +41,11 @@ import { FaGithub } from 'react-icons/fa'
 import { FaFileWaveform } from 'react-icons/fa6'
 import { MdNavigateNext } from 'react-icons/md'
 import { BsGlobe } from 'react-icons/bs'
+import { GiHumanTarget } from 'react-icons/gi'
+import { GoPaperAirplane } from 'react-icons/go'
+import { IoCarSportOutline } from 'react-icons/io5'
+import { RiGpsLine } from 'react-icons/ri'
+import { TbCloudSearch } from 'react-icons/tb'
 //icons
 
 //Pages
@@ -143,7 +148,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <GiHumanTarget />
                 {isOpen && <p className='ml-4 text-sm'>Cesium Human</p>}
               </div>
             </NavItem>
@@ -151,7 +156,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <GoPaperAirplane />
                 {isOpen && <p className='ml-4 text-sm'>Cesium Aircraft</p>}
               </div>
             </NavItem>
@@ -159,7 +164,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <IoCarSportOutline />
                 {isOpen && <p className='ml-4 text-sm'>Cesium Vehicle</p>}
               </div>
             </NavItem>
@@ -167,7 +172,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <RiGpsLine />
                 {isOpen && <p className='ml-4 text-sm'>Cesium GPX</p>}
               </div>
             </NavItem>
@@ -175,7 +180,7 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <TbCloudSearch />
                 {isOpen && <p className='ml-4 text-sm'>Cesium Clouds</p>}
               </div>
             </NavItem>
@@ -251,35 +256,35 @@ function SideNav({ selected, setSelected }) {
           <div>
             <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <GiHumanTarget />
               </div>
             </NavItem>
           </div>
           <div>
             <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <GoPaperAirplane />
               </div>
             </NavItem>
           </div>
           <div>
             <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <IoCarSportOutline />
               </div>
             </NavItem>
           </div>
           <div>
             <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <RiGpsLine />
               </div>
             </NavItem>
           </div>
           <div>
             <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
               <div className='flex items-center'>
-                <BsGlobe />
+                <TbCloudSearch />
               </div>
             </NavItem>
           </div>
