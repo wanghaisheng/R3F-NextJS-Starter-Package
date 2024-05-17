@@ -58,7 +58,7 @@ export default function CesiumOSM() {
 
       // Set the initial camera to look at Seattle
       viewer.scene.camera.setView({
-        destination: Cartesian3.fromDegrees(-122.3472, 47.598, 370),
+        destination: Cartesian3.fromDegrees(85.28718395296745, 27.695589070164228, 370),
         orientation: {
           heading: Math.toRadians(10),
           pitch: Math.toRadians(-10),
@@ -113,6 +113,11 @@ export default function CesiumOSM() {
           case 'apartments':
             osmBuildingsTileset.style = new Cesium3DTileStyle({
               show: "${feature['building']} === 'apartments'",
+            })
+            break
+          case 'school':
+            osmBuildingsTileset.style = new Cesium3DTileStyle({
+              show: "${feature['building']} === 'school'",
             })
             break
           default:
@@ -185,6 +190,10 @@ export default function CesiumOSM() {
             removeCoordinatePickingOnLeftClick()
             showByBuildingType('apartments')
             break
+          case 'showByBuildingTypeSchools':
+            removeCoordinatePickingOnLeftClick()
+            showByBuildingType('school')
+            break
           default:
             break
         }
@@ -215,6 +224,7 @@ export default function CesiumOSM() {
           <option value='highlightAllResidentialBuildings'>Highlight All Residential Buildings</option>
           <option value='showByBuildingTypeOffice'>Show Office Buildings</option>
           <option value='showByBuildingTypeApartments'>Show Apartment Buildings</option>
+          <option value='showByBuildingTypeSchools'>Show Schools</option>
         </select>
       </div>
     </>
