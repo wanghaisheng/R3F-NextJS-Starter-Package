@@ -141,13 +141,18 @@ export default function CesiumOSM() {
       // When dropdown option is not "Color By Distance To Selected Location",
       // remove the left click input event for selecting a central location
       function removeCoordinatePickingOnLeftClick() {
-        // document.querySelector('.infoPanel').style.visibility = 'hidden'
+        const infoPanel = document.querySelector('.infoPanel') as HTMLElement | null
+        if (infoPanel) {
+          infoPanel.style.visibility = 'hidden'
+        }
         handler.removeInputAction(ScreenSpaceEventType.LEFT_CLICK)
       }
 
       // Add event listeners to dropdown menu options
       // document.querySelector('.infoPanel').style.visibility = 'hidden'
-      const menu = document.getElementById('dropdown')
+      // const menu = document.getElementById('dropdown')
+
+      const menu = document.getElementById('dropdown') as HTMLSelectElement
 
       menu.addEventListener('change', function () {
         switch (menu.value) {
@@ -185,10 +190,7 @@ export default function CesiumOSM() {
         }
       })
 
-      colorByMaterial() // Default to color by material
-      // highlightAllResidentialBuildings()
-      // showByBuildingType('office')
-      // colorByDistanceToCoordinate(-122.3472, 47.598)
+      colorByMaterial() // Default styling
     }
 
     initializeCesiumViewer()
