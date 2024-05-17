@@ -1,5 +1,5 @@
 'use client'
-import { Cartesian3, Ion, Viewer, Color, Clock } from 'cesium'
+import { Cartesian3, Ion, Viewer, Color, Clock, ConstantProperty, CallbackProperty } from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import { useEffect } from 'react'
 import './css/main.css'
@@ -69,6 +69,8 @@ export default function HumanModalCesium() {
         // orientation: orientation,
         model: {
           uri: url,
+          minimumPixelSize: 64, // Ensure the model is always visible regardless of zoom level
+          maximumScale: 20000, // Cap the model's scale when zooming in
         },
       })
       const entity2 = viewer.entities.add({
@@ -83,19 +85,84 @@ export default function HumanModalCesium() {
       viewer.trackedEntity = entity
       // viewer.trackedEntity = entity2
 
+      // Green circle
+      // const greenCircle = viewer.entities.add({
+      //   position: Cartesian3.fromDegrees(85.283948, 27.689929),
+      //   name: 'Green circle at height with outline',
+      //   ellipse: {
+      //     semiMinorAxis: 300.0,
+      //     semiMajorAxis: 300.0,
+      //     height: 0.0,
+      //     material: Color.GREEN.withAlpha(0.5),
+      //     outline: true, // height must be set for outline to display
+      //   },
+      // })
+
       const greenCircle = viewer.entities.add({
         position: Cartesian3.fromDegrees(85.283948, 27.689929),
         name: 'Green circle at height with outline',
         ellipse: {
-          semiMinorAxis: 300.0,
-          semiMajorAxis: 300.0,
+          semiMinorAxis: new CallbackProperty(() => {
+            const cameraHeight = viewer.camera.positionCartographic.height
+            const scale = cameraHeight / 1000
+            return 300.0 * scale
+          }, false),
+          semiMajorAxis: new CallbackProperty(() => {
+            const cameraHeight = viewer.camera.positionCartographic.height
+            const scale = cameraHeight / 1000
+            return 300.0 * scale
+          }, false),
           height: 0.0,
           material: Color.GREEN.withAlpha(0.5),
-          outline: true, // height must be set for outline to display
+          outline: true,
         },
       })
 
+      //Dome
+      const dome = viewer.entities.add({
+        name: 'Dome',
+        position: Cartesian3.fromDegrees(85.288501, 27.693956),
+        ellipsoid: {
+          radii: new Cartesian3(200.0, 200.0, 200.0),
+          maximumCone: Math.PI / 2,
+          material: Color.BLUE.withAlpha(0.3),
+          outline: true,
+        },
+      })
+
+      // const dome = viewer.entities.add({
+      //   name: 'Dome',
+      //   position: Cartesian3.fromDegrees(85.288501, 27.693956),
+      //   ellipsoid: {
+      //     radii: new CallbackProperty(() => {
+      //       const cameraHeight = viewer.camera.positionCartographic.height
+      //       const scale = cameraHeight / 1000
+      //       return new Cartesian3(200.0 * scale, 200.0 * scale, 200.0 * scale)
+      //     }, false),
+      //     maximumCone: Math.PI / 2,
+      //     material: Color.BLUE.withAlpha(0.3),
+      //     outline: true,
+      //   },
+      // })
+
       // viewer.zoomTo(viewer.entities)
+
+      // Update the size of the entities based on the camera height
+      const updateEntitySizes = () => {
+        viewer.entities.values.forEach((entity) => {
+          if (entity.ellipse) {
+            entity.ellipse.semiMinorAxis.getValue(viewer.clock.currentTime)
+            entity.ellipse.semiMajorAxis.getValue(viewer.clock.currentTime)
+          }
+          if (entity.ellipsoid) {
+            entity.ellipsoid.radii.getValue(viewer.clock.currentTime)
+          }
+        })
+      }
+
+      viewer.camera.moveEnd.addEventListener(updateEntitySizes)
+      viewer.camera.changed.addEventListener(updateEntitySizes)
+      updateEntitySizes()
     }
 
     initializeCesiumViewer()
