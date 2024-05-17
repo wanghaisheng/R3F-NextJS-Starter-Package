@@ -119,31 +119,31 @@ export default function HumanModalCesium() {
       })
 
       //Dome
-      const dome = viewer.entities.add({
-        name: 'Dome',
-        position: Cartesian3.fromDegrees(85.288501, 27.693956),
-        ellipsoid: {
-          radii: new Cartesian3(200.0, 200.0, 200.0),
-          maximumCone: Math.PI / 2,
-          material: Color.BLUE.withAlpha(0.3),
-          outline: true,
-        },
-      })
-
       // const dome = viewer.entities.add({
       //   name: 'Dome',
-      //   position: Cartesian3.fromDegrees(85.288501, 27.693956),
+      //   position: Cartesian3.fromDegrees(85.28726816954399, 27.69574804402426),
       //   ellipsoid: {
-      //     radii: new CallbackProperty(() => {
-      //       const cameraHeight = viewer.camera.positionCartographic.height
-      //       const scale = cameraHeight / 1000
-      //       return new Cartesian3(200.0 * scale, 200.0 * scale, 200.0 * scale)
-      //     }, false),
+      //     radii: new Cartesian3(200.0, 200.0, 200.0),
       //     maximumCone: Math.PI / 2,
       //     material: Color.BLUE.withAlpha(0.3),
       //     outline: true,
       //   },
       // })
+
+      const dome = viewer.entities.add({
+        name: 'Dome',
+        position: Cartesian3.fromDegrees(85.28726816954399, 27.69574804402426),
+        ellipsoid: {
+          radii: new CallbackProperty(() => {
+            const cameraHeight = viewer.camera.positionCartographic.height
+            const scale = cameraHeight / 1000
+            return new Cartesian3(200.0 * scale, 200.0 * scale, 200.0 * scale)
+          }, false),
+          maximumCone: Math.PI / 2,
+          material: Color.BLUE.withAlpha(0.3),
+          outline: true,
+        },
+      })
 
       // viewer.zoomTo(viewer.entities)
 
