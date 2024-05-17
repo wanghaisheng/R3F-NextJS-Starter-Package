@@ -55,14 +55,14 @@ export default function VehicleCesium() {
         shouldAnimate: true,
       })
 
-      // Enable rendering the sky
-      viewer.scene.skyAtmosphere.show = true
+      // // Enable rendering the sky
+      // viewer.scene.skyAtmosphere.show = true
 
-      // set lighting to true
-      viewer.scene.globe.enableLighting = true
+      // // set lighting to true
+      // viewer.scene.globe.enableLighting = true
 
-      // for blue sky effect
-      viewer.scene.globe.depthTestAgainstTerrain = true
+      // // for blue sky effect
+      // viewer.scene.globe.depthTestAgainstTerrain = true
 
       viewer.entities.removeAll()
 
@@ -84,13 +84,15 @@ export default function VehicleCesium() {
         orientation: orientation,
         model: {
           uri: url,
+          minimumPixelSize: 64, // Ensure the model is always visible regardless of zoom level
+          maximumScale: 20000, // Cap the model's scale when zooming in
         },
       })
       viewer.trackedEntity = entity
 
       // // // Add Cesium OSM Buildings, a global 3D buildings layer.
-      const osmBuildingsTileset = await createOsmBuildingsAsync()
-      viewer.scene.primitives.add(osmBuildingsTileset)
+      // const osmBuildingsTileset = await createOsmBuildingsAsync()
+      // viewer.scene.primitives.add(osmBuildingsTileset)
 
       // Fly the camera
       // viewer.camera.flyTo({

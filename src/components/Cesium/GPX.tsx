@@ -1,30 +1,25 @@
 'use client'
 import {
-  Cartesian2,
-  Cartesian3,
   Clock,
   ClockRange,
   ClockStep,
-  ClockViewModel,
-  CloudCollection,
   Ion,
-  JulianDate,
-  Math,
   Terrain,
   Viewer,
-  createOsmBuildingsAsync,
   GpxDataSource,
   PinBuilder,
   Color,
   VerticalOrigin,
 } from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
-import { useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import './css/main.css'
 
+type Entity = any
+
 export default function GPX() {
-  let gpxEntity
-  let pinEntity
+  const gpxEntityRef = useRef<Entity | null>(null)
+  const pinEntityRef = useRef<Entity | null>(null)
 
   useEffect(() => {
     const initializeCesiumViewer = async () => {
@@ -84,11 +79,11 @@ export default function GPX() {
       viewer.dataSources.add(gpxDataSource)
 
       // Get the first entity from the data source
-      gpxEntity = gpxDataSource.entities.values[0]
+      gpxEntityRef.current = gpxDataSource.entities.values[0]
 
       // Create an entity for the pinBuilder
-      pinEntity = viewer.entities.add({
-        position: gpxEntity.position,
+      pinEntityRef.current = viewer.entities.add({
+        position: gpxEntityRef.current.position,
         billboard: {
           image: pinBuilder.fromColor(Color.TRANSPARENT, 50),
           verticalOrigin: VerticalOrigin.BASELINE,
@@ -96,7 +91,7 @@ export default function GPX() {
       })
 
       // Set the tracked entity to the GPX data entity
-      viewer.trackedEntity = pinEntity
+      viewer.trackedEntity = pinEntityRef.current
     }
 
     initializeCesiumViewer()
