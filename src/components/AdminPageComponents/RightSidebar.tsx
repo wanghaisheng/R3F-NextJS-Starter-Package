@@ -10,7 +10,7 @@ interface SidebarContextType {
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined)
 
-export default function Sidebar({ children }) {
+export default function RightSidebar({ children }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -21,7 +21,7 @@ export default function Sidebar({ children }) {
             onClick={() => setExpanded((curr) => !curr)}
             className='rounded-lg bg-purple-700 p-1.5 hover:bg-purple-900'
           >
-            {!expanded ? <MdKeyboardDoubleArrowRight size={20} /> : <MdKeyboardDoubleArrowLeft size={20} />}
+            {!expanded ? <MdKeyboardDoubleArrowLeft size={20} /> : <MdKeyboardDoubleArrowRight size={20} />}
           </button>
         </div>
 
@@ -33,7 +33,7 @@ export default function Sidebar({ children }) {
   )
 }
 
-export function SidebarItem({ icon, text, active, alert, onClick }) {
+export function RightSidebarItem({ icon, text, active, alert, onClick }) {
   const { expanded } = useContext(SidebarContext)
   return (
     <li
@@ -47,7 +47,7 @@ export function SidebarItem({ icon, text, active, alert, onClick }) {
             : 'text-gray-600 hover:bg-indigo-50'
         }
     `}
-      onClick={onClick}
+      // onClick={onClick}
     >
       {icon}
       <span className={`overflow-hidden transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>{text}</span>
@@ -57,7 +57,7 @@ export function SidebarItem({ icon, text, active, alert, onClick }) {
       {!expanded && (
         <div
           className={`
-          invisible absolute left-full ml-6 -translate-x-3 rounded-md
+          invisible absolute right-full mr-6 translate-x-4 rounded-md
           bg-indigo-100 px-2 py-1
           text-sm text-indigo-800 opacity-20 transition-all
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
