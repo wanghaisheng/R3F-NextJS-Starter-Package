@@ -59,10 +59,41 @@ import Settings from '@/components/AdminPageComponents/Settings'
 //SideBar
 function SideNav({ selected, setSelected }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedSubItem, setSelectedSubItem] = useState(null)
 
   function handleToggle() {
     setIsOpen(!isOpen)
   }
+
+  function handleSubItemClick(subItem) {
+    setSelectedSubItem(subItem)
+    setSelected(subItem.id)
+  }
+
+  const navItems = [
+    { id: 0, icon: <MdSpaceDashboard />, label: 'Dashboard' },
+    { id: 1, icon: <FaCalendarCheck />, label: 'Calendar' },
+    { id: 2, icon: <CgProfile />, label: 'Profile' },
+    { id: 3, icon: <IoIosSettings />, label: 'Settings' },
+    { id: 4, icon: <FaRegChartBar />, label: 'Chart' },
+    { id: 5, icon: <FaGithub />, label: 'GitHub' },
+    { id: 6, icon: <FaFileWaveform />, label: 'Add Region' },
+    {
+      id: selectedSubItem ? selectedSubItem.id : 7,
+      icon: selectedSubItem ? selectedSubItem.icon : <BsGlobe />,
+      label: selectedSubItem ? selectedSubItem.label : 'Cesium',
+      subItems: [
+        { id: 7, icon: <BsGlobe />, label: 'Cesium' },
+        { id: 8, icon: <GiHumanTarget />, label: 'Cesium Human' },
+        { id: 9, icon: <GoPaperAirplane />, label: 'Cesium Aircraft' },
+        { id: 10, icon: <IoCarSportOutline />, label: 'Cesium Vehicle' },
+        { id: 11, icon: <RiGpsLine />, label: 'Cesium GPX' },
+        { id: 12, icon: <TbCloudSearch />, label: 'Cesium Clouds' },
+        { id: 13, icon: <TbCloudSearch />, label: 'Cesium Buildings' },
+        { id: 14, icon: <TbCloudSearch />, label: 'Cesium Video' },
+      ],
+    },
+  ]
 
   return (
     <div>
@@ -73,129 +104,40 @@ function SideNav({ selected, setSelected }) {
           animate={{ width: isOpen ? '192px' : '10px', transform: isOpen ? 'translateX(0)' : 'translateX(-200%)' }}
           exit={{ transform: 'translateX(-200%)' }}
           transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-20 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
         >
-          <div>
-            <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-              <div className='flex items-center'>
-                {/* Icon */}
-                <MdSpaceDashboard />
-                {isOpen && <p className='ml-4 text-sm'>Dashboard</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaCalendarCheck />
-                {isOpen && <p className='ml-4 text-sm'>Calendar</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <CgProfile />
-                {isOpen && <p className='ml-4 text-sm'>Profile</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoIosSettings />
-                {isOpen && <p className='ml-4 text-sm'>Settings</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaRegChartBar />
-                {isOpen && <p className='ml-4 text-sm'>Chart</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaGithub />
-                {isOpen && <p className='ml-4 text-sm'>GitHub</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaFileWaveform />
-                {isOpen && <p className='ml-4 text-sm'>Add Region</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <BsGlobe />
-                {isOpen && <p className='ml-4 text-sm'>Cesium</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GiHumanTarget />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Human</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GoPaperAirplane />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Aircraft</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoCarSportOutline />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Vehicle</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <RiGpsLine />
-                {isOpen && <p className='ml-4 text-sm'>Cesium GPX</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Clouds</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 13} id={13} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Buildings</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 14} id={14} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Video</p>}
-              </div>
-            </NavItem>
-          </div>
+          {navItems.map(({ id, icon, label, subItems }) => (
+            <div key={id}>
+              <NavItem
+                selected={selected === id}
+                id={id}
+                setSelected={setSelected}
+                setSelectedSubItem={setSelectedSubItem}
+              >
+                <div className='flex items-center'>
+                  {icon}
+                  {isOpen && <p className='ml-4 text-sm'>{label}</p>}
+                </div>
+              </NavItem>
+              {isOpen && subItems && selected === id && (
+                <div className='ml-8'>
+                  {subItems.map((subItem) => (
+                    <NavItem
+                      selected={selected === subItem.id}
+                      id={subItem.id}
+                      setSelected={() => handleSubItemClick(subItem)}
+                      key={subItem.id}
+                    >
+                      <div className='flex items-center'>
+                        {subItem.icon}
+                        <p className='ml-4 text-sm'>{subItem.label}</p>
+                      </div>
+                    </NavItem>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </motion.div>
       </AnimatePresence>
       {/* Onclose */}
@@ -205,118 +147,38 @@ function SideNav({ selected, setSelected }) {
           animate={{ width: !isOpen ? '48px' : '36px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
           exit={{ transform: 'translateX(-300%)' }}
           transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-20 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
         >
-          <div>
-            <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-              <div className='flex items-center'>
-                {/* Icon */}
-                <MdSpaceDashboard />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaCalendarCheck />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <CgProfile />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoIosSettings />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaRegChartBar />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaGithub />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaFileWaveform />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <BsGlobe />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GiHumanTarget />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GoPaperAirplane />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoCarSportOutline />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <RiGpsLine />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 13} id={13} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 14} id={14} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-              </div>
-            </NavItem>
-          </div>
+          {navItems.map(({ id, icon, subItems }) => (
+            <div key={id}>
+              <NavItem
+                selected={selected === id}
+                id={id}
+                setSelected={setSelected}
+                setSelectedSubItem={setSelectedSubItem}
+              >
+                <div className='flex items-center'>{icon}</div>
+              </NavItem>
+              {!isOpen && subItems && selected === id && (
+                <div className='absolute left-12 top-10'>
+                  {subItems.map((subItem) => (
+                    <NavItem
+                      selected={selected === subItem.id}
+                      id={subItem.id}
+                      setSelected={() => handleSubItemClick(subItem)}
+                      key={subItem.id}
+                    >
+                      <div className='flex items-center'>{subItem.icon}</div>
+                    </NavItem>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </motion.div>
       </AnimatePresence>
 
-      <div className={`fixed  top-20 ${!isOpen ? 'left-10' : 'left-48'}`}>
+      <div className='fixed left-1 top-20'>
         <div onClick={handleToggle}>
           <p className={`ml-2 text-2xl text-pink-500 ${isOpen ? 'rotate-180' : ''}`}>
             <MdNavigateNext />
