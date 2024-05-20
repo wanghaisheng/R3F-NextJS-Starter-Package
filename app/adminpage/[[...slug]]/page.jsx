@@ -214,26 +214,114 @@ function SideNav({ selected, setSelected }) {
     </div>
   )
 }
+
 //SideBar
 
 // Main Page
-const AdminPage = () => {
+const AdminPage = ({ params }) => {
   const [selected, setSelected] = useState(0)
   return (
     <>
-      <div className='flex h-full flex-row'>
+      <div className='flex size-full flex-row'>
         {/* <SideNav selected={selected} setSelected={setSelected} /> */}
-        <div className='flex'>
+
+        <div className='fixed left-0 z-50 h-full'>
           <Sidebar>
-            <SidebarItem icon={<MdSpaceDashboard size={20} />} text='Dashboard' active />
-            <SidebarItem icon={<FaCalendarCheck size={20} />} text='Calendar' />
-            <SidebarItem icon={<CgProfile size={20} />} text='Profile' />
-            <SidebarItem icon={<BsGlobe size={20} />} text='Cesium' alert />
+            <SidebarItem
+              icon={<MdSpaceDashboard size={20} />}
+              text='Dashboard'
+              active={selected === 0}
+              onClick={() => setSelected(0)}
+            />
+            <SidebarItem
+              icon={<FaCalendarCheck size={20} />}
+              text='Calendar'
+              active={selected === 1}
+              onClick={() => setSelected(1)}
+            />
+            <SidebarItem
+              icon={<CgProfile size={20} />}
+              text='Profile'
+              active={selected === 2}
+              onClick={() => setSelected(2)}
+            />
+            <SidebarItem
+              icon={<FaRegChartBar size={20} />}
+              text='Chart'
+              active={selected === 3}
+              onClick={() => setSelected(3)}
+            />
+            <SidebarItem
+              icon={<FaGithub size={20} />}
+              text='GitHub'
+              active={selected === 4}
+              onClick={() => setSelected(4)}
+            />
+            <SidebarItem
+              icon={<FaFileWaveform size={20} />}
+              text='Add Region'
+              active={selected === 5}
+              onClick={() => setSelected(5)}
+            />
+            <SidebarItem
+              icon={<BsGlobe size={20} />}
+              text='Cesium'
+              active={selected === 6}
+              onClick={() => setSelected(6)}
+            />
+            <SidebarItem
+              icon={<GiHumanTarget size={20} />}
+              text='Cesium Human'
+              active={selected === 7}
+              onClick={() => setSelected(7)}
+            />
+            <SidebarItem
+              icon={<GoPaperAirplane size={20} />}
+              text='Cesium Aircraft'
+              active={selected === 8}
+              onClick={() => setSelected(8)}
+            />
+            <SidebarItem
+              icon={<IoCarSportOutline size={20} />}
+              text='Cesium Vehicle'
+              active={selected === 9}
+              onClick={() => setSelected(9)}
+            />
+            <SidebarItem
+              icon={<RiGpsLine size={20} />}
+              text='Cesium GPX'
+              active={selected === 10}
+              onClick={() => setSelected(10)}
+            />
+            <SidebarItem
+              icon={<TbCloudSearch size={20} />}
+              text='Cesium Clouds'
+              active={selected === 11}
+              onClick={() => setSelected(11)}
+            />
+            <SidebarItem
+              icon={<TbCloudSearch size={20} />}
+              text='Cesium Buildings'
+              active={selected === 12}
+              onClick={() => setSelected(12)}
+            />
+            <SidebarItem
+              icon={<TbCloudSearch size={20} />}
+              text='Cesium Video'
+              active={selected === 13}
+              onClick={() => setSelected(13)}
+            />
             <hr className='my-3' />
-            <SidebarItem icon={<IoIosSettings size={20} />} text='Settings' />
+            <SidebarItem
+              icon={<IoIosSettings size={20} />}
+              text='Settings'
+              active={selected === 14}
+              onClick={() => setSelected(14)}
+            />
           </Sidebar>
         </div>
-        <div className='flex-1'>
+
+        <div className='ml-16 flex-1'>
           {selected === 0 ? (
             <AdminDashboard />
           ) : selected === 1 ? (

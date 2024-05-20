@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { createContext, useState, useContext } from 'react'
-import { CgMoreVertical } from 'react-icons/cg'
 import { MdKeyboardDoubleArrowRight, MdKeyboardDoubleArrowLeft } from 'react-icons/md'
 
 interface SidebarContextType {
@@ -15,9 +14,9 @@ export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <aside className='h-screen'>
-      <nav className='fixed left-0 top-0 z-40 flex h-full flex-col bg-slate-950 shadow-sm'>
-        <div className='mt-20 flex items-center justify-between p-4 pb-2'>
+    <aside className='h-full'>
+      <nav className='flex h-full flex-col bg-slate-950 shadow-sm'>
+        <div className='flex items-center justify-between p-4 pb-2'>
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className='rounded-lg bg-purple-700 p-1.5 hover:bg-purple-900'
@@ -34,7 +33,7 @@ export default function Sidebar({ children }) {
   )
 }
 
-export function SidebarItem({ icon, text, active, alert }) {
+export function SidebarItem({ icon, text, active, alert, onClick }) {
   const { expanded } = useContext(SidebarContext)
   return (
     <li
@@ -48,6 +47,7 @@ export function SidebarItem({ icon, text, active, alert }) {
             : 'text-gray-600 hover:bg-indigo-50'
         }
     `}
+      onClick={onClick}
     >
       {icon}
       <span className={`overflow-hidden transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>{text}</span>
