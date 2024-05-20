@@ -6,34 +6,15 @@ const prisma = new PrismaClient()
 // Function to create a skill
 export async function POST(request) {
   try {
-    const { skill, percentage, gg_id } = await request.json()
+    const { gg_id, skill } = await request.json()
 
-    // Check if the user exists
-    const existingUser = await prisma.users.findUnique({
-      where: { gg_id },
+    const newSkill = await prisma.skills.create({
+      data: {
+        gg_id,
+        skill: [skill],
+      },
     })
-
-    if (!existingUser) {
-      return NextResponse.error('User not found', 404)
-    }
-
-    const existingSkill = await prisma.skills.findUnique({
-      where: { gg_id, skill },
-    })
-
-    if (!existingSkill) {
-      // Create the skill for the user
-      const newSkill = await prisma.skills.create({
-        data: {
-          skill,
-          percentage,
-          gg_id,
-        },
-      })
-      return NextResponse.json(newSkill)
-    } else {
-      return NextResponse.error('The skill already exists', 404)
-    }
+    return NextResponse.json(newSkill)
   } catch (error) {
     console.error('Error Creating Skill', error)
     return NextResponse.error('Internal Server Error', 500)

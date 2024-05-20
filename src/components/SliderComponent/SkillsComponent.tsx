@@ -28,6 +28,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { element } from 'three/examples/jsm/nodes/shadernode/ShaderNode'
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -42,31 +43,85 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-async function getSkills() {
-  try {
-    const res = await axios.get('/api/skills')
-    if (res.status !== 200) {
-      throw new Error('failed to fetch the skills')
-    }
-    return res.data
-  } catch (error) {
-    throw new Error('failed to fetch the skills')
-  }
-}
-
 export default function SkillsComponent() {
   const { user } = useUser()
-  const [skills, setSkills] = useState([{ skill: 'skill1', percentage: 0 }])
-  const [originalLength, setOriginalLength] = useState(0)
+
+  const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
+
+  function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
+    for (let i = 0; i < exp_skills.length; i++) {
+      if (exp_skills[i].includes(skill)) {
+        return true
+      }
+    }
+    return false
+  }
 
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
-        const testData = await getSkills() // Fetch skills data
-        const filteredData = testData.filter((element: any) => element.gg_id === user.gg_id) // Filter data based on user
-        if (filteredData.length != 0) {
-          setSkills(filteredData) // Set the filtered data
-          setOriginalLength(filteredData.length)
+        const skillsSet = new Set<string>() // Create a Set to store unique JSON strings
+
+        if (user.experience.length !== 0) {
+          const exp_skill_obj = {}
+          const exp_skills = []
+
+          user.skills.forEach((skillObj) => {
+            // Add the skillObj to skillsSet
+
+            skillsSet.add(
+              JSON.stringify({
+                gg_id: skillObj.gg_id,
+                skill_id: skillObj.skill_id,
+                skill_name: skillObj.skill[0].skill_name,
+                percentage: skillObj.skill[0].percentage,
+              }),
+            )
+
+            // Iterate over each skill element in skillObj.skill array
+            skillObj.skill.forEach((element) => {
+              // Add the skill name to exp_skills array
+              exp_skills.push(element.skill_name)
+
+              // Create an entry in exp_skill_obj for the skill percentage
+              exp_skill_obj[element.skill_name] = element.percentage
+
+              // Create an entry in exp_skill_obj for the skill_id
+              exp_skill_obj[element.skill_name + '_id'] = skillObj.skill_id
+            })
+          })
+          user.experience.forEach((element) => {
+            if (element.project_skills.length !== 0) {
+              element.project_skills.forEach((skill) => {
+                if (!checkExistingSkills(skill, exp_skills)) {
+                  skillsSet.add(
+                    JSON.stringify({
+                      gg_id: '',
+                      skill_id: '',
+                      skill_name: skill,
+                      percentage: 0,
+                    }),
+                  ) // Add each object to the Set after converting it to a string
+                } else {
+                  skillsSet.add(
+                    JSON.stringify({
+                      gg_id: user.gg_id,
+                      skill_id: exp_skill_obj[`${skill}` + '_id'],
+                      skill_name: skill,
+                      percentage: exp_skill_obj[`${skill}`],
+                    }),
+                  )
+                }
+              })
+            }
+          })
+        }
+
+        // Convert the Set back to an array of objects
+        if (skillsSet.size !== 0) {
+          const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
+          setSkills(skillsArray)
+          console.log(skills)
         }
       } catch (error) {
         console.log('failed to fetch the skills data')
@@ -78,10 +133,75 @@ export default function SkillsComponent() {
     }
   }, [user])
 
+  const checkActiveSkills = (element) => {
+    return element.gg_id === user.gg_id
+  }
+
+  const handleSkillSubmit = async (e: any, index: number) => {
+    e.preventDefault()
+    const submit = {
+      gg_id: user.gg_id,
+      skill: {
+        skill_name: skills[index].skill_name,
+        percentage: skills[index].percentage,
+      },
+    }
+    try {
+      await axios({
+        url: `/api/skills`,
+        method: 'POST',
+        data: submit,
+      })
+      alert('skills info saved')
+      window.location.reload()
+      return
+    } catch (error) {
+      throw new Error('failed to save the skills info')
+    }
+  }
+
+  const handleSkillUpdate = async (e: any, index: number) => {
+    e.preventDefault()
+    const submit = {
+      skill: {
+        skill_name: skills[index].skill_name,
+        percentage: skills[index].percentage,
+      },
+    }
+    try {
+      await axios({
+        url: `/api/skills/${skills[index].skill_id}`,
+        method: 'PUT',
+        data: submit,
+      })
+      alert('skills info updated')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+      throw new Error('failed to update the skills info')
+    }
+  }
+
+  const handleSkillDelete = async (index: number) => {
+    try {
+      await axios({
+        url: `/api/skills/${skills[index].skill_id}`,
+        method: 'DELETE',
+      })
+      alert('skill info deleted')
+      window.location.reload()
+      return
+    } catch (error) {
+      console.error(error)
+      throw new Error('failed to delete the skill info')
+    }
+  }
+
   const handleSkillNameChange = (index: number, newName: string) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
-      updatedSkills[index].skill = newName
+      updatedSkills[index].skill_name = newName
       return updatedSkills
     })
   }
@@ -95,13 +215,16 @@ export default function SkillsComponent() {
   }
 
   const handleAddSkill = () => {
-    setSkills((prevSkills) => [...prevSkills, { skill: 'skill', percentage: 0 }])
+    setSkills((prevSkills) => [...prevSkills, { gg_id: '', skill_id: '', skill_name: 'skill', percentage: 0 }])
   }
 
   const handleDeleteSkill = (index) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
       updatedSkills.splice(index, 1)
+      if (skills[index].skill_id !== '') {
+        handleSkillDelete(index)
+      }
       return updatedSkills
     })
   }
@@ -133,7 +256,7 @@ export default function SkillsComponent() {
             <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
-                  {element.skill}
+                  {element.skill_name}
                   <button
                     aria-label='delete'
                     className='ml-2 text-gray-900 hover:text-red-500'
@@ -148,36 +271,38 @@ export default function SkillsComponent() {
             {/* TabPanel */}
             <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
               <div className='flex flex-col lg:flex-row lg:justify-between'>
-                <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
-                  {skills.map((element, index) => (
-                    <TabPanel key={index}>
-                      <div className='size-full rounded-[20px]  p-4'>
-                        <div className='flex flex-col lg:flex-row  lg:justify-between'>
-                          <div className='w-full'>
-                            <input
-                              type='text'
-                              value={element.skill}
-                              onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                              placeholder='Skill Name'
-                              className='w-full rounded-md bg-white/20 p-1'
-                              aria-label='skill name'
-                            />
+                {skills.map((element, index) => (
+                  <div key={index} className='w-[300px] md:w-[500px] lg:w-[60%]'>
+                    {user && checkActiveSkills(element) != true ? (
+                      <form onSubmit={(e) => handleSkillSubmit(e, index)}>
+                        <TabPanel>
+                          <div className='size-full rounded-[20px]  p-4'>
+                            <div className='flex flex-col lg:flex-row  lg:justify-between'>
+                              <div className='w-full'>
+                                <input
+                                  type='text'
+                                  value={element.skill_name}
+                                  onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                                  placeholder='Skill Name'
+                                  className='w-full rounded-md bg-white/20 p-1'
+                                  aria-label='skill name'
+                                />
 
-                            <div className='my-4 flex'>
-                              <input
-                                type='range'
-                                min='0'
-                                max='100'
-                                value={element.percentage}
-                                className='w-full rounded-md bg-purple-600'
-                                onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                                aria-label='slider'
-                              />
-                              <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                <div className='my-4 flex'>
+                                  <input
+                                    type='range'
+                                    min='0'
+                                    max='100'
+                                    value={element.percentage}
+                                    className='w-full rounded-md bg-purple-600'
+                                    onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                    aria-label='slider'
+                                  />
+                                  <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                        {/* <p>
+                            {/* <p>
                           Work Project{' '}
                           <input
                             type='text'
@@ -197,23 +322,104 @@ export default function SkillsComponent() {
                             className='w-full rounded-md bg-white/20 p-1'
                           />
                         </p> */}
-                        <p className='my-4 lg:mt-0'>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam sed
-                          saepe repudiandae accusamus temporibus, autem
+                            {/* <p className='my-4 lg:mt-0'>
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam
+                              sed saepe repudiandae accusamus temporibus, autem
+                            </p> */}
+                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                              Certifications
+                            </label>
+                            <input
+                              className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              id='file_input'
+                              type='file'
+                              aria-label='file input'
+                            />
+                          </div>
+                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
+                            <div className='-mt-2'>
+                              <DrawOutlineButton type='submit' aria-label='generate button'>
+                                Generate
+                              </DrawOutlineButton>
+                            </div>
+                          </div>
+                        </TabPanel>
+                      </form>
+                    ) : (
+                      <form key={index} onSubmit={(e) => handleSkillUpdate(e, index)}>
+                        <TabPanel>
+                          <div className='size-full rounded-[20px]  p-4'>
+                            <div className='flex flex-col lg:flex-row  lg:justify-between'>
+                              <div className='w-full'>
+                                <input
+                                  type='text'
+                                  value={element.skill_name}
+                                  onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                                  placeholder='Skill Name'
+                                  className='w-full rounded-md bg-white/20 p-1'
+                                  aria-label='skill name'
+                                />
+
+                                <div className='my-4 flex'>
+                                  <input
+                                    type='range'
+                                    min='0'
+                                    max='100'
+                                    value={element.percentage}
+                                    className='w-full rounded-md bg-purple-600'
+                                    onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                    aria-label='slider'
+                                  />
+                                  <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                </div>
+                              </div>
+                            </div>
+                            {/* <p>
+                          Work Project{' '}
+                          <input
+                            type='text'
+                            value={element.skill}
+                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                            placeholder='Skill Name'
+                            className='w-full rounded-md bg-white/20 p-1'
+                          />
                         </p>
-                        <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
-                          Certifications
-                        </label>
-                        <input
-                          className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
-                          id='file_input'
-                          type='file'
-                          aria-label='file input'
-                        />
-                      </div>
-                    </TabPanel>
-                  ))}
-                </div>
+                        <p>
+                          Education Project{' '}
+                          <input
+                            type='text'
+                            value={element.skill}
+                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                            placeholder='Skill Name'
+                            className='w-full rounded-md bg-white/20 p-1'
+                          />
+                        </p> */}
+                            {/* <p className='my-4 lg:mt-0'>
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam
+                              sed saepe repudiandae accusamus temporibus, autem
+                            </p> */}
+                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                              Certifications
+                            </label>
+                            <input
+                              className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              id='file_input'
+                              type='file'
+                              aria-label='file input'
+                            />
+                          </div>
+                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
+                            <div className='-mt-2'>
+                              <DrawOutlineButton type='submit' aria-label='generate button'>
+                                Generate
+                              </DrawOutlineButton>
+                            </div>
+                          </div>
+                        </TabPanel>
+                      </form>
+                    )}
+                  </div>
+                ))}
 
                 <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
                   <p className='mb-2 flex justify-center'>Specification</p>
@@ -233,7 +439,7 @@ export default function SkillsComponent() {
                             bottom: 5,
                           }}
                         >
-                          <XAxis dataKey='skill' />
+                          <XAxis dataKey='skill_name' />
                           <YAxis domain={[0, 100]} />
                           <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
                           <CartesianGrid vertical={false} strokeDasharray='6 6' />
@@ -257,7 +463,7 @@ export default function SkillsComponent() {
                           data={skills}
                         >
                           <PolarGrid />
-                          <PolarAngleAxis dataKey='skill' />
+                          <PolarAngleAxis dataKey='skill_name' />
                           <PolarRadiusAxis opacity={0} domain={[0, 100]} />
                           <Radar
                             name='Ram'
@@ -278,13 +484,6 @@ export default function SkillsComponent() {
               </div>
             </div>
           </Tabs>
-          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-            <div className='-mt-2'>
-              <DrawOutlineButton type='submit' aria-label='generate button'>
-                Generate
-              </DrawOutlineButton>
-            </div>
-          </div>
           <div className='absolute bottom-4 right-0 lg:right-4'>
             <Link href='/hero3'>
               <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>

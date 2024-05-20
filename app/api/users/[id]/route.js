@@ -16,6 +16,7 @@ export async function GET(request, { params }) {
         cards: true,
         experience: true,
         avatar: true,
+        skills: true,
       },
     })
 
