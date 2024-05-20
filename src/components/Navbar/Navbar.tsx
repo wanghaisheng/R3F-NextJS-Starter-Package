@@ -7,6 +7,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { LuLogOut } from 'react-icons/lu'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import path from 'path'
 
 const Navbar = () => {
   const [isToggled, setToggle] = useState(false)
