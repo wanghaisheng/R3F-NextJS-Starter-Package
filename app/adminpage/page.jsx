@@ -8,6 +8,7 @@ import CesiumVehicleViewer from '@/components/Cesium/CesiumViewingComponents/Ces
 import CesiumGPXViewer from '@/components/Cesium/CesiumViewingComponents/CesiumGPXViewer'
 import CesiumCloudsViewer from '@/components/Cesium/CesiumViewingComponents/CesiumCloudsViewer'
 import CesiumOSMViewer from '@/components/Cesium/CesiumViewingComponents/CesiumOSMViewer'
+import VideoCesiumViewer from '@/components/Cesium/CesiumViewingComponents/VideoCesiumViewer'
 //Cesium
 
 //Charts
@@ -194,6 +195,14 @@ function SideNav({ selected, setSelected }) {
               </div>
             </NavItem>
           </div>
+          <div>
+            <NavItem selected={selected === 14} id={14} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <TbCloudSearch />
+                {isOpen && <p className='ml-4 text-sm'>Cesium Video</p>}
+              </div>
+            </NavItem>
+          </div>
         </motion.div>
       </AnimatePresence>
       {/* Onclose */}
@@ -299,6 +308,13 @@ function SideNav({ selected, setSelected }) {
           </div>
           <div>
             <NavItem selected={selected === 13} id={13} setSelected={setSelected}>
+              <div className='flex items-center'>
+                <TbCloudSearch />
+              </div>
+            </NavItem>
+          </div>
+          <div>
+            <NavItem selected={selected === 14} id={14} setSelected={setSelected}>
               <div className='flex items-center'>
                 <TbCloudSearch />
               </div>
@@ -416,6 +432,8 @@ const AdminPage = () => {
           <CesiumCloudsViewer />
         ) : selected === 13 ? (
           <CesiumOSMViewer />
+        ) : selected === 14 ? (
+          <VideoCesiumViewer />
         ) : (
           <div>Dashboard</div>
         )}
