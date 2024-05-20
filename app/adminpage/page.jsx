@@ -66,13 +66,6 @@ function SideNav({ selected, setSelected }) {
 
   return (
     <div>
-      <div className='fixed left-0 top-20'>
-        <div onClick={handleToggle}>
-          <p className={`ml-2 text-2xl text-pink-500 ${isOpen ? 'rotate-180' : ''}`}>
-            <MdNavigateNext />
-          </p>
-        </div>
-      </div>
       {/* Open */}
       <AnimatePresence>
         <motion.div
@@ -80,7 +73,7 @@ function SideNav({ selected, setSelected }) {
           animate={{ width: isOpen ? '192px' : '10px', transform: isOpen ? 'translateX(0)' : 'translateX(-200%)' }}
           exit={{ transform: 'translateX(-200%)' }}
           transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+          className={`fixed left-0 top-20 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
         >
           <div>
             <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
@@ -191,7 +184,7 @@ function SideNav({ selected, setSelected }) {
             <NavItem selected={selected === 13} id={13} setSelected={setSelected}>
               <div className='flex items-center'>
                 <TbCloudSearch />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Clouds</p>}
+                {isOpen && <p className='ml-4 text-sm'>Cesium Buildings</p>}
               </div>
             </NavItem>
           </div>
@@ -212,7 +205,7 @@ function SideNav({ selected, setSelected }) {
           animate={{ width: !isOpen ? '48px' : '36px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
           exit={{ transform: 'translateX(-300%)' }}
           transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
+          className={`fixed left-0 top-20 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
         >
           <div>
             <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
@@ -322,6 +315,14 @@ function SideNav({ selected, setSelected }) {
           </div>
         </motion.div>
       </AnimatePresence>
+
+      <div className={`fixed  top-20 ${!isOpen ? 'left-10' : 'left-48'}`}>
+        <div onClick={handleToggle}>
+          <p className={`ml-2 text-2xl text-pink-500 ${isOpen ? 'rotate-180' : ''}`}>
+            <MdNavigateNext />
+          </p>
+        </div>
+      </div>
     </div>
   )
 }

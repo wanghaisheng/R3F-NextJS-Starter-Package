@@ -22,17 +22,25 @@ const CesiumVehicleViewer = () => {
           <VehicleCesium />
         </div>
 
-        <div className='absolute left-24 top-24 bg-purple-900/20'>
-          <LineComponent />
+        <div className='absolute left-24 top-24 '>
+          <div className='mb-2 bg-purple-900/20'>
+            <p className='p-4 text-sm'>Certain description about the chart below</p>
+            <LineComponent />
+          </div>
+          <div className='mt-2 bg-purple-900/20'>
+            <p className='p-4 text-sm'>Certain description about the chart below</p>
+            <AreaChartComponent />
+          </div>
         </div>
-        <div className='absolute right-10 top-24 w-[300px] bg-purple-900/20'>
-          <AreaChartComponent />
-        </div>
-        <div className='absolute bottom-24 right-10 w-[300px] bg-purple-900/20'>
-          <PieChartComponent />
-        </div>
-        <div className='absolute bottom-24 left-24 h-[250px] w-[350px] bg-purple-900/20'>
-          <AreaChartComponent />
+        <div className='absolute right-10 top-24 w-[300px]'>
+          <div className='mb-2 bg-purple-900/20'>
+            <p className='p-4 text-sm'>Certain description about the chart below</p>
+            <AreaChartComponent />
+          </div>
+          <div className='mt-2 bg-purple-900/20'>
+            <p className='p-4 text-sm'>Certain description about the chart below</p>
+            <PieChartComponent />
+          </div>
         </div>
       </div>
     </>
