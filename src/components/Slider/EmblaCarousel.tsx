@@ -62,28 +62,37 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
                 key='UserInfoComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
+                isSmallScreen={isSmallScreen}
               />,
               <AvatarComponent
                 key='AvatarComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
+                isSmallScreen={isSmallScreen}
               />,
               <Card2Component
                 key='Card2Component'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
+                isSmallScreen={isSmallScreen}
               />,
               <ConnectionComponent
                 key='ConnectionComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
+                isSmallScreen={isSmallScreen}
               />,
               <ExperienceComponent
                 key='ExperienceComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
+                isSmallScreen={isSmallScreen}
               />,
-              <SkillsComponent key='SkillsComponent' onPrevButtonClick={() => emblaApi.scrollPrev()} />,
+              <SkillsComponent
+                key='SkillsComponent'
+                onPrevButtonClick={() => emblaApi.scrollPrev()}
+                isSmallScreen={isSmallScreen}
+              />,
             ].map((Component) => (
               <div key={Component.key} className='w-[900px] min-w-0 flex-none pl-4'>
                 <div className='flex items-center justify-center'>{Component}</div>

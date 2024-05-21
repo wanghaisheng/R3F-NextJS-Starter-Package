@@ -10,6 +10,7 @@ import Avatar_creator from '@/components/avatar-creator/avatar'
 import axios from 'axios'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 async function getAvatarById(id: string) {
   try {
@@ -23,7 +24,7 @@ async function getAvatarById(id: string) {
   }
 }
 
-export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick }) {
+export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
 
@@ -106,7 +107,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick }
             {/* <div className='mt-5 flex justify-center gap-x-2'>
               <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
             </div> */}
-            <div className='absolute bottom-4 right-4 mt-4 flex justify-center gap-x-2 '>
+            <div className='mt-4 flex justify-center gap-x-2 lg:absolute lg:bottom-6 lg:right-20 '>
               <DrawOutlineButton
                 onClick={() => {
                   setIsCardModalOpen(true)
@@ -114,7 +115,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick }
               >
                 Create Avatar &emsp; +
               </DrawOutlineButton>
-              <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
             </div>
 
             {isCardModalOpen && (
@@ -124,11 +124,45 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick }
                 </FormModal2>
               </div>
             )}
-            <div className='absolute bottom-4 left-4 mt-4'>
-              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                <p className='px-4'>Back</p>
-              </DrawOutlineButton>
-            </div>
+            {!isSmallScreen ? (
+              <div>
+                <div className='absolute bottom-4 left-4 mt-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    onClick={onPrevButtonClick}
+                    aria-label='prev'
+                  >
+                    <p className='p-4'>
+                      <FaArrowLeft />
+                    </p>
+                  </button>
+                </div>
+                <div className='absolute bottom-4 right-4 mt-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    onClick={onNextButtonClick}
+                    aria-label='prev'
+                  >
+                    <p className='p-4'>
+                      <FaArrowRight />
+                    </p>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className='absolute bottom-4 left-4 mt-4'>
+                  <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                    <p className='px-4'>Back</p>
+                  </DrawOutlineButton>
+                </div>
+                <div className='absolute bottom-4 right-4'>
+                  <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
+                    Next
+                  </DrawOutlineButton>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

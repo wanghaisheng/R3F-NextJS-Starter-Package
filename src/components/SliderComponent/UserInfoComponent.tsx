@@ -12,11 +12,11 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import Image from 'next/image'
 
 import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
-import { FaDiamond } from 'react-icons/fa6'
+import { FaArrowLeft, FaArrowRight, FaDiamond } from 'react-icons/fa6'
 import { BsOctagonFill } from 'react-icons/bs'
 import { MdHexagon } from 'react-icons/md'
 
-export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick }) {
+export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const guildData = [
     {
       name: 'BUDDHA',
@@ -325,16 +325,84 @@ export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick
                 </form>
               </div>
             </div>
-            <div className='absolute bottom-4 right-4 mt-4'>
-              <DrawOutlineButton onClick={onNextButtonClick} aria-label='next'>
-                <p className='px-4'>Next</p>
-              </DrawOutlineButton>
-            </div>
-            <div className='absolute bottom-4 left-4 mt-4'>
-              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                <p className='px-4'>Last</p>
-              </DrawOutlineButton>
-            </div>
+            {!isSmallScreen ? (
+              <div>
+                <div className='absolute bottom-4 left-4 mt-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    onClick={onPrevButtonClick}
+                    aria-label='prev'
+                  >
+                    <p className='p-4'>
+                      <FaArrowLeft />
+                    </p>
+                  </button>
+                </div>
+                <div className='absolute bottom-4 right-4 mt-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    onClick={onNextButtonClick}
+                    aria-label='prev'
+                  >
+                    <p className='p-4'>
+                      <FaArrowRight />
+                    </p>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className='absolute bottom-4 left-4 mt-4'>
+                  <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                    <p className='px-4'>Back</p>
+                  </DrawOutlineButton>
+                </div>
+                <div className='absolute bottom-4 right-4'>
+                  <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
+                    Next
+                  </DrawOutlineButton>
+                </div>
+              </div>
+            )}
+            {!isSmallScreen ? (
+              <div>
+                <div className='absolute bottom-4 left-4 mt-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    onClick={onPrevButtonClick}
+                    aria-label='prev'
+                  >
+                    <p className='p-4'>
+                      <FaArrowLeft />
+                    </p>
+                  </button>
+                </div>
+                <div className='absolute bottom-4 right-4 mt-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    onClick={onNextButtonClick}
+                    aria-label='prev'
+                  >
+                    <p className='p-4'>
+                      <FaArrowRight />
+                    </p>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className='absolute bottom-4 left-4 mt-4'>
+                  <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                    <p className='px-4'>Back</p>
+                  </DrawOutlineButton>
+                </div>
+                <div className='absolute bottom-4 right-4'>
+                  <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
+                    Next
+                  </DrawOutlineButton>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

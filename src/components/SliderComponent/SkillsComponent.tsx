@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 
+import { FaArrowLeft } from 'react-icons/fa6'
+
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -43,7 +45,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-export default function SkillsComponent({ onPrevButtonClick }) {
+export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
 
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
@@ -269,10 +271,10 @@ export default function SkillsComponent({ onPrevButtonClick }) {
             </TabList>
 
             {/* TabPanel */}
-            <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
-              <div className='flex flex-col lg:flex-row lg:justify-between'>
+            <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
+              <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
                 {skills.map((element, index) => (
-                  <div key={index} className='w-[300px] md:w-[500px] lg:w-[60%]'>
+                  <div key={index}>
                     {user && checkActiveSkills(element) != true ? (
                       <form onSubmit={(e) => handleSkillSubmit(e, index)}>
                         <TabPanel>
@@ -302,30 +304,6 @@ export default function SkillsComponent({ onPrevButtonClick }) {
                                 </div>
                               </div>
                             </div>
-                            {/* <p>
-                          Work Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p>
-                        <p>
-                          Education Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p> */}
-                            {/* <p className='my-4 lg:mt-0'>
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam
-                              sed saepe repudiandae accusamus temporibus, autem
-                            </p> */}
                             <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                               Certifications
                             </label>
@@ -374,30 +352,7 @@ export default function SkillsComponent({ onPrevButtonClick }) {
                                 </div>
                               </div>
                             </div>
-                            {/* <p>
-                          Work Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p>
-                        <p>
-                          Education Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p> */}
-                            {/* <p className='my-4 lg:mt-0'>
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam
-                              sed saepe repudiandae accusamus temporibus, autem
-                            </p> */}
+
                             <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                               Certifications
                             </label>
@@ -420,80 +375,96 @@ export default function SkillsComponent({ onPrevButtonClick }) {
                     )}
                   </div>
                 ))}
+              </div>
 
-                <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
-                  <p className='mb-2 flex justify-center'>Specification</p>
+              <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
+                <p className='mb-2 flex justify-center'>Specification</p>
 
-                  {/* Condition for changing barchart chart and radar chart*/}
-                  <div className='lg:block lg:w-full'>
-                    {skills.length < 6 ? (
-                      <ResponsiveContainer width='100%' height={220}>
-                        <BarChart
-                          width={100}
-                          height={287}
-                          data={skills}
-                          margin={{
-                            top: 5,
-                            right: 20,
-                            left: -20,
-                            bottom: 5,
-                          }}
-                        >
-                          <XAxis dataKey='skill_name' />
-                          <YAxis domain={[0, 100]} />
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                          <Bar
-                            name='Ram'
-                            dataKey='percentage'
-                            fill='#6E29F7'
-                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    ) : (
-                      // Radar chart
-                      <ResponsiveContainer width='100%' height={220}>
-                        <RadarChart
-                          // cx={300}
-                          // cy={250}
-                          // outerRadius={150}
-                          width={100}
-                          height={287}
-                          data={skills}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey='skill_name' />
-                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                          <Radar
-                            name='Ram'
-                            dataKey='percentage'
-                            stroke='#28B5E1'
-                            strokeWidth={4}
-                            fill='#28B5E1'
-                            fillOpacity={0.4}
-                          />
-                          {/* <Tooltip /> */}
-                          {/* <Legend values="100%" /> */}
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                        </RadarChart>
-                      </ResponsiveContainer>
-                    )}
-                  </div>
+                {/* Condition for changing barchart chart and radar chart*/}
+                <div className='lg:block lg:w-full'>
+                  {skills.length < 6 ? (
+                    <ResponsiveContainer width='100%' height={220}>
+                      <BarChart
+                        width={100}
+                        height={287}
+                        data={skills}
+                        margin={{
+                          top: 5,
+                          right: 20,
+                          left: -20,
+                          bottom: 5,
+                        }}
+                      >
+                        <XAxis dataKey='skill' />
+                        <YAxis domain={[0, 100]} />
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                        <Bar
+                          name='Ram'
+                          dataKey='percentage'
+                          fill='#6E29F7'
+                          activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    // Radar chart
+                    <ResponsiveContainer width='100%' height={220}>
+                      <RadarChart
+                        // cx={300}
+                        // cy={250}
+                        // outerRadius={150}
+                        width={100}
+                        height={287}
+                        data={skills}
+                      >
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey='skill' />
+                        <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                        <Radar
+                          name='Ram'
+                          dataKey='percentage'
+                          stroke='#28B5E1'
+                          strokeWidth={4}
+                          fill='#28B5E1'
+                          fillOpacity={0.4}
+                        />
+                        {/* <Tooltip /> */}
+                        {/* <Legend values="100%" /> */}
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  )}
                 </div>
               </div>
             </div>
           </Tabs>
+
           <div className='absolute bottom-4 right-0 lg:right-4'>
             <Link href='/hero3'>
               <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
             </Link>
           </div>
-          <div className='absolute bottom-4 left-4 mt-4'>
-            <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-              <p className='px-4'>Back</p>
-            </DrawOutlineButton>
-          </div>
+
+          {!isSmallScreen ? (
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <button
+                className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                onClick={onPrevButtonClick}
+                aria-label='prev'
+              >
+                <p className='p-4'>
+                  <FaArrowLeft />
+                </p>
+              </button>
+            </div>
+          ) : (
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                <p className='px-4'>Back</p>
+              </DrawOutlineButton>
+            </div>
+          )}
         </div>
       </div>
     </div>
