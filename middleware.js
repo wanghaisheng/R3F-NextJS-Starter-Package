@@ -21,6 +21,8 @@ export async function middleware(request) {
   if (!token) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
+
+  return NextResponse.next()
 }
 
 //

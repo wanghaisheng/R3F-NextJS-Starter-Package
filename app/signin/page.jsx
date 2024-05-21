@@ -155,7 +155,7 @@ const SignIn = () => {
               <hr className='h-px' />
             </div>
             <div className='flex justify-center gap-16 p-5'>
-              <a href='/api/auth/signin'>
+              <a href='/api/internal/auth/signin'>
                 <LogosGoogleIcon className='logos text-2xl' />
               </a>
               <a href=''>
