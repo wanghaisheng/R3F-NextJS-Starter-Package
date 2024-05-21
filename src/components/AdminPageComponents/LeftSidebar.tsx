@@ -26,7 +26,7 @@ export default function LeftSidebar({ children }) {
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className='flex-1 px-3'>{children}</ul>
+          <ul className='flex-1 px-2'>{children}</ul>
         </SidebarContext.Provider>
       </nav>
     </aside>
@@ -50,7 +50,7 @@ export function LeftSidebarItem({ icon, text, active, alert, onClick }) {
       onClick={onClick}
     >
       {icon}
-      <span className={`overflow-hidden whitespace-nowrap transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>
+      <span className={`overflow-hidden whitespace-nowrap transition-all ${expanded ? 'ml-3 w-44' : 'w-0'}`}>
         {text}
       </span>
 

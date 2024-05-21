@@ -61,6 +61,32 @@ import DropdownMenu from '@/components/AdminPageComponents/DropDownMenu'
 // Main Page
 const AdminPage = () => {
   const [selected, setSelected] = useState(0)
+
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const handleSelectItem = (icon, text) => {
+    setSelectedItem({ icon, text })
+    // Set the selected state based on the text or index as needed
+    const textToIndexMap = {
+      Dashboard: 0,
+      Calendar: 1,
+      Profile: 2,
+      Chart: 3,
+      GitHub: 4,
+      'Add Region': 5,
+      Cesium: 6,
+      'Cesium Human': 7,
+      'Cesium Aircraft': 8,
+      'Cesium Vehicle': 9,
+      'Cesium GPX': 10,
+      'Cesium Clouds': 11,
+      'Cesium Buildings': 12,
+      'Cesium Video': 13,
+      Settings: 14,
+    }
+    setSelected(textToIndexMap[text] || 0)
+  }
+
   return (
     <>
       <div className='flex size-full flex-row'>
@@ -103,7 +129,7 @@ const AdminPage = () => {
                 active={selected === 5}
                 onClick={() => setSelected(5)}
               />
-              <DropdownMenu title={<BsGlobe size={20} />}>
+              <DropdownMenu title={<BsGlobe size={20} />} selectedItem={selectedItem} onSelectItem={handleSelectItem}>
                 <LeftSidebarItem
                   icon={<BsGlobe size={20} />}
                   text='Cesium'
