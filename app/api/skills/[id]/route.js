@@ -25,13 +25,13 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { skill, percentage, gg_id } = await request.json()
+    const { gg_id, skill } = await request.json()
     const id = params.id
 
     // Update the skill
     const updatedSkill = await prisma.skills.update({
       where: { skill_id: id },
-      data: { skill, percentage, gg_id },
+      data: { gg_id, skill: [skill] },
     })
 
     return NextResponse.json(updatedSkill)

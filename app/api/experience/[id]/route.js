@@ -25,13 +25,8 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { gg_id, type, name, description, tools, skills } = await request.json()
+    const { gg_id, type, name, description, tools, project_skills } = await request.json()
     const id = params.id
-
-    const skillData = skills.map((skillObj) => ({
-      skill: skillObj.skill,
-      percentage: skillObj.percentage,
-    }))
 
     // Update the experience
     const updatedexperience = await prisma.experience.update({
@@ -42,7 +37,7 @@ export async function PUT(request, { params }) {
         name,
         description,
         tools,
-        skills: skillData,
+        project_skills,
       },
     })
 
