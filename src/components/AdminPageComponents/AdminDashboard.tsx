@@ -88,7 +88,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className='basis-1/4 px-4'>
+      {/* <div className='basis-1/4 px-4'>
         {user ? (
           <GeniusIDFlipCard
             first_name={user.first_name}
@@ -108,7 +108,7 @@ export default function AdminDashboard() {
             address='DEFAULT'
           />
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

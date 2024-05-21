@@ -8,6 +8,7 @@ import CesiumVehicleViewer from '@/components/Cesium/CesiumViewingComponents/Ces
 import CesiumGPXViewer from '@/components/Cesium/CesiumViewingComponents/CesiumGPXViewer'
 import CesiumCloudsViewer from '@/components/Cesium/CesiumViewingComponents/CesiumCloudsViewer'
 import CesiumOSMViewer from '@/components/Cesium/CesiumViewingComponents/CesiumOSMViewer'
+import VideoCesiumViewer from '@/components/Cesium/CesiumViewingComponents/VideoCesiumViewer'
 //Cesium
 
 //Charts
@@ -25,8 +26,6 @@ import GitHubCard from '@/components/card/GitGubCard'
 //GitHub Card
 
 import { useState } from 'react'
-
-import { AnimatePresence, motion } from 'framer-motion'
 
 //Forms
 import AddRegionForm from '@/components/Regions/AddRegionForm'
@@ -55,375 +54,240 @@ import Profile from '@/components/AdminPageComponents/Profile'
 import Settings from '@/components/AdminPageComponents/Settings'
 //Pages
 
-//SideBar
-function SideNav({ selected, setSelected }) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  function handleToggle() {
-    setIsOpen(!isOpen)
-  }
-
-  return (
-    <div>
-      <div className='fixed left-0 top-20'>
-        <div onClick={handleToggle}>
-          <p className={`ml-2 text-2xl text-pink-500 ${isOpen ? 'rotate-180' : ''}`}>
-            <MdNavigateNext />
-          </p>
-        </div>
-      </div>
-      {/* Open */}
-      <AnimatePresence>
-        <motion.div
-          initial={{ transform: 'translateX(-200%)' }}
-          animate={{ width: isOpen ? '192px' : '10px', transform: isOpen ? 'translateX(0)' : 'translateX(-200%)' }}
-          exit={{ transform: 'translateX(-200%)' }}
-          transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
-        >
-          <div>
-            <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-              <div className='flex items-center'>
-                {/* Icon */}
-                <MdSpaceDashboard />
-                {isOpen && <p className='ml-4 text-sm'>Dashboard</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaCalendarCheck />
-                {isOpen && <p className='ml-4 text-sm'>Calendar</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <CgProfile />
-                {isOpen && <p className='ml-4 text-sm'>Profile</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoIosSettings />
-                {isOpen && <p className='ml-4 text-sm'>Settings</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaRegChartBar />
-                {isOpen && <p className='ml-4 text-sm'>Chart</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaGithub />
-                {isOpen && <p className='ml-4 text-sm'>GitHub</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaFileWaveform />
-                {isOpen && <p className='ml-4 text-sm'>Add Region</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <BsGlobe />
-                {isOpen && <p className='ml-4 text-sm'>Cesium</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GiHumanTarget />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Human</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GoPaperAirplane />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Aircraft</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoCarSportOutline />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Vehicle</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <RiGpsLine />
-                {isOpen && <p className='ml-4 text-sm'>Cesium GPX</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Clouds</p>}
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 13} id={13} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-                {isOpen && <p className='ml-4 text-sm'>Cesium Clouds</p>}
-              </div>
-            </NavItem>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-      {/* Onclose */}
-      <AnimatePresence>
-        <motion.div
-          initial={{ transform: 'translateX(0%)' }}
-          animate={{ width: !isOpen ? '48px' : '36px', transform: !isOpen ? 'translateX(0)' : 'translateX(-300%)' }}
-          exit={{ transform: 'translateX(-300%)' }}
-          transition={{ duration: 0.2 }}
-          className={`fixed left-0 top-28 z-50 h-full ${isOpen ? 'w-48' : 'w-12'}`}
-        >
-          <div>
-            <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-              <div className='flex items-center'>
-                {/* Icon */}
-                <MdSpaceDashboard />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaCalendarCheck />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <CgProfile />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoIosSettings />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaRegChartBar />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 5} id={5} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaGithub />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 6} id={6} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <FaFileWaveform />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 7} id={7} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <BsGlobe />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 8} id={8} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GiHumanTarget />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 9} id={9} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <GoPaperAirplane />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 10} id={10} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <IoCarSportOutline />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 11} id={11} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <RiGpsLine />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 12} id={12} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-              </div>
-            </NavItem>
-          </div>
-          <div>
-            <NavItem selected={selected === 13} id={13} setSelected={setSelected}>
-              <div className='flex items-center'>
-                <TbCloudSearch />
-              </div>
-            </NavItem>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  )
-}
-//SideBar
-
-//NavItem
-const NavItem = ({ children, selected, id, setSelected }) => {
-  return (
-    <motion.div
-      className='relative h-full bg-slate-800 p-3 text-xl transition-colors hover:bg-slate-700'
-      onClick={() => setSelected(id)}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <span className='relative z-10 block w-full'>{children}</span>
-      <AnimatePresence>
-        {selected && (
-          <motion.span
-            className='absolute inset-0 z-0 bg-indigo-600'
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-          ></motion.span>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-//NavItem
+import LeftSidebar, { LeftSidebarItem } from '@/components/AdminPageComponents/LeftSidebar'
+import RightSidebar, { RightSidebarItem } from '@/components/AdminPageComponents/RightSidebar'
+import DropdownMenu from '@/components/AdminPageComponents/DropDownMenu'
 
 // Main Page
 const AdminPage = () => {
   const [selected, setSelected] = useState(0)
+
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const handleSelectItem = (icon, text) => {
+    setSelectedItem({ icon, text })
+    // Set the selected state based on the text or index as needed
+    const textToIndexMap = {
+      Dashboard: 0,
+      Calendar: 1,
+      Profile: 2,
+      Chart: 3,
+      GitHub: 4,
+      'Add Region': 5,
+      Cesium: 6,
+      'Cesium Human': 7,
+      'Cesium Aircraft': 8,
+      'Cesium Vehicle': 9,
+      'Cesium GPX': 10,
+      'Cesium Clouds': 11,
+      'Cesium Buildings': 12,
+      'Cesium Video': 13,
+      Settings: 14,
+    }
+    setSelected(textToIndexMap[text] || 0)
+  }
+
   return (
-    <div className='flex h-full flex-row'>
-      <div className='ml-16 basis-full'>
-        <div className='m-4'>Welcome, Admin</div>
-
-        {selected === 0 ? (
-          <AdminDashboard />
-        ) : selected === 1 ? (
-          <div>Calendar</div>
-        ) : selected === 2 ? (
-          <Profile />
-        ) : selected === 3 ? (
-          <Settings />
-        ) : selected === 4 ? (
-          <div>
-            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-              <div>
-                <h1>Radar Chart for comparision</h1>
-                <p className='mt-5'>Some description about the chart</p>
-              </div>
-              <DonutComponent />
+    <>
+      <div className='flex size-full flex-row'>
+        <div className='fixed left-0 z-50 h-full'>
+          <LeftSidebar>
+            <div className='flex-1'>
+              <LeftSidebarItem
+                icon={<MdSpaceDashboard size={20} />}
+                text='Dashboard'
+                active={selected === 0}
+                onClick={() => setSelected(0)}
+              />
+              <LeftSidebarItem
+                icon={<FaCalendarCheck size={20} />}
+                text='Calendar'
+                active={selected === 1}
+                onClick={() => setSelected(1)}
+              />
+              <LeftSidebarItem
+                icon={<CgProfile size={20} />}
+                text='Profile'
+                active={selected === 2}
+                onClick={() => setSelected(2)}
+              />
+              <LeftSidebarItem
+                icon={<FaRegChartBar size={20} />}
+                text='Chart'
+                active={selected === 3}
+                onClick={() => setSelected(3)}
+              />
+              <LeftSidebarItem
+                icon={<FaGithub size={20} />}
+                text='GitHub'
+                active={selected === 4}
+                onClick={() => setSelected(4)}
+              />
+              <LeftSidebarItem
+                icon={<FaFileWaveform size={20} />}
+                text='Add Region'
+                active={selected === 5}
+                onClick={() => setSelected(5)}
+              />
+              <DropdownMenu title={<BsGlobe size={17} />} selectedItem={selectedItem} onSelectItem={handleSelectItem}>
+                <LeftSidebarItem
+                  icon={<BsGlobe size={20} />}
+                  text='Cesium'
+                  active={selected === 6}
+                  onClick={() => setSelected(6)}
+                />
+                <LeftSidebarItem
+                  icon={<GiHumanTarget size={20} />}
+                  text='Cesium Human'
+                  active={selected === 7}
+                  onClick={() => setSelected(7)}
+                />
+                <LeftSidebarItem
+                  icon={<GoPaperAirplane size={20} />}
+                  text='Cesium Aircraft'
+                  active={selected === 8}
+                  onClick={() => setSelected(8)}
+                />
+                <LeftSidebarItem
+                  icon={<IoCarSportOutline size={20} />}
+                  text='Cesium Vehicle'
+                  active={selected === 9}
+                  onClick={() => setSelected(9)}
+                />
+                <LeftSidebarItem
+                  icon={<RiGpsLine size={20} />}
+                  text='Cesium GPX'
+                  active={selected === 10}
+                  onClick={() => setSelected(10)}
+                />
+                <LeftSidebarItem
+                  icon={<TbCloudSearch size={20} />}
+                  text='Cesium Clouds'
+                  active={selected === 11}
+                  onClick={() => setSelected(11)}
+                />
+                <LeftSidebarItem
+                  icon={<TbCloudSearch size={20} />}
+                  text='Cesium Buildings'
+                  active={selected === 12}
+                  onClick={() => setSelected(12)}
+                />
+                <LeftSidebarItem
+                  icon={<TbCloudSearch size={20} />}
+                  text='Cesium Video'
+                  active={selected === 13}
+                  onClick={() => setSelected(13)}
+                />
+              </DropdownMenu>
             </div>
-            <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-              <BubbleChartComponent />
-            </div>
 
-            <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
-              <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div>
-                  <h1>Pie Chart</h1>
-                  <p className='mt-5'>Some description about the chart</p>
-                </div>
-                <PieChartComponent />
-              </div>
+            <div className='mt-auto'>
+              <hr className='my-3' />
+              <LeftSidebarItem
+                icon={<IoIosSettings size={20} />}
+                text='Settings'
+                active={selected === 14}
+                onClick={() => setSelected(14)}
+              />
+            </div>
+          </LeftSidebar>
+        </div>
+
+        <div className='ml-20 flex-1'>
+          {selected === 0 ? (
+            <AdminDashboard />
+          ) : selected === 1 ? (
+            <div>Calendar</div>
+          ) : selected === 2 ? (
+            <Profile />
+          ) : selected === 14 ? (
+            <Settings />
+          ) : selected === 3 ? (
+            <div>
               <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
                 <div>
                   <h1>Radar Chart for comparision</h1>
                   <p className='mt-5'>Some description about the chart</p>
                 </div>
-                <RadarChartComponent />
+                <DonutComponent />
+              </div>
+              <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                <BubbleChartComponent />
               </div>
 
-              <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <div>
-                  <h1>Radar Chart for comparision</h1>
-                  <p className='mt-5'>Some description about the chart</p>
+              <div className=' grid grid-flow-row grid-cols-2 gap-2 '>
+                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div>
+                    <h1>Pie Chart</h1>
+                    <p className='mt-5'>Some description about the chart</p>
+                  </div>
+                  <PieChartComponent />
                 </div>
-                <SkillsRadarComponent />
+                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div>
+                    <h1>Radar Chart for comparision</h1>
+                    <p className='mt-5'>Some description about the chart</p>
+                  </div>
+                  <RadarChartComponent />
+                </div>
+
+                <div className='m-4 flex size-fit flex-col justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <div>
+                    <h1>Radar Chart for comparision</h1>
+                    <p className='mt-5'>Some description about the chart</p>
+                  </div>
+                  <SkillsRadarComponent />
+                </div>
+              </div>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
+                <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <LineComponent />
+                </div>
+                <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
+                  <AreaChartComponent />
+                </div>
               </div>
             </div>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6'>
-              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <LineComponent />
-              </div>
-              <div className='my-4 flex size-fit justify-between rounded-2xl p-4 text-slate-50 shadow-md shadow-[#6B37CA]  backdrop-blur-md'>
-                <AreaChartComponent />
-              </div>
-            </div>
-          </div>
-        ) : selected === 5 ? (
-          <GitHubCard />
-        ) : selected === 6 ? (
-          <AddRegionForm />
-        ) : selected === 7 ? (
-          <CesiumWidgetViewer />
-        ) : selected === 8 ? (
-          <CesiumHumanModalViewer />
-        ) : selected === 9 ? (
-          <CesiumAirCraftViewer />
-        ) : selected === 10 ? (
-          <CesiumVehicleViewer />
-        ) : selected === 11 ? (
-          <CesiumGPXViewer />
-        ) : selected === 12 ? (
-          <CesiumCloudsViewer />
-        ) : selected === 13 ? (
-          <CesiumOSMViewer />
-        ) : (
-          <div>Dashboard</div>
-        )}
+          ) : selected === 4 ? (
+            <GitHubCard />
+          ) : selected === 5 ? (
+            <AddRegionForm />
+          ) : selected === 6 ? (
+            <CesiumWidgetViewer />
+          ) : selected === 7 ? (
+            <CesiumHumanModalViewer />
+          ) : selected === 8 ? (
+            <CesiumAirCraftViewer />
+          ) : selected === 9 ? (
+            <CesiumVehicleViewer />
+          ) : selected === 10 ? (
+            <CesiumGPXViewer />
+          ) : selected === 11 ? (
+            <CesiumCloudsViewer />
+          ) : selected === 12 ? (
+            <CesiumOSMViewer />
+          ) : selected === 13 ? (
+            <VideoCesiumViewer />
+          ) : (
+            <div>Dashboard</div>
+          )}
+        </div>
+
+        <div className='z-50'>
+          <RightSidebar>
+            <RightSidebarItem
+              icon={<MdSpaceDashboard size={20} />}
+              text='Card'
+              active={selected === 100}
+              onClick={() => setSelected(100)}
+            />
+            <RightSidebarItem icon={<MdSpaceDashboard size={20} />} text='Feedback' />
+            <RightSidebarItem icon={<MdSpaceDashboard size={20} />} text='Help' />
+            <RightSidebarItem icon={<MdSpaceDashboard size={20} />} text='Contact Us' />
+          </RightSidebar>
+        </div>
       </div>
-      <div>
-        <SideNav selected={selected} setSelected={setSelected} />
-      </div>
-    </div>
+    </>
   )
 }
 // Main Page

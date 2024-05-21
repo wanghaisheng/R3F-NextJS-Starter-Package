@@ -1,10 +1,10 @@
-import CesiumOSM from '../CesiumOSM'
+import VideoCesium from '../VideoCesium'
 
 import AreaChartComponent from '../../charts/AreaChart'
 import LineComponent from '../../charts/LineChart'
 import PieChartComponent from '../../charts/PieChart'
 
-const CesiumOSMViewer = () => {
+const VideoCesiumViewer = () => {
   return (
     <>
       <div className='absolute -top-20 left-0 h-screen w-full'>
@@ -19,11 +19,10 @@ const CesiumOSMViewer = () => {
           }}
         >
           {/* Cesium */}
-          {/* Includes cesium widget, day-night effect, clouds, fly to certain place effect, weather */}
-          <CesiumOSM />
+          <VideoCesium />
         </div>
 
-        <div className='absolute left-24 top-24 '>
+        {/* <div className='absolute left-24 top-24 '>
           <div className='mb-2 bg-purple-900/20'>
             <p className='p-4 text-sm'>Certain description about the chart below</p>
             <LineComponent />
@@ -33,7 +32,7 @@ const CesiumOSMViewer = () => {
             <AreaChartComponent />
           </div>
         </div>
-        {/* <div className='absolute right-10 top-24 w-[300px]'>
+        <div className='absolute right-10 top-24 w-[300px]'>
           <div className='mb-2 bg-purple-900/20'>
             <p className='p-4 text-sm'>Certain description about the chart below</p>
             <AreaChartComponent />
@@ -48,4 +47,4 @@ const CesiumOSMViewer = () => {
   )
 }
 
-export default CesiumOSMViewer
+export default VideoCesiumViewer

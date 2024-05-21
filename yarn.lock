@@ -6259,6 +6259,11 @@ lit@^2.7.2:
     lit-element "^3.3.0"
     lit-html "^2.8.0"
 
+load-script@*:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/load-script/-/load-script-2.0.0.tgz"
+  integrity sha512-km6cyoPW4rM22JMGb+SHUKPMZVDpUaMpMAKrv8UHWllIxc/qjgMGHD91nY+5hM+/NFs310OZ2pqQeJKs7HqWPA==
+
 loader-runner@^4.2.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-4.3.0.tgz"
@@ -7340,6 +7345,11 @@ proxy-from-env@^1.1.0:
   resolved "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz"
   integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
+pubsub@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/pubsub/-/pubsub-0.0.5.tgz"
+  integrity sha512-dJzeSQWmJjV/Q5mC3fWEzVP4j6YJxNZtFzGWv2Ww003cwvsnw7T3NQJiske2bKDq5UkMbHuG/ExqluDFSdm1yg==
+
 punycode@^2.1.0:
   version "2.3.1"
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz"
@@ -7797,6 +7807,14 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/require-main-filename/-/require-main-filename-2.0.0.tgz"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
+
+require-sdk@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npmjs.org/require-sdk/-/require-sdk-0.0.2.tgz"
+  integrity sha512-GlYWIeUb3ZSoA3+olr7pvrezfoVI89u4XvxrLLmzmqrQoaVHJ9ka7FSpTGCBOpnrOlu+XddUEc/2Zsk/tSPsEQ==
+  dependencies:
+    load-script "*"
+    pubsub "0.0.5"
 
 resize-observer-polyfill@^1.5.0, resize-observer-polyfill@^1.5.1:
   version "1.5.1"
@@ -9580,6 +9598,13 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+youtube-iframe-player@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/youtube-iframe-player/-/youtube-iframe-player-1.0.1.tgz"
+  integrity sha512-hQoK0tPG67guXOHV5Cn+8Dc7DTUhRNiOCWUBucxaYst66nXt8U3Vl+9tYpxFb8m8tfBBPx+bJR4EfkjWn+k/RA==
+  dependencies:
+    require-sdk "0.0.2"
 
 zustand@^3.7.1:
   version "3.7.2"
