@@ -49,8 +49,6 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
     },
   ]
 
-  // const countries = await getCountries()
-
   const filteredRegions = filter
     ? regions.filter((region) => region.continent === filter)
     : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
@@ -66,9 +64,9 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
               </div>
             ))}
           </div> */}
-          <div className='h-[600px] lg:w-[50%]'>
+          <div className='size-full'>
             <Suspense fallback={<div>Loading map...</div>}>
-              <div style={{ position: 'relative', width: '100%', height: '550px' }}>
+              <div className='absolute -top-20 h-screen w-full'>
                 <div
                   style={{
                     position: 'absolute',
@@ -84,33 +82,42 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
           </div>
-          <div className='mx-10 flex flex-col items-center justify-center lg:w-[30%] '>
-            <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:ml-24 lg:justify-start'>
-              {filteredRegions.map((region, index) => (
-                <a
-                  href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
-                  className='relative flex h-[230px] w-[300px] min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out hover:scale-105 '
-                  key={index}
-                >
-                  <Image
-                    className='aspect-[300/230] w-[300px] rounded-lg'
-                    src={region.image}
-                    alt=''
-                    width={300}
-                    height={230}
-                    style={{ objectFit: 'cover' }}
-                  />
-                  {/* Symbol */}
-                  <span className='absolute top-0 flex size-full items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
-                    <Image src={region.icon} alt='region icon' height={50} width={50} className='absolute top-[35%] ' />
-                  </span>
-                  <span className='absolute bottom-0 flex w-full flex-col items-center rounded-b-md bg-purple-950 px-3 py-2'>
-                    <h1>{region.name}</h1>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
+        </div>
+      </div>
+
+      <div className='fixed bottom-0 left-[50%] z-50 flex h-auto w-[60%] -translate-x-1/2 items-center justify-center '>
+        <div className='flex flex-wrap justify-center gap-x-5 py-2'>
+          {filteredRegions.map((region, index) => (
+            <a
+              href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
+              className='relative flex aspect-[2/1] size-20 min-w-0 flex-col items-center justify-center rounded-lg transition duration-500 ease-out hover:scale-105'
+              key={index}
+            >
+              <Image
+                className='rounded-lg object-cover'
+                src={region.image}
+                alt=''
+                layout='fill' // Use layout="fill" for responsive images
+                // width={200}
+                // height={100}
+                loading='lazy'
+              />
+              {/* Symbol */}
+              <span className='absolute top-0 flex size-20 items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
+                <Image
+                  src={region.icon}
+                  alt='region icon'
+                  height={30}
+                  width={30}
+                  className='absolute top-[19%]'
+                  loading='lazy'
+                />
+              </span>
+              <span className='absolute bottom-0 flex w-full flex-col items-center rounded-b-md bg-purple-950 py-1 text-xs'>
+                <h1>{region.name}</h1>
+              </span>
+            </a>
+          ))}
         </div>
       </div>
     </>

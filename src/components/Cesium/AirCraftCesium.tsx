@@ -28,33 +28,33 @@ export default function AirCraftCesium() {
       // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
       const viewer = new Viewer('cesiumContainer', {
         // // show terrain
-        terrain: Terrain.fromWorldTerrain({
-          // for day-night effect
-          requestWaterMask: true, // required for water effects
-          requestVertexNormals: true, // required for terrain lighting
-        }),
-        clockViewModel: new ClockViewModel(clock), // Shows the clock
-        infoBox: false,
-        selectionIndicator: false,
-        shadows: true,
-        shouldAnimate: true,
+        // terrain: Terrain.fromWorldTerrain({
+        //   // for day-night effect
+        //   requestWaterMask: true, // required for water effects
+        //   requestVertexNormals: true, // required for terrain lighting
+        // }),
+        // clockViewModel: new ClockViewModel(clock), // Shows the clock
+        // infoBox: false,
+        // selectionIndicator: false,
+        // shadows: true,
+        // shouldAnimate: true,
       })
 
       // Enable rendering the sky
-      viewer.scene.skyAtmosphere.show = true
+      // viewer.scene.skyAtmosphere.show = true
 
-      // set lighting to true
-      viewer.scene.globe.enableLighting = true
+      // // set lighting to true
+      // viewer.scene.globe.enableLighting = true
 
-      // for blue sky effect
-      viewer.scene.globe.depthTestAgainstTerrain = true
+      // // for blue sky effect
+      // viewer.scene.globe.depthTestAgainstTerrain = true
 
-      viewer.entities.removeAll()
-      const scene = viewer.scene
+      // viewer.entities.removeAll()
+      // const scene = viewer.scene
 
-      if (!scene.sampleHeightSupported) {
-        window.alert('This browser does not support sampleHeight.')
-      }
+      // if (!scene.sampleHeightSupported) {
+      //   window.alert('This browser does not support sampleHeight.')
+      // }
 
       // // Add Cesium OSM Buildings, a global 3D buildings layer.
       // const osmBuildingsTileset = await createOsmBuildingsAsync()

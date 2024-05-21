@@ -17,8 +17,9 @@ import Link from 'next/link'
 
 import { TagsInput } from 'react-tag-input-component'
 import dynamic from 'next/dynamic'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-export default function ExperienceComponent({ onNextButtonClick }) {
+export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [projects, setProjects] = useState([
     { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
@@ -110,7 +111,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
       return
     } catch (error) {
       console.error(error)
-      throw new Error('failed to delete the exp info')
+      // throw new Error('failed to delete the exp info')
     }
   }
 
@@ -507,11 +508,46 @@ export default function ExperienceComponent({ onNextButtonClick }) {
               </TabPanel>
             ))}
           </Tabs>
-          <div className='absolute bottom-4 right-4'>
-            <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
-              Next
-            </DrawOutlineButton>
-          </div>
+
+          {!isSmallScreen ? (
+            <div>
+              <div className='absolute bottom-4 left-4 mt-4'>
+                <button
+                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                  onClick={onPrevButtonClick}
+                  aria-label='prev'
+                >
+                  <p className='p-4'>
+                    <FaArrowLeft />
+                  </p>
+                </button>
+              </div>
+              <div className='absolute bottom-4 right-4 mt-4'>
+                <button
+                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                  onClick={onNextButtonClick}
+                  aria-label='prev'
+                >
+                  <p className='p-4'>
+                    <FaArrowRight />
+                  </p>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className='absolute bottom-4 left-4 mt-4'>
+                <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                  <p className='px-4'>Back</p>
+                </DrawOutlineButton>
+              </div>
+              <div className='absolute bottom-4 right-4'>
+                <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
+                  Next
+                </DrawOutlineButton>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

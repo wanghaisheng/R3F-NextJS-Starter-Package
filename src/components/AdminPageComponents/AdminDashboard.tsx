@@ -3,10 +3,16 @@ import { FaTasks, FaRegClock } from 'react-icons/fa'
 import { MdTask } from 'react-icons/md'
 import { LuGauge } from 'react-icons/lu'
 
+import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
+
+import { useUser } from '@/context/UserContext/UserContext'
+
 export default function AdminDashboard() {
+  const { user } = useUser()
+
   return (
-    <div className='mx-4'>
-      <div className='flex flex-col lg:flex-row lg:justify-between'>
+    <div className='flex'>
+      <div className='flex basis-full flex-col lg:flex-row lg:justify-between'>
         {/* left side */}
         <div className='grid grid-cols-2 gap-6 lg:w-[58%]'>
           {/* 1 */}
@@ -81,6 +87,28 @@ export default function AdminDashboard() {
           <AreaChartComponent />
         </div>
       </div>
+
+      {/* <div className='basis-1/4 px-4'>
+        {user ? (
+          <GeniusIDFlipCard
+            first_name={user.first_name}
+            last_name={user.last_name}
+            email={user.email}
+            dob={user.dob}
+            contact={user.phone_number}
+            address={user.address}
+          />
+        ) : (
+          <GeniusIDFlipCard
+            first_name='DEFAULT'
+            last_name='DEFAULT'
+            email='DEFAULT@'
+            dob='DEFAULT'
+            contact='DEFAULT'
+            address='DEFAULT'
+          />
+        )}
+      </div> */}
     </div>
   )
 }

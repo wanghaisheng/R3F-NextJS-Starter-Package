@@ -89,9 +89,8 @@ const Regions = ({ params }) => {
                 filter: 'blur(8px)',
               }}
             ></div> */}
-            <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-            <div className='flex flex-col justify-center lg:ml-72 lg:justify-start'>
+            <div className='flex flex-col justify-center lg:justify-start'>
               {/* Old Component */}
               {/* <ShowRegion filter={selectedFilter} searchTerm={searchTerm} /> */}
 
@@ -99,6 +98,7 @@ const Regions = ({ params }) => {
               {/* <ShowRegion2 filter={selectedFilter} /> */}
               <ShowRegionCesium filter={selectedFilter} />
             </div>
+            <RegionHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </>
         )}
       </div>
