@@ -23,7 +23,7 @@ async function getAvatarById(id: string) {
   }
 }
 
-export default function AvatarComponent({ onNextButtonClick }) {
+export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
 
@@ -124,6 +124,11 @@ export default function AvatarComponent({ onNextButtonClick }) {
                 </FormModal2>
               </div>
             )}
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                <p className='px-4'>Back</p>
+              </DrawOutlineButton>
+            </div>
           </div>
         </div>
       </div>

@@ -43,7 +43,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-export default function SkillsComponent() {
+export default function SkillsComponent({ onPrevButtonClick }) {
   const { user } = useUser()
 
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
@@ -488,6 +488,11 @@ export default function SkillsComponent() {
             <Link href='/hero3'>
               <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
             </Link>
+          </div>
+          <div className='absolute bottom-4 left-4 mt-4'>
+            <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+              <p className='px-4'>Back</p>
+            </DrawOutlineButton>
           </div>
         </div>
       </div>

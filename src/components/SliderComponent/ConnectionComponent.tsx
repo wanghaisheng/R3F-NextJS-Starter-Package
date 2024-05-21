@@ -7,7 +7,7 @@ import { TiDelete } from 'react-icons/ti'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
-export default function ConnectionComponent({ onNextButtonClick }) {
+export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick }) {
   const [selectedLogo, setSelectedLogo] = useState(null)
   const [connections, setConnections] = useState([])
 
@@ -118,6 +118,11 @@ export default function ConnectionComponent({ onNextButtonClick }) {
           <div className='absolute bottom-4 right-4'>
             <DrawOutlineButton onClick={onNextButtonClick}>
               <p className='px-2'>Next</p>
+            </DrawOutlineButton>
+          </div>
+          <div className='absolute bottom-4 left-4 mt-4'>
+            <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+              <p className='px-4'>Back</p>
             </DrawOutlineButton>
           </div>
         </div>

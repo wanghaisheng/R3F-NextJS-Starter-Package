@@ -18,7 +18,7 @@ import Link from 'next/link'
 import { TagsInput } from 'react-tag-input-component'
 import dynamic from 'next/dynamic'
 
-export default function ExperienceComponent({ onNextButtonClick }) {
+export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick }) {
   const { user } = useUser()
   const [projects, setProjects] = useState([
     { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
@@ -510,6 +510,11 @@ export default function ExperienceComponent({ onNextButtonClick }) {
           <div className='absolute bottom-4 right-4'>
             <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
               Next
+            </DrawOutlineButton>
+          </div>
+          <div className='absolute bottom-4 left-4 mt-4'>
+            <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+              <p className='px-4'>Back</p>
             </DrawOutlineButton>
           </div>
         </div>

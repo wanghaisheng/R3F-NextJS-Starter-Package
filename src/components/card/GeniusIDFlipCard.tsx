@@ -8,7 +8,16 @@ import { useState } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function GeniusIDFlipCard({ first_name, last_name, email, dob, contact, address }) {
+export default function GeniusIDFlipCard({
+  first_name,
+  last_name,
+  email,
+  dob,
+  contact,
+  address,
+  selectedGuild,
+  guildData,
+}) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
@@ -45,6 +54,13 @@ export default function GeniusIDFlipCard({ first_name, last_name, email, dob, co
               <div className='absolute top-5 flex flex-col p-5 text-sm text-white'>
                 <nav className='mb-1 flex list-none flex-wrap'>
                   <ul>
+                    {/* Display selected guild's symbol */}
+                    {selectedGuild && (
+                      <li className='absolute -top-2 left-5'>
+                        {/* Use selectedGuild to get the corresponding guild's symbol */}
+                        {guildData.find((guild) => guild.name === selectedGuild)?.symbol}
+                      </li>
+                    )}
                     <li className='mb-1 w-full text-xl font-semibold'>
                       <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
                     </li>

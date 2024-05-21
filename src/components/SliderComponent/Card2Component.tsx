@@ -13,7 +13,7 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import axios from 'axios'
 
-export default function CardComponent({ onNextButtonClick }) {
+export default function CardComponent({ onNextButtonClick, onPrevButtonClick }) {
   const { user } = useUser()
   const [cards, setCards] = useState([
     { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
@@ -378,6 +378,11 @@ export default function CardComponent({ onNextButtonClick }) {
           </Tabs>
           <div className='absolute bottom-4 right-4 mt-4'>
             <DrawOutlineButton onClick={onNextButtonClick}>Next</DrawOutlineButton>
+          </div>
+          <div className='absolute bottom-4 left-4 mt-4'>
+            <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+              <p className='px-4'>Back</p>
+            </DrawOutlineButton>
           </div>
         </div>
       </div>

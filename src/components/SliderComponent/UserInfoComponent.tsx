@@ -16,39 +16,77 @@ import { FaDiamond } from 'react-icons/fa6'
 import { BsOctagonFill } from 'react-icons/bs'
 import { MdHexagon } from 'react-icons/md'
 
-export default function UserInfoComponent({ onNextButtonClick }) {
+export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick }) {
   const guildData = [
     {
       name: 'BUDDHA',
-      symbol: <MdHexagon />,
+      symbol: (
+        <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <circle cx='11' cy='11' r='11' fill='white' />
+          <path
+            d='M6.17881 4.75887L10.8764 5.64775M6.17881 4.75887L3 10.0544M6.17881 4.75887L8.29801 3H14.2848L15.5916 4.75887M10.8764 5.64775V11.1891M10.8764 5.64775L15.5916 4.75887M10.8764 11.1891L6.17881 13.8369M10.8764 11.1891L15.5916 13.8369M6.17881 13.8369L3 10.0544M6.17881 13.8369L7.69757 19M3 10.0544V12.4563L5.47241 17.7329L7.69757 19M15.5916 4.75887L18.3996 10.0544M18.3996 10.0544L15.5916 13.8369M18.3996 10.0544L19 12.4563L16.2804 17.7329L14.2848 19M15.5916 13.8369L14.2848 19M7.69757 19H14.2848'
+            stroke='black'
+          />
+        </svg>
+      ),
       color: 'FFFFFF',
       description: ' WHITE Guild of the Vairochana family',
       image: '/svgs/vairocana.svg',
     },
     {
       name: 'VAJRA',
-      symbol: <BsOctagonFill />,
+      symbol: (
+        <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <circle cx='11' cy='11' r='11' fill='#4A9BD5' />
+          <path
+            d='M10.6428 3L3 7.00455M10.6428 3L19 7.00455M10.6428 3V6.27645M3 7.00455V15.0137M3 7.00455L10.6428 6.27645M3 7.00455L5.87957 13.3026M3 15.0137L10.6428 19M3 15.0137L5.87957 13.3026M10.6428 19L19 15.0137M10.6428 19L5.87957 13.3026M10.6428 19L15.2544 13.3026M19 15.0137V7.00455M19 15.0137L15.2544 13.3026M19 7.00455L10.6428 6.27645M19 7.00455L15.2544 13.3026M10.6428 6.27645L5.87957 13.3026M10.6428 6.27645L15.2544 13.3026M5.87957 13.3026H15.2544'
+            stroke='#030303'
+          />
+        </svg>
+      ),
       color: '0000FF',
       description: ' BLUE Guild of the Akshobhya family',
       image: '/svgs/akshobhya.svg',
     },
     {
       name: 'KARMA',
-      symbol: <FaDiamond />,
+      symbol: (
+        <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <circle cx='11' cy='11' r='11' fill='#46B58F' />
+          <path
+            d='M3 7.02733L10.9046 3L19 7.02733M3 7.02733L10.9046 10.7995M3 7.02733V15.0638L10.9046 19M19 7.02733L10.9046 10.7995M19 7.02733V15.0638L10.9046 19M10.9046 10.7995V19'
+            stroke='black'
+          />
+        </svg>
+      ),
       color: '00FF00',
       description: ' Green Guild of the Amoghasiddhi family selihgosadilnho uiogcseou voshdof',
       image: '/svgs/amoghasiddhi.svg',
     },
     {
       name: 'RATNA',
-      symbol: <IoCubeSharp />,
+      symbol: (
+        <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <circle cx='11' cy='11' r='11' fill='#F0BE65' />
+          <path
+            d='M3 6.87713H19M3 6.87713L11.0758 3L19 6.87713M3 6.87713V15.3595L11.0758 19M3 6.87713L11.0758 19M19 6.87713L11.0758 19M19 6.87713V15.3595L11.0758 19'
+            stroke='black'
+          />
+        </svg>
+      ),
       color: 'FFF200',
       description: ' YELLOW/GOLD Guild of the Ratnasambhava family',
       image: '/svgs/ratnasambhava.svg',
     },
     {
       name: 'PADMA',
-      symbol: <IoTriangleSharp />,
+      symbol: (
+        <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <circle cx='11' cy='11' r='11' fill='#DA4C5C' />
+          <path d='M4 17L10.9521 3L18 17M4 17H18M4 17L10.9521 12.5073L18 17' stroke='black' />
+          <path d='M11 12.7351V3' stroke='black' />
+        </svg>
+      ),
       color: 'FF0000',
       description: ' RED Guild of the Amitabha family',
       image: '/svgs/amitabha.svg',
@@ -139,8 +177,10 @@ export default function UserInfoComponent({ onNextButtonClick }) {
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Card Image / Container */}
               <div className='flex flex-col'>
-                <div className='flex justify-center'>
+                <div className='mt-2 flex justify-center'>
                   <GeniusIDFlipCard
+                    selectedGuild={selectedGuild}
+                    guildData={guildData}
                     first_name={first_name}
                     last_name={last_name}
                     email={email}
@@ -149,8 +189,6 @@ export default function UserInfoComponent({ onNextButtonClick }) {
                     address={address}
                   />
                 </div>
-
-                <p className='flex justify-center'>{selectedGuild}</p>
               </div>
 
               {/* form */}
@@ -290,6 +328,11 @@ export default function UserInfoComponent({ onNextButtonClick }) {
             <div className='absolute bottom-4 right-4 mt-4'>
               <DrawOutlineButton onClick={onNextButtonClick} aria-label='next'>
                 <p className='px-4'>Next</p>
+              </DrawOutlineButton>
+            </div>
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                <p className='px-4'>Last</p>
               </DrawOutlineButton>
             </div>
           </div>
