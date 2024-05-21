@@ -21,7 +21,7 @@ import dynamic from 'next/dynamic'
 export default function ExperienceComponent({ onNextButtonClick }) {
   const { user } = useUser()
   const [projects, setProjects] = useState([
-    { experience_id: '', type: '', name: '', description: '', tools: [], skills: [] },
+    { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
   ])
 
   // fetch experience data
@@ -29,11 +29,13 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     const fetchExpData = () => {
       try {
         if (user.experience.length !== 0) {
-          const modifiedProjects = user.experience.map((exp) => ({
-            ...exp, // Keep all properties of the original experience object
-            skills: exp.skills.map((skill) => skill.skill), // Modify the 'skills' property
-          }))
-          setProjects(modifiedProjects)
+          // const modifiedProjects = user.experience.map((exp) => ({
+          //   ...exp, // Keep all properties of the original experience object
+          //   skills: exp.skills.map((skill) => skill.skill), // Modify the 'skills' property
+          // }))
+          // setProjects(modifiedProjects)
+          // console.log(modifiedProjects)
+          setProjects(user.experience)
         }
       } catch (error) {
         console.log('Error fetching cards data:', error)
@@ -57,14 +59,11 @@ export default function ExperienceComponent({ onNextButtonClick }) {
       name: projects[index].name,
       description: projects[index].description,
       tools: projects[index].tools,
-      skills: projects[index].skills.map((skill) => ({
-        skill: skill,
-        percentage: 0,
-      })),
+      project_skills: projects[index].project_skills,
     }
     try {
       await axios({
-        url: `/api/experience`,
+        url: `/api/internal/experience`,
         method: 'POST',
         data: submit,
       })
@@ -83,14 +82,11 @@ export default function ExperienceComponent({ onNextButtonClick }) {
       name: projects[index].name,
       description: projects[index].description,
       tools: projects[index].tools,
-      skills: projects[index].skills.map((skill) => ({
-        skill: skill,
-        percentage: 0,
-      })),
+      project_skills: projects[index].project_skills,
     }
     try {
       await axios({
-        url: `/api/experience/${experience_id}`,
+        url: `/api/internal/experience/${experience_id}`,
         method: 'PUT',
         data: submit,
       })
@@ -106,7 +102,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   const handleExpDelete = async (experience_id) => {
     try {
       await axios({
-        url: `/api/experience/${experience_id}`,
+        url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
       alert('exp info deleted')
@@ -145,7 +141,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   const handleAddProject = () => {
     setProjects((prevProjects) => [
       ...prevProjects,
-      { experience_id: '', type: '', name: 'Project Name', description: '', skills: [], tools: [] },
+      { experience_id: '', type: '', name: 'Project Name', description: '', project_skills: [], tools: [] },
     ])
   }
 
@@ -153,7 +149,9 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects]
       updatedProjects.splice(index, 1)
-      handleExpDelete(experience_id)
+      if (experience_id) {
+        handleExpDelete(experience_id)
+      }
       return updatedProjects
     })
   }
@@ -161,7 +159,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   const handleSkillsChange = (index, newSkills) => {
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects]
-      updatedProjects[index].skills = newSkills
+      updatedProjects[index].project_skills = newSkills
       return updatedProjects
     })
   }
@@ -215,11 +213,11 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                   {/* Card Image / Container */}
                   <div className='flex flex-col'>
                     <div className='flex justify-center'>
-                      {project.skills && (
+                      {project.project_skills && (
                         <ExperienceFlipCard
                           type={project.type}
                           projectName={project.name}
-                          skills={project.skills.join(', ')}
+                          skills={project.project_skills.join(', ')}
                           toolsAndTech={project.tools.join(', ')}
                         />
                       )}
@@ -340,7 +338,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                             <label htmlFor=''>Skills</label>
                             <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
                               <TagsInput
-                                value={project.skills}
+                                value={project.project_skills}
                                 onChange={(tags) => handleSkillsChange(index, tags)}
                                 aria-label='skills_input'
                                 name='skills'
@@ -473,7 +471,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
                             <label htmlFor=''>Skills</label>
                             <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
                               <TagsInput
-                                value={project.skills}
+                                value={project.project_skills}
                                 onChange={(tags) => handleSkillsChange(index, tags)}
                                 aria-label='skills_input'
                                 name='skills'

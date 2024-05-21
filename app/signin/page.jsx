@@ -31,7 +31,7 @@ const SignIn = () => {
 
     try {
       const { data } = await axios({
-        url: '/api/signin',
+        url: '/api/internal/signin',
         method: 'POST',
         data: submit,
       })

@@ -3,10 +3,11 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// Function to create a skill
+// create new card
 export async function POST(request) {
   try {
-    const { skill, percentage, gg_id } = await request.json()
+    const data = await request.json()
+    const { gg_id, type, name, description, tools, project_skills } = data
 
     // Check if the user exists
     const existingUser = await prisma.users.findUnique({
@@ -17,33 +18,29 @@ export async function POST(request) {
       return NextResponse.error('User not found', 404)
     }
 
-    const existingSkill = await prisma.skills.findUnique({
-      where: { gg_id, skill },
+    // Create new experience with skills
+    const newExperience = await prisma.experience.create({
+      data: {
+        gg_id,
+        type,
+        name,
+        description,
+        tools,
+        project_skills,
+      },
     })
 
-    if (!existingSkill) {
-      // Create the skill for the user
-      const newSkill = await prisma.skills.create({
-        data: {
-          skill,
-          percentage,
-          gg_id,
-        },
-      })
-      return NextResponse.json(newSkill)
-    } else {
-      return NextResponse.error('The skill already exists', 404)
-    }
+    return NextResponse.json(newExperience)
   } catch (error) {
-    console.error('Error Creating Skill', error)
+    console.error('Error Creating Experience', error)
     return NextResponse.error('Internal Server Error', 500)
   }
 }
 
-// Function to read all skills
+// read all cards
 export async function GET() {
   try {
-    const skills = await prisma.skills.findMany()
+    const skills = await prisma.experience.findMany()
     return NextResponse.json(skills)
   } catch (error) {
     console.error('Error fetching skills', error)

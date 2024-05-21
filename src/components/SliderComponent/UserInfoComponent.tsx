@@ -72,7 +72,6 @@ export default function UserInfoComponent({ onNextButtonClick }) {
       setAddress(user.address ? user.address : '')
       setPhoneNumber(user.phone_number ? user.phone_number : '')
       setDob(user.dob ? user.dob : '')
-      console.log(email)
     }
     if (user) {
       setUserInfo()
@@ -91,7 +90,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
     }
     try {
       await axios({
-        url: `/api/users/${user.gg_id}`,
+        url: `/api/internal/users/${user.gg_id}`,
         method: 'put',
         data: submit,
       })

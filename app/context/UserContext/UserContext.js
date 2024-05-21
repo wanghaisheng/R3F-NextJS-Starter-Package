@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async (userId, token) => {
     try {
-      const { data: userData } = await axios.get(`/api/users/${userId}`, {
+      const { data: userData } = await axios.get(`/api/internal/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

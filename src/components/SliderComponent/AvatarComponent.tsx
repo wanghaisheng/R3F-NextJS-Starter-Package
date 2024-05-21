@@ -13,7 +13,7 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 async function getAvatarById(id: string) {
   try {
-    const res = await axios.get(`/api/avatar/${id}`)
+    const res = await axios.get(`/api/internal/avatar/${id}`)
     if (res.status !== 200) {
       throw new Error('failed to fetch the avatars')
     }

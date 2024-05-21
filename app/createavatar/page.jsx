@@ -12,7 +12,7 @@ const CreateAvatar = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get('/api/avatar')
+        const res = await axios.get('/api/internal/avatar')
         if (res.status !== 200) {
           throw new Error('Failed to fetch avatars')
         }
