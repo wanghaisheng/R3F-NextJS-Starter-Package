@@ -39,7 +39,7 @@ export function RightSidebarItem({ icon, text, active, alert, onClick }) {
     <li
       className={`
         group relative my-1 flex cursor-pointer items-center
-        rounded-md px-3 py-2
+        rounded-md pl-2 pr-0
         font-medium transition-colors
         ${
           active
@@ -50,15 +50,17 @@ export function RightSidebarItem({ icon, text, active, alert, onClick }) {
       // onClick={onClick}
     >
       {icon}
-      <span className={`overflow-hidden transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>{text}</span>
+      <span className={`overflow-hidden whitespace-nowrap transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>
+        {text}
+      </span>
 
       {alert && <div className={`absolute right-2 size-2 rounded bg-indigo-400 ${expanded ? '' : 'top-2'}`} />}
 
       {!expanded && (
         <div
           className={`
-          invisible absolute right-full mr-6 translate-x-4 rounded-md
-          bg-indigo-100 px-2 py-1
+          invisible absolute right-full mr-6 translate-x-4 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
           text-sm text-indigo-800 opacity-20 transition-all
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
       `}

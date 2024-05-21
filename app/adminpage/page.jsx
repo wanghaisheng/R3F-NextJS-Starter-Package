@@ -129,7 +129,7 @@ const AdminPage = () => {
                 active={selected === 5}
                 onClick={() => setSelected(5)}
               />
-              <DropdownMenu title={<BsGlobe size={20} />} selectedItem={selectedItem} onSelectItem={handleSelectItem}>
+              <DropdownMenu title={<BsGlobe size={17} />} selectedItem={selectedItem} onSelectItem={handleSelectItem}>
                 <LeftSidebarItem
                   icon={<BsGlobe size={20} />}
                   text='Cesium'
