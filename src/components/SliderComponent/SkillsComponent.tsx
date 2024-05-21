@@ -148,7 +148,7 @@ export default function SkillsComponent() {
     }
     try {
       await axios({
-        url: `/api/skills`,
+        url: `/api/internal/skills`,
         method: 'POST',
         data: submit,
       })
@@ -170,7 +170,7 @@ export default function SkillsComponent() {
     }
     try {
       await axios({
-        url: `/api/skills/${skills[index].skill_id}`,
+        url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'PUT',
         data: submit,
       })
@@ -186,7 +186,7 @@ export default function SkillsComponent() {
   const handleSkillDelete = async (index: number) => {
     try {
       await axios({
-        url: `/api/skills/${skills[index].skill_id}`,
+        url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
       alert('skill info deleted')
@@ -222,7 +222,7 @@ export default function SkillsComponent() {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
       updatedSkills.splice(index, 1)
-      if (skills[index].skill_id !== '') {
+      if (skills[index].skill_id.length != 0) {
         handleSkillDelete(index)
       }
       return updatedSkills

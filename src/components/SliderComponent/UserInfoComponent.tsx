@@ -90,7 +90,7 @@ export default function UserInfoComponent({ onNextButtonClick }) {
     }
     try {
       await axios({
-        url: `/api/users/${user.gg_id}`,
+        url: `/api/internal/users/${user.gg_id}`,
         method: 'put',
         data: submit,
       })

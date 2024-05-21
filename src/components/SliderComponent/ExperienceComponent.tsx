@@ -63,7 +63,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     }
     try {
       await axios({
-        url: `/api/experience`,
+        url: `/api/internal/experience`,
         method: 'POST',
         data: submit,
       })
@@ -86,7 +86,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
     }
     try {
       await axios({
-        url: `/api/experience/${experience_id}`,
+        url: `/api/internal/experience/${experience_id}`,
         method: 'PUT',
         data: submit,
       })
@@ -102,7 +102,7 @@ export default function ExperienceComponent({ onNextButtonClick }) {
   const handleExpDelete = async (experience_id) => {
     try {
       await axios({
-        url: `/api/experience/${experience_id}`,
+        url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
       alert('exp info deleted')

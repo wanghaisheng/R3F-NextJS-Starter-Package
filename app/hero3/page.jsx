@@ -544,13 +544,20 @@ export default function Hero3() {
                     </div>
                   )}
                   <div className='mt-4 flex justify-center'>
-                    <a
-                      href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
-                      target='_blank'
-                      aria-label='Booking button'
-                    >
-                      <DrawOutlineButton>Booking</DrawOutlineButton>
-                    </a>
+                    {/* https://r3-f-next-js-starter-package.vercel.app/ */}
+                    {user ? (
+                      <a
+                        href={`http://localhost:3000/api/users/${user.gg_id}`}
+                        target='_blank'
+                        aria-label='Booking button'
+                      >
+                        <DrawOutlineButton>Booking</DrawOutlineButton>
+                      </a>
+                    ) : (
+                      <a href='' target='_blank' aria-label='Booking button'>
+                        <DrawOutlineButton>Booking</DrawOutlineButton>
+                      </a>
+                    )}
                   </div>
                 </div>
 

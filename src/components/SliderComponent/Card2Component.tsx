@@ -13,18 +13,6 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import axios from 'axios'
 
-async function getCardInfo() {
-  try {
-    const res = await axios.get('/api/card')
-    if (res.status !== 200) {
-      throw new Error('failed to fetch the cards')
-    }
-    return res.data
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export default function CardComponent({ onNextButtonClick }) {
   const { user } = useUser()
   const [cards, setCards] = useState([
@@ -63,7 +51,7 @@ export default function CardComponent({ onNextButtonClick }) {
     }
     try {
       await axios({
-        url: `/api/card`,
+        url: `/api/internal/card`,
         method: 'POST',
         data: submit,
       })
@@ -86,7 +74,7 @@ export default function CardComponent({ onNextButtonClick }) {
     }
     try {
       await axios({
-        url: `/api/card/${id}`,
+        url: `/api/internal/card/${id}`,
         method: 'PUT',
         data: submit,
       })
@@ -101,7 +89,7 @@ export default function CardComponent({ onNextButtonClick }) {
   const handleDelete = async (id: any) => {
     try {
       await axios({
-        url: `/api/card/${id}`,
+        url: `/api/internal/card/${id}`,
         method: 'DELETE',
       })
       alert('card info deleted')

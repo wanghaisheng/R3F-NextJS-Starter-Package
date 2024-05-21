@@ -28,7 +28,7 @@ export default function Page() {
 
     try {
       const { data } = await axios({
-        url: '/api/users',
+        url: '/api/internal/users',
         method: 'POST',
         data: submit,
       })

@@ -39,7 +39,7 @@ export default function App() {
 
   //   try {
   //     const { data } = await axios({
-  //       url: `/api/avatar/${userId}`,
+  //       url: `/api/internal/avatar/${userId}`,
   //       method: 'PUT',
   //       data: submit,
   //     })
