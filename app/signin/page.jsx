@@ -131,7 +131,7 @@ const SignIn = () => {
                   type='email'
                   id='email'
                   name='email'
-                  className={`rounded-md p-2 text-black`}
+                  className='rounded-md bg-transparent p-2 text-white '
                   value={email}
                   placeholder='Email'
                   onChange={({ target }) => setEmail(target.value)}
@@ -149,7 +149,7 @@ const SignIn = () => {
                   type='password'
                   id='password'
                   name='password'
-                  className='rounded-md p-2 text-black'
+                  className='rounded-md bg-transparent p-2 text-white'
                   placeholder='Password'
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}

@@ -10,8 +10,7 @@
 
 .signin .input-group {
   position: relative;
-  background-color: white;
-  border-bottom: 1px solid grey;
+  background-color: black;
 }
 .signin .input-group input {
   width: 300px;

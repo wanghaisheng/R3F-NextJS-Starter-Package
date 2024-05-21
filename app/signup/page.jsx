@@ -124,7 +124,7 @@ export default function Page() {
               <input
                 type='email'
                 name='email'
-                className='rounded-md p-2 text-black'
+                className='rounded-md bg-transparent p-2 text-white'
                 value={email}
                 onChange={({ target }) => setEmail(target?.value)}
               />
@@ -141,7 +141,7 @@ export default function Page() {
               <input
                 type='password'
                 name='password'
-                className='rounded-md p-2 text-black'
+                className='rounded-md bg-transparent p-2 text-white'
                 value={password}
                 onChange={({ target }) => setPassword(target?.value)}
               />
