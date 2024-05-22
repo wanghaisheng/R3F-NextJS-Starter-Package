@@ -111,7 +111,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       return
     } catch (error) {
       console.error(error)
-      throw new Error('failed to delete the exp info')
+      // throw new Error('failed to delete the exp info')
     }
   }
 

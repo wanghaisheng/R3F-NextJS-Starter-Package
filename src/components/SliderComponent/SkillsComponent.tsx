@@ -196,7 +196,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return
     } catch (error) {
       console.error(error)
-      throw new Error('failed to delete the skill info')
+      // throw new Error('failed to delete the skill info')
     }
   }
 

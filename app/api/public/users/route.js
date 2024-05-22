@@ -56,7 +56,20 @@ export async function POST(request) {
 //Function to read user data
 export async function GET() {
   try {
-    const users = await prisma.users.findMany()
+    const users = await prisma.users.findMany({
+      select: {
+        first_name: true,
+        last_name: true,
+        email: true,
+        image_url: true,
+        description: true,
+        address: true,
+        cards: true,
+        experience: true,
+        avatar: true,
+        skills: true,
+      },
+    })
     return NextResponse.json(users)
   } catch (error) {
     console.error('Error fetching users', error)

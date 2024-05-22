@@ -547,7 +547,7 @@ export default function Hero3() {
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
                     {user ? (
                       <a
-                        href={`http://localhost:3000/api/users/${user.gg_id}`}
+                        href={`http://localhost:3000/api/public/users/${user.gg_id}`}
                         target='_blank'
                         aria-label='Booking button'
                       >

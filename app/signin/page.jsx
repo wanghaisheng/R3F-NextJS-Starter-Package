@@ -189,7 +189,7 @@ const SignIn = () => {
               <hr className='h-px' />
             </div>
             <div className='flex justify-center gap-16 p-5'>
-              <a href='/api/auth/signin'>
+              <a href='/api/internal/auth/signin'>
                 <FcGoogle className='text-3xl transition-transform hover:scale-125' />
               </a>
               <a href=''>
