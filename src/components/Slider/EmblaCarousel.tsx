@@ -55,7 +55,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
     <>
       <section className='mx-auto mt-20 w-full'>
         <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex'>
+          <div className='mb-5 flex'>
             {[
               <UserInfoComponent
                 key='UserInfoComponent'
@@ -103,7 +103,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 
       <footer className='fixed inset-x-0 bottom-4 flex flex-col items-center justify-center'>
         <div className='mt-2 flex items-center justify-center'>
-          <div className='flex gap-2 rounded-3xl p-2 shadow-md shadow-[#6B37CA] backdrop-blur-md md:h-10 md:items-center md:justify-center md:gap-7'>
+          <div className='flex gap-2 rounded-3xl p-2 px-7 shadow shadow-[#6B37CA] backdrop-blur-md md:h-10 md:items-center md:justify-center md:gap-7'>
             {tabs.map((tab, index) => (
               <Chip
                 key={tab}
