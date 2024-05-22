@@ -11,6 +11,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { TiDelete } from 'react-icons/ti'
+import { IoHome } from 'react-icons/io5'
+
 import Link from 'next/link'
 
 import axios from 'axios'
@@ -314,13 +316,37 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               aria-label='file input'
                             />
                           </div>
-                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-                            <div className='-mt-2'>
-                              <DrawOutlineButton type='submit' aria-label='generate button'>
-                                Generate
-                              </DrawOutlineButton>
+                          {/* Go Home and Generate Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4 flex justify-center'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Generate
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <Link href='/hero3'>
+                                  <button
+                                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                                    type='submit'
+                                    aria-label='home btn'
+                                  >
+                                    <p className='p-4'>
+                                      <IoHome />
+                                    </p>
+                                  </button>
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <Link href='/hero3'>
+                                <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                  Go To Home
+                                </DrawOutlineButton>
+                              </Link>
                             </div>
-                          </div>
+                          )}
                         </TabPanel>
                       </form>
                     ) : (
@@ -363,13 +389,31 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               aria-label='file input'
                             />
                           </div>
-                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-                            <div className='-mt-2'>
-                              <DrawOutlineButton type='submit' aria-label='generate button'>
-                                Generate
-                              </DrawOutlineButton>
+                          {/* Go Home and Generate Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4 flex justify-center'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Generate
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <Link href='/hero3'>
+                                  <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                    Go To Home
+                                  </DrawOutlineButton>
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <Link href='/hero3'>
+                                <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                  Go To Home
+                                </DrawOutlineButton>
+                              </Link>
                             </div>
-                          </div>
+                          )}
                         </TabPanel>
                       </form>
                     )}
@@ -419,7 +463,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                         data={skills}
                       >
                         <PolarGrid />
-                        <PolarAngleAxis dataKey='skill' />
+                        <PolarAngleAxis dataKey='skill_name' />
                         <PolarRadiusAxis opacity={0} domain={[0, 100]} />
                         <Radar
                           name='Ram'
@@ -431,7 +475,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                         />
                         {/* <Tooltip /> */}
                         {/* <Legend values="100%" /> */}
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
                       </RadarChart>
                     </ResponsiveContainer>
                   )}
@@ -439,12 +483,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
               </div>
             </div>
           </Tabs>
-
-          <div className='absolute bottom-4 right-0 lg:right-4'>
-            <Link href='/hero3'>
-              <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
-            </Link>
-          </div>
 
           {!isSmallScreen ? (
             <div className='absolute bottom-4 left-4 mt-4'>

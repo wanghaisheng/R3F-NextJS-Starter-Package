@@ -7,6 +7,8 @@ import { TiDelete } from 'react-icons/ti'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import Link from 'next/link'
+import { IoHome } from 'react-icons/io5'
 
 export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const [selectedLogo, setSelectedLogo] = useState(null)
@@ -118,6 +120,17 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                   <DrawOutlineButton aria-label='generate'>Submit</DrawOutlineButton>
                 </div>
                 <div className='absolute bottom-4 right-4'>
+                  <Link href='/hero3'>
+                    <button
+                      className='mr-2 rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                      type='submit'
+                      aria-label='home btn'
+                    >
+                      <p className='p-4'>
+                        <IoHome />
+                      </p>
+                    </button>
+                  </Link>
                   <button
                     className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
                     type='submit'
@@ -131,7 +144,12 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                 </div>
               </>
             ) : (
-              <div className='absolute bottom-4 right-4'>
+              <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                <Link href='/hero3'>
+                  <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                    <IoHome className='my-1' />
+                  </DrawOutlineButton>
+                </Link>
                 <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                   Next
                 </DrawOutlineButton>
@@ -158,7 +176,7 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
                 <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                  <p className='px-4'>Back</p>
+                  Back
                 </DrawOutlineButton>
               </div>
             </div>

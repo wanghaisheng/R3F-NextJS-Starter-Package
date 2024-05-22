@@ -348,31 +348,6 @@ export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick
                 </form>
               </div>
             </div>
-
-            {/* Back Button */}
-            {!isSmallScreen ? (
-              <div>
-                <div className='absolute bottom-4 left-4 mt-4'>
-                  <button
-                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
-                    onClick={onPrevButtonClick}
-                    aria-label='prev'
-                  >
-                    <p className='p-4'>
-                      <FaArrowLeft />
-                    </p>
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className='absolute bottom-4 left-4 mt-4'>
-                  <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                    <p className='px-4'>Back</p>
-                  </DrawOutlineButton>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
