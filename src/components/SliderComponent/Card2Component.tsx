@@ -286,9 +286,32 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </div>
                           </div>
                           {/* Submit button */}
-                          <div className='mt-4 gap-x-2'>
-                            <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
-                          </div>
+
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4'>
+                                <DrawOutlineButton aria-label='generate'>Generate</DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <button
+                                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                                  type='submit'
+                                  onClick={onNextButtonClick}
+                                  aria-label='next'
+                                >
+                                  <p className='p-4'>
+                                    <FaArrowRight />
+                                  </p>
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                Next
+                              </DrawOutlineButton>
+                            </div>
+                          )}
                         </form>
                       ) : (
                         <form
@@ -365,10 +388,35 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               />
                             </div>
                           </div>
-                          {/* Submit button */}
-                          <div className='mt-4'>
-                            <DrawOutlineButton type='submit'>Generate</DrawOutlineButton>
-                          </div>
+
+                          {/* Next and Generate Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Generate
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <button
+                                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                                  type='submit'
+                                  onClick={onNextButtonClick}
+                                  aria-label='next'
+                                >
+                                  <p className='p-4'>
+                                    <FaArrowRight />
+                                  </p>
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                Next
+                              </DrawOutlineButton>
+                            </div>
+                          )}
                         </form>
                       )}
                     </div>
@@ -378,6 +426,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
             ))}
           </Tabs>
 
+          {/* Back Button */}
           {!isSmallScreen ? (
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
@@ -391,28 +440,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                   </p>
                 </button>
               </div>
-              <div className='absolute bottom-4 right-4 mt-4'>
-                <button
-                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
-                  onClick={onNextButtonClick}
-                  aria-label='prev'
-                >
-                  <p className='p-4'>
-                    <FaArrowRight />
-                  </p>
-                </button>
-              </div>
             </div>
           ) : (
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
                 <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
                   <p className='px-4'>Back</p>
-                </DrawOutlineButton>
-              </div>
-              <div className='absolute bottom-4 right-4'>
-                <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
-                  Next
                 </DrawOutlineButton>
               </div>
             </div>

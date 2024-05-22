@@ -576,7 +576,7 @@ export default function Hero3() {
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
                         {skillsData ? (
-                          <div className=' '>
+                          <div>
                             {/* Condition for changing barchart chart and radar chart*/}
                             {skillsData.length < 6 ? (
                               <ResponsiveContainer width={380} height={330}>
@@ -591,9 +591,13 @@ export default function Hero3() {
                                     bottom: 5,
                                   }}
                                 >
-                                  <XAxis dataKey='skill' padding={{ left: 20, right: 20 }} />
+                                  <XAxis
+                                    dataKey={skillsData.skill_name}
+                                    angle={-30}
+                                    padding={{ left: 20, right: 20 }}
+                                  />
                                   <YAxis domain={[0, 100]} />
-                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
 
                                   <CartesianGrid vertical={false} strokeDasharray='6 6' />
                                   <Bar

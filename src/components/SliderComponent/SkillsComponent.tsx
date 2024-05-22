@@ -36,7 +36,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-lg'>{label}</p>
+        <p className='text-lg text-white'>{label}</p>
         <p className='text-sm text-indigo-400'>
           <span className='ml-2'>{payload[0].payload.percentage}</span>%
         </p>
@@ -381,7 +381,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 <p className='mb-2 flex justify-center'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
-                <div className='lg:block lg:w-full'>
+                <div className='mb-5 lg:block lg:w-full'>
                   {skills.length < 6 ? (
                     <ResponsiveContainer width='100%' height={220}>
                       <BarChart
@@ -395,9 +395,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                           bottom: 5,
                         }}
                       >
-                        <XAxis dataKey='skill' />
+                        <XAxis dataKey='skill_name' angle={-30} />
                         <YAxis domain={[0, 100]} />
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
                         <CartesianGrid vertical={false} strokeDasharray='6 6' />
                         <Bar
                           name='Ram'

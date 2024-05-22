@@ -110,13 +110,36 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                 ))}
               </div>
             )}
-            <div className='mt-20 flex justify-center lg:absolute lg:bottom-6 lg:right-28 lg:mt-0'>
-              <DrawOutlineButton id='submit-connection' type='submit'>
-                Submit
-              </DrawOutlineButton>
-            </div>
+
+            {/* Submit and Next Button */}
+            {!isSmallScreen ? (
+              <>
+                <div className='mt-7 flex justify-center'>
+                  <DrawOutlineButton aria-label='generate'>Submit</DrawOutlineButton>
+                </div>
+                <div className='absolute bottom-4 right-4'>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    type='submit'
+                    onClick={onNextButtonClick}
+                    aria-label='next'
+                  >
+                    <p className='p-4'>
+                      <FaArrowRight />
+                    </p>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className='absolute bottom-4 right-4'>
+                <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                  Next
+                </DrawOutlineButton>
+              </div>
+            )}
           </form>
 
+          {/* Back Button */}
           {!isSmallScreen ? (
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
@@ -130,28 +153,12 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                   </p>
                 </button>
               </div>
-              <div className='absolute bottom-4 right-4 mt-4'>
-                <button
-                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
-                  onClick={onNextButtonClick}
-                  aria-label='prev'
-                >
-                  <p className='p-4'>
-                    <FaArrowRight />
-                  </p>
-                </button>
-              </div>
             </div>
           ) : (
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
                 <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
                   <p className='px-4'>Back</p>
-                </DrawOutlineButton>
-              </div>
-              <div className='absolute bottom-4 right-4'>
-                <DrawOutlineButton onClick={onNextButtonClick} aria-label='next slide'>
-                  Next
                 </DrawOutlineButton>
               </div>
             </div>
