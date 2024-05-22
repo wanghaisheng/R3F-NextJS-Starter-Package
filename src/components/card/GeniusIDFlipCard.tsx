@@ -15,8 +15,8 @@ export default function GeniusIDFlipCard({
   dob,
   contact,
   address,
-  selectedGuild,
-  guildData,
+  // selectedGuild,
+  // guildData,
 }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
@@ -55,12 +55,12 @@ export default function GeniusIDFlipCard({
                 <nav className='mb-1 flex list-none flex-wrap'>
                   <ul>
                     {/* Display selected guild's symbol */}
-                    {selectedGuild && (
-                      <li className='absolute -top-2 left-5'>
-                        {/* Use selectedGuild to get the corresponding guild's symbol */}
-                        {guildData.find((guild) => guild.name === selectedGuild)?.symbol}
+                    {/* {selectedGuild && (
+                      <li className='absolute -top-2 left-5'> */}
+                    {/* Use selectedGuild to get the corresponding guild's symbol */}
+                    {/* {guildData.find((guild) => guild.name === selectedGuild)?.symbol}
                       </li>
-                    )}
+                    )} */}
                     <li className='mb-1 w-full text-xl font-semibold'>
                       <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
                     </li>
