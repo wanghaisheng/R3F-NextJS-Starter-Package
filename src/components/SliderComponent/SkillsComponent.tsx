@@ -123,7 +123,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         if (skillsSet.size !== 0) {
           const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
           setSkills(skillsArray)
-          console.log(skills)
         }
       } catch (error) {
         console.log('failed to fetch the skills data')

@@ -76,6 +76,7 @@ export default function Hero3() {
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
+  const [experience, setExperience] = useState([])
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -132,13 +133,94 @@ export default function Hero3() {
 
   // ------------------------------------------------------------
 
+  // Experience
+  useEffect(() => {
+    const fetchExpData = async () => {
+      try {
+        setExperience(user.experience)
+      } catch (error) {
+        console.log('Error fetching experience data:', error)
+      }
+    }
+
+    if (user) {
+      fetchExpData() // Fetch data only if user is available
+    }
+  }, [user])
+
+  // ------------------------------------------------------------
+
   // Fetch skills data
+  function checkExistingSkills(skill, exp_skills) {
+    for (let i = 0; i < exp_skills.length; i++) {
+      if (exp_skills[i].includes(skill)) {
+        return true
+      }
+    }
+    return false
+  }
+
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
-        setSkillsData(user.skills)
+        const skillsSet = new Set() // Create a Set to store unique JSON strings
+
+        if (experience.length !== 0) {
+          const exp_skill_obj = {}
+          const exp_skills = []
+
+          user.skills.forEach((skillObj) => {
+            // Add the skillObj to skillsSet
+
+            skillsSet.add(
+              JSON.stringify({
+                skill_name: skillObj.skill[0].skill_name,
+                percentage: skillObj.skill[0].percentage,
+              }),
+            )
+
+            // Iterate over each skill element in skillObj.skill array
+            skillObj.skill.forEach((element) => {
+              // Add the skill name to exp_skills array
+              exp_skills.push(element.skill_name)
+
+              // Create an entry in exp_skill_obj for the skill percentage
+              exp_skill_obj[element.skill_name] = element.percentage
+
+              // Create an entry in exp_skill_obj for the skill_id
+              exp_skill_obj[element.skill_name + '_id'] = skillObj.skill_id
+            })
+          })
+          user.experience.forEach((element) => {
+            if (element.project_skills.length !== 0) {
+              element.project_skills.forEach((skill) => {
+                if (!checkExistingSkills(skill, exp_skills)) {
+                  skillsSet.add(
+                    JSON.stringify({
+                      skill_name: skill,
+                      percentage: 0,
+                    }),
+                  ) // Add each object to the Set after converting it to a string
+                } else {
+                  skillsSet.add(
+                    JSON.stringify({
+                      skill_name: skill,
+                      percentage: exp_skill_obj[`${skill}`],
+                    }),
+                  )
+                }
+              })
+            }
+          })
+        }
+
+        // Convert the Set back to an array of objects
+        if (skillsSet.size !== 0) {
+          const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
+          setSkillsData(skillsArray)
+        }
       } catch (error) {
-        console.log('Error fetching skills data:', error)
+        console.log('failed to fetch the skills data')
       }
     }
 
@@ -231,7 +313,7 @@ export default function Hero3() {
             <div className='w-full shrink-0 grow lg:min-w-0 '>
               <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
                 <div className='h-full lg:ml-24 lg:w-[27%]'>
-                  {user && cardsData.length != 0 ? (
+                  {user ? (
                     <div className='flex flex-col items-center justify-center'>
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
@@ -260,11 +342,37 @@ export default function Hero3() {
                               </div>
                             </div>
                           </div>
-                          {cardsData.map((card) => (
-                            <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
+
+                          {cardsData.length != 0 ? (
+                            cardsData.map((card) => (
+                              <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
+                                <div className='flex flex-col justify-center'>
+                                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                                    {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
+                                    <a
+                                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                                      aria-label='edit button'
+                                      href='/slider'
+                                    >
+                                      <FaRegEdit />
+                                    </a>
+                                  </div>
+                                  <div className='flex justify-center'>
+                                    <CardsFlipCard
+                                      type={card.type}
+                                      name={card.name}
+                                      dateIn={card.date_in}
+                                      dateOut={card.date_out}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className='w-full shrink-0 grow lg:min-w-0 '>
                               <div className='flex flex-col justify-center'>
-                                <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                  {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
+                                <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                                  CARD2
                                   <a
                                     className=' px-2 py-1 text-sm text-black dark:text-white'
                                     aria-label='edit button'
@@ -275,15 +383,16 @@ export default function Hero3() {
                                 </div>
                                 <div className='flex justify-center'>
                                   <CardsFlipCard
-                                    type={card.type}
-                                    name={card.name}
-                                    dateIn={card.date_in}
-                                    dateOut={card.date_out}
+                                    personName='Person Name'
+                                    type='DEFAULT'
+                                    name='DEFAULT'
+                                    dateIn='DEFAULT'
+                                    dateOut='DEFAULT'
                                   />
                                 </div>
                               </div>
                             </div>
-                          ))}
+                          )}
                         </div>
                         <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
                           <button aria-label='previos button' onClick={scrollPrev2}>
@@ -394,69 +503,42 @@ export default function Hero3() {
             <div className='w-full shrink-0 grow lg:min-w-0'>
               <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
                 <div className='h-full lg:ml-24 lg:w-[27%]'>
-                  {user ? (
+                  <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                    Experience
+                    <a
+                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                      aria-label='edit button'
+                      href='/slider'
+                    >
+                      <FaRegEdit />
+                    </a>
+                  </div>
+                  {user && experience.length != 0 ? (
                     <div className='flex flex-col items-center justify-center'>
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef3}>
                         <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow lg:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                Experience
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <ExperienceFlipCard
-                                  type='TYPE'
-                                  projectName='Name'
-                                  skills='skill1, skill2'
-                                  toolsAndTech='vscode, blender'
-                                />
-                              </div>
-                              <div className='my-3'>
-                                <p className='px-4'>
-                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
-                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
-                                  blanditiis sed!
-                                </p>
+                          {experience.map((exp) => (
+                            <div className='w-full shrink-0 grow lg:min-w-0 '>
+                              <div className='flex flex-col justify-center'>
+                                <div className='flex justify-center'>
+                                  <ExperienceFlipCard
+                                    type={exp.type}
+                                    projectName={exp.name}
+                                    skills={exp.project_skills.join(', ')}
+                                    toolsAndTech={exp.tools}
+                                  />
+                                </div>
+                                <div className='my-3'>
+                                  <p className='px-4'>
+                                    Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
+                                    voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
+                                    blanditiis sed!
+                                  </p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className='w-full shrink-0 grow lg:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                Exp2
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <ExperienceFlipCard
-                                  type='EDUCATION'
-                                  projectName='Name2'
-                                  skills='skill3, skil23l2'
-                                  toolsAndTech='vscode, figma'
-                                />
-                              </div>
-                              <div className='my-3'>
-                                <p className='px-4'>
-                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
-                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
-                                  blanditiis sed!
-                                </p>
-                              </div>
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
                       <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
@@ -475,16 +557,6 @@ export default function Hero3() {
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                Experience
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
                               <div className='flex justify-center'>
                                 <ExperienceFlipCard
                                   type='DEFAULT'
@@ -495,35 +567,6 @@ export default function Hero3() {
                               </div>
                               <div className='my-3'>
                                 <p className='px-4'>
-                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
-                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
-                                  blanditiis sed!
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className='w-full shrink-0 grow lg:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                Exp2
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <ExperienceFlipCard
-                                  type='DEFAULT 2'
-                                  projectName='Project 2'
-                                  skills='DEFAULT'
-                                  toolsAndTech='DEFAULT'
-                                />
-                              </div>
-                              <div className='mt-3'>
-                                <p>
                                   Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
                                   voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
                                   blanditiis sed!
@@ -575,7 +618,7 @@ export default function Hero3() {
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                        {skillsData ? (
+                        {user && skillsData.length != 0 ? (
                           <div>
                             {/* Condition for changing barchart chart and radar chart*/}
                             {skillsData.length < 6 ? (
@@ -591,11 +634,7 @@ export default function Hero3() {
                                     bottom: 5,
                                   }}
                                 >
-                                  <XAxis
-                                    dataKey={skillsData.skill_name}
-                                    angle={-30}
-                                    padding={{ left: 20, right: 20 }}
-                                  />
+                                  <XAxis dataKey='skill_name' angle={-30} padding={{ left: 20, right: 20 }} />
                                   <YAxis domain={[0, 100]} />
                                   <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
 
@@ -620,7 +659,7 @@ export default function Hero3() {
                                   data={skillsData}
                                 >
                                   <PolarGrid />
-                                  <PolarAngleAxis dataKey='skill' />
+                                  <PolarAngleAxis dataKey='skill_name' />
                                   <PolarRadiusAxis opacity={0} domain={[0, 100]} />
                                   <Radar
                                     name='Ram'
@@ -632,7 +671,7 @@ export default function Hero3() {
                                   />
                                   {/* <Tooltip /> */}
                                   {/* <Legend values="100%" /> */}
-                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
                                 </RadarChart>
                               </ResponsiveContainer>
                             )}

@@ -19,20 +19,20 @@ export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const router = useRouter()
   const handleOnAvatarExported = (event: AvatarExportedEvent) => {
-    router.push('/slider')
+    // router.push('/slider')
     setAvatarUrl(event.data.url)
   }
 
   // const { log } = console
   // const { user } = useUser()
-  // const userId = user.gg_id;
+  // const userId = user.gg_id
   // console.log(avatarUrl)
   // console.log(user)
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault()
   //   const submit = {
-  //     avatarUrl
+  //     avatarUrl,
   //   }
 
   //   log('Submit: ', submit)
