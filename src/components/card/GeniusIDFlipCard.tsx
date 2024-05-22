@@ -3,7 +3,7 @@
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -21,7 +21,11 @@ export default function GeniusIDFlipCard({
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
-  QRCode.toDataURL(pathname).then(setImgSrc)
+
+  useEffect(() => {
+    QRCode.toDataURL(pathname).then(setImgSrc)
+  }, [pathname])
+
   // Flip Card QR end
 
   const [isFlipped, setIsFlipped] = useState(false)
@@ -44,6 +48,8 @@ export default function GeniusIDFlipCard({
               src='/card/abstract1.webp'
               alt='GID'
               fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              priority
               className='rounded-lg object-cover'
             />
             <div className='absolute top-0 flex w-full justify-end'>
@@ -88,7 +94,9 @@ export default function GeniusIDFlipCard({
             {/* QRCode */}
             <div className='absolute inset-0  rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
               <div className='flex size-full items-center justify-center '>
-                <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                {imgSrc && (
+                  <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                )}
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
                 <div className='text-base font-semibold text-purple-600'>GOING GENIUS</div>

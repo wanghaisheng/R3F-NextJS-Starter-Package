@@ -143,14 +143,14 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Avatar and AvatarImageComponent Container */}
-              <div className='flex flex-col items-center justify-center bg-blue-300 lg:w-[35%]'>
+              <div className='flex flex-col items-center justify-center bg-blue-300/40 lg:w-[35%]'>
                 {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-                  <div>
+                  <div className='relative'>
                     <Avatar
                       modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                       // shadows
                       animationSrc='/male-idle-3.fbx'
-                      style={{ background: 'rgb(9,20,26)', width: '400px', height: '400px', pointerEvents: 'none' }}
+                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
                       fov={40}
                       cameraTarget={1.5}
                       cameraInitialDistance={30}
@@ -158,7 +158,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         ambientOcclusion: true,
                       }}
                     />
-                    {/* <AvatarImageComponent /> */}
+                    <div className='absolute bottom-14 left-20'>
+                      <AvatarImageComponent />
+                    </div>
                   </div>
                 ) : (
                   <div className='relative'>
@@ -174,14 +176,14 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         ambientOcclusion: true,
                       }}
                     />
-                    <div className='absolute bottom-6 left-20'>
+                    <div className='absolute bottom-14 left-20'>
                       <AvatarImageComponent />
                     </div>
                   </div>
                 )}
               </div>
               {/* Guilds Component */}
-              <div className='w-full bg-pink-300 lg:w-[65%]'>
+              <div className='w-full bg-pink-300/40 lg:w-[65%]'>
                 {/* GUILDS SELECTION */}
                 <div className='flex flex-col lg:flex-row lg:justify-between'>
                   <label htmlFor='guilds'>Guilds</label>
@@ -232,15 +234,27 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               </div>
             </div>
 
-            <div className='mt-4 flex justify-center gap-x-2 lg:absolute lg:bottom-6 lg:right-20 '>
-              <DrawOutlineButton
-                onClick={() => {
-                  setIsCardModalOpen(true)
-                }}
-              >
-                Create Avatar &emsp; +
-              </DrawOutlineButton>
-            </div>
+            {!isSmallScreen ? (
+              <div className='absolute left-96 top-96 transition-all duration-200 lg:left-20 lg:mt-14'>
+                <DrawOutlineButton
+                  onClick={() => {
+                    setIsCardModalOpen(true)
+                  }}
+                >
+                  Create Avatar &emsp; +
+                </DrawOutlineButton>
+              </div>
+            ) : (
+              <div className='absolute top-96 flex w-full justify-center'>
+                <DrawOutlineButton
+                  onClick={() => {
+                    setIsCardModalOpen(true)
+                  }}
+                >
+                  Create Avatar &emsp; +
+                </DrawOutlineButton>
+              </div>
+            )}
 
             {isCardModalOpen && (
               <div className='absolute left-0 top-0 flex size-full items-center justify-center'>

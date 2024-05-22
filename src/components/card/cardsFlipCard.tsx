@@ -72,7 +72,9 @@ export default function CardsFlipCard({ type, name, dateIn, dateOut }) {
             {/* QRCode */}
             <div className='absolute inset-0  rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
               <div className='flex size-full items-center justify-center '>
-                <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                {imgSrc && (
+                  <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                )}
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
                 <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
