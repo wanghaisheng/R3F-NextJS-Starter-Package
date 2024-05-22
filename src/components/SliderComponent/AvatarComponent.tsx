@@ -292,7 +292,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               <div>
                 <div className='absolute bottom-4 left-4 mt-4'>
                   <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                    <p className='px-4'>Back</p>
+                    Back
                   </DrawOutlineButton>
                 </div>
                 <div className='absolute bottom-4 right-4'>

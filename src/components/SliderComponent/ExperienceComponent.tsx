@@ -31,12 +31,6 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
     const fetchExpData = () => {
       try {
         if (user.experience.length !== 0) {
-          // const modifiedProjects = user.experience.map((exp) => ({
-          //   ...exp, // Keep all properties of the original experience object
-          //   skills: exp.skills.map((skill) => skill.skill), // Modify the 'skills' property
-          // }))
-          // setProjects(modifiedProjects)
-          // console.log(modifiedProjects)
           setProjects(user.experience)
         }
       } catch (error) {
@@ -69,11 +63,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'POST',
         data: submit,
       })
-      alert('exp info saved')
-      window.location.reload()
-      return
+      alert('Experience Info saved')
     } catch (error) {
-      throw new Error('failed to save the exp info')
+      alert('failed to save the exp info')
     }
   }
   const handleExpUpdate = async (e: any, index: number, experience_id) => {
@@ -92,12 +84,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'PUT',
         data: submit,
       })
-      alert('exp info updated')
-      window.location.reload()
-      return
+      alert('Experience info updated')
     } catch (error) {
-      console.error(error)
-      throw new Error('failed to update the exp info')
+      alert('Error updating exp info')
     }
   }
 
@@ -107,12 +96,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
-      alert('exp info deleted')
-      window.location.reload()
-      return
+      alert('Experience info deleted')
     } catch (error) {
-      console.error(error)
-      throw new Error('failed to delete the exp info')
+      alert('Error deleting exp info')
     }
   }
 

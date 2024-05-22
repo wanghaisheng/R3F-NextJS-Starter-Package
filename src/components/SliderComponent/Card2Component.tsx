@@ -59,7 +59,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         data: submit,
       })
       alert('card info saved')
-      window.location.reload()
       return
     } catch (error) {
       console.error(error)
@@ -82,7 +81,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         data: submit,
       })
       alert('card info updated')
-      window.location.reload()
       return
     } catch (error) {
       console.error(error)
@@ -96,7 +94,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'DELETE',
       })
       alert('card info deleted')
-      window.location.reload()
       return
     } catch (error) {
       console.error(error)
@@ -287,12 +284,14 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               />
                             </div>
                           </div>
-                          {/* Submit button */}
 
+                          {/* Generate button */}
                           {!isSmallScreen ? (
                             <>
                               <div className='mt-4'>
-                                <DrawOutlineButton aria-label='generate'>Generate</DrawOutlineButton>
+                                <DrawOutlineButton aria-label='generate' onClick={onNextButtonClick}>
+                                  Generate
+                                </DrawOutlineButton>
                               </div>
 
                               <div className='absolute bottom-4 right-4'>
@@ -408,12 +407,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </div>
                           </div>
 
-                          {/* Next and Generate Button */}
+                          {/* Next and Update Button */}
                           {!isSmallScreen ? (
                             <>
                               <div className='mt-4'>
-                                <DrawOutlineButton type='submit' aria-label='generate'>
-                                  Generate
+                                <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='update'>
+                                  Update
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>

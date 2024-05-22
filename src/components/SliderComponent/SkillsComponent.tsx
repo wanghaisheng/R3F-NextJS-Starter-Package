@@ -484,6 +484,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
             </div>
           </Tabs>
 
+          {/* Back Button */}
           {!isSmallScreen ? (
             <div className='absolute bottom-4 left-4 mt-4'>
               <button
@@ -499,7 +500,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           ) : (
             <div className='absolute bottom-4 left-4 mt-4'>
               <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                <p className='px-4'>Back</p>
+                Back
               </DrawOutlineButton>
             </div>
           )}
