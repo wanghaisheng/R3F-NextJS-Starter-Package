@@ -14,6 +14,7 @@ export default function CardsFlipCard({
   name,
   dateIn,
   dateOut,
+  description,
   bloodGroup,
   emergencyContact,
   emergencyAddress,
@@ -83,10 +84,11 @@ export default function CardsFlipCard({
               </div>
 
               {/* QRCode */}
-              <div className='absolute inset-0  rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
-                <div className='flex size-full items-center justify-center '>
+              <div className='absolute inset-0 rounded-lg bg-black px-12 py-8 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
+                <div className='flex items-center justify-between'>
+                  <p className='w-[60%] flex-wrap break-words'>Description : {description}</p>
                   {imgSrc && (
-                    <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                    <Image className='mb-4 rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
                   )}
                 </div>
                 <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
@@ -139,10 +141,11 @@ export default function CardsFlipCard({
               </div>
 
               {/* QRCode */}
-              <div className='absolute inset-0  rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
-                <div className='flex size-full items-center justify-center '>
+              <div className='absolute inset-0 rounded-lg bg-black px-12 py-8 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
+                <div className='flex items-center justify-between'>
+                  <p className='w-[60%] flex-wrap break-words'>Description : {description}</p>
                   {imgSrc && (
-                    <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                    <Image className='mb-4 rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
                   )}
                 </div>
                 <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>

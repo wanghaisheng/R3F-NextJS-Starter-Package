@@ -269,6 +269,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                         name={card.name}
                         dateIn={card.date_in}
                         dateOut={card.date_out}
+                        description={card.description}
                         bloodGroup={card.bloodGroup}
                         emergencyContact={card.emergencyContact}
                         emergencyAddress={card.emergencyAddress}
