@@ -1,6 +1,5 @@
 'use client'
 
-import { MdCancel } from 'react-icons/md'
 import { enqueueSnackbar } from 'notistack'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -18,7 +17,7 @@ import axios from 'axios'
 import Link from 'next/link'
 
 import { TagsInput } from 'react-tag-input-component'
-import dynamic from 'next/dynamic'
+
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { IoHome } from 'react-icons/io5'
 
@@ -35,7 +34,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
           setProjects(user.experience)
         }
       } catch (error) {
-        console.log('Error fetching cards data:', error)
+        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
     }
 

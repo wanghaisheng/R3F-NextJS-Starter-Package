@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
+import { enqueueSnackbar } from 'notistack'
+
 import { TiDelete } from 'react-icons/ti'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
@@ -11,7 +13,6 @@ import Link from 'next/link'
 import { IoHome } from 'react-icons/io5'
 
 export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
-  const [selectedLogo, setSelectedLogo] = useState(null)
   const [connections, setConnections] = useState([])
 
   const handleLogoClick = (logo) => {

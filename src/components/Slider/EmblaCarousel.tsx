@@ -87,7 +87,6 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
             {[
               <UserInfoComponent
                 key='UserInfoComponent'
-                onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
               />,

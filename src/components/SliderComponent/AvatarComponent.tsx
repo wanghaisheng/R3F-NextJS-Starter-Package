@@ -2,6 +2,8 @@
 
 import Image from 'next/image'
 
+import { enqueueSnackbar } from 'notistack'
+
 import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect, useMemo } from 'react'
@@ -18,11 +20,11 @@ async function getAvatarById(id: string) {
   try {
     const res = await axios.get(`/api/internal/avatar/${id}`)
     if (res.status !== 200) {
-      throw new Error('failed to fetch the avatars')
+      enqueueSnackbar('Failed to fetch the avatars', { autoHideDuration: 2500, variant: 'error' })
     }
     return res.data
   } catch (error) {
-    console.error(error)
+    enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
   }
 }
 
@@ -42,7 +44,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        console.error('Error fetching avatars data:', error)
+        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
     }
 

@@ -2,6 +2,8 @@
 
 import 'react-tabs/style/react-tabs.css'
 
+import { enqueueSnackbar } from 'notistack'
+
 import { useState, useEffect } from 'react'
 
 import { useUser } from '@/context/UserContext/UserContext'
@@ -10,9 +12,9 @@ import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
-import { FaArrowLeft, FaArrowRight, FaDiamond } from 'react-icons/fa6'
+import { FaArrowRight } from 'react-icons/fa6'
 
-export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
+export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
@@ -51,9 +53,9 @@ export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick
         method: 'put',
         data: submit,
       })
-      alert('Experience Info saved')
+      enqueueSnackbar('Experience Info saved', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      alert('failed to save the exp info')
+      enqueueSnackbar('Failed to save Experience Info', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 

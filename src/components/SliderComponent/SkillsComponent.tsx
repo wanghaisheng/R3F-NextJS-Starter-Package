@@ -1,5 +1,7 @@
 'use client'
 
+import { enqueueSnackbar } from 'notistack'
+
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 
@@ -32,7 +34,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { element } from 'three/examples/jsm/nodes/shadernode/ShaderNode'
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -125,10 +126,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         if (skillsSet.size !== 0) {
           const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
           setSkills(skillsArray)
-          console.log(skills)
+          // console.log(skills)
         }
       } catch (error) {
-        console.log('failed to fetch the skills data')
+        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
     }
 
@@ -156,11 +157,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'POST',
         data: submit,
       })
-      alert('skills info saved')
-      window.location.reload()
-      return
+      enqueueSnackbar('Generate Skills Successfully', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      throw new Error('failed to save the skills info')
+      enqueueSnackbar('Failed to generate skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
@@ -178,12 +177,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'PUT',
         data: submit,
       })
-      alert('skills info updated')
-      window.location.reload()
-      return
+      enqueueSnackbar('Skills updated', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      console.error(error)
-      throw new Error('failed to update the skills info')
+      enqueueSnackbar('Failed to update skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
@@ -193,12 +189,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
-      alert('skill info deleted')
-      window.location.reload()
-      return
+      enqueueSnackbar('Skills deleted', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      console.error(error)
-      // throw new Error('failed to delete the skill info')
+      enqueueSnackbar('Failed to delete skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
