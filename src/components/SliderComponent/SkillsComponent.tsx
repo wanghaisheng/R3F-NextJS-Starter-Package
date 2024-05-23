@@ -3,12 +3,16 @@
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 
+import { FaArrowLeft } from 'react-icons/fa6'
+
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { TiDelete } from 'react-icons/ti'
+import { IoHome } from 'react-icons/io5'
+
 import Link from 'next/link'
 
 import axios from 'axios'
@@ -34,7 +38,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-lg'>{label}</p>
+        <p className='text-lg text-white'>{label}</p>
         <p className='text-sm text-indigo-400'>
           <span className='ml-2'>{payload[0].payload.percentage}</span>%
         </p>
@@ -43,7 +47,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-export default function SkillsComponent() {
+export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
 
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
@@ -148,7 +152,7 @@ export default function SkillsComponent() {
     }
     try {
       await axios({
-        url: `/api/skills`,
+        url: `/api/internal/skills`,
         method: 'POST',
         data: submit,
       })
@@ -170,7 +174,7 @@ export default function SkillsComponent() {
     }
     try {
       await axios({
-        url: `/api/skills/${skills[index].skill_id}`,
+        url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'PUT',
         data: submit,
       })
@@ -186,7 +190,7 @@ export default function SkillsComponent() {
   const handleSkillDelete = async (index: number) => {
     try {
       await axios({
-        url: `/api/skills/${skills[index].skill_id}`,
+        url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
       alert('skill info deleted')
@@ -194,7 +198,7 @@ export default function SkillsComponent() {
       return
     } catch (error) {
       console.error(error)
-      throw new Error('failed to delete the skill info')
+      // throw new Error('failed to delete the skill info')
     }
   }
 
@@ -222,7 +226,7 @@ export default function SkillsComponent() {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
       updatedSkills.splice(index, 1)
-      if (skills[index].skill_id !== '') {
+      if (skills[index].skill_id.length != 0) {
         handleSkillDelete(index)
       }
       return updatedSkills
@@ -235,11 +239,11 @@ export default function SkillsComponent() {
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
-            Skills
+          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+            SKILLS
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
                 onClick={() => {
@@ -269,10 +273,10 @@ export default function SkillsComponent() {
             </TabList>
 
             {/* TabPanel */}
-            <div className='flex gap-y-5 lg:gap-x-5 lg:gap-y-0'>
-              <div className='flex flex-col lg:flex-row lg:justify-between'>
+            <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
+              <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
                 {skills.map((element, index) => (
-                  <div key={index} className='w-[300px] md:w-[500px] lg:w-[60%]'>
+                  <div key={index}>
                     {user && checkActiveSkills(element) != true ? (
                       <form onSubmit={(e) => handleSkillSubmit(e, index)}>
                         <TabPanel>
@@ -302,30 +306,6 @@ export default function SkillsComponent() {
                                 </div>
                               </div>
                             </div>
-                            {/* <p>
-                          Work Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p>
-                        <p>
-                          Education Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p> */}
-                            {/* <p className='my-4 lg:mt-0'>
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam
-                              sed saepe repudiandae accusamus temporibus, autem
-                            </p> */}
                             <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                               Certifications
                             </label>
@@ -336,13 +316,37 @@ export default function SkillsComponent() {
                               aria-label='file input'
                             />
                           </div>
-                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-                            <div className='-mt-2'>
-                              <DrawOutlineButton type='submit' aria-label='generate button'>
-                                Generate
-                              </DrawOutlineButton>
+                          {/* Go Home and Generate Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4 flex justify-center'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Generate
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <Link href='/hero3'>
+                                  <button
+                                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                                    type='submit'
+                                    aria-label='home btn'
+                                  >
+                                    <p className='p-4'>
+                                      <IoHome />
+                                    </p>
+                                  </button>
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <Link href='/hero3'>
+                                <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                  Go To Home
+                                </DrawOutlineButton>
+                              </Link>
                             </div>
-                          </div>
+                          )}
                         </TabPanel>
                       </form>
                     ) : (
@@ -374,30 +378,7 @@ export default function SkillsComponent() {
                                 </div>
                               </div>
                             </div>
-                            {/* <p>
-                          Work Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p>
-                        <p>
-                          Education Project{' '}
-                          <input
-                            type='text'
-                            value={element.skill}
-                            onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                            placeholder='Skill Name'
-                            className='w-full rounded-md bg-white/20 p-1'
-                          />
-                        </p> */}
-                            {/* <p className='my-4 lg:mt-0'>
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, voluptatibus laboriosam
-                              sed saepe repudiandae accusamus temporibus, autem
-                            </p> */}
+
                             <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
                               Certifications
                             </label>
@@ -408,87 +389,121 @@ export default function SkillsComponent() {
                               aria-label='file input'
                             />
                           </div>
-                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-                            <div className='-mt-2'>
-                              <DrawOutlineButton type='submit' aria-label='generate button'>
-                                Generate
-                              </DrawOutlineButton>
+                          {/* Go Home and Update Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4 flex justify-center'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Update
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <Link href='/hero3'>
+                                  <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                    Go To Home
+                                  </DrawOutlineButton>
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <Link href='/hero3'>
+                                <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                  Go To Home
+                                </DrawOutlineButton>
+                              </Link>
                             </div>
-                          </div>
+                          )}
                         </TabPanel>
                       </form>
                     )}
                   </div>
                 ))}
+              </div>
 
-                <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
-                  <p className='mb-2 flex justify-center'>Specification</p>
+              <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
+                <p className='mb-2 flex justify-center'>Specification</p>
 
-                  {/* Condition for changing barchart chart and radar chart*/}
-                  <div className='lg:block lg:w-full'>
-                    {skills.length < 6 ? (
-                      <ResponsiveContainer width='100%' height={220}>
-                        <BarChart
-                          width={100}
-                          height={287}
-                          data={skills}
-                          margin={{
-                            top: 5,
-                            right: 20,
-                            left: -20,
-                            bottom: 5,
-                          }}
-                        >
-                          <XAxis dataKey='skill_name' />
-                          <YAxis domain={[0, 100]} />
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                          <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                          <Bar
-                            name='Ram'
-                            dataKey='percentage'
-                            fill='#6E29F7'
-                            activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    ) : (
-                      // Radar chart
-                      <ResponsiveContainer width='100%' height={220}>
-                        <RadarChart
-                          // cx={300}
-                          // cy={250}
-                          // outerRadius={150}
-                          width={100}
-                          height={287}
-                          data={skills}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey='skill_name' />
-                          <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                          <Radar
-                            name='Ram'
-                            dataKey='percentage'
-                            stroke='#28B5E1'
-                            strokeWidth={4}
-                            fill='#28B5E1'
-                            fillOpacity={0.4}
-                          />
-                          {/* <Tooltip /> */}
-                          {/* <Legend values="100%" /> */}
-                          <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
-                        </RadarChart>
-                      </ResponsiveContainer>
-                    )}
-                  </div>
+                {/* Condition for changing barchart chart and radar chart*/}
+                <div className='mb-5 lg:block lg:w-full'>
+                  {skills.length < 6 ? (
+                    <ResponsiveContainer width='100%' height={220}>
+                      <BarChart
+                        width={100}
+                        height={287}
+                        data={skills}
+                        margin={{
+                          top: 5,
+                          right: 20,
+                          left: -20,
+                          bottom: 5,
+                        }}
+                      >
+                        <XAxis dataKey='skill_name' angle={-30} />
+                        <YAxis domain={[0, 100]} />
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
+                        <CartesianGrid vertical={false} strokeDasharray='6 6' />
+                        <Bar
+                          name='Ram'
+                          dataKey='percentage'
+                          fill='#6E29F7'
+                          activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    // Radar chart
+                    <ResponsiveContainer width='100%' height={220}>
+                      <RadarChart
+                        // cx={300}
+                        // cy={250}
+                        // outerRadius={150}
+                        width={100}
+                        height={287}
+                        data={skills}
+                      >
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey='skill_name' />
+                        <PolarRadiusAxis opacity={0} domain={[0, 100]} />
+                        <Radar
+                          name='Ram'
+                          dataKey='percentage'
+                          stroke='#28B5E1'
+                          strokeWidth={4}
+                          fill='#28B5E1'
+                          fillOpacity={0.4}
+                        />
+                        {/* <Tooltip /> */}
+                        {/* <Legend values="100%" /> */}
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  )}
                 </div>
               </div>
             </div>
           </Tabs>
-          <div className='absolute bottom-4 right-0 lg:right-4'>
-            <Link href='/hero3'>
-              <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
-            </Link>
-          </div>
+
+          {/* Back Button */}
+          {!isSmallScreen ? (
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <button
+                className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                onClick={onPrevButtonClick}
+                aria-label='prev'
+              >
+                <p className='p-4'>
+                  <FaArrowLeft />
+                </p>
+              </button>
+            </div>
+          ) : (
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                Back
+              </DrawOutlineButton>
+            </div>
+          )}
         </div>
       </div>
     </div>

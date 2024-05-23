@@ -6,8 +6,11 @@ import Image from 'next/image'
 import { TiDelete } from 'react-icons/ti'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import Link from 'next/link'
+import { IoHome } from 'react-icons/io5'
 
-export default function ConnectionComponent({ onNextButtonClick }) {
+export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const [selectedLogo, setSelectedLogo] = useState(null)
   const [connections, setConnections] = useState([])
 
@@ -46,10 +49,12 @@ export default function ConnectionComponent({ onNextButtonClick }) {
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='connection'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Connection</div>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+            CONNECTION
+          </div>
           {connections.length < 4 ? (
             <div className='mt-3 flex flex-wrap justify-center gap-x-10 gap-y-5'>
               {logos.map((logo, index) => (
@@ -109,17 +114,75 @@ export default function ConnectionComponent({ onNextButtonClick }) {
                 ))}
               </div>
             )}
-            <div className='absolute bottom-4 right-28'>
-              <DrawOutlineButton id='submit-connection' type='submit'>
-                Submit
-              </DrawOutlineButton>
-            </div>
+
+            {/* Submit and Next Button */}
+            {!isSmallScreen ? (
+              <>
+                <div className='mt-7 flex justify-center'>
+                  <DrawOutlineButton aria-label='generate'>Submit</DrawOutlineButton>
+                </div>
+                <div className='absolute bottom-4 right-4'>
+                  <Link href='/hero3'>
+                    <button
+                      className='mr-2 rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                      type='submit'
+                      aria-label='home btn'
+                    >
+                      <p className='p-4'>
+                        <IoHome />
+                      </p>
+                    </button>
+                  </Link>
+                  <button
+                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    type='submit'
+                    onClick={onNextButtonClick}
+                    aria-label='next'
+                  >
+                    <p className='p-4'>
+                      <FaArrowRight />
+                    </p>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                <Link href='/hero3'>
+                  <DrawOutlineButton type='submit' aria-label='next slide'>
+                    <IoHome className='my-1' />
+                  </DrawOutlineButton>
+                </Link>
+                <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                  Next
+                </DrawOutlineButton>
+              </div>
+            )}
           </form>
-          <div className='absolute bottom-4 right-4'>
-            <DrawOutlineButton onClick={onNextButtonClick}>
-              <p className='px-2'>Next</p>
-            </DrawOutlineButton>
-          </div>
+
+          {/* Back Button */}
+          {!isSmallScreen ? (
+            <div>
+              <div className='absolute bottom-4 left-4 mt-4'>
+                <button
+                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                  onClick={onPrevButtonClick}
+                  aria-label='prev'
+                >
+                  <p className='p-4'>
+                    <FaArrowLeft />
+                  </p>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className='absolute bottom-4 left-4 mt-4'>
+                <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                  Back
+                </DrawOutlineButton>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
