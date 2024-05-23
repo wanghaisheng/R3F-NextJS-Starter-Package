@@ -1,5 +1,8 @@
 'use client'
 
+import { MdCancel } from 'react-icons/md'
+import { SnackbarProvider, enqueueSnackbar, closeSnackbar } from 'notistack'
+
 import { motion } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
@@ -73,6 +76,12 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
   return (
     <>
       <section className='mx-auto mt-20 w-full'>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        />
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-5 flex'>
             {[

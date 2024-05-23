@@ -1,5 +1,7 @@
 'use client'
-import { motion } from 'framer-motion'
+
+import { enqueueSnackbar } from 'notistack'
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
@@ -73,10 +75,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'POST',
         data: submit,
       })
-      alert('Card info saved')
-      return
+      enqueueSnackbar('Generated Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
     } catch (error) {
-      console.error(error)
+      enqueueSnackbar('Failed to Generate', { autoHideDuration: 2000, variant: 'error' })
     }
   }
 
@@ -99,10 +103,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'PUT',
         data: submit,
       })
-      alert('Card info updated')
-      return
+      enqueueSnackbar('Updated Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
     } catch (error) {
-      console.error(error)
+      enqueueSnackbar('Failed to Update', { autoHideDuration: 2000, variant: 'error' })
     }
   }
 

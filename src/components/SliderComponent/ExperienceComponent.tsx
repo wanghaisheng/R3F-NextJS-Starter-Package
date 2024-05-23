@@ -1,6 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { MdCancel } from 'react-icons/md'
+import { enqueueSnackbar } from 'notistack'
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
@@ -25,7 +27,6 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
   const [projects, setProjects] = useState([
     { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
   ])
-
   // fetch experience data
   useEffect(() => {
     const fetchExpData = () => {
@@ -63,9 +64,12 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'POST',
         data: submit,
       })
-      alert('Experience Info saved')
+      enqueueSnackbar('Generated Sucessfully', {
+        autoHideDuration: 2500,
+        variant: 'success',
+      })
     } catch (error) {
-      alert('failed to save the exp info')
+      enqueueSnackbar('Failed to Generate', { autoHideDuration: 2500, variant: 'error' })
     }
   }
   const handleExpUpdate = async (e: any, index: number, experience_id) => {
@@ -84,9 +88,10 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'PUT',
         data: submit,
       })
-      alert('Experience info updated')
+      // alert('Experience info updated')
+      enqueueSnackbar('Updated Sucessfully', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      alert('Error updating exp info')
+      enqueueSnackbar('Update Failed', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
@@ -96,9 +101,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
-      alert('Experience info deleted')
+      enqueueSnackbar('Deleted Sucessfully', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      alert('Error deleting exp info')
+      enqueueSnackbar('Deletion Failed', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
