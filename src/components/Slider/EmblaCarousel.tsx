@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
@@ -31,6 +31,21 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
     if (emblaApi) emblaApi.scrollTo(index)
   }
 
+  const handleScroll = useCallback(
+    (event) => {
+      if (!emblaApi) return
+
+      const deltaY = event.deltaY
+
+      if (deltaY > 0) {
+        emblaApi.scrollNext()
+      } else if (deltaY < 0) {
+        emblaApi.scrollPrev()
+      }
+    },
+    [emblaApi],
+  )
+
   useEffect(() => {
     if (emblaApi) {
       emblaApi.on('select', () => {
@@ -48,8 +63,12 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 
     handleResize()
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    window.addEventListener('wheel', handleScroll)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('wheel', handleScroll)
+    }
+  }, [handleScroll])
 
   return (
     <>
