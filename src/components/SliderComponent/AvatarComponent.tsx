@@ -130,6 +130,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   ]
   const [selectedGuild, setSelectedGuild] = useState('')
 
+  const selectedGuildData = guildData.find((guild) => guild.name === selectedGuild)
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -145,7 +147,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Avatar and AvatarImageComponent Container */}
-              <div className='flex flex-col items-center justify-center bg-blue-300/40 lg:w-[35%]'>
+              <div className='flex flex-col items-center justify-center lg:w-[35%]'>
                 {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
                   <div className='relative'>
                     <Avatar
@@ -185,13 +187,22 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 )}
               </div>
               {/* Guilds Component */}
-              <div className='w-full bg-pink-300/40 lg:w-[65%]'>
+              <div className='w-full rounded-lg bg-gradient-to-r from-pink-300/70 to-pink-400/40 p-4 shadow-lg lg:w-[65%]'>
+                {selectedGuildData && (
+                  <div className='mt-4 rounded-lg border border-white p-4'>
+                    <h2 className='text-lg font-bold'>{selectedGuildData.name} Guild</h2>
+                    <p className='text-sm text-gray-300'>{selectedGuildData.description}</p>
+                    <img src={selectedGuildData.image} alt={selectedGuildData.name} className='mt-2 size-24' />
+                  </div>
+                )}
                 {/* GUILDS SELECTION */}
-                <div className='flex flex-col lg:flex-row lg:justify-between'>
-                  <label htmlFor='guilds'>Guilds</label>
-                  <div className='relative flex items-center justify-between gap-x-2 px-4 lg:w-[70%]'>
+                <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+                  <label htmlFor='guilds' className='text-lg font-semibold text-gray-700 lg:text-xl'>
+                    Guilds
+                  </label>
+                  <div className='relative flex items-center justify-between gap-x-4 px-4 lg:w-[70%]'>
                     {guildData.map((guild, index) => (
-                      <div key={index} className='lg:relative'>
+                      <div key={index} className='group lg:relative'>
                         <input
                           type='radio'
                           id={guild.name.toString()}
@@ -204,22 +215,29 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         />
                         <label
                           htmlFor={guild.name}
-                          className={'group cursor-pointer'}
+                          className={`cursor-pointer transition-transform duration-200 ${
+                            selectedGuild === guild.name ? 'scale-105 text-pink-500' : 'text-white'
+                          }`}
                           style={{
                             color: selectedGuild === guild.name ? `#${guild.color}` : `#FFFFFF`,
                             fontSize: selectedGuild === guild.name ? '1.2em' : '1em',
-                            transition: 'font-size 0.2s ease',
                           }}
                         >
                           {guild.symbol}
                           <div
-                            className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-2 text-white group-hover:block`}
+                            className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-4 text-white shadow-md group-hover:block`}
                           >
                             <div style={{ width: '150px' }}>
-                              <Image src={guild.image} alt={guild.name} width={150} height={50} />
+                              <Image
+                                src={guild.image}
+                                alt={guild.name}
+                                width={150}
+                                height={50}
+                                className='rounded-md'
+                              />
                             </div>
                             <p
-                              className='flex justify-center text-xs font-bold'
+                              className='mt-2 flex justify-center text-xs font-bold'
                               style={{
                                 color: `#${guild.color}`,
                               }}
