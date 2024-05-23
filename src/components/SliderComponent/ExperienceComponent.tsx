@@ -163,8 +163,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
       <div className='relative flex flex-col py-4 md:w-[600px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'>
         <div className='flex h-screen w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
-            Experience
+          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+            EXPERIENCE
             <div className='absolute right-0 top-10 text-sm'>
               <DrawOutlineButton
                 onClick={() => {
@@ -269,19 +269,19 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div>
                               <input
                                 type='radio'
-                                aria-label='gym'
-                                id='gym'
+                                aria-label='emergency'
+                                id='emergency'
                                 name='type'
-                                value='gym'
-                                checked={project.type === 'gym'}
+                                value='emergency'
+                                checked={project.type === 'emergency'}
                                 onChange={(e) => handleProjectTypeChange(index, e.target.value)}
                                 className='hidden'
                               />
                               <label
-                                htmlFor='gym'
-                                className={` ${project.type === 'gym' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                                htmlFor='emergency'
+                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
                               >
-                                Gym
+                                Emergency
                               </label>
                             </div>
                           </div>
@@ -438,19 +438,19 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div>
                               <input
                                 type='radio'
-                                aria-label='gym'
-                                id='gym'
+                                aria-label='emergency'
+                                id='emergency'
                                 name='type'
-                                value='gym'
-                                checked={project.type === 'gym'}
+                                value='emergency'
+                                checked={project.type === 'emergency'}
                                 onChange={(e) => handleProjectTypeChange(index, e.target.value)}
                                 className='hidden'
                               />
                               <label
-                                htmlFor='gym'
-                                className={` ${project.type === 'gym' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
+                                htmlFor='emergency'
+                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-400' : 'text-white hover:text-purple-400'}`}
                               >
-                                Gym
+                                Emergency
                               </label>
                             </div>
                           </div>
@@ -516,12 +516,12 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             </div>
                           </div>
                         </div>
-                        {/* Next and Generate Button */}
+                        {/* Next and Update Button */}
                         {!isSmallScreen ? (
                           <>
                             <div className='mt-4'>
-                              <DrawOutlineButton type='submit' aria-label='generate'>
-                                Generate
+                              <DrawOutlineButton type='submit' aria-label='update'>
+                                Update
                               </DrawOutlineButton>
                             </div>
                             <div className='absolute bottom-4 right-4'>

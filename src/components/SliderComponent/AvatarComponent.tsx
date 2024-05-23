@@ -138,7 +138,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         // style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>My Avatars</div>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+            AVATAR & GUILDS
+          </div>
 
           <div className='mt-5 rounded-[20px] '>
             <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -158,9 +160,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         ambientOcclusion: true,
                       }}
                     />
-                    <div className='absolute bottom-14 left-20'>
+                    {/* <div className='absolute bottom-14 left-20'>
                       <AvatarImageComponent />
-                    </div>
+                    </div> */}
                   </div>
                 ) : (
                   <div className='relative'>
@@ -176,9 +178,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         ambientOcclusion: true,
                       }}
                     />
-                    <div className='absolute bottom-14 left-20'>
+                    {/* <div className='absolute bottom-14 left-20'>
                       <AvatarImageComponent />
-                    </div>
+                    </div> */}
                   </div>
                 )}
               </div>

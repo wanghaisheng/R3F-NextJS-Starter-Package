@@ -242,8 +242,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
-            Skills
+          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+            SKILLS
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
                 onClick={() => {
@@ -389,12 +389,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               aria-label='file input'
                             />
                           </div>
-                          {/* Go Home and Generate Button */}
+                          {/* Go Home and Update Button */}
                           {!isSmallScreen ? (
                             <>
                               <div className='mt-4 flex justify-center'>
                                 <DrawOutlineButton type='submit' aria-label='generate'>
-                                  Generate
+                                  Update
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>

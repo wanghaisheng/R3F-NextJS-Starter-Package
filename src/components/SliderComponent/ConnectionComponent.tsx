@@ -52,7 +52,9 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
         className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
       >
         <div className='flex flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Connection</div>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+            CONNECTION
+          </div>
           {connections.length < 4 ? (
             <div className='mt-3 flex flex-wrap justify-center gap-x-10 gap-y-5'>
               {logos.map((logo, index) => (
@@ -146,7 +148,7 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
             ) : (
               <div className='absolute bottom-4 right-4 flex gap-x-1'>
                 <Link href='/hero3'>
-                  <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                  <DrawOutlineButton type='submit' aria-label='next slide'>
                     <IoHome className='my-1' />
                   </DrawOutlineButton>
                 </Link>

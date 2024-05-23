@@ -89,7 +89,9 @@ export default function UserInfoComponent({ onNextButtonClick, onPrevButtonClick
           className='relative flex h-[900px] w-[300px] py-4 md:w-[500px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
         >
           <div className='flex w-full flex-col'>
-            <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>Genius ID</div>
+            <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+              GENIUS ID
+            </div>
 
             <div className='mt-5 rounded-[20px] '>
               <div className='flex flex-col lg:flex-row lg:justify-between'>
