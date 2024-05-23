@@ -493,7 +493,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                           </div>
                           <div className='flex flex-col lg:flex-row lg:justify-between'>
                             <label htmlFor=''>Skills</label>
-                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                            <div className='bg-black text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:text-black dark:placeholder:text-black'>
                               <TagsInput
                                 value={project.project_skills}
                                 onChange={(tags) => handleSkillsChange(index, tags)}
@@ -505,7 +505,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                           </div>
                           <div className='flex flex-col lg:flex-row lg:justify-between'>
                             <label htmlFor=''>Tools</label>
-                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                            <div className='bg-black text-sm text-gray-900 focus:outline-none  lg:w-[70%] dark:text-black dark:placeholder:text-black'>
                               <TagsInput
                                 value={project.tools}
                                 onChange={(tags) => handleToolsChange(index, tags)}

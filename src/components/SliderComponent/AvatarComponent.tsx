@@ -192,7 +192,13 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   <div className='mt-4 rounded-lg border border-white p-4'>
                     <h2 className='text-lg font-bold'>{selectedGuildData.name} Guild</h2>
                     <p className='text-sm text-gray-300'>{selectedGuildData.description}</p>
-                    <img src={selectedGuildData.image} alt={selectedGuildData.name} className='mt-2 size-24' />
+                    <Image
+                      src={selectedGuildData.image}
+                      alt={selectedGuildData.name}
+                      className='mt-2'
+                      width={56}
+                      height={56}
+                    />
                   </div>
                 )}
                 {/* GUILDS SELECTION */}
