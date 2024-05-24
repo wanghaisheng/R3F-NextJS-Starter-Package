@@ -148,11 +148,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='My Avatar'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
         // style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
             AVATAR & GUILDS
           </div>
 
@@ -263,14 +263,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   </form>
                   {selectedGuildData && (
                     <div
-                      className='ml-4 h-auto rounded-lg border p-4 lg:h-60'
+                      className='ml-4 h-auto rounded-lg border p-4 lg:h-60 lg:w-72'
                       style={{ borderColor: selectedGuildData.color }}
                     >
-                      <h2 className='text-lg font-bold'>{selectedGuildData.name} Guild</h2>
-                      <p className='text-sm text-gray-300'>{selectedGuildData.description}</p>
-                      <p className='text-sm text-gray-300'>Skills : {selectedGuildData.skills}</p>
-                      <p className='text-sm text-gray-300'>Alignment : {selectedGuildData.alignment}</p>
-                      <p className='text-sm text-gray-300'>Additional Skill : {selectedGuildData.additionalSkills}</p>
+                      <h2 className='text-lg font-bold' style={{ color: selectedGuildData.color }}>
+                        {selectedGuildData.name} Guild
+                      </h2>
+                      <p className='text-sm text-purple-950 dark:text-gray-300'>{selectedGuildData.description}</p>
+                      <p className='text-sm text-purple-950 dark:text-gray-300'>Skills : {selectedGuildData.skills}</p>
+                      <p className='text-sm text-purple-950 dark:text-gray-300'>
+                        Alignment : {selectedGuildData.alignment}
+                      </p>
+                      <p className='text-sm text-purple-950 dark:text-gray-300'>
+                        Additional Skill : {selectedGuildData.additionalSkills}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -315,7 +321,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               <div>
                 <div className='absolute bottom-4 left-4 mt-4'>
                   <button
-                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                     onClick={onPrevButtonClick}
                     aria-label='prev'
                   >
@@ -326,7 +332,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 </div>
                 <div className='absolute bottom-4 right-4 mt-4'>
                   <button
-                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                    className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                     onClick={onNextButtonClick}
                     aria-label='prev'
                   >
