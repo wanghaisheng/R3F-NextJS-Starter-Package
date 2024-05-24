@@ -225,17 +225,16 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-
   const [open, setOpen] = useState(false)
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:bg-black/10 md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl font-semibold drop-shadow lg:my-5 lg:text-5xl'>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
             SKILLS
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
@@ -267,7 +266,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
 
             {/* TabPanel */}
             <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
-              <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
+              <div className='w-[300px] text-purple-950 md:w-[500px] lg:w-[60%] dark:text-purple-200'>
                 {skills.map((element, index) => (
                   <div key={index}>
                     {user && checkActiveSkills(element) != true ? (
@@ -303,7 +302,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               Certifications
                             </label>
                             <input
-                              className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              className='block w-full cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
                               id='file_input'
                               type='file'
                               aria-label='file input'
@@ -318,26 +317,24 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>
-                                <Link href='/hero3'>
-                                  <button
-                                    className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
-                                    type='submit'
-                                    aria-label='home btn'
-                                  >
+                                <button
+                                  className='rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
                                     <p className='p-4'>
                                       <IoHome />
                                     </p>
-                                  </button>
-                                </Link>
+                                  </Link>
+                                </button>
                               </div>
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4'>
-                              <Link href='/hero3'>
-                                <DrawOutlineButton type='submit' aria-label='go to home page'>
-                                  Go To Home
-                                </DrawOutlineButton>
-                              </Link>
+                              <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                <Link href='/hero3'>Go To Home</Link>
+                              </DrawOutlineButton>
                             </div>
                           )}
                         </TabPanel>
@@ -376,7 +373,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               Certifications
                             </label>
                             <input
-                              className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              className='block w-full cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
                               id='file_input'
                               type='file'
                               aria-label='file input'
@@ -391,20 +388,24 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>
-                                <Link href='/hero3'>
-                                  <DrawOutlineButton type='submit' aria-label='go to home page'>
-                                    Go To Home
-                                  </DrawOutlineButton>
-                                </Link>
+                                <button
+                                  className='rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
+                                    <p className='p-4'>
+                                      <IoHome />
+                                    </p>
+                                  </Link>
+                                </button>
                               </div>
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4'>
-                              <Link href='/hero3'>
-                                <DrawOutlineButton type='submit' aria-label='go to home page'>
-                                  Go To Home
-                                </DrawOutlineButton>
-                              </Link>
+                              <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                <Link href='/hero3'>Go To Home</Link>
+                              </DrawOutlineButton>
                             </div>
                           )}
                         </TabPanel>
@@ -481,7 +482,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           {!isSmallScreen ? (
             <div className='absolute bottom-4 left-4 mt-4'>
               <button
-                className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 onClick={onPrevButtonClick}
                 aria-label='prev'
               >

@@ -508,17 +508,17 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>
-                                <Link href='/hero3'>
-                                  <button
-                                    className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                    type='submit'
-                                    aria-label='home btn'
-                                  >
+                                <button
+                                  className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
                                     <p className='p-4'>
                                       <IoHome />
                                     </p>
-                                  </button>
-                                </Link>
+                                  </Link>
+                                </button>
                                 <button
                                   className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
@@ -533,11 +533,11 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                              <Link href='/hero3'>
-                                <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                <Link href='/hero3'>
                                   <IoHome className='my-1' />
-                                </DrawOutlineButton>
-                              </Link>
+                                </Link>
+                              </DrawOutlineButton>
                               <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                                 Next
                               </DrawOutlineButton>
@@ -740,17 +740,17 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>
-                                <Link href='/hero3'>
-                                  <button
-                                    className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                    type='submit'
-                                    aria-label='home btn'
-                                  >
+                                <button
+                                  className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
                                     <p className='p-4'>
                                       <IoHome />
                                     </p>
-                                  </button>
-                                </Link>
+                                  </Link>
+                                </button>
                                 <button
                                   className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
@@ -765,11 +765,11 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                              <Link href='/hero3'>
-                                <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                <Link href='/hero3'>
                                   <IoHome className='my-1' />
-                                </DrawOutlineButton>
-                              </Link>
+                                </Link>
+                              </DrawOutlineButton>
                               <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                                 Next
                               </DrawOutlineButton>

@@ -210,7 +210,7 @@ const Navbar = () => {
         <div
           className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
-          } flex w-[75%] flex-col bg-white shadow-xl dark:bg-black`}
+          } flex w-[75%] flex-col bg-violet-400 shadow-xl dark:bg-black`}
         >
           <div className='p-4 '>
             <button
@@ -220,10 +220,10 @@ const Navbar = () => {
               aria-label='Close panel'
             >
               <span className='sr-only'>Close panel</span>
-              <IoMdArrowRoundBack className='text-black dark:text-white' />
+              <IoMdArrowRoundBack className='text-white dark:text-purple-200' />
             </button>
           </div>
-          <div className='px-4 py-6 '>
+          <div className=' px-4 py-6 '>
             {/* Navbar for Hamburger */}
             <ul className='flex flex-col gap-y-4'>
               <li>
