@@ -112,7 +112,7 @@ export default function Page() {
         transition={{ duration: 0.5, delay: 0.4 }}
         className='signup flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
       >
-        <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl shadow shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5'>
+        <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
           <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
             <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN UP</h2>
           </div>
@@ -166,7 +166,7 @@ export default function Page() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSubmit}
-                className='w-full rounded-lg bg-purple-200 p-2 px-4 text-purple-950'
+                className='w-full rounded-lg bg-purple-950 p-2 px-4 text-purple-200 dark:bg-purple-200 dark:text-purple-950'
               >
                 Signup
               </motion.button>
