@@ -144,7 +144,7 @@ const SignIn = () => {
                   type='email'
                   id='email'
                   name='email'
-                  className='rounded-md bg-transparent  p-2 text-purple-950 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 dark:text-purple-200'
+                  className='rounded-md bg-transparent  p-2 text-purple-950 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 '
                   value={email}
                   placeholder='Email'
                   onChange={({ target }) => setEmail(target.value)}
@@ -166,7 +166,7 @@ const SignIn = () => {
                   type='password'
                   id='password'
                   name='password'
-                  className='rounded-md bg-transparent p-2 text-purple-950 dark:text-purple-200'
+                  className='rounded-md bg-transparent p-2 text-purple-950 '
                   placeholder='Password'
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}
