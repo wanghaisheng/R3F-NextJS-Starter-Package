@@ -23,7 +23,8 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = ({ options }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-  const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
+  // const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
+  const tabs = ['Genius ID', 'Avatar', 'Card', 'Experience', 'Skills']
 
   const [selected, setSelected] = useState(tabs[0])
   const [slideIndex, setSlideIndex] = useState(0)
@@ -102,12 +103,12 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
               />,
-              <ConnectionComponent
-                key='ConnectionComponent'
-                onPrevButtonClick={() => emblaApi.scrollPrev()}
-                onNextButtonClick={() => emblaApi.scrollNext()}
-                isSmallScreen={isSmallScreen}
-              />,
+              // <ConnectionComponent
+              //   key='ConnectionComponent'
+              //   onPrevButtonClick={() => emblaApi.scrollPrev()}
+              //   onNextButtonClick={() => emblaApi.scrollNext()}
+              //   isSmallScreen={isSmallScreen}
+              // />,
               <ExperienceComponent
                 key='ExperienceComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}

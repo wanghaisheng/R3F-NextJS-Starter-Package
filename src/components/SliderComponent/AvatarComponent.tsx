@@ -67,9 +67,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           />
         </svg>
       ),
-      color: 'FFFFFF',
-      description: ' WHITE Guild of the Vairochana family',
-      image: '/svgs/vairocana.svg',
+      color: 'white',
+      description: 'Buddha Vairocana Family (Space): Development, Engineering  & ITAI Services ',
+      skills: 'Clear vision, leadership, adaptability, communication',
+      alignment: 'Strategic planning, project management, problem-solving',
+      additionalSkills: 'Innovation, data analysis, research',
     },
     {
       name: 'VAJRA',
@@ -82,9 +84,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           />
         </svg>
       ),
-      color: '0000FF',
+      color: 'blue',
       description: ' BLUE Guild of the Akshobhya family',
-      image: '/svgs/akshobhya.svg',
+      skills: 'Clear vision, leadership, adaptability, communication',
+      alignment: 'Strategic planning, project management, problem-solving',
+      additionalSkills: 'Innovation, data analysis, research',
     },
     {
       name: 'KARMA',
@@ -97,9 +101,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           />
         </svg>
       ),
-      color: '00FF00',
+      color: 'green',
       description: ' Green Guild of the Amoghasiddhi family selihgosadilnho uiogcseou voshdof',
-      image: '/svgs/amoghasiddhi.svg',
+      skills: 'Clear vision, leadership, adaptability, communication',
+      alignment: 'Strategic planning, project management, problem-solving',
+      additionalSkills: 'Innovation, data analysis, research',
     },
     {
       name: 'RATNA',
@@ -112,9 +118,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           />
         </svg>
       ),
-      color: 'FFF200',
+      color: 'yellow',
       description: ' YELLOW/GOLD Guild of the Ratnasambhava family',
-      image: '/svgs/ratnasambhava.svg',
+      skills: 'Clear vision, leadership, adaptability, communication',
+      alignment: 'Strategic planning, project management, problem-solving',
+      additionalSkills: 'Innovation, data analysis, research',
     },
     {
       name: 'PADMA',
@@ -125,12 +133,14 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
           <path d='M11 12.7351V3' stroke='black' />
         </svg>
       ),
-      color: 'FF0000',
+      color: 'red',
       description: ' RED Guild of the Amitabha family',
-      image: '/svgs/amitabha.svg',
+      skills: 'Clear vision, leadership, adaptability, communication',
+      alignment: 'Strategic planning, project management, problem-solving',
+      additionalSkills: 'Innovation, data analysis, research',
     },
   ]
-  const [selectedGuild, setSelectedGuild] = useState('')
+  const [selectedGuild, setSelectedGuild] = useState(guildData[0].name)
 
   const selectedGuildData = guildData.find((guild) => guild.name === selectedGuild)
 
@@ -188,28 +198,19 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   </div>
                 )}
               </div>
+
               {/* Guilds Component */}
-              <div className='w-full rounded-lg bg-gradient-to-r from-pink-300/70 to-pink-400/40 p-4 shadow-lg lg:w-[65%]'>
-                {selectedGuildData && (
-                  <div className='mt-4 rounded-lg border border-white p-4'>
-                    <h2 className='text-lg font-bold'>{selectedGuildData.name} Guild</h2>
-                    <p className='text-sm text-gray-300'>{selectedGuildData.description}</p>
-                    <Image
-                      src={selectedGuildData.image}
-                      alt={selectedGuildData.name}
-                      className='mt-2'
-                      width={56}
-                      height={56}
-                    />
-                  </div>
-                )}
+              <div className='size-full p-4 lg:w-[65%]'>
                 {/* GUILDS SELECTION */}
-                <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+                <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
                   <form>
-                    <label htmlFor='guilds' className='text-lg font-semibold text-gray-700 lg:text-xl'>
-                      Guilds
+                    <label
+                      htmlFor='guilds'
+                      className='flex justify-center text-lg font-semibold text-gray-700 lg:text-xl'
+                    >
+                      <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
                     </label>
-                    <div className='relative flex items-center justify-between gap-x-4 px-4 lg:w-[70%]'>
+                    <div className='relative mb-4 flex items-center justify-center gap-4 lg:mb-0 lg:flex-col '>
                       {guildData.map((guild, index) => (
                         <div key={index} className='group lg:relative'>
                           <input
@@ -225,7 +226,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                           <label
                             htmlFor={guild.name}
                             className={`cursor-pointer transition-transform duration-200 ${
-                              selectedGuild === guild.name ? 'scale-105 text-pink-500' : 'text-white'
+                              selectedGuild === guild.name ? 'scale-125 text-pink-500' : 'text-white'
                             }`}
                             style={{
                               color: selectedGuild === guild.name ? `#${guild.color}` : `#FFFFFF`,
@@ -233,7 +234,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                             }}
                           >
                             {guild.symbol}
-                            <div
+                            {/* <div
                               className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-4 text-white shadow-md group-hover:block`}
                             >
                               <div style={{ width: '150px' }}>
@@ -254,12 +255,24 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                                 {guild.name}
                               </p>
                               <p className='text-xs'>{guild.description}</p>
-                            </div>
+                            </div> */}
                           </label>
                         </div>
                       ))}
                     </div>
                   </form>
+                  {selectedGuildData && (
+                    <div
+                      className='ml-4 h-auto rounded-lg border p-4 lg:h-60'
+                      style={{ borderColor: selectedGuildData.color }}
+                    >
+                      <h2 className='text-lg font-bold'>{selectedGuildData.name} Guild</h2>
+                      <p className='text-sm text-gray-300'>{selectedGuildData.description}</p>
+                      <p className='text-sm text-gray-300'>Skills : {selectedGuildData.skills}</p>
+                      <p className='text-sm text-gray-300'>Alignment : {selectedGuildData.alignment}</p>
+                      <p className='text-sm text-gray-300'>Additional Skill : {selectedGuildData.additionalSkills}</p>
+                    </div>
+                  )}
                 </div>
                 <div className='mt-4 flex justify-center'>
                   <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='generate'>
