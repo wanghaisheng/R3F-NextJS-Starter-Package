@@ -1,5 +1,7 @@
 'use client'
-import { motion } from 'framer-motion'
+
+import { enqueueSnackbar } from 'notistack'
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
@@ -13,17 +15,30 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import Link from 'next/link'
+import { IoHome } from 'react-icons/io5'
 
 export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [cards, setCards] = useState([
-    { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
+    {
+      card_id: '',
+      type: 'type',
+      name: '',
+      description: '',
+      date_in: '',
+      date_out: '',
+      emergency_contact: '',
+      emergency_details: '',
+      blood_group: '',
+      emergency_address: '',
+    },
   ])
 
   useEffect(() => {
     const fetchCardsData = async () => {
       try {
-        if (user.cards.length != 0) {
+        if (user.cards.length !== 0) {
           setCards(user.cards) // Set the filtered data
         }
       } catch (error) {
@@ -36,11 +51,11 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     }
   }, [user])
 
-  const checkActiveCard = (element: any) => {
+  const checkActiveCard = (element) => {
     return element.gg_id === user.gg_id
   }
 
-  const handleSubmit = async (e: any, index: number) => {
+  const handleSubmit = async (e, index) => {
     e.preventDefault()
     const submit = {
       gg_id: user.gg_id,
@@ -49,6 +64,10 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       description: cards[index].description,
       date_in: cards[index].date_in,
       date_out: cards[index].date_out,
+      emergency_contact: cards[index].emergency_contact,
+      emergency_details: cards[index].emergency_details,
+      blood_group: cards[index].blood_group,
+      emergency_address: cards[index].emergency_address,
     }
     try {
       await axios({
@@ -56,15 +75,16 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'POST',
         data: submit,
       })
-      alert('card info saved')
-      window.location.reload()
-      return
+      enqueueSnackbar('Generated Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
     } catch (error) {
-      console.error(error)
+      enqueueSnackbar('Failed to Generate', { autoHideDuration: 2000, variant: 'error' })
     }
   }
 
-  const handleUpdate = async (e: any, id: any, index: number) => {
+  const handleUpdate = async (e, id, index) => {
     e.preventDefault()
     const submit = {
       type: cards[index].type,
@@ -72,6 +92,10 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       description: cards[index].description,
       date_in: cards[index].date_in,
       date_out: cards[index].date_out,
+      emergency_contact: cards[index].emergency_contact,
+      emergency_details: cards[index].emergency_details,
+      blood_group: cards[index].blood_group,
+      emergency_address: cards[index].emergency_address,
     }
     try {
       await axios({
@@ -79,29 +103,29 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'PUT',
         data: submit,
       })
-      alert('card info updated')
-      window.location.reload()
-      return
+      enqueueSnackbar('Updated Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
     } catch (error) {
-      console.error(error)
+      enqueueSnackbar('Failed to Update', { autoHideDuration: 2000, variant: 'error' })
     }
   }
 
-  const handleDelete = async (id: any) => {
+  const handleDelete = async (id) => {
     try {
       await axios({
         url: `/api/internal/card/${id}`,
         method: 'DELETE',
       })
-      alert('card info deleted')
-      window.location.reload()
+      alert('Card info deleted')
       return
     } catch (error) {
       console.error(error)
     }
   }
 
-  const handleCardTypeChange = (index: number, newType: string) => {
+  const handleCardTypeChange = (index, newType) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].type = newType
@@ -109,7 +133,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     })
   }
 
-  const handleCardNameChange = (index: number, newName: string) => {
+  const handleCardNameChange = (index, newName) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].name = newName
@@ -117,7 +141,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     })
   }
 
-  const handleCardDescriptionChange = (index: number, newDescription: string) => {
+  const handleCardDescriptionChange = (index, newDescription) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].description = newDescription
@@ -125,7 +149,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     })
   }
 
-  const handleCardDateInChange = (index: number, newDateIn: string) => {
+  const handleCardDateInChange = (index, newDateIn) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].date_in = newDateIn
@@ -133,7 +157,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     })
   }
 
-  const handleCardDateOutChange = (index: number, newDateOut: string) => {
+  const handleCardDateOutChange = (index, newDateOut) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].date_out = newDateOut
@@ -141,14 +165,57 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     })
   }
 
+  const handleCardemergency_contactChange = (index, newEmergency_contact) => {
+    setCards((prevCards) => {
+      const updatedCards = [...prevCards]
+      updatedCards[index].emergency_contact = newEmergency_contact
+      return updatedCards
+    })
+  }
+
+  const handleCardemergency_detailsChange = (index, newEmergency_details) => {
+    setCards((prevCards) => {
+      const updatedCards = [...prevCards]
+      updatedCards[index].emergency_details = newEmergency_details
+      return updatedCards
+    })
+  }
+
+  const handleCardblood_groupChange = (index, newBlood_group) => {
+    setCards((prevCards) => {
+      const updatedCards = [...prevCards]
+      updatedCards[index].blood_group = newBlood_group
+      return updatedCards
+    })
+  }
+
+  const handleCardemergency_addressChange = (index, newEmergency_address) => {
+    setCards((prevCards) => {
+      const updatedCards = [...prevCards]
+      updatedCards[index].emergency_address = newEmergency_address
+      return updatedCards
+    })
+  }
+
   const handleAddCard = () => {
     setCards((prevCards) => [
       ...prevCards,
-      { card_id: '', type: 'type', name: '', description: '', date_in: '', date_out: '' },
+      {
+        card_id: '',
+        type: 'type',
+        name: '',
+        description: '',
+        date_in: '',
+        date_out: '',
+        emergency_contact: '',
+        emergency_details: '',
+        blood_group: '',
+        emergency_address: '',
+      },
     ])
   }
 
-  const handleDeleteCard = (index: number, card_id: any) => {
+  const handleDeleteCard = (index, card_id) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards.splice(index, 1)
@@ -161,12 +228,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           {/* heading */}
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
-            Card
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200 '>
+            CARD
             <div className='absolute right-0 top-10 text-sm'>
               <DrawOutlineButton
                 onClick={() => {
@@ -183,7 +250,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
             {/* TabList */}
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {cards.map((card, index) => (
-                <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-4 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {card.type}
                   <button
                     className='ml-2 text-gray-900 hover:text-red-500'
@@ -199,194 +266,237 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
             {/* TabPanel */}
             {cards.map((card, index) => (
               <TabPanel key={index}>
-                {/* <div className='rounded-[20px] border border-[#B5B5B5] bg-[#D9D9D9]/20 p-4'> */}
                 <div>
                   <div className='flex flex-col lg:flex-row lg:justify-between'>
                     {/* Card Image / Container */}
-
                     <div className='flex justify-center'>
-                      <CardsFlipCard type={card.type} name={card.name} dateIn={card.date_in} dateOut={card.date_out} />
+                      <CardsFlipCard
+                        type={card.type}
+                        name={card.name}
+                        dateIn={card.date_in}
+                        dateOut={card.date_out}
+                        description={card.description}
+                        blood_group={card.blood_group}
+                        emergency_contact={card.emergency_contact}
+                        emergency_address={card.emergency_address}
+                        emergency_details={card.emergency_details}
+                      />
                     </div>
 
                     {/* Form for user input */}
                     <div className='w-full lg:w-[50%]'>
-                      {user && checkActiveCard(card) != true ? (
+                      {user && checkActiveCard(card) !== true ? (
                         <form
                           onSubmit={(e) => handleSubmit(e, index)}
                           className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                         >
-                          <div className='flex w-full flex-col gap-y-2 px-4'>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='type'>Type</label>
+                          <div className='flex w-full flex-col gap-y-2 px-4 text-purple-950 dark:text-purple-200'>
+                            <div className='flex flex-col  lg:flex-row lg:justify-between '>
+                              <label htmlFor='type' className='font-semibold'>
+                                Type
+                              </label>
                               <select
                                 id='type'
                                 name='type'
                                 value={card.type}
-                                className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option defaultValue='' className='bg-black text-gray-600'>
+                                <option defaultValue='' className='bg-purple-200  text-gray-600  dark:bg-black'>
                                   Select Type
                                 </option>
-                                <option value='Educational' className='bg-black'>
-                                  Educational
-                                </option>
-                                <option value='Work' className='bg-black'>
-                                  Work
-                                </option>
-                                <option value='Gym' className='bg-black'>
-                                  Gym
-                                </option>
-                              </select>
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='cardName'>Card Name</label>
-                              <input
-                                id='cardName'
-                                type='text'
-                                value={card.name}
-                                onChange={(e) => handleCardNameChange(index, e.target.value)}
-                                placeholder='Card Name'
-                                className='rounded-md bg-white/20 px-3 lg:w-[70%]'
-                                required
-                              />
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='cardDescription'>Description</label>
-                              <input
-                                id='cardDescription'
-                                type='text'
-                                value={card.description}
-                                onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
-                                placeholder='Card Description'
-                                className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                              />
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='dateIn'>Date In</label>
-                              <input
-                                id='dateIn'
-                                type='date'
-                                value={card.date_in}
-                                className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                                onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='dateOut'>Date Out</label>
-                              <input
-                                id='dateOut'
-                                type='date'
-                                value={card.date_out}
-                                className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                                onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                              />
-                            </div>
-                          </div>
-                          {/* Submit button */}
-
-                          {!isSmallScreen ? (
-                            <>
-                              <div className='mt-4'>
-                                <DrawOutlineButton aria-label='generate'>Generate</DrawOutlineButton>
-                              </div>
-                              <div className='absolute bottom-4 right-4'>
-                                <button
-                                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
-                                  type='submit'
-                                  onClick={onNextButtonClick}
-                                  aria-label='next'
+                                <option
+                                  value='Educational'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
                                 >
-                                  <p className='p-4'>
-                                    <FaArrowRight />
-                                  </p>
-                                </button>
-                              </div>
-                            </>
-                          ) : (
-                            <div className='absolute bottom-4 right-4'>
-                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                                Next
-                              </DrawOutlineButton>
-                            </div>
-                          )}
-                        </form>
-                      ) : (
-                        <form
-                          onSubmit={(e) => handleUpdate(e, card.card_id, index)}
-                          className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
-                        >
-                          <div className='flex w-full flex-col gap-y-2 px-4'>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='type'>Type</label>
-                              <select
-                                id='type'
-                                name='type'
-                                value={card.type}
-                                className='rounded-md bg-white/20 px-2 lg:w-[70%]'
-                                onChange={(e) => handleCardTypeChange(index, e.target.value)}
-                                required
-                              >
-                                <option defaultValue='' className='bg-black text-gray-600'>
-                                  Select Type
-                                </option>
-                                <option value='Educational' className='bg-black'>
                                   Educational
                                 </option>
-                                <option value='Work' className='bg-black'>
+                                <option
+                                  value='Work'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
                                   Work
                                 </option>
-                                <option value='Gym' className='bg-black'>
-                                  Gym
+                                <option
+                                  value='Emergency'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
+                                  Emergency
                                 </option>
                               </select>
                             </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='cardName'>Card Name</label>
-                              <input
-                                type='text'
-                                id='cardName'
-                                value={card.name}
-                                onChange={(e) => handleCardNameChange(index, e.target.value)}
-                                placeholder='Card Name'
-                                className='rounded-md bg-white/20 px-3 lg:w-[70%]'
-                                required
-                              />
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='cardDescription'>Description</label>
-                              <input
-                                type='text'
-                                id='cardDescription'
-                                value={card.description}
-                                onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
-                                placeholder='Card Description'
-                                className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                              />
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='dateIn'>Date In</label>
-                              <input
-                                type='date'
-                                id='dateIn'
-                                value={card.date_in}
-                                className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                                onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div className='flex flex-col lg:flex-row lg:justify-between'>
-                              <label htmlFor='dateOut'>Date Out</label>
-                              <input
-                                id='dateOut'
-                                type='date'
-                                value={card.date_out}
-                                className='rounded-md bg-white/20 px-3  lg:w-[70%]'
-                                onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                              />
-                            </div>
+
+                            {card.type === 'Emergency' ? (
+                              <>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`blood_group-${index}`} className='text-sm font-semibold'>
+                                    Blood Group
+                                  </label>
+                                  <select
+                                    id={`blood_group-${index}`}
+                                    value={card.blood_group}
+                                    onChange={(e) => handleCardblood_groupChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  >
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value=''
+                                    >
+                                      Select Blood Group
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='A+'
+                                    >
+                                      A+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='A-'
+                                    >
+                                      A-
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='B+'
+                                    >
+                                      B+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='B-'
+                                    >
+                                      B-
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='O+'
+                                    >
+                                      O+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='O-'
+                                    >
+                                      O-
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='AB+'
+                                    >
+                                      AB+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='AB-'
+                                    >
+                                      AB-
+                                    </option>
+                                  </select>
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`emergency_contact-${index}`} className='font-semibold'>
+                                    Contact
+                                  </label>
+                                  <input
+                                    id={`emergency_contact-${index}`}
+                                    value={card.emergency_contact}
+                                    onChange={(e) => handleCardemergency_contactChange(index, e.target.value)}
+                                    type='text'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    placeholder='Emergency Contact'
+                                    required
+                                  />
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`emergency_details-${index}`} className='font-semibold'>
+                                    Details
+                                  </label>
+                                  <textarea
+                                    id={`emergency_details-${index}`}
+                                    value={card.emergency_details}
+                                    onChange={(e) => handleCardemergency_detailsChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    placeholder='Emergency Details'
+                                  ></textarea>
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`emergency_address-${index}`} className='font-semibold'>
+                                    Address
+                                  </label>
+                                  <input
+                                    id={`emergency_address-${index}`}
+                                    value={card.emergency_address}
+                                    onChange={(e) => handleCardemergency_addressChange(index, e.target.value)}
+                                    type='text'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    placeholder='Emergency Address'
+                                  />
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='name' className='font-semibold'>
+                                    Name
+                                  </label>
+                                  <input
+                                    id='name'
+                                    type='text'
+                                    value={card.name}
+                                    onChange={(e) => handleCardNameChange(index, e.target.value)}
+                                    placeholder='Name'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='description' className='font-semibold'>
+                                    Description
+                                  </label>
+                                  <textarea
+                                    id='description'
+                                    value={card.description}
+                                    onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
+                                    placeholder='Description'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='dateIn' className='font-semibold'>
+                                    Date In
+                                  </label>
+                                  <input
+                                    id='dateIn'
+                                    type='date'
+                                    value={card.date_in}
+                                    onChange={(e) => handleCardDateInChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='dateOut' className='font-semibold'>
+                                    Date Out
+                                  </label>
+                                  <input
+                                    id='dateOut'
+                                    type='date'
+                                    value={card.date_out}
+                                    onChange={(e) => handleCardDateOutChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+                              </>
+                            )}
                           </div>
 
                           {/* Next and Generate Button */}
@@ -399,7 +509,18 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                                  className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
+                                    <p className='p-4'>
+                                      <IoHome />
+                                    </p>
+                                  </Link>
+                                </button>
+                                <button
+                                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   onClick={onNextButtonClick}
                                   aria-label='next'
@@ -411,7 +532,268 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               </div>
                             </>
                           ) : (
-                            <div className='absolute bottom-4 right-4'>
+                            <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                <Link href='/hero3'>
+                                  <IoHome className='my-1' />
+                                </Link>
+                              </DrawOutlineButton>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                Next
+                              </DrawOutlineButton>
+                            </div>
+                          )}
+                        </form>
+                      ) : (
+                        <form
+                          onSubmit={(e) => handleUpdate(e, card.card_id, index)}
+                          className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center '
+                        >
+                          <div className='flex w-full flex-col gap-y-2 px-4 text-purple-950 dark:text-purple-200'>
+                            <div className='flex flex-col lg:flex-row lg:justify-between'>
+                              <label htmlFor='type' className='font-semibold'>
+                                Type
+                              </label>
+                              <select
+                                id='type'
+                                name='type'
+                                value={card.type}
+                                className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                onChange={(e) => handleCardTypeChange(index, e.target.value)}
+                                required
+                              >
+                                <option defaultValue='' className='bg-purple-200  text-gray-600 dark:bg-black '>
+                                  Select Type
+                                </option>
+                                <option
+                                  value='Educational'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
+                                  Educational
+                                </option>
+                                <option
+                                  value='Work'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
+                                  Work
+                                </option>
+                                <option
+                                  value='Emergency'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
+                                  Emergency
+                                </option>
+                              </select>
+                            </div>
+
+                            {card.type === 'Emergency' ? (
+                              <>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`blood_group-${index}`} className='text-sm font-semibold'>
+                                    Blood Group
+                                  </label>
+                                  <select
+                                    id={`blood_group-${index}`}
+                                    value={card.blood_group}
+                                    onChange={(e) => handleCardblood_groupChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  >
+                                    <option className='bg-purple-200 text-gray-600 dark:bg-black ' value=''>
+                                      Select Blood Group
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='A+'
+                                    >
+                                      A+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='A-'
+                                    >
+                                      A-
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='B+'
+                                    >
+                                      B+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='B-'
+                                    >
+                                      B-
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='O+'
+                                    >
+                                      O+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='O-'
+                                    >
+                                      O-
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='AB+'
+                                    >
+                                      AB+
+                                    </option>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='AB-'
+                                    >
+                                      AB-
+                                    </option>
+                                  </select>
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`emergency_contact-${index}`} className='font-semibold'>
+                                    Contact
+                                  </label>
+                                  <input
+                                    id={`emergency_contact-${index}`}
+                                    value={card.emergency_contact}
+                                    onChange={(e) => handleCardemergency_contactChange(index, e.target.value)}
+                                    type='text'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    placeholder='Emergency Contact'
+                                    required
+                                  />
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`emergency_details-${index}`} className='font-semibold'>
+                                    Details
+                                  </label>
+                                  <textarea
+                                    id={`emergency_details-${index}`}
+                                    value={card.emergency_details}
+                                    onChange={(e) => handleCardemergency_detailsChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    placeholder='Emergency Details'
+                                  ></textarea>
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor={`emergency_address-${index}`} className='font-semibold'>
+                                    Address
+                                  </label>
+                                  <input
+                                    id={`emergency_address-${index}`}
+                                    value={card.emergency_address}
+                                    onChange={(e) => handleCardemergency_addressChange(index, e.target.value)}
+                                    type='text'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    placeholder='Emergency Address'
+                                  />
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='name' className='font-semibold'>
+                                    Name
+                                  </label>
+                                  <input
+                                    id='name'
+                                    type='text'
+                                    value={card.name}
+                                    onChange={(e) => handleCardNameChange(index, e.target.value)}
+                                    placeholder='Name'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='description' className='font-semibold'>
+                                    Description
+                                  </label>
+                                  <textarea
+                                    id='description'
+                                    value={card.description}
+                                    onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
+                                    placeholder='Description'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='dateIn' className='font-semibold'>
+                                    Date In
+                                  </label>
+                                  <input
+                                    id='dateIn'
+                                    type='date'
+                                    value={card.date_in}
+                                    onChange={(e) => handleCardDateInChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+
+                                <div className='flex flex-col lg:flex-row lg:justify-between'>
+                                  <label htmlFor='dateOut' className='font-semibold'>
+                                    Date Out
+                                  </label>
+                                  <input
+                                    id='dateOut'
+                                    type='date'
+                                    value={card.date_out}
+                                    onChange={(e) => handleCardDateOutChange(index, e.target.value)}
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                                    required
+                                  />
+                                </div>
+                              </>
+                            )}
+                          </div>
+
+                          {/* Next and Update Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Update
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <button
+                                  className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
+                                    <p className='p-4'>
+                                      <IoHome />
+                                    </p>
+                                  </Link>
+                                </button>
+                                <button
+                                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  onClick={onNextButtonClick}
+                                  aria-label='next'
+                                >
+                                  <p className='p-4'>
+                                    <FaArrowRight />
+                                  </p>
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                                <Link href='/hero3'>
+                                  <IoHome className='my-1' />
+                                </Link>
+                              </DrawOutlineButton>
                               <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                                 Next
                               </DrawOutlineButton>
@@ -425,32 +807,31 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
               </TabPanel>
             ))}
           </Tabs>
-
-          {/* Back Button */}
-          {!isSmallScreen ? (
-            <div>
-              <div className='absolute bottom-4 left-4 mt-4'>
-                <button
-                  className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
-                  onClick={onPrevButtonClick}
-                  aria-label='prev'
-                >
-                  <p className='p-4'>
-                    <FaArrowLeft />
-                  </p>
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className='absolute bottom-4 left-4 mt-4'>
-                <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                  <p className='px-4'>Back</p>
-                </DrawOutlineButton>
-              </div>
-            </div>
-          )}
         </div>
+        {/* Back Button */}
+        {!isSmallScreen ? (
+          <div>
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <button
+                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                onClick={onPrevButtonClick}
+                aria-label='prev'
+              >
+                <p className='p-4'>
+                  <FaArrowLeft />
+                </p>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className='absolute bottom-4 left-4 mt-4'>
+              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+                Back
+              </DrawOutlineButton>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

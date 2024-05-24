@@ -1,5 +1,7 @@
 'use client'
 
+import { enqueueSnackbar } from 'notistack'
+
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 
@@ -11,6 +13,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
 import { TiDelete } from 'react-icons/ti'
+import { IoHome } from 'react-icons/io5'
+
 import Link from 'next/link'
 
 import axios from 'axios'
@@ -30,7 +34,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { element } from 'three/examples/jsm/nodes/shadernode/ShaderNode'
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -123,9 +126,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         if (skillsSet.size !== 0) {
           const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
           setSkills(skillsArray)
+          // console.log(skills)
         }
       } catch (error) {
-        console.log('failed to fetch the skills data')
+        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
     }
 
@@ -153,11 +157,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'POST',
         data: submit,
       })
-      alert('skills info saved')
-      window.location.reload()
-      return
+      enqueueSnackbar('Generate Skills Successfully', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      throw new Error('failed to save the skills info')
+      enqueueSnackbar('Failed to generate skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
@@ -175,12 +177,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'PUT',
         data: submit,
       })
-      alert('skills info updated')
-      window.location.reload()
-      return
+      enqueueSnackbar('Skills updated', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      console.error(error)
-      throw new Error('failed to update the skills info')
+      enqueueSnackbar('Failed to update skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
@@ -190,12 +189,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
-      alert('skill info deleted')
-      window.location.reload()
-      return
+      enqueueSnackbar('Skills deleted', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
-      console.error(error)
-      // throw new Error('failed to delete the skill info')
+      enqueueSnackbar('Failed to delete skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
 
@@ -229,18 +225,17 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-
   const [open, setOpen] = useState(false)
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl  md:border  md:border-[#a5a4a8]/40 md:bg-[#F8F8F8]/10 md:px-10 md:shadow-inner md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px]'
+        className='relative flex h-[900px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl drop-shadow lg:my-5 lg:text-7xl'>
-            Skills
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
+            SKILLS
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
                 onClick={() => {
@@ -256,7 +251,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           <Tabs>
             <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
+                <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {element.skill_name}
                   <button
                     aria-label='delete'
@@ -271,7 +266,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
 
             {/* TabPanel */}
             <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
-              <div className='w-[300px] md:w-[500px] lg:w-[60%]'>
+              <div className='w-[300px] text-purple-950 md:w-[500px] lg:w-[60%] dark:text-purple-200'>
                 {skills.map((element, index) => (
                   <div key={index}>
                     {user && checkActiveSkills(element) != true ? (
@@ -285,7 +280,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                   value={element.skill_name}
                                   onChange={(e) => handleSkillNameChange(index, e.target.value)}
                                   placeholder='Skill Name'
-                                  className='w-full rounded-md bg-white/20 p-1'
+                                  className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
                                   aria-label='skill name'
                                 />
 
@@ -299,27 +294,51 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                     onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                                     aria-label='slider'
                                   />
-                                  <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                  <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
+                                    {element.percentage}%
+                                  </p>
                                 </div>
                               </div>
                             </div>
-                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                            <label className='text-gray-900 dark:text-purple-200' htmlFor='file_input'>
                               Certifications
                             </label>
                             <input
-                              className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
                               id='file_input'
                               type='file'
                               aria-label='file input'
                             />
                           </div>
-                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-                            <div className='-mt-2'>
-                              <DrawOutlineButton type='submit' aria-label='generate button'>
-                                Generate
+                          {/* Go Home and Generate Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4 flex justify-center'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Generate
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <button
+                                  className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
+                                    <p className='p-4 text-white'>
+                                      <IoHome />
+                                    </p>
+                                  </Link>
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                <Link href='/hero3'>Go To Home</Link>
                               </DrawOutlineButton>
                             </div>
-                          </div>
+                          )}
                         </TabPanel>
                       </form>
                     ) : (
@@ -333,7 +352,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                   value={element.skill_name}
                                   onChange={(e) => handleSkillNameChange(index, e.target.value)}
                                   placeholder='Skill Name'
-                                  className='w-full rounded-md bg-white/20 p-1'
+                                  className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
                                   aria-label='skill name'
                                 />
 
@@ -347,28 +366,52 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                     onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                                     aria-label='slider'
                                   />
-                                  <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                  <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
+                                    {element.percentage}%
+                                  </p>
                                 </div>
                               </div>
                             </div>
 
-                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                            <label className='text-purple-950 dark:text-purple-200' htmlFor='file_input'>
                               Certifications
                             </label>
                             <input
-                              className='block w-full cursor-pointer rounded-lg  bg-gray-50 text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900  focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
                               id='file_input'
                               type='file'
                               aria-label='file input'
                             />
                           </div>
-                          <div className='mb-20 flex justify-center gap-x-2 lg:mb-0'>
-                            <div className='-mt-2'>
-                              <DrawOutlineButton type='submit' aria-label='generate button'>
-                                Generate
+                          {/* Go Home and Update Button */}
+                          {!isSmallScreen ? (
+                            <>
+                              <div className='mt-4 flex justify-center'>
+                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                  Update
+                                </DrawOutlineButton>
+                              </div>
+                              <div className='absolute bottom-4 right-4'>
+                                <button
+                                  className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  type='submit'
+                                  aria-label='home btn'
+                                >
+                                  <Link href='/hero3'>
+                                    <p className='p-4 text-white'>
+                                      <IoHome />
+                                    </p>
+                                  </Link>
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            <div className='absolute bottom-4 right-4'>
+                              <DrawOutlineButton type='submit' aria-label='go to home page'>
+                                <Link href='/hero3'>Go To Home</Link>
                               </DrawOutlineButton>
                             </div>
-                          </div>
+                          )}
                         </TabPanel>
                       </form>
                     )}
@@ -377,7 +420,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
               </div>
 
               <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
-                <p className='mb-2 flex justify-center'>Specification</p>
+                <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
                 <div className='mb-5 lg:block lg:w-full'>
@@ -418,7 +461,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                         data={skills}
                       >
                         <PolarGrid />
-                        <PolarAngleAxis dataKey='skill' />
+                        <PolarAngleAxis dataKey='skill_name' />
                         <PolarRadiusAxis opacity={0} domain={[0, 100]} />
                         <Radar
                           name='Ram'
@@ -430,7 +473,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                         />
                         {/* <Tooltip /> */}
                         {/* <Legend values="100%" /> */}
-                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='' />} />
+                        <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
                       </RadarChart>
                     </ResponsiveContainer>
                   )}
@@ -439,16 +482,11 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
             </div>
           </Tabs>
 
-          <div className='absolute bottom-4 right-0 lg:right-4'>
-            <Link href='/hero3'>
-              <DrawOutlineButton aria-label='go to home page'>Go To Home</DrawOutlineButton>
-            </Link>
-          </div>
-
+          {/* Back Button */}
           {!isSmallScreen ? (
             <div className='absolute bottom-4 left-4 mt-4'>
               <button
-                className='rounded-full bg-purple-400/20 transition-all duration-150 hover:scale-105 hover:bg-purple-300/30'
+                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 onClick={onPrevButtonClick}
                 aria-label='prev'
               >
@@ -460,7 +498,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           ) : (
             <div className='absolute bottom-4 left-4 mt-4'>
               <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                <p className='px-4'>Back</p>
+                Back
               </DrawOutlineButton>
             </div>
           )}

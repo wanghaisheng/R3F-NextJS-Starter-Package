@@ -22,14 +22,18 @@ model avatar {
 }
 
 model cards {
-  card_id     String  @id(map: "card_pkey") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  gg_id       String? @db.Uuid
-  type        String? @db.VarChar(50)
-  name        String? @db.VarChar(50)
-  description String?
-  date_in     String? @db.VarChar
-  date_out    String? @db.VarChar
-  users       users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction, map: "card_gg_id_fkey")
+  card_id           String  @id(map: "card_pkey") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  gg_id             String? @db.Uuid
+  type              String? @db.VarChar(50)
+  name              String? @db.VarChar(50)
+  description       String?
+  date_in           String? @db.VarChar
+  date_out          String? @db.VarChar
+  blood_group       String?
+  emergency_contact String?
+  emergency_details String?
+  emergency_address String?
+  users             users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction, map: "card_gg_id_fkey")
 }
 
 model experience {

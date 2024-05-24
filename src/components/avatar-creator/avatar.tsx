@@ -13,8 +13,6 @@ const config: AvatarCreatorConfig = {
   language: 'en',
 }
 
-const style = { width: '100%', height: '66vh', border: 'none', borderRadius: '15px' }
-
 export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const router = useRouter()
@@ -51,7 +49,12 @@ export default function App() {
 
   return (
     <>
-      <AvatarCreator subdomain='gguser' config={config} style={style} onAvatarExported={handleOnAvatarExported} />
+      <AvatarCreator
+        subdomain='gguser'
+        config={config}
+        className='-ml-4 h-[127vh] w-[107%] rounded-lg border-none lg:ml-0 lg:h-[65vh] lg:w-full'
+        onAvatarExported={handleOnAvatarExported}
+      />
     </>
   )
 }

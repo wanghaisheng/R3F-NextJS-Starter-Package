@@ -1,8 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { MdCancel } from 'react-icons/md'
+import { SnackbarProvider, enqueueSnackbar, closeSnackbar } from 'notistack'
 
+import { motion } from 'framer-motion'
+import { useState, useEffect, useCallback } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
@@ -21,7 +23,8 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = ({ options }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-  const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
+  // const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
+  const tabs = ['Genius ID', 'Avatar', 'Card', 'Experience', 'Skills']
 
   const [selected, setSelected] = useState(tabs[0])
   const [slideIndex, setSlideIndex] = useState(0)
@@ -31,6 +34,21 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
     setSlideIndex(index)
     if (emblaApi) emblaApi.scrollTo(index)
   }
+
+  const handleScroll = useCallback(
+    (event) => {
+      if (!emblaApi) return
+
+      const deltaY = event.deltaY
+
+      if (deltaY > 0) {
+        emblaApi.scrollNext()
+      } else if (deltaY < 0) {
+        emblaApi.scrollPrev()
+      }
+    },
+    [emblaApi],
+  )
 
   useEffect(() => {
     if (emblaApi) {
@@ -49,18 +67,27 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 
     handleResize()
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    window.addEventListener('wheel', handleScroll)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('wheel', handleScroll)
+    }
+  }, [handleScroll])
 
   return (
     <>
       <section className='mx-auto mt-20 w-full'>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        />
         <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex'>
+          <div className='mb-5 flex'>
             {[
               <UserInfoComponent
                 key='UserInfoComponent'
-                onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
               />,
@@ -76,12 +103,12 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
               />,
-              <ConnectionComponent
-                key='ConnectionComponent'
-                onPrevButtonClick={() => emblaApi.scrollPrev()}
-                onNextButtonClick={() => emblaApi.scrollNext()}
-                isSmallScreen={isSmallScreen}
-              />,
+              // <ConnectionComponent
+              //   key='ConnectionComponent'
+              //   onPrevButtonClick={() => emblaApi.scrollPrev()}
+              //   onNextButtonClick={() => emblaApi.scrollNext()}
+              //   isSmallScreen={isSmallScreen}
+              // />,
               <ExperienceComponent
                 key='ExperienceComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
@@ -102,9 +129,9 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
         </div>
       </section>
 
-      <footer className='fixed inset-x-0 bottom-4 flex justify-center'>
-        <div className='flex items-center justify-center'>
-          <div className='flex gap-2 rounded-3xl p-2 shadow-md shadow-[#6B37CA] backdrop-blur-md md:h-10 md:items-center md:justify-center md:gap-7'>
+      <footer className='fixed inset-x-0 bottom-4 flex flex-col items-center justify-center '>
+        <div className='mt-2 flex items-center justify-center '>
+          <div className='flex gap-2 rounded-3xl p-2 px-7 shadow shadow-[#6B37CA] backdrop-blur-md md:h-10 md:items-center md:justify-center md:gap-7'>
             {tabs.map((tab, index) => (
               <Chip
                 key={tab}
@@ -115,6 +142,14 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
             ))}
           </div>
         </div>
+        <div className='flex w-full justify-start'>
+          <motion.div
+            className='-mb-4 mt-2 h-2 w-full rounded-r-full bg-gradient-to-r from-blue-400 to-green-500'
+            initial={{ width: 0 }}
+            animate={{ width: `${((slideIndex + 0.2) / (tabs.length - 1)) * 100}%` }}
+            transition={{ type: 'spring', duration: 0.5 }}
+          />
+        </div>
       </footer>
     </>
   )
@@ -124,7 +159,9 @@ const Chip = ({ text, selected, onClick }) => (
   <button
     onClick={onClick}
     className={`${
-      selected ? 'bg-purple-600 text-white' : 'text-slate-200 hover:bg-slate-700 hover:text-slate-200'
+      selected
+        ? 'bg-purple-600 text-purple-200'
+        : 'text-purple-950 hover:bg-slate-700 hover:text-slate-200 dark:text-purple-200'
     } relative rounded-full px-2.5 py-0.5 text-sm transition-colors`}
   >
     <span className='relative z-10 pt-4'>{text}</span>

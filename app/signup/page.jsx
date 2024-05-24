@@ -2,9 +2,12 @@
 
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
+
+import { LiaSignInAltSolid } from 'react-icons/lia'
+import { RiLockPasswordLine } from 'react-icons/ri'
+
 import { LogosFacebook } from '@/logo/LogosFacebook'
-import { UserLogoIcon } from '@/logo/UserLogo'
-import { PasswordLogoIcon } from '@/logo/PasswordLogo'
+
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
@@ -75,25 +78,25 @@ export default function Page() {
         initial={{ opacity: 0, scale: 0.4 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className='hidden items-center justify-center pl-10 sm:flex'
+        className='hidden items-center justify-center pl-10 lg:flex'
       >
-        <CardContainer className='px-10 py-0 dark:border-none dark:hover:border-none '>
-          <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+        <CardContainer className='border-none px-10 py-0'>
+          <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-violet-400 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
             <div className='flex'>
               <CardItem className='mt-4 w-full'>
                 <Image
                   src='/aa.png'
                   height='1000'
                   width='1000'
-                  className='size-full rounded-xl object-cover group-hover/card:shadow-xl'
+                  className='size-full rounded-xl object-cover'
                   alt='thumbnail'
                 />
               </CardItem>
               <div className='flex flex-col'>
-                <CardItem translateZ='50' className='text-2xl font-bold text-neutral-600 dark:text-white'>
+                <CardItem translateZ='50' className='text-2xl font-bold text-purple-600 dark:text-white'>
                   Genius Card
                 </CardItem>
-                <CardItem as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-[#39ff14] dark:text-[#39ff14]'>
+                <CardItem as='p' translateZ='60' className='mt-2 max-w-sm text-lg text-purple-950 dark:text-[#39ff14]'>
                   Coming Soon!
                 </CardItem>
                 <div className='mt-20 flex items-center justify-between'></div>
@@ -109,40 +112,50 @@ export default function Page() {
         transition={{ duration: 0.5, delay: 0.4 }}
         className='signup flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
       >
-        <div className='card flex h-auto flex-col items-center justify-center gap-2 rounded-3xl shadow-lg shadow-purple-700 backdrop-blur-sm lg:w-3/5'>
-          <div className='card-title m-0 mb-5 rounded-t-3xl p-2 shadow-sm  backdrop-blur-3xl'>
-            <h2 className='p-2 text-center text-xl text-purple-400'>SIGN UP</h2>
+        <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
+          <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
+            <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN UP</h2>
           </div>
           <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
-            <label htmlFor='' className='text-xl font-semibold'>
+            <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
               Email
             </label>
-            <div className={`input-group m-2 flex rounded-md border-2  ${emailError ? ' border-red-500' : ''}`}>
-              <div className='input-icon text-black'>
-                <UserLogoIcon />
+            <div
+              className={`input-group m-2 flex rounded-md border-2 ${emailError ? ' border-red-500' : 'border-violet-400 '}`}
+            >
+              <div
+                className={`flex items-center justify-center px-1 text-2xl ${emailError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
+              >
+                <LiaSignInAltSolid />
               </div>
               <input
                 type='email'
                 name='email'
-                className='rounded-md bg-transparent p-2 text-white'
+                className='rounded-md bg-transparent  p-2 text-purple-950 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 '
                 value={email}
+                placeholder='Email'
                 onChange={({ target }) => setEmail(target?.value)}
               />
             </div>
             {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
 
-            <label htmlFor='' className='text-xl font-semibold'>
+            <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
               Password
             </label>
-            <div className={`input-group m-2 flex rounded-md border-2 ${passwordError ? ' border-red-500' : ''}`}>
-              <div className='input-icon text-black'>
-                <PasswordLogoIcon />
+            <div
+              className={`input-group m-2 flex rounded-md border-2 ${passwordError ? ' border-red-500' : 'border-violet-400'}`}
+            >
+              <div
+                className={`flex items-center justify-center px-1 text-2xl  ${passwordError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
+              >
+                <RiLockPasswordLine />
               </div>
               <input
                 type='password'
                 name='password'
-                className='rounded-md bg-transparent p-2 text-white'
+                className='rounded-md bg-transparent p-2 text-purple-950 '
                 value={password}
+                placeholder='Password'
                 onChange={({ target }) => setPassword(target?.value)}
               />
             </div>
@@ -153,7 +166,7 @@ export default function Page() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSubmit}
-                className='w-full rounded-lg bg-purple-200 p-2 px-4 text-black'
+                className='w-full rounded-lg bg-purple-950 p-2 px-4 text-purple-200 dark:bg-purple-200 dark:text-purple-950'
               >
                 Signup
               </motion.button>
@@ -162,7 +175,7 @@ export default function Page() {
 
           <div className='flex items-end'>
             <hr className='h-1 w-full border-solid text-black' />
-            <p className='px-5 font-semibold'>or</p>
+            <p className='px-5 font-semibold text-purple-950 dark:text-purple-200'>or</p>
             <hr className='h-px' />
           </div>
           <div className='flex justify-center gap-16 p-5'>
@@ -177,7 +190,7 @@ export default function Page() {
             </a>
           </div>
           <div className='m-5 flex items-center justify-center '>
-            <p className=' text-sm'>
+            <p className='text-sm text-purple-950 dark:text-purple-200'>
               Already a Genius User?
               <a href='/signin' className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
                 Sign In Here
