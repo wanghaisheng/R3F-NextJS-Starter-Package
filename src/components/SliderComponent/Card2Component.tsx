@@ -228,7 +228,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
+        className='relative flex h-[900px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           {/* heading */}
@@ -250,7 +250,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
             {/* TabList */}
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {cards.map((card, index) => (
-                <Tab key={index} className='ml-4 flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-4 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {card.type}
                   <button
                     className='ml-2 text-gray-900 hover:text-red-500'
@@ -299,7 +299,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 id='type'
                                 name='type'
                                 value={card.type}
-                                className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
@@ -337,7 +337,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     id={`bloodGroup-${index}`}
                                     value={card.bloodGroup}
                                     onChange={(e) => handleCardBloodGroupChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   >
                                     <option
@@ -406,7 +406,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.emergencyContact}
                                     onChange={(e) => handleCardEmergencyContactChange(index, e.target.value)}
                                     type='text'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     placeholder='Emergency Contact'
                                     required
                                   />
@@ -420,7 +420,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     id={`emergencyDetails-${index}`}
                                     value={card.emergencyDetails}
                                     onChange={(e) => handleCardEmergencyDetailsChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     placeholder='Emergency Details'
                                   ></textarea>
                                 </div>
@@ -434,7 +434,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.emergencyAddress}
                                     onChange={(e) => handleCardEmergencyAddressChange(index, e.target.value)}
                                     type='text'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     placeholder='Emergency Address'
                                   />
                                 </div>
@@ -451,7 +451,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.name}
                                     onChange={(e) => handleCardNameChange(index, e.target.value)}
                                     placeholder='Name'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -464,7 +464,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.description}
                                     onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
                                     placeholder='Description'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -477,7 +477,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     type='date'
                                     value={card.date_in}
                                     onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -491,7 +491,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     type='date'
                                     value={card.date_out}
                                     onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -509,7 +509,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   aria-label='home btn'
                                 >
@@ -520,7 +520,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                   </Link>
                                 </button>
                                 <button
-                                  className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   onClick={onNextButtonClick}
                                   aria-label='next'
@@ -558,7 +558,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 id='type'
                                 name='type'
                                 value={card.type}
-                                className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
@@ -596,34 +596,58 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     id={`bloodGroup-${index}`}
                                     value={card.bloodGroup}
                                     onChange={(e) => handleCardBloodGroupChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   >
-                                    <option className='bg-black text-white' value=''>
+                                    <option className='bg-purple-200 text-gray-600 dark:bg-black ' value=''>
                                       Select Blood Group
                                     </option>
-                                    <option className='bg-black text-white' value='A+'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='A+'
+                                    >
                                       A+
                                     </option>
-                                    <option className='bg-black text-white' value='A-'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='A-'
+                                    >
                                       A-
                                     </option>
-                                    <option className='bg-black text-white' value='B+'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='B+'
+                                    >
                                       B+
                                     </option>
-                                    <option className='bg-black text-white' value='B-'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='B-'
+                                    >
                                       B-
                                     </option>
-                                    <option className='bg-black text-white' value='O+'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='O+'
+                                    >
                                       O+
                                     </option>
-                                    <option className='bg-black text-white' value='O-'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='O-'
+                                    >
                                       O-
                                     </option>
-                                    <option className='bg-black text-white' value='AB+'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='AB+'
+                                    >
                                       AB+
                                     </option>
-                                    <option className='bg-black text-white' value='AB-'>
+                                    <option
+                                      className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                      value='AB-'
+                                    >
                                       AB-
                                     </option>
                                   </select>
@@ -638,7 +662,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.emergencyContact}
                                     onChange={(e) => handleCardEmergencyContactChange(index, e.target.value)}
                                     type='text'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     placeholder='Emergency Contact'
                                     required
                                   />
@@ -652,7 +676,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     id={`emergencyDetails-${index}`}
                                     value={card.emergencyDetails}
                                     onChange={(e) => handleCardEmergencyDetailsChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     placeholder='Emergency Details'
                                   ></textarea>
                                 </div>
@@ -666,7 +690,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.emergencyAddress}
                                     onChange={(e) => handleCardEmergencyAddressChange(index, e.target.value)}
                                     type='text'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     placeholder='Emergency Address'
                                   />
                                 </div>
@@ -683,7 +707,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.name}
                                     onChange={(e) => handleCardNameChange(index, e.target.value)}
                                     placeholder='Name'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -696,7 +720,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     value={card.description}
                                     onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
                                     placeholder='Description'
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -709,7 +733,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     type='date'
                                     value={card.date_in}
                                     onChange={(e) => handleCardDateInChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -723,7 +747,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                     type='date'
                                     value={card.date_out}
                                     onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                                    className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                                    className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                                     required
                                   />
                                 </div>
@@ -741,7 +765,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   aria-label='home btn'
                                 >
@@ -752,7 +776,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                   </Link>
                                 </button>
                                 <button
-                                  className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   onClick={onNextButtonClick}
                                   aria-label='next'
@@ -789,7 +813,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
           <div>
             <div className='absolute bottom-4 left-4 mt-4'>
               <button
-                className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 onClick={onPrevButtonClick}
                 aria-label='prev'
               >

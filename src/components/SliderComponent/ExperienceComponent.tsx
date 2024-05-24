@@ -165,7 +165,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
-      <div className='relative flex flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'>
+      <div className='relative flex flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'>
         <div className='flex h-screen w-full flex-col '>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
             EXPERIENCE
@@ -185,7 +185,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
             {/* TabList */}
             <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
               {projects.map((project, index) => (
-                <Tab key={index} className='ml-3 flex cursor-pointer px-1'>
+                <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {project.name}
                   <button
                     className='ml-2 text-gray-900 hover:text-red-500'
@@ -237,7 +237,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div>
                               <label
                                 htmlFor='educational'
-                                className={` ${project.type === 'educational' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-white hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                className={` ${project.type === 'educational' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
                                 Educational
                               </label>
@@ -265,7 +265,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               />
                               <label
                                 htmlFor='work'
-                                className={`${project.type === 'work' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-white hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                className={`${project.type === 'work' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
                                 Work
                               </label>
@@ -283,7 +283,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               />
                               <label
                                 htmlFor='emergency'
-                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-white hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
                                 Emergency
                               </label>
@@ -301,7 +301,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               value={project.name}
                               onChange={(e) => handleProjectNameChange(index, e.target.value)}
                               placeholder='Project Name'
-                              className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                               required
                             />
                           </div>
@@ -316,7 +316,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               value={project.description}
                               onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
                               placeholder='Project Description'
-                              className='rounded-md bg-white/20 px-3  lg:w-[70%]'
+                              className='rounded-md bg-white/70 px-3 lg:w-[70%]  dark:bg-white/20'
                             />
                           </div>
                           <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -324,7 +324,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               ProjPic
                             </label>
                             <input
-                              className='block cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-black/30 dark:text-white dark:placeholder:text-white'
+                              className='block cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:bg-black/30 dark:text-white dark:placeholder:text-white'
                               id='file_input'
                               type='file'
                               aria-label='file_input'
@@ -334,7 +334,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <label htmlFor='' className='font-semibold'>
                               Skills
                             </label>
-                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:text-black dark:placeholder:text-black'>
                               <TagsInput
                                 value={project.project_skills}
                                 onChange={(tags) => handleSkillsChange(index, tags)}
@@ -348,7 +348,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <label htmlFor='' className='font-semibold'>
                               Tools
                             </label>
-                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-white dark:text-black dark:placeholder:text-black'>
+                            <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:text-black dark:placeholder:text-black'>
                               <TagsInput
                                 value={project.tools}
                                 onChange={(tags) => handleToolsChange(index, tags)}
@@ -369,7 +369,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
-                                className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 type='submit'
                                 aria-label='home btn'
                               >
@@ -380,7 +380,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                                 </Link>
                               </button>
                               <button
-                                className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 type='submit'
                                 onClick={onNextButtonClick}
                                 aria-label='next'
@@ -414,7 +414,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div>
                               <label
                                 htmlFor='educational'
-                                className={` ${project.type === 'educational' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-white hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                className={` ${project.type === 'educational' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
                                 Educational
                               </label>
@@ -442,7 +442,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               />
                               <label
                                 htmlFor='work'
-                                className={`${project.type === 'work' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-white hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                className={`${project.type === 'work' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
                                 Work
                               </label>
@@ -460,7 +460,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               />
                               <label
                                 htmlFor='emergency'
-                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-white hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
                                 Emergency
                               </label>
@@ -478,7 +478,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               value={project.name}
                               onChange={(e) => handleProjectNameChange(index, e.target.value)}
                               placeholder='Project Name'
-                              className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
                               required
                             />
                           </div>
@@ -493,7 +493,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               value={project.description}
                               onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
                               placeholder='Project Description'
-                              className='rounded-md bg-white/20 px-3  lg:w-[70%]'
+                              className='rounded-md bg-white/70 px-3 lg:w-[70%]  dark:bg-white/20'
                             />
                           </div>
                           <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -501,7 +501,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                               ProjPic
                             </label>
                             <input
-                              className='block cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:bg-black/30 dark:text-white dark:placeholder:text-white'
+                              className='block cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:bg-black/30 dark:text-white dark:placeholder:text-white'
                               id='file_input'
                               type='file'
                               aria-label='file_input'
@@ -546,7 +546,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
-                                className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 type='submit'
                                 aria-label='home btn'
                               >
@@ -557,7 +557,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                                 </Link>
                               </button>
                               <button
-                                className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 type='submit'
                                 onClick={onNextButtonClick}
                                 aria-label='next'
@@ -593,7 +593,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
                 <button
-                  className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                   onClick={onPrevButtonClick}
                   aria-label='prev'
                 >

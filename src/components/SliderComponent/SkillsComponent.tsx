@@ -231,7 +231,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
+        className='relative flex h-[900px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
@@ -251,7 +251,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           <Tabs>
             <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='ml-3 flex cursor-pointer px-1 '>
+                <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {element.skill_name}
                   <button
                     aria-label='delete'
@@ -280,7 +280,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                   value={element.skill_name}
                                   onChange={(e) => handleSkillNameChange(index, e.target.value)}
                                   placeholder='Skill Name'
-                                  className='w-full rounded-md bg-white/20 p-1'
+                                  className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
                                   aria-label='skill name'
                                 />
 
@@ -294,15 +294,17 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                     onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                                     aria-label='slider'
                                   />
-                                  <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                  <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
+                                    {element.percentage}%
+                                  </p>
                                 </div>
                               </div>
                             </div>
-                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                            <label className='text-gray-900 dark:text-purple-200' htmlFor='file_input'>
                               Certifications
                             </label>
                             <input
-                              className='block w-full cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
                               id='file_input'
                               type='file'
                               aria-label='file input'
@@ -318,12 +320,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   aria-label='home btn'
                                 >
                                   <Link href='/hero3'>
-                                    <p className='p-4'>
+                                    <p className='p-4 text-white'>
                                       <IoHome />
                                     </p>
                                   </Link>
@@ -350,7 +352,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                   value={element.skill_name}
                                   onChange={(e) => handleSkillNameChange(index, e.target.value)}
                                   placeholder='Skill Name'
-                                  className='w-full rounded-md bg-white/20 p-1'
+                                  className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
                                   aria-label='skill name'
                                 />
 
@@ -364,16 +366,18 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                     onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                                     aria-label='slider'
                                   />
-                                  <p className='pl-2 text-sm text-purple-300'>{element.percentage}%</p>
+                                  <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
+                                    {element.percentage}%
+                                  </p>
                                 </div>
                               </div>
                             </div>
 
-                            <label className='text-gray-900 dark:text-white' htmlFor='file_input'>
+                            <label className='text-purple-950 dark:text-purple-200' htmlFor='file_input'>
                               Certifications
                             </label>
                             <input
-                              className='block w-full cursor-pointer rounded-lg text-sm text-gray-900 focus:outline-none  dark:bg-gray-700 dark:text-gray-400 dark:placeholder:text-gray-400'
+                              className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900  focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
                               id='file_input'
                               type='file'
                               aria-label='file input'
@@ -389,12 +393,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                  className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   aria-label='home btn'
                                 >
                                   <Link href='/hero3'>
-                                    <p className='p-4'>
+                                    <p className='p-4 text-white'>
                                       <IoHome />
                                     </p>
                                   </Link>
@@ -416,7 +420,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
               </div>
 
               <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
-                <p className='mb-2 flex justify-center'>Specification</p>
+                <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
                 <div className='mb-5 lg:block lg:w-full'>
@@ -482,7 +486,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           {!isSmallScreen ? (
             <div className='absolute bottom-4 left-4 mt-4'>
               <button
-                className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 onClick={onPrevButtonClick}
                 aria-label='prev'
               >
