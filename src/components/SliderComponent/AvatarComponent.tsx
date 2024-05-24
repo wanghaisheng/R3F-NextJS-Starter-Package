@@ -205,59 +205,66 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 )}
                 {/* GUILDS SELECTION */}
                 <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
-                  <label htmlFor='guilds' className='text-lg font-semibold text-gray-700 lg:text-xl'>
-                    Guilds
-                  </label>
-                  <div className='relative flex items-center justify-between gap-x-4 px-4 lg:w-[70%]'>
-                    {guildData.map((guild, index) => (
-                      <div key={index} className='group lg:relative'>
-                        <input
-                          type='radio'
-                          id={guild.name.toString()}
-                          name='guild'
-                          value={`Guild ${guild.name}`}
-                          className='hidden'
-                          checked={selectedGuild === guild.name}
-                          onChange={() => setSelectedGuild(guild.name)}
-                          aria-label='Guild Selection'
-                        />
-                        <label
-                          htmlFor={guild.name}
-                          className={`cursor-pointer transition-transform duration-200 ${
-                            selectedGuild === guild.name ? 'scale-105 text-pink-500' : 'text-white'
-                          }`}
-                          style={{
-                            color: selectedGuild === guild.name ? `#${guild.color}` : `#FFFFFF`,
-                            fontSize: selectedGuild === guild.name ? '1.2em' : '1em',
-                          }}
-                        >
-                          {guild.symbol}
-                          <div
-                            className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-4 text-white shadow-md group-hover:block`}
+                  <form>
+                    <label htmlFor='guilds' className='text-lg font-semibold text-gray-700 lg:text-xl'>
+                      Guilds
+                    </label>
+                    <div className='relative flex items-center justify-between gap-x-4 px-4 lg:w-[70%]'>
+                      {guildData.map((guild, index) => (
+                        <div key={index} className='group lg:relative'>
+                          <input
+                            type='radio'
+                            id={guild.name.toString()}
+                            name='guild'
+                            value={`Guild ${guild.name}`}
+                            className='hidden'
+                            checked={selectedGuild === guild.name}
+                            onChange={() => setSelectedGuild(guild.name)}
+                            aria-label='Guild Selection'
+                          />
+                          <label
+                            htmlFor={guild.name}
+                            className={`cursor-pointer transition-transform duration-200 ${
+                              selectedGuild === guild.name ? 'scale-105 text-pink-500' : 'text-white'
+                            }`}
+                            style={{
+                              color: selectedGuild === guild.name ? `#${guild.color}` : `#FFFFFF`,
+                              fontSize: selectedGuild === guild.name ? '1.2em' : '1em',
+                            }}
                           >
-                            <div style={{ width: '150px' }}>
-                              <Image
-                                src={guild.image}
-                                alt={guild.name}
-                                width={150}
-                                height={50}
-                                className='rounded-md'
-                              />
-                            </div>
-                            <p
-                              className='mt-2 flex justify-center text-xs font-bold'
-                              style={{
-                                color: `#${guild.color}`,
-                              }}
+                            {guild.symbol}
+                            <div
+                              className={`absolute bottom-full left-1/2 z-50 hidden -translate-x-1/2 rounded-xl bg-black/80 p-4 text-white shadow-md group-hover:block`}
                             >
-                              {guild.name}
-                            </p>
-                            <p className='text-xs'>{guild.description}</p>
-                          </div>
-                        </label>
-                      </div>
-                    ))}
-                  </div>
+                              <div style={{ width: '150px' }}>
+                                <Image
+                                  src={guild.image}
+                                  alt={guild.name}
+                                  width={150}
+                                  height={50}
+                                  className='rounded-md'
+                                />
+                              </div>
+                              <p
+                                className='mt-2 flex justify-center text-xs font-bold'
+                                style={{
+                                  color: `#${guild.color}`,
+                                }}
+                              >
+                                {guild.name}
+                              </p>
+                              <p className='text-xs'>{guild.description}</p>
+                            </div>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </form>
+                </div>
+                <div className='mt-4 flex justify-center'>
+                  <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='generate'>
+                    Update
+                  </DrawOutlineButton>
                 </div>
               </div>
             </div>
@@ -285,7 +292,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
             )}
 
             {isCardModalOpen && (
-              <div className='absolute left-0 top-0 flex size-full items-center justify-center'>
+              <div className='absolute left-0 top-0 z-50 flex size-full items-center justify-center rounded-lg bg-black/80'>
                 <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
                   <Avatar_creator />
                 </FormModal2>
