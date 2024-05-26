@@ -1,0 +1,38 @@
+import { NextResponse } from 'next/server'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+export async function POST(request) {
+  try {
+    const data = await request.json()
+    const { description, guild, avatar_img, soft_skills, additional_skills, color, symbol, gg_id, alignment } = data
+    const new_guild = await prisma.guilds.create({
+      data: {
+        description,
+        guild,
+        avatar_img,
+        soft_skills,
+        additional_skills,
+        color,
+        symbol,
+        gg_id,
+        alignment,
+      },
+    })
+    return NextResponse.json(new_guild)
+  } catch (error) {
+    console.error('error creating guild', error)
+    return NextResponse.error('Internal server error', 500)
+  }
+}
+
+export async function GET(request) {
+  try {
+    const guilds = await prisma.guilds.findMany()
+    return NextResponse.json(guilds)
+  } catch (error) {
+    console.error('error fetching guilds', error)
+    return NextResponse.error('Internal server error', 500)
+  }
+}
