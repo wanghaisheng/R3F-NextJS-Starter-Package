@@ -305,7 +305,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option defaultValue='' className='bg-purple-200  text-gray-600  dark:bg-black'>
+                                <option value='' className='bg-purple-200  text-gray-600  dark:bg-black'>
                                   Select Type
                                 </option>
                                 <option
@@ -548,7 +548,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option defaultValue='' className='bg-purple-200  text-gray-600 dark:bg-black '>
+                                <option value='' className='bg-purple-200  text-gray-600 dark:bg-black '>
                                   Select Type
                                 </option>
                                 <option
