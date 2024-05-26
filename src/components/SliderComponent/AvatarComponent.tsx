@@ -110,9 +110,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
 
   useEffect(() => {
     const setGuild = () => {
-      setSelectedGuild(user.guilds[0].guild_name)
+      if (user.guilds.length !== 0) {
+        setSelectedGuild(user.guilds[0].guild_name)
+      }
     }
-    if (user && user.guilds.length !== 0) {
+    if (user) {
       setGuild()
     }
   }, [user])
