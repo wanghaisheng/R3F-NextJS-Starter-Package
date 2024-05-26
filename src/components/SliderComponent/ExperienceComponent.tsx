@@ -5,7 +5,7 @@ import { enqueueSnackbar } from 'notistack'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import { TiDelete } from 'react-icons/ti'
 
@@ -26,6 +26,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
   const [projects, setProjects] = useState([
     { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
   ])
+
+  const formRefs = useRef([])
+
   // fetch experience data
   useEffect(() => {
     const fetchExpData = () => {
@@ -161,6 +164,16 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       updatedProjects[index].tools = newTools
       return updatedProjects
     })
+  }
+
+  const handleHomeClick = async (index) => {
+    const form = formRefs.current[index]
+    const isSubmitted = await (form
+      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
+      : true)
+    if (isSubmitted) {
+      window.location.href = '/hero3'
+    }
   }
 
   return (
@@ -370,14 +383,12 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div className='absolute bottom-4 right-4'>
                               <button
                                 className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                type='submit'
-                                aria-label='home btn'
+                                onClick={() => handleHomeClick(0)}
+                                aria-label='home button'
                               >
-                                <Link href='/hero3'>
-                                  <p className='p-4'>
-                                    <IoHome />
-                                  </p>
-                                </Link>
+                                <p className='p-4'>
+                                  <IoHome />
+                                </p>
                               </button>
                               <button
                                 className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
@@ -393,10 +404,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                           </>
                         ) : (
                           <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                            <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                              <Link href='/hero3'>
-                                <IoHome className='my-1' />
-                              </Link>
+                            <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='home'>
+                              <IoHome className='my-1' />
                             </DrawOutlineButton>
                             <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                               Next
@@ -547,14 +556,12 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div className='absolute bottom-4 right-4'>
                               <button
                                 className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                type='submit'
-                                aria-label='home btn'
+                                onClick={() => handleHomeClick(0)}
+                                aria-label='home button'
                               >
-                                <Link href='/hero3'>
-                                  <p className='p-4'>
-                                    <IoHome />
-                                  </p>
-                                </Link>
+                                <p className='p-4'>
+                                  <IoHome />
+                                </p>
                               </button>
                               <button
                                 className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
@@ -570,10 +577,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                           </>
                         ) : (
                           <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                            <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                              <Link href='/hero3'>
-                                <IoHome className='my-1' />
-                              </Link>
+                            <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='home'>
+                              <IoHome className='my-1' />
                             </DrawOutlineButton>
                             <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                               Next

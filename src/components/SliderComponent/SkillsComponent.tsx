@@ -2,7 +2,7 @@
 
 import { enqueueSnackbar } from 'notistack'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 
 import { FaArrowLeft } from 'react-icons/fa6'
@@ -52,6 +52,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
 
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
+
+  const formRefs = useRef([])
 
   function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
     for (let i = 0; i < exp_skills.length; i++) {
@@ -227,6 +229,16 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   }
   const [open, setOpen] = useState(false)
 
+  const handleHomeClick = async (index) => {
+    const form = formRefs.current[index]
+    const isSubmitted = await (form
+      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
+      : true)
+    if (isSubmitted) {
+      window.location.href = '/hero3'
+    }
+  }
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -321,21 +333,19 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                               <div className='absolute bottom-4 right-4'>
                                 <button
                                   className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  type='submit'
+                                  onClick={() => handleHomeClick(0)}
                                   aria-label='home btn'
                                 >
-                                  <Link href='/hero3'>
-                                    <p className='p-4 text-white'>
-                                      <IoHome />
-                                    </p>
-                                  </Link>
+                                  <p className='p-4 text-white'>
+                                    <IoHome />
+                                  </p>
                                 </button>
                               </div>
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4'>
-                              <DrawOutlineButton type='submit' aria-label='go to home page'>
-                                <Link href='/hero3'>Go To Home</Link>
+                              <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
+                                Go To Home
                               </DrawOutlineButton>
                             </div>
                           )}
@@ -387,28 +397,26 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                           {!isSmallScreen ? (
                             <>
                               <div className='mt-4 flex justify-center'>
-                                <DrawOutlineButton type='submit' aria-label='generate'>
+                                <DrawOutlineButton type='submit' aria-label='update'>
                                   Update
                                 </DrawOutlineButton>
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
                                   className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  type='submit'
+                                  onClick={() => handleHomeClick(0)}
                                   aria-label='home btn'
                                 >
-                                  <Link href='/hero3'>
-                                    <p className='p-4 text-white'>
-                                      <IoHome />
-                                    </p>
-                                  </Link>
+                                  <p className='p-4 text-white'>
+                                    <IoHome />
+                                  </p>
                                 </button>
                               </div>
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4'>
-                              <DrawOutlineButton type='submit' aria-label='go to home page'>
-                                <Link href='/hero3'>Go To Home</Link>
+                              <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
+                                Go To Home
                               </DrawOutlineButton>
                             </div>
                           )}
