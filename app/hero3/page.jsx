@@ -31,43 +31,12 @@ import AvatarImageComponent from '@/components/avatarImage/page'
 
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  PolarAngleAxis,
-  PolarGrid,
-  PolarRadiusAxis,
-  Radar,
-  RadarChart,
-  Rectangle,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts'
-
-// import { ConstantColorFactor } from 'three'
+import Link from 'next/link'
 
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
-
-// Custom tooltip component for chart
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className='flex flex-col gap-4 rounded-md bg-slate-900 p-4'>
-        <p className='text-base'>{label}</p>
-        <p className='text-sm text-indigo-400'>
-          <span className='ml-2'>{payload[0].payload.percentage}</span>%
-        </p>
-      </div>
-    )
-  }
-}
 
 export default function Hero3() {
   const { user } = useUser()
@@ -556,38 +525,10 @@ export default function Hero3() {
                     <div className='flex flex-col items-center justify-center'>
                       <div>
                         <p>Seems like you have not generated an Experience card Yet, you want to generate one?</p>
-                        <button>EDIT</button>
-                      </div>
-                      {/* Carousel */}
-                      <div className='w-full overflow-hidden' ref={emblaRef3}>
-                        <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow lg:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='flex justify-center'>
-                                <ExperienceFlipCard
-                                  type='DEFAULT'
-                                  projectName='DEFAULT'
-                                  skills='DEFAULT'
-                                  toolsAndTech='DEFAULT'
-                                />
-                              </div>
-                              <div className='my-3'>
-                                <p className='px-4'>
-                                  Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
-                                  voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
-                                  blanditiis sed!
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button onClick={scrollPrev3} aria-label='previous button'>
-                            <MdNavigateBefore />
-                          </button>
-                          <button onClick={scrollNext3} aria-label='next button'>
-                            <MdNavigateNext />
-                          </button>
+                        <div className='flex justify-center'>
+                          <Link href='slider' aria-label='slider link'>
+                            <DrawOutlineButton>EDIT</DrawOutlineButton>
+                          </Link>
                         </div>
                       </div>
                     </div>
