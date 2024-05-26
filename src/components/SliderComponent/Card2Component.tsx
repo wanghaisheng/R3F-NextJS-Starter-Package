@@ -15,8 +15,6 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import Link from 'next/link'
-import { IoHome } from 'react-icons/io5'
 
 export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
@@ -34,8 +32,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       emergency_address: '',
     },
   ])
-
-  const formRefs = useRef([])
 
   useEffect(() => {
     const fetchCardsData = async () => {
@@ -120,10 +116,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         url: `/api/internal/card/${id}`,
         method: 'DELETE',
       })
-      alert('Card info deleted')
-      return
+      enqueueSnackbar('Deleted Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
     } catch (error) {
-      console.error(error)
+      enqueueSnackbar('Failed to Delete', { autoHideDuration: 2000, variant: 'error' })
     }
   }
 
@@ -226,16 +224,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     })
   }
 
-  const handleHomeClick = async (index) => {
-    const form = formRefs.current[index]
-    const isSubmitted = await (form
-      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
-      : true)
-    if (isSubmitted) {
-      window.location.href = '/hero3'
-    }
-  }
-
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -264,13 +252,15 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
               {cards.map((card, index) => (
                 <Tab key={index} className='ml-4 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {card.type}
-                  <button
-                    className='ml-2 text-gray-900 hover:text-red-500'
-                    onClick={() => handleDeleteCard(index, card.card_id)}
-                    aria-label='Delete Card'
-                  >
-                    <TiDelete />
-                  </button>
+                  {index !== 0 && ( // Condition to check if it's not the first tab
+                    <button
+                      className='ml-2 text-gray-900 hover:text-red-500'
+                      onClick={() => handleDeleteCard(index, card.card_id)}
+                      aria-label='Delete Card'
+                    >
+                      <TiDelete />
+                    </button>
+                  )}
                 </Tab>
               ))}
             </TabList>
@@ -521,15 +511,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  onClick={() => handleHomeClick(0)}
-                                  aria-label='home btn'
-                                >
-                                  <p className='p-4'>
-                                    <IoHome />
-                                  </p>
-                                </button>
-                                <button
                                   className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   onClick={onNextButtonClick}
@@ -543,9 +524,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                              <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='home'>
-                                <IoHome className='my-1' />
-                              </DrawOutlineButton>
                               <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                                 Next
                               </DrawOutlineButton>
@@ -773,15 +751,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                               </div>
                               <div className='absolute bottom-4 right-4'>
                                 <button
-                                  className='mr-2 rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  onClick={() => handleHomeClick(0)}
-                                  aria-label='home btn'
-                                >
-                                  <p className='p-4'>
-                                    <IoHome />
-                                  </p>
-                                </button>
-                                <button
                                   className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                   type='submit'
                                   onClick={onNextButtonClick}
@@ -795,9 +764,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </>
                           ) : (
                             <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                              <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='home'>
-                                <IoHome className='my-1' />
-                              </DrawOutlineButton>
                               <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
                                 Next
                               </DrawOutlineButton>

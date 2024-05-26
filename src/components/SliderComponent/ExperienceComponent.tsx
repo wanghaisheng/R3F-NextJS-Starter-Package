@@ -168,11 +168,14 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
 
   const handleHomeClick = async (index) => {
     const form = formRefs.current[index]
-    const isSubmitted = await (form
-      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
-      : true)
-    if (isSubmitted) {
-      window.location.href = '/hero3'
+    if (form) {
+      const isSubmitted = form.checkValidity()
+      if (isSubmitted) {
+        window.location.href = '/hero3'
+        form.reportValidity() // This will show validation messages if any field is invalid
+      } else {
+        form.reportValidity() // This will show validation messages if any field is invalid
+      }
     }
   }
 
@@ -200,13 +203,15 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
               {projects.map((project, index) => (
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {project.name}
-                  <button
-                    className='ml-2 text-gray-900 hover:text-red-500'
-                    aria-label='delete button'
-                    onClick={() => handleDeleteProject(index, project.experience_id)}
-                  >
-                    <TiDelete />
-                  </button>
+                  {index !== 0 && ( // Condition to check if it's not the first tab
+                    <button
+                      className='ml-2 text-gray-900 hover:text-red-500'
+                      aria-label='delete button'
+                      onClick={() => handleDeleteProject(index, project.experience_id)}
+                    >
+                      <TiDelete />
+                    </button>
+                  )}
                 </Tab>
               ))}
             </TabList>

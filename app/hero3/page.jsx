@@ -1,12 +1,10 @@
 'use client'
 
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-// import { Button } from "@/components/ui/button"
 
-import axios from 'axios'
+import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 
 import dynamic from 'next/dynamic'
-// import Image from 'next/image'
 // import { Suspense } from 'react'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
@@ -552,6 +550,10 @@ export default function Hero3() {
                     </div>
                   ) : (
                     <div className='flex flex-col items-center justify-center'>
+                      <div>
+                        <p>Seems like you have not generated an Experience card Yet, you want to generate one?</p>
+                        <button>EDIT</button>
+                      </div>
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef3}>
                         <div className='flex items-center'>
@@ -619,66 +621,10 @@ export default function Hero3() {
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
                         {user && skillsData.length != 0 ? (
-                          <div>
-                            {/* Condition for changing barchart chart and radar chart*/}
-                            {skillsData.length < 6 ? (
-                              <ResponsiveContainer width={380} height={330}>
-                                <BarChart
-                                  width={420}
-                                  height={330}
-                                  data={skillsData}
-                                  margin={{
-                                    top: 5,
-                                    right: 30,
-                                    left: 0,
-                                    bottom: 5,
-                                  }}
-                                >
-                                  <XAxis dataKey='skill_name' angle={-30} padding={{ left: 20, right: 20 }} />
-                                  <YAxis domain={[0, 100]} />
-                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
-
-                                  <CartesianGrid vertical={false} strokeDasharray='6 6' />
-                                  <Bar
-                                    name='Ram'
-                                    dataKey='percentage'
-                                    fill='#6E29F7'
-                                    activeBar={<Rectangle fill='#268AFF' stroke='blue' />}
-                                  />
-                                </BarChart>
-                              </ResponsiveContainer>
-                            ) : (
-                              // Radar chart
-                              <ResponsiveContainer width={420} height={330}>
-                                <RadarChart
-                                  // cx={300}
-                                  // cy={250}
-                                  // outerRadius={150}
-                                  width={420}
-                                  height={330}
-                                  data={skillsData}
-                                >
-                                  <PolarGrid />
-                                  <PolarAngleAxis dataKey='skill_name' />
-                                  <PolarRadiusAxis opacity={0} domain={[0, 100]} />
-                                  <Radar
-                                    name='Ram'
-                                    dataKey='percentage'
-                                    stroke='#28B5E1'
-                                    strokeWidth={4}
-                                    fill='#28B5E1'
-                                    fillOpacity={0.4}
-                                  />
-                                  {/* <Tooltip /> */}
-                                  {/* <Legend values="100%" /> */}
-                                  <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
-                                </RadarChart>
-                              </ResponsiveContainer>
-                            )}
-                          </div>
+                          <SkillsChartComponent skills={skillsData} />
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched
-                          <div>No Skill to show</div>
+                          <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
                         )}
                       </div>
                     </CardBody>
