@@ -79,7 +79,7 @@ model users {
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model guilds {
   description       String?
-  guild             String?
+  guild_name        String?
   avatar_img        String?
   continent         String?
   gg_id             String?  @db.Uuid

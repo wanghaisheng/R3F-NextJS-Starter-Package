@@ -276,9 +276,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       {/* Next and Update Button */}
                       {!isSmallScreen ? (
                         <>
-                          <div className='mt-4 flex justify-center lg:ml-[33%]'>
-                            <DrawOutlineButton type='submit' aria-label='update'>
-                              Update
+                          <div className='mt-4 flex justify-center'>
+                            <DrawOutlineButton type='submit' aria-label='generate'>
+                              Generate
                             </DrawOutlineButton>
                           </div>
                           <div className='absolute bottom-4 right-4'>
@@ -336,7 +336,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       {/* Next and Update Button */}
                       {!isSmallScreen ? (
                         <>
-                          <div className='mt-4 flex justify-center lg:ml-[33%]'>
+                          <div className='mt-4 flex justify-center'>
                             <DrawOutlineButton type='submit' aria-label='update'>
                               Update
                             </DrawOutlineButton>
