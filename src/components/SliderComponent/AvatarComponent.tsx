@@ -15,6 +15,7 @@ import axios from 'axios'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import P from 'public/Cesium/Workers/createGeometry'
 
 async function getAvatarById(id: string) {
   try {
@@ -31,9 +32,8 @@ async function getAvatarById(id: string) {
 export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
-
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-
+  const [userGuild, setUserGuild] = useState([])
   const openCardModal = () => {
     setIsCardModalOpen(true)
   }
@@ -43,6 +43,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       try {
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
+        console.log(user.guilds)
+        user
       } catch (error) {
         enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
@@ -55,97 +57,131 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
+  // width='42' height='42'
+
   const guildData = [
     {
-      name: 'BUDDHA',
-      symbol: (
-        <svg width='42' height='42' viewBox='0 0 42 42' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='21' cy='21' r='21' fill='white' />
-          <path
-            d='M11.9603 9.4078L20.7682 11.13M11.9603 9.4078L6 19.6678M11.9603 9.4078L15.9338 6H27.1589L29.6093 9.4078M20.7682 11.13V21.8664M20.7682 11.13L29.6093 9.4078M20.7682 21.8664L11.9603 26.9965M20.7682 21.8664L29.6093 26.9965M11.9603 26.9965L6 19.6678M11.9603 26.9965L14.8079 37M6 19.6678V24.3215L10.6358 34.5449L14.8079 37M29.6093 9.4078L34.8742 19.6678M34.8742 19.6678L29.6093 26.9965M34.8742 19.6678L36 24.3215L30.9007 34.5449L27.1589 37M29.6093 26.9965L27.1589 37M14.8079 37H27.1589'
-            stroke='black'
-          />
-        </svg>
-      ),
+      guild_name: 'BUDDHA',
+      symbol: '/guild/buddha.png',
       color: 'white',
-      description: 'Buddha Vairocana Family (Space): Development, Engineering  & ITAI Services ',
-      skills: 'Clear vision, leadership, adaptability, communication',
-      alignment: 'Strategic planning, project management, problem-solving',
-      additionalSkills: 'Innovation, data analysis, research',
+      description: 'Buddha Vairocana Family (Space): Development, Engineering & ITAI Services',
+      skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+      alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+      additionalSkills: ['Innovation', 'data analysis', 'research'],
     },
     {
-      name: 'VAJRA',
-      symbol: (
-        <svg width='42' height='42' viewBox='0 0 42 42' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='21' cy='21' r='21' fill='#4A9BD5' />
-          <path
-            d='M20.3302 6L6 13.5085M20.3302 6L36 13.5085M20.3302 6V12.1433M6 13.5085V28.5256M6 13.5085L20.3302 12.1433M6 13.5085L11.3992 25.3174M6 28.5256L20.3302 36M6 28.5256L11.3992 25.3174M20.3302 36L36 28.5256M20.3302 36L11.3992 25.3174M20.3302 36L28.977 25.3174M36 28.5256V13.5085M36 28.5256L28.977 25.3174M36 13.5085L20.3302 12.1433M36 13.5085L28.977 25.3174M20.3302 12.1433L11.3992 25.3174M20.3302 12.1433L28.977 25.3174M11.3992 25.3174H28.977'
-            stroke='#030303'
-          />
-        </svg>
-      ),
+      guild_name: 'VAJRA',
+      symbol: '/guild/vajra.png',
       color: 'blue',
-      description: ' Vajra Family (Water): All Departments ()  & ITAI Services',
-      skills: ' Wisdom, clarity, calmness, emotional intelligence',
-      alignment: 'Leadership across departments, conflict resolution, team building ',
-      additionalSkills: 'Active listening, problem-solving from multiple perspectives',
+      description: 'Vajra Family (Water): All Departments & ITAI Services',
+      skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
+      alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
+      additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
     },
     {
-      name: 'KARMA',
-      symbol: (
-        <svg width='42' height='42' viewBox='0 0 42 42' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='21' cy='21' r='21' fill='#46B58F' />
-          <path
-            d='M6 13.5513L20.8212 6L36 13.5513M6 13.5513L20.8212 20.6241M6 13.5513V28.6196L20.8212 36M36 13.5513L20.8212 20.6241M36 13.5513V28.6196L20.8212 36M20.8212 20.6241V36'
-            stroke='black'
-          />
-        </svg>
-      ),
+      guild_name: 'KARMA',
+      symbol: '/guild/karma.png',
       color: 'green',
-      description: ' Karma Family (Wind): Sales & Marketing',
-      skills: ' Action-oriented, perseverance, resourcefulness, decisiveness',
-      alignment: 'Sales strategy, negotiation, marketing campaigns, lead generation',
-      additionalSkills: 'Public speaking, persuasion, social media expertise',
+      description: 'Karma Family (Wind): Sales & Marketing',
+      skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
+      alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
+      additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
     },
     {
-      name: 'RATNA',
-      symbol: (
-        <svg width='42' height='42' viewBox='0 0 42 42' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='21' cy='21' r='21' fill='#F0BE65' />
-          <path
-            d='M6 12.5119H36M6 12.5119L21.1421 5L36 12.5119M6 12.5119V28.9465L21.1421 36M6 12.5119L21.1421 36M36 12.5119L21.1421 36M36 12.5119V28.9465L21.1421 36'
-            stroke='black'
-          />
-        </svg>
-      ),
+      guild_name: 'RATNA',
+      symbol: '/guild/ratna.png',
       color: 'yellow',
-      description: 'Ratna Family (Earth): Admin & Customer Support ',
-      skills: 'Stability, reliability, patience, empathy',
-      alignment: 'Operations management, customer service, finance, human resources ',
-      additionalSkills: 'Organization, detail-orientation, conflict resolution',
+      description: 'Ratna Family (Earth): Admin & Customer Support',
+      skills: ['Stability', 'reliability', 'patience', 'empathy'],
+      alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
+      additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
     },
     {
-      name: 'PADMA',
-      symbol: (
-        <svg width='42' height='42' viewBox='0 0 42 42' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='21' cy='21' r='21' fill='#DA4C5C' />
-          <path
-            d='M7.63672 32.1824L20.9088 5.45508L34.364 32.1824M7.63672 32.1824H34.364M7.63672 32.1824L20.9088 23.6054L34.364 32.1824'
-            stroke='black'
-          />
-          <path d='M21 24.0403V5.45508' stroke='black' />
-        </svg>
-      ),
+      guild_name: 'PADMA',
+      symbol: '/guild/padma.png',
       color: 'red',
-      description: 'Padma Family (Fire): Design & Creative (Working Class)  ',
-      skills: 'Creativity, passion, discernment, inspiration',
-      alignment: 'Product design, brand development, content creation, innovation',
-      additionalSkills: ' Storytelling, user experience (UX) design, trend analysis',
+      description: 'Padma Family (Fire): Design & Creative (Working Class)',
+      skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
+      alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
+      additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
     },
   ]
-  const [selectedGuild, setSelectedGuild] = useState(guildData[0].name)
 
-  const selectedGuildData = guildData.find((guild) => guild.name === selectedGuild)
+  const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
+
+  const [index, setIndex] = useState(0)
+
+  const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
+
+  useEffect(() => {
+    const getIndex = guildData.findIndex((guild) => guild.guild_name === selectedGuild)
+    setIndex(getIndex)
+  }, [selectedGuild])
+
+  const checkUserGuild = () => {
+    if (user.guilds.length !== 0) {
+      return true
+    }
+    return false
+  }
+
+  const handleGuildSubmit = async (e: any) => {
+    e.preventDefault()
+    const submit = {
+      description: guildData[index].description,
+      guild: guildData[index].guild_name,
+      avatar_img: user.avatar.avatar_img,
+      soft_skills: guildData[index].skills,
+      color: guildData[index].color,
+      additional_skills: guildData[index].additionalSkills,
+      alignment: guildData[index].alignment,
+      symbol: guildData[index].symbol,
+      gg_id: user.gg_id,
+    }
+    console.log(submit)
+    try {
+      await axios({
+        url: '/api/internal/guilds',
+        method: 'POST',
+        data: submit,
+      })
+      enqueueSnackbar('Generated Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
+    } catch (error) {
+      console.error('failed to save the guild')
+    }
+  }
+
+  const handleGuildUpdate = async (e: any) => {
+    e.preventDefault()
+    const submit = {
+      description: guildData[index].description,
+      guild: guildData[index].guild_name,
+      avatar_img: user.avatar.avatar_img,
+      soft_skills: guildData[index].skills,
+      color: guildData[index].color,
+      additional_skills: guildData[index].additionalSkills,
+      alignment: guildData[index].alignment,
+      symbol: guildData[index].symbol,
+      gg_id: user.gg_id,
+    }
+    console.log(submit)
+    try {
+      await axios({
+        url: `/api/internal/guilds/${user.guilds[0].id}`,
+        method: 'PUT',
+        data: submit,
+      })
+      enqueueSnackbar('updated Sucessfully', {
+        autoHideDuration: 2000,
+        variant: 'success',
+      })
+    } catch (error) {
+      console.error('failed to update the guild')
+    }
+  }
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
@@ -206,44 +242,137 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               <div className='size-full p-4 lg:w-[65%]'>
                 {/* GUILDS SELECTION */}
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
-                  <form>
-                    <label
-                      htmlFor='guilds'
-                      className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
-                    >
-                      <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
-                    </label>
-                    <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
-                      {guildData.map((guild, index) => (
-                        <div key={index} className='group lg:relative'>
-                          <label htmlFor={guild.name} className='cursor-pointer'>
-                            <p
-                              className={`rounded-full transition-transform duration-500 ${selectedGuild === guild.name ? 'rotate-180 scale-75 border-4 border-pink-400' : 'rotate-0'}`}
+                  {user && checkUserGuild() !== true ? (
+                    <form onSubmit={handleGuildSubmit}>
+                      <label
+                        htmlFor='guilds'
+                        className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
+                      >
+                        <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
+                      </label>
+                      <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
+                        {guildData.map((guild, index) => (
+                          <div key={index} className='group lg:relative'>
+                            <label htmlFor={guild.guild_name} className='cursor-pointer'>
+                              <p
+                                className={`rounded-full transition-transform duration-500 ${selectedGuild === guild.guild_name ? 'rotate-180 scale-75 border-4 border-pink-400' : 'rotate-0'}`}
+                              >
+                                <Image src={`${guild.symbol}`} alt='' height={42} width={42} />
+                              </p>
+                            </label>
+                            <input
+                              type='radio'
+                              id={guild.guild_name.toString()}
+                              name='guild'
+                              value={`Guild ${guild.guild_name}`}
+                              className='hidden'
+                              checked={selectedGuild === guild.guild_name}
+                              onChange={() => setSelectedGuild(guild.guild_name)}
+                              aria-label='Guild Selection'
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      {/* Next and Update Button */}
+                      {!isSmallScreen ? (
+                        <>
+                          <div className='mt-4 flex justify-center lg:ml-[33%]'>
+                            <DrawOutlineButton type='submit' aria-label='update'>
+                              Update
+                            </DrawOutlineButton>
+                          </div>
+                          <div className='absolute bottom-4 right-4'>
+                            <button
+                              className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                              type='submit'
+                              onClick={onNextButtonClick}
+                              aria-label='next'
                             >
-                              {guild.symbol}
-                            </p>
-                          </label>
-                          <input
-                            type='radio'
-                            id={guild.name.toString()}
-                            name='guild'
-                            value={`Guild ${guild.name}`}
-                            className='hidden'
-                            checked={selectedGuild === guild.name}
-                            onChange={() => setSelectedGuild(guild.name)}
-                            aria-label='Guild Selection'
-                          />
+                              <p className='p-4'>
+                                <FaArrowRight />
+                              </p>
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                            Next
+                          </DrawOutlineButton>
                         </div>
-                      ))}
-                    </div>
-                  </form>
+                      )}
+                    </form>
+                  ) : (
+                    <form onSubmit={handleGuildUpdate}>
+                      <label
+                        htmlFor='guilds'
+                        className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
+                      >
+                        <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
+                      </label>
+                      <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
+                        {guildData.map((guild, index) => (
+                          <div key={index} className='group lg:relative'>
+                            <label htmlFor={guild.guild_name} className='cursor-pointer'>
+                              <p
+                                className={`rounded-full transition-transform duration-500 ${selectedGuild === guild.guild_name ? 'rotate-180 scale-75 border-4 border-pink-400' : 'rotate-0'}`}
+                              >
+                                <Image src={`${guild.symbol}`} alt='' height={42} width={42} />
+                              </p>
+                            </label>
+                            <input
+                              type='radio'
+                              id={guild.guild_name.toString()}
+                              name='guild'
+                              value={`Guild ${guild.guild_name}`}
+                              className='hidden'
+                              checked={selectedGuild === guild.guild_name}
+                              onChange={() => setSelectedGuild(guild.guild_name)}
+                              aria-label='Guild Selection'
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      {/* Next and Update Button */}
+                      {!isSmallScreen ? (
+                        <>
+                          <div className='mt-4 flex justify-center lg:ml-[33%]'>
+                            <DrawOutlineButton type='submit' aria-label='update'>
+                              Update
+                            </DrawOutlineButton>
+                          </div>
+                          <div className='absolute bottom-4 right-4'>
+                            <button
+                              className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                              type='submit'
+                              onClick={onNextButtonClick}
+                              aria-label='next'
+                            >
+                              <p className='p-4'>
+                                <FaArrowRight />
+                              </p>
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                            Next
+                          </DrawOutlineButton>
+                        </div>
+                      )}
+                    </form>
+                  )}
+
                   {selectedGuildData && (
                     <div
                       className='relative h-80 rounded-lg border text-purple-950 lg:ml-4 lg:w-72 dark:text-gray-300'
                       style={{ borderColor: selectedGuildData.color }}
                     >
                       <div className='absolute -right-3 -top-3 scale-125'>
-                        <h2 className='font-bold'>{selectedGuildData.symbol}</h2>
+                        <h2 className='font-bold'>
+                          <Image src={`${selectedGuildData.symbol}`} alt='' height={36} width={36} />
+                        </h2>
                       </div>
                       <div className='p-2'>
                         <h3 className='text-lg font-semibold'>Description</h3>
@@ -252,48 +381,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       <div className='flex justify-between p-2'>
                         <div>
                           <h3 className='text-lg font-semibold'>Skills</h3>
-                          <p className='text-sm '>{selectedGuildData.skills}</p>
+                          <p className='text-sm '>{selectedGuildData.skills.join(', ')}</p>
                         </div>
                         <div>
                           <h3 className='text-sm font-semibold'>Additional Skills</h3>
-                          <p className='text-sm '>{selectedGuildData.additionalSkills}</p>
+                          <p className='text-sm '>{selectedGuildData.additionalSkills.join(', ')}</p>
                         </div>
                       </div>
                       <div className='p-2'>
                         <h3 className='text-lg font-semibold'>Alignment</h3>
-                        <p className='text-sm '>{selectedGuildData.alignment}</p>
+                        <p className='text-sm '>{selectedGuildData.alignment.join(', ')}</p>
                       </div>
                     </div>
                   )}
                 </div>
-                {/* Next and Update Button */}
-                {!isSmallScreen ? (
-                  <>
-                    <div className='mt-4 flex justify-center lg:ml-[33%]'>
-                      <DrawOutlineButton type='submit' aria-label='update'>
-                        Update
-                      </DrawOutlineButton>
-                    </div>
-                    <div className='absolute bottom-4 right-4'>
-                      <button
-                        className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                        type='submit'
-                        onClick={onNextButtonClick}
-                        aria-label='next'
-                      >
-                        <p className='p-4'>
-                          <FaArrowRight />
-                        </p>
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                    <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                      Next
-                    </DrawOutlineButton>
-                  </div>
-                )}
               </div>
             </div>
 

@@ -72,5 +72,22 @@ model users {
   avatar         avatar[]
   cards          cards[]
   experience     experience[]
+  guilds         guilds[]
   skills         skills[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model guilds {
+  description       String?
+  guild             String?
+  avatar_img        String?
+  continent         String?
+  gg_id             String?  @db.Uuid
+  soft_skills       String[]
+  additional_skills String[]
+  symbol            String?
+  color             String?
+  alignment         String[]
+  id                String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  users             users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
 }
