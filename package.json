@@ -35,6 +35,7 @@
     "cesium": "^1.117.0",
     "clsx": "^2.1.0",
     "copy-webpack-plugin": "^12.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "embla-carousel-react": "^8.0.2",
     "geojson-world-map": "^0.0.2",
