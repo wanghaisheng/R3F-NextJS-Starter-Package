@@ -168,14 +168,11 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
 
   const handleHomeClick = async (index) => {
     const form = formRefs.current[index]
-    if (form) {
-      const isSubmitted = form.checkValidity()
-      if (isSubmitted) {
-        window.location.href = '/hero3'
-        form.reportValidity() // This will show validation messages if any field is invalid
-      } else {
-        form.reportValidity() // This will show validation messages if any field is invalid
-      }
+    const isSubmitted = await (form
+      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
+      : true)
+    if (isSubmitted) {
+      window.location.href = '/hero'
     }
   }
 

@@ -160,13 +160,13 @@ const Navbar = () => {
                     GUILDS
                   </Link>
                 )}
-                {pathname === '/hero3' ? (
-                  <Link href='/hero3' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                {pathname === '/hero' ? (
+                  <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HOME
                   </Link>
                 ) : (
                   <Link
-                    href='/hero3'
+                    href='/hero'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     HOME
@@ -244,7 +244,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  href='hero3'
+                  href='hero'
                   className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
                 >
                   HOME

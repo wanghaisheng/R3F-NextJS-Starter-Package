@@ -108,6 +108,15 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
 
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
 
+  useEffect(() => {
+    const setGuild = () => {
+      setSelectedGuild(user.guilds[0].guild_name)
+    }
+    if (user.guilds.length !== 0) {
+      setGuild()
+    }
+  }, [user])
+
   const [index, setIndex] = useState(0)
 
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)

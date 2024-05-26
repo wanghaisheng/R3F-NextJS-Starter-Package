@@ -206,7 +206,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
       : true)
     if (isSubmitted) {
-      window.location.href = '/hero3'
+      window.location.href = '/hero'
     }
   }
 

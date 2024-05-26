@@ -361,6 +361,10 @@ export default function Hero3() {
                                       name={card.name}
                                       dateIn={card.date_in}
                                       dateOut={card.date_out}
+                                      emergency_address={card.emergency_address}
+                                      emergency_details={card.emergency_details}
+                                      emergency_contact={card.emergency_contact}
+                                      blood_group={card.blood_group}
                                     />
                                   </div>
                                 </div>
