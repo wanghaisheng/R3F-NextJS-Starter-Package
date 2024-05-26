@@ -44,7 +44,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
         console.log(user.guilds)
-        user
       } catch (error) {
         enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
@@ -129,7 +128,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     e.preventDefault()
     const submit = {
       description: guildData[index].description,
-      guild: guildData[index].guild_name,
+      guild_name: guildData[index].guild_name,
       avatar_img: user.avatar.avatar_img,
       soft_skills: guildData[index].skills,
       color: guildData[index].color,
@@ -138,7 +137,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       symbol: guildData[index].symbol,
       gg_id: user.gg_id,
     }
-    console.log(submit)
     try {
       await axios({
         url: '/api/internal/guilds',
@@ -158,7 +156,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     e.preventDefault()
     const submit = {
       description: guildData[index].description,
-      guild: guildData[index].guild_name,
+      guild_name: guildData[index].guild_name,
       avatar_img: user.avatar.avatar_img,
       soft_skills: guildData[index].skills,
       color: guildData[index].color,
