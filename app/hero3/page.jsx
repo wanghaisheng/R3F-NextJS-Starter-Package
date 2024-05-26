@@ -519,7 +519,7 @@ export default function Hero3() {
                       <div className='w-full overflow-hidden' ref={emblaRef3}>
                         <div className='flex items-center'>
                           {experience.map((exp) => (
-                            <div className='w-full shrink-0 grow lg:min-w-0 '>
+                            <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
                               <div className='flex flex-col justify-center'>
                                 <div className='flex justify-center'>
                                   <ExperienceFlipCard

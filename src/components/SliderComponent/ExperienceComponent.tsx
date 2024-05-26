@@ -273,19 +273,19 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div>
                               <input
                                 type='radio'
-                                aria-label='emergency'
-                                id='emergency'
+                                aria-label='other'
+                                id='other'
                                 name='type'
-                                value='emergency'
-                                checked={project.type === 'emergency'}
+                                value='other'
+                                checked={project.type === 'other'}
                                 onChange={(e) => handleProjectTypeChange(index, e.target.value)}
                                 className='hidden'
                               />
                               <label
-                                htmlFor='emergency'
-                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                htmlFor='other'
+                                className={` ${project.type === 'other' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
-                                Emergency
+                                Other
                               </label>
                             </div>
                           </div>
@@ -450,19 +450,19 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <div>
                               <input
                                 type='radio'
-                                aria-label='emergency'
-                                id='emergency'
+                                aria-label='other'
+                                id='other'
                                 name='type'
-                                value='emergency'
-                                checked={project.type === 'emergency'}
+                                value='other'
+                                checked={project.type === 'other'}
                                 onChange={(e) => handleProjectTypeChange(index, e.target.value)}
                                 className='hidden'
                               />
                               <label
-                                htmlFor='emergency'
-                                className={` ${project.type === 'emergency' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+                                htmlFor='other'
+                                className={` ${project.type === 'other' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
                               >
-                                Emergency
+                                Other
                               </label>
                             </div>
                           </div>
