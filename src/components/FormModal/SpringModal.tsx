@@ -26,11 +26,8 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               <div className='mx-auto mb-2 grid size-16 place-items-center rounded-full bg-white text-3xl text-indigo-600'>
                 <FiAlertCircle />
               </div>
-              <h3 className='mb-2 text-center text-3xl font-bold'>One more thing!</h3>
-              <p className='mb-6 text-center'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id aperiam vitae, sapiente ducimus eveniet in
-                velit.
-              </p>
+              <h3 className='mb-2 text-center text-3xl font-bold'>Comming Soon!</h3>
+
               <div className='flex gap-2'>
                 <button
                   onClick={() => setIsOpen(false)}
