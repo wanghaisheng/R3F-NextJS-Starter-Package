@@ -25,7 +25,14 @@ const FormModal2 = ({ show, onclose, children }) => {
             >
               <IoMdArrowRoundBack />
             </motion.button>
-            <button className=' rounded-lg bg-violet-400 p-1'>Submit</button>
+            <button
+              onClick={() => {
+                onclose(false)
+              }}
+              className=' rounded-lg bg-violet-400 p-1'
+            >
+              Next
+            </button>
           </div>
         </div>
       </motion.div>

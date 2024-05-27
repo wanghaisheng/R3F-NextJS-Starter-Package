@@ -192,6 +192,14 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     }
   }
 
+  const [modelSrc, setModelSrc] = useState('')
+
+  useEffect(() => {
+    if (avatarsData.length > 0) {
+      setModelSrc(avatarsData[avatarsData.length - 1].avatar_url)
+    }
+  }, [avatarsData])
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -211,7 +219,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
                   <div className='relative'>
                     <Avatar
-                      modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                      // modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                      modelSrc={modelSrc}
                       // shadows
                       animationSrc='/male-idle-3.fbx'
                       style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
