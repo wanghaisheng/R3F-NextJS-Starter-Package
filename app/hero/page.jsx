@@ -38,7 +38,7 @@ import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
 
-export default function Hero() {
+export default function Hero3() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
@@ -530,22 +530,27 @@ export default function Hero() {
                             <DrawOutlineButton>EDIT</DrawOutlineButton>
                           </Link>
                         </div>
+                        <p>These are some templates you can follow:</p>
+                        <div className='flex justify-center'>
+                          <ExperienceFlipCard
+                            type='Education'
+                            projectName='ProjectOne'
+                            skills='CSS, HTML, JS'
+                            toolsAndTech='VSCODE, Figma, AdobeXD'
+                          />
+                        </div>
                       </div>
                     </div>
                   )}
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
-                    {user ? (
+                    {user && (
                       <a
                         href={`http://localhost:3000/api/public/users/${user.gg_id}`}
                         target='_blank'
                         aria-label='Booking button'
                       >
-                        <DrawOutlineButton>Booking</DrawOutlineButton>
-                      </a>
-                    ) : (
-                      <a href='' target='_blank' aria-label='Booking button'>
-                        <DrawOutlineButton>Booking</DrawOutlineButton>
+                        <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
                       </a>
                     )}
                   </div>

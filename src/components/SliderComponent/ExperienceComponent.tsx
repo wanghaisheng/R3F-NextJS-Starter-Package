@@ -235,7 +235,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                         target='_blank'
                         aria-label='booking button'
                       >
-                        <DrawOutlineButton aria-label='booking button'>Booking</DrawOutlineButton>
+                        <DrawOutlineButton aria-label='booking button'>Booking Comming Soon!!</DrawOutlineButton>
                       </a>
                     </div>
                   </div>

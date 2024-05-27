@@ -218,7 +218,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
-            SKILLS
+            SKILLS STATS
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
                 onClick={() => {

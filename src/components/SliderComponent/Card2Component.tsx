@@ -21,7 +21,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
   const [cards, setCards] = useState([
     {
       card_id: '',
-      type: 'type',
+      type: 'Emergency',
       name: '',
       description: '',
       date_in: '',
@@ -202,7 +202,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       ...prevCards,
       {
         card_id: '',
-        type: 'type',
+        type: 'Emergency',
         name: '',
         description: '',
         date_in: '',
@@ -305,8 +305,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option value='' className='bg-purple-200  text-gray-600  dark:bg-black'>
-                                  Select Type
+                                <option
+                                  defaultValue='Emergency'
+                                  value='Emergency'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
+                                  Emergency
                                 </option>
                                 <option
                                   value='Educational'
@@ -319,12 +323,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                   className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
                                 >
                                   Work
-                                </option>
-                                <option
-                                  value='Emergency'
-                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
-                                >
-                                  Emergency
                                 </option>
                               </select>
                             </div>
@@ -548,8 +546,11 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                 onChange={(e) => handleCardTypeChange(index, e.target.value)}
                                 required
                               >
-                                <option value='' className='bg-purple-200  text-gray-600 dark:bg-black '>
-                                  Select Type
+                                <option
+                                  defaultValue='Emergency'
+                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+                                >
+                                  Emergency
                                 </option>
                                 <option
                                   value='Educational'
@@ -562,12 +563,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                                   className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
                                 >
                                   Work
-                                </option>
-                                <option
-                                  value='Emergency'
-                                  className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
-                                >
-                                  Emergency
                                 </option>
                               </select>
                             </div>

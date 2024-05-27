@@ -530,22 +530,27 @@ export default function Hero3() {
                             <DrawOutlineButton>EDIT</DrawOutlineButton>
                           </Link>
                         </div>
+                        <p>These are some templates you can follow:</p>
+                        <div className='flex justify-center'>
+                          <ExperienceFlipCard
+                            type='Education'
+                            projectName='ProjectOne'
+                            skills='CSS, HTML, JS'
+                            toolsAndTech='VSCODE, Figma, AdobeXD'
+                          />
+                        </div>
                       </div>
                     </div>
                   )}
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
-                    {user ? (
+                    {user && (
                       <a
                         href={`http://localhost:3000/api/public/users/${user.gg_id}`}
                         target='_blank'
                         aria-label='Booking button'
                       >
-                        <DrawOutlineButton>Booking</DrawOutlineButton>
-                      </a>
-                    ) : (
-                      <a href='' target='_blank' aria-label='Booking button'>
-                        <DrawOutlineButton>Booking</DrawOutlineButton>
+                        <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
                       </a>
                     )}
                   </div>
@@ -578,7 +583,7 @@ export default function Hero3() {
               </div>
             </div>
             {/* Slide 3 */}
-            <div className='w-full shrink-0 grow lg:min-w-0'>
+            {/* <div className='w-full shrink-0 grow lg:min-w-0'>
               <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
                 <div className='h-full lg:ml-24 lg:w-[30%] '>
                   {user ? (
@@ -605,7 +610,7 @@ export default function Hero3() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <button
             className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
