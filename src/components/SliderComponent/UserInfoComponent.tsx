@@ -12,9 +12,11 @@ import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+
 import { FaArrowRight } from 'react-icons/fa6'
 
 export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
+
   const { user } = useUser()
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
@@ -53,9 +55,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
         method: 'put',
         data: submit,
       })
+
       enqueueSnackbar('Experience Info saved', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
       enqueueSnackbar('Failed to save Experience Info', { autoHideDuration: 2500, variant: 'error' })
+
     }
   }
 
@@ -88,10 +92,12 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
         <div
           id='Genius ID'
+
           className='relative flex h-[770px] w-[300px] bg-violet-300 py-4 md:w-[500px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
         >
           <div className='flex w-full flex-col'>
             <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
+
               GENIUS ID
             </div>
 
@@ -119,11 +125,13 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     onSubmit={handleSubmit}
                     className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                   >
+
                     <div className='flex w-full flex-col gap-y-2 px-4  text-purple-950 dark:text-purple-200'>
                       <div className='flex flex-col lg:flex-row lg:justify-between '>
                         <label htmlFor='' className='font-semibold'>
                           First Name
                         </label>
+
                         <input
                           type='text'
                           value={first_name}
@@ -135,9 +143,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
+
                         <label htmlFor='' className='font-semibold'>
                           Last Name
                         </label>
+
                         <input
                           type='text'
                           value={last_name}
@@ -149,9 +159,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
+
                         <label htmlFor='' className='font-semibold'>
                           Email
                         </label>
+
                         <input
                           type='text'
                           value={email}
@@ -163,9 +175,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
+
                         <label htmlFor='' className='font-semibold'>
                           Address
                         </label>
+
                         <input
                           type='text'
                           value={address}
@@ -176,9 +190,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
+
                         <label htmlFor='' className='font-semibold'>
                           Contact
                         </label>
+
                         <input
                           type='text'
                           value={phone_number}
@@ -189,9 +205,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
+
                         <label htmlFor='' className='font-semibold'>
                           DOB
                         </label>
+
                         <input
                           type='date'
                           value={dob}
@@ -213,7 +231,9 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         </div>
                         <div className='absolute bottom-4 right-4'>
                           <button
+
                             className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+
                             type='submit'
                             onClick={onNextButtonClick}
                             aria-label='next'

@@ -19,6 +19,7 @@ export default function CardsFlipCard({
   emergency_contact,
   emergency_address,
   emergency_details,
+
 }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
@@ -161,11 +162,13 @@ export default function CardsFlipCard({
               onClick={handleFlip}
             >
               {/* Card Front */}
+
               <Image unoptimized src='/card/redcard.png' alt='Card Front' fill className='rounded-lg object-cover' />
               <div className='absolute top-0 flex w-full justify-end'>
                 <p className='bg-gradient-to-r from-red-500 to-white bg-clip-text pr-2 font-bold text-transparent drop-shadow-sm'>
                   {type.toUpperCase()}
                 </p>
+
               </div>
               <div className='absolute inset-0 cursor-default rounded-xl '>
                 {/* Card Details */}
@@ -187,14 +190,17 @@ export default function CardsFlipCard({
                     </ul>
                     <div className='flex w-full justify-between'>
                       <ul>
+
                         <li className='my-2 mb-1 w-full'>Blood Group : {blood_group}</li>
                         <li className='my-2 mb-1 w-full'>Emergency Contact : {emergency_contact}</li>
+
                       </ul>
                     </div>
                   </nav>
                 </div>
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
+
                 <div className='text-base font-bold text-violet-400'>GOING GENIUS</div>
                 <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
               </div>
@@ -209,6 +215,7 @@ export default function CardsFlipCard({
                     <li className='font-semibold text-violet-400'>Emergency Address</li>
                     <li className='flex-wrap break-words'> {emergency_address}</li>
                   </ul>
+
                   {imgSrc && (
                     <Image className='mb-4 rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
                   )}

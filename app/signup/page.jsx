@@ -3,6 +3,7 @@
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
 
+
 import { LiaSignInAltSolid } from 'react-icons/lia'
 import { RiLockPasswordLine } from 'react-icons/ri'
 
@@ -80,8 +81,10 @@ export default function Page() {
         transition={{ duration: 0.5, delay: 0.3 }}
         className='hidden items-center justify-center pl-10 lg:flex'
       >
+
         <CardContainer className='border-none px-10 py-0'>
           <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-violet-400 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+
             <div className='flex'>
               <CardItem className='mt-4 w-full'>
                 <Image
@@ -112,14 +115,17 @@ export default function Page() {
         transition={{ duration: 0.5, delay: 0.4 }}
         className='signup flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
       >
+
         <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
           <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
             <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN UP</h2>
+
           </div>
           <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
             <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
               Email
             </label>
+
             <div
               className={`input-group m-2 flex rounded-md border-2 ${emailError ? ' border-red-500' : 'border-violet-400 '}`}
             >
@@ -127,11 +133,14 @@ export default function Page() {
                 className={`flex items-center justify-center px-1 text-2xl ${emailError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
               >
                 <LiaSignInAltSolid />
+
               </div>
               <input
                 type='email'
                 name='email'
+
                 className='rounded-md bg-transparent  p-2 text-purple-950 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 '
+
                 value={email}
                 placeholder='Email'
                 onChange={({ target }) => setEmail(target?.value)}
@@ -142,6 +151,7 @@ export default function Page() {
             <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
               Password
             </label>
+
             <div
               className={`input-group m-2 flex rounded-md border-2 ${passwordError ? ' border-red-500' : 'border-violet-400'}`}
             >
@@ -149,11 +159,14 @@ export default function Page() {
                 className={`flex items-center justify-center px-1 text-2xl  ${passwordError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
               >
                 <RiLockPasswordLine />
+
               </div>
               <input
                 type='password'
                 name='password'
+
                 className='rounded-md bg-transparent p-2 text-purple-950 '
+
                 value={password}
                 placeholder='Password'
                 onChange={({ target }) => setPassword(target?.value)}
@@ -166,7 +179,9 @@ export default function Page() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSubmit}
+
                 className='w-full rounded-lg bg-purple-950 p-2 px-4 text-purple-200 dark:bg-purple-200 dark:text-purple-950'
+
               >
                 Signup
               </motion.button>
@@ -179,6 +194,7 @@ export default function Page() {
             <hr className='h-px' />
           </div>
           <div className='flex justify-center gap-16 p-5'>
+
             {/* <a href='/api/auth/signin'> */}
             <a href='#'>
               <FcGoogle className='text-3xl transition-transform hover:scale-125' />
@@ -187,6 +203,7 @@ export default function Page() {
               <FaApple className='text-3xl transition-transform hover:scale-125' />
             </a>
             <a href='#'>
+
               <LogosFacebook className='text-3xl transition-transform hover:scale-125' />
             </a>
           </div>

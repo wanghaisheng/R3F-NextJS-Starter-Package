@@ -27,7 +27,9 @@ const SignIn = () => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
+
   const [generalError, setGeneralError] = useState('')
+
 
   // const validateEmail = (email) => {
   //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -98,8 +100,10 @@ const SignIn = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className='hidden items-center justify-center pl-10 lg:flex'
         >
+
           <CardContainer className='border-none px-10 py-0'>
             <CardBody className='group/card relative size-auto rounded-xl border border-black/[0.1] bg-violet-400 p-6 sm:w-[30rem] dark:border-white/[0.2] dark:bg-black dark:hover:shadow-3xl dark:hover:shadow-emerald-500/[0.1]'>
+
               <div className='flex'>
                 <CardItem className='mt-4 w-full'>
                   <Image
@@ -134,6 +138,7 @@ const SignIn = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className='signin flex flex-1 flex-col items-center justify-center rounded-t-3xl py-10 text-white sm:h-1/4'
         >
+
           <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
             <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
               <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN IN</h2>
@@ -150,19 +155,23 @@ const SignIn = () => {
                   className={`flex items-center justify-center px-1 text-2xl ${emailError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
                 >
                   <LiaSignInAltSolid />
+
                 </div>
 
                 <input
                   type='email'
                   id='email'
                   name='email'
+
                   className='rounded-md bg-transparent  p-2 text-purple-950 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 '
+
                   value={email}
                   placeholder='Email'
                   onChange={({ target }) => setEmail(target.value)}
                 />
               </div>
               {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
+
 
               <label htmlFor='password' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
                 Password
@@ -174,19 +183,24 @@ const SignIn = () => {
                   className={`flex items-center justify-center px-1 text-2xl  ${passwordError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
                 >
                   <RiLockPasswordLine />
+
                 </div>
                 <input
                   type='password'
                   id='password'
                   name='password'
+
                   className='rounded-md bg-transparent p-2 text-purple-950 '
+
                   placeholder='Password'
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}
                 />
               </div>
+
               {emailError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
               {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}
+
 
               <div className=''>
                 <p className='flex justify-between text-sm text-blue-500'>
@@ -208,7 +222,9 @@ const SignIn = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSubmit}
+
                   className='w-full rounded-lg bg-purple-950 p-2 px-4 text-purple-200 dark:bg-purple-200 dark:text-purple-950'
+
                 >
                   Sign In
                 </motion.button>
@@ -221,6 +237,7 @@ const SignIn = () => {
               <hr className='h-px' />
             </div>
             <div className='flex justify-center gap-16 p-5'>
+
               {/* <a href='/api/internal/auth/signin'> */}
               <a href='#'>
                 <FcGoogle className='text-3xl transition-transform hover:scale-125' />
@@ -229,6 +246,7 @@ const SignIn = () => {
                 <FaApple className='text-3xl transition-transform hover:scale-125' />
               </a>
               <a href='#'>
+
                 <LogosFacebook className='text-3xl transition-transform hover:scale-125' />
               </a>
             </div>
