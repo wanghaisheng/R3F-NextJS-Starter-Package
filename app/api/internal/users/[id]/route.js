@@ -17,6 +17,9 @@ export async function GET(request, { params }) {
         experience: true,
         avatar: true,
         skills: true,
+
+        guilds: true,
+
       },
     })
 

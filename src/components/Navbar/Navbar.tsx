@@ -160,13 +160,13 @@ const Navbar = () => {
                     GUILDS
                   </Link>
                 )}
-                {pathname === '/hero3' ? (
-                  <Link href='/hero3' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                {pathname === '/hero' ? (
+                  <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HOME
                   </Link>
                 ) : (
                   <Link
-                    href='/hero3'
+                    href='/hero'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     HOME
@@ -210,7 +210,9 @@ const Navbar = () => {
         <div
           className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
-          } flex w-[75%] flex-col bg-white shadow-xl dark:bg-black`}
+
+          } flex w-[75%] flex-col bg-violet-400 shadow-xl dark:bg-black`}
+
         >
           <div className='p-4 '>
             <button
@@ -220,10 +222,12 @@ const Navbar = () => {
               aria-label='Close panel'
             >
               <span className='sr-only'>Close panel</span>
-              <IoMdArrowRoundBack className='text-black dark:text-white' />
+
+              <IoMdArrowRoundBack className='text-white dark:text-purple-200' />
             </button>
           </div>
-          <div className='px-4 py-6 '>
+          <div className=' px-4 py-6 '>
+
             {/* Navbar for Hamburger */}
             <ul className='flex flex-col gap-y-4'>
               <li>
@@ -244,7 +248,9 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  href='hero3'
+
+                  href='hero'
+
                   className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
                 >
                   HOME

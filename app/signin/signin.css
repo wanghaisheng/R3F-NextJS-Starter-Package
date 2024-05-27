@@ -10,27 +10,15 @@
 
 .signin .input-group {
   position: relative;
-  background-color: black;
+
+  background-color: rgb(243, 221, 249);
+
 }
 .signin .input-group input {
   width: 300px;
 }
-.signin .input-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  font-size: larger;
-  padding: 0.4em;
-  background-color: whitesmoke;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-end-end-radius: 20px;
-  box-shadow:
-    inset -0.2em -0.2em 0.4em rgba(0, 0, 0, 0.2),
-    inset 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.2),
-    0.2em 0.2em 0.8em rgba(0, 0, 0, 0.2);
-}
+
+
 
 .signin input:focus {
   outline: none;
