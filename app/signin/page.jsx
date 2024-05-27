@@ -221,13 +221,14 @@ const SignIn = () => {
               <hr className='h-px' />
             </div>
             <div className='flex justify-center gap-16 p-5'>
-              <a href='/api/internal/auth/signin'>
+              {/* <a href='/api/internal/auth/signin'> */}
+              <a href='#'>
                 <FcGoogle className='text-3xl transition-transform hover:scale-125' />
               </a>
-              <a href=''>
+              <a href='#'>
                 <FaApple className='text-3xl transition-transform hover:scale-125' />
               </a>
-              <a href=''>
+              <a href='#'>
                 <LogosFacebook className='text-3xl transition-transform hover:scale-125' />
               </a>
             </div>
