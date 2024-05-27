@@ -27,6 +27,8 @@ const SignIn = () => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
+  const [generalError, setGeneralError] = useState('')
+
   // const validateEmail = (email) => {
   //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   //   return re.test(String(email).toLowerCase())
@@ -74,6 +76,16 @@ const SignIn = () => {
       }
     } catch (error) {
       log('Error: ', error)
+      log('Error Response: ', error.response.status)
+      if (error.response) {
+        if (error.response.status === 404) {
+          setEmailError('User does not exist, Please Sign Up to create an account.')
+        } else if (error.response.status === 401) {
+          setGeneralError('Incorrect email or password.')
+        } else {
+          setGeneralError('An error occurred. Please try again.')
+        }
+      }
     }
   }
 
@@ -150,6 +162,7 @@ const SignIn = () => {
                   onChange={({ target }) => setEmail(target.value)}
                 />
               </div>
+              {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
 
               <label htmlFor='password' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
                 Password
@@ -172,6 +185,8 @@ const SignIn = () => {
                   onChange={({ target }) => setPassword(target.value)}
                 />
               </div>
+              {emailError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
+              {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}
 
               <div className=''>
                 <p className='flex justify-between text-sm text-blue-500'>

@@ -18,14 +18,14 @@ export async function POST(request) {
     // Check if user exists
     if (!user) {
       // If user doesn't exist, return error indicating incorrect email
-      return NextResponse.error('Incorrect email', 401)
+      return NextResponse.json({ error: 'User email does not exist' }, { status: 404 })
     }
 
     // Verify password
     const passwordMatch = await bcrypt.compare(password, user.password)
     if (!passwordMatch) {
       // If password doesn't match, return error indicating incorrect password
-      return NextResponse.error('Incorrect password', 401)
+      return NextResponse.json({ error: 'Incorrect password' }, { status: 401 })
     }
 
     // Generate JWT token
@@ -35,6 +35,6 @@ export async function POST(request) {
     return NextResponse.json({ token })
   } catch (error) {
     console.error('Error signing in:', error)
-    return NextResponse.error('Internal Server Error', 500)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
