@@ -384,7 +384,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         </h2>
                       </div>
                       <div className='p-2'>
-                        <h3 className='text-lg font-semibold'>Description</h3>
+                        <h3 className='text-lg font-bold' style={{ color: selectedGuildData.color }}>
+                          {selectedGuildData.guild_name}
+                        </h3>
                         <p className='text-sm '>{selectedGuildData.description}</p>
                       </div>
                       <div className='flex justify-between p-2'>
