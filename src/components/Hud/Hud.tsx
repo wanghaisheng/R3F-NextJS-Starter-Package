@@ -123,7 +123,7 @@ const Hud = () => {
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
       `}
                   >
-                    Comming Soon
+                    Coming Soon
                   </div>
                 </Link>
               </div>
