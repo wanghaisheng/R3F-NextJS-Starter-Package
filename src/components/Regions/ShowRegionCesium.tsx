@@ -76,7 +76,7 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
               </div>
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
-            <div className='absolute right-0 top-14 mr-4 h-[66vh] w-[44vh] bg-violet-400/20 p-4'>
+            <div className='absolute right-0 top-14 mr-4 h-[66vh] w-[44vh] rounded-lg bg-violet-400/10 p-4'>
               <div className='flex size-full animate-pulse items-center justify-center'>
                 <h1 className='text-center text-3xl font-bold text-white'>
                   ELITE AVATARS <br />

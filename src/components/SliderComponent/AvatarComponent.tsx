@@ -229,127 +229,67 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               <div className='size-full p-4 lg:w-[65%]'>
                 {/* GUILDS SELECTION */}
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
-                  {user && checkUserGuild() !== true ? (
-                    <form onSubmit={handleGuildSubmit}>
-                      <label
-                        htmlFor='guilds'
-                        className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
-                      >
-                        <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
-                      </label>
-                      <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
-                        {guildData.map((guild, index) => (
-                          <div key={index} className='group lg:relative'>
-                            <label htmlFor={guild.guild_name} className='cursor-pointer'>
-                              <p
-                                className={`rounded-full transition-transform duration-500 ${selectedGuild === guild.guild_name ? 'rotate-180 scale-75 border-4 border-pink-400' : 'rotate-0'}`}
-                              >
-                                <Image src={`${guild.symbol}`} alt='' height={42} width={42} />
-                              </p>
-                            </label>
-                            <input
-                              type='radio'
-                              id={guild.guild_name.toString()}
-                              name='guild'
-                              value={`Guild ${guild.guild_name}`}
-                              className='hidden'
-                              checked={selectedGuild === guild.guild_name}
-                              onChange={() => setSelectedGuild(guild.guild_name)}
-                              aria-label='Guild Selection'
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      {/* Next and Update Button */}
-                      {!isSmallScreen ? (
-                        <>
-                          <div className='mt-4 flex justify-center'>
-                            <DrawOutlineButton type='submit' aria-label='generate'>
-                              Generate
-                            </DrawOutlineButton>
-                          </div>
-                          <div className='absolute bottom-4 right-4'>
-                            <button
-                              className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                              type='submit'
-                              onClick={onNextButtonClick}
-                              aria-label='next'
+                  {/* {user && checkUserGuild() !== true ? ( */}
+                  <form onSubmit={user && checkUserGuild() !== true ? handleGuildSubmit : handleGuildUpdate}>
+                    <label
+                      htmlFor='guilds'
+                      className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
+                    >
+                      <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
+                    </label>
+                    <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
+                      {guildData.map((guild, index) => (
+                        <div key={index} className='group lg:relative'>
+                          <label htmlFor={guild.guild_name} className='cursor-pointer'>
+                            <p
+                              className={`rounded-full transition-transform duration-500 ${selectedGuild === guild.guild_name ? 'rotate-180 scale-75 border-4 border-pink-400' : 'rotate-0'}`}
                             >
-                              <p className='p-4'>
-                                <FaArrowRight />
-                              </p>
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                            Next
+                              <Image src={`${guild.symbol}`} alt='' height={42} width={42} />
+                            </p>
+                          </label>
+                          <input
+                            type='radio'
+                            id={guild.guild_name.toString()}
+                            name='guild'
+                            value={`Guild ${guild.guild_name}`}
+                            className='hidden'
+                            checked={selectedGuild === guild.guild_name}
+                            onChange={() => setSelectedGuild(guild.guild_name)}
+                            aria-label='Guild Selection'
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    {/* Next and Update Button */}
+                    {!isSmallScreen ? (
+                      <>
+                        <div className='mt-4 flex justify-center'>
+                          <DrawOutlineButton type='submit' aria-label='generate/update'>
+                            {user && checkUserGuild() !== true ? 'Generate' : 'Update'}
                           </DrawOutlineButton>
                         </div>
-                      )}
-                    </form>
-                  ) : (
-                    <form onSubmit={handleGuildUpdate}>
-                      <label
-                        htmlFor='guilds'
-                        className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
-                      >
-                        <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
-                      </label>
-                      <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
-                        {guildData.map((guild, index) => (
-                          <div key={index} className='group lg:relative'>
-                            <label htmlFor={guild.guild_name} className='cursor-pointer'>
-                              <p
-                                className={`rounded-full transition-transform duration-500 ${selectedGuild === guild.guild_name ? 'rotate-180 scale-75 border-4 border-pink-400' : 'rotate-0'}`}
-                              >
-                                <Image src={`${guild.symbol}`} alt='' height={42} width={42} />
-                              </p>
-                            </label>
-                            <input
-                              type='radio'
-                              id={guild.guild_name.toString()}
-                              name='guild'
-                              value={`Guild ${guild.guild_name}`}
-                              className='hidden'
-                              checked={selectedGuild === guild.guild_name}
-                              onChange={() => setSelectedGuild(guild.guild_name)}
-                              aria-label='Guild Selection'
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      {/* Next and Update Button */}
-                      {!isSmallScreen ? (
-                        <>
-                          <div className='mt-4 flex justify-center'>
-                            <DrawOutlineButton type='submit' aria-label='update'>
-                              Update
-                            </DrawOutlineButton>
-                          </div>
-                          <div className='absolute bottom-4 right-4'>
-                            <button
-                              className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                              type='submit'
-                              onClick={onNextButtonClick}
-                              aria-label='next'
-                            >
-                              <p className='p-4'>
-                                <FaArrowRight />
-                              </p>
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                            Next
-                          </DrawOutlineButton>
+                        <div className='absolute bottom-4 right-4'>
+                          <button
+                            className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                            type='submit'
+                            onClick={onNextButtonClick}
+                            aria-label='next'
+                          >
+                            <p className='p-4'>
+                              <FaArrowRight />
+                            </p>
+                          </button>
                         </div>
-                      )}
-                    </form>
-                  )}
+                      </>
+                    ) : (
+                      <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                        <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                          Next
+                        </DrawOutlineButton>
+                      </div>
+                    )}
+                  </form>
+
                   {selectedGuildData && (
                     <div
                       className='relative h-80 rounded-lg border text-purple-950 lg:ml-4 lg:w-72 dark:text-gray-300'
