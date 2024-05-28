@@ -176,9 +176,7 @@ const Navbar = () => {
         <div
           className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
-
           } flex w-[75%] flex-col bg-violet-400 shadow-xl dark:bg-black`}
-
         >
           <div className='p-4 '>
             <button
@@ -193,47 +191,39 @@ const Navbar = () => {
             </button>
           </div>
           <div className=' px-4 py-6 '>
-
             {/* Navbar for Hamburger */}
             <ul className='flex flex-col gap-y-4'>
               <li>
-                <Link
-                  href='/avatars'
-                  className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
-                >
+                <Link href='/avatars' className='hover:text-violet-400'>
                   AVATARS
                 </Link>
               </li>
               <li>
-                <Link
-                  href='/guilds'
-                  className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
-                >
+                <Link href='/guilds' className='hover:text-violet-400'>
                   GUILDS
                 </Link>
               </li>
               <li>
-                <Link
-
-                  href='hero'
-
-                  className='w-full rounded-b-2xl border-violet-500 py-4 text-center font-semibold hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
-                >
+                <Link href='hero' className='hover:text-violet-400'>
                   HOME
                 </Link>
               </li>
               <li>
-                <Link href='regions'>REGIONS</Link>
+                <Link href='regions' className='hover:text-violet-400'>
+                  REGIONS
+                </Link>
               </li>
               <li>
-                <Link href='experience'>EXP</Link>
+                <Link href='experience' className='hover:text-violet-400'>
+                  EXP
+                </Link>
               </li>
               <li>
                 {user ? (
                   <Link
                     href='/signin'
                     onClick={logout}
-                    className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+                    className='flex w-full items-center justify-center py-4 hover:text-fuchsia-300'
                     aria-label='Sign Out'
                   >
                     Logout
@@ -241,7 +231,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href='/signin'
-                    className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+                    className='flex w-full items-center justify-center py-4 hover:text-fuchsia-300'
                     aria-label='Sign In'
                   >
                     Sign-In
