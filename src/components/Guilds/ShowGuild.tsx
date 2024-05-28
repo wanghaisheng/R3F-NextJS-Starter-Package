@@ -1,17 +1,13 @@
 import Image from 'next/image'
-
 import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
 import { FaDiamond } from 'react-icons/fa6'
 import { BsOctagonFill } from 'react-icons/bs'
 import { MdHexagon } from 'react-icons/md'
-
 export default function ShowGuild({ users, filter, searchTerm }: { users: any; filter: string; searchTerm: string }) {
   const filteredFactions = filter ? users.filter((user) => user.guild === filter) : users
-
   const filteredAndSearchedFactions = filteredFactions.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
-
   return (
     <>
       <div className='flex justify-start'>
@@ -63,7 +59,6 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
               {/* <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
                 <p>{user.description}</p>
               </span> */}
-
               <span
                 className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
               >

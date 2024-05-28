@@ -49,6 +49,11 @@ const Regions = ({ params }) => {
   return (
     <>
       <div className='relative'>
+        <div className='absolute top-0 z-50 flex w-full justify-center'>
+          <p className='animate-pulse rounded-lg bg-black/70 p-3 font-semibold text-purple-200 shadow shadow-violet-400'>
+            BETA TESTING
+          </p>
+        </div>
         {/* Render other content over the background */}
         {params.slug?.length === 2 ? (
           <div className='flex justify-center'>
@@ -57,7 +62,7 @@ const Regions = ({ params }) => {
         ) : params.slug?.length === 1 ? (
           <div>
             {/* Render background image */}
-            <div
+            {/* <div
               style={{
                 position: 'absolute',
                 top: -110,
@@ -69,7 +74,7 @@ const Regions = ({ params }) => {
                 backgroundPosition: 'center',
                 filter: 'blur(8px)',
               }}
-            ></div>
+            ></div> */}
             <RegionDetails continent={params.slug[0]} />
             <div className='mx-10 flex justify-end'>{params.slug[0].toUpperCase()}</div>
           </div>
@@ -89,11 +94,9 @@ const Regions = ({ params }) => {
                 filter: 'blur(8px)',
               }}
             ></div> */}
-
             <div className='flex flex-col justify-center lg:justify-start'>
               {/* Old Component */}
               {/* <ShowRegion filter={selectedFilter} searchTerm={searchTerm} /> */}
-
               {/* New Component */}
               {/* <ShowRegion2 filter={selectedFilter} /> */}
               <ShowRegionCesium filter={selectedFilter} />
