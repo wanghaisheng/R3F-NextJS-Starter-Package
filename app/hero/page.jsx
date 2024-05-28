@@ -1,105 +1,97 @@
 'use client'
-
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
-
 import dynamic from 'next/dynamic'
 // import { Suspense } from 'react'
-
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
-
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState } from 'react'
-
 import SpringModal from '@/components/FormModal/SpringModal'
-
 //icons
 import { FaRegEdit } from 'react-icons/fa'
-
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
-
 // For carousel inside slide 1
 import AvatarImageComponent from '@/components/avatarImage/page'
-
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
-
 import Link from 'next/link'
-
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
-
-export default function Hero3() {
+export default function Hero() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
-
   const [isOpen, setIsOpen] = useState(false)
-
-  // Main Carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+  const handleChangeSlide = (index) => {
+    if (emblaApi) emblaApi.scrollTo(index)
+  }
+  const handleScroll = useCallback(
+    (event) => {
+      if (!emblaApi) return
+      const deltaY = event.deltaY
+      if (deltaY > 0) {
+        emblaApi.scrollNext()
+      } else if (deltaY < 0) {
+        emblaApi.scrollPrev()
+      }
+    },
+    [emblaApi],
+  )
+  useEffect(() => {
+    window.addEventListener('wheel', handleScroll)
+    return () => {
+      window.removeEventListener('wheel', handleScroll)
+    }
+  }, [handleScroll])
+  // Main Carousel
 
   useEffect(() => {
     if (emblaApi) {
       console.log(emblaApi.slideNodes()) // Access API
     }
   }, [emblaApi])
-
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
-
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
-
   // carousel inside Slide 1
   const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: true })
-
   useEffect(() => {
     if (emblaApi2) {
       console.log(emblaApi2.slideNodes()) // Access API
     }
   }, [emblaApi2])
-
   const scrollPrev2 = useCallback(() => {
     if (emblaApi2) emblaApi2.scrollPrev()
   }, [emblaApi2])
-
   const scrollNext2 = useCallback(() => {
     if (emblaApi2) emblaApi2.scrollNext()
   }, [emblaApi2])
-
   // Carousel inside slide 2
   const [emblaRef3, emblaApi3] = useEmblaCarousel({ loop: true })
-
   useEffect(() => {
     if (emblaApi3) {
       console.log(emblaApi3.slideNodes()) // Access API
     }
   }, [emblaApi3])
-
   const scrollPrev3 = useCallback(() => {
     if (emblaApi3) emblaApi3.scrollPrev()
   }, [emblaApi3])
-
   const scrollNext3 = useCallback(() => {
     if (emblaApi3) emblaApi3.scrollNext()
   }, [emblaApi3])
-
-  // ------------------------------------------------------------
-
   // Experience
   useEffect(() => {
     const fetchExpData = async () => {
@@ -109,14 +101,10 @@ export default function Hero3() {
         console.log('Error fetching experience data:', error)
       }
     }
-
     if (user) {
       fetchExpData() // Fetch data only if user is available
     }
   }, [user])
-
-  // ------------------------------------------------------------
-
   // Fetch skills data
   function checkExistingSkills(skill, exp_skills) {
     for (let i = 0; i < exp_skills.length; i++) {
@@ -126,7 +114,6 @@ export default function Hero3() {
     }
     return false
   }
-
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
@@ -138,22 +125,18 @@ export default function Hero3() {
 
           user.skills.forEach((skillObj) => {
             // Add the skillObj to skillsSet
-
             skillsSet.add(
               JSON.stringify({
                 skill_name: skillObj.skill[0].skill_name,
                 percentage: skillObj.skill[0].percentage,
               }),
             )
-
             // Iterate over each skill element in skillObj.skill array
             skillObj.skill.forEach((element) => {
               // Add the skill name to exp_skills array
               exp_skills.push(element.skill_name)
-
               // Create an entry in exp_skill_obj for the skill percentage
               exp_skill_obj[element.skill_name] = element.percentage
-
               // Create an entry in exp_skill_obj for the skill_id
               exp_skill_obj[element.skill_name + '_id'] = skillObj.skill_id
             })
@@ -180,7 +163,6 @@ export default function Hero3() {
             }
           })
         }
-
         // Convert the Set back to an array of objects
         if (skillsSet.size !== 0) {
           const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
@@ -190,14 +172,10 @@ export default function Hero3() {
         console.log('failed to fetch the skills data')
       }
     }
-
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
   }, [user])
-
-  // ------------------------------------------------------------
-
   // Cards data
   useEffect(() => {
     const fetchCardsData = async () => {
@@ -207,24 +185,20 @@ export default function Hero3() {
         console.log('Error fetching skills data:', error)
       }
     }
-
     if (user) {
       fetchCardsData() // Fetch data only if user is available
     }
   }, [user])
-
   // Flip Card QR
   const [isFlipped, setIsFlipped] = useState(false)
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   QRCode.toDataURL(pathname).then(setImgSrc)
   // Flip Card QR end
-
   // Flip Card QR
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
-
   // Avatar
   useEffect(() => {
     const fetchAvatarsData = async () => {
@@ -234,12 +208,10 @@ export default function Hero3() {
         console.log('Error fetching avatars data:', error)
       }
     }
-
     if (user) {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
-
   return (
     <div className='relative flex flex-col lg:size-full'>
       <div className='absolute top-2 z-50 flex w-full justify-center'>
@@ -247,7 +219,6 @@ export default function Hero3() {
           BETA TESTING
         </p>
       </div>
-
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
@@ -277,7 +248,6 @@ export default function Hero3() {
           />
         )}
       </div>
-
       {/* Carousel */}
       <div className='top-10 flex size-full justify-between px-4 lg:absolute'>
         <div className='overflow-hidden' ref={emblaRef}>
@@ -315,7 +285,6 @@ export default function Hero3() {
                               </div>
                             </div>
                           </div>
-
                           {cardsData.length != 0 ? (
                             cardsData.map((card) => (
                               <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
@@ -456,7 +425,6 @@ export default function Hero3() {
                     <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
                   </div>
                 </div>
-
                 <div className='mt-60 h-full lg:mr-20 lg:mt-0 lg:w-[30%] '>
                   <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Avatar
@@ -543,7 +511,6 @@ export default function Hero3() {
                       </div>
                     )}
                   </div>
-
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
                     {user && (
@@ -558,7 +525,6 @@ export default function Hero3() {
                     )}
                   </div>
                 </div>
-
                 <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
                   <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
                     Skills
