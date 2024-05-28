@@ -486,64 +486,58 @@ export default function Hero3() {
                       <FaRegEdit />
                     </a>
                   </div>
-                  {user && experience.length != 0 ? (
-                    <div className='flex flex-col items-center justify-center'>
-                      {/* Carousel */}
-                      <div className='w-full overflow-hidden' ref={emblaRef3}>
-                        <div className='flex items-center'>
-                          {experience.map((exp) => (
-                            <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
-                              <div className='flex flex-col justify-center'>
-                                <div className='flex justify-center'>
-                                  <ExperienceFlipCard
-                                    type={exp.type}
-                                    projectName={exp.name}
-                                    skills={exp.project_skills.join(', ')}
-                                    toolsAndTech={exp.tools}
-                                  />
-                                </div>
-                                <div className='my-3'>
-                                  <p className='px-4'>
-                                    Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
-                                    voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
-                                    blanditiis sed!
-                                  </p>
+                  <div className='flex flex-col items-center justify-center'>
+                    {/* Carousel */}
+                    {user && experience.length != 0 ? (
+                      <>
+                        <div className='w-full overflow-hidden' ref={emblaRef3}>
+                          <div className='flex items-center'>
+                            {experience.map((exp) => (
+                              <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
+                                <div className='flex flex-col justify-center'>
+                                  <div className='flex justify-center'>
+                                    <ExperienceFlipCard
+                                      type={exp.type}
+                                      projectName={exp.name}
+                                      skills={exp.project_skills.join(', ')}
+                                      toolsAndTech={exp.tools}
+                                    />
+                                  </div>
+                                  <div className='my-3'>
+                                    <p className='px-4'>
+                                      Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
+                                      voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
+                                      blanditiis sed!
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                      <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                        <button onClick={scrollPrev3} aria-label='prev button'>
-                          <MdNavigateBefore />
-                        </button>
-                        <button onClick={scrollNext3} aria-label='next button'>
-                          <MdNavigateNext />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className='flex flex-col items-center justify-center'>
-                      <div>
-                        <p>Seems like you have not generated an Experience card Yet, you want to generate one?</p>
-                        <div className='flex justify-center'>
+                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
+                          <button onClick={scrollPrev3} aria-label='prev button'>
+                            <MdNavigateBefore />
+                          </button>
+                          <button onClick={scrollNext3} aria-label='next button'>
+                            <MdNavigateNext />
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className='flex flex-col justify-center'>
+                        <p className='flex text-center'>
+                          Seems like you have not generated an Experience card Yet, you want to generate one?
+                        </p>
+                        <div className='mt-5 flex justify-center'>
                           <Link href='slider' aria-label='slider link'>
                             <DrawOutlineButton>EDIT</DrawOutlineButton>
                           </Link>
                         </div>
-                        <p>These are some templates you can follow:</p>
-                        <div className='flex justify-center'>
-                          <ExperienceFlipCard
-                            type='Education'
-                            projectName='ProjectOne'
-                            skills='CSS, HTML, JS'
-                            toolsAndTech='VSCODE, Figma, AdobeXD'
-                          />
-                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
                     {user && (

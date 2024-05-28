@@ -29,10 +29,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         if (user.experience.length !== 0) {
           const exp_skill_obj = {}
           const exp_skills = []
-
           user.skills.forEach((skillObj) => {
             // Add the skillObj to skillsSet
-
             skillsSet.add(
               JSON.stringify({
                 gg_id: skillObj.gg_id,
@@ -41,15 +39,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 percentage: skillObj.skill[0].percentage,
               }),
             )
-
             // Iterate over each skill element in skillObj.skill array
             skillObj.skill.forEach((element) => {
               // Add the skill name to exp_skills array
               exp_skills.push(element.skill_name)
-
               // Create an entry in exp_skill_obj for the skill percentage
               exp_skill_obj[element.skill_name] = element.percentage
-
               // Create an entry in exp_skill_obj for the skill_id
               exp_skill_obj[element.skill_name + '_id'] = skillObj.skill_id
             })

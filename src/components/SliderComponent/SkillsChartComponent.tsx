@@ -25,6 +25,22 @@ const CustomTooltip = ({ active, payload, label }) => {
     )
   }
 }
+
+const CustomXAxisTick = (props) => {
+  const { x, y, payload } = props
+  const text = payload.value
+  const maxLength = 3 // Maximum characters to show before truncating
+  const truncatedText = text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={0} y={0} dy={5} textAnchor='end' fill='#666' transform='rotate(-30)'>
+        {truncatedText}
+      </text>
+    </g>
+  )
+}
+
 export default function SkillsChartComponent({ skills }) {
   return (
     <div className='mb-5 lg:block lg:w-full'>
@@ -41,7 +57,7 @@ export default function SkillsChartComponent({ skills }) {
               bottom: 5,
             }}
           >
-            <XAxis dataKey='skill_name' angle={-30} />
+            <XAxis dataKey='skill_name' tick={<CustomXAxisTick />} interval={0} />
             <YAxis domain={[0, 100]} />
             <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
             <CartesianGrid vertical={false} strokeDasharray='6 6' />
