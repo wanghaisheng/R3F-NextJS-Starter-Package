@@ -114,7 +114,9 @@ export default function Page() {
       >
         <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
           <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
-            <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN UP</h2>
+            <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>
+              SIGN UP AS <span className='text-gray-300'>BETA TESTER</span>
+            </h2>
           </div>
           <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
             <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
@@ -192,7 +194,8 @@ export default function Page() {
           </div>
           <div className='m-5 flex items-center justify-center '>
             <p className='text-sm text-purple-950 dark:text-purple-200'>
-              Already a Genius User?
+              {/* Already a Genius User? */}
+              Already a Beta Tester?
               <a href='/signin' className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
                 Sign In Here
               </a>

@@ -1,22 +1,14 @@
 'use client'
-
 import Image from 'next/image'
-
 import { enqueueSnackbar } from 'notistack'
-
 import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect, useMemo } from 'react'
-import AvatarImageComponent from '../avatarImage/page'
 import FormModal2 from '../FormModal/Modal2'
 import Avatar_creator from '@/components/avatar-creator/avatar'
-
 import axios from 'axios'
-
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import P from 'public/Cesium/Workers/createGeometry'
-
 async function getAvatarById(id: string) {
   try {
     const res = await axios.get(`/api/internal/avatar/${id}`)
@@ -28,36 +20,27 @@ async function getAvatarById(id: string) {
     enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
   }
 }
-
 export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-  const [userGuild, setUserGuild] = useState([])
   const openCardModal = () => {
     setIsCardModalOpen(true)
   }
-
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
-        console.log(user.guilds)
       } catch (error) {
         enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
     }
-
     if (user) {
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
   }, [user])
-
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
-
-  // width='42' height='42'
-
   const guildData = [
     {
       guild_name: 'BUDDHA',
@@ -105,9 +88,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
     },
   ]
-
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
-
   useEffect(() => {
     const setGuild = () => {
       if (user.guilds.length !== 0) {
@@ -118,23 +99,18 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       setGuild()
     }
   }, [user])
-
   const [index, setIndex] = useState(0)
-
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-
   useEffect(() => {
     const getIndex = guildData.findIndex((guild) => guild.guild_name === selectedGuild)
     setIndex(getIndex)
-  }, [selectedGuild])
-
+  }, [guildData, selectedGuild])
   const checkUserGuild = () => {
     if (user.guilds.length !== 0) {
       return true
     }
     return false
   }
-
   const handleGuildSubmit = async (e: any) => {
     e.preventDefault()
     const submit = {
@@ -159,10 +135,12 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         variant: 'success',
       })
     } catch (error) {
-      console.error('failed to save the guild')
+      enqueueSnackbar('Generation Failed', {
+        autoHideDuration: 2000,
+        variant: 'error',
+      })
     }
   }
-
   const handleGuildUpdate = async (e: any) => {
     e.preventDefault()
     const submit = {
@@ -176,36 +154,34 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       symbol: guildData[index].symbol,
       gg_id: user.gg_id,
     }
-    console.log(submit)
     try {
       await axios({
         url: `/api/internal/guilds/${user.guilds[0].id}`,
         method: 'PUT',
         data: submit,
       })
-      enqueueSnackbar('updated Sucessfully', {
+      enqueueSnackbar('Updated Sucessfully', {
         autoHideDuration: 2000,
         variant: 'success',
       })
     } catch (error) {
-      console.error('failed to update the guild')
+      enqueueSnackbar('Update Failed', {
+        autoHideDuration: 2000,
+        variant: 'error',
+      })
     }
   }
-
   const [modelSrc, setModelSrc] = useState('')
-
   useEffect(() => {
     if (avatarsData.length > 0) {
       setModelSrc(avatarsData[avatarsData.length - 1].avatar_url)
     }
   }, [avatarsData])
-
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='My Avatar'
         className='relative flex h-[1055px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl  md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
-        // style={{ minHeight: '300px' }} //Reserve space for dynamic content
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
@@ -231,9 +207,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         ambientOcclusion: true,
                       }}
                     />
-                    {/* <div className='absolute bottom-14 left-20'>
-                      <AvatarImageComponent />
-                    </div> */}
                   </div>
                 ) : (
                   <div className='relative'>
@@ -249,13 +222,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         ambientOcclusion: true,
                       }}
                     />
-                    {/* <div className='absolute bottom-14 left-20'>
-                      <AvatarImageComponent />
-                    </div> */}
                   </div>
                 )}
               </div>
-
               {/* Guilds Component */}
               <div className='size-full p-4 lg:w-[65%]'>
                 {/* GUILDS SELECTION */}
@@ -381,7 +350,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       )}
                     </form>
                   )}
-
                   {selectedGuildData && (
                     <div
                       className='relative h-80 rounded-lg border text-purple-950 lg:ml-4 lg:w-72 dark:text-gray-300'
@@ -417,7 +385,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 </div>
               </div>
             </div>
-
             {!isSmallScreen ? (
               <div className='absolute left-96 top-96 transition-all duration-200 lg:left-20 lg:mt-14'>
                 <DrawOutlineButton
@@ -439,7 +406,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 </DrawOutlineButton>
               </div>
             )}
-
             {isCardModalOpen && (
               <div className='absolute left-0 top-0 z-50 flex size-full items-center justify-center rounded-lg bg-black/80'>
                 <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
@@ -447,7 +413,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 </FormModal2>
               </div>
             )}
-
             {/* Back Button */}
             {!isSmallScreen ? (
               <div>

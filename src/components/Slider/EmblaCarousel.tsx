@@ -83,6 +83,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
             horizontal: 'right',
           }}
         />
+
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-5 flex'>
             {[

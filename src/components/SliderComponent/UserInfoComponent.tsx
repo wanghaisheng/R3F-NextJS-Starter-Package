@@ -1,19 +1,12 @@
 'use client'
-
 import 'react-tabs/style/react-tabs.css'
-
 import { enqueueSnackbar } from 'notistack'
-
 import { useState, useEffect } from 'react'
-
 import { useUser } from '@/context/UserContext/UserContext'
-
 import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
-
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowRight } from 'react-icons/fa6'
-
 export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [first_name, setFirstName] = useState('')
@@ -22,7 +15,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
   const [address, setAddress] = useState('')
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
-
   useEffect(() => {
     const setUserInfo = () => {
       setFirstName(user.first_name ? user.first_name : '')
@@ -36,7 +28,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       setUserInfo()
     }
   }, [user])
-
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     const submit = {
@@ -58,31 +49,24 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       enqueueSnackbar('Failed to save Experience Info', { autoHideDuration: 2500, variant: 'error' })
     }
   }
-
   const handleFirstNameChange = (newFirstName: string) => {
     setFirstName(newFirstName)
   }
-
   const handleLastNameChange = (newLastName: string) => {
     setLastName(newLastName)
   }
-
   const handleEmailChange = (newEmail: string) => {
     setEmail(newEmail)
   }
-
   const handleAddressChange = (newAddress: string) => {
     setAddress(newAddress)
   }
-
   const handlePhoneNumberChange = (newPhoneNumber: string) => {
     setPhoneNumber(newPhoneNumber)
   }
-
   const handleDOBChange = (newDob: string) => {
     setDob(newDob)
   }
-
   return (
     <>
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
@@ -94,7 +78,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
             <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
               GENIUS ID
             </div>
-
             <div className='mt-5 rounded-[20px] '>
               <div className='flex flex-col lg:flex-row lg:justify-between'>
                 {/* Card Image / Container */}
@@ -112,7 +95,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     />
                   </div>
                 </div>
-
                 {/* form */}
                 <div className='w-full lg:w-[50%]'>
                   <form
@@ -202,7 +184,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                     </div>
-
                     {/* Next and Update button */}
                     {!isSmallScreen ? (
                       <>
