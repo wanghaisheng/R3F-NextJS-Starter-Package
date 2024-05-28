@@ -10,8 +10,10 @@
 
 .signup .input-group {
   position: relative;
+
   background-color: rgb(243, 221, 249);
 }
 .signup .input-group input {
   width: 300px;
 }
+

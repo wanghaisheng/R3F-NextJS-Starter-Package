@@ -10,20 +10,25 @@ import { TiDelete } from 'react-icons/ti'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+
 export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [cards, setCards] = useState([
     {
       card_id: '',
+
       type: 'Emergency',
+
       name: '',
       description: '',
       date_in: '',
       date_out: '',
+
       emergency_contact: '',
       emergency_details: '',
       blood_group: '',
       emergency_address: '',
+
     },
   ])
   useEffect(() => {
@@ -52,10 +57,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       description: cards[index].description,
       date_in: cards[index].date_in,
       date_out: cards[index].date_out,
+
       emergency_contact: cards[index].emergency_contact,
       emergency_details: cards[index].emergency_details,
       blood_group: cards[index].blood_group,
       emergency_address: cards[index].emergency_address,
+
     }
     try {
       await axios({
@@ -63,10 +70,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'POST',
         data: submit,
       })
+
       enqueueSnackbar('Generated Sucessfully', {
         autoHideDuration: 2000,
         variant: 'success',
       })
+
     } catch (error) {
       enqueueSnackbar('Failed to Generate', { autoHideDuration: 2000, variant: 'error' })
     }
@@ -79,10 +88,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       description: cards[index].description,
       date_in: cards[index].date_in,
       date_out: cards[index].date_out,
+
       emergency_contact: cards[index].emergency_contact,
       emergency_details: cards[index].emergency_details,
       blood_group: cards[index].blood_group,
       emergency_address: cards[index].emergency_address,
+
     }
     try {
       await axios({
@@ -90,10 +101,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'PUT',
         data: submit,
       })
+
       enqueueSnackbar('Updated Sucessfully', {
         autoHideDuration: 2000,
         variant: 'success',
       })
+
     } catch (error) {
       enqueueSnackbar('Failed to Update', { autoHideDuration: 2000, variant: 'error' })
     }
@@ -104,10 +117,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         url: `/api/internal/card/${id}`,
         method: 'DELETE',
       })
+
       enqueueSnackbar('Deleted Sucessfully', {
         autoHideDuration: 2000,
         variant: 'success',
       })
+
     } catch (error) {
       enqueueSnackbar('Failed to Delete', { autoHideDuration: 2000, variant: 'error' })
     }
@@ -147,10 +162,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       return updatedCards
     })
   }
+
   const handleCardemergency_contactChange = (index, newEmergency_contact) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].emergency_contact = newEmergency_contact
+
       return updatedCards
     })
   }
@@ -158,13 +175,16 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].emergency_details = newEmergency_details
+
       return updatedCards
     })
   }
+
   const handleCardblood_groupChange = (index, newBlood_group) => {
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].blood_group = newBlood_group
+
       return updatedCards
     })
   }
@@ -172,6 +192,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     setCards((prevCards) => {
       const updatedCards = [...prevCards]
       updatedCards[index].emergency_address = newEmergency_address
+
       return updatedCards
     })
   }
@@ -180,15 +201,19 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       ...prevCards,
       {
         card_id: '',
+
         type: 'Emergency',
+
         name: '',
         description: '',
         date_in: '',
         date_out: '',
+
         emergency_contact: '',
         emergency_details: '',
         blood_group: '',
         emergency_address: '',
+
       },
     ])
   }
@@ -204,6 +229,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
+
         className='relative flex h-[900px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
@@ -252,10 +278,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                         dateIn={card.date_in}
                         dateOut={card.date_out}
                         description={card.description}
+
                         blood_group={card.blood_group}
                         emergency_contact={card.emergency_contact}
                         emergency_address={card.emergency_address}
                         emergency_details={card.emergency_details}
+
                       />
                     </div>
                     {/* Form for user input */}
@@ -311,6 +339,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                           </div>
                         )}
                       </form>
+
                     </div>
                   </div>
                 </div>

@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 
 const prisma = new PrismaClient()
 
+
 export async function POST(request) {
   try {
     const data = await request.json()
@@ -19,6 +20,7 @@ export async function POST(request) {
     return NextResponse.error('internal server error', 500)
   }
 }
+
 
 export async function GET() {
   try {

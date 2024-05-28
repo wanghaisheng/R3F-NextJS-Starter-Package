@@ -6,6 +6,7 @@ const prisma = new PrismaClient()
 // create new card
 export async function POST(request) {
   try {
+
     const {
       gg_id,
       type,
@@ -18,6 +19,7 @@ export async function POST(request) {
       date_in,
       date_out,
     } = await request.json()
+
 
     // Check if the user exists
     const existingUser = await prisma.users.findUnique({
@@ -32,10 +34,12 @@ export async function POST(request) {
       data: {
         gg_id,
         type,
+
         blood_group,
         emergency_contact,
         emergency_details,
         emergency_address,
+
         name,
         description,
         date_in,
