@@ -242,6 +242,12 @@ export default function Hero3() {
 
   return (
     <div className='relative flex flex-col lg:size-full'>
+      <div className='absolute top-2 z-50 flex w-full justify-center'>
+        <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
+          BETA TESTING
+        </p>
+      </div>
+
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar

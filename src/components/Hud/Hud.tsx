@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
-import { MdSwipe } from 'react-icons/md'
 import { TbSwipe } from 'react-icons/tb'
-import { SiExpertsexchange } from 'react-icons/si'
+import { AiFillAlipayCircle, AiFillCheckCircle, AiFillClockCircle, AiFillDribbbleCircle } from 'react-icons/ai'
 import SpringModal from '../FormModal/SpringModal'
 const Hud = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -56,11 +55,12 @@ const Hud = () => {
                   </div>
                 </Link>
                 <Link
-                  href='/#'
-                  aria-label=''
+                  href='https://ggrelativity.xyz/login'
+                  aria-label='gg relativity'
+                  target='_blank'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  A
+                  <AiFillClockCircle />
                   <div
                     className={`
           invisible absolute -left-7 top-0 -translate-y-8 whitespace-nowrap
@@ -73,11 +73,12 @@ const Hud = () => {
                   </div>
                 </Link>
                 <Link
-                  href='#'
-                  aria-label='swipe'
+                  href='https://office.goinggenius.com.np/signin'
+                  aria-label='GG Office'
+                  target='_blank'
                   className='group py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <MdSwipe />
+                  <AiFillAlipayCircle />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -86,15 +87,17 @@ const Hud = () => {
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
       `}
                   >
-                    Swipe
+                    Going Genius
                   </div>
                 </Link>
                 <Link
-                  href='#'
+                  href='https://portals.goinggenius.com.np/users/login'
                   aria-label='G'
+                  target='_blank'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  {/* <SiExpertsexchange onClick={() => setIsOpen(true)} /> */}B
+                  {/* <SiExpertsexchange onClick={() => setIsOpen(true)} /> */}
+                  <AiFillDribbbleCircle />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -111,7 +114,7 @@ const Hud = () => {
                   aria-label=''
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  D
+                  <AiFillCheckCircle />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -120,7 +123,7 @@ const Hud = () => {
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
       `}
                   >
-                    GG
+                    Comming Soon
                   </div>
                 </Link>
               </div>
