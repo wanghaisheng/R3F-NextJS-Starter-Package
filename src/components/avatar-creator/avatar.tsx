@@ -2,18 +2,15 @@
 import { AvatarCreator, AvatarCreatorConfig, AvatarExportedEvent } from '@readyplayerme/react-avatar-creator'
 import { useRouter } from 'next/navigation'
 import { enqueueSnackbar } from 'notistack'
-
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useUser } from '@/context/UserContext/UserContext'
-
 const config: AvatarCreatorConfig = {
   clearCache: false,
   bodyType: 'fullbody',
   quickStart: false,
   language: 'en',
 }
-
 export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const { user } = useUser()
@@ -21,16 +18,13 @@ export default function App() {
   const handleOnAvatarExported = (event: AvatarExportedEvent) => {
     setAvatarUrl(event.data.url)
   }
-
   useEffect(() => {
     const createAvatar = async () => {
       const submit = {
         avatar_url: avatarUrl,
         gg_id: user.gg_id,
       }
-
       console.log('Submit: ', submit)
-
       try {
         const { data } = await axios({
           url: '/api/internal/avatar',
@@ -54,13 +48,12 @@ export default function App() {
       createAvatar()
     }
   }, [avatarUrl])
-
   return (
     <>
       <AvatarCreator
         subdomain='gguser'
         config={config}
-        className='-ml-4 h-[127vh] w-[107%] rounded-lg border-none lg:ml-0 lg:h-[65vh] lg:w-full'
+        className='-ml-4 size-full rounded-lg border-none lg:ml-0'
         onAvatarExported={handleOnAvatarExported}
       />
     </>

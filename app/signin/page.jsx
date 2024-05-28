@@ -1,11 +1,8 @@
 'use client'
-
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
-
 import { LiaSignInAltSolid } from 'react-icons/lia'
 import { RiLockPasswordLine } from 'react-icons/ri'
-
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
@@ -14,55 +11,43 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/UserContext/UserContext'
 import { motion } from 'framer-motion'
-
 import Cookies from 'js-cookie'
-
 const { log } = console
 const SignIn = () => {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { updateUser } = useUser()
-
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-
   const [generalError, setGeneralError] = useState('')
-
 
   // const validateEmail = (email) => {
   //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   //   return re.test(String(email).toLowerCase())
   // }
-
   const handleSubmit = async (event) => {
     event.preventDefault()
     let valid = true
-
     // if (!validateEmail(email)) {
     //   setEmailError('Invalid email address.')
     //   valid = false
     // } else {
     //   setEmailError('')
     // }
-
     if (password.length < 3) {
       setPasswordError('Password must be at least 3 characters long.')
       valid = false
     } else {
       setPasswordError('')
     }
-
     if (!valid) return
-
     const submit = {
       email,
       password,
     }
-
     log('Submit: ', submit)
-
     try {
       const { data } = await axios({
         url: '/api/internal/signin',
@@ -90,7 +75,6 @@ const SignIn = () => {
       }
     }
   }
-
   return (
     <>
       <main className='relative mt-10 flex min-h-full flex-col items-center justify-around md:flex-row'>
@@ -131,7 +115,6 @@ const SignIn = () => {
             </CardBody>
           </CardContainer>
         </motion.div>
-
         <motion.div
           initial={{ opacity: 0, scale: 0.4 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -141,13 +124,14 @@ const SignIn = () => {
 
           <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
             <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
-              <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN IN</h2>
+              <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>
+                SIGN IN AS <span className='text-gray-300'>BETA TESTER</span>
+              </h2>
             </div>
             <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
               <label htmlFor='email' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
                 Email
               </label>
-
               <div
                 className={`input-group m-2 flex rounded-md border-2 dark:bg-black ${emailError ? ' border-red-500' : 'border-violet-400'}`}
               >
@@ -157,7 +141,6 @@ const SignIn = () => {
                   <LiaSignInAltSolid />
 
                 </div>
-
                 <input
                   type='email'
                   id='email'
@@ -171,7 +154,6 @@ const SignIn = () => {
                 />
               </div>
               {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
-
 
               <label htmlFor='password' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
                 Password
@@ -198,9 +180,8 @@ const SignIn = () => {
                 />
               </div>
 
-              {emailError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
+              {passwordError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
               {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}
-
 
               <div className=''>
                 <p className='flex justify-between text-sm text-blue-500'>
@@ -216,7 +197,6 @@ const SignIn = () => {
                   </a>
                 </p>
               </div>
-
               <div className='flex w-full items-center justify-center p-5'>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -230,7 +210,6 @@ const SignIn = () => {
                 </motion.button>
               </div>
             </form>
-
             <div className='flex items-end'>
               <hr className='h-1 w-full border-solid text-black' />
               <p className='px-5 font-semibold text-purple-950 dark:text-purple-200'>or</p>
@@ -252,7 +231,8 @@ const SignIn = () => {
             </div>
             <div className='m-5 flex items-center justify-center '>
               <p className=' text-sm text-purple-950 dark:text-purple-200'>
-                Not a Genius User yet?
+                {/* Not a Genius User yet? */}
+                Not a Beta Tester yet?
                 <a href='/signup' className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
                   Sign Up Now
                 </a>

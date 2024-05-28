@@ -1,14 +1,10 @@
 'use client'
-
 import { useState } from 'react'
 import GuildHeader from '@/components/Guilds/GuildHeader'
 import ShowGuild from '@/components/Guilds/ShowGuild'
-import Image from 'next/image'
-
 const Factions = ({ params }) => {
   const [selectedFilter, setSelectedFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-
   const guilds = [
     {
       name: 'Rohit Shrestha',
@@ -82,13 +78,17 @@ const Factions = ({ params }) => {
       continent: 'SUB-SAHARAN-AFRICA',
     },
   ]
-
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter)
     setSearchTerm('')
   }
   return (
     <>
+      <div className='absolute top-0 z-50 flex w-full justify-center'>
+        <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
+          BETA TESTING
+        </p>
+      </div>
       {params.slug?.length === 2 ? (
         <div>
           View of region {params.slug[0]} and Concept {params.slug[1]}
@@ -96,7 +96,16 @@ const Factions = ({ params }) => {
       ) : params.slug?.length === 1 ? (
         <div>
           {/* <RegionDetails continent={params.slug[0]} /> */}
-          <div className='mx-10 flex justify-end'>{params.slug[0].toUpperCase()}</div>
+          <div className='relative h-[80vh] flex-1 items-center justify-center'>
+            <div className='mx-10 flex justify-start font-semibold'>{params.slug[0].toUpperCase()}</div>
+
+            <div className='flex size-full animate-pulse items-center justify-center'>
+              <h1 className='text-center text-3xl font-bold text-white'>
+                Developers are working on this page. <br />
+                Any feedback will be helpful.
+              </h1>
+            </div>
+          </div>
         </div>
       ) : (
         <>
