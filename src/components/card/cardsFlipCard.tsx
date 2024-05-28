@@ -1,14 +1,10 @@
 'use client'
-
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
-
 import { useState } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
-
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-
 export default function CardsFlipCard({
   type,
   name,
@@ -26,13 +22,10 @@ export default function CardsFlipCard({
   const { user } = useUser()
   QRCode.toDataURL(pathname).then(setImgSrc)
   // Flip Card QR end
-
   const [isFlipped, setIsFlipped] = useState(false)
-
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
-
   return (
     <>
       <CardBody>
@@ -72,7 +65,11 @@ export default function CardsFlipCard({
                     <div className='flex w-full justify-between'>
                       <ul>
                         <li className='my-2 mb-1 w-full'>Date In : {dateIn}</li>
-                        <li className='my-2 mb-1 w-full'>Date Out : {dateOut}</li>
+                        {dateOut === null ? (
+                          <li>Current</li>
+                        ) : (
+                          <li className='my-2 mb-1 w-full'>Date Out : {dateOut}</li>
+                        )}
                       </ul>
                     </div>
                   </nav>
@@ -82,7 +79,6 @@ export default function CardsFlipCard({
                 <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
                 <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
               </div>
-
               {/* QRCode */}
               <div className='absolute inset-0 rounded-lg bg-black px-12 py-8 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
                 <div className='flex items-center justify-between'>
@@ -129,7 +125,11 @@ export default function CardsFlipCard({
                     <div className='flex w-full justify-between'>
                       <ul>
                         <li className='my-2 mb-1 w-full'>Date In : {dateIn}</li>
-                        <li className='my-2 mb-1 w-full'>Date Out : {dateOut}</li>
+                        {dateOut === null ? (
+                          <li>Current</li>
+                        ) : (
+                          <li className='my-2 mb-1 w-full'>Date Out : {dateOut}</li>
+                        )}
                       </ul>
                     </div>
                   </nav>
@@ -139,7 +139,6 @@ export default function CardsFlipCard({
                 <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
                 <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
               </div>
-
               {/* QRCode */}
               <div className='absolute inset-0 rounded-lg bg-black px-12 py-8 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
                 <div className='flex items-center justify-between'>

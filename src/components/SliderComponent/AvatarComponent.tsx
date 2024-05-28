@@ -385,27 +385,17 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 </div>
               </div>
             </div>
-            {!isSmallScreen ? (
-              <div className='absolute left-96 top-96 transition-all duration-200 lg:left-20 lg:mt-14'>
-                <DrawOutlineButton
-                  onClick={() => {
-                    setIsCardModalOpen(true)
-                  }}
-                >
-                  Create Avatar &emsp; +
-                </DrawOutlineButton>
-              </div>
-            ) : (
-              <div className='absolute top-96 flex w-full justify-center'>
-                <DrawOutlineButton
-                  onClick={() => {
-                    setIsCardModalOpen(true)
-                  }}
-                >
-                  Create Avatar &emsp; +
-                </DrawOutlineButton>
-              </div>
-            )}
+            <div
+              className={`absolute transition-all duration-200 ${!isSmallScreen ? 'left-96 top-96 lg:left-20 lg:mt-14 ' : 'top-96 flex w-full justify-center'}`}
+            >
+              <DrawOutlineButton
+                onClick={() => {
+                  setIsCardModalOpen(true)
+                }}
+              >
+                Create Avatar &emsp; +
+              </DrawOutlineButton>
+            </div>
             {isCardModalOpen && (
               <div className='absolute left-0 top-0 z-50 flex size-full items-center justify-center rounded-lg bg-black/80'>
                 <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
@@ -414,9 +404,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               </div>
             )}
             {/* Back Button */}
-            {!isSmallScreen ? (
-              <div>
-                <div className='absolute bottom-4 left-4 mt-4'>
+            <div>
+              <div className='absolute bottom-4 left-4 mt-4'>
+                {!isSmallScreen ? (
                   <button
                     className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                     onClick={onPrevButtonClick}
@@ -426,17 +416,13 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       <FaArrowLeft />
                     </p>
                   </button>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className='absolute bottom-4 left-4 mt-4'>
+                ) : (
                   <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
                     Back
                   </DrawOutlineButton>
-                </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
