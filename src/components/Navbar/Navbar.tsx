@@ -3,18 +3,13 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useUser } from '@/context/UserContext/UserContext'
-
 import { LuLogOut } from 'react-icons/lu'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import path from 'path'
 import { IoMdArrowRoundBack } from 'react-icons/io'
-
 import Hamburger from 'hamburger-react'
 
 const Navbar = () => {
-  const [isToggled, setToggle] = useState(false)
-
   const [isOpen, setOpen] = useState(false)
   const closeMenu = () => {
     setOpen(false)
@@ -39,28 +34,12 @@ const Navbar = () => {
 
     if (pathname === '/signin' || pathname === '/signup') {
       setHideTopRightNav(true)
+    } else {
+      setHideTopRightNav(false)
     }
   }, [pathname])
 
   const { user, logout } = useUser()
-  const navAnimate = {
-    hidden: {
-      scaleX: 0,
-    },
-    show: {
-      scaleX: 1,
-      transition: {
-        duration: 0.4,
-        ease: 'easeOut',
-      },
-    },
-    exit: {
-      width: 0,
-      transition: {
-        delay: 0.4,
-      },
-    },
-  }
 
   return (
     <>
@@ -77,13 +56,14 @@ const Navbar = () => {
               alt='GG Logo'
             />
           </Link>
-
           {/* SignIn, SignOut and Logout */}
           <div className='flex items-center justify-center'>
             {user ? (
-              user.first_name != null ? (
-                <div className='flex'>
+              <>
+                {user.first_name != null && (
                   <span className='px-2 text-sm font-medium'>{user.first_name + ' ' + user.last_name}</span>
+                )}
+                <div className='flex'>
                   <Link
                     href='/signin'
                     onClick={logout}
@@ -97,28 +77,14 @@ const Navbar = () => {
                     <Hamburger toggled={isOpen} toggle={setOpen} />
                   </div>
                 </div>
-              ) : (
-                <div className='flex'>
-                  <Link
-                    href='/signin'
-                    onClick={logout}
-                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105  focus:outline-none md:flex'
-                    id='user-menu-button'
-                  >
-                    <LuLogOut className='mr-4 size-6 text-red-500' />
-                  </Link>
-                  <div className='-mr-2 flex items-center md:hidden'>
-                    <Hamburger toggled={isOpen} toggle={setOpen} />
-                  </div>
-                </div>
-              )
+              </>
             ) : (
               <>
                 {hideTopRightNav ? null : (
                   <div>
                     <Link
                       href='/signin'
-                      className='rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900  '
+                      className='hidden rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
                     >
                       Sign-In
                     </Link>
@@ -257,21 +223,24 @@ const Navbar = () => {
                 <Link href='experience'>EXP</Link>
               </li>
               <li>
-                <Link
-                  href='/signin'
-                  onClick={logout}
-                  className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
-                  aria-label='Sign Out'
-                >
-                  <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'>
-                    <path
-                      fill='currentColor'
-                      fillRule='evenodd'
-                      d='M3.5 9.568v4.864c0 2.294 0 3.44.722 4.153c.655.647 1.674.706 3.596.712c-.101-.675-.122-1.48-.128-2.428a.734.734 0 0 1 .735-.734a.735.735 0 0 1 .744.726c.006 1.064.033 1.818.14 2.39c.103.552.267.87.507 1.108c.273.27.656.445 1.38.54c.744.1 1.73.101 3.145.101h.985c1.415 0 2.401-.002 3.146-.1c.723-.096 1.106-.272 1.378-.541c.273-.27.451-.648.548-1.362c.1-.734.102-1.709.102-3.105V8.108c0-1.397-.002-2.37-.102-3.105c-.097-.714-.275-1.093-.547-1.362c-.273-.27-.656-.445-1.38-.54C17.728 3 16.742 3 15.327 3h-.985c-1.415 0-2.401.002-3.146.1c-.723.096-1.106.272-1.379.541c-.24.237-.404.556-.507 1.108c-.107.572-.134 1.326-.14 2.39a.735.735 0 0 1-.744.726a.734.734 0 0 1-.735-.734c.006-.948.027-1.753.128-2.428c-1.922.006-2.94.065-3.596.712c-.722.713-.722 1.86-.722 4.153m2.434 2.948a.723.723 0 0 1 0-1.032l1.97-1.946a.746.746 0 0 1 1.046 0a.723.723 0 0 1 0 1.032l-.71.7h7.086c.408 0 .74.327.74.73c0 .403-.332.73-.74.73H8.24l.71.7a.723.723 0 0 1 0 1.032a.746.746 0 0 1-1.046 0z'
-                      clipRule='evenodd'
-                    />
-                  </svg>
-                </Link>
+                {user ? (
+                  <Link
+                    href='/signin'
+                    onClick={logout}
+                    className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+                    aria-label='Sign Out'
+                  >
+                    Logout
+                  </Link>
+                ) : (
+                  <Link
+                    href='/signin'
+                    className='flex w-full items-center justify-center rounded-b-2xl border-violet-500 py-4 hover:border-b-2 hover:text-lg hover:text-fuchsia-300'
+                    aria-label='Sign In'
+                  >
+                    Sign-In
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
