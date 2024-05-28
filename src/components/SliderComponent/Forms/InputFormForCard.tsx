@@ -173,7 +173,7 @@ export default function InputFormForCard({
               required
             />
           </div>
-          <div className='flex items-center lg:flex-row lg:justify-between'>
+          <div className='flex'>
             <label htmlFor='isCurrent' className='font-semibold'>
               Current
             </label>
@@ -182,7 +182,7 @@ export default function InputFormForCard({
               type='checkbox'
               checked={isCurrent}
               onChange={handleIsCurrentChange}
-              className='ml-2'
+              className='ml-10 size-5'
             />
           </div>
           {!isCurrent && (

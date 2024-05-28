@@ -1,38 +1,29 @@
 'use client'
-
 import { useState } from 'react'
 import Image from 'next/image'
-
 import { enqueueSnackbar } from 'notistack'
-
 import { TiDelete } from 'react-icons/ti'
-
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
 import { IoHome } from 'react-icons/io5'
-
 export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const [connections, setConnections] = useState([])
-
   const handleLogoClick = (logo) => {
     if (!connections.some((connection) => connection.src === logo.src)) {
       const newConnection = { src: logo.src, alt: logo.alt, link: '' }
       setConnections([...connections, newConnection])
     }
   }
-
   const handleInputChange = (e, index) => {
     const updatedConnections = [...connections]
     updatedConnections[index] = { ...updatedConnections[index], link: e.target.value }
     setConnections(updatedConnections)
   }
-
   const handleRemoveConnection = (index, event) => {
     event.preventDefault() // To prevent form submission and reload of the page
     setConnections(connections.filter((_, i) => i !== index))
   }
-
   const logos = [
     { src: '/connectionlogo/github.png', alt: 'github logo', name: 'GitHub' },
     { src: '/connectionlogo/facebook.png', alt: 'facebook logo', name: 'Facebook' },
@@ -45,7 +36,6 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
     { src: '/connectionlogo/apple.png', alt: 'apple logo', name: 'Apple' },
     { src: '/connectionlogo/figma.png', alt: 'figma logo', name: 'Figma' },
   ]
-
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -88,7 +78,6 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
               ))}
             </div>
           )}
-
           <form>
             {connections.length > 0 && (
               <div className='mt-10 flex flex-wrap justify-center gap-4 text-purple-950 dark:text-purple-200'>
@@ -115,7 +104,6 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                 ))}
               </div>
             )}
-
             {/* Submit and Next Button */}
             {!isSmallScreen ? (
               <>
@@ -159,7 +147,6 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
               </div>
             )}
           </form>
-
           {/* Back Button */}
           {!isSmallScreen ? (
             <div>

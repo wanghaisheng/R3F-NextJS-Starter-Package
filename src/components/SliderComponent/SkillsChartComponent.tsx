@@ -13,7 +13,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
@@ -26,7 +25,6 @@ const CustomTooltip = ({ active, payload, label }) => {
     )
   }
 }
-
 export default function SkillsChartComponent({ skills }) {
   return (
     <div className='mb-5 lg:block lg:w-full'>

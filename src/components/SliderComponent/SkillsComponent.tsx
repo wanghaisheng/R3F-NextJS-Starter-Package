@@ -1,31 +1,19 @@
 'use client'
-
 import { enqueueSnackbar } from 'notistack'
-
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
-
 import { FaArrowLeft } from 'react-icons/fa6'
-
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
-
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-
 import { TiDelete } from 'react-icons/ti'
 import { IoHome } from 'react-icons/io5'
-
 import axios from 'axios'
-
 import SkillsChartComponent from './SkillsChartComponent'
-
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
-
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
-
   const formRefs = useRef([])
-
   function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
     for (let i = 0; i < exp_skills.length; i++) {
       if (exp_skills[i].includes(skill)) {
@@ -34,12 +22,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     }
     return false
   }
-
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
         const skillsSet = new Set<string>() // Create a Set to store unique JSON strings
-
         if (user.experience.length !== 0) {
           const exp_skill_obj = {}
           const exp_skills = []
@@ -94,7 +80,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
             }
           })
         }
-
         // Convert the Set back to an array of objects
         if (skillsSet.size !== 0) {
           const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
@@ -105,16 +90,13 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
       }
     }
-
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
   }, [user])
-
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
   }
-
   const handleSkillSubmit = async (e: any, index: number) => {
     e.preventDefault()
     const submit = {
@@ -135,7 +117,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       enqueueSnackbar('Failed to generate skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
-
   const handleSkillUpdate = async (e: any, index: number) => {
     e.preventDefault()
     const submit = {
@@ -155,7 +136,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       enqueueSnackbar('Failed to update skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
-
   const handleSkillDelete = async (index: number) => {
     try {
       await axios({
@@ -167,7 +147,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       enqueueSnackbar('Failed to delete skills', { autoHideDuration: 2500, variant: 'error' })
     }
   }
-
   const handleSkillNameChange = (index: number, newName: string) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
@@ -175,7 +154,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-
   const handleSliderChange = (index: number, newValue: number) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
@@ -183,11 +161,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-
   const handleAddSkill = () => {
     setSkills((prevSkills) => [...prevSkills, { gg_id: '', skill_id: '', skill_name: 'skill', percentage: 0 }])
   }
-
   const handleDeleteSkill = (index) => {
     setSkills((prevSkills) => {
       const updatedSkills = [...prevSkills]
@@ -198,8 +174,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-  const [open, setOpen] = useState(false)
-
   const handleHomeClick = async (index) => {
     const form = formRefs.current[index]
     const isSubmitted = await (form
@@ -209,7 +183,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       window.location.href = '/hero'
     }
   }
-
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -230,7 +203,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
               </DrawOutlineButton>
             </div>
           </div>
-
           <Tabs>
             <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
@@ -248,158 +220,88 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 </Tab>
               ))}
             </TabList>
-
             {/* TabPanel */}
             <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
               <div className='w-[300px] text-purple-950 md:w-[500px] lg:w-[60%] dark:text-purple-200'>
                 {skills.map((element, index) => (
                   <div key={index}>
-                    {user && checkActiveSkills(element) != true ? (
-                      <form onSubmit={(e) => handleSkillSubmit(e, index)}>
-                        <TabPanel>
-                          <div className='size-full rounded-[20px]  p-4'>
-                            <div className='flex flex-col lg:flex-row  lg:justify-between'>
-                              <div className='w-full'>
+                    <form
+                      onSubmit={
+                        user && checkActiveSkills(element) != true
+                          ? (e) => handleSkillSubmit(e, index)
+                          : (e) => handleSkillUpdate(e, index)
+                      }
+                    >
+                      <TabPanel>
+                        <div className='size-full rounded-[20px]  p-4'>
+                          <div className='flex flex-col lg:flex-row  lg:justify-between'>
+                            <div className='w-full'>
+                              <input
+                                type='text'
+                                value={element.skill_name}
+                                onChange={(e) => handleSkillNameChange(index, e.target.value)}
+                                placeholder='Skill Name'
+                                className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
+                                aria-label='skill name'
+                              />
+                              <div className='my-4 flex'>
                                 <input
-                                  type='text'
-                                  value={element.skill_name}
-                                  onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                                  placeholder='Skill Name'
-                                  className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
-                                  aria-label='skill name'
+                                  type='range'
+                                  min='0'
+                                  max='100'
+                                  value={element.percentage}
+                                  className='w-full rounded-md bg-purple-600'
+                                  onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                  aria-label='slider'
                                 />
-
-                                <div className='my-4 flex'>
-                                  <input
-                                    type='range'
-                                    min='0'
-                                    max='100'
-                                    value={element.percentage}
-                                    className='w-full rounded-md bg-purple-600'
-                                    onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                                    aria-label='slider'
-                                  />
-                                  <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
-                                    {element.percentage}%
-                                  </p>
-                                </div>
+                                <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
+                                  {element.percentage}%
+                                </p>
                               </div>
                             </div>
-                            <label className='text-gray-900 dark:text-purple-200' htmlFor='file_input'>
-                              Certifications
-                            </label>
-                            <input
-                              className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
-                              id='file_input'
-                              type='file'
-                              aria-label='file input'
-                            />
                           </div>
-                          {/* Go Home and Generate Button */}
-                          {!isSmallScreen ? (
-                            <>
-                              <div className='mt-4 flex justify-center'>
-                                <DrawOutlineButton type='submit' aria-label='generate'>
-                                  Generate
-                                </DrawOutlineButton>
-                              </div>
-                              <div className='absolute bottom-4 right-4'>
-                                <button
-                                  className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  onClick={() => handleHomeClick(0)}
-                                  aria-label='home btn'
-                                >
-                                  <p className='p-4 text-white'>
-                                    <IoHome />
-                                  </p>
-                                </button>
-                              </div>
-                            </>
-                          ) : (
-                            <div className='absolute bottom-4 right-4'>
-                              <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
-                                Go To Home
+                          <label className='text-gray-900 dark:text-purple-200' htmlFor='file_input'>
+                            Certifications
+                          </label>
+                          <input
+                            className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            id='file_input'
+                            type='file'
+                            aria-label='file input'
+                          />
+                        </div>
+                        {/* Go Home and Generate Button */}
+                        {!isSmallScreen ? (
+                          <>
+                            <div className='mt-4 flex justify-center'>
+                              <DrawOutlineButton type='submit' aria-label='generate/update'>
+                                {user && checkActiveSkills(element) != true ? 'Generate' : 'Update'}
                               </DrawOutlineButton>
                             </div>
-                          )}
-                        </TabPanel>
-                      </form>
-                    ) : (
-                      <form key={index} onSubmit={(e) => handleSkillUpdate(e, index)}>
-                        <TabPanel>
-                          <div className='size-full rounded-[20px]  p-4'>
-                            <div className='flex flex-col lg:flex-row  lg:justify-between'>
-                              <div className='w-full'>
-                                <input
-                                  type='text'
-                                  value={element.skill_name}
-                                  onChange={(e) => handleSkillNameChange(index, e.target.value)}
-                                  placeholder='Skill Name'
-                                  className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
-                                  aria-label='skill name'
-                                />
-
-                                <div className='my-4 flex'>
-                                  <input
-                                    type='range'
-                                    min='0'
-                                    max='100'
-                                    value={element.percentage}
-                                    className='w-full rounded-md bg-purple-600'
-                                    onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                                    aria-label='slider'
-                                  />
-                                  <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
-                                    {element.percentage}%
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <label className='text-purple-950 dark:text-purple-200' htmlFor='file_input'>
-                              Certifications
-                            </label>
-                            <input
-                              className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900  focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
-                              id='file_input'
-                              type='file'
-                              aria-label='file input'
-                            />
-                          </div>
-                          {/* Go Home and Update Button */}
-                          {!isSmallScreen ? (
-                            <>
-                              <div className='mt-4 flex justify-center'>
-                                <DrawOutlineButton type='submit' aria-label='update'>
-                                  Update
-                                </DrawOutlineButton>
-                              </div>
-                              <div className='absolute bottom-4 right-4'>
-                                <button
-                                  className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  onClick={() => handleHomeClick(0)}
-                                  aria-label='home btn'
-                                >
-                                  <p className='p-4 text-white'>
-                                    <IoHome />
-                                  </p>
-                                </button>
-                              </div>
-                            </>
-                          ) : (
                             <div className='absolute bottom-4 right-4'>
-                              <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
-                                Go To Home
-                              </DrawOutlineButton>
+                              <button
+                                className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                onClick={() => handleHomeClick(0)}
+                                aria-label='home btn'
+                              >
+                                <p className='p-4 text-white'>
+                                  <IoHome />
+                                </p>
+                              </button>
                             </div>
-                          )}
-                        </TabPanel>
-                      </form>
-                    )}
+                          </>
+                        ) : (
+                          <div className='absolute bottom-4 right-4'>
+                            <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
+                              Go To Home
+                            </DrawOutlineButton>
+                          </div>
+                        )}
+                      </TabPanel>
+                    </form>
                   </div>
                 ))}
               </div>
-
               <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
                 <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
@@ -408,10 +310,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
               </div>
             </div>
           </Tabs>
-
           {/* Back Button */}
-          {!isSmallScreen ? (
-            <div className='absolute bottom-4 left-4 mt-4'>
+          <div className='absolute bottom-4 left-4 mt-4'>
+            {!isSmallScreen ? (
               <button
                 className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 onClick={onPrevButtonClick}
@@ -421,14 +322,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                   <FaArrowLeft />
                 </p>
               </button>
-            </div>
-          ) : (
-            <div className='absolute bottom-4 left-4 mt-4'>
+            ) : (
               <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
                 Back
               </DrawOutlineButton>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

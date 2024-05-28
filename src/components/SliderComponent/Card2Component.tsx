@@ -1,5 +1,5 @@
 'use client'
-import InputFormForCard from './InputFormForCard'
+import InputFormForCard from './Forms/InputFormForCard'
 import { enqueueSnackbar } from 'notistack'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
@@ -217,7 +217,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                 }}
                 aria-label='Add Card'
               >
-                Add Card &emsp; +
+                Add Membership &emsp; +
               </DrawOutlineButton>
             </div>
           </div>
@@ -365,29 +365,23 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
           </Tabs>
         </div>
         {/* Back Button */}
-        {!isSmallScreen ? (
-          <div>
-            <div className='absolute bottom-4 left-4 mt-4'>
-              <button
-                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                onClick={onPrevButtonClick}
-                aria-label='prev'
-              >
-                <p className='p-4'>
-                  <FaArrowLeft />
-                </p>
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className='absolute bottom-4 left-4 mt-4'>
-              <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
-                Back
-              </DrawOutlineButton>
-            </div>
-          </div>
-        )}
+        <div className='absolute bottom-4 left-4 mt-4'>
+          {!isSmallScreen ? (
+            <button
+              className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+              onClick={onPrevButtonClick}
+              aria-label='prev'
+            >
+              <p className='p-4'>
+                <FaArrowLeft />
+              </p>
+            </button>
+          ) : (
+            <DrawOutlineButton onClick={onPrevButtonClick} aria-label='prev'>
+              Back
+            </DrawOutlineButton>
+          )}
+        </div>
       </div>
     </div>
   )
