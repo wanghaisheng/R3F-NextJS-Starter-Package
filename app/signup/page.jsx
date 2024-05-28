@@ -17,6 +17,7 @@ export default function Page() {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [generalError, setGeneralError] = useState('')
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return re.test(String(email).toLowerCase())
@@ -54,6 +55,13 @@ export default function Page() {
       }
     } catch (error) {
       log('Error: ', error)
+      if (error.response) {
+        if (error.response.status === 409) {
+          setGeneralError('Account already exists with this email.')
+        } else {
+          setGeneralError('An error occurred. Please try again.')
+        }
+      }
     }
   }
   return (
@@ -123,6 +131,7 @@ export default function Page() {
               />
             </div>
             {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
+            {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}
             <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
               Password
             </label>
@@ -143,7 +152,7 @@ export default function Page() {
                 onChange={({ target }) => setPassword(target?.value)}
               />
             </div>
-            {emailError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
+            {passwordError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
             <div className='flex w-full items-center justify-center p-5'>
               <motion.button
                 whileHover={{ scale: 1.05 }}
