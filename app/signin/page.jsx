@@ -1,11 +1,8 @@
 'use client'
-
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
-
 import { LiaSignInAltSolid } from 'react-icons/lia'
 import { RiLockPasswordLine } from 'react-icons/ri'
-
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import Image from 'next/image'
@@ -14,53 +11,41 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/UserContext/UserContext'
 import { motion } from 'framer-motion'
-
 import Cookies from 'js-cookie'
-
 const { log } = console
 const SignIn = () => {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { updateUser } = useUser()
-
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-
   const [generalError, setGeneralError] = useState('')
-
   // const validateEmail = (email) => {
   //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   //   return re.test(String(email).toLowerCase())
   // }
-
   const handleSubmit = async (event) => {
     event.preventDefault()
     let valid = true
-
     // if (!validateEmail(email)) {
     //   setEmailError('Invalid email address.')
     //   valid = false
     // } else {
     //   setEmailError('')
     // }
-
     if (password.length < 3) {
       setPasswordError('Password must be at least 3 characters long.')
       valid = false
     } else {
       setPasswordError('')
     }
-
     if (!valid) return
-
     const submit = {
       email,
       password,
     }
-
     log('Submit: ', submit)
-
     try {
       const { data } = await axios({
         url: '/api/internal/signin',
@@ -88,7 +73,6 @@ const SignIn = () => {
       }
     }
   }
-
   return (
     <>
       <main className='relative mt-10 flex min-h-full flex-col items-center justify-around md:flex-row'>
@@ -127,7 +111,6 @@ const SignIn = () => {
             </CardBody>
           </CardContainer>
         </motion.div>
-
         <motion.div
           initial={{ opacity: 0, scale: 0.4 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -144,7 +127,6 @@ const SignIn = () => {
               <label htmlFor='email' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
                 Email
               </label>
-
               <div
                 className={`input-group m-2 flex rounded-md border-2 dark:bg-black ${emailError ? ' border-red-500' : 'border-violet-400'}`}
               >
@@ -153,7 +135,6 @@ const SignIn = () => {
                 >
                   <LiaSignInAltSolid />
                 </div>
-
                 <input
                   type='email'
                   id='email'
@@ -165,7 +146,6 @@ const SignIn = () => {
                 />
               </div>
               {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
-
               <label htmlFor='password' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
                 Password
               </label>
@@ -189,7 +169,6 @@ const SignIn = () => {
               </div>
               {passwordError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}
               {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}
-
               <div className=''>
                 <p className='flex justify-between text-sm text-blue-500'>
                   <a
@@ -204,7 +183,6 @@ const SignIn = () => {
                   </a>
                 </p>
               </div>
-
               <div className='flex w-full items-center justify-center p-5'>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -216,7 +194,6 @@ const SignIn = () => {
                 </motion.button>
               </div>
             </form>
-
             <div className='flex items-end'>
               <hr className='h-1 w-full border-solid text-black' />
               <p className='px-5 font-semibold text-purple-950 dark:text-purple-200'>or</p>

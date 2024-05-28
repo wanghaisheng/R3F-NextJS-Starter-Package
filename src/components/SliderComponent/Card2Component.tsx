@@ -260,103 +260,57 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                     </div>
                     {/* Form for user input */}
                     <div className='w-full lg:w-[50%]'>
-                      {user && checkActiveCard(card) !== true ? (
-                        <form
-                          onSubmit={(e) => handleSubmit(e, index)}
-                          className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
-                        >
-                          <InputFormForCard
-                            card={card}
-                            index={index}
-                            handleCardDateInChange={handleCardDateInChange}
-                            handleCardDateOutChange={handleCardDateOutChange}
-                            handleCardDescriptionChange={handleCardDescriptionChange}
-                            handleCardNameChange={handleCardNameChange}
-                            handleCardTypeChange={handleCardTypeChange}
-                            handleCardblood_groupChange={handleCardblood_groupChange}
-                            handleCardemergency_addressChange={handleCardemergency_addressChange}
-                            handleCardemergency_contactChange={handleCardemergency_contactChange}
-                            handleCardemergency_detailsChange={handleCardemergency_detailsChange}
-                          />
+                      <form
+                        onSubmit={
+                          user && checkActiveCard(card) !== true
+                            ? (e) => handleSubmit(e, index)
+                            : (e) => handleUpdate(e, card.card_id, index)
+                        }
+                        className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
+                      >
+                        <InputFormForCard
+                          card={card}
+                          index={index}
+                          handleCardDateInChange={handleCardDateInChange}
+                          handleCardDateOutChange={handleCardDateOutChange}
+                          handleCardDescriptionChange={handleCardDescriptionChange}
+                          handleCardNameChange={handleCardNameChange}
+                          handleCardTypeChange={handleCardTypeChange}
+                          handleCardblood_groupChange={handleCardblood_groupChange}
+                          handleCardemergency_addressChange={handleCardemergency_addressChange}
+                          handleCardemergency_contactChange={handleCardemergency_contactChange}
+                          handleCardemergency_detailsChange={handleCardemergency_detailsChange}
+                        />
 
-                          {/* Next and Generate Button */}
-                          {!isSmallScreen ? (
-                            <>
-                              <div className='mt-4'>
-                                <DrawOutlineButton type='submit' aria-label='generate'>
-                                  Generate
-                                </DrawOutlineButton>
-                              </div>
-                              <div className='absolute bottom-4 right-4'>
-                                <button
-                                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  type='submit'
-                                  onClick={onNextButtonClick}
-                                  aria-label='next'
-                                >
-                                  <p className='p-4'>
-                                    <FaArrowRight />
-                                  </p>
-                                </button>
-                              </div>
-                            </>
-                          ) : (
-                            <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                                Next
+                        {/* Next and Generate Button */}
+                        {!isSmallScreen ? (
+                          <>
+                            <div className='mt-4'>
+                              <DrawOutlineButton type='submit' aria-label='generate'>
+                                Generate
                               </DrawOutlineButton>
                             </div>
-                          )}
-                        </form>
-                      ) : (
-                        <form
-                          onSubmit={(e) => handleUpdate(e, card.card_id, index)}
-                          className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center '
-                        >
-                          <InputFormForCard
-                            card={card}
-                            index={index}
-                            handleCardDateInChange={handleCardDateInChange}
-                            handleCardDateOutChange={handleCardDateOutChange}
-                            handleCardDescriptionChange={handleCardDescriptionChange}
-                            handleCardNameChange={handleCardNameChange}
-                            handleCardTypeChange={handleCardTypeChange}
-                            handleCardblood_groupChange={handleCardblood_groupChange}
-                            handleCardemergency_addressChange={handleCardemergency_addressChange}
-                            handleCardemergency_contactChange={handleCardemergency_contactChange}
-                            handleCardemergency_detailsChange={handleCardemergency_detailsChange}
-                          />
-
-                          {/* Next and Update Button */}
-                          {!isSmallScreen ? (
-                            <>
-                              <div className='mt-4'>
-                                <DrawOutlineButton type='submit' aria-label='generate'>
-                                  Update
-                                </DrawOutlineButton>
-                              </div>
-                              <div className='absolute bottom-4 right-4'>
-                                <button
-                                  className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                  type='submit'
-                                  onClick={onNextButtonClick}
-                                  aria-label='next'
-                                >
-                                  <p className='p-4'>
-                                    <FaArrowRight />
-                                  </p>
-                                </button>
-                              </div>
-                            </>
-                          ) : (
-                            <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                              <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
-                                Next
-                              </DrawOutlineButton>
+                            <div className='absolute bottom-4 right-4'>
+                              <button
+                                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                type='submit'
+                                onClick={onNextButtonClick}
+                                aria-label='next'
+                              >
+                                <p className='p-4'>
+                                  <FaArrowRight />
+                                </p>
+                              </button>
                             </div>
-                          )}
-                        </form>
-                      )}
+                          </>
+                        ) : (
+                          <div className='absolute bottom-4 right-4 flex gap-x-1'>
+                            <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                              Next
+                            </DrawOutlineButton>
+                          </div>
+                        )}
+                      </form>
                     </div>
                   </div>
                 </div>
