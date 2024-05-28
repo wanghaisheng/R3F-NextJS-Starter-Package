@@ -513,14 +513,18 @@ export default function Hero3() {
                   </div>
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
+
                     {user && (
+
                       <a
                         // href={`http://localhost:3000/api/public/users/${user.gg_id}`}
                         href='#'
                         // target='_blank'
                         aria-label='Booking button'
                       >
+
                         <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
+
                       </a>
                     )}
                   </div>
@@ -539,8 +543,10 @@ export default function Hero3() {
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+
                         {user && skillsData.length != 0 ? (
                           <SkillsChartComponent skills={skillsData} />
+
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched
                           <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>

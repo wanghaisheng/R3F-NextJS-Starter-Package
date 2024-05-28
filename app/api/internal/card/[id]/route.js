@@ -25,6 +25,7 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
+
     const {
       type,
       blood_group,
@@ -36,11 +37,13 @@ export async function PUT(request, { params }) {
       date_in,
       date_out,
     } = await request.json()
+
     const id = params.id
 
     // Update the cards
     const updatedcard = await prisma.cards.update({
       where: { card_id: id },
+
       data: {
         type,
         blood_group,
@@ -52,6 +55,7 @@ export async function PUT(request, { params }) {
         date_in,
         date_out,
       },
+
     })
 
     return NextResponse.json(updatedcard)
