@@ -215,11 +215,17 @@ export default function Hero() {
   }, [user])
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute top-2 z-50 flex w-full justify-center'>
+      <div className='absolute -top-8 z-50 flex w-full justify-start lg:-top-14 lg:pl-28'>
         <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
           BETA TESTING
         </p>
       </div>
+      <a
+        href='https://r3-f-next-js-starter-package-git-mainproduction-going-genius.vercel.app/guilds/feedback'
+        className='absolute -top-2 left-2 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:top-2'
+      >
+        Give Feedback
+      </a>
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
@@ -478,12 +484,11 @@ export default function Hero() {
                                       toolsAndTech={exp.tools}
                                     />
                                   </div>
-                                  <div className='my-3'>
-                                    <p className='px-4'>
-                                      Nobis nostrum consequuntur maxime consectetur dolor ratione, in harum explicabo
-                                      voluptates distinctio magni, obcaecati minus aperiam pariatur. Ratione fuga quia
-                                      blanditiis sed!
-                                    </p>
+                                  <div className='my-3 flex justify-center'>
+                                    <div className='flex flex-col'>
+                                      <p className='px-4 font-bold text-violet-400'>DESCRIPTION</p>
+                                      <p>{exp.description}</p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -539,7 +544,7 @@ export default function Hero() {
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                        {user && skillsData.length != 0 ? (
+                        {user && skillsData ? (
                           <SkillsChartComponent skills={skillsData} />
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched

@@ -1,3 +1,6 @@
+'use client'
+import { useState } from 'react'
+
 import {
   Bar,
   BarChart,
@@ -26,22 +29,74 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 }
 
-const CustomXAxisTick = (props) => {
-  const { x, y, payload } = props
+// Custom tick component for BarChart's XAxis
+const CustomXAxisTick = ({ x, y, payload, activeIndex, index, setActiveIndex }) => {
   const text = payload.value
   const maxLength = 3 // Maximum characters to show before truncating
   const truncatedText = text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+  const isActive = activeIndex === index
 
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={5} textAnchor='end' fill='#666' transform='rotate(-30)'>
+      <text
+        x={0}
+        y={0}
+        dy={5}
+        textAnchor='end'
+        fill={isActive ? '#a78bfa' : '#808080'}
+        transform='rotate(-30)'
+        onMouseEnter={() => setActiveIndex(index)}
+        onMouseLeave={() => setActiveIndex(null)}
+      >
         {truncatedText}
       </text>
     </g>
   )
 }
 
+interface CustomXAxisRadarTickProps {
+  payload: {
+    coordinate: number
+    value: string
+  }
+  x: number
+  y: number
+  textAnchor: string
+  stroke: string
+  radius: number
+  activeIndex: number | null
+  index: number
+  setActiveIndex: (index: number | null) => void
+}
+
+// Custom tick component for PolarAngleAxis
+const CustomXAxisRadarTick: React.FC<CustomXAxisRadarTickProps> = ({
+  payload,
+  x,
+  y,
+  textAnchor,
+  stroke,
+  activeIndex,
+  index,
+  setActiveIndex,
+}) => {
+  const isActive = activeIndex === index
+  return (
+    <text
+      x={x}
+      y={y}
+      textAnchor={textAnchor}
+      fill={isActive ? '#a78bfa' : '#808080'}
+      onMouseEnter={() => setActiveIndex(index)}
+      onMouseLeave={() => setActiveIndex(null)}
+    >
+      {payload.value}
+    </text>
+  )
+}
+
 export default function SkillsChartComponent({ skills }) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   return (
     <div className='mb-5 lg:block lg:w-full'>
       {skills.length < 6 ? (
@@ -57,7 +112,18 @@ export default function SkillsChartComponent({ skills }) {
               bottom: 5,
             }}
           >
-            <XAxis dataKey='skill_name' tick={<CustomXAxisTick />} interval={0} />
+            <XAxis
+              dataKey='skill_name'
+              tick={(props) => (
+                <CustomXAxisTick
+                  {...props}
+                  activeIndex={activeIndex}
+                  index={props.index}
+                  setActiveIndex={setActiveIndex}
+                />
+              )}
+              interval={0}
+            />
             <YAxis domain={[0, 100]} />
             <Tooltip content={<CustomTooltip active={false} payload={[]} label='skill_name' />} />
             <CartesianGrid vertical={false} strokeDasharray='6 6' />
@@ -81,7 +147,17 @@ export default function SkillsChartComponent({ skills }) {
             data={skills}
           >
             <PolarGrid />
-            <PolarAngleAxis dataKey='skill_name' />
+            <PolarAngleAxis
+              dataKey='skill_name'
+              tick={(props) => (
+                <CustomXAxisRadarTick
+                  {...props}
+                  activeIndex={activeIndex}
+                  index={props.index}
+                  setActiveIndex={setActiveIndex}
+                />
+              )}
+            />
             <PolarRadiusAxis opacity={0} domain={[0, 100]} />
             <Radar name='Ram' dataKey='percentage' stroke='#28B5E1' strokeWidth={4} fill='#28B5E1' fillOpacity={0.4} />
             {/* <Tooltip /> */}

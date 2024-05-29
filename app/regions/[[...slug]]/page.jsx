@@ -49,11 +49,12 @@ const Regions = ({ params }) => {
   return (
     <>
       <div className='relative'>
-        <div className='absolute top-0 z-50 flex w-full justify-center'>
-          <p className='animate-pulse rounded-lg bg-black/70 p-3 font-semibold text-purple-200 shadow shadow-violet-400'>
-            BETA TESTING
-          </p>
-        </div>
+        <a
+          href='https://r3-f-next-js-starter-package-git-mainproduction-going-genius.vercel.app/guilds/feedback'
+          className='absolute left-2 top-14 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:top-2'
+        >
+          Give Feedback
+        </a>
         {/* Render other content over the background */}
         {params.slug?.length === 2 ? (
           <div className='flex justify-center'>
