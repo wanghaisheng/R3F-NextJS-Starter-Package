@@ -31,7 +31,7 @@ export default function HomePage() {
     if (emblaApi) {
       const autoplay = setInterval(() => {
         emblaApi.scrollNext()
-      }, 3000)
+      }, 5000)
 
       return () => clearInterval(autoplay)
     }
@@ -58,10 +58,12 @@ export default function HomePage() {
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow lg:min-w-0'>
               <p>Hel</p>
+              <img src='/homepage/image.png' alt='' className='absolute' />
             </div>
             {/* Slide 2 */}
             <div className='w-full shrink-0 grow lg:min-w-0'>
               <p>HI</p>
+              <img src='/homepage/image2.png' alt='' />
             </div>
             {/* Slide 3 */}
             <div className='w-full shrink-0 grow lg:min-w-0'>
