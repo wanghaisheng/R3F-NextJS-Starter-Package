@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
+import Image from 'next/image'
 export default function HomePage() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   // const handleChangeSlide = (index) => {
@@ -44,47 +45,46 @@ export default function HomePage() {
   }, [emblaApi])
 
   return (
-    <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute -top-14 z-50 flex w-full justify-start pl-28'>
-        <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
-          BETA TESTING
-        </p>
-      </div>
-      <div className='absolute top-0 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'></div>
-      {/* Carousel */}
-      <div className='top-10 flex size-full justify-between px-4 lg:absolute'>
-        <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex'>
-            {/* Slide 1 */}
-            <div className='w-full shrink-0 grow lg:min-w-0'>
-              <p>Hel</p>
-              <img src='/homepage/image.png' alt='' />
-            </div>
-            {/* Slide 2 */}
-            <div className='w-full shrink-0 grow lg:min-w-0'>
-              <p>HI</p>
-              <img src='/homepage/image2.png' alt='' />
-            </div>
-            {/* Slide 3 */}
-            <div className='w-full shrink-0 grow lg:min-w-0'>
-              <p>HO</p>
+    <div className='relative h-screen w-screen overflow-hidden'>
+      <div className='size-full overflow-hidden' ref={emblaRef}>
+        <div className='flex size-full'>
+          {/* Slide 1 */}
+          <div className='relative flex w-full shrink-0 grow items-center justify-center lg:min-w-0'>
+            <Image src='/homepage/image.png' alt='' layout='fill' objectFit='cover' />
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <p className='text-2xl text-white lg:text-5xl'>Text for Slide 1</p>
             </div>
           </div>
-          <button
-            className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
-            onClick={scrollPrev}
-            aria-label='Previous Slide'
-          >
-            <MdNavigateBefore />
-          </button>
-          <button
-            className='absolute hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
-            onClick={scrollNext}
-            aria-label='Next Slide'
-          >
-            <MdNavigateNext />
-          </button>
+
+          {/* Slide 2 */}
+          <div className='relative flex w-full shrink-0 grow items-center justify-center lg:min-w-0'>
+            <div className='absolute inset-0 flex items-center justify-center bg-black/50'>
+              <p className='text-2xl text-white lg:text-5xl'>HO</p>
+            </div>
+          </div>
+
+          {/* Slide 3 */}
+          <div className='relative flex w-full shrink-0 grow items-center justify-center lg:min-w-0'>
+            <Image src='/homepage/image2.png' alt='' layout='fill' objectFit='cover' />
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <p className='text-2xl text-white lg:text-5xl'>Text for Slide 3</p>
+            </div>
+          </div>
         </div>
+        <button
+          className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
+          onClick={scrollPrev}
+          aria-label='Previous Slide'
+        >
+          <MdNavigateBefore />
+        </button>
+        <button
+          className='absolute hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
+          onClick={scrollNext}
+          aria-label='Next Slide'
+        >
+          <MdNavigateNext />
+        </button>
       </div>
     </div>
   )
