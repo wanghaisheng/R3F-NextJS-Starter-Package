@@ -84,12 +84,6 @@ const Factions = ({ params }) => {
   }
   return (
     <>
-      <div className='absolute top-8 z-50 flex w-full lg:top-0 lg:justify-center'>
-        <p className='animate-pulse rounded-lg bg-black/70 p-3 font-semibold text-purple-200 shadow shadow-violet-400'>
-          BETA TESTING
-        </p>
-      </div>
-
       {params.slug?.length === 2 ? (
         <div>
           View of region {params.slug[0]} and Concept {params.slug[1]}
@@ -100,13 +94,13 @@ const Factions = ({ params }) => {
           <div className='relative h-[80vh] flex-1 items-center justify-center'>
             <div className='mx-10 flex justify-start font-semibold'>{params.slug[0].toUpperCase()}</div>
 
-            <div className='flex size-full animate-pulse flex-col items-center justify-center'>
+            <div className='mt-6 flex animate-pulse flex-col items-center justify-center lg:mt-10'>
               <h1 className='text-center text-3xl font-bold text-white'>
                 Developers are working on this page. <br />
                 Any feedback will be helpful.
               </h1>
             </div>
-            <div className='absolute bottom-0 flex w-full px-10 lg:bottom-10 '>
+            <div className='absolute bottom-0 flex h-[48vh] w-full px-10 lg:bottom-10 '>
               <iframe
                 className='w-full rounded'
                 src='https://ggrelativity.xyz/ticket-form/c4ca4238a0b923820dcc509a6f75849b'

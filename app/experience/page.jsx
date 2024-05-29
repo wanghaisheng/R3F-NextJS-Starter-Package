@@ -8,7 +8,7 @@ const ExperiencePage = () => {
       </div>
       <a
         href='https://r3-f-next-js-starter-package-git-mainproduction-going-genius.vercel.app/guilds/feedback'
-        className='absolute left-2 top-24 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:top-2'
+        className='absolute left-2 top-24 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:left-[46%] lg:top-24'
       >
         Give Feedback
       </a>

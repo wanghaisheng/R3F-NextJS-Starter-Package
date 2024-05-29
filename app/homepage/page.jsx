@@ -45,20 +45,20 @@ export default function HomePage() {
 
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute top-2 z-50 flex w-full justify-center'>
+      <div className='absolute -top-14 z-50 flex w-full justify-start pl-28'>
         <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
           BETA TESTING
         </p>
       </div>
-      <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'></div>
+      <div className='absolute top-0 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'></div>
       {/* Carousel */}
       <div className='top-10 flex size-full justify-between px-4 lg:absolute'>
         <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex '>
+          <div className='flex'>
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow lg:min-w-0'>
               <p>Hel</p>
-              <img src='/homepage/image.png' alt='' className='absolute' />
+              <img src='/homepage/image.png' alt='' />
             </div>
             {/* Slide 2 */}
             <div className='w-full shrink-0 grow lg:min-w-0'>
