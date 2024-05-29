@@ -24,7 +24,7 @@ import Link from 'next/link'
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
-export default function Hero3() {
+export default function Profile() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
@@ -515,16 +515,13 @@ export default function Hero3() {
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
 
                     {user && (
-
                       <a
                         // href={`http://localhost:3000/api/public/users/${user.gg_id}`}
                         href='#'
                         // target='_blank'
                         aria-label='Booking button'
                       >
-
                         <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
-
                       </a>
                     )}
                   </div>
@@ -543,10 +540,8 @@ export default function Hero3() {
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-
                         {user && skillsData.length != 0 ? (
                           <SkillsChartComponent skills={skillsData} />
-
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched
                           <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
