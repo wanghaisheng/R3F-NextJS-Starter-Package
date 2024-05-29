@@ -23,6 +23,55 @@ async function getAvatarById(id: string) {
     enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
   }
 }
+
+const guildData = [
+  {
+    guild_name: 'BUDDHA',
+    symbol: '/guild/buddha.png',
+    color: 'white',
+    description: 'Buddha Vairocana Family (Space): Development, Engineering & ITAI Services',
+    skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+    alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+    additionalSkills: ['Innovation', 'data analysis', 'research'],
+  },
+  {
+    guild_name: 'VAJRA',
+    symbol: '/guild/vajra.png',
+    color: 'blue',
+    description: 'Vajra Family (Water): All Departments & ITAI Services',
+    skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
+    alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
+    additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
+  },
+  {
+    guild_name: 'KARMA',
+    symbol: '/guild/karma.png',
+    color: 'green',
+    description: 'Karma Family (Wind): Sales & Marketing',
+    skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
+    alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
+    additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
+  },
+  {
+    guild_name: 'RATNA',
+    symbol: '/guild/ratna.png',
+    color: 'yellow',
+    description: 'Ratna Family (Earth): Admin & Customer Support',
+    skills: ['Stability', 'reliability', 'patience', 'empathy'],
+    alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
+    additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
+  },
+  {
+    guild_name: 'PADMA',
+    symbol: '/guild/padma.png',
+    color: 'red',
+    description: 'Padma Family (Fire): Design & Creative (Working Class)',
+    skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
+    alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
+    additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
+  },
+]
+
 export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
@@ -45,53 +94,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   }, [user])
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
-  const guildData = [
-    {
-      guild_name: 'BUDDHA',
-      symbol: '/guild/buddha.png',
-      color: 'white',
-      description: 'Buddha Vairocana Family (Space): Development, Engineering & ITAI Services',
-      skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
-      alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
-      additionalSkills: ['Innovation', 'data analysis', 'research'],
-    },
-    {
-      guild_name: 'VAJRA',
-      symbol: '/guild/vajra.png',
-      color: 'blue',
-      description: 'Vajra Family (Water): All Departments & ITAI Services',
-      skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
-      alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
-      additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
-    },
-    {
-      guild_name: 'KARMA',
-      symbol: '/guild/karma.png',
-      color: 'green',
-      description: 'Karma Family (Wind): Sales & Marketing',
-      skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
-      alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
-      additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
-    },
-    {
-      guild_name: 'RATNA',
-      symbol: '/guild/ratna.png',
-      color: 'yellow',
-      description: 'Ratna Family (Earth): Admin & Customer Support',
-      skills: ['Stability', 'reliability', 'patience', 'empathy'],
-      alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
-      additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
-    },
-    {
-      guild_name: 'PADMA',
-      symbol: '/guild/padma.png',
-      color: 'red',
-      description: 'Padma Family (Fire): Design & Creative (Working Class)',
-      skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
-      alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
-      additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
-    },
-  ]
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
   useEffect(() => {
     const setGuild = () => {
@@ -185,12 +187,10 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='My Avatar'
-
         className='relative flex h-[1055px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl  md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
-
             AVATAR & GUILDS
           </div>
 
@@ -328,7 +328,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       </div>
                     </div>
                   )}
-
                 </div>
               </div>
             </div>
@@ -356,9 +355,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
               <div className='absolute bottom-4 left-4 mt-4'>
                 {!isSmallScreen ? (
                   <button
-
                     className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-
                     onClick={onPrevButtonClick}
                     aria-label='prev'
                   >
