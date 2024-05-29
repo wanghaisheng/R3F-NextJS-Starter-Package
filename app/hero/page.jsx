@@ -24,6 +24,7 @@ import Link from 'next/link'
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
+
 export default function Hero() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
@@ -520,8 +521,7 @@ export default function Hero() {
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
                     {user && (
                       <a
-                        // href={`http://localhost:3000/api/public/users/${user.gg_id}`}
-                        href='#'
+                        // href={`http://localhost:3001//api/public/users/${user.gg_id}`}
                         // target='_blank'
                         aria-label='Booking button'
                       >

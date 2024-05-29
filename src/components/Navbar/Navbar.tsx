@@ -204,7 +204,9 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
+
                 <Link href='hero' className='hover:text-violet-400'>
+
                   HOME
                 </Link>
               </li>
