@@ -49,7 +49,7 @@ const Regions = ({ params }) => {
   return (
     <>
       <div className='relative'>
-        <div className='absolute top-0 z-50 flex w-full justify-center'>
+        <div className='absolute top-8 z-50 flex w-full lg:top-0 lg:justify-center'>
           <p className='animate-pulse rounded-lg bg-black/70 p-3 font-semibold text-purple-200 shadow shadow-violet-400'>
             BETA TESTING
           </p>

@@ -201,6 +201,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
                   <div className='relative'>
                     <Avatar
+                      key={modelSrc}
                       // modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                       modelSrc={modelSrc}
                       // shadows

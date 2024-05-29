@@ -84,8 +84,8 @@ const Factions = ({ params }) => {
   }
   return (
     <>
-      <div className='absolute top-0 z-50 flex w-full justify-center'>
-        <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
+      <div className='absolute top-8 z-50 flex w-full lg:top-0 lg:justify-center'>
+        <p className='animate-pulse rounded-lg bg-black/70 p-3 font-semibold text-purple-200 shadow shadow-violet-400'>
           BETA TESTING
         </p>
       </div>

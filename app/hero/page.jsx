@@ -214,7 +214,7 @@ export default function Hero() {
   }, [user])
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute top-2 z-50 flex w-full justify-center'>
+      <div className='absolute -top-8 z-50 flex w-full justify-center lg:top-2'>
         <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
           BETA TESTING
         </p>
