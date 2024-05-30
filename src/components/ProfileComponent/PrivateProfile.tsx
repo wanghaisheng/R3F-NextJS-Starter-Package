@@ -21,7 +21,7 @@ import Link from 'next/link'
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
-import ExpProfileView from '../card/ExpProfileView'
+import ExperienceFlipCard from '../card/experienceFlipCard'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
 
@@ -513,8 +513,8 @@ export default function PrivateProfile() {
                             {experience.map((exp) => (
                               <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
                                 <div className='flex flex-col justify-center'>
-                                  <div className='flex h-48 justify-center'>
-                                    <ExpProfileView
+                                  <div className='flex justify-center'>
+                                    <ExperienceFlipCard
                                       type={exp.type}
                                       projectName={exp.name}
                                       skills={exp.project_skills.join(', ')}
