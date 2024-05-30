@@ -1,7 +1,7 @@
 import WeatherBackground from '@/components/Weather/WeatherBackground'
 import WeatherClientComponent from '@/components/Weather/WeatherClientComponent'
 
-import PrivateProfile from '@/components/ProfileComponent/PivateProfile'
+import PrivateProfile from '@/components/ProfileComponent/PrivateProfile'
 
 const Hero4 = () => {
   return (
