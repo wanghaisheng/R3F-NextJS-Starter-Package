@@ -20,8 +20,8 @@ import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 import Link from 'next/link'
 // Cards
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
-import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
+import ExpProfileView from '../card/ExpProfileView'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
 
@@ -514,7 +514,7 @@ export default function PrivateProfile() {
                               <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
                                 <div className='flex flex-col justify-center'>
                                   <div className='flex h-48 justify-center'>
-                                    <ExperienceFlipCard
+                                    <ExpProfileView
                                       type={exp.type}
                                       projectName={exp.name}
                                       skills={exp.project_skills.join(', ')}

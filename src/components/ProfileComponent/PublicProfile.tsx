@@ -4,7 +4,6 @@ import SkillsChartComponent from '@/components/SliderComponent/SkillsChartCompon
 import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
-import SpringModal from '@/components/FormModal/SpringModal'
 
 //icons
 import { FaRegEdit } from 'react-icons/fa'
@@ -15,15 +14,12 @@ import { usePathname } from 'next/navigation'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 // For carousel inside slide 1
-import AvatarImageComponent from '@/components/avatarImage/page'
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 import Link from 'next/link'
 // Cards
-import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
 
 export default function PublicProfile() {
   const { user } = useUser()
