@@ -285,30 +285,6 @@ export default function PublicProfile() {
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
                         <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                Genius ID
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <GeniusIDFlipCard
-                                  first_name={user.first_name}
-                                  last_name={user.last_name}
-                                  email={user.email}
-                                  dob={user.dob}
-                                  contact={user.phone_number}
-                                  address={user.address}
-                                />
-                              </div>
-                            </div>
-                          </div>
                           {cardsData.length != 0 ? (
                             cardsData.map((card) => (
                               <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
@@ -384,30 +360,6 @@ export default function PublicProfile() {
                       {/* Carousel */}
                       <div className='w-full overflow-hidden' ref={emblaRef2}>
                         <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow md:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                Genius ID
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <GeniusIDFlipCard
-                                  first_name='DEFAULT'
-                                  last_name='DEFAULT'
-                                  email='DEFAULT@'
-                                  dob='DEFAULT'
-                                  contact='DEFAULT'
-                                  address='DEFAULT'
-                                />
-                              </div>
-                            </div>
-                          </div>
                           <div className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
@@ -447,35 +399,6 @@ export default function PublicProfile() {
                       </div>
                     </div>
                   )}
-                  <div className='my-5 flex flex-col items-center py-5'>
-                    <div className='rounded-lg bg-purple-900/50 p-5'>
-                      <p className='mb-4 px-4 text-center'>Some premium features for paid users</p>
-                      <div className='flex justify-center'>
-                        <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
-                      </div>
-                    </div>
-                    {/* Spring Pop Up Modal */}
-                    <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
-                  </div>
-                </div>
-                <div className='mt-60 h-full lg:mr-20 lg:mt-0 lg:w-[30%] '>
-                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                    Avatar
-                    <a
-                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                      aria-label='edit button'
-                      href='/slider'
-                    >
-                      <FaRegEdit />
-                    </a>
-                  </div>
-                  <div className='flex min-h-48 items-center justify-center px-4'>
-                    <div className='mb-7 flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
-                      <AvatarImageComponent />
-                    </div>
-                  </div>
-                  {/* Skin Card Component */}
-                  <SkinsCard />
                 </div>
               </div>
             </div>
@@ -549,9 +472,9 @@ export default function PublicProfile() {
                       <a
                         // href={`http://localhost:3001//api/public/users/${user.gg_id}`}
                         // target='_blank'
-                        aria-label='Booking button'
+                        aria-label='Interact button'
                       >
-                        <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
+                        <DrawOutlineButton>Interact!!</DrawOutlineButton>
                       </a>
                     )}
                   </div>
@@ -582,35 +505,6 @@ export default function PublicProfile() {
                 </div>
               </div>
             </div>
-            {/* Slide 3 */}
-            {/* <div className='w-full shrink-0 grow lg:min-w-0'>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
-                <div className='h-full lg:ml-24 lg:w-[30%] '>
-                  {user ? (
-                    <div className='flex flex-col items-center justify-center'>
-                      <div className='relative my-4 flex justify-center  text-xl font-semibold drop-shadow lg:text-5xl'>
-                        Achievements
-                      </div>
-                      <p>Logged In users Achievements</p>
-                      <div className='mt-20 h-96 w-52 rounded-xl bg-purple-900/20'></div>
-                    </div>
-                  ) : (
-                    <div className='flex flex-col items-center justify-center '>
-                      <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                        <p>Achievements</p>
-                      </div>
-                      Awards
-                    </div>
-                  )}
-                </div>
-
-                <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%]'>
-                  <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                    Recommendations
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
           <button
             className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
