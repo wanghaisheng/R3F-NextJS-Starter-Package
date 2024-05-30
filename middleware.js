@@ -12,8 +12,6 @@ export function middleware(request) {
   const requestUrl = request.nextUrl.pathname
   const origin = request.headers.get('origin')
 
-  console.log('Request Origin:', origin)
-
   // Handle CORS for '/api/public/:path*'
   if (requestUrl.startsWith('/api/public/')) {
     const res = NextResponse.next()
