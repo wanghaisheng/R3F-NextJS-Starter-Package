@@ -25,7 +25,7 @@ export default function HomePage() {
     if (emblaApi) {
       const autoplay = setInterval(() => {
         emblaApi.scrollNext()
-      }, 12000)
+      }, 8000)
       return () => clearInterval(autoplay)
     }
   }, [emblaApi])
