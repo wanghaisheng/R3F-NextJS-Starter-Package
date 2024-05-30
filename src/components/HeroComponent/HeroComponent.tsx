@@ -294,7 +294,17 @@ export default function HeroComponent() {
                                 </a>
                               </div>
                               <div className='flex justify-center'>
-                                <CardsFlipCard type='TYPE' name='NAME' dateIn='DATE IN' dateOut='DATE OUT' />
+                                <CardsFlipCard
+                                  type='TYPE'
+                                  name='NAME'
+                                  dateIn='DATE IN'
+                                  dateOut='DATE OUT'
+                                  description={undefined}
+                                  blood_group={undefined}
+                                  emergency_contact={undefined}
+                                  emergency_address={undefined}
+                                  emergency_details={undefined}
+                                />
                               </div>
                             </div>
                           </div>
@@ -351,7 +361,17 @@ export default function HeroComponent() {
                                 </a>
                               </div>
                               <div className='flex justify-center'>
-                                <CardsFlipCard type='DEFAULT' name='DEFAULT' dateIn='DEFAULT' dateOut='DEFAULT' />
+                                <CardsFlipCard
+                                  type='DEFAULT'
+                                  name='DEFAULT'
+                                  dateIn='DEFAULT'
+                                  dateOut='DEFAULT'
+                                  description={undefined}
+                                  blood_group={undefined}
+                                  emergency_contact={undefined}
+                                  emergency_address={undefined}
+                                  emergency_details={undefined}
+                                />
                               </div>
                             </div>
                           </div>

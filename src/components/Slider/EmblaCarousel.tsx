@@ -1,8 +1,7 @@
 'use client'
-import { SnackbarProvider, enqueueSnackbar, closeSnackbar } from 'notistack'
+import { SnackbarProvider } from 'notistack'
 import { motion } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import SkillsComponent from '@/components/SliderComponent/SkillsComponent'
 import AvatarComponent from '@/components/SliderComponent/AvatarComponent'
@@ -12,10 +11,9 @@ import UserInfoComponent from '@/components/SliderComponent/UserInfoComponent'
 import Card2Component from '@/components/SliderComponent/Card2Component'
 type PropType = {
   slides: number[]
-  options?: EmblaOptionsType
 }
-const EmblaCarousel: React.FC<PropType> = ({ options }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+const EmblaCarousel: React.FC<PropType> = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   // const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
   const tabs = ['Genius ID', 'Avatar', 'Card', 'Experience', 'Skills']
   const [selected, setSelected] = useState(tabs[0])
@@ -25,6 +23,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
     setSlideIndex(index)
     if (emblaApi) emblaApi.scrollTo(index)
   }
+
   const handleScroll = useCallback(
     (event) => {
       if (!emblaApi) return
@@ -76,7 +75,6 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
             {[
               <UserInfoComponent
                 key='UserInfoComponent'
-
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
               />,
@@ -120,10 +118,8 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
         </div>
       </section>
 
-
       <footer className='fixed inset-x-0 bottom-4 flex flex-col items-center justify-center '>
         <div className='mt-2 flex items-center justify-center '>
-
           <div className='flex gap-2 rounded-3xl p-2 px-7 shadow shadow-[#6B37CA] backdrop-blur-md md:h-10 md:items-center md:justify-center md:gap-7'>
             {tabs.map((tab, index) => (
               <Chip
@@ -152,11 +148,9 @@ const Chip = ({ text, selected, onClick }) => (
   <button
     onClick={onClick}
     className={`${
-
       selected
         ? 'bg-purple-600 text-purple-200'
         : 'text-purple-950 hover:bg-slate-700 hover:text-slate-200 dark:text-purple-200'
-
     } relative rounded-full px-2.5 py-0.5 text-sm transition-colors`}
   >
     <span className='relative z-10 pt-4'>{text}</span>

@@ -1,13 +1,11 @@
 import Link from 'next/link'
+import HomePage from '@/components/HomePage/HomePage'
 
 export default function Page() {
   return (
     <>
-      <div
-        className='relative flex min-h-screen flex-col bg-gradient-to-r from-purple-950/70 to-violet-400/20'
-        id='about-me'
-      >
-        <div
+      <div className='relative flex min-h-screen flex-col' id='about-us'>
+        {/* <div
           className='absolute inset-0 bg-cover bg-center opacity-30'
           style={{ backgroundImage: "url('/path/to/your/image.jpg')" }}
         ></div>
@@ -32,7 +30,8 @@ export default function Page() {
         </div>
         <footer className='z-20 flex items-center justify-center p-4 text-white'>
           <p>@ This is a BETA version.</p>
-        </footer>
+        </footer> */}
+        <HomePage />
       </div>
     </>
   )

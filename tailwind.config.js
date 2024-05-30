@@ -8,6 +8,9 @@ module.exports = {
         '3xl': '20px 20px 80px 0px rgba(0, 0, 0, 0.16 )',
         '4xl': '30px 30px 40px 0px #1F51FF',
       },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(90deg, #FFE27D 0%, #FFB543 29%, #61FFD5 73%, #3FB5FF 99%)',
+      },
     },
   },
   variants: {
