@@ -16,7 +16,7 @@ const Navbar = () => {
   }
 
   const pathname = usePathname()
-  const [hideMiddleNav, setHideMiddleNav] = useState(false)
+  const [hideMiddleNav, setHideMiddleNav] = useState(true)
   const [hideTopRightNav, setHideTopRightNav] = useState(false)
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Navbar = () => {
       pathname === '/slider' ||
       pathname === '/signin' ||
       pathname === '/signup' ||
-      pathname === '/slider2'
+      pathname === '/public-profile'
     ) {
       setHideMiddleNav(true)
     } else {
@@ -204,9 +204,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-
                 <Link href='hero' className='hover:text-violet-400'>
-
                   HOME
                 </Link>
               </li>

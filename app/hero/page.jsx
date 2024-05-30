@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
 import { useUser } from '@/context/UserContext/UserContext'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import SpringModal from '@/components/FormModal/SpringModal'
 //icons
 import { FaRegEdit } from 'react-icons/fa'
@@ -33,18 +33,27 @@ export default function Hero() {
   const [experience, setExperience] = useState([])
   const [isOpen, setIsOpen] = useState(false)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+  const isScrollingRef = useRef(false)
   const handleChangeSlide = (index) => {
     if (emblaApi) emblaApi.scrollTo(index)
   }
   const handleScroll = useCallback(
     (event) => {
-      if (!emblaApi) return
+      if (!emblaApi || isScrollingRef.current) return
+
+      isScrollingRef.current = true
+
       const deltaY = event.deltaY
+
       if (deltaY > 0) {
         emblaApi.scrollNext()
       } else if (deltaY < 0) {
         emblaApi.scrollPrev()
       }
+
+      setTimeout(() => {
+        isScrollingRef.current = false
+      }, 500) // Adjust debounce delay as needed
     },
     [emblaApi],
   )

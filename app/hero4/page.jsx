@@ -5,11 +5,15 @@ import HeroComponent from '@/components/HeroComponent/HeroComponent'
 
 const Hero4 = () => {
   return (
-    <div>
-      <WeatherClientComponent>
-        <WeatherBackground city='Kathmandu' />
-      </WeatherClientComponent>
-      <HeroComponent />
+    <div className='relative'>
+      <div className='absolute inset-0 z-0'>
+        <WeatherClientComponent>
+          <WeatherBackground city='Kathmandu' />
+        </WeatherClientComponent>
+      </div>
+      <div className='relative z-10'>
+        <HeroComponent />
+      </div>
     </div>
   )
 }

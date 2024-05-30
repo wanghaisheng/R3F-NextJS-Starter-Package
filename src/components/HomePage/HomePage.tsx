@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
-
+import { GoArrowDown } from 'react-icons/go'
 import Link from 'next/link'
 
 export default function HomePage() {
@@ -23,10 +23,10 @@ export default function HomePage() {
 
   useEffect(() => {
     if (emblaApi) {
-      // const autoplay = setInterval(() => {
-      //   emblaApi.scrollNext()
-      // }, 5000)
-      // return () => clearInterval(autoplay)
+      const autoplay = setInterval(() => {
+        emblaApi.scrollNext()
+      }, 12000)
+      return () => clearInterval(autoplay)
     }
   }, [emblaApi])
 
@@ -96,8 +96,11 @@ export default function HomePage() {
                 <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
               </Link>
               <div className='absolute bottom-10 text-white'>
-                <button className='rounded-full border border-white p-3 hover:bg-gray-200' aria-label='down button'>
-                  <span className='text-2xl'>&#x25BC;</span>
+                <button
+                  className='animate-bounce rounded-full border border-white p-3 hover:bg-purple-400'
+                  aria-label='down button'
+                >
+                  <GoArrowDown />
                 </button>
               </div>
             </div>

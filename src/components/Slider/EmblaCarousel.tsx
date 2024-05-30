@@ -1,7 +1,7 @@
 'use client'
 import { SnackbarProvider } from 'notistack'
 import { motion } from 'framer-motion'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import SkillsComponent from '@/components/SliderComponent/SkillsComponent'
 import AvatarComponent from '@/components/SliderComponent/AvatarComponent'
@@ -19,6 +19,7 @@ const EmblaCarousel: React.FC<PropType> = () => {
   const [selected, setSelected] = useState(tabs[0])
   const [slideIndex, setSlideIndex] = useState(0)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const isScrollingRef = useRef(false)
   const handleChangeSlide = (index) => {
     setSlideIndex(index)
     if (emblaApi) emblaApi.scrollTo(index)
@@ -26,7 +27,9 @@ const EmblaCarousel: React.FC<PropType> = () => {
 
   const handleScroll = useCallback(
     (event) => {
-      if (!emblaApi) return
+      if (!emblaApi || isScrollingRef.current) return
+
+      isScrollingRef.current = true
 
       const deltaY = event.deltaY
 
@@ -35,6 +38,10 @@ const EmblaCarousel: React.FC<PropType> = () => {
       } else if (deltaY < 0) {
         emblaApi.scrollPrev()
       }
+
+      setTimeout(() => {
+        isScrollingRef.current = false
+      }, 500) // Adjust debounce delay as needed
     },
     [emblaApi],
   )

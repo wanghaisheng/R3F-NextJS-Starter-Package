@@ -73,30 +73,22 @@ export default async function WeatherBackground({ city }: { city: string }) {
 
     return (
       <>
-        <div className='relative top-[-82px] h-screen w-full '>
+        <div className='fixed inset-0 z-0 overflow-hidden'>
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src={backgroundVideoUrl} type='video/mp4' />
           </video>
-
-          {/* <iframe
-            className='absolute left-0 top-0 z-0 size-full'
-            src='https://www.youtube.com/embed/GrypM52edHg?autoplay=1&loop=1&controls=0&mute=1&playlist=GrypM52edHg'
-            allow='autoplay; encrypted-media'
-            allowFullScreen
-          ></iframe> */}
-
-          <div className='fixed right-5 top-24'>
-            <Card
-              cityName={name}
-              humidity={main.humidity}
-              temperature={main.temp}
-              windSpeed={wind.speed}
-              visibility={visibility}
-              icon={icon}
-              weatherStatus={weatherStatus}
-              weatherDescription={weatherDescription}
-            />
-          </div>
+        </div>
+        <div className='fixed right-5 top-24 z-20'>
+          <Card
+            cityName={name}
+            humidity={main.humidity}
+            temperature={main.temp}
+            windSpeed={wind.speed}
+            visibility={visibility}
+            icon={icon}
+            weatherStatus={weatherStatus}
+            weatherDescription={weatherDescription}
+          />
         </div>
       </>
     )
