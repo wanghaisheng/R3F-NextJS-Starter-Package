@@ -1,7 +1,4 @@
 import EmblaCarousel from '@/components/Slider/EmblaCarousel'
-
-const OPTIONS = { loop: true }
-
 const Slider = () => (
   <>
     <div className='relative'>
@@ -11,7 +8,7 @@ const Slider = () => (
         </p>
       </div>
 
-      <EmblaCarousel options={OPTIONS} />
+      <EmblaCarousel />
     </div>
   </>
 )
