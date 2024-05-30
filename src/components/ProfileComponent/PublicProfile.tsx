@@ -2,12 +2,10 @@
 import { CardBody, CardContainer, CardItem } from '@/components/card/card'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import dynamic from 'next/dynamic'
-// import { Suspense } from 'react'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import SpringModal from '@/components/FormModal/SpringModal'
+
 //icons
 import { FaRegEdit } from 'react-icons/fa'
 // For the card flip QR code
@@ -24,8 +22,10 @@ import Link from 'next/link'
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import ExperienceFlipCard from '@/components/card/experienceFlipCard'
 import CardsFlipCard from '@/components/card/cardsFlipCard'
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
 
-export default function Hero() {
+export default function PublicProfile() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
@@ -34,9 +34,11 @@ export default function Hero() {
   const [isOpen, setIsOpen] = useState(false)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const isScrollingRef = useRef(false)
+
   const handleChangeSlide = (index) => {
     if (emblaApi) emblaApi.scrollTo(index)
   }
+
   const handleScroll = useCallback(
     (event) => {
       if (!emblaApi || isScrollingRef.current) return
@@ -57,6 +59,7 @@ export default function Hero() {
     },
     [emblaApi],
   )
+
   useEffect(() => {
     window.addEventListener('wheel', handleScroll)
     return () => {
@@ -70,12 +73,15 @@ export default function Hero() {
       console.log(emblaApi.slideNodes()) // Access API
     }
   }, [emblaApi])
+
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
+
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
+
   // carousel inside Slide 1
   const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: true })
   useEffect(() => {
@@ -83,26 +89,33 @@ export default function Hero() {
       console.log(emblaApi2.slideNodes()) // Access API
     }
   }, [emblaApi2])
+
   const scrollPrev2 = useCallback(() => {
     if (emblaApi2) emblaApi2.scrollPrev()
   }, [emblaApi2])
+
   const scrollNext2 = useCallback(() => {
     if (emblaApi2) emblaApi2.scrollNext()
   }, [emblaApi2])
+
   // Carousel inside slide 2
   const [emblaRef3, emblaApi3] = useEmblaCarousel({ loop: true })
+
   useEffect(() => {
     if (emblaApi3) {
       console.log(emblaApi3.slideNodes()) // Access API
     }
   }, [emblaApi3])
+
   const scrollPrev3 = useCallback(() => {
     if (emblaApi3) emblaApi3.scrollPrev()
   }, [emblaApi3])
+
   const scrollNext3 = useCallback(() => {
     if (emblaApi3) emblaApi3.scrollNext()
   }, [emblaApi3])
-  // Experience
+
+  // Experience data
   useEffect(() => {
     const fetchExpData = async () => {
       try {
@@ -115,6 +128,7 @@ export default function Hero() {
       fetchExpData() // Fetch data only if user is available
     }
   }, [user])
+
   // Fetch skills data
   function checkExistingSkills(skill, exp_skills) {
     for (let i = 0; i < exp_skills.length; i++) {
@@ -124,6 +138,7 @@ export default function Hero() {
     }
     return false
   }
+
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
@@ -151,6 +166,7 @@ export default function Hero() {
               exp_skill_obj[element.skill_name + '_id'] = skillObj.skill_id
             })
           })
+
           user.experience.forEach((element) => {
             if (element.project_skills.length !== 0) {
               element.project_skills.forEach((skill) => {
@@ -173,19 +189,22 @@ export default function Hero() {
             }
           })
         }
+
         // Convert the Set back to an array of objects
         if (skillsSet.size !== 0) {
-          const skillsArray = Array.from(skillsSet).map((strObj) => JSON.parse(strObj))
+          const skillsArray = Array.from(skillsSet).map((strObj: string) => JSON.parse(strObj))
           setSkillsData(skillsArray)
         }
       } catch (error) {
         console.log('failed to fetch the skills data')
       }
     }
+
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
   }, [user])
+
   // Cards data
   useEffect(() => {
     const fetchCardsData = async () => {
@@ -224,17 +243,6 @@ export default function Hero() {
   }, [user])
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute -top-8 z-50 flex w-full justify-start lg:-top-14 lg:pl-28'>
-        <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
-          BETA TESTING
-        </p>
-      </div>
-      <a
-        href='https://r3-f-next-js-starter-package-git-mainproduction-going-genius.vercel.app/guilds/feedback'
-        className='absolute -top-2 left-2 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:top-2'
-      >
-        Give Feedback
-      </a>
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar

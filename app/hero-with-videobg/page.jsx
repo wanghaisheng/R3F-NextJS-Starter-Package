@@ -1,7 +1,7 @@
 import WeatherBackground from '@/components/Weather/WeatherBackground'
 import WeatherClientComponent from '@/components/Weather/WeatherClientComponent'
 
-import HeroComponent from '@/components/HeroComponent/HeroComponent'
+import PrivateProfile from '@/components/ProfileComponent/PivateProfile'
 
 const Hero4 = () => {
   return (
@@ -12,7 +12,7 @@ const Hero4 = () => {
         </WeatherClientComponent>
       </div>
       <div className='relative z-10'>
-        <HeroComponent />
+        <PrivateProfile />
       </div>
     </div>
   )
