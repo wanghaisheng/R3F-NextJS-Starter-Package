@@ -57,7 +57,7 @@ const Navbar = () => {
             />
           </Link>
           {/* SignIn, SignOut and Logout */}
-          <div className='flex items-center justify-center'>
+          <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
                 {user.first_name != null && (
@@ -81,10 +81,10 @@ const Navbar = () => {
             ) : (
               <>
                 {hideTopRightNav ? null : (
-                  <div>
+                  <div className='text-black dark:text-white'>
                     <Link
                       href='/signin'
-                      className='hidden rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
+                      className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
                     >
                       Sign-In
                     </Link>
@@ -176,7 +176,7 @@ const Navbar = () => {
         <div
           className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
-          } flex w-[75%] flex-col bg-violet-400 shadow-xl dark:bg-black`}
+          } flex w-[75%] flex-col bg-slate-800 shadow-xl dark:bg-black`}
         >
           <div className='p-4 '>
             <button

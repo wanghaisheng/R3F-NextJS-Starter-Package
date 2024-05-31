@@ -22,7 +22,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
     <>
       <CardBody>
         {/* Event Image  */}
-        <div className='group h-[350px] w-[500px] p-6 [prespective:1000px]'>
+        <div className='group h-[400px] w-[650px] p-6 [prespective:1000px]'>
           {/* Flip the card when clicked */}
           <div
             className={`relative size-full rounded-xl shadow-md transition-all duration-500 [transform-style:preserve-3d] 
