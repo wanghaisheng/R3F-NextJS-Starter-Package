@@ -17,6 +17,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 import { format, formatDistanceToNow } from 'date-fns'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+import Image from 'next/image'
 
 export default function PublicProfile() {
   const { user } = useUser()
@@ -235,16 +236,15 @@ export default function PublicProfile() {
     }
   }, [user])
 
-  console.log(user)
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='relative z-10 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
+      <div className='relative z-50 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
         {/* <div className='absolute top-[40%] z-10 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[650px]'> */}
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
             shadows
-            animationSrc='/male-idle-3.fbx'
+            animationSrc='/male-spawn-animation.fbx'
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
@@ -295,15 +295,18 @@ export default function PublicProfile() {
 
                         <div className='z-0 flex w-full flex-col justify-start bg-blue-950 p-8 lg:w-[72%]'>
                           <div>
-                            <h1 className='text-3xl font-bold'>
-                              Name : {user.first_name} {user.last_name}
-                            </h1>
-                            <p>{user.created_at}</p>
+                            <div className='flex items-center justify-start'>
+                              <Image src='/image.png' alt='profile pic' height={90} width={90} />
+                              <h1 className='pl-4 text-3xl font-bold'>
+                                Name : {user.first_name} {user.last_name}
+                              </h1>
+                            </div>
+                            <p className='flex justify-end'>{user.created_at}</p>
                             <p className='mt-2'>DOB: {user.dob}</p>
                             <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
                             <p className='mt-2'>Description: {user.description}</p>
                           </div>
-                          <div>
+                          <div className='flex justify-between'>
                             <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                               <CardBody className='group/card relative'>
                                 <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
@@ -316,7 +319,15 @@ export default function PublicProfile() {
                                 </div>
                               </CardBody>
                             </CardContainer>
+                            <div className='h-72 w-60 bg-slate-700 p-4'>
+                              <h1 className='flex justify-center font-semibold'>BADGES</h1>
+                              <p>!</p>
+                              <p>!</p>
+                              <p>!</p>
+                              <p>!</p>
+                            </div>
                           </div>
+                          <p>The bg is just for testing</p>
                         </div>
                       </div>
                     </>
@@ -385,14 +396,14 @@ export default function PublicProfile() {
             </div>
           </div>
           <button
-            className='absolute hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
+            className='absolute z-50 hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
             onClick={scrollPrev}
             aria-label='Previous Slide'
           >
             <MdNavigateBefore />
           </button>
           <button
-            className='absolute hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
+            className='absolute z-50 hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
             onClick={scrollNext}
             aria-label='Next Slide'
           >
