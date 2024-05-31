@@ -270,7 +270,7 @@ export default function PublicProfile() {
       </div>
 
       {user && (
-        <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl  lg:hidden'>
+        <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl lg:hidden'>
           {user.first_name.toUpperCase()}
         </div>
       )}
@@ -283,23 +283,43 @@ export default function PublicProfile() {
               <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
                 <div className='h-full lg:ml-24 lg:w-full'>
                   {user && (
-                    <div className='flex size-full lg:justify-between'>
-                      <div className='z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
-                        <div className='flex flex-col items-center justify-center pt-4 text-8xl font-extrabold'>
-                          {user.first_name.split('').map((letter, index) => (
-                            <span key={index}>{letter.toUpperCase()}</span>
-                          ))}
+                    <>
+                      <div className='flex size-full lg:justify-between'>
+                        <div className='z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+                          <div className='flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+                            {user.first_name.split('').map((letter, index) => (
+                              <span key={index}>{letter.toUpperCase()}</span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className='z-0 flex w-full flex-col justify-start bg-blue-950 p-8 lg:w-[72%]'>
+                          <div>
+                            <h1 className='text-3xl font-bold'>
+                              Name : {user.first_name} {user.last_name}
+                            </h1>
+                            <p>{user.created_at}</p>
+                            <p className='mt-2'>DOB: {user.dob}</p>
+                            <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
+                            <p className='mt-2'>Description: {user.description}</p>
+                          </div>
+                          <div>
+                            <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+                              <CardBody className='group/card relative'>
+                                <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                                  {user && skillsData ? (
+                                    <SkillsChartComponent skills={skillsData} />
+                                  ) : (
+                                    // Render loading indicator or placeholder while data is being fetched
+                                    <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
+                                  )}
+                                </div>
+                              </CardBody>
+                            </CardContainer>
+                          </div>
                         </div>
                       </div>
-
-                      <div className='z-0 flex w-full flex-col items-start justify-center bg-blue-950 p-8 lg:w-[72%]'>
-                        <h1 className='text-3xl font-bold'>
-                          Name : {user.first_name} {user.last_name}
-                        </h1>
-                        <p className='mt-2'>DOB: {user.dob}</p>
-                        <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
-                      </div>
-                    </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -361,29 +381,6 @@ export default function PublicProfile() {
                     )}
                   </div>
                 </div>
-              </div>
-            </div>
-            {/* Slide3 */}
-            <div className='w-full shrink-0 grow lg:min-w-0'>
-              <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
-                <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
-                  Skills
-                  <a className=' px-2 py-1 text-sm text-black dark:text-white' aria-label='edit button' href='/slider'>
-                    <FaRegEdit />
-                  </a>
-                </div>
-                <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-                  <CardBody className='group/card relative'>
-                    <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                      {user && skillsData ? (
-                        <SkillsChartComponent skills={skillsData} />
-                      ) : (
-                        // Render loading indicator or placeholder while data is being fetched
-                        <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
-                      )}
-                    </div>
-                  </CardBody>
-                </CardContainer>
               </div>
             </div>
           </div>
