@@ -296,7 +296,16 @@ export default function PublicProfile() {
                         <div className='z-0 flex w-full flex-col justify-start bg-blue-950 p-8 lg:w-[72%]'>
                           <div>
                             <div className='flex items-center justify-start'>
-                              <Image src='/image.png' alt='profile pic' height={90} width={90} />
+                              <div
+                                className='size-20 rounded-full border-2 border-white'
+                                style={{
+                                  backgroundImage: 'url(/image.png)',
+                                  backgroundSize: 'cover',
+                                  backgroundPosition: 'center',
+                                  backgroundRepeat: 'no-repeat',
+                                  borderRadius: '50%',
+                                }}
+                              ></div>
                               <h1 className='pl-4 text-3xl font-bold'>
                                 Name : {user.first_name} {user.last_name}
                               </h1>
@@ -319,6 +328,12 @@ export default function PublicProfile() {
                                 </div>
                               </CardBody>
                             </CardContainer>
+                            <div>
+                              <div>
+                                <span className='text-lg font-semibold'>10</span> Connections
+                              </div>
+                              <div>Highlights</div>
+                            </div>
                             <div className='h-72 w-60 bg-slate-700 p-4'>
                               <h1 className='flex justify-center font-semibold'>BADGES</h1>
                               <p>!</p>
