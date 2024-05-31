@@ -15,10 +15,7 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 // For carousel inside slide 1
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
-import Link from 'next/link'
-// Cards
-import ExperienceFlipCard from '@/components/card/experienceFlipCard'
-import CardsFlipCard from '@/components/card/cardsFlipCard'
+import { format, formatDistanceToNow } from 'date-fns'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 
 export default function PublicProfile() {
@@ -237,9 +234,12 @@ export default function PublicProfile() {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
+  console.log(user)
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute right-0 top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
+      <div className='relative z-10 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
+        {/* <div className='absolute top-[40%] z-10 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[650px]'> */}
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -255,7 +255,7 @@ export default function PublicProfile() {
           />
         ) : (
           <Avatar
-            modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+            modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true'
             shadows
             animationSrc='/male-idle-3.fbx'
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -268,130 +268,36 @@ export default function PublicProfile() {
           />
         )}
       </div>
+
+      {user && (
+        <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl  lg:hidden'>
+          {user.first_name.toUpperCase()}
+        </div>
+      )}
       {/* Carousel */}
-      <div className='top-10 flex size-full justify-between px-4 lg:absolute'>
+      <div className='top-10 flex size-full justify-end px-4 lg:absolute'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex '>
             {/* Slide 1 */}
             <div className='w-full shrink-0 grow lg:min-w-0 '>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
-                <div className='h-full lg:ml-24 lg:w-[27%]'>
-                  {user ? (
-                    <div className='flex flex-col items-center justify-center'>
-                      {/* Carousel */}
-                      <div className='w-full overflow-hidden' ref={emblaRef2}>
-                        <div className='flex items-center'>
-                          {cardsData.length != 0 ? (
-                            cardsData.map((card) => (
-                              <div key={card.card_id} className='w-full shrink-0 grow lg:min-w-0 '>
-                                <div className='flex flex-col justify-center'>
-                                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                    {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
-                                    <a
-                                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                                      aria-label='edit button'
-                                      href='/slider'
-                                    >
-                                      <FaRegEdit />
-                                    </a>
-                                  </div>
-                                  <div className='flex justify-center'>
-                                    <CardsFlipCard
-                                      type={card.type}
-                                      name={card.name}
-                                      dateIn={card.date_in}
-                                      dateOut={card.date_out}
-                                      emergency_address={card.emergency_address}
-                                      emergency_details={card.emergency_details}
-                                      emergency_contact={card.emergency_contact}
-                                      blood_group={card.blood_group}
-                                      description={card.description}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            ))
-                          ) : (
-                            <div className='w-full shrink-0 grow lg:min-w-0 '>
-                              <div className='flex flex-col justify-center'>
-                                <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                  CARD2
-                                  <a
-                                    className=' px-2 py-1 text-sm text-black dark:text-white'
-                                    aria-label='edit button'
-                                    href='/slider'
-                                  >
-                                    <FaRegEdit />
-                                  </a>
-                                </div>
-                                <div className='flex justify-center'>
-                                  <CardsFlipCard
-                                    type='DEFAULT'
-                                    name='DEFAULT'
-                                    dateIn='DEFAULT'
-                                    dateOut='DEFAULT'
-                                    description={undefined}
-                                    blood_group={undefined}
-                                    emergency_contact={undefined}
-                                    emergency_address={undefined}
-                                    emergency_details={undefined}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button aria-label='previos button' onClick={scrollPrev2}>
-                            <MdNavigateBefore />
-                          </button>
-                          <button aria-label='next button' onClick={scrollNext2}>
-                            <MdNavigateNext />
-                          </button>
+              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
+                <div className='h-full lg:ml-24 lg:w-full'>
+                  {user && (
+                    <div className='flex size-full lg:justify-between'>
+                      <div className='z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+                        <div className='flex flex-col items-center justify-center pt-4 text-8xl font-extrabold'>
+                          {user.first_name.split('').map((letter, index) => (
+                            <span key={index}>{letter.toUpperCase()}</span>
+                          ))}
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div className='flex flex-col items-center justify-center'>
-                      {/* Carousel */}
-                      <div className='w-full overflow-hidden' ref={emblaRef2}>
-                        <div className='flex items-center'>
-                          <div className='w-full shrink-0 grow lg:min-w-0 '>
-                            <div className='flex flex-col justify-center'>
-                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                CARD2
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
-                              </div>
-                              <div className='flex justify-center'>
-                                <CardsFlipCard
-                                  type='DEFAULT'
-                                  name='DEFAULT'
-                                  dateIn='DEFAULT'
-                                  dateOut='DEFAULT'
-                                  description={undefined}
-                                  blood_group={undefined}
-                                  emergency_contact={undefined}
-                                  emergency_address={undefined}
-                                  emergency_details={undefined}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button aria-label='Previous btn' onClick={scrollPrev2}>
-                            <MdNavigateBefore />
-                          </button>
-                          <button aria-label='Next btn' onClick={scrollNext2}>
-                            <MdNavigateNext />
-                          </button>
-                        </div>
+
+                      <div className='z-0 flex w-full flex-col items-start justify-center bg-blue-950 p-8 lg:w-[72%]'>
+                        <h1 className='text-3xl font-bold'>
+                          Name : {user.first_name} {user.last_name}
+                        </h1>
+                        <p className='mt-2'>DOB: {user.dob}</p>
+                        <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
                       </div>
                     </div>
                   )}
@@ -400,67 +306,47 @@ export default function PublicProfile() {
             </div>
             {/* Slide 2 */}
             <div className='w-full shrink-0 grow lg:min-w-0'>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-between'>
-                <div className='h-full lg:ml-24 lg:w-[27%]'>
-                  <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                    Experience
-                    <a
-                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                      aria-label='edit button'
-                      href='/slider'
-                    >
-                      <FaRegEdit />
-                    </a>
-                  </div>
-                  <div className='flex flex-col items-center justify-center'>
-                    {/* Carousel */}
-                    {user && experience.length != 0 ? (
-                      <>
-                        <div className='w-full overflow-hidden' ref={emblaRef3}>
-                          <div className='flex items-center'>
-                            {experience.map((exp) => (
-                              <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
-                                <div className='flex flex-col justify-center'>
-                                  <div className='flex justify-center'>
-                                    <ExpProfileView
-                                      type={exp.type}
-                                      projectName={exp.name}
-                                      skills={exp.project_skills.join(', ')}
-                                      toolsAndTech={exp.tools}
-                                    />
-                                  </div>
-                                  <div className='my-3 flex justify-center'>
-                                    <div className='flex flex-col'>
-                                      <p className='px-4 font-bold text-violet-400'>DESCRIPTION</p>
-                                      <p>{exp.description}</p>
-                                    </div>
-                                  </div>
+              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
+                <div className='h-full lg:ml-24 lg:w-[70%]'>
+                  <div className='relative'>
+                    <div className='overflow-hidden' ref={emblaRef}>
+                      <div className='flex'>
+                        <div className='flex-[0_0_100%]'>
+                          <div className='flex justify-center'>
+                            <button onClick={scrollPrev3} aria-label='prev button'>
+                              <MdNavigateBefore />
+                            </button>
+                            <button onClick={scrollNext3} aria-label='next button'>
+                              <MdNavigateNext />
+                            </button>
+                          </div>
+                          {experience.length !== 0 ? (
+                            <>
+                              <div className='w-full overflow-hidden' ref={emblaRef3}>
+                                <div className='flex w-full flex-row items-center justify-start'>
+                                  {experience.map((exp, index) => (
+                                    <>
+                                      <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
+                                        <CardContainer>
+                                          <ExpProfileView
+                                            type={exp.type}
+                                            projectName={exp.name}
+                                            skills={exp.project_skills.join(', ')}
+                                            toolsAndTech={exp.tools}
+                                          />
+                                        </CardContainer>
+                                      </div>
+                                    </>
+                                  ))}
                                 </div>
                               </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div className='my-4 flex justify-center gap-x-24 text-2xl sm:gap-x-36'>
-                          <button onClick={scrollPrev3} aria-label='prev button'>
-                            <MdNavigateBefore />
-                          </button>
-                          <button onClick={scrollNext3} aria-label='next button'>
-                            <MdNavigateNext />
-                          </button>
-                        </div>
-                      </>
-                    ) : (
-                      <div className='flex flex-col justify-center'>
-                        <p className='flex text-center'>
-                          Seems like you have not generated an Experience card Yet, you want to generate one?
-                        </p>
-                        <div className='mt-5 flex justify-center'>
-                          <Link href='slider' aria-label='slider link'>
-                            <DrawOutlineButton>EDIT</DrawOutlineButton>
-                          </Link>
+                            </>
+                          ) : (
+                            <p>No experiences available.</p>
+                          )}
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
@@ -475,30 +361,29 @@ export default function PublicProfile() {
                     )}
                   </div>
                 </div>
-                <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
-                  <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
-                    Skills
-                    <a
-                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                      aria-label='edit button'
-                      href='/slider'
-                    >
-                      <FaRegEdit />
-                    </a>
-                  </div>
-                  <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-                    <CardBody className='group/card relative'>
-                      <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                        {user && skillsData ? (
-                          <SkillsChartComponent skills={skillsData} />
-                        ) : (
-                          // Render loading indicator or placeholder while data is being fetched
-                          <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
-                        )}
-                      </div>
-                    </CardBody>
-                  </CardContainer>
+              </div>
+            </div>
+            {/* Slide3 */}
+            <div className='w-full shrink-0 grow lg:min-w-0'>
+              <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
+                <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
+                  Skills
+                  <a className=' px-2 py-1 text-sm text-black dark:text-white' aria-label='edit button' href='/slider'>
+                    <FaRegEdit />
+                  </a>
                 </div>
+                <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
+                  <CardBody className='group/card relative'>
+                    <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
+                      {user && skillsData ? (
+                        <SkillsChartComponent skills={skillsData} />
+                      ) : (
+                        // Render loading indicator or placeholder while data is being fetched
+                        <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
+                      )}
+                    </div>
+                  </CardBody>
+                </CardContainer>
               </div>
             </div>
           </div>
