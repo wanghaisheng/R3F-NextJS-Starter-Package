@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
   return (
     <div
       ref={ref}
-      className='bg-purple-200 dark:bg-black'
+      className='bg-black'
       style={{
         position: 'relative',
         width: ' 100%',

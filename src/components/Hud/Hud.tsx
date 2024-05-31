@@ -30,13 +30,13 @@ const Hud = () => {
   }, [pathname])
   return (
     <>
-      <motion.nav className='container fixed bottom-0 z-50 mx-auto flex flex-col items-center justify-center rounded-2xl text-purple-950 dark:text-purple-200 '>
+      <motion.nav className='container fixed bottom-0 z-50 mx-auto flex flex-col items-center justify-center rounded-2xl text-gray-200 dark:text-purple-200 '>
         {/* HUD */}
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-16 items-center justify-center px-0 py-2 '>
             <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
             <div className='hidden md:flex'>
-              <div className='flex h-10 items-center justify-center gap-2 rounded-full px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-[#6B37CA] backdrop-blur-md md:gap-7 lg:gap-14'>
+              <div className='flex h-10 items-center justify-center gap-2 rounded-full px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 <Link
                   href='/slider'
                   aria-label='Go to slider'

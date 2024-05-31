@@ -45,7 +45,7 @@ export default function GeniusIDFlipCard({
           >
             <Image
               // placeholder='blur'
-              src='/card/abstract1.webp'
+              src='/card/ljsd.png'
               alt='GID'
               fill
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -53,7 +53,7 @@ export default function GeniusIDFlipCard({
               className='rounded-lg object-cover'
             />
             <div className='absolute top-0 flex w-full justify-end'>
-              <p className='pr-3 pt-1 font-bold text-purple-200'>GENIUS ID</p>
+              <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>GENIUS ID</p>
             </div>
             <div className='absolute inset-0 cursor-default rounded-xl'>
               {/* Card Details */}
@@ -71,7 +71,7 @@ export default function GeniusIDFlipCard({
                       <p>{first_name.toUpperCase() + ' ' + last_name.toUpperCase()}</p>
                     </li>
                     <li className='mb-1 w-full'>
-                      <p className='text-purple-500'>{email}</p>
+                      <p className='text-gray-400 dark:text-purple-500'>{email}</p>
                     </li>
                     <li className='w-full'>
                       <p>DOB : {dob}</p>
@@ -87,7 +87,7 @@ export default function GeniusIDFlipCard({
               </div>
             </div>
             <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-              <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
+              <div className='text-base font-bold text-gray-200 dark:text-purple-500'>GOING GENIUS</div>
               <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
             </div>
 
@@ -99,7 +99,7 @@ export default function GeniusIDFlipCard({
                 )}
               </div>
               <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                <div className='text-base font-semibold text-purple-600'>GOING GENIUS</div>
+                <div className='text-base font-semibold text-gray-200 dark:text-purple-500'>GOING GENIUS</div>
                 <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
               </div>
             </div>

@@ -9,7 +9,6 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 
 import { FaArrowRight } from 'react-icons/fa6'
 export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
-
   const { user } = useUser()
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
@@ -50,7 +49,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       enqueueSnackbar('Experience Info saved', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
       enqueueSnackbar('Failed to save Experience Info', { autoHideDuration: 2500, variant: 'error' })
-
     }
   }
   const handleFirstNameChange = (newFirstName: string) => {
@@ -76,19 +74,17 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
         <div
           id='Genius ID'
-
-          className='relative flex h-[770px] w-[300px] bg-violet-300 py-4 md:w-[500px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
+          className='relative flex h-[770px] w-[300px] rounded bg-[#F5F5F5] px-2 py-4 md:w-[500px] md:rounded-3xl md:px-10 md:shadow-black/30 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] md:dark:bg-black/10 dark:md:shadow-purple-700'
         >
           <div className='flex w-full flex-col'>
             <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
-
               GENIUS ID
             </div>
             <div className='mt-5 rounded-[20px] '>
               <div className='flex flex-col lg:flex-row lg:justify-between'>
                 {/* Card Image / Container */}
                 <div className='flex flex-col'>
-                  <div className='mt-2 flex justify-center'>
+                  <div className='mt-2 flex justify-center '>
                     <GeniusIDFlipCard
                       // selectedGuild={selectedGuild}
                       // guildData={guildData}
@@ -107,7 +103,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     onSubmit={handleSubmit}
                     className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                   >
-
                     <div className='flex w-full flex-col gap-y-2 px-4  text-purple-950 dark:text-purple-200'>
                       <div className='flex flex-col lg:flex-row lg:justify-between '>
                         <label htmlFor='' className='font-semibold'>
@@ -119,13 +114,12 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={first_name}
                           onChange={(e) => handleFirstNameChange(e.target.value)}
                           placeholder='First Name'
-                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
                           required
                           aria-label='First Name'
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
-
                         <label htmlFor='' className='font-semibold'>
                           Last Name
                         </label>
@@ -135,13 +129,12 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={last_name}
                           onChange={(e) => handleLastNameChange(e.target.value)}
                           placeholder='Last Name'
-                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                          className='rounded-md  px-3 lg:w-[70%] dark:bg-white/20'
                           required
                           aria-label='Last Name'
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
-
                         <label htmlFor='' className='font-semibold'>
                           Email
                         </label>
@@ -151,13 +144,12 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={email}
                           onChange={(e) => handleEmailChange(e.target.value)}
                           placeholder='Email'
-                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
                           required
                           aria-label='Email'
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
-
                         <label htmlFor='' className='font-semibold'>
                           Address
                         </label>
@@ -167,12 +159,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={address}
                           onChange={(e) => handleAddressChange(e.target.value)}
                           placeholder='Address'
-                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
                           aria-label='Address'
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
-
                         <label htmlFor='' className='font-semibold'>
                           Contact
                         </label>
@@ -182,12 +173,11 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={phone_number}
                           onChange={(e) => handlePhoneNumberChange(e.target.value)}
                           placeholder='Phone Number'
-                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
                           aria-label='Phone Number'
                         />
                       </div>
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
-
                         <label htmlFor='' className='font-semibold'>
                           DOB
                         </label>
@@ -196,7 +186,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           type='date'
                           value={dob}
                           onChange={(e) => handleDOBChange(e.target.value)}
-                          className='rounded-md bg-white/20 px-3  lg:w-[70%]'
+                          className='rounded-md px-3 lg:w-[70%]  dark:bg-white/20'
                           required
                           aria-label='Date of Birth'
                         />
@@ -212,9 +202,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         </div>
                         <div className='absolute bottom-4 right-4'>
                           <button
-
-                            className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-
+                            className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                             type='submit'
                             onClick={onNextButtonClick}
                             aria-label='next'

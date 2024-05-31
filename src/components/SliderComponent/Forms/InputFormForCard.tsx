@@ -37,14 +37,14 @@ export default function InputFormForCard({
           <option
             defaultValue='Emergency'
             value='Emergency'
-            className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'
+            className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200'
           >
             Emergency
           </option>
-          <option value='Educational' className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'>
+          <option value='Educational' className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200'>
             Educational
           </option>
-          <option value='Work' className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200'>
+          <option value='Work' className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200'>
             Work
           </option>
         </select>
@@ -62,31 +62,31 @@ export default function InputFormForCard({
               className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
               required
             >
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value=''>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value=''>
                 Select Blood Group
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='A+'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='A+'>
                 A+
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='A-'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='A-'>
                 A-
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='B+'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='B+'>
                 B+
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='B-'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='B-'>
                 B-
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='O+'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='O+'>
                 O+
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='O-'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='O-'>
                 O-
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='AB+'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='AB+'>
                 AB+
               </option>
-              <option className='bg-purple-200 text-purple-950 dark:bg-black dark:text-purple-200' value='AB-'>
+              <option className='bg-gray-200 text-purple-950 dark:bg-black dark:text-purple-200' value='AB-'>
                 AB-
               </option>
             </select>

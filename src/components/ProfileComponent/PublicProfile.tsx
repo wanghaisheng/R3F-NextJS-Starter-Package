@@ -4,7 +4,7 @@ import SkillsChartComponent from '@/components/SliderComponent/SkillsChartCompon
 import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
-
+import ExpProfileView from '../card/ExpProfileView'
 //icons
 import { FaRegEdit } from 'react-icons/fa'
 // For the card flip QR code
@@ -239,7 +239,7 @@ export default function PublicProfile() {
   }, [user])
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
+      <div className='absolute right-0 top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -422,7 +422,7 @@ export default function PublicProfile() {
                               <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
                                 <div className='flex flex-col justify-center'>
                                   <div className='flex justify-center'>
-                                    <ExperienceFlipCard
+                                    <ExpProfileView
                                       type={exp.type}
                                       projectName={exp.name}
                                       skills={exp.project_skills.join(', ')}
