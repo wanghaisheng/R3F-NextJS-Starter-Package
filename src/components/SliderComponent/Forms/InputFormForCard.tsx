@@ -100,7 +100,7 @@ export default function InputFormForCard({
               value={card.emergency_contact}
               onChange={(e) => handleCardemergency_contactChange(index, e.target.value)}
               type='text'
-              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+              className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
               placeholder='Emergency Contact'
               required
             />
@@ -113,7 +113,7 @@ export default function InputFormForCard({
               id={`emergency_details-${index}`}
               value={card.emergency_details}
               onChange={(e) => handleCardemergency_detailsChange(index, e.target.value)}
-              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+              className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
               placeholder='Emergency Details'
             ></textarea>
           </div>
@@ -126,7 +126,7 @@ export default function InputFormForCard({
               value={card.emergency_address}
               onChange={(e) => handleCardemergency_addressChange(index, e.target.value)}
               type='text'
-              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+              className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
               placeholder='Emergency Address'
             />
           </div>
@@ -143,7 +143,7 @@ export default function InputFormForCard({
               value={card.name}
               onChange={(e) => handleCardNameChange(index, e.target.value)}
               placeholder='Name'
-              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+              className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
               required
             />
           </div>
@@ -156,7 +156,7 @@ export default function InputFormForCard({
               value={card.description}
               onChange={(e) => handleCardDescriptionChange(index, e.target.value)}
               placeholder='Description'
-              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+              className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
               required
             />
           </div>
@@ -169,7 +169,7 @@ export default function InputFormForCard({
               type='date'
               value={card.date_in}
               onChange={(e) => handleCardDateInChange(index, e.target.value)}
-              className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+              className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
               required
             />
           </div>
@@ -195,7 +195,7 @@ export default function InputFormForCard({
                 type='date'
                 value={card.date_out}
                 onChange={(e) => handleCardDateOutChange(index, e.target.value)}
-                className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+                className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
                 required
               />
             </div>
