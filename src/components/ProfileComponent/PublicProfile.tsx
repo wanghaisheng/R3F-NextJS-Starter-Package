@@ -260,7 +260,7 @@ export default function PublicProfile() {
 
       {/* Carousel */}
       <div className='top-0 flex size-full flex-col justify-end px-4 lg:absolute'>
-        <div className='h-screen overflow-hidden' ref={emblaRef}>
+        <div className='h-screen overflow-hidden py-4' ref={emblaRef}>
           <div className='flex h-full flex-col'>
             {/* Slide 1 */}
             <div className='w-full flex-1 shrink-0 grow lg:min-w-0 '>
