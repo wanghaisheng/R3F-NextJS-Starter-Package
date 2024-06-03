@@ -9,7 +9,7 @@ export default function Slide1({ user, skillsData }) {
           {user && (
             <>
               <div className='mt-10 flex size-full lg:justify-end'>
-                <div className='flex size-full flex-col flex-wrap justify-start rounded-xl bg-[#f5f5f5] p-8 shadow shadow-purple-500 backdrop-blur-md lg:mr-14 lg:w-[67%] dark:bg-purple-950/20'>
+                <div className='flex h-fit w-full flex-col flex-wrap justify-start rounded-xl bg-[#f5f5f5] p-8 shadow shadow-purple-500 backdrop-blur-md lg:mr-14 lg:w-[67%] dark:bg-purple-950/20'>
                   <div>
                     <div className='flex items-center justify-start'>
                       <div

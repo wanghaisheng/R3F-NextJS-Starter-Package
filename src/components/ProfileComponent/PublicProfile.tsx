@@ -25,7 +25,7 @@ export default function PublicProfile() {
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, axis: 'y' })
   const isScrollingRef = useRef(false)
 
   const handleChangeSlide = (index) => {
@@ -268,17 +268,17 @@ export default function PublicProfile() {
       </div>
 
       {/* Carousel */}
-      <div className='top-10 flex size-full justify-end px-4 lg:absolute'>
-        <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex '>
+      <div className='top-10 flex size-full flex-col justify-end px-4 lg:absolute'>
+        <div className='h-screen overflow-hidden' ref={emblaRef}>
+          <div className='flex h-full flex-col'>
             {/* Slide 1 */}
 
-            <div className='w-full shrink-0 grow lg:min-w-0 '>
+            <div className='w-full flex-1 shrink-0 grow lg:min-w-0 '>
               <Slide1 user={user} skillsData={skillsData} />
             </div>
             {/* Slide 2 */}
 
-            <div className='w-full shrink-0 grow lg:min-w-0'>
+            <div className='w-full flex-1 shrink-0 grow lg:min-w-0'>
               <Slide2
                 emblaRef={emblaRef}
                 emblaRef3={emblaRef3}
