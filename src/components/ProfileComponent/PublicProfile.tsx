@@ -239,6 +239,21 @@ export default function PublicProfile() {
   return (
     <div className='relative flex flex-col lg:size-full'>
       <div className='relative z-50 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
+        {user && (
+          <>
+            <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl lg:hidden'>
+              {user.first_name.toUpperCase()}
+            </div>
+
+            <div className='absolute left-28 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+              <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+                {user.first_name.split('').map((letter, index) => (
+                  <span key={index}>{letter.toUpperCase()}</span>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
         {/* <div className='absolute top-[40%] z-10 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[650px]'> */}
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
@@ -269,11 +284,6 @@ export default function PublicProfile() {
         )}
       </div>
 
-      {user && (
-        <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl lg:hidden'>
-          {user.first_name.toUpperCase()}
-        </div>
-      )}
       {/* Carousel */}
       <div className='top-10 flex size-full justify-end px-4 lg:absolute'>
         <div className='overflow-hidden' ref={emblaRef}>
@@ -284,20 +294,12 @@ export default function PublicProfile() {
                 <div className='h-full lg:ml-24 lg:w-full'>
                   {user && (
                     <>
-                      <div className='flex size-full lg:justify-between'>
-                        <div className='z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
-                          <div className='flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
-                            {user.first_name.split('').map((letter, index) => (
-                              <span key={index}>{letter.toUpperCase()}</span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className='z-0 flex w-full flex-col justify-start bg-blue-950 p-8 lg:w-[72%]'>
+                      <div className='flex size-full lg:justify-end'>
+                        <div className='z-0 flex h-fit w-full flex-col justify-start rounded-xl bg-purple-950/40 p-8 shadow shadow-purple-500 backdrop-blur-md lg:w-[72%]'>
                           <div>
                             <div className='flex items-center justify-start'>
                               <div
-                                className='size-20 rounded-full border-2 border-white'
+                                className='size-16 rounded-full border-2 border-white'
                                 style={{
                                   backgroundImage: 'url(/image.png)',
                                   backgroundSize: 'cover',
@@ -306,16 +308,19 @@ export default function PublicProfile() {
                                   borderRadius: '50%',
                                 }}
                               ></div>
-                              <h1 className='pl-4 text-3xl font-bold'>
-                                Name : {user.first_name} {user.last_name}
-                              </h1>
+                              <div className='flex flex-col pl-4 '>
+                                <h1 className='text-3xl font-bold'>
+                                  {user.first_name} {user.last_name}
+                                </h1>
+
+                                <p className='mt-2'>Bio: {user.description}</p>
+                              </div>
                             </div>
                             <p className='flex justify-end'>{user.created_at}</p>
                             <p className='mt-2'>DOB: {user.dob}</p>
                             <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
-                            <p className='mt-2'>Description: {user.description}</p>
                           </div>
-                          <div className='flex justify-between'>
+                          <div className='flex flex-col lg:flex-row lg:justify-between'>
                             <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                               <CardBody className='group/card relative'>
                                 <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
@@ -334,13 +339,15 @@ export default function PublicProfile() {
                               </div>
                               <div>Highlights</div>
                             </div>
-                            <div className='h-72 w-60 bg-slate-700 p-4'>
-                              <h1 className='flex justify-center font-semibold'>BADGES</h1>
-                              <p>!</p>
-                              <p>!</p>
-                              <p>!</p>
-                              <p>!</p>
-                            </div>
+                            <CardContainer>
+                              <div className='h-72 w-60 bg-slate-700 p-4'>
+                                <h1 className='flex justify-center font-semibold'>BADGES</h1>
+                                <p>!</p>
+                                <p>!</p>
+                                <p>!</p>
+                                <p>!</p>
+                              </div>
+                            </CardContainer>
                           </div>
                           <p>The bg is just for testing</p>
                         </div>
