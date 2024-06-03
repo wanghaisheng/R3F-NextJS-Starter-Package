@@ -68,15 +68,13 @@ export default function Slide2({ emblaRef, emblaRef3, experience, user, scrollPr
                           <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
                             <div className='flex flex-col justify-center'>
                               <div className='flex justify-center'>
-                                <CardContainer>
-                                  <ExpProfileView
-                                    type={exp.type}
-                                    projectName={exp.name}
-                                    skills={exp.project_skills.join(', ')}
-                                    toolsAndTech={exp.tools}
-                                    description={exp.description}
-                                  />
-                                </CardContainer>
+                                <ExpProfileView
+                                  type={exp.type}
+                                  projectName={exp.name}
+                                  skills={exp.project_skills.join(', ')}
+                                  toolsAndTech={exp.tools}
+                                  description={exp.description}
+                                />
                               </div>
                             </div>
                           </div>
