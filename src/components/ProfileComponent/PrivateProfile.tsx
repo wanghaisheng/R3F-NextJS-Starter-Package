@@ -243,11 +243,6 @@ export default function PrivateProfile() {
   }, [user])
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='absolute -top-8 z-50 flex w-full justify-start lg:-top-14 lg:pl-28'>
-        <p className='animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400'>
-          BETA TESTING
-        </p>
-      </div>
       <a
         href='https://r3-f-next-js-starter-package-git-mainproduction-going-genius.vercel.app/guilds/feedback'
         className='absolute -top-2 left-2 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:top-2'
@@ -282,6 +277,11 @@ export default function PrivateProfile() {
             }}
           />
         )}
+        <div className='absolute right-10 top-0 flex items-center justify-center'>
+          <Link href='/public-profile' className='text-sm text-blue-400'>
+            View Public Profile
+          </Link>
+        </div>
       </div>
       {/* Carousel */}
       <div className='top-10 flex size-full justify-between px-4 lg:absolute'>

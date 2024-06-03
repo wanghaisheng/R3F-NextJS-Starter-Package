@@ -13,9 +13,8 @@ import { usePathname } from 'next/navigation'
 // For the carousel
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
-// For carousel inside slide 1
-import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
-import { format, formatDistanceToNow } from 'date-fns'
+import Slide1 from './PublicProfileComponent/Slide1'
+import Slide2 from './PublicProfileComponent/Slide2'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import Image from 'next/image'
 
@@ -75,22 +74,6 @@ export default function PublicProfile() {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
-
-  // carousel inside Slide 1
-  const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: true })
-  useEffect(() => {
-    if (emblaApi2) {
-      console.log(emblaApi2.slideNodes()) // Access API
-    }
-  }, [emblaApi2])
-
-  const scrollPrev2 = useCallback(() => {
-    if (emblaApi2) emblaApi2.scrollPrev()
-  }, [emblaApi2])
-
-  const scrollNext2 = useCallback(() => {
-    if (emblaApi2) emblaApi2.scrollNext()
-  }, [emblaApi2])
 
   // Carousel inside slide 2
   const [emblaRef3, emblaApi3] = useEmblaCarousel({ loop: true })
@@ -241,7 +224,7 @@ export default function PublicProfile() {
       <div className='relative z-50 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
         {user && (
           <>
-            <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl lg:hidden'>
+            <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
               {user.first_name.toUpperCase()}
             </div>
 
@@ -289,132 +272,21 @@ export default function PublicProfile() {
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex '>
             {/* Slide 1 */}
-            <div className='w-full shrink-0 grow lg:min-w-0 '>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
-                <div className='h-full lg:ml-24 lg:w-full'>
-                  {user && (
-                    <>
-                      <div className='flex size-full lg:justify-end'>
-                        <div className='z-0 flex h-fit w-full flex-col justify-start rounded-xl bg-purple-950/40 p-8 shadow shadow-purple-500 backdrop-blur-md lg:w-[72%]'>
-                          <div>
-                            <div className='flex items-center justify-start'>
-                              <div
-                                className='size-16 rounded-full border-2 border-white'
-                                style={{
-                                  backgroundImage: 'url(/image.png)',
-                                  backgroundSize: 'cover',
-                                  backgroundPosition: 'center',
-                                  backgroundRepeat: 'no-repeat',
-                                  borderRadius: '50%',
-                                }}
-                              ></div>
-                              <div className='flex flex-col pl-4 '>
-                                <h1 className='text-3xl font-bold'>
-                                  {user.first_name} {user.last_name}
-                                </h1>
 
-                                <p className='mt-2'>Bio: {user.description}</p>
-                              </div>
-                            </div>
-                            <p className='flex justify-end'>{user.created_at}</p>
-                            <p className='mt-2'>DOB: {user.dob}</p>
-                            <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
-                          </div>
-                          <div className='flex flex-col lg:flex-row lg:justify-between'>
-                            <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-                              <CardBody className='group/card relative'>
-                                <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                                  {user && skillsData ? (
-                                    <SkillsChartComponent skills={skillsData} />
-                                  ) : (
-                                    // Render loading indicator or placeholder while data is being fetched
-                                    <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
-                                  )}
-                                </div>
-                              </CardBody>
-                            </CardContainer>
-                            <div>
-                              <div>
-                                <span className='text-lg font-semibold'>10</span> Connections
-                              </div>
-                              <div>Highlights</div>
-                            </div>
-                            <CardContainer>
-                              <div className='h-72 w-60 bg-slate-700 p-4'>
-                                <h1 className='flex justify-center font-semibold'>BADGES</h1>
-                                <p>!</p>
-                                <p>!</p>
-                                <p>!</p>
-                                <p>!</p>
-                              </div>
-                            </CardContainer>
-                          </div>
-                          <p>The bg is just for testing</p>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
+            <div className='w-full shrink-0 grow lg:min-w-0 '>
+              <Slide1 user={user} skillsData={skillsData} />
             </div>
             {/* Slide 2 */}
+
             <div className='w-full shrink-0 grow lg:min-w-0'>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
-                <div className='h-full lg:ml-24 lg:w-[70%]'>
-                  <div className='relative'>
-                    <div className='overflow-hidden' ref={emblaRef}>
-                      <div className='flex'>
-                        <div className='flex-[0_0_100%]'>
-                          <div className='flex justify-center'>
-                            <button onClick={scrollPrev3} aria-label='prev button'>
-                              <MdNavigateBefore />
-                            </button>
-                            <button onClick={scrollNext3} aria-label='next button'>
-                              <MdNavigateNext />
-                            </button>
-                          </div>
-                          {experience.length !== 0 ? (
-                            <>
-                              <div className='w-full overflow-hidden' ref={emblaRef3}>
-                                <div className='flex w-full flex-row items-center justify-start'>
-                                  {experience.map((exp, index) => (
-                                    <>
-                                      <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
-                                        <CardContainer>
-                                          <ExpProfileView
-                                            type={exp.type}
-                                            projectName={exp.name}
-                                            skills={exp.project_skills.join(', ')}
-                                            toolsAndTech={exp.tools}
-                                          />
-                                        </CardContainer>
-                                      </div>
-                                    </>
-                                  ))}
-                                </div>
-                              </div>
-                            </>
-                          ) : (
-                            <p>No experiences available.</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='mt-4 flex justify-center'>
-                    {/* https://r3-f-next-js-starter-package.vercel.app/ */}
-                    {user && (
-                      <a
-                        // href={`http://localhost:3001//api/public/users/${user.gg_id}`}
-                        // target='_blank'
-                        aria-label='Interact button'
-                      >
-                        <DrawOutlineButton>Interact!!</DrawOutlineButton>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <Slide2
+                emblaRef={emblaRef}
+                emblaRef3={emblaRef3}
+                experience={experience}
+                user={user}
+                scrollPrev3={scrollPrev3}
+                scrollNext3={scrollNext3}
+              />
             </div>
           </div>
           <button
