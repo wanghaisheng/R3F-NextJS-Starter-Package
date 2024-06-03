@@ -6,7 +6,7 @@ import { useState } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function ExpProfileView({ type, projectName, skills, toolsAndTech }) {
+export default function ExpProfileView({ type, projectName, skills, toolsAndTech, description }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
@@ -30,7 +30,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
         >
           <Image
             unoptimized
-            src='/card/abstract3.webp'
+            src='/card/abstract4.webp'
             alt='Experience'
             layout='fill'
             className='rounded-lg object-cover'
@@ -68,6 +68,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
                 <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
               )}
             </div>
+            <div>{description}</div>
             <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
               <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
               <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />

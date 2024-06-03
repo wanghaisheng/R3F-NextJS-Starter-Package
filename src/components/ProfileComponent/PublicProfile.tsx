@@ -1,23 +1,14 @@
 'use client'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
-import ExpProfileView from '../card/ExpProfileView'
-//icons
-import { FaRegEdit } from 'react-icons/fa'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-// For the carousel
-import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 import Slide1 from './PublicProfileComponent/Slide1'
 import Slide2 from './PublicProfileComponent/Slide2'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-import Image from 'next/image'
-
 export default function PublicProfile() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
@@ -221,7 +212,7 @@ export default function PublicProfile() {
 
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='relative z-50 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
+      <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[40%]'>
         {user && (
           <>
             <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
@@ -268,16 +259,14 @@ export default function PublicProfile() {
       </div>
 
       {/* Carousel */}
-      <div className='top-10 flex size-full flex-col justify-end px-4 lg:absolute'>
+      <div className='top-0 flex size-full flex-col justify-end px-4 lg:absolute'>
         <div className='h-screen overflow-hidden' ref={emblaRef}>
           <div className='flex h-full flex-col'>
             {/* Slide 1 */}
-
             <div className='w-full flex-1 shrink-0 grow lg:min-w-0 '>
               <Slide1 user={user} skillsData={skillsData} />
             </div>
             {/* Slide 2 */}
-
             <div className='w-full flex-1 shrink-0 grow lg:min-w-0'>
               <Slide2
                 emblaRef={emblaRef}
@@ -289,20 +278,6 @@ export default function PublicProfile() {
               />
             </div>
           </div>
-          <button
-            className='absolute z-50 hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
-            onClick={scrollPrev}
-            aria-label='Previous Slide'
-          >
-            <MdNavigateBefore />
-          </button>
-          <button
-            className='absolute z-50 hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
-            onClick={scrollNext}
-            aria-label='Next Slide'
-          >
-            <MdNavigateNext />
-          </button>
         </div>
       </div>
     </div>
