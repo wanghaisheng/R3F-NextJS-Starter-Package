@@ -1,24 +1,14 @@
 'use client'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
-import ExpProfileView from '../card/ExpProfileView'
-//icons
-import { FaRegEdit } from 'react-icons/fa'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-// For the carousel
-import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
-// For carousel inside slide 1
-import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
-import { format, formatDistanceToNow } from 'date-fns'
+import Slide1 from './PublicProfileComponent/Slide1'
+import Slide2 from './PublicProfileComponent/Slide2'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-import Image from 'next/image'
-
 export default function PublicProfile() {
   const { user } = useUser()
   const [skillsData, setSkillsData] = useState([])
@@ -26,7 +16,7 @@ export default function PublicProfile() {
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, axis: 'y' })
   const isScrollingRef = useRef(false)
 
   const handleChangeSlide = (index) => {
@@ -75,22 +65,6 @@ export default function PublicProfile() {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
-
-  // carousel inside Slide 1
-  const [emblaRef2, emblaApi2] = useEmblaCarousel({ loop: true })
-  useEffect(() => {
-    if (emblaApi2) {
-      console.log(emblaApi2.slideNodes()) // Access API
-    }
-  }, [emblaApi2])
-
-  const scrollPrev2 = useCallback(() => {
-    if (emblaApi2) emblaApi2.scrollPrev()
-  }, [emblaApi2])
-
-  const scrollNext2 = useCallback(() => {
-    if (emblaApi2) emblaApi2.scrollNext()
-  }, [emblaApi2])
 
   // Carousel inside slide 2
   const [emblaRef3, emblaApi3] = useEmblaCarousel({ loop: true })
@@ -238,7 +212,22 @@ export default function PublicProfile() {
 
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <div className='relative z-50 flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-[650px] lg:w-[40%]'>
+      <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[40%]'>
+        {user && (
+          <>
+            <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
+              {user.first_name.toUpperCase()}
+            </div>
+
+            <div className='absolute left-28 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+              <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+                {user.first_name.split('').map((letter, index) => (
+                  <span key={index}>{letter.toUpperCase()}</span>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
         {/* <div className='absolute top-[40%] z-10 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[650px]'> */}
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
@@ -269,161 +258,26 @@ export default function PublicProfile() {
         )}
       </div>
 
-      {user && (
-        <div className='absolute top-20 z-0 flex w-full items-center justify-center text-8xl font-extrabold md:text-9xl lg:hidden'>
-          {user.first_name.toUpperCase()}
-        </div>
-      )}
       {/* Carousel */}
-      <div className='top-10 flex size-full justify-end px-4 lg:absolute'>
-        <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex '>
+      <div className='top-0 flex size-full flex-col justify-end px-4 lg:absolute'>
+        <div className='h-screen overflow-hidden py-4' ref={emblaRef}>
+          <div className='flex h-full flex-col'>
             {/* Slide 1 */}
-            <div className='w-full shrink-0 grow lg:min-w-0 '>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
-                <div className='h-full lg:ml-24 lg:w-full'>
-                  {user && (
-                    <>
-                      <div className='flex size-full lg:justify-between'>
-                        <div className='z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
-                          <div className='flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
-                            {user.first_name.split('').map((letter, index) => (
-                              <span key={index}>{letter.toUpperCase()}</span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className='z-0 flex w-full flex-col justify-start bg-blue-950 p-8 lg:w-[72%]'>
-                          <div>
-                            <div className='flex items-center justify-start'>
-                              <div
-                                className='size-20 rounded-full border-2 border-white'
-                                style={{
-                                  backgroundImage: 'url(/image.png)',
-                                  backgroundSize: 'cover',
-                                  backgroundPosition: 'center',
-                                  backgroundRepeat: 'no-repeat',
-                                  borderRadius: '50%',
-                                }}
-                              ></div>
-                              <h1 className='pl-4 text-3xl font-bold'>
-                                Name : {user.first_name} {user.last_name}
-                              </h1>
-                            </div>
-                            <p className='flex justify-end'>{user.created_at}</p>
-                            <p className='mt-2'>DOB: {user.dob}</p>
-                            <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
-                            <p className='mt-2'>Description: {user.description}</p>
-                          </div>
-                          <div className='flex justify-between'>
-                            <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
-                              <CardBody className='group/card relative'>
-                                <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                                  {user && skillsData ? (
-                                    <SkillsChartComponent skills={skillsData} />
-                                  ) : (
-                                    // Render loading indicator or placeholder while data is being fetched
-                                    <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
-                                  )}
-                                </div>
-                              </CardBody>
-                            </CardContainer>
-                            <div>
-                              <div>
-                                <span className='text-lg font-semibold'>10</span> Connections
-                              </div>
-                              <div>Highlights</div>
-                            </div>
-                            <div className='h-72 w-60 bg-slate-700 p-4'>
-                              <h1 className='flex justify-center font-semibold'>BADGES</h1>
-                              <p>!</p>
-                              <p>!</p>
-                              <p>!</p>
-                              <p>!</p>
-                            </div>
-                          </div>
-                          <p>The bg is just for testing</p>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
+            <div className='w-full flex-1 shrink-0 grow lg:min-w-0 '>
+              <Slide1 user={user} skillsData={skillsData} />
             </div>
             {/* Slide 2 */}
-            <div className='w-full shrink-0 grow lg:min-w-0'>
-              <div className='flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
-                <div className='h-full lg:ml-24 lg:w-[70%]'>
-                  <div className='relative'>
-                    <div className='overflow-hidden' ref={emblaRef}>
-                      <div className='flex'>
-                        <div className='flex-[0_0_100%]'>
-                          <div className='flex justify-center'>
-                            <button onClick={scrollPrev3} aria-label='prev button'>
-                              <MdNavigateBefore />
-                            </button>
-                            <button onClick={scrollNext3} aria-label='next button'>
-                              <MdNavigateNext />
-                            </button>
-                          </div>
-                          {experience.length !== 0 ? (
-                            <>
-                              <div className='w-full overflow-hidden' ref={emblaRef3}>
-                                <div className='flex w-full flex-row items-center justify-start'>
-                                  {experience.map((exp, index) => (
-                                    <>
-                                      <div key={exp.name} className='w-full shrink-0 grow lg:min-w-0 '>
-                                        <CardContainer>
-                                          <ExpProfileView
-                                            type={exp.type}
-                                            projectName={exp.name}
-                                            skills={exp.project_skills.join(', ')}
-                                            toolsAndTech={exp.tools}
-                                          />
-                                        </CardContainer>
-                                      </div>
-                                    </>
-                                  ))}
-                                </div>
-                              </div>
-                            </>
-                          ) : (
-                            <p>No experiences available.</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='mt-4 flex justify-center'>
-                    {/* https://r3-f-next-js-starter-package.vercel.app/ */}
-                    {user && (
-                      <a
-                        // href={`http://localhost:3001//api/public/users/${user.gg_id}`}
-                        // target='_blank'
-                        aria-label='Interact button'
-                      >
-                        <DrawOutlineButton>Interact!!</DrawOutlineButton>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
+            <div className='w-full flex-1 shrink-0 grow lg:min-w-0'>
+              <Slide2
+                emblaRef={emblaRef}
+                emblaRef3={emblaRef3}
+                experience={experience}
+                user={user}
+                scrollPrev3={scrollPrev3}
+                scrollNext3={scrollNext3}
+              />
             </div>
           </div>
-          <button
-            className='absolute z-50 hidden lg:left-10 lg:top-[45%] lg:block lg:text-5xl'
-            onClick={scrollPrev}
-            aria-label='Previous Slide'
-          >
-            <MdNavigateBefore />
-          </button>
-          <button
-            className='absolute z-50 hidden lg:right-10 lg:top-[45%] lg:block lg:text-5xl'
-            onClick={scrollNext}
-            aria-label='Next Slide'
-          >
-            <MdNavigateNext />
-          </button>
         </div>
       </div>
     </div>
