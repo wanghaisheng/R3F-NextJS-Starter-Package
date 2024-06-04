@@ -25,13 +25,17 @@ const RightSidebar2 = () => {
 
   return (
     <>
+      {isSidebarOpen && <div className='absolute top-0 z-50 h-screen w-full bg-black/40' onClick={toggleSidebar}></div>}
       {!isSidebarOpen && (
-        <button className='fixed right-0 top-0 z-50 size-10 bg-white/20 shadow-lg' onClick={toggleSidebar}>
+        <button
+          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-white/20 p-1 shadow-lg'
+          onClick={toggleSidebar}
+        >
           OPEN
         </button>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-screen w-80 bg-white/20 shadow-lg transition-transform duration-300 ease-in-out${
+        className={`fixed right-0 top-0 z-50 h-screen w-80 bg-slate-800 shadow-lg transition-transform duration-300 ease-in-out${
           isSidebarOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'
         }`}
       >
