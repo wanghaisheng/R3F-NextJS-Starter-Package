@@ -3,12 +3,14 @@
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { PiCardsFill } from 'react-icons/pi'
+import { FaOpencart } from 'react-icons/fa'
 
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
+import ShopComponent from './SubComponents/ShopComponent'
 
 const RightSidebar2 = () => {
-  const [activeTab, setActiveTab] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState('search')
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab)
@@ -18,6 +20,7 @@ const RightSidebar2 = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
+    setActiveTab('search')
   }
 
   return (
@@ -33,7 +36,7 @@ const RightSidebar2 = () => {
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>
-          <h2 className='text-xl font-bold'>Sidebar</h2>
+          <h2 className='text-xl font-bold'>{activeTab.toUpperCase()}</h2>
           <button className='text-blue-600 hover:text-white/60' onClick={toggleSidebar}>
             <svg xmlns='http://www.w3.org/2000/svg' className='size-6' viewBox='0 0 20 20' fill='currentColor'>
               <path
@@ -45,22 +48,23 @@ const RightSidebar2 = () => {
           </button>
         </div>
 
-        <div className='flex justify-between'>
+        <div className='flex h-screen justify-between'>
           {activeTab && (
-            <div className='p-4'>
+            <div className='flex size-full flex-col overflow-y-auto p-4 pb-24'>
               {activeTab === 'search' && <SearchComponent />}
               {activeTab === 'cards' && <WalletComponent />}
+              {activeTab === 'shop' && <ShopComponent />}
             </div>
           )}
 
-          <ul className='flex flex-col space-y-2 bg-pink-200 p-2'>
+          <ul className='flex flex-col space-y-2 p-2'>
             <li>
               <a
                 href='#'
                 className={`flex items-center rounded-md p-2 ${
                   activeTab === 'search'
                     ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
                 }`}
                 onClick={() => handleTabClick('search')}
               >
@@ -73,11 +77,24 @@ const RightSidebar2 = () => {
                 className={`flex items-center rounded-md p-2 ${
                   activeTab === 'cards'
                     ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
                 }`}
                 onClick={() => handleTabClick('cards')}
               >
                 <PiCardsFill />
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                className={`flex items-center rounded-md p-2 ${
+                  activeTab === 'shop'
+                    ? 'bg-gray-100 text-gray-900'
+                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+                onClick={() => handleTabClick('shop')}
+              >
+                <FaOpencart />
               </a>
             </li>
           </ul>

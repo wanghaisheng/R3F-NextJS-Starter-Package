@@ -45,11 +45,7 @@ const Layout = ({ children }) => {
       /> */}
 
       <div>
-        {/* Your page content */}
-
-        <div>
-          <RightSidebar2 />
-        </div>
+        <RightSidebar2 />
       </div>
 
       <div className='absolute bottom-0 w-full '>
