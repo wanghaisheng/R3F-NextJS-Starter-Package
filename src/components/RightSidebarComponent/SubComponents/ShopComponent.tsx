@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 
 const demodata = [
@@ -117,11 +120,44 @@ const demodata = [
   },
 ]
 
+const categories = ['Laptops', 'Smartphones', 'Headphones', 'Consoles', 'Electronics']
+
 export default function ShopComponent() {
+  const [selectedCategory, setSelectedCategory] = useState(null)
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category)
+  }
+
+  const filteredProducts = selectedCategory
+    ? demodata.filter((product) => product.categories.includes(selectedCategory))
+    : demodata
+
   return (
     <div>
+      <div className='mb-4 flex gap-2 overflow-auto'>
+        <button
+          className={`rounded-md px-4 py-2 ${
+            selectedCategory === null ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+          }`}
+          onClick={() => handleCategoryClick(null)}
+        >
+          All
+        </button>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={`rounded-md px-4 py-2 ${
+              selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+            }`}
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
       <div className='grid grid-cols-2 gap-4'>
-        {demodata.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.productId} className='relative overflow-hidden rounded-md bg-white shadow-md'>
             <div className='h-24 w-full overflow-hidden'>
               <Image

@@ -5,7 +5,7 @@ import SubTabs from './SubTabs'
 export default function WalletComponent() {
   return (
     <>
-      <div className='px-2 md:absolute md:right-12 md:top-16'>
+      <div className='px-2 md:absolute md:right-12 md:top-14'>
         <CardContainer>
           <GeniusIDFlipCard
             first_name='Ram'
