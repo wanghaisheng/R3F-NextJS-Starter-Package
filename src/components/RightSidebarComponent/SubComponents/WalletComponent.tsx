@@ -5,8 +5,8 @@ import SubTabs from './SubTabs'
 export default function WalletComponent() {
   return (
     <>
-      <div className='absolute right-16 top-14'>
-        <CardContainer className='z-0'>
+      <div className='md:absolute md:right-16 md:top-14'>
+        <CardContainer>
           <GeniusIDFlipCard
             first_name='Ram'
             last_name='Kumar'
@@ -17,7 +17,7 @@ export default function WalletComponent() {
           />
         </CardContainer>
       </div>
-      <div className='h-60'></div>
+      <div className='md:h-60'></div>
       <div className='mt-12 overflow-auto'>
         <div className=''>
           <p>hasvk</p>
@@ -32,7 +32,7 @@ export default function WalletComponent() {
             <p>hasvk</p> */}
         </div>
 
-        <div className='rounded border border-blue-200'>
+        <div className='mb-10 rounded border border-blue-200'>
           <SubTabs />
         </div>
       </div>

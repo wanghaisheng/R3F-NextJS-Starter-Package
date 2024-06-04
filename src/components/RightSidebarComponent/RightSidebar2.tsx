@@ -52,7 +52,7 @@ const RightSidebar2 = () => {
           </button>
         </div>
 
-        <div className='flex h-screen justify-between'>
+        <div className='flex flex-col md:h-screen md:flex-row md:justify-between'>
           {activeTab && (
             <div className='flex size-full flex-col overflow-y-auto p-4 pb-24'>
               {activeTab === 'search' && <SearchComponent />}
@@ -61,11 +61,11 @@ const RightSidebar2 = () => {
             </div>
           )}
 
-          <ul className='flex flex-col space-y-2 p-2'>
+          <ul className='fixed bottom-0 flex w-full flex-row space-x-2 space-y-0 bg-black p-2'>
             <li>
               <a
                 href='#'
-                className={`flex items-center rounded-md p-2 ${
+                className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'search'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
@@ -73,12 +73,22 @@ const RightSidebar2 = () => {
                 onClick={() => handleTabClick('search')}
               >
                 <FaSearch />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Search
+                </div>
               </a>
             </li>
             <li>
               <a
                 href='#'
-                className={`flex items-center rounded-md p-2 ${
+                className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'cards'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
@@ -86,12 +96,22 @@ const RightSidebar2 = () => {
                 onClick={() => handleTabClick('cards')}
               >
                 <PiCardsFill />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Cards
+                </div>
               </a>
             </li>
             <li>
               <a
                 href='#'
-                className={`flex items-center rounded-md p-2 ${
+                className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'shop'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
@@ -99,6 +119,16 @@ const RightSidebar2 = () => {
                 onClick={() => handleTabClick('shop')}
               >
                 <FaOpencart />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Shop
+                </div>
               </a>
             </li>
           </ul>
