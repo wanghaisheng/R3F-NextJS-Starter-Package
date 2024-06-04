@@ -8,11 +8,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { TiDelete } from 'react-icons/ti'
 import { IoHome } from 'react-icons/io5'
+import { useRouter } from 'next/navigation'
 
 import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
+import Link from 'next/link'
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
+  const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
   const formRefs = useRef([])
 
@@ -83,7 +86,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           setSkills(skillsArray)
 
           // console.log(skills)
-
         }
       } catch (error) {
         enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
@@ -115,7 +117,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       enqueueSnackbar('Generate Skills Successfully', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
       enqueueSnackbar('Failed to generate skills', { autoHideDuration: 2500, variant: 'error' })
-
     }
   }
   const handleSkillUpdate = async (e: any, index: number) => {
@@ -136,7 +137,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       enqueueSnackbar('Skills updated', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
       enqueueSnackbar('Failed to update skills', { autoHideDuration: 2500, variant: 'error' })
-
     }
   }
   const handleSkillDelete = async (index: number) => {
@@ -149,7 +149,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       enqueueSnackbar('Skills deleted', { autoHideDuration: 2500, variant: 'success' })
     } catch (error) {
       enqueueSnackbar('Failed to delete skills', { autoHideDuration: 2500, variant: 'error' })
-
     }
   }
   const handleSkillNameChange = (index: number, newName: string) => {
@@ -185,6 +184,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
       : true)
     if (isSubmitted) {
+      // router.refresh()
+      // router.push('/hero')
       window.location.href = '/hero'
     }
   }
@@ -192,13 +193,11 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-
         className='relative flex h-[770px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
             SKILLS STATS
-
             <div className='absolute right-0 top-10 text-sm '>
               <DrawOutlineButton
                 onClick={() => {
@@ -213,7 +212,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           <Tabs>
             <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
-
                 <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
                   {element.skill_name}
                   {index !== 0 && (
@@ -225,15 +223,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                       <TiDelete />
                     </button>
                   )}
-
                 </Tab>
               ))}
             </TabList>
             {/* TabPanel */}
             <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
-
               <div className='w-[300px] text-purple-950 md:w-[500px] lg:w-[60%] dark:text-purple-200'>
-
                 {skills.map((element, index) => (
                   <div key={index}>
                     <form
@@ -314,12 +309,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 ))}
               </div>
               <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
-
                 <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
                 <SkillsChartComponent skills={skills} />
-
               </div>
             </div>
           </Tabs>
@@ -327,9 +320,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           <div className='absolute bottom-4 left-4 mt-4'>
             {!isSmallScreen ? (
               <button
-
                 className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-
                 onClick={onPrevButtonClick}
                 aria-label='prev'
               >

@@ -12,11 +12,15 @@ import { useCallback, useState, useEffect } from 'react'
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import FormModal2 from '../FormModal/Modal2'
+import Avatar_creator from '@/components/avatar-creator/avatar'
 
 export default function AvatarImageComponent() {
   const router = useRouter()
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false)
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
@@ -36,7 +40,7 @@ export default function AvatarImageComponent() {
 
   // Fetch avatars data
   useEffect(() => {
-    const fetchAvatarsData = async () => {
+    const fetchAvatarsData = () => {
       try {
         setAvatarsData(user.avatar)
       } catch (error) {
@@ -66,6 +70,13 @@ export default function AvatarImageComponent() {
                     width={120}
                     loading='lazy'
                   />
+                  <DrawOutlineButton
+                    onClick={() => {
+                      setIsCardModalOpen(true)
+                    }}
+                  >
+                    Edit Avatar &emsp; +
+                  </DrawOutlineButton>
                 </div>
               </div>
             ))
@@ -84,6 +95,13 @@ export default function AvatarImageComponent() {
           </button>
         </div>
       </div>
+      {isCardModalOpen && (
+        <div className='absolute left-0 top-0 z-50 flex size-full items-center justify-center rounded-lg bg-black/80'>
+          <FormModal2 show={isCardModalOpen} onclose={setIsCardModalOpen}>
+            <Avatar_creator />
+          </FormModal2>
+        </div>
+      )}
     </div>
   )
 }

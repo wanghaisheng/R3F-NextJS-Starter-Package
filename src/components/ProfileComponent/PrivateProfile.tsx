@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 // For carousel inside slide 1
-import AvatarImageComponent from '@/components/avatarImage/page'
+import AvatarImageComponent from '../avatarImage/AvatarImage'
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 import Link from 'next/link'
 // Cards
