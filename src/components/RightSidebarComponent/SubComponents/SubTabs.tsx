@@ -10,9 +10,9 @@ export default function SubTabs() {
     setActiveTab(tab)
   }
   return (
-    <div className='h-80 w-full '>
-      <div>
-        <ul className='flex w-full justify-between space-x-2  overflow-auto p-2'>
+    <>
+      <div className='w-full rounded'>
+        <ul className='flex w-full justify-between space-x-2 overflow-auto p-2'>
           <li>
             <a
               href='#'
@@ -78,26 +78,36 @@ export default function SubTabs() {
               BUY
             </a>
           </li>
-          <li>
-            <a
-              href='#'
-              className={`flex items-center rounded-md p-2 ${
-                activeTab === 'tab2'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-              onClick={() => handleTabClick('tab2')}
-            >
-              BUY
-            </a>
-          </li>
         </ul>
       </div>
 
-      <div className='h-60 overflow-auto'>
+      <div className='h-52 overflow-auto'>
         {activeTab && (
           <div className='flex w-full flex-col p-4'>
-            {activeTab === 'tab1' && <div>tab1</div>}
+            {activeTab === 'tab1' && (
+              <div>
+                tab1 tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                tttt
+                <div>
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                  tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt tttt
+                </div>
+              </div>
+            )}
             {activeTab === 'tab2' && (
               <div>
                 <ShopComponent />
@@ -106,6 +116,6 @@ export default function SubTabs() {
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 }

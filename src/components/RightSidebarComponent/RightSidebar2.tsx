@@ -54,7 +54,7 @@ const RightSidebar2 = () => {
 
         <div className='flex flex-col md:h-screen md:flex-row md:justify-between'>
           {activeTab && (
-            <div className='flex size-full flex-col overflow-y-auto p-4 pb-24'>
+            <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
               {activeTab === 'search' && <SearchComponent />}
               {activeTab === 'cards' && <WalletComponent />}
               {activeTab === 'shop' && <ShopComponent />}

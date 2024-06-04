@@ -120,7 +120,7 @@ const demodata = [
 export default function ShopComponent() {
   return (
     <div>
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+      <div className='grid grid-cols-2 gap-4'>
         {demodata.map((product) => (
           <div key={product.productId} className='relative overflow-hidden rounded-md bg-white shadow-md'>
             <div className='h-24 w-full overflow-hidden'>
