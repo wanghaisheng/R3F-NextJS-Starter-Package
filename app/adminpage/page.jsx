@@ -55,7 +55,7 @@ import Settings from '@/components/AdminPageComponents/Settings'
 //Pages
 
 import LeftSidebar, { LeftSidebarItem } from '@/components/AdminPageComponents/LeftSidebar'
-import RightSidebar, { RightSidebarItem } from '@/components/AdminPageComponents/RightSidebar'
+import RightSidebar, { RightSidebarItem } from '@/components/RightSidebarComponent/RightSidebar'
 import DropdownMenu from '@/components/AdminPageComponents/DropDownMenu'
 
 // Main Page
@@ -273,6 +273,7 @@ const AdminPage = () => {
           )}
         </div>
 
+        {/* Right Sidebar */}
         <div className='z-50'>
           <RightSidebar>
             <RightSidebarItem
@@ -281,6 +282,7 @@ const AdminPage = () => {
               active={selected === 100}
               onClick={() => setSelected(100)}
             />
+
             <RightSidebarItem icon={<MdSpaceDashboard size={20} />} text='Feedback' />
             <RightSidebarItem icon={<MdSpaceDashboard size={20} />} text='Help' />
             <RightSidebarItem icon={<MdSpaceDashboard size={20} />} text='Contact Us' />

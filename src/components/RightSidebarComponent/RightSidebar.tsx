@@ -1,9 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { createContext, useState, useContext } from 'react'
 import { MdKeyboardDoubleArrowRight, MdKeyboardDoubleArrowLeft } from 'react-icons/md'
-
+import CardsFlipCard from '../card/cardsFlipCard'
 interface SidebarContextType {
   expanded: boolean
 }
@@ -24,6 +23,22 @@ export default function RightSidebar({ children }) {
             {!expanded ? <MdKeyboardDoubleArrowLeft size={20} /> : <MdKeyboardDoubleArrowRight size={20} />}
           </button>
         </div>
+
+        {expanded && (
+          <div className='mr-5'>
+            <CardsFlipCard
+              type='Emergency'
+              name='John Doe'
+              blood_group='O+'
+              emergency_contact='1234567890'
+              emergency_address='Bangalore'
+              emergency_details='Some details about the emergency'
+              dateIn={undefined}
+              dateOut={undefined}
+              description={undefined}
+            />
+          </div>
+        )}
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className='flex-1 px-3'>{children}</ul>
@@ -50,7 +65,7 @@ export function RightSidebarItem({ icon, text, active, alert, onClick }) {
       // onClick={onClick}
     >
       {icon}
-      <span className={`overflow-hidden whitespace-nowrap transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>
+      <span className={`overflow-hidden whitespace-nowrap transition-all ${expanded ? 'ml-3 w-60' : 'w-0'}`}>
         {text}
       </span>
 
