@@ -57,11 +57,29 @@ const Navbar = () => {
             />
           </Link>
           {/* SignIn, SignOut and Logout */}
-          <div className='flex items-center justify-center'>
+          <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
                 {user.first_name != null && (
-                  <span className='px-2 text-sm font-medium'>{user.first_name + ' ' + user.last_name}</span>
+                  <div>
+                    <Link
+                      href='/my-profile'
+                      className='flex items-center px-2 text-sm font-medium text-purple-950 dark:text-violet-400 '
+                      onClick={closeMenu}
+                    >
+                      <div
+                        className='size-9 rounded-full'
+                        style={{
+                          backgroundImage: 'url(/image.png)', // img url profile
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          borderRadius: '50%',
+                          border: `2px solid ${user.guilds[0].color}`,
+                        }}
+                      ></div>
+                    </Link>
+                  </div>
                 )}
                 <div className='flex'>
                   <Link
@@ -81,10 +99,10 @@ const Navbar = () => {
             ) : (
               <>
                 {hideTopRightNav ? null : (
-                  <div>
+                  <div className='text-black dark:text-white'>
                     <Link
                       href='/signin'
-                      className='hidden rounded-2xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
+                      className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
                     >
                       Sign-In
                     </Link>
@@ -176,7 +194,7 @@ const Navbar = () => {
         <div
           className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
-          } flex w-[75%] flex-col bg-violet-400 shadow-xl dark:bg-black`}
+          } flex w-[75%] flex-col bg-slate-800 shadow-xl dark:bg-black`}
         >
           <div className='p-4 '>
             <button
@@ -190,40 +208,75 @@ const Navbar = () => {
               <IoMdArrowRoundBack className='text-white dark:text-purple-200' />
             </button>
           </div>
-          <div className=' px-4 py-6 '>
+          <div className='px-4 py-6 '>
             {/* Navbar for Hamburger */}
+            {user ? (
+              <div className='-mt-6 flex justify-end pb-4'>
+                {user.first_name != null && (
+                  <div>
+                    <Link
+                      href='/my-profile'
+                      className='flex items-center gap-x-2 text-sm font-medium text-purple-950 dark:text-violet-400 '
+                      onClick={closeMenu}
+                    >
+                      <p>{user.first_name + ' ' + user.last_name}</p>
+                      <div
+                        className='size-7 rounded-full'
+                        style={{
+                          backgroundImage: 'url(/image.png)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          borderRadius: '50%',
+                          border: `2px solid ${user.guilds[0].color}`,
+                        }}
+                      ></div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className='-mt-6 flex justify-end pb-4'>
+                <span className='text-sm font-medium text-purple-950 dark:text-violet-400'>Guest User</span>
+              </div>
+            )}
             <ul className='flex flex-col gap-y-4'>
               <li>
-                <Link href='/avatars' className='hover:text-violet-400'>
+                <Link href='/avatars' className='hover:text-violet-400' onClick={closeMenu}>
                   AVATARS
                 </Link>
               </li>
               <li>
-                <Link href='/guilds' className='hover:text-violet-400'>
+                <Link href='/guilds' className='hover:text-violet-400' onClick={closeMenu}>
                   GUILDS
                 </Link>
               </li>
               <li>
-                <Link href='hero' className='hover:text-violet-400'>
+                <Link href='/hero' className='hover:text-violet-400' onClick={closeMenu}>
                   HOME
                 </Link>
               </li>
               <li>
-                <Link href='regions' className='hover:text-violet-400'>
+                <Link href='/regions' className='hover:text-violet-400' onClick={closeMenu}>
                   REGIONS
                 </Link>
               </li>
               <li>
-                <Link href='experience' className='hover:text-violet-400'>
+                <Link href='/experience' className='hover:text-violet-400' onClick={closeMenu}>
                   EXP
                 </Link>
               </li>
               <li>
+                <Link href='/my-profile' className='hover:text-violet-400' onClick={closeMenu}>
+                  Profile
+                </Link>
+              </li>
+              <li className='fixed bottom-5 left-10'>
                 {user ? (
                   <Link
                     href='/signin'
                     onClick={logout}
-                    className='flex w-full items-center justify-center py-4 hover:text-fuchsia-300'
+                    className='py-4 text-red-500 hover:text-fuchsia-300'
                     aria-label='Sign Out'
                   >
                     Logout
@@ -231,8 +284,9 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href='/signin'
-                    className='flex w-full items-center justify-center py-4 hover:text-fuchsia-300'
+                    className='py-4 text-blue-400 hover:text-fuchsia-300'
                     aria-label='Sign In'
+                    onClick={closeMenu}
                   >
                     Sign-In
                   </Link>

@@ -193,12 +193,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[770px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
+        className='relative flex h-[770px] w-[300px] flex-col rounded bg-[#F5F5F5] px-2 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
             SKILLS STATS
-            <div className='absolute right-0 top-10 text-sm '>
+            <div className='absolute top-10 text-sm lg:right-0 '>
               <DrawOutlineButton
                 onClick={() => {
                   handleAddSkill()
@@ -247,7 +247,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                 value={element.skill_name}
                                 onChange={(e) => handleSkillNameChange(index, e.target.value)}
                                 placeholder='Skill Name'
-                                className='w-full rounded-md bg-white/70 p-1 dark:bg-white/20'
+                                className='w-full rounded-md border p-1 dark:border-none dark:bg-white/20'
                                 aria-label='skill name'
                               />
                               <div className='my-4 flex'>
@@ -270,7 +270,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                             Certifications
                           </label>
                           <input
-                            className='block w-full cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            className='block w-full cursor-pointer rounded-lg border text-sm text-gray-900 focus:outline-none dark:border-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
                             id='file_input'
                             type='file'
                             aria-label='file input'
@@ -286,7 +286,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                             </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
-                                className='rounded-full bg-purple-950 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                className='rounded-full bg-black transition-all  duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 onClick={() => handleHomeClick(0)}
                                 aria-label='home btn'
                               >
@@ -320,7 +320,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           <div className='absolute bottom-4 left-4 mt-4'>
             {!isSmallScreen ? (
               <button
-                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 onClick={onPrevButtonClick}
                 aria-label='prev'
               >

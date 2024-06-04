@@ -3,7 +3,7 @@ const DrawOutlineButton = ({ children, ...rest }) => {
   return (
     <button
       {...rest}
-      className='group relative rounded-md bg-purple-950 px-4 py-2 font-medium text-white transition-colors duration-[400ms]  dark:bg-purple-400/20 dark:text-slate-100 hover:dark:text-purple-300'
+      className='group relative rounded-md bg-black px-4 py-2 font-medium text-white transition-colors duration-[400ms]  dark:bg-purple-400/20 dark:text-slate-100 hover:dark:text-purple-300'
     >
       <span>{children}</span>
 

@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import StarsCanvas from '@/components/StarsCanvas/StarBackground'
 import Navbar from '@/components/Navbar/Navbar'
 import Hud from '@/components/Hud/Hud'
+import RightSidebar2 from '../RightSidebarComponent/RightSidebar2'
 
 import PurpleVoid from '@/components/PurpleVoid/PurpleVoid'
 
@@ -16,7 +17,7 @@ const Layout = ({ children }) => {
   return (
     <div
       ref={ref}
-      className='bg-purple-200 dark:bg-black'
+      className='bg-black'
       style={{
         position: 'relative',
         width: ' 100%',
@@ -42,6 +43,10 @@ const Layout = ({ children }) => {
         eventSource={ref}
         eventPrefix='client'
       /> */}
+
+      <div>
+        <RightSidebar2 />
+      </div>
 
       <div className='absolute bottom-0 w-full '>
         <div className='flex justify-center'>

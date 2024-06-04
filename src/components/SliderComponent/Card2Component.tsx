@@ -28,7 +28,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       emergency_details: '',
       blood_group: '',
       emergency_address: '',
-
     },
   ])
   useEffect(() => {
@@ -62,7 +61,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       emergency_details: cards[index].emergency_details,
       blood_group: cards[index].blood_group,
       emergency_address: cards[index].emergency_address,
-
     }
     try {
       await axios({
@@ -75,7 +73,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         autoHideDuration: 2000,
         variant: 'success',
       })
-
     } catch (error) {
       enqueueSnackbar('Failed to Generate', { autoHideDuration: 2000, variant: 'error' })
     }
@@ -93,7 +90,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
       emergency_details: cards[index].emergency_details,
       blood_group: cards[index].blood_group,
       emergency_address: cards[index].emergency_address,
-
     }
     try {
       await axios({
@@ -106,7 +102,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         autoHideDuration: 2000,
         variant: 'success',
       })
-
     } catch (error) {
       enqueueSnackbar('Failed to Update', { autoHideDuration: 2000, variant: 'error' })
     }
@@ -122,7 +117,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         autoHideDuration: 2000,
         variant: 'success',
       })
-
     } catch (error) {
       enqueueSnackbar('Failed to Delete', { autoHideDuration: 2000, variant: 'error' })
     }
@@ -213,7 +207,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         emergency_details: '',
         blood_group: '',
         emergency_address: '',
-
       },
     ])
   }
@@ -229,14 +222,13 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-
-        className='relative flex h-[900px] w-[300px] flex-col bg-violet-300 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
+        className='relative flex h-[900px] w-[300px] flex-col rounded bg-[#F5F5F5] py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
       >
         <div className='flex w-full flex-col'>
           {/* heading */}
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200 '>
             MEMBERSHIPS
-            <div className='absolute right-0 top-10 text-sm'>
+            <div className='absolute top-10 text-sm lg:right-0'>
               <DrawOutlineButton
                 onClick={() => {
                   handleAddCard()
@@ -278,12 +270,10 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                         dateIn={card.date_in}
                         dateOut={card.date_out}
                         description={card.description}
-
                         blood_group={card.blood_group}
                         emergency_contact={card.emergency_contact}
                         emergency_address={card.emergency_address}
                         emergency_details={card.emergency_details}
-
                       />
                     </div>
                     {/* Form for user input */}
@@ -320,7 +310,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                             </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
-                                className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                                className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 type='submit'
                                 onClick={onNextButtonClick}
                                 aria-label='next'
@@ -339,7 +329,6 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                           </div>
                         )}
                       </form>
-
                     </div>
                   </div>
                 </div>
@@ -351,7 +340,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         <div className='absolute bottom-4 left-4 mt-4'>
           {!isSmallScreen ? (
             <button
-              className='rounded-full bg-purple-950 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+              className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
               onClick={onPrevButtonClick}
               aria-label='prev'
             >

@@ -78,7 +78,7 @@ export default function InputFormForExperience({
           value={project.name}
           onChange={(e) => handleProjectNameChange(index, e.target.value)}
           placeholder='Project Name'
-          className='rounded-md bg-white/70 px-3 lg:w-[70%] dark:bg-white/20'
+          className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
           required
         />
       </div>
@@ -93,7 +93,7 @@ export default function InputFormForExperience({
           value={project.description}
           onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
           placeholder='Project Description'
-          className='rounded-md bg-white/70 px-3 lg:w-[70%]  dark:bg-white/20'
+          className='rounded-md border px-3 lg:w-[70%] dark:border-none  dark:bg-white/20'
         />
       </div>
       <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -101,7 +101,7 @@ export default function InputFormForExperience({
           ProjPic
         </label>
         <input
-          className='block cursor-pointer rounded-lg bg-white/70 text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:bg-black/30 dark:text-white dark:placeholder:text-white'
+          className='block cursor-pointer rounded-lg border text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:border-none dark:bg-black/30 dark:text-white dark:placeholder:text-white'
           id='file_input'
           type='file'
           aria-label='file_input'

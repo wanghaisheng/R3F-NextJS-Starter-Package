@@ -157,7 +157,7 @@ const Chip = ({ text, selected, onClick }) => (
     className={`${
       selected
         ? 'bg-purple-600 text-purple-200'
-        : 'text-purple-950 hover:bg-slate-700 hover:text-slate-200 dark:text-purple-200'
+        : 'text-gray-200 shadow hover:bg-slate-700 hover:text-slate-200 dark:text-purple-200'
     } relative rounded-full px-2.5 py-0.5 text-sm transition-colors`}
   >
     <span className='relative z-10 pt-4'>{text}</span>
@@ -165,7 +165,7 @@ const Chip = ({ text, selected, onClick }) => (
       <motion.span
         layoutId='pill-tab'
         transition={{ type: 'spring', duration: 0.5 }}
-        className='absolute inset-0 z-0 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600'
+        className='absolute inset-0 z-0 rounded-full bg-gradient-to-r from-purple-700 to-indigo-500'
       ></motion.span>
     )}
   </button>
