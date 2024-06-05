@@ -1,14 +1,13 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
-import { enqueueSnackbar } from 'notistack'
+import toast from 'react-hot-toast'
 import { TiDelete } from 'react-icons/ti'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
 import { IoHome } from 'react-icons/io5'
 export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
-
   const [connections, setConnections] = useState([])
   const handleLogoClick = (logo) => {
     if (!connections.some((connection) => connection.src === logo.src)) {
@@ -41,12 +40,10 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='connection'
-
         className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
-
             CONNECTION
           </div>
           {connections.length < 4 ? (
@@ -114,11 +111,9 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                   <DrawOutlineButton aria-label='generate'>Submit</DrawOutlineButton>
                 </div>
                 <div className='absolute bottom-4 right-4'>
-
                   <Link href='/hero'>
                     <button
                       className='mr-2 rounded-full bg-purple-400 transition-all  duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-
                       type='submit'
                       aria-label='home btn'
                     >
@@ -128,9 +123,7 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
                     </button>
                   </Link>
                   <button
-
                     className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-
                     type='submit'
                     onClick={onNextButtonClick}
                     aria-label='next'
@@ -143,9 +136,7 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
               </>
             ) : (
               <div className='absolute bottom-4 right-4 flex gap-x-1'>
-
                 <Link href='/hero'>
-
                   <DrawOutlineButton type='submit' aria-label='next slide'>
                     <IoHome className='my-1' />
                   </DrawOutlineButton>
@@ -161,9 +152,7 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
             <div>
               <div className='absolute bottom-4 left-4 mt-4'>
                 <button
-
                   className='rounded-full bg-purple-400 transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-
                   onClick={onPrevButtonClick}
                   aria-label='prev'
                 >

@@ -1,15 +1,16 @@
 'use client'
-
-import { useCallback, useEffect } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
-
-// For the carousel
-import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
-import useEmblaCarousel from 'embla-carousel-react'
-
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/effect-cube'
+import 'swiper/css/pagination'
+import { EffectCube, Navigation, Pagination } from 'swiper/modules'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 
 export default function SkinsCard() {
+  const swiperRef = useRef(null)
   const skins = [
     {
       name: 'Stealthy Shadow',
@@ -36,57 +37,59 @@ export default function SkinsCard() {
     },
   ]
 
-  // For the carousel
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
-
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()) // Access API
-    }
-  }, [emblaApi])
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
-
   return (
     <div className='flex justify-center'>
-      <div className='mx-2 my-5 flex h-[250px] w-[360px] py-2 md:mx-6'>
-        <button id='skinback' aria-label='prevskin' onClick={scrollPrev}>
-          <MdNavigateBefore />
-        </button>
-        <div className='size-full overflow-hidden rounded-lg' ref={emblaRef}>
-          <div className='mx-2 flex size-full items-center '>
-            {skins.map((skin, index) => (
-              <div
-                className='mx-2 flex size-full shrink-0 grow flex-col items-center justify-center rounded-lg md:min-w-0'
+      <div className='relative mt-[-50px] size-[300px] rounded-lg '>
+        <Swiper
+          ref={swiperRef}
+          effect={'cube'}
+          grabCursor={true}
+          cubeEffect={{
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+          }}
+          pagination={{
+            clickable: false,
+          }}
+          navigation={true}
+          modules={[EffectCube, Navigation, Pagination]}
+          className='absolute left-1/2 top-1/2 size-72 -translate-x-1/2 -translate-y-1/2 rounded-lg'
+        >
+          {skins.map((skin, index) => (
+            <SwiperSlide className='bg-cover bg-center' key={index}>
+              <a
+                href='#'
+                className='relative flex size-full min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out'
                 key={index}
               >
-                <a
-                  href='#'
-                  className='relative flex size-full min-w-0 flex-col items-center justify-center rounded-lg bg-purple-900/30 transition duration-500 ease-out'
-                  key={index}
-                >
-                  <Image unoptimized src={skin.image} alt={skin.name} fill className='rounded-lg object-cover' />
-                  <span className='absolute top-0 flex w-full flex-col items-center rounded-tr-md px-3 py-2 transition duration-300 hover:text-purple-400'>
-                    <h1 className='font-bold'>{skin.name}</h1>
-                  </span>
-                  <span className='absolute bottom-0 flex w-full items-center justify-between rounded-bl-md bg-purple-950 px-3 py-2'>
-                    <h1 className='font-bold text-white'>{skin.price}</h1>
-                    <DrawOutlineButton>Add to cart</DrawOutlineButton>
-                  </span>
-                </a>
-              </div>
-            ))}
-          </div>
+                <Image
+                  unoptimized
+                  src={skin.image}
+                  alt={skin.name}
+                  fill
+                  className='block w-full rounded-lg object-cover'
+                />
+                <span className='absolute top-0 flex w-full flex-col items-center rounded-t-md px-3 py-2 transition duration-300 hover:text-purple-400'>
+                  <h1 className='font-bold'>{skin.name}</h1>
+                </span>
+                <span className='absolute bottom-7 flex w-full items-center justify-between bg-black/50 py-2 pl-3 backdrop-blur-sm'>
+                  <h1 className='font-bold text-white'>{skin.price}</h1>
+                  <DrawOutlineButton>Add to cart</DrawOutlineButton>
+                </span>
+              </a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className='absolute top-36 z-10  flex w-full justify-between pl-2 text-2xl'>
+          <button onClick={() => swiperRef.current.swiper.slidePrev()}>
+            <MdNavigateBefore />
+          </button>
+          <button onClick={() => swiperRef.current.swiper.slideNext()}>
+            <MdNavigateNext />
+          </button>
         </div>
-        <button id='skinnext' aria-label='nextskin' onClick={scrollNext} className='ml-1'>
-          <MdNavigateNext />
-        </button>
       </div>
     </div>
   )

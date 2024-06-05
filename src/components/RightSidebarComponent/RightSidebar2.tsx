@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { PiCardsFill } from 'react-icons/pi'
 import { FaOpencart } from 'react-icons/fa'
+import Image from 'next/image'
 
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
@@ -25,18 +26,23 @@ const RightSidebar2 = () => {
 
   return (
     <>
-      {isSidebarOpen && <div className='absolute top-0 z-50 h-screen w-full bg-black/40' onClick={toggleSidebar}></div>}
+      {isSidebarOpen && (
+        <div
+          className='absolute top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'
+          onClick={toggleSidebar}
+        ></div>
+      )}
       {!isSidebarOpen && (
         <button
-          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-white/20 p-1 shadow-lg'
+          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-black/20 p-1 shadow-lg'
           onClick={toggleSidebar}
         >
-          OPEN
+          <Image src='/GGlogo.png' alt='sidebar' height={30} width={30}></Image>
         </button>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-screen w-80 bg-slate-800 shadow-lg transition-transform duration-300 ease-in-out${
-          isSidebarOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'
+        className={`fixed right-0 top-0 z-50 h-screen w-96 rounded-l-md bg-black/5 backdrop-blur-md transition-transform duration-300 ease-in-out${
+          isSidebarOpen ? 'w-72 translate-x-0 shadow-lg shadow-purple-500' : 'w-0 translate-x-full'
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>
@@ -52,20 +58,20 @@ const RightSidebar2 = () => {
           </button>
         </div>
 
-        <div className='flex h-screen justify-between'>
+        <div className='flex flex-col md:h-screen md:flex-row md:justify-between'>
           {activeTab && (
-            <div className='flex size-full flex-col overflow-y-auto p-4 pb-24'>
+            <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
               {activeTab === 'search' && <SearchComponent />}
               {activeTab === 'cards' && <WalletComponent />}
               {activeTab === 'shop' && <ShopComponent />}
             </div>
           )}
 
-          <ul className='flex flex-col space-y-2 p-2'>
+          <ul className='fixed bottom-0 flex w-full flex-row space-x-2 space-y-0 bg-black p-2'>
             <li>
               <a
                 href='#'
-                className={`flex items-center rounded-md p-2 ${
+                className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'search'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
@@ -73,12 +79,22 @@ const RightSidebar2 = () => {
                 onClick={() => handleTabClick('search')}
               >
                 <FaSearch />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Search
+                </div>
               </a>
             </li>
             <li>
               <a
                 href='#'
-                className={`flex items-center rounded-md p-2 ${
+                className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'cards'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
@@ -86,12 +102,22 @@ const RightSidebar2 = () => {
                 onClick={() => handleTabClick('cards')}
               >
                 <PiCardsFill />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Cards
+                </div>
               </a>
             </li>
             <li>
               <a
                 href='#'
-                className={`flex items-center rounded-md p-2 ${
+                className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'shop'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
@@ -99,6 +125,16 @@ const RightSidebar2 = () => {
                 onClick={() => handleTabClick('shop')}
               >
                 <FaOpencart />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Shop
+                </div>
               </a>
             </li>
           </ul>

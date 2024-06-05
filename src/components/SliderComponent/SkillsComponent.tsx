@@ -1,5 +1,6 @@
 'use client'
-import { enqueueSnackbar } from 'notistack'
+
+import toast from 'react-hot-toast'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import { FaArrowLeft } from 'react-icons/fa6'
@@ -88,7 +89,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           // console.log(skills)
         }
       } catch (error) {
-        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+        toast.error(error)
       }
     }
     if (user) {
@@ -113,10 +114,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'POST',
         data: submit,
       })
-
-      enqueueSnackbar('Generate Skills Successfully', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Generate Skills Successfully')
     } catch (error) {
-      enqueueSnackbar('Failed to generate skills', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to generate skills')
     }
   }
   const handleSkillUpdate = async (e: any, index: number) => {
@@ -133,10 +133,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'PUT',
         data: submit,
       })
-
-      enqueueSnackbar('Skills updated', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Skills updated')
     } catch (error) {
-      enqueueSnackbar('Failed to update skills', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to update skills')
     }
   }
   const handleSkillDelete = async (index: number) => {
@@ -145,10 +144,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
-
-      enqueueSnackbar('Skills deleted', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Skills deleted')
     } catch (error) {
-      enqueueSnackbar('Failed to delete skills', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to delete skills')
     }
   }
   const handleSkillNameChange = (index: number, newName: string) => {

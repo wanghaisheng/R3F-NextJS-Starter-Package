@@ -1,8 +1,6 @@
 'use client'
 import Image from 'next/image'
-
-import { enqueueSnackbar } from 'notistack'
-
+import toast from 'react-hot-toast'
 import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect, useMemo } from 'react'
@@ -16,11 +14,11 @@ async function getAvatarById(id: string) {
   try {
     const res = await axios.get(`/api/internal/avatar/${id}`)
     if (res.status !== 200) {
-      enqueueSnackbar('Failed to fetch the avatars', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to fetch avatar data')
     }
     return res.data
   } catch (error) {
-    enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+    toast.error('Failed to fetch avatar data')
   }
 }
 
@@ -29,7 +27,8 @@ const guildData = [
     guild_name: 'BUDDHA',
     symbol: '/guild/buddha.png',
     color: 'white',
-    description: 'Buddha Vairocana Family (Space): Development, Engineering & ITAI Services',
+    element: 'Space',
+    description: 'Development, Engineering & ITAI Services',
     skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
     alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
     additionalSkills: ['Innovation', 'data analysis', 'research'],
@@ -38,7 +37,8 @@ const guildData = [
     guild_name: 'VAJRA',
     symbol: '/guild/vajra.png',
     color: 'blue',
-    description: 'Vajra Family (Water): All Departments & ITAI Services',
+    element: 'Water',
+    description: 'All Departments & ITAI Services',
     skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
     alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
     additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
@@ -47,7 +47,8 @@ const guildData = [
     guild_name: 'KARMA',
     symbol: '/guild/karma.png',
     color: 'green',
-    description: 'Karma Family (Wind): Sales & Marketing',
+    element: 'Wind',
+    description: 'Sales & Marketing',
     skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
     alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
     additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
@@ -56,7 +57,8 @@ const guildData = [
     guild_name: 'RATNA',
     symbol: '/guild/ratna.png',
     color: 'yellow',
-    description: 'Ratna Family (Earth): Admin & Customer Support',
+    element: 'Earth',
+    description: 'Admin & Customer Support',
     skills: ['Stability', 'reliability', 'patience', 'empathy'],
     alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
     additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
@@ -65,7 +67,8 @@ const guildData = [
     guild_name: 'PADMA',
     symbol: '/guild/padma.png',
     color: 'red',
-    description: 'Padma Family (Fire): Design & Creative (Working Class)',
+    element: 'Fire',
+    description: 'Design & Creative (Working Class)',
     skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
     alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
     additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
@@ -83,7 +86,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+        toast.error('Failed to fetch avatar data')
       }
     }
     if (user) {
@@ -134,15 +137,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'POST',
         data: submit,
       })
-      enqueueSnackbar('Generated Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Generated Sucessfully')
     } catch (error) {
-      enqueueSnackbar('Generation Failed', {
-        autoHideDuration: 2000,
-        variant: 'error',
-      })
+      toast.error('Generation Failed')
     }
   }
   const handleGuildUpdate = async (e: any) => {
@@ -164,15 +161,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'PUT',
         data: submit,
       })
-      enqueueSnackbar('Updated Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Updated Sucessfully')
     } catch (error) {
-      enqueueSnackbar('Update Failed', {
-        autoHideDuration: 2000,
-        variant: 'error',
-      })
+      toast.error('Update Failed')
     }
   }
   const [modelSrc, setModelSrc] = useState('')
@@ -276,7 +267,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         <div className='absolute bottom-4 right-4'>
                           <button
                             className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                            type='submit'
+                            type='button'
                             onClick={onNextButtonClick}
                             aria-label='next'
                           >
@@ -306,10 +297,21 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         </h2>
                       </div>
                       <div className='p-2'>
-                        <h3 className='text-lg font-bold' style={{ color: selectedGuildData.color }}>
+                        <h3 className='absolute -top-7 text-xl font-bold' style={{ color: selectedGuildData.color }}>
                           {selectedGuildData.guild_name}
                         </h3>
-                        <p className='text-sm '>{selectedGuildData.description}</p>
+                        <p className='mt-3 text-xl font-bold text-black dark:text-white'>
+                          {selectedGuildData.description}
+                        </p>
+                      </div>
+                      <div className='absolute -right-14 top-20 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+                        <div className=' flex flex-col items-center justify-center p-4 text-lg font-extrabold'>
+                          {selectedGuildData.element.split('').map((letter, index) => (
+                            <span key={index} style={{ color: selectedGuildData.color }}>
+                              {letter.toUpperCase()}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                       <div className='flex justify-between p-2'>
                         <div>
