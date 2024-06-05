@@ -47,7 +47,7 @@ const Navbar = () => {
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
-          <Link href='' className='flex items-center justify-center pl-1 '>
+          <Link href='/hero' className='flex items-center justify-center pl-1 '>
             <Image
               src='/GGlogo.png'
               className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'

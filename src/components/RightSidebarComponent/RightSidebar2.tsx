@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { PiCardsFill } from 'react-icons/pi'
 import { FaOpencart } from 'react-icons/fa'
+import Image from 'next/image'
 
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
@@ -25,17 +26,22 @@ const RightSidebar2 = () => {
 
   return (
     <>
-      {isSidebarOpen && <div className='absolute top-0 z-50 h-screen w-full bg-black/40' onClick={toggleSidebar}></div>}
+      {isSidebarOpen && (
+        <div
+          className='absolute top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'
+          onClick={toggleSidebar}
+        ></div>
+      )}
       {!isSidebarOpen && (
         <button
-          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-white/20 p-1 shadow-lg'
+          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-black/20 p-1 shadow-lg'
           onClick={toggleSidebar}
         >
-          OPEN
+          <Image src='/GGlogo.png' alt='sidebar' height={30} width={30}></Image>
         </button>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-screen w-96 bg-slate-800/10 shadow-lg backdrop-blur-md    transition-transform duration-300 ease-in-out${
+        className={`fixed right-0 top-0 z-50 h-screen w-96 rounded-l-md bg-black/5 shadow-lg shadow-purple-500 backdrop-blur-md transition-transform duration-300 ease-in-out${
           isSidebarOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'
         }`}
       >
