@@ -203,7 +203,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         <div className='absolute bottom-4 right-4'>
                           <button
                             className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                            type='submit'
+                            type='button'
                             onClick={onNextButtonClick}
                             aria-label='next'
                           >
