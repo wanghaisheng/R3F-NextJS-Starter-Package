@@ -1,5 +1,5 @@
 'use client'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
+import { CardBody, CardContainer } from '@/components/card/card'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
