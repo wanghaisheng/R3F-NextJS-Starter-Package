@@ -1,11 +1,11 @@
 'use client'
 import 'react-tabs/style/react-tabs.css'
-import { enqueueSnackbar } from 'notistack'
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import toast from 'react-hot-toast'
 
 import { FaArrowRight } from 'react-icons/fa6'
 export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
@@ -45,10 +45,9 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
         method: 'put',
         data: submit,
       })
-
-      enqueueSnackbar('Experience Info saved', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Successfully updated!')
     } catch (error) {
-      enqueueSnackbar('Failed to save Experience Info', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Update failed!')
     }
   }
   const handleFirstNameChange = (newFirstName: string) => {
@@ -196,7 +195,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     {!isSmallScreen ? (
                       <>
                         <div className='mt-4'>
-                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='generate'>
+                          <DrawOutlineButton type='submit' aria-label='generate'>
                             Update
                           </DrawOutlineButton>
                         </div>

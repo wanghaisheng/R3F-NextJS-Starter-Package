@@ -19,7 +19,8 @@ const Hud = () => {
       pathname === '/signup' ||
       pathname === '/guilds' ||
       pathname === '/regions' ||
-      pathname === '/adminpage'
+      pathname === '/adminpage' ||
+      pathname === '/homepage-bg'
       // ||
       // pathname.match(/^\/regions\/.*/)
     ) {

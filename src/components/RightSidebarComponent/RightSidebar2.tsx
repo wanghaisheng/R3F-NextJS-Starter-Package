@@ -41,8 +41,8 @@ const RightSidebar2 = () => {
         </button>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-screen w-96 rounded-l-md bg-black/5 shadow-lg shadow-purple-500 backdrop-blur-md transition-transform duration-300 ease-in-out${
-          isSidebarOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'
+        className={`fixed right-0 top-0 z-50 h-screen w-96 rounded-l-md bg-black/5 backdrop-blur-md transition-transform duration-300 ease-in-out${
+          isSidebarOpen ? 'w-72 translate-x-0 shadow-lg shadow-purple-500' : 'w-0 translate-x-full'
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>

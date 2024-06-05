@@ -1,8 +1,6 @@
 'use client'
 import Image from 'next/image'
-
-import { enqueueSnackbar } from 'notistack'
-
+import toast from 'react-hot-toast'
 import { Avatar } from 'src/components/Avatar'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useState, useEffect, useMemo } from 'react'
@@ -16,11 +14,11 @@ async function getAvatarById(id: string) {
   try {
     const res = await axios.get(`/api/internal/avatar/${id}`)
     if (res.status !== 200) {
-      enqueueSnackbar('Failed to fetch the avatars', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to fetch avatar data')
     }
     return res.data
   } catch (error) {
-    enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+    toast.error('Failed to fetch avatar data')
   }
 }
 
@@ -90,7 +88,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+        toast.error('Failed to fetch avatar data')
       }
     }
     if (user) {
@@ -141,15 +139,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'POST',
         data: submit,
       })
-      enqueueSnackbar('Generated Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Generated Sucessfully')
     } catch (error) {
-      enqueueSnackbar('Generation Failed', {
-        autoHideDuration: 2000,
-        variant: 'error',
-      })
+      toast.error('Generation Failed')
     }
   }
   const handleGuildUpdate = async (e: any) => {
@@ -171,15 +163,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'PUT',
         data: submit,
       })
-      enqueueSnackbar('Updated Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Updated Sucessfully')
     } catch (error) {
-      enqueueSnackbar('Update Failed', {
-        autoHideDuration: 2000,
-        variant: 'error',
-      })
+      toast.error('Update Failed')
     }
   }
   const [modelSrc, setModelSrc] = useState('')

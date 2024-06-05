@@ -25,7 +25,8 @@ const Navbar = () => {
       pathname === '/slider' ||
       pathname === '/signin' ||
       pathname === '/signup' ||
-      pathname === '/public-profile'
+      pathname === '/public-profile' ||
+      pathname === '/homepage-bg'
     ) {
       setHideMiddleNav(true)
     } else {
