@@ -79,9 +79,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-  const openCardModal = () => {
-    setIsCardModalOpen(true)
-  }
+
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {

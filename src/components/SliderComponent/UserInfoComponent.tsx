@@ -190,6 +190,20 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           aria-label='Date of Birth'
                         />
                       </div>
+                      <div className='flex flex-col lg:flex-row lg:justify-between'>
+                        <label htmlFor='' className='font-semibold'>
+                          region
+                        </label>
+
+                        <input
+                          type='checkbox'
+                          value={dob}
+                          onChange={(e) => handleDOBChange(e.target.value)}
+                          className='rounded-md px-3 lg:w-[70%]  dark:bg-white/20'
+                          required
+                          aria-label='Date of Birth'
+                        />
+                      </div>
                     </div>
                     {/* Next and Update button */}
                     {!isSmallScreen ? (

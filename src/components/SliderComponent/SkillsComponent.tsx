@@ -9,11 +9,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { TiDelete } from 'react-icons/ti'
 import { IoHome } from 'react-icons/io5'
+import { useRouter } from 'next/navigation'
 
 import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
+import Link from 'next/link'
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
+  const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
   const formRefs = useRef([])
 
@@ -179,6 +182,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
       : true)
     if (isSubmitted) {
+      // router.refresh()
+      // router.push('/hero')
       window.location.href = '/hero'
     }
   }
