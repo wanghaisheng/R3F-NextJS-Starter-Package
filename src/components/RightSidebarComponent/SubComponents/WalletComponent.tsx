@@ -21,6 +21,7 @@ export default function WalletComponent() {
         <h1 className='text-lg font-semibold text-white'>Wallet</h1>
       </div>
       <hr />
+
       <div className='mb-10'>
         <SubTabs />
       </div>
