@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import EmergencyCard from '@/components/card/EmergencyCard'
+import EmergencyCard from '@/components/card/TypeCard/EmergencyCard'
 import { useUser } from '@/context/UserContext/UserContext'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -15,8 +15,6 @@ export default function EmergencyComponent() {
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
-
-  console.log(user)
 
   return (
     <>
