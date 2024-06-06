@@ -15,6 +15,7 @@ export default function GeniusIDFlipCard({
   dob,
   contact,
   address,
+  inSlider,
   // selectedGuild,
   // guildData,
 }) {
@@ -26,6 +27,11 @@ export default function GeniusIDFlipCard({
     QRCode.toDataURL(pathname).then(setImgSrc)
   }, [pathname])
 
+  const [isHidden, setIsHidden] = useState(false)
+  const checkHidden = () => {
+    setIsHidden(!isHidden)
+  }
+
   // Flip Card QR end
 
   const [isFlipped, setIsFlipped] = useState(false)
@@ -33,10 +39,14 @@ export default function GeniusIDFlipCard({
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
+
   return (
     <>
       <CardBody>
         <div className='group h-[239px] p-4 [prespective:1000px]'>
+          <button type='button' aria-label='hide-unhide button' onClick={checkHidden}>
+            H/U
+          </button>
           {/* Flip the card when clicked */}
           <div
             className={`relative size-full rounded-xl shadow-md transition-all  duration-500 [transform-style:preserve-3d] 
@@ -53,7 +63,17 @@ export default function GeniusIDFlipCard({
               className='rounded-lg object-cover'
             />
             <div className='absolute top-0 flex w-full justify-end'>
-              <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>GENIUS ID</p>
+              {inSlider ? (
+                <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>GENIUS ID</p>
+              ) : (
+                <>
+                  {isHidden ? (
+                    <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>******</p>
+                  ) : (
+                    <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>87698</p>
+                  )}
+                </>
+              )}
             </div>
             <div className='absolute inset-0 cursor-default rounded-xl'>
               {/* Card Details */}

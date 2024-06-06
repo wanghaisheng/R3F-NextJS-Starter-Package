@@ -89,6 +89,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     <GeniusIDFlipCard
                       // selectedGuild={selectedGuild}
                       // guildData={guildData}
+                      inSlider={true}
                       first_name={first_name}
                       last_name={last_name}
                       email={email}

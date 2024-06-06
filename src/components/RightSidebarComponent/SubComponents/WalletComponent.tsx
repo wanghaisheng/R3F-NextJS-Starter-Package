@@ -8,6 +8,7 @@ export default function WalletComponent() {
       <div className='px-2 md:absolute md:right-12 md:top-14'>
         <CardContainer>
           <GeniusIDFlipCard
+            inSlider={false}
             first_name='Ram'
             last_name='Kumar'
             email='asf@gmail.com'
