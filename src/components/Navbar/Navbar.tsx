@@ -240,7 +240,7 @@ const Navbar = () => {
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
                           borderRadius: '50%',
-                          border: `2px solid ${user.guilds[0].color}`,
+                          border: `2px solid ${guildColor}`,
                         }}
                       ></div>
                     </Link>
