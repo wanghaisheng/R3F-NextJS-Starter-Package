@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import ShopComponent from './ShopComponent'
+import Image from 'next/image'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 
-export default function SubTabs() {
+export default function TopUpWalletTabs() {
   const [activeTab, setActiveTab] = useState('tab1')
 
   const handleTabClick = (tab: string) => {
@@ -53,46 +53,7 @@ export default function SubTabs() {
               }`}
               onClick={() => handleTabClick('tab2')}
             >
-              BUY
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex items-center rounded-md p-2 ${
-                activeTab === 'tab2'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-              onClick={() => handleTabClick('tab2')}
-            >
-              BUY
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex items-center rounded-md p-2 ${
-                activeTab === 'tab2'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-              onClick={() => handleTabClick('tab2')}
-            >
-              BUY
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex items-center rounded-md p-2 ${
-                activeTab === 'tab2'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-              onClick={() => handleTabClick('tab2')}
-            >
-              BUY
+              TOPUP
             </a>
           </li>
         </ul>
@@ -104,7 +65,28 @@ export default function SubTabs() {
             {activeTab === 'tab1' && <div>Redeem Card Code Enter</div>}
             {activeTab === 'tab2' && (
               <div>
-                <ShopComponent />
+                <div className='-mt-2 grid grid-cols-2 gap-4'>
+                  {/* {topupMethods.map((product) => ( */}
+                  <div className='relative overflow-hidden rounded-md bg-white shadow-md'>
+                    <div className='h-24 w-full overflow-hidden'>
+                      <Image
+                        src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbJHtIt0p3GmXkfXnps0N5pOvgiGJVMe8kdg&s'
+                        unoptimized
+                        alt='buy'
+                        width={200}
+                        height={100}
+                        layout='responsive'
+                        className='object-cover'
+                      />
+                    </div>
+                    <div className='h-14 w-full bg-gray-300 p-1'>
+                      <h1 className='font-medium text-black'>$5</h1>
+                      <h2 className='text-sm text-black'>DFGH</h2>
+                      {/* <p className='mt-1 text-sm text-gray-600'>{product.description.slice(0, 22)}...</p> */}
+                    </div>
+                  </div>
+                  {/* ))} */}
+                </div>
               </div>
             )}
           </div>

@@ -64,7 +64,7 @@ const RightSidebar2 = () => {
           {activeTab && (
             <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
               {activeTab === 'search' && <SearchComponent />}
-              {activeTab === 'cards' && <WalletComponent />}
+              {activeTab === 'wallet' && <WalletComponent />}
               {activeTab === 'shop' && <ShopComponent />}
               {activeTab === 'emergency' && <EmergencyComponent />}
             </div>
@@ -98,11 +98,11 @@ const RightSidebar2 = () => {
               <a
                 href='#'
                 className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'cards'
+                  activeTab === 'wallet'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
                 }`}
-                onClick={() => handleTabClick('cards')}
+                onClick={() => handleTabClick('wallet')}
               >
                 <PiCardsFill />
                 <div
@@ -113,7 +113,7 @@ const RightSidebar2 = () => {
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
       `}
                 >
-                  Cards
+                  Wallet
                 </div>
               </a>
             </li>

@@ -38,6 +38,7 @@ export default function EmergencyComponent() {
           <div className='text-3xl text-gray-400'>No User Found</div>
         </div>
       )}
+      <div>Okay</div>
     </>
   )
 }
