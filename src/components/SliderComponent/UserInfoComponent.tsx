@@ -31,6 +31,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
   }, [user])
   const handleSubmit = async (e: any) => {
     e.preventDefault()
+
     const submit = {
       first_name,
       last_name,
@@ -46,6 +47,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
         data: submit,
       })
       toast.success('Successfully updated!')
+      onNextButtonClick() // Proceed to the next slide after successful update
     } catch (error) {
       toast.error('Update failed!')
     }
@@ -205,19 +207,13 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         />
                       </div>
                     </div>
-                    {/* Next and Update button */}
+                    {/* Next */}
                     {!isSmallScreen ? (
                       <>
-                        <div className='mt-4'>
-                          <DrawOutlineButton type='submit' aria-label='generate'>
-                            Update
-                          </DrawOutlineButton>
-                        </div>
                         <div className='absolute bottom-4 right-4'>
                           <button
                             className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                            type='button'
-                            onClick={onNextButtonClick}
+                            type='submit'
                             aria-label='next'
                           >
                             <p className='p-4'>
@@ -227,8 +223,8 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         </div>
                       </>
                     ) : (
-                      <div className='absolute bottom-4 right-4'>
-                        <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                      <div className='absolute -bottom-4 right-4'>
+                        <DrawOutlineButton type='submit' aria-label='next slide'>
                           Next
                         </DrawOutlineButton>
                       </div>

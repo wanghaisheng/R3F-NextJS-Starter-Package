@@ -10,15 +10,14 @@ import 'react-tabs/style/react-tabs.css'
 import { TiDelete } from 'react-icons/ti'
 import { IoHome } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
-
 import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
-import Link from 'next/link'
+
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
-  const formRefs = useRef([])
+  const [lastUpdated, setLastUpdated] = useState(Date.now())
 
   function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
     for (let i = 0; i < exp_skills.length; i++) {
@@ -115,6 +114,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Generate Skills Successfully')
+      setLastUpdated(Date.now()) // Update the lastUpdated state to re-render the component
+      router.push('/hero')
     } catch (error) {
       toast.error('Failed to generate skills')
     }
@@ -134,6 +135,8 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Skills updated')
+      setLastUpdated(Date.now()) // Update the lastUpdated state to re-render the component
+      router.push('/hero')
     } catch (error) {
       toast.error('Failed to update skills')
     }
@@ -176,17 +179,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-  const handleHomeClick = async (index) => {
-    const form = formRefs.current[index]
-    const isSubmitted = await (form
-      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
-      : true)
-    if (isSubmitted) {
-      // router.refresh()
-      // router.push('/hero')
-      window.location.href = '/hero'
-    }
-  }
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -277,15 +270,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                         {/* Go Home and Generate Button */}
                         {!isSmallScreen ? (
                           <>
-                            <div className='mt-4 flex justify-center'>
-                              <DrawOutlineButton type='submit' aria-label='generate/update'>
-                                {user && checkActiveSkills(element) != true ? 'Generate' : 'Update'}
-                              </DrawOutlineButton>
-                            </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
                                 className='rounded-full bg-black transition-all  duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                onClick={() => handleHomeClick(0)}
+                                type='submit'
                                 aria-label='home btn'
                               >
                                 <p className='p-4 text-white'>
@@ -296,7 +284,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                           </>
                         ) : (
                           <div className='absolute bottom-4 right-4'>
-                            <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
+                            <DrawOutlineButton type='submit' aria-label='go to home page'>
                               Go To Home
                             </DrawOutlineButton>
                           </div>
@@ -310,7 +298,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
-                <SkillsChartComponent skills={skills} />
+                <SkillsChartComponent key={lastUpdated} skills={skills} />
               </div>
             </div>
           </Tabs>
