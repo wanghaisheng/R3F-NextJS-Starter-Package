@@ -2,6 +2,10 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Scrollbar } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/scrollbar'
 
 const demodata = [
   {
@@ -124,40 +128,73 @@ const categories = ['Laptops', 'Smartphones', 'Headphones', 'Consoles', 'Electro
 
 export default function ShopComponent() {
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category)
+  }
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value)
   }
 
   const filteredProducts = selectedCategory
     ? demodata.filter((product) => product.categories.includes(selectedCategory))
     : demodata
 
+  const searchedProducts = filteredProducts.filter((product) => {
+    const nameMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const descriptionMatch = product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    return nameMatch || descriptionMatch
+  })
+
   return (
     <div>
-      <div className='mb-4 flex gap-2 overflow-auto'>
-        <button
-          className={`rounded-md px-4 py-2 ${
-            selectedCategory === null ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
-          }`}
-          onClick={() => handleCategoryClick(null)}
-        >
-          All
-        </button>
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`rounded-md px-4 py-2 ${
-              selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
-            }`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </button>
-        ))}
+      <div className='mb-4 flex items-center gap-2'>
+        <input
+          type='text'
+          placeholder='Search products...'
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className='-mt-4 w-full rounded-md border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
+        />
       </div>
-      <div className='grid grid-cols-2 gap-4'>
-        {filteredProducts.map((product) => (
+      {/* Carousel */}
+      <div className='relative mb-4'>
+        <div className='flex gap-2 overflow-auto'>
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={3}
+            scrollbar={{ draggable: true, hide: false }}
+            modules={[Scrollbar]}
+          >
+            <SwiperSlide className='shrink-0 pb-4'>
+              <button
+                className={`w-full justify-center rounded-md p-2 ${
+                  selectedCategory === null ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                }`}
+                onClick={() => handleCategoryClick(null)}
+              >
+                All
+              </button>
+            </SwiperSlide>
+            {categories.map((category) => (
+              <SwiperSlide key={category} className='shrink-0 pb-4'>
+                <button
+                  className={`w-full justify-center rounded-md p-2 ${
+                    selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                  }`}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                </button>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+      <div className='-mt-2 grid grid-cols-2 gap-4'>
+        {searchedProducts.map((product) => (
           <div key={product.productId} className='relative overflow-hidden rounded-md bg-white shadow-md'>
             <div className='h-24 w-full overflow-hidden'>
               <Image

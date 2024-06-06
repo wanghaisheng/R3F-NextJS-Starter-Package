@@ -1,5 +1,6 @@
 'use client'
-import { enqueueSnackbar } from 'notistack'
+
+import toast from 'react-hot-toast'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import { FaArrowLeft } from 'react-icons/fa6'
@@ -8,13 +9,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { TiDelete } from 'react-icons/ti'
 import { IoHome } from 'react-icons/io5'
-
+import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
+
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
+  const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
-  const formRefs = useRef([])
 
   function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
     for (let i = 0; i < exp_skills.length; i++) {
@@ -85,13 +87,13 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           // console.log(skills)
         }
       } catch (error) {
-        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+        toast.error(error)
       }
     }
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
-  }, [user])
+  }, [user, skills.length])
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
   }
@@ -110,10 +112,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'POST',
         data: submit,
       })
-
-      enqueueSnackbar('Generate Skills Successfully', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Generate Skills Successfully')
+      router.push('/hero')
     } catch (error) {
-      enqueueSnackbar('Failed to generate skills', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to generate skills')
     }
   }
   const handleSkillUpdate = async (e: any, index: number) => {
@@ -130,10 +132,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'PUT',
         data: submit,
       })
-
-      enqueueSnackbar('Skills updated', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Skills updated')
+      router.push('/hero')
     } catch (error) {
-      enqueueSnackbar('Failed to update skills', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to update skills')
     }
   }
   const handleSkillDelete = async (index: number) => {
@@ -142,10 +144,9 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
-
-      enqueueSnackbar('Skills deleted', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Skills deleted')
     } catch (error) {
-      enqueueSnackbar('Failed to delete skills', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to delete skills')
     }
   }
   const handleSkillNameChange = (index: number, newName: string) => {
@@ -175,15 +176,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       return updatedSkills
     })
   }
-  const handleHomeClick = async (index) => {
-    const form = formRefs.current[index]
-    const isSubmitted = await (form
-      ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
-      : true)
-    if (isSubmitted) {
-      window.location.href = '/hero'
-    }
-  }
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -274,15 +267,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                         {/* Go Home and Generate Button */}
                         {!isSmallScreen ? (
                           <>
-                            <div className='mt-4 flex justify-center'>
-                              <DrawOutlineButton type='submit' aria-label='generate/update'>
-                                {user && checkActiveSkills(element) != true ? 'Generate' : 'Update'}
-                              </DrawOutlineButton>
-                            </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
                                 className='rounded-full bg-black transition-all  duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                onClick={() => handleHomeClick(0)}
+                                type='submit'
                                 aria-label='home btn'
                               >
                                 <p className='p-4 text-white'>
@@ -293,7 +281,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                           </>
                         ) : (
                           <div className='absolute bottom-4 right-4'>
-                            <DrawOutlineButton onClick={() => handleHomeClick(0)} aria-label='go to home page'>
+                            <DrawOutlineButton type='submit' aria-label='go to home page'>
                               Go To Home
                             </DrawOutlineButton>
                           </div>
@@ -307,7 +295,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
-                <SkillsChartComponent skills={skills} />
+                <SkillsChartComponent key={skills.length} skills={skills} />
               </div>
             </div>
           </Tabs>

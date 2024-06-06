@@ -1,5 +1,5 @@
 'use client'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
+import { CardBody, CardContainer } from '@/components/card/card'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 // For carousel inside slide 1
-import AvatarImageComponent from '@/components/avatarImage/page'
+import AvatarImageComponent from '../avatarImage/AvatarImage'
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 import Link from 'next/link'
 // Cards
@@ -203,7 +203,7 @@ export default function PrivateProfile() {
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
-  }, [user])
+  }, [experience, user])
 
   // Cards data
   useEffect(() => {
@@ -277,11 +277,6 @@ export default function PrivateProfile() {
             }}
           />
         )}
-        <div className='absolute right-10 top-0 flex items-center justify-center'>
-          <Link href='/public-profile' className='text-sm text-blue-400'>
-            View Public Profile
-          </Link>
-        </div>
       </div>
       {/* Carousel */}
       <div className='top-10 flex size-full justify-between px-4 lg:absolute'>
@@ -310,6 +305,7 @@ export default function PrivateProfile() {
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
+                                  inSlider={true}
                                   first_name={user.first_name}
                                   last_name={user.last_name}
                                   email={user.email}
@@ -409,6 +405,7 @@ export default function PrivateProfile() {
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
+                                  inSlider={true}
                                   first_name='DEFAULT'
                                   last_name='DEFAULT'
                                   email='DEFAULT@'
@@ -461,8 +458,11 @@ export default function PrivateProfile() {
                   <div className='my-5 flex flex-col items-center py-5'>
                     <div className='rounded-lg bg-purple-900/50 p-5'>
                       <p className='mb-4 px-4 text-center'>Some premium features for paid users</p>
-                      <div className='flex justify-center'>
+                      <div className='flex justify-center gap-x-2'>
                         <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
+                        <Link href='/public-profile'>
+                          <DrawOutlineButton>View Public Profile</DrawOutlineButton>
+                        </Link>
                       </div>
                     </div>
                     {/* Spring Pop Up Modal */}

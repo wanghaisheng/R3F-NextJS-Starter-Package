@@ -1,11 +1,11 @@
 'use client'
 import 'react-tabs/style/react-tabs.css'
-import { enqueueSnackbar } from 'notistack'
 import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import toast from 'react-hot-toast'
 
 import { FaArrowRight } from 'react-icons/fa6'
 export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
@@ -31,6 +31,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
   }, [user])
   const handleSubmit = async (e: any) => {
     e.preventDefault()
+
     const submit = {
       first_name,
       last_name,
@@ -45,10 +46,10 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
         method: 'put',
         data: submit,
       })
-
-      enqueueSnackbar('Experience Info saved', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Successfully updated!')
+      onNextButtonClick() // Proceed to the next slide after successful update
     } catch (error) {
-      enqueueSnackbar('Failed to save Experience Info', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Update failed!')
     }
   }
   const handleFirstNameChange = (newFirstName: string) => {
@@ -88,6 +89,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     <GeniusIDFlipCard
                       // selectedGuild={selectedGuild}
                       // guildData={guildData}
+                      inSlider={true}
                       first_name={first_name}
                       last_name={last_name}
                       email={email}
@@ -191,20 +193,28 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           aria-label='Date of Birth'
                         />
                       </div>
+                      <div className='flex flex-col lg:flex-row lg:justify-between'>
+                        <label htmlFor='' className='font-semibold'>
+                          region
+                        </label>
+
+                        <input
+                          type='checkbox'
+                          value={dob}
+                          onChange={(e) => handleDOBChange(e.target.value)}
+                          className='rounded-md px-3 lg:w-[70%]  dark:bg-white/20'
+                          required
+                          aria-label='Date of Birth'
+                        />
+                      </div>
                     </div>
-                    {/* Next and Update button */}
+                    {/* Next */}
                     {!isSmallScreen ? (
                       <>
-                        <div className='mt-4'>
-                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='generate'>
-                            Update
-                          </DrawOutlineButton>
-                        </div>
                         <div className='absolute bottom-4 right-4'>
                           <button
                             className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                             type='submit'
-                            onClick={onNextButtonClick}
                             aria-label='next'
                           >
                             <p className='p-4'>
@@ -214,8 +224,8 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         </div>
                       </>
                     ) : (
-                      <div className='absolute bottom-4 right-4'>
-                        <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                      <div className='absolute -bottom-4 right-4'>
+                        <DrawOutlineButton type='submit' aria-label='next slide'>
                           Next
                         </DrawOutlineButton>
                       </div>

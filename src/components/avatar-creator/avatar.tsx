@@ -5,19 +5,42 @@ import { enqueueSnackbar } from 'notistack'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useUser } from '@/context/UserContext/UserContext'
-const config: AvatarCreatorConfig = {
-  clearCache: false,
+const createConfig: AvatarCreatorConfig = {
+  clearCache: true,
   bodyType: 'fullbody',
   quickStart: false,
   language: 'en',
 }
+// const editConfig: AvatarCreatorConfig = {
+//   clearCache: true,
+//   bodyType: 'fullbody',
+//   quickStart: false,
+//   language: 'en',
+//   avatarId: '',
+// }
+
 export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const { user } = useUser()
   const router = useRouter()
+  let avatarArray = []
+  const [existingAvatars, setExistingAvatars] = useState([])
   const handleOnAvatarExported = (event: AvatarExportedEvent) => {
+    console.log(event.data.avatarId)
     setAvatarUrl(event.data.url)
   }
+
+  useEffect(() => {
+    const getAvatars = async () => {
+      user.avatar.forEach((avatar) => avatarArray.push(avatar.avatar_url))
+    }
+    if (user && user.avatar.length !== 0) {
+      getAvatars()
+    }
+  }, [user])
+
+  console.log(avatarArray)
+
   useEffect(() => {
     const createAvatar = async () => {
       const submit = {
@@ -37,7 +60,7 @@ export default function App() {
           variant: 'success',
         })
       } catch (error) {
-        console.log('Error: ', error)
+        console.error('Error: ', error)
         enqueueSnackbar('Failed to create the avatar', {
           autoHideDuration: 2000,
           variant: 'error',
@@ -52,7 +75,7 @@ export default function App() {
     <>
       <AvatarCreator
         subdomain='gguser'
-        config={config}
+        config={createConfig}
         className='-ml-4 size-full rounded-lg border-none lg:ml-0'
         onAvatarExported={handleOnAvatarExported}
       />

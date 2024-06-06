@@ -171,7 +171,7 @@ export default function PublicProfile() {
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
-  }, [user])
+  }, [user, experience])
 
   // Cards data
   useEffect(() => {

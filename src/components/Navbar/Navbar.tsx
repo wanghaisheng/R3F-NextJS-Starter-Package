@@ -25,7 +25,8 @@ const Navbar = () => {
       pathname === '/slider' ||
       pathname === '/signin' ||
       pathname === '/signup' ||
-      pathname === '/public-profile'
+      pathname === '/public-profile' ||
+      pathname === '/homepage-bg'
     ) {
       setHideMiddleNav(true)
     } else {
@@ -47,7 +48,7 @@ const Navbar = () => {
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
-          <Link href='' className='flex items-center justify-center pl-1 '>
+          <Link href='/hero' className='flex items-center justify-center pl-1 '>
             <Image
               src='/GGlogo.png'
               className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
@@ -75,7 +76,7 @@ const Navbar = () => {
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
                           borderRadius: '50%',
-                          border: `2px solid ${user.guilds[0].color}`,
+                          border: `2px solid ${user.guilds[0].color ? user.guilds[0].color : 'black'}`,
                         }}
                       ></div>
                     </Link>

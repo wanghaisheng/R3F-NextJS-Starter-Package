@@ -1,22 +1,22 @@
 'use client'
-import { enqueueSnackbar } from 'notistack'
+
+import toast from 'react-hot-toast'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
+import { useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 import { TiDelete } from 'react-icons/ti'
 import ExperienceFlipCard from '../card/experienceFlipCard'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import axios from 'axios'
-import Link from 'next/link'
-import { TagsInput } from 'react-tag-input-component'
-
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { IoHome } from 'react-icons/io5'
 import InputFormForExperience from './Forms/InputFormForExperience'
 
 export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
+  const router = useRouter()
   const [projects, setProjects] = useState([
     { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
   ])
@@ -29,7 +29,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
           setProjects(user.experience)
         }
       } catch (error) {
-        enqueueSnackbar(error, { autoHideDuration: 2500, variant: 'error' })
+        toast.error(error)
       }
     }
     if (user) {
@@ -55,13 +55,10 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'POST',
         data: submit,
       })
-
-      enqueueSnackbar('Generated Sucessfully', {
-        autoHideDuration: 2500,
-        variant: 'success',
-      })
+      toast.success('Generated Sucessfully')
+      onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
-      enqueueSnackbar('Failed to Generate', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Failed to Generate')
     }
   }
   const handleExpUpdate = async (e: any, index: number, experience_id) => {
@@ -80,11 +77,10 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'PUT',
         data: submit,
       })
-
-      // alert('Experience info updated')
-      enqueueSnackbar('Updated Sucessfully', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Updated Sucessfully')
+      onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
-      enqueueSnackbar('Update Failed', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Update Failed')
     }
   }
   const handleExpDelete = async (experience_id) => {
@@ -93,9 +89,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
-      enqueueSnackbar('Deleted Sucessfully', { autoHideDuration: 2500, variant: 'success' })
+      toast.success('Deleted Sucessfully')
     } catch (error) {
-      enqueueSnackbar('Deletion Failed', { autoHideDuration: 2500, variant: 'error' })
+      toast.error('Deletion Failed')
     }
   }
   const handleProjectNameChange = (index, newName) => {
@@ -155,7 +151,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
       : true)
     if (isSubmitted) {
-      window.location.href = '/hero'
+      router.push('/hero') // Use router.push to navigate
     }
   }
   return (
@@ -239,14 +235,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                         handleToolsChange={handleToolsChange}
                         index={index}
                       />
-                      {/* Next and Generate Button */}
+                      {/* Next */}
                       {!isSmallScreen ? (
                         <>
-                          <div className='mt-4'>
-                            <DrawOutlineButton type='submit' aria-label='generate'>
-                              Generate
-                            </DrawOutlineButton>
-                          </div>
                           <div className='absolute bottom-4 right-4'>
                             <button
                               className='mr-2 rounded-full bg-black transition-all  duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
@@ -260,7 +251,6 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <button
                               className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                               type='submit'
-                              onClick={onNextButtonClick}
                               aria-label='next'
                             >
                               <p className='p-4'>
@@ -275,7 +265,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                             <IoHome className='my-1' />
                           </DrawOutlineButton>
 
-                          <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                          <DrawOutlineButton type='submit' aria-label='next slide'>
                             Next
                           </DrawOutlineButton>
                         </div>

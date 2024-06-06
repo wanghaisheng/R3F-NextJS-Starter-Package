@@ -3,11 +3,14 @@
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { PiCardsFill } from 'react-icons/pi'
+import { TbEmergencyBed } from 'react-icons/tb'
 import { FaOpencart } from 'react-icons/fa'
+import Image from 'next/image'
 
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
+import EmergencyComponent from './SubComponents/EmergencyComponent'
 
 const RightSidebar2 = () => {
   const [activeTab, setActiveTab] = useState('search')
@@ -25,18 +28,23 @@ const RightSidebar2 = () => {
 
   return (
     <>
-      {isSidebarOpen && <div className='absolute top-0 z-50 h-screen w-full bg-black/40' onClick={toggleSidebar}></div>}
+      {isSidebarOpen && (
+        <div
+          className='absolute top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'
+          onClick={toggleSidebar}
+        ></div>
+      )}
       {!isSidebarOpen && (
         <button
-          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-white/20 p-1 shadow-lg'
+          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-black/20 p-1 shadow-lg'
           onClick={toggleSidebar}
         >
-          OPEN
+          <Image src='/GGlogo.png' alt='sidebar' height={30} width={30}></Image>
         </button>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-screen w-96 bg-slate-800 shadow-lg transition-transform duration-300 ease-in-out${
-          isSidebarOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'
+        className={`fixed right-0 top-0 z-50 h-screen w-96 rounded-l-md bg-black/5 backdrop-blur-md transition-transform duration-300 ease-in-out${
+          isSidebarOpen ? 'w-72 translate-x-0 shadow-lg shadow-purple-500' : 'w-0 translate-x-full'
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>
@@ -56,8 +64,9 @@ const RightSidebar2 = () => {
           {activeTab && (
             <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
               {activeTab === 'search' && <SearchComponent />}
-              {activeTab === 'cards' && <WalletComponent />}
+              {activeTab === 'wallet' && <WalletComponent />}
               {activeTab === 'shop' && <ShopComponent />}
+              {activeTab === 'emergency' && <EmergencyComponent />}
             </div>
           )}
 
@@ -89,11 +98,11 @@ const RightSidebar2 = () => {
               <a
                 href='#'
                 className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'cards'
+                  activeTab === 'wallet'
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
                 }`}
-                onClick={() => handleTabClick('cards')}
+                onClick={() => handleTabClick('wallet')}
               >
                 <PiCardsFill />
                 <div
@@ -104,7 +113,7 @@ const RightSidebar2 = () => {
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
       `}
                 >
-                  Cards
+                  Wallet
                 </div>
               </a>
             </li>
@@ -128,6 +137,29 @@ const RightSidebar2 = () => {
       `}
                 >
                   Shop
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                className={`group flex items-center rounded-md p-2 ${
+                  activeTab === 'emergency'
+                    ? 'bg-gray-100 text-gray-900'
+                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+                onClick={() => handleTabClick('emergency')}
+              >
+                <TbEmergencyBed />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Emergency
                 </div>
               </a>
             </li>

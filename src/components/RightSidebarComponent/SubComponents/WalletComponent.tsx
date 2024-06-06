@@ -1,6 +1,6 @@
 import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
 import { CardContainer } from '@/components/card/card'
-import SubTabs from './SubTabs'
+import TopUpWalletTabs from './TopUpWalletTabs'
 
 export default function WalletComponent() {
   return (
@@ -8,6 +8,7 @@ export default function WalletComponent() {
       <div className='px-2 md:absolute md:right-12 md:top-14'>
         <CardContainer>
           <GeniusIDFlipCard
+            inSlider={false}
             first_name='Ram'
             last_name='Kumar'
             email='asf@gmail.com'
@@ -21,8 +22,9 @@ export default function WalletComponent() {
         <h1 className='text-lg font-semibold text-white'>Wallet</h1>
       </div>
       <hr />
+
       <div className='mb-10'>
-        <SubTabs />
+        <TopUpWalletTabs />
       </div>
     </>
   )

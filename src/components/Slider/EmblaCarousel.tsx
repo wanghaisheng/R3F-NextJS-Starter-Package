@@ -9,6 +9,8 @@ import ExperienceComponent from '@/components/SliderComponent/ExperienceComponen
 // import ConnectionComponent from '@/components/SliderComponent/ConnectionComponent'
 import UserInfoComponent from '@/components/SliderComponent/UserInfoComponent'
 import Card2Component from '@/components/SliderComponent/Card2Component'
+import toast, { Toaster } from 'react-hot-toast'
+
 type PropType = {
   slides: number[]
 }
@@ -70,12 +72,7 @@ const EmblaCarousel: React.FC<PropType> = () => {
   return (
     <>
       <section className='mx-auto mt-20 w-full'>
-        <SnackbarProvider
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-        />
+        <Toaster />
 
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-5 flex'>

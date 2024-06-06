@@ -1,6 +1,6 @@
 'use client'
 import InputFormForCard from './Forms/InputFormForCard'
-import { enqueueSnackbar } from 'notistack'
+import toast from 'react-hot-toast'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { useState, useEffect, useRef } from 'react'
@@ -16,14 +16,11 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
   const [cards, setCards] = useState([
     {
       card_id: '',
-
       type: 'Emergency',
-
       name: '',
       description: '',
       date_in: '',
       date_out: '',
-
       emergency_contact: '',
       emergency_details: '',
       blood_group: '',
@@ -68,13 +65,10 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'POST',
         data: submit,
       })
-
-      enqueueSnackbar('Generated Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Generated Sucessfully')
+      onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
-      enqueueSnackbar('Failed to Generate', { autoHideDuration: 2000, variant: 'error' })
+      toast.error('Failed to Generate')
     }
   }
   const handleUpdate = async (e, id, index) => {
@@ -97,13 +91,10 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'PUT',
         data: submit,
       })
-
-      enqueueSnackbar('Updated Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Updated Sucessfully')
+      onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
-      enqueueSnackbar('Failed to Update', { autoHideDuration: 2000, variant: 'error' })
+      toast.error('Failed to Update')
     }
   }
   const handleDelete = async (id) => {
@@ -112,13 +103,9 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         url: `/api/internal/card/${id}`,
         method: 'DELETE',
       })
-
-      enqueueSnackbar('Deleted Sucessfully', {
-        autoHideDuration: 2000,
-        variant: 'success',
-      })
+      toast.success('Deleted Sucessfully')
     } catch (error) {
-      enqueueSnackbar('Failed to Delete', { autoHideDuration: 2000, variant: 'error' })
+      toast.error('Failed to Delete')
     }
   }
   const handleCardTypeChange = (index, newType) => {
@@ -300,19 +287,13 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                           handleCardemergency_detailsChange={handleCardemergency_detailsChange}
                         />
 
-                        {/* Next and Generate Button */}
+                        {/* Next */}
                         {!isSmallScreen ? (
                           <>
-                            <div className='mt-4'>
-                              <DrawOutlineButton type='submit' aria-label='generate'>
-                                Generate
-                              </DrawOutlineButton>
-                            </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
                                 className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                                 type='submit'
-                                onClick={onNextButtonClick}
                                 aria-label='next'
                               >
                                 <p className='p-4'>
@@ -323,7 +304,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                           </>
                         ) : (
                           <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                            <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                            <DrawOutlineButton type='submit' aria-label='next slide'>
                               Next
                             </DrawOutlineButton>
                           </div>
