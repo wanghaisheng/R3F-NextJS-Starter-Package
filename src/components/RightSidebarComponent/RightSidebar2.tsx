@@ -3,12 +3,14 @@
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { PiCardsFill } from 'react-icons/pi'
+import { TbEmergencyBed } from 'react-icons/tb'
 import { FaOpencart } from 'react-icons/fa'
 import Image from 'next/image'
 
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
+import EmergencyComponent from './SubComponents/EmergencyComponent'
 
 const RightSidebar2 = () => {
   const [activeTab, setActiveTab] = useState('search')
@@ -64,6 +66,7 @@ const RightSidebar2 = () => {
               {activeTab === 'search' && <SearchComponent />}
               {activeTab === 'cards' && <WalletComponent />}
               {activeTab === 'shop' && <ShopComponent />}
+              {activeTab === 'emergency' && <EmergencyComponent />}
             </div>
           )}
 
@@ -134,6 +137,29 @@ const RightSidebar2 = () => {
       `}
                 >
                   Shop
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                className={`group flex items-center rounded-md p-2 ${
+                  activeTab === 'emergency'
+                    ? 'bg-gray-100 text-gray-900'
+                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+                onClick={() => handleTabClick('emergency')}
+              >
+                <TbEmergencyBed />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Emergency
                 </div>
               </a>
             </li>
