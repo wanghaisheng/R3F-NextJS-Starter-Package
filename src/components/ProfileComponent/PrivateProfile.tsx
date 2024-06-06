@@ -305,6 +305,7 @@ export default function PrivateProfile() {
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
+                                  inSlider={true}
                                   first_name={user.first_name}
                                   last_name={user.last_name}
                                   email={user.email}
@@ -404,6 +405,7 @@ export default function PrivateProfile() {
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
+                                  inSlider={true}
                                   first_name='DEFAULT'
                                   last_name='DEFAULT'
                                   email='DEFAULT@'

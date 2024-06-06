@@ -14,6 +14,8 @@ export default function VideoHome() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
   }
 
+  const guild = 'buddha'
+
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
@@ -32,6 +34,13 @@ export default function VideoHome() {
         className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-lg'
       >
         <SwiperSlide className='bg-cover bg-center'>
+          <div className='absolute left-20 z-20 hidden w-1/4 items-center justify-center lg:flex lg:flex-col'>
+            <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+              {guild.split('').map((letter, index) => (
+                <span key={index}>{letter.toUpperCase()}</span>
+              ))}
+            </div>
+          </div>
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src='/livewallpapers/candles.mp4' type='video/mp4' />
           </video>

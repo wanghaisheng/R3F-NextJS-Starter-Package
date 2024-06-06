@@ -44,9 +44,11 @@ export default function GeniusIDFlipCard({
     <>
       <CardBody>
         <div className='group h-[239px] p-4 [prespective:1000px]'>
-          <button type='button' aria-label='hide-unhide button' onClick={checkHidden}>
-            H/U
-          </button>
+          {!inSlider && (
+            <button type='button' aria-label='hide-unhide button' onClick={checkHidden}>
+              H/U
+            </button>
+          )}
           {/* Flip the card when clicked */}
           <div
             className={`relative size-full rounded-xl shadow-md transition-all  duration-500 [transform-style:preserve-3d] 
