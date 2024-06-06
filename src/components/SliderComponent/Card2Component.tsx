@@ -16,14 +16,11 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
   const [cards, setCards] = useState([
     {
       card_id: '',
-
       type: 'Emergency',
-
       name: '',
       description: '',
       date_in: '',
       date_out: '',
-
       emergency_contact: '',
       emergency_details: '',
       blood_group: '',
@@ -69,6 +66,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         data: submit,
       })
       toast.success('Generated Sucessfully')
+      onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
       toast.error('Failed to Generate')
     }
@@ -94,6 +92,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         data: submit,
       })
       toast.success('Updated Sucessfully')
+      onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
       toast.error('Failed to Update')
     }
@@ -288,19 +287,13 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                           handleCardemergency_detailsChange={handleCardemergency_detailsChange}
                         />
 
-                        {/* Next and Generate Button */}
+                        {/* Next */}
                         {!isSmallScreen ? (
                           <>
-                            <div className='mt-4'>
-                              <DrawOutlineButton type='submit' aria-label='generate'>
-                                Generate
-                              </DrawOutlineButton>
-                            </div>
                             <div className='absolute bottom-4 right-4'>
                               <button
                                 className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-gray-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
-                                type='button'
-                                onClick={onNextButtonClick}
+                                type='submit'
                                 aria-label='next'
                               >
                                 <p className='p-4'>
@@ -311,7 +304,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
                           </>
                         ) : (
                           <div className='absolute bottom-4 right-4 flex gap-x-1'>
-                            <DrawOutlineButton type='submit' onClick={onNextButtonClick} aria-label='next slide'>
+                            <DrawOutlineButton type='submit' aria-label='next slide'>
                               Next
                             </DrawOutlineButton>
                           </div>
