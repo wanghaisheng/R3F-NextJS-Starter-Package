@@ -93,7 +93,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
-  }, [user])
+  }, [user, skills.length])
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
   }
