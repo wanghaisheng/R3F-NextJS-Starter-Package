@@ -41,6 +41,17 @@ const Navbar = () => {
   }, [pathname])
 
   const { user, logout } = useUser()
+  // State to hold the current guild color
+  const [guildColor, setGuildColor] = useState(null)
+
+  // Update guildColor whenever user changes
+  useEffect(() => {
+    if (user && user.guilds && user.guilds.length > 0) {
+      setGuildColor(user.guilds[0].color || 'black') // Default to black if no color
+    } else {
+      setGuildColor('black') // Default to black if no user or guilds
+    }
+  }, [user])
 
   return (
     <>
@@ -76,7 +87,7 @@ const Navbar = () => {
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
                           borderRadius: '50%',
-                          border: `2px solid ${user.guilds[0].color ? user.guilds[0].color : 'black'}`,
+                          border: `2px solid ${guildColor}`,
                         }}
                       ></div>
                     </Link>
@@ -102,10 +113,10 @@ const Navbar = () => {
                 {hideTopRightNav ? null : (
                   <div className='text-black dark:text-white'>
                     <Link
-                      href='/signin'
+                      href='/signup'
                       className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
                     >
-                      Sign-In
+                      REGISTER
                     </Link>
                     <div className='-mr-2 flex items-center md:hidden'>
                       <Hamburger toggled={isOpen} toggle={setOpen} />
@@ -284,12 +295,12 @@ const Navbar = () => {
                   </Link>
                 ) : (
                   <Link
-                    href='/signin'
+                    href='/signup'
                     className='py-4 text-blue-400 hover:text-fuchsia-300'
                     aria-label='Sign In'
                     onClick={closeMenu}
                   >
-                    Sign-In
+                    REGISTER
                   </Link>
                 )}
               </li>
