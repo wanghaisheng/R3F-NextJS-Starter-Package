@@ -203,7 +203,7 @@ export default function PrivateProfile() {
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
-  }, [user])
+  }, [experience, user])
 
   // Cards data
   useEffect(() => {

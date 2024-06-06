@@ -17,7 +17,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
-  const [lastUpdated, setLastUpdated] = useState(Date.now())
 
   function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
     for (let i = 0; i < exp_skills.length; i++) {
@@ -114,7 +113,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Generate Skills Successfully')
-      setLastUpdated(Date.now()) // Update the lastUpdated state to re-render the component
       router.push('/hero')
     } catch (error) {
       toast.error('Failed to generate skills')
@@ -135,7 +133,6 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Skills updated')
-      setLastUpdated(Date.now()) // Update the lastUpdated state to re-render the component
       router.push('/hero')
     } catch (error) {
       toast.error('Failed to update skills')
@@ -298,7 +295,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
-                <SkillsChartComponent key={lastUpdated} skills={skills} />
+                <SkillsChartComponent key={skills.length} skills={skills} />
               </div>
             </div>
           </Tabs>
