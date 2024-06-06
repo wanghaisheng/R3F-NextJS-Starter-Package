@@ -44,6 +44,14 @@ export async function POST(request) {
       data: {
         email,
         password: hashedPassword,
+        region: {
+          ip: '',
+          city: '',
+          country_name: '',
+          continent_code: '',
+          latitude: '',
+          longitude: '',
+        },
       },
     })
     return NextResponse.json(newUser)
