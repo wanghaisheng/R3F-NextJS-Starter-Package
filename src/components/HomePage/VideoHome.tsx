@@ -5,6 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import Image from 'next/image'
 
 const guildData = [
   {
@@ -102,9 +103,18 @@ export default function VideoHome() {
                 ))}
               </div>
             </div>
+            <div className='absolute z-20 flex size-full flex-col items-center justify-center'>
+              <p className='text-3xl font-bold'>{guild.description}</p>
+              <p>{guild.skills.join(', ')}</p>
+              <p>{guild.additionalSkills.join(', ')}</p>
+              <p>{guild.alignment.join(', ')}</p>
+            </div>
             <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
               <source src={guild.guild_video} type='video/mp4' />
             </video>
+            <div className='absolute z-20 flex h-full items-end lg:right-20 lg:items-center'>
+              <Image src={guild.symbol} height={200} width={200} alt='guild symbol' />
+            </div>
           </SwiperSlide>
         ))}
         <SwiperSlide className='bg-cover bg-center'>
