@@ -581,7 +581,7 @@ export default function PrivateProfile() {
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative'>
                       <div className='flex min-h-48 flex-col items-center justify-center px-4 md:px-8 xl:px-10'>
-                        {user && skillsData ? (
+                        {user && skillsData.length > 0 ? (
                           <SkillsChartComponent skills={skillsData} />
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched
