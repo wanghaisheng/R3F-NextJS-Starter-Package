@@ -22,24 +22,11 @@ const createConfig: AvatarCreatorConfig = {
 export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const { user } = useUser()
-  const router = useRouter()
-  let avatarArray = []
-  const [existingAvatars, setExistingAvatars] = useState([])
+
   const handleOnAvatarExported = (event: AvatarExportedEvent) => {
     console.log(event.data.avatarId)
     setAvatarUrl(event.data.url)
   }
-
-  useEffect(() => {
-    const getAvatars = async () => {
-      user.avatar.forEach((avatar) => avatarArray.push(avatar.avatar_url))
-    }
-    if (user && user.avatar.length !== 0) {
-      getAvatars()
-    }
-  }, [user])
-
-  console.log(avatarArray)
 
   useEffect(() => {
     const createAvatar = async () => {
