@@ -128,10 +128,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
     }
   }
 
-  useEffect(() => {
-    console.log(geoLocationInfo)
-  }, [geoLocationInfo])
-
   return (
     <>
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
