@@ -130,6 +130,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       alignment: guildData[index].alignment,
       symbol: guildData[index].symbol,
       gg_id: user.gg_id,
+      element: guildData[index].element,
     }
     try {
       await axios({
@@ -155,6 +156,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       alignment: guildData[index].alignment,
       symbol: guildData[index].symbol,
       gg_id: user.gg_id,
+      element: guildData[index].element,
     }
     try {
       await axios({

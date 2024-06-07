@@ -89,6 +89,7 @@ model guilds {
   color             String?
   alignment         String[]
   id                String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  element           String?
   users             users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
