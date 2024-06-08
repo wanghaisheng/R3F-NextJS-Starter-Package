@@ -8,6 +8,7 @@ import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import toast from 'react-hot-toast'
 
 import { FaArrowRight } from 'react-icons/fa6'
+
 export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [first_name, setFirstName] = useState('')
@@ -16,19 +17,33 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
   const [address, setAddress] = useState('')
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
+  const [regionStatus, setRegionStatus] = useState(false)
+  const [geoLocationInfo, setGeoLocationInfo] = useState({
+    ip: '',
+    city: '',
+    country: '',
+    continent_code: '',
+    latitude: '',
+    longitude: '',
+  })
+
   useEffect(() => {
     const setUserInfo = () => {
       setFirstName(user.first_name ? user.first_name : '')
       setLastName(user.last_name ? user.last_name : '')
       setEmail(user.email ? user.email : '')
-      setAddress(user.address ? user.address : '')
+      setAddress(
+        user.region.ip !== '' ? user.region.city + ', ' + user.region.country : user.address ? user.address : '',
+      )
       setPhoneNumber(user.phone_number ? user.phone_number : '')
       setDob(user.dob ? user.dob : '')
+      setGeoLocationInfo(user.region)
     }
     if (user) {
       setUserInfo()
     }
   }, [user])
+
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
@@ -39,6 +54,24 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       phone_number,
       address,
       dob,
+      region:
+        geoLocationInfo.ip !== ''
+          ? {
+              ip: geoLocationInfo.ip,
+              city: geoLocationInfo.city,
+              country: geoLocationInfo.country,
+              continent_code: geoLocationInfo.continent_code,
+              latitude: geoLocationInfo.latitude,
+              longitude: geoLocationInfo.longitude,
+            }
+          : {
+              ip: '',
+              city: '',
+              country: '',
+              continent_code: '',
+              latitude: '',
+              longitude: '',
+            },
     }
     try {
       await axios({
@@ -52,6 +85,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       toast.error('Update failed!')
     }
   }
+
   const handleFirstNameChange = (newFirstName: string) => {
     setFirstName(newFirstName)
   }
@@ -70,6 +104,34 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
   const handleDOBChange = (newDob: string) => {
     setDob(newDob)
   }
+
+  const handleRegionStatus = async (value: boolean) => {
+    setRegionStatus(value)
+    if (value === true) {
+      const response = await fetch('https://ipapi.co/json/')
+      const data = await response.json()
+      const isConfirmed = window.confirm('Do you want to share the location via your IP?')
+      if (isConfirmed) {
+        setGeoLocationInfo(data)
+      } else {
+        return
+      }
+    } else if (value === false) {
+      setGeoLocationInfo({
+        ip: '',
+        city: '',
+        country: '',
+        continent_code: '',
+        latitude: '',
+        longitude: '',
+      })
+    }
+  }
+
+  useEffect(() => {
+    console.log(geoLocationInfo)
+  }, [geoLocationInfo])
+
   return (
     <>
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
@@ -200,11 +262,10 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
 
                         <input
                           type='checkbox'
-                          value={dob}
-                          onChange={(e) => handleDOBChange(e.target.value)}
+                          checked={regionStatus}
+                          onChange={(e) => handleRegionStatus(e.target.checked)}
                           className='rounded-md px-3 lg:w-[70%]  dark:bg-white/20'
-                          required
-                          aria-label='Date of Birth'
+                          aria-label='region status'
                         />
                       </div>
                     </div>

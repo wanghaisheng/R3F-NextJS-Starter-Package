@@ -38,12 +38,51 @@ export async function POST(request) {
       )
     }
 
+    // guild_name: 'BUDDHA',
+    // symbol: '/guild/buddha.png',
+    // color: 'white',
+    // element: 'Space',
+    // description: 'Development, Engineering & ITAI Services',
+    // skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+    // alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+    // additionalSkills: ['Innovation', 'data analysis', 'research'],
+
+    // description: 'Development, Engineering & ITAI Services',
+    // guild_name: 'BUDDHA',
+    // soft_skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+    // color: 'white',
+    // additional_skills: ['Innovation', 'data analysis', 'research'],
+    // alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+    // symbol: '/guild/buddha.png',
+    // gg_id: user.gg_id,
+
     // Create a new user
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = await prisma.users.create({
       data: {
         email,
         password: hashedPassword,
+        region: {
+          ip: '',
+          city: '',
+          country_name: '',
+          continent_code: '',
+          latitude: '',
+          longitude: '',
+        },
+      },
+    })
+    // console.log(newUser.gg_id + '--' + newUser.email)
+    await prisma.guilds.create({
+      data: {
+        description: 'Development, Engineering & ITAI Services',
+        guild_name: 'BUDDHA',
+        soft_skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+        color: 'white',
+        additional_skills: ['Innovation', 'data analysis', 'research'],
+        alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+        symbol: '/guild/buddha.png',
+        gg_id: newUser.gg_id,
       },
     })
     return NextResponse.json(newUser)
