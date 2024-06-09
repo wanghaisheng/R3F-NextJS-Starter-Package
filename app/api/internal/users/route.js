@@ -83,6 +83,7 @@ export async function POST(request) {
         alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
         symbol: '/guild/buddha.png',
         gg_id: newUser.gg_id,
+        element: 'Space',
       },
     })
     return NextResponse.json(newUser)
