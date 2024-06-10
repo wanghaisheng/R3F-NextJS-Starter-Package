@@ -1,24 +1,29 @@
-import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
+import Wallet from '@/components/card/TypeCard/Wallet'
 import { CardContainer } from '@/components/card/card'
 import TopUpWalletTabs from './TopUpWalletTabs'
+import { useUser } from '@/context/UserContext/UserContext'
 
 export default function WalletComponent() {
+  const { user } = useUser()
+
   return (
     <>
-      <div className='px-2 md:absolute md:right-12 md:top-14'>
-        <CardContainer>
-          <GeniusIDFlipCard
-            inSlider={false}
-            first_name='Ram'
-            last_name='Kumar'
-            email='asf@gmail.com'
-            dob='12/12/12'
-            contact='1234567890'
-            address='Bangalore'
+      <div className='relative -mt-3 px-2'>
+        {user ? (
+          <Wallet
+            first_name={user.first_name}
+            last_name={user.last_name}
+            email={user.email}
+            dob={user.dob}
+            contact={user.phone_number}
+            address={user.address}
+            balance='9076400'
           />
-        </CardContainer>
+        ) : (
+          <div>Signup</div>
+        )}
       </div>
-      <div className='mb-4 mt-0 h-20 bg-blue-300 md:mt-52'>
+      <div className='mt-8'>
         <h1 className='text-lg font-semibold text-white'>Wallet</h1>
       </div>
       <hr />

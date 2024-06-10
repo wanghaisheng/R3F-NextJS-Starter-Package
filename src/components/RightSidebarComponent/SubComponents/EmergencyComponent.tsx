@@ -16,9 +16,11 @@ export default function EmergencyComponent() {
     setIsFlipped(!isFlipped)
   }
 
+  console.log(user)
+
   return (
     <>
-      {user ? (
+      {user && user.cards[0] ? (
         <div className='group h-[239px] [prespective:1000px]'>
           <EmergencyCard
             type='emergency'
