@@ -34,84 +34,87 @@ async function getGuilds() {
   }
 }
 
-const guildData = [
-  {
-    id: '',
-    guild_name: 'BUDDHA',
-    symbol: '/guild/buddha.png',
-    color: 'white',
-    element: 'Space',
-    description: 'Development, Engineering & ITAI Services',
-    skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
-    alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
-    additionalSkills: ['Innovation', 'data analysis', 'research'],
-  },
-  {
-    id: '',
-    guild_name: 'VAJRA',
-    symbol: '/guild/vajra.png',
-    color: 'blue',
-    element: 'Water',
-    description: 'All Departments & ITAI Services',
-    avatar_img: '',
-    continent: '',
-    skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
-    alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
-    additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
-  },
-  {
-    id: '',
-    guild_name: 'KARMA',
-    symbol: '/guild/karma.png',
-    color: 'green',
-    element: 'Wind',
-    description: 'Sales & Marketing',
-    avatar_img: '',
-    continent: '',
-    skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
-    alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
-    additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
-  },
-  {
-    id: '',
-    guild_name: 'RATNA',
-    symbol: '/guild/ratna.png',
-    color: 'yellow',
-    element: 'Earth',
-    description: 'Admin & Customer Support',
-    avatar_img: '',
-    continent: '',
-    skills: ['Stability', 'reliability', 'patience', 'empathy'],
-    alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
-    additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
-  },
-  {
-    id: '',
-    guild_name: 'PADMA',
-    symbol: '/guild/padma.png',
-    color: 'red',
-    element: 'Fire',
-    description: 'Design & Creative (Working Class)',
-    avatar_img: '',
-    continent: '',
-    skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
-    alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
-    additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
-  },
-]
-
 export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-  const [staticGuildData, setStaticGuildData] = useState([])
+  const [guildData, setGuildData] = useState([
+    {
+      id: '',
+      guild_name: 'BUDDHA',
+      symbol: '/guild/buddha.png',
+      color: 'white',
+      element: 'Space',
+      description: 'Development, Engineering & ITAI Services',
+      skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+      alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+      additionalSkills: ['Innovation', 'data analysis', 'research'],
+    },
+    {
+      id: '',
+      guild_name: 'VAJRA',
+      symbol: '/guild/vajra.png',
+      color: 'blue',
+      element: 'Water',
+      description: 'All Departments & ITAI Services',
+      avatar_img: '',
+      continent: '',
+      skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
+      alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
+      additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
+    },
+    {
+      id: '',
+      guild_name: 'KARMA',
+      symbol: '/guild/karma.png',
+      color: 'green',
+      element: 'Wind',
+      description: 'Sales & Marketing',
+      avatar_img: '',
+      continent: '',
+      skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
+      alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
+      additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
+    },
+    {
+      id: '',
+      guild_name: 'RATNA',
+      symbol: '/guild/ratna.png',
+      color: 'yellow',
+      element: 'Earth',
+      description: 'Admin & Customer Support',
+      avatar_img: '',
+      continent: '',
+      skills: ['Stability', 'reliability', 'patience', 'empathy'],
+      alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
+      additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
+    },
+    {
+      id: '',
+      guild_name: 'PADMA',
+      symbol: '/guild/padma.png',
+      color: 'red',
+      element: 'Fire',
+      description: 'Design & Creative (Working Class)',
+      avatar_img: '',
+      continent: '',
+      skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
+      alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
+      additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
+    },
+  ])
+  const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
+  const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
+  const [index, setIndex] = useState(0)
+  const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
+  const [modelSrc, setModelSrc] = useState('')
 
   //GuildsData
   useEffect(() => {
     const fetchGuildData = async () => {
       try {
         const guildData = await getGuilds()
-        setStaticGuildData(guildData)
+        setGuildData(guildData)
       } catch (error) {
         toast.error('Failed to set avatar data')
       }
@@ -133,19 +136,24 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
   }, [user])
-  const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
-  const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
-
-  const [index, setIndex] = useState(0)
-  const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-
-  const [modelSrc, setModelSrc] = useState('')
   useEffect(() => {
     if (avatarsData.length > 0) {
       setModelSrc(avatarsData[avatarsData.length - 1].avatar_url)
     }
   }, [avatarsData])
+
+  // useEffect(() => {})
+
+  const handleGuildUpdate = (e: any) => {
+    e.preventDefault()
+    try {
+      const submit = {
+        guild_id: guildData[index].id,
+      }
+    } catch (error) {}
+  }
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
