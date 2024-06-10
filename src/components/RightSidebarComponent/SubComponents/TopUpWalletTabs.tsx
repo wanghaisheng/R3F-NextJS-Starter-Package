@@ -22,33 +22,33 @@ export default function TopUpWalletTabs() {
   const topupMethods = [
     {
       id: 1,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbJHtIt0p3GmXkfXnps0N5pOvgiGJVMe8kdg&s',
-      amount: '$5',
-      description: 'DFGH',
+      image: '/icons/share.png',
+      amount: '$99.99',
+      description: 'Premium',
     },
     {
       id: 2,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbJHtIt0p3GmXkfXnps0N5pOvgiGJVMe8kdg&s',
-      amount: '$10',
-      description: 'Another top-up option',
+      image: '/icons/share.png',
+      amount: '$49.99',
+      description: 'PAA',
     },
     {
       id: 3,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbJHtIt0p3GmXkfXnps0N5pOvgiGJVMe8kdg&s',
-      amount: '$10',
-      description: 'Another top-up option',
+      image: '/icons/share.png',
+      amount: '$19.99',
+      description: 'NNN',
     },
     {
       id: 4,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbJHtIt0p3GmXkfXnps0N5pOvgiGJVMe8kdg&s',
-      amount: '$10',
-      description: 'Another top-up option',
+      image: '/icons/share.png',
+      amount: '$9.99',
+      description: 'AFK',
     },
     {
       id: 5,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbJHtIt0p3GmXkfXnps0N5pOvgiGJVMe8kdg&s',
-      amount: '$10',
-      description: 'Another top-up option',
+      image: '/icons/share.png',
+      amount: '$4.99',
+      description: 'AFM',
     },
   ]
 
@@ -134,7 +134,7 @@ export default function TopUpWalletTabs() {
               <div>
                 <div className='-mt-2 grid grid-cols-2 gap-4'>
                   {topupMethods.map((product) => (
-                    <div key={product.id} className='relative overflow-hidden rounded-md bg-white shadow-md'>
+                    <div key={product.id} className='relative overflow-hidden rounded-md bg-purple-800/30 shadow-md'>
                       <div className='h-24 w-full overflow-hidden'>
                         <Image
                           src={product.image}
@@ -146,9 +146,9 @@ export default function TopUpWalletTabs() {
                           className='object-cover'
                         />
                       </div>
-                      <div className='h-14 w-full bg-gray-300 p-1'>
-                        <h1 className='font-medium text-black'>{product.amount}</h1>
-                        <h2 className='text-sm text-black'>{product.description}</h2>
+                      <div className='h-14 w-full bg-purple-600/40 p-1 backdrop-blur-sm'>
+                        <h1 className='font-medium text-white'>{product.amount}</h1>
+                        <h2 className='text-sm text-purple-200'>{product.description}</h2>
                       </div>
                     </div>
                   ))}
