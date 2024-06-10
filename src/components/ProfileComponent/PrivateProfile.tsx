@@ -243,12 +243,6 @@ export default function PrivateProfile() {
   }, [user])
   return (
     <div className='relative flex flex-col lg:size-full'>
-      <a
-        href='https://r3-f-next-js-starter-package-git-mainproduction-going-genius.vercel.app/guilds/feedback'
-        className='absolute -top-2 left-2 z-50 animate-pulse rounded-lg p-2 font-semibold  text-purple-200 shadow shadow-violet-400 lg:top-2'
-      >
-        Give Feedback
-      </a>
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
