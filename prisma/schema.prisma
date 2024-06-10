@@ -18,7 +18,7 @@ model avatar {
   avatar_id  String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   gg_id      String? @db.Uuid
   avatar_url String? @db.VarChar(255)
-  users      users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
+  users      users?  @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model cards {
@@ -33,7 +33,7 @@ model cards {
   emergency_contact String?
   emergency_details String?
   emergency_address String?
-  users             users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction, map: "card_gg_id_fkey")
+  users             users?  @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction, map: "card_gg_id_fkey")
 }
 
 model experience {
@@ -44,14 +44,14 @@ model experience {
   description    String?
   tools          String[]
   project_skills String[]
-  users          users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
+  users          users?   @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model skills {
   skill_id String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   skill    Json[]
   gg_id    String? @db.Uuid
-  users    users?  @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
+  users    users?  @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model users {
@@ -70,27 +70,25 @@ model users {
   address        String?      @db.VarChar(200)
   dob            String?      @db.VarChar
   region         Json?
+  guild_id       String?      @db.Uuid
   avatar         avatar[]
   cards          cards[]
   experience     experience[]
-  guilds         guilds[]
   skills         skills[]
 }
 
 model guilds {
-  description       String?
-  guild_name        String?
-  avatar_img        String?
-  continent         String?
-  gg_id             String?  @db.Uuid
-  soft_skills       String[]
-  additional_skills String[]
-  symbol            String?
-  color             String?
-  alignment         String[]
-  id                String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  element           String?
-  users             users?   @relation(fields: [gg_id], references: [gg_id], onDelete: NoAction, onUpdate: NoAction)
+  description      String?
+  guild_name       String?  @unique
+  avatar_img       String?
+  continent        String?
+  skills           String[]
+  additionalSkills String[]
+  symbol           String?
+  color            String?
+  alignment        String[]
+  id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  element          String?
 }
 
 model continents {

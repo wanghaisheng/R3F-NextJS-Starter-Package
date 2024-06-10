@@ -22,8 +22,21 @@ async function getAvatarById(id: string) {
   }
 }
 
+async function getGuilds() {
+  try {
+    const res = await axios.get('/api/internal/guilds')
+    if (res.status !== 200) {
+      toast.error('Failed to fetch guilds data')
+    }
+    return res.data
+  } catch (error) {
+    toast.error('Failed to fetch guilds data')
+  }
+}
+
 const guildData = [
   {
+    id: '',
     guild_name: 'BUDDHA',
     symbol: '/guild/buddha.png',
     color: 'white',
@@ -34,41 +47,53 @@ const guildData = [
     additionalSkills: ['Innovation', 'data analysis', 'research'],
   },
   {
+    id: '',
     guild_name: 'VAJRA',
     symbol: '/guild/vajra.png',
     color: 'blue',
     element: 'Water',
     description: 'All Departments & ITAI Services',
+    avatar_img: '',
+    continent: '',
     skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
     alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
     additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
   },
   {
+    id: '',
     guild_name: 'KARMA',
     symbol: '/guild/karma.png',
     color: 'green',
     element: 'Wind',
     description: 'Sales & Marketing',
+    avatar_img: '',
+    continent: '',
     skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
     alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
     additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
   },
   {
+    id: '',
     guild_name: 'RATNA',
     symbol: '/guild/ratna.png',
     color: 'yellow',
     element: 'Earth',
     description: 'Admin & Customer Support',
+    avatar_img: '',
+    continent: '',
     skills: ['Stability', 'reliability', 'patience', 'empathy'],
     alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
     additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
   },
   {
+    id: '',
     guild_name: 'PADMA',
     symbol: '/guild/padma.png',
     color: 'red',
     element: 'Fire',
     description: 'Design & Creative (Working Class)',
+    avatar_img: '',
+    continent: '',
     skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
     alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
     additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
@@ -79,14 +104,29 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+  const [staticGuildData, setStaticGuildData] = useState([])
 
+  //GuildsData
+  useEffect(() => {
+    const fetchGuildData = async () => {
+      try {
+        const guildData = await getGuilds()
+        setStaticGuildData(guildData)
+      } catch (error) {
+        toast.error('Failed to set avatar data')
+      }
+    }
+    fetchGuildData()
+  }, [guildData])
+
+  // AvatarsData
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        toast.error('Failed to fetch avatar data')
+        toast.error('Failed to set avatar data')
       }
     }
     if (user) {
@@ -96,80 +136,10 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
 
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
-  useEffect(() => {
-    const setGuild = () => {
-      if (user.guilds.length !== 0) {
-        setSelectedGuild(user.guilds[0].guild_name)
-      }
-    }
-    if (user) {
-      setGuild()
-    }
-  }, [user])
+
   const [index, setIndex] = useState(0)
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-  useEffect(() => {
-    const getIndex = guildData.findIndex((guild) => guild.guild_name === selectedGuild)
-    setIndex(getIndex)
-  }, [guildData, selectedGuild])
-  const checkUserGuild = () => {
-    if (user.guilds.length !== 0) {
-      return true
-    }
-    return false
-  }
-  const handleGuildSubmit = async (e: any) => {
-    e.preventDefault()
-    const submit = {
-      description: guildData[index].description,
-      guild_name: guildData[index].guild_name,
-      avatar_img: user.avatar.avatar_img,
-      soft_skills: guildData[index].skills,
-      color: guildData[index].color,
-      additional_skills: guildData[index].additionalSkills,
-      alignment: guildData[index].alignment,
-      symbol: guildData[index].symbol,
-      gg_id: user.gg_id,
-      element: guildData[index].element,
-    }
-    try {
-      await axios({
-        url: '/api/internal/guilds',
-        method: 'POST',
-        data: submit,
-      })
-      toast.success('Generated Sucessfully')
-      onNextButtonClick() // Move to next slide after successful generation
-    } catch (error) {
-      toast.error('Generation Failed')
-    }
-  }
-  const handleGuildUpdate = async (e: any) => {
-    e.preventDefault()
-    const submit = {
-      description: guildData[index].description,
-      guild_name: guildData[index].guild_name,
-      avatar_img: user.avatar.avatar_img,
-      soft_skills: guildData[index].skills,
-      color: guildData[index].color,
-      additional_skills: guildData[index].additionalSkills,
-      alignment: guildData[index].alignment,
-      symbol: guildData[index].symbol,
-      gg_id: user.gg_id,
-      element: guildData[index].element,
-    }
-    try {
-      await axios({
-        url: `/api/internal/guilds/${user.guilds[0].id}`,
-        method: 'PUT',
-        data: submit,
-      })
-      toast.success('Updated Sucessfully')
-      onNextButtonClick() // Move to next slide after successful update
-    } catch (error) {
-      toast.error('Update Failed')
-    }
-  }
+
   const [modelSrc, setModelSrc] = useState('')
   useEffect(() => {
     if (avatarsData.length > 0) {
@@ -230,7 +200,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 {/* GUILDS SELECTION */}
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
                   {/* {user && checkUserGuild() !== true ? ( */}
-                  <form onSubmit={user && checkUserGuild() !== true ? handleGuildSubmit : handleGuildUpdate}>
+                  <form>
                     <label
                       htmlFor='guilds'
                       className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'

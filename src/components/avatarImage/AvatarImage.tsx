@@ -21,7 +21,7 @@ export default function AvatarImageComponent() {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-
+  const [avatarUrlId, setAvatarUrlId] = useState('')
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
   useEffect(() => {
@@ -37,6 +37,12 @@ export default function AvatarImageComponent() {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
+
+  const extractAvatarId = (url) => {
+    const filteredElements = url.split('/').pop()
+    const avatarUrlId = filteredElements.split('.')[0]
+    setAvatarUrlId(avatarUrlId)
+  }
 
   // Fetch avatars data
   useEffect(() => {
@@ -73,6 +79,7 @@ export default function AvatarImageComponent() {
                   <DrawOutlineButton
                     onClick={() => {
                       setIsCardModalOpen(true)
+                      extractAvatarId(avatar.avatar_url)
                     }}
                   >
                     Edit Avatar &emsp; +
