@@ -61,7 +61,7 @@ export default function TopUpWalletTabs() {
               className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2 ${
                 activeTab === 'tab1'
                   ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+                  : 'text-gray-200 hover:bg-blue-400 hover:text-gray-900'
               }`}
               onClick={() => handleTabClick('tab1')}
             >
@@ -73,7 +73,7 @@ export default function TopUpWalletTabs() {
               className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2  ${
                 activeTab === 'tab2'
                   ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+                  : 'text-gray-200 hover:bg-blue-400 hover:text-gray-900'
               }`}
               onClick={() => handleTabClick('tab2')}
             >
