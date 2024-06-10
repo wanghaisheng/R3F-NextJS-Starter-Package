@@ -37,7 +37,7 @@ export default function EmergencyComponent() {
         </div>
       ) : (
         <div className='flex h-96 items-center justify-center'>
-          <div className='text-3xl text-gray-400'>No User Found</div>
+          <div className='text-3xl text-gray-400'>SignUp</div>
         </div>
       )}
       <div>Okay</div>

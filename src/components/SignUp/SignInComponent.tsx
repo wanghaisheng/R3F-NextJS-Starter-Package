@@ -71,7 +71,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
               <ErrorMessage name='email' component='p' className='-mt-3 text-xs text-red-500' />
 
               <div className={`input-group m-2 flex w-full rounded-md border-2 border-violet-400`}>
-                <div className={`darK:text-purple-200 flex items-center justify-center px-1 text-2xl text-purple-600`}>
+                <div className={`flex items-center justify-center px-1 text-2xl text-purple-600 dark:text-purple-200`}>
                   <RiLockPasswordLine />
                 </div>
                 <Field
@@ -84,20 +84,18 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
               </div>
               <ErrorMessage name='password' component='p' className='-mt-3 text-xs text-red-500' />
 
-              <div className=''>
-                <p className='flex justify-between text-sm text-blue-500'>
-                  <a href='' className='text-end transition-colors hover:text-blue-700'>
-                    Forgot Password?
-                  </a>
-                </p>
+              <div className='flex w-full justify-center px-4 text-sm text-blue-500'>
+                <a href='' className='transition-colors hover:text-blue-700'>
+                  Forgot Password?
+                </a>
               </div>
-              <div className='flex w-full items-center justify-center'>
+              <div className='flex w-full items-center justify-center p-5'>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type='submit'
                   disabled={isSubmitting}
-                  className='rounded-lg bg-purple-950 p-2 px-4 text-purple-200 dark:bg-purple-200 dark:text-purple-950'
+                  className='w-full rounded-lg bg-purple-950 p-2 px-4 text-purple-200 dark:bg-purple-200 dark:text-purple-950'
                 >
                   Sign In
                 </motion.button>
@@ -105,30 +103,11 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
             </Form>
           )}
         </Formik>
-        {/* <div className='flex items-end'>
-              <hr className='h-1 w-full border-solid text-black' />
-              <p className='px-5 font-semibold text-purple-950 dark:text-purple-200'>or</p>
-              <hr className='h-px' />
-            </div> */}
-        {/* <div className='flex justify-center gap-16 p-5'> */}
-        {/* <a href='/api/internal/auth/signin'> */}
-        {/* <a href='#'>
-                <FcGoogle className='text-3xl transition-transform hover:scale-125' />
-              </a>
-              <a href='#'>
-                <FaApple className='text-3xl transition-transform hover:scale-125' />
-              </a>
-              <a href='#'>
-                <LogosFacebook className='text-3xl transition-transform hover:scale-125' />
-              </a>
-            </div> */}
-        <div className='m-5 flex items-center justify-center '>
-          <p className=' text-sm text-purple-950 dark:text-purple-200'>
-            Not a Genius User yet?
-            <div onClick={changetoSignUp} className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
-              Sign Up Now
-            </div>
-          </p>
+        <div className='m-5 flex flex-col items-center justify-center '>
+          <p className=' text-sm text-purple-950 dark:text-purple-200'>Not a Genius User yet?</p>
+          <div onClick={changetoSignUp} className='text-blue-500 transition-colors hover:text-blue-700'>
+            Sign Up Now
+          </div>
         </div>
       </div>
     </>

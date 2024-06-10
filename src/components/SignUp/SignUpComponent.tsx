@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { motion } from 'framer-motion'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup' // For validation schema
+import * as Yup from 'yup'
 
 const { log } = console
 
@@ -100,13 +100,11 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn }) {
         )}
       </Formik>
 
-      <div className='m-5 flex items-center justify-center '>
-        <p className='text-sm text-purple-950 dark:text-purple-200'>
-          Already a Genius User?
-          <div onClick={changetoSignIn} className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
-            Sign In Here
-          </div>
-        </p>
+      <div className='m-5 flex flex-col items-center justify-center '>
+        <p className='text-sm text-purple-950 dark:text-purple-200'>Already a Genius User?</p>
+        <div onClick={changetoSignIn} className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
+          Sign In Here
+        </div>
       </div>
     </div>
   )
