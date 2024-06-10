@@ -63,6 +63,7 @@ export async function GET() {
         email: true,
         image_url: true,
         description: true,
+        guild_id: true,
         address: true,
         cards: true,
         experience: true,

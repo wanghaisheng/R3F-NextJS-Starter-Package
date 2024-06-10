@@ -105,7 +105,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   ])
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
-  const [index, setIndex] = useState(0)
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
   const [modelSrc, setModelSrc] = useState('')
 
@@ -121,6 +120,17 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     }
     fetchGuildData()
   }, [guildData])
+
+  // for displaying users guild
+  useEffect(() => {
+    const setUserGuild = async () => {
+      const guild = guildData.find((guild) => guild.id === user.guild_id)
+      setSelectedGuild(guild.guild_name)
+    }
+    if (user && guildData[0].id !== '') {
+      setUserGuild()
+    }
+  }, [user])
 
   // AvatarsData
   useEffect(() => {
@@ -145,13 +155,22 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
 
   // useEffect(() => {})
 
-  const handleGuildUpdate = (e: any) => {
+  const handleGuildUpdate = async (e: any) => {
     e.preventDefault()
     try {
       const submit = {
-        guild_id: guildData[index].id,
+        guild_id: selectedGuildData.id,
       }
-    } catch (error) {}
+      console.log(submit)
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'PUT',
+        data: submit,
+      })
+      toast.success('user guild updated')
+    } catch (error) {
+      toast.error('Failed to update user guild')
+    }
   }
 
   return (
@@ -208,7 +227,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 {/* GUILDS SELECTION */}
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
                   {/* {user && checkUserGuild() !== true ? ( */}
-                  <form>
+                  <form onSubmit={handleGuildUpdate}>
                     <label
                       htmlFor='guilds'
                       className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
