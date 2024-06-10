@@ -1,15 +1,10 @@
 'use client'
-import { FcGoogle } from 'react-icons/fc'
-import { FaApple } from 'react-icons/fa'
 import { LiaSignInAltSolid } from 'react-icons/lia'
 import { RiLockPasswordLine } from 'react-icons/ri'
-import { LogosFacebook } from '@/logo/LogosFacebook'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { motion } from 'framer-motion'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
-import Image from 'next/image'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup' // For validation schema
 

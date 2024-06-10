@@ -82,7 +82,7 @@ model guilds {
   guild_name        String?
   avatar_img        String?
   continent         String?
-  gg_id             String?  @db.Uuid
+  gg_id             String?  @unique @db.Uuid
   soft_skills       String[]
   additional_skills String[]
   symbol            String?
