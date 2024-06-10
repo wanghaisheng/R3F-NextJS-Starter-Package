@@ -58,10 +58,10 @@ export default function TopUpWalletTabs() {
         <ul className='flex w-full justify-center space-x-2 overflow-auto p-2'>
           <li className='w-full'>
             <div
-              className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2 ${
+              className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2 transition-colors duration-300 ${
                 activeTab === 'tab1'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-blue-400 hover:text-gray-900'
+                  ? 'bg-purple-700/30 text-purple-200'
+                  : 'bg-transparent text-gray-200 hover:bg-purple-700/30'
               }`}
               onClick={() => handleTabClick('tab1')}
             >
@@ -70,10 +70,10 @@ export default function TopUpWalletTabs() {
           </li>
           <li className='w-full'>
             <div
-              className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2  ${
+              className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2 transition-colors duration-300 ${
                 activeTab === 'tab2'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-blue-400 hover:text-gray-900'
+                  ? 'bg-purple-700/30 text-purple-200'
+                  : 'bg-transparent text-gray-200 hover:bg-purple-700/30'
               }`}
               onClick={() => handleTabClick('tab2')}
             >
@@ -83,7 +83,7 @@ export default function TopUpWalletTabs() {
         </ul>
       </div>
 
-      <hr />
+      <hr className=' border-t-2 border-purple-700 transition-colors hover:border-purple-400' />
 
       <div className='h-52 overflow-auto'>
         {activeTab && (
@@ -107,7 +107,7 @@ export default function TopUpWalletTabs() {
                 >
                   {({ isSubmitting }) => (
                     <Form className='flex w-full flex-col items-center justify-center'>
-                      <label htmlFor='redeemCode' className='mb-2 w-full font-semibold'>
+                      <label htmlFor='redeemCode' className='mb-2 w-full font-semibold text-violet-300'>
                         Redeem Code:
                       </label>
                       <Field
@@ -115,13 +115,13 @@ export default function TopUpWalletTabs() {
                         type='text'
                         name='redeemCode'
                         placeholder='Enter redeem code'
-                        className='w-full rounded-md border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        className='w-full rounded-md bg-black/20 px-3 py-2 text-white shadow shadow-purple-700 backdrop-blur-sm focus:outline-none '
                       />
                       <ErrorMessage name='redeemCode' component='p' className='mt-1 text-xs text-red-500' />
                       <button
                         type='submit'
                         disabled={isSubmitting}
-                        className='mt-4 w-fit rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
+                        className='mt-4 w-fit rounded border border-purple-800 bg-black/20 px-4 py-2 font-bold text-white transition-colors  hover:bg-purple-700/20 focus:outline-none'
                       >
                         Redeem
                       </button>

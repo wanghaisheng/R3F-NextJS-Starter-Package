@@ -26,7 +26,7 @@ export default function WalletComponent() {
       <div className='mt-8'>
         <h1 className='text-lg font-semibold text-white'>Wallet</h1>
       </div>
-      <hr />
+      <hr className=' border-t-2 border-purple-700 transition-colors hover:border-purple-400' />
 
       <div className='mb-10'>
         <TopUpWalletTabs />

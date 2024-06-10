@@ -62,7 +62,7 @@ export default function SearchComponent() {
               </div> */}
               <div className='mt-4'>
                 <button
-                  className='w-full rounded-full bg-blue-500 py-2 text-center text-white transition-colors duration-500 hover:bg-blue-500/20'
+                  className='w-full rounded-full bg-black/10 py-2 text-center text-white shadow-md shadow-purple-700 backdrop-blur-md transition-colors duration-500 hover:bg-purple-800/20'
                   onClick={toggleSignUp}
                 >
                   Create account
@@ -84,10 +84,10 @@ export default function SearchComponent() {
                 .
               </div>
               <div className='mt-4 text-center'>
-                <p className='text-sm'>Already have an account?</p>
+                <p className='mb-2 text-sm'>Already have an account?</p>
                 <a href='#' className='text-blue-400'>
                   <button
-                    className='w-full rounded-full bg-blue-500 py-2 text-center text-white transition-colors duration-500 hover:bg-blue-500/20'
+                    className='w-full rounded-full bg-black/10 py-2 text-center text-white shadow-md shadow-purple-700 backdrop-blur-md transition-colors duration-500 hover:bg-purple-800/20'
                     onClick={toggleSignIn}
                   >
                     Sign In
