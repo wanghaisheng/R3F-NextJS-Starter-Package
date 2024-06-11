@@ -148,8 +148,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
 
-    // Set interval to fetch avatar data every 5 seconds
-    const intervalId = setInterval(fetchAvatarsData, 5000)
+    // Set interval to fetch avatar data every 10 seconds
+    const intervalId = setInterval(fetchAvatarsData, 10000)
     return () => clearInterval(intervalId) // Clear interval on component unmount
   }, [user])
 
