@@ -10,15 +10,14 @@ import * as Yup from 'yup'
 
 const { log } = console
 
-export default function SignUpComponent({ toggleSignUp, toggleSignIn }) {
+export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSignIn }) {
   const router = useRouter()
   const [generalError, setGeneralError] = useState('')
 
   const changetoSignIn = () => {
     toggleSignUp()
-    toggleSignIn()
+    setShowSignIn(true)
   }
-
   return (
     <div className='flex h-auto flex-col items-center justify-center rounded-3xl bg-violet-300 backdrop-blur-sm  dark:bg-black/30'>
       <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
@@ -40,7 +39,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn }) {
             })
             log('Response:', data)
             if (data != null) {
-              router.push('/signin')
+              changetoSignIn()
             }
           } catch (error) {
             log('Error: ', error)

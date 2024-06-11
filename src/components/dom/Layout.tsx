@@ -14,10 +14,10 @@ const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 const Layout = ({ children }) => {
   const ref = useRef()
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false) // for toggling the right sidebar
 
-  const [showSignUp, setShowSignUp] = useState(false)
-  const [showSignIn, setShowSignIn] = useState(false)
+  const [showSignUp, setShowSignUp] = useState(false) // for showing the signup component in the right sidebar
+  const [showSignIn, setShowSignIn] = useState(false) // for showing the signin component in the right sidebar
 
   return (
     <div

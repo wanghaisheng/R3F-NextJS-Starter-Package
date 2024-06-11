@@ -102,7 +102,11 @@ export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn,
                   <div onClick={toggleSignUp} className='px-2'>
                     <IoIosArrowBack />
                   </div>
-                  <SignUpComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} />
+                  <SignUpComponent
+                    toggleSignIn={toggleSignIn}
+                    toggleSignUp={toggleSignUp}
+                    setShowSignIn={setShowSignIn}
+                  />
                 </div>
               )}
               {showSignIn && (
