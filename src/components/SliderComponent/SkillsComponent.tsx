@@ -18,14 +18,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
 
-  function checkExistingSkills(skill: string, exp_skills: string[][]): boolean {
-    for (let i = 0; i < exp_skills.length; i++) {
-      if (exp_skills[i].includes(skill)) {
-        return true
-      }
-    }
-    return false
+  const checkExistingSkills = (skill, exp_skills) => {
+    return exp_skills.some((expSkill) => expSkill.includes(skill))
   }
+
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
@@ -93,10 +89,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     if (user) {
       fetchSkillsData() // Fetch data only if user is available
     }
-  }, [user, skills.length])
+  }, [user])
+
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
   }
+
   const handleSkillSubmit = async (e: any, index: number) => {
     e.preventDefault()
     const submit = {
@@ -198,9 +196,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
             </div>
           </div>
           <Tabs>
-            <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
+            <TabList className='mt-20 flex overflow-x-auto lg:my-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
+                <Tab
+                  key={index}
+                  className='ml-3 flex cursor-pointer whitespace-nowrap px-1 text-purple-950 dark:text-purple-200 '
+                >
                   {element.skill_name}
                   {index !== 0 && (
                     <button

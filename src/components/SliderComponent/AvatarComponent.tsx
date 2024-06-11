@@ -94,7 +94,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-  const [modelSrc, setModelSrc] = useState('')
+  const [modelSrc, setModelSrc] = useState<string | null>(null)
 
   //GuildsData
   useEffect(() => {
@@ -134,15 +134,19 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     if (user) {
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
+
+    // Set interval to fetch avatar data every 7 seconds
+    const intervalId = setInterval(fetchAvatarsData, 7000)
+    return () => clearInterval(intervalId) // Clear interval on component unmount
   }, [user])
 
+  // This useEffect will run whenever `avatarsData` changes.
+  // It updates the `modelSrc` state, which will trigger a re-render.
   useEffect(() => {
-    if (avatarsData.length > 0) {
+    if (avatarsData && avatarsData.length > 0) {
       setModelSrc(avatarsData[avatarsData.length - 1].avatar_url)
     }
   }, [avatarsData])
-
-  // useEffect(() => {})
 
   const handleGuildUpdate = async (e: any) => {
     e.preventDefault()
@@ -157,6 +161,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         data: submit,
       })
       toast.success('user guild updated')
+      onNextButtonClick()
     } catch (error) {
       toast.error('Failed to update user guild')
     }
@@ -177,13 +182,11 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Avatar and AvatarImageComponent Container */}
               <div className='flex flex-col items-center justify-center lg:w-[35%]'>
-                {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
+                {memoizedAvatarsData && modelSrc && memoizedAvatarsData.length != 0 ? (
                   <div className='relative'>
                     <Avatar
                       key={modelSrc}
-                      // modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                       modelSrc={modelSrc}
-                      // shadows
                       animationSrc='/male-idle-3.fbx'
                       style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
                       fov={40}
@@ -198,7 +201,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   <div className='relative'>
                     <Avatar
                       modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-                      // shadows
                       animationSrc='/male-idle-3.fbx'
                       style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
                       fov={40}
@@ -324,7 +326,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   setIsCardModalOpen(true)
                 }}
               >
-                Create Avatar &emsp; +
+                Create Avatar   +
               </DrawOutlineButton>
             </div>
             {isCardModalOpen && (

@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
 
-const Navbar = () => {
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
   const closeMenu = () => {
     setOpen(false)
@@ -18,6 +18,11 @@ const Navbar = () => {
   const pathname = usePathname()
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
   const [hideTopRightNav, setHideTopRightNav] = useState(false)
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+    setShowSignUp(true)
+  }
 
   useEffect(() => {
     if (
@@ -95,7 +100,7 @@ const Navbar = () => {
                 )}
                 <div className='flex'>
                   <Link
-                    href='/signin'
+                    href='/'
                     onClick={logout}
                     className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none md:flex'
                     id='user-menu-button'
@@ -112,12 +117,12 @@ const Navbar = () => {
               <>
                 {hideTopRightNav ? null : (
                   <div className='text-black dark:text-white'>
-                    <Link
-                      href='/signup'
+                    <div
+                      onClick={toggleSidebar}
                       className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
                     >
                       REGISTER
-                    </Link>
+                    </div>
                     <div className='-mr-2 flex items-center md:hidden'>
                       <Hamburger toggled={isOpen} toggle={setOpen} />
                     </div>
@@ -286,7 +291,7 @@ const Navbar = () => {
               <li className='fixed bottom-5 left-10'>
                 {user ? (
                   <Link
-                    href='/signin'
+                    href='/'
                     onClick={logout}
                     className='py-4 text-red-500 hover:text-fuchsia-300'
                     aria-label='Sign Out'
@@ -294,14 +299,13 @@ const Navbar = () => {
                     Logout
                   </Link>
                 ) : (
-                  <Link
-                    href='/signup'
+                  <div
+                    onClick={toggleSidebar}
                     className='py-4 text-blue-400 hover:text-fuchsia-300'
                     aria-label='Sign In'
-                    onClick={closeMenu}
                   >
                     REGISTER
-                  </Link>
+                  </div>
                 )}
               </li>
             </ul>

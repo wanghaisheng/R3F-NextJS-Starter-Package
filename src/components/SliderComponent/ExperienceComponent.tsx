@@ -173,9 +173,12 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
           </div>
           <Tabs>
             {/* TabList */}
-            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
+            <TabList className='mt-20 flex overflow-x-auto  sm:items-start sm:justify-start lg:my-6'>
               {projects.map((project, index) => (
-                <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
+                <Tab
+                  key={index}
+                  className='ml-3 flex cursor-pointer  whitespace-nowrap px-1 text-purple-950 dark:text-purple-200'
+                >
                   {project.name}
                   {index !== 0 && ( // Condition to check if it's not the first tab
                     <button

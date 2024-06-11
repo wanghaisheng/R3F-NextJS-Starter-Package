@@ -171,21 +171,28 @@ const Factions = ({ params }) => {
 
   useEffect(() => {
     const mapGuildInfo = () => {
-      const guilds = publicUsers.map((publicUser) => ({
-        name: publicUser.first_name + ' ' + publicUser.last_name,
-        description: publicUser.description,
-        guild: guildData.find((guild) => guild.id === publicUser.guild_id).guild_name,
-        avatarimg: publicUser.avatar[0].avatar_url.replace('glb', 'png'),
-        continent: continents.find(
+      const guilds = publicUsers.map((publicUser) => {
+        const guild = guildData.find((guild) => guild.id === publicUser.guild_id)
+        const continent = continents.find(
           (continent) => continent.continent_code.toUpperCase() === publicUser.region.continent_code,
-        ).continent_name,
-      }))
+        )
+        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
+
+        return {
+          name: publicUser.first_name + ' ' + publicUser.last_name,
+          description: publicUser.description,
+          guild: guild ? guild.guild_name : 'Unknown Guild',
+          avatarimg: avatarUrl.replace('glb', 'png'),
+          continent: continent ? continent.continent_name : 'Unknown Continent',
+        }
+      })
       setGuilds(guilds)
     }
+
     if (publicUsers.length !== 0 && guildData.length !== 0) {
       mapGuildInfo()
     }
-  }, [publicUsers, guildData])
+  }, [publicUsers, guildData, continents])
 
   return (
     <>

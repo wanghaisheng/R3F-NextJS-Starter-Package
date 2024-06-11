@@ -5,6 +5,7 @@ import { enqueueSnackbar } from 'notistack'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useUser } from '@/context/UserContext/UserContext'
+import toast from 'react-hot-toast'
 
 const config: AvatarCreatorConfig = {
   clearCache: true,
@@ -50,16 +51,10 @@ export default function App() {
           method: 'POST',
           data: submit,
         })
-        enqueueSnackbar('Avatar Created Sucessfully', {
-          autoHideDuration: 2000,
-          variant: 'success',
-        })
+        toast.success('Avatar Created Sucessfully')
       } catch (error) {
         console.error('Error: ', error)
-        enqueueSnackbar('Failed to create the avatar', {
-          autoHideDuration: 2000,
-          variant: 'error',
-        })
+        toast.error('Failed to create the avatar')
       }
     }
     if (user && avatarUrl !== '') {

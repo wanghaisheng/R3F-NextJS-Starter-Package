@@ -9,10 +9,8 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { IoIosArrowBack } from 'react-icons/io'
 
-export default function SearchComponent() {
+export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn, setShowSignIn }) {
   const { user } = useUser()
-  const [showSignUp, setShowSignUp] = useState(false)
-  const [showSignIn, setShowSignIn] = useState(false)
 
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp)
@@ -22,17 +20,37 @@ export default function SearchComponent() {
     setShowSignIn(!showSignIn)
   }
   return (
-    <div className='mb-32 flex h-full flex-col'>
-      <div className='flex-1 p-4'>
-        <h2>Search tab</h2>
+    <div className='mb-12 flex h-full flex-col'>
+      <div className='flex-1 px-4'>
+        <div className='mb-4 flex items-center gap-2'>
+          <input
+            type='text'
+            placeholder='Search ...'
+            // onChange={}
+            className='-mt-4 w-full rounded-md border border-purple-700 bg-purple-950/20 px-3 py-2 text-purple-200 focus:outline-none'
+          />
+        </div>
+        <div className='flex h-1/2 w-full justify-between gap-x-2'>
+          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+            <p>Searched Items</p>
+          </div>
+          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+            <p>Searched Items</p>
+          </div>
+        </div>
+        {user && (
+          <div className='mt-2 flex h-1/3 w-full justify-between gap-x-2'>
+            <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+              <p>Searched Items</p>
+            </div>
+            <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+              <p>Searched Items</p>
+            </div>
+          </div>
+        )}
       </div>
 
-      {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
-          {/* User is signed in, show a message or other content */}
-          <p>Welcome, {user.name}!</p>
-        </div>
-      ) : (
+      {!user && (
         <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
           {!showSignUp && !showSignIn ? (
             <div className='mx-auto max-w-xs flex-1 p-4'>
@@ -94,6 +112,16 @@ export default function SearchComponent() {
                   </button>
                 </a>
               </div>
+              <div className='mt-4 text-center'>
+                <a href='#' className='text-blue-400'>
+                  <button
+                    className='w-full rounded-full bg-black/10 py-2 text-center text-white shadow-md shadow-purple-700 backdrop-blur-md transition-colors duration-500 hover:bg-purple-800/20'
+                    // onClick={toggleSignIn}
+                  >
+                    Sign In As a Developer
+                  </button>
+                </a>
+              </div>
             </div>
           ) : (
             <>
@@ -102,7 +130,11 @@ export default function SearchComponent() {
                   <div onClick={toggleSignUp} className='px-2'>
                     <IoIosArrowBack />
                   </div>
-                  <SignUpComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} />
+                  <SignUpComponent
+                    toggleSignIn={toggleSignIn}
+                    toggleSignUp={toggleSignUp}
+                    setShowSignIn={setShowSignIn}
+                  />
                 </div>
               )}
               {showSignIn && (

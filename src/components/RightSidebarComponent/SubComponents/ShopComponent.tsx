@@ -156,7 +156,7 @@ export default function ShopComponent() {
           placeholder='Search products...'
           value={searchTerm}
           onChange={handleSearchChange}
-          className='-mt-4 w-full rounded-md border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
+          className='-mt-4 w-full rounded-md border border-purple-700 bg-purple-950/20 px-3 py-2 text-purple-200 focus:outline-none'
         />
       </div>
       {/* Carousel */}
@@ -170,8 +170,10 @@ export default function ShopComponent() {
           >
             <SwiperSlide className='shrink-0 pb-4'>
               <button
-                className={`w-full justify-center rounded-md p-2 ${
-                  selectedCategory === null ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                className={`w-full justify-center rounded-md  p-2  ${
+                  selectedCategory === null
+                    ? ' border border-purple-600 bg-black/20 text-white'
+                    : ' bg-purple-800/30 text-gray-200'
                 }`}
                 onClick={() => handleCategoryClick(null)}
               >
@@ -182,7 +184,9 @@ export default function ShopComponent() {
               <SwiperSlide key={category} className='shrink-0 pb-4'>
                 <button
                   className={`w-full justify-center rounded-md p-2 ${
-                    selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                    selectedCategory === category
+                      ? 'border border-purple-600 bg-black/20 text-white'
+                      : ' bg-purple-800/30 text-gray-200'
                   }`}
                   onClick={() => handleCategoryClick(category)}
                 >
@@ -196,7 +200,7 @@ export default function ShopComponent() {
       <div className='-mt-2 grid grid-cols-2 gap-4'>
         {searchedProducts.map((product) => (
           <div key={product.productId} className='relative overflow-hidden rounded-md bg-white shadow-md'>
-            <div className='h-24 w-full overflow-hidden'>
+            <div className='h-24 w-full overflow-hidden rounded-md bg-purple-800/30 shadow-md'>
               <Image
                 src={product.imageUrl}
                 unoptimized
@@ -207,7 +211,7 @@ export default function ShopComponent() {
                 className='object-cover'
               />
             </div>
-            <div className='h-14 w-full bg-gray-300 p-1'>
+            <div className='h-14 w-full bg-purple-600/40 p-1 backdrop-blur-sm'>
               <h1 className='font-medium text-black'>${product.price}</h1>
               <h2 className='text-sm text-black'>{product.name.slice(0, 10)}...</h2>
               {/* <p className='mt-1 text-sm text-gray-600'>{product.description.slice(0, 22)}...</p> */}

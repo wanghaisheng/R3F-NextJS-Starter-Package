@@ -7,13 +7,15 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { motion } from 'framer-motion'
 import Cookies from 'js-cookie'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup' // For validation schema
+import * as Yup from 'yup'
+import { useState } from 'react' // Import useState
 
 const { log } = console
 
 const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
   const router = useRouter()
   const { updateUser } = useUser()
+  const [generalError, setGeneralError] = useState('') // State for managing error messages
 
   const changetoSignUp = () => {
     toggleSignUp()
@@ -22,7 +24,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
 
   return (
     <>
-      <div className='flex h-auto flex-col items-center justify-center rounded-3xl bg-violet-300 backdrop-blur-sm  dark:bg-black/30'>
+      <div className='flex h-auto flex-col items-center justify-center rounded-3xl bg-violet-300 backdrop-blur-sm dark:bg-black/30'>
         <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
           <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN IN</h2>
         </div>
@@ -34,6 +36,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             log('Submit: ', values)
+            setGeneralError('')
             try {
               const { data } = await axios({
                 url: '/api/internal/signin',
@@ -49,7 +52,13 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
               }
             } catch (error) {
               log('Error: ', error)
-              log('Error Response: ', error.response.status)
+              if (error.response && error.response.status === 404) {
+                setGeneralError('User does not exist')
+              } else if (error.response && error.response.status === 401) {
+                setGeneralError('Password do not match')
+              } else {
+                setGeneralError('An error occurred. Please try again.')
+              }
             }
             setSubmitting(false)
           }}
@@ -69,7 +78,6 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
                 />
               </div>
               <ErrorMessage name='email' component='p' className='-mt-3 text-xs text-red-500' />
-
               <div className={`input-group m-2 flex w-full rounded-md border-2 border-violet-400`}>
                 <div className={`flex items-center justify-center px-1 text-2xl text-purple-600 dark:text-purple-200`}>
                   <RiLockPasswordLine />
@@ -83,7 +91,8 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
                 />
               </div>
               <ErrorMessage name='password' component='p' className='-mt-3 text-xs text-red-500' />
-
+              {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}{' '}
+              {/* Display general error message */}
               <div className='flex w-full justify-center px-4 text-sm text-blue-500'>
                 <a href='' className='transition-colors hover:text-blue-700'>
                   Forgot Password?
@@ -113,4 +122,5 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
     </>
   )
 }
+
 export default SignInComponent
