@@ -198,9 +198,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
             </div>
           </div>
           <Tabs>
-            <TabList className='mt-20 grid grid-cols-3 lg:my-6 lg:grid-cols-6'>
+            <TabList className='mt-20 grid grid-cols-3 overflow-x-auto lg:my-6 lg:grid-cols-6'>
               {skills.map((element, index) => (
-                <Tab key={index} className='ml-3 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
+                <Tab
+                  key={index}
+                  className='ml-3 flex cursor-pointer whitespace-nowrap px-1 text-purple-950 dark:text-purple-200 '
+                >
                   {element.skill_name}
                   {index !== 0 && (
                     <button

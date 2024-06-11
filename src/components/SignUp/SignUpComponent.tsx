@@ -2,7 +2,6 @@
 import { LiaSignInAltSolid } from 'react-icons/lia'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { motion } from 'framer-motion'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -11,7 +10,6 @@ import * as Yup from 'yup'
 const { log } = console
 
 export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSignIn }) {
-  const router = useRouter()
   const [generalError, setGeneralError] = useState('')
 
   const changetoSignIn = () => {
@@ -31,6 +29,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
         })}
         onSubmit={async (values, { setSubmitting }) => {
           log('Submit: ', values)
+          setGeneralError('')
           try {
             const { data } = await axios({
               url: '/api/internal/users',
