@@ -13,13 +13,13 @@ const getUsers = async () => {
     }
     const users = res.data.filter(
       (user) =>
-        user.first_name !== (null || '') &&
-        user.last_name !== (null || '') &&
-        user.email !== (null || '') &&
-        user.description !== (null || '') &&
-        user.region.ip !== '' &&
+        user.first_name &&
+        user.last_name &&
+        user.email &&
+        user.description &&
+        user.region.ip &&
         user.avatar.length !== 0 &&
-        user.guild_id !== (null || ''),
+        user.guild_id,
     )
     return users
   } catch (error) {
@@ -44,38 +44,7 @@ const Factions = ({ params }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [publicUsers, setPublicUsers] = useState([])
   const [guildData, setGuildData] = useState([])
-  const continents = [
-    {
-      continent_name: 'africa',
-      continent_code: 'af',
-    },
-    {
-      continent_name: 'antartica',
-      continent_code: 'an',
-    },
-    {
-      continent_name: 'asia',
-      continent_code: 'as',
-    },
-    {
-      continent_name: 'europe',
-      continent_code: 'eu',
-    },
-    {
-      continent_name: 'north america',
-      continent_code: 'na',
-    },
-    {
-      continent_name: 'oceania',
-      continent_code: 'oc',
-    },
-    {
-      continent_name: 'south and central america',
-      continent_code: 'sa',
-    },
-  ]
-
-  const guilds = [
+  const [guilds, setGuilds] = useState([
     {
       name: 'Rohit Shrestha',
       description: 'description',
@@ -147,15 +116,37 @@ const Factions = ({ params }) => {
       avatarimg: 'https://models.readyplayer.me/6630d85ee2cc95da16c0484b.png',
       continent: 'SUB-SAHARAN-AFRICA',
     },
+  ])
+  const continents = [
+    {
+      continent_name: 'africa',
+      continent_code: 'af',
+    },
+    {
+      continent_name: 'antartica',
+      continent_code: 'an',
+    },
+    {
+      continent_name: 'asia',
+      continent_code: 'as',
+    },
+    {
+      continent_name: 'europe',
+      continent_code: 'eu',
+    },
+    {
+      continent_name: 'north america',
+      continent_code: 'na',
+    },
+    {
+      continent_name: 'oceania',
+      continent_code: 'oc',
+    },
+    {
+      continent_name: 'south and central america',
+      continent_code: 'sa',
+    },
   ]
-
-  // const guilds = publicUsers.map((publicUser) => ({
-  //   name: publicUser.first_name + ' ' + publicUser.last_name,
-  //   description: publicUser.description,
-  //   guild: guildData.find((guild) => guild.id === publicUser.guild_id).guild_name,
-  //   avatarimg: publicUser.avatar[0].avatar_url,
-  //   continent: continents.find((continent) => continent.continent_code === publicUser.region.continent_code).continent_name,
-  // }))
 
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter)
@@ -179,9 +170,22 @@ const Factions = ({ params }) => {
   }, [])
 
   useEffect(() => {
-    console.log(guildData)
-    console.log(publicUsers)
-  }, [guildData, publicUsers])
+    const mapGuildInfo = () => {
+      const guilds = publicUsers.map((publicUser) => ({
+        name: publicUser.first_name + ' ' + publicUser.last_name,
+        description: publicUser.description,
+        guild: guildData.find((guild) => guild.id === publicUser.guild_id).guild_name,
+        avatarimg: publicUser.avatar[0].avatar_url.replace('glb', 'png'),
+        continent: continents.find(
+          (continent) => continent.continent_code.toUpperCase() === publicUser.region.continent_code,
+        ).continent_name,
+      }))
+      setGuilds(guilds)
+    }
+    if (publicUsers.length !== 0 && guildData.length !== 0) {
+      mapGuildInfo()
+    }
+  }, [publicUsers, guildData])
 
   return (
     <>
