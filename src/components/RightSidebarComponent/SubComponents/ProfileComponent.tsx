@@ -31,12 +31,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   return (
     <div className='mb-32 flex h-full flex-col'>
       {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
-          <p>
-            Welcome, {user.first_name} {user.last_name}!
+        <div className='flex-1 items-center justify-center rounded-lg bg-black p-3 text-white'>
+          <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-8xl font-bold uppercase'>
+            {user.first_name} {user.last_name}!
           </p>
-          <div>Avatar</div>
-          <div className=' h-[360px] w-full '>
+          <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
                 modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -64,6 +63,13 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                 }}
               />
             )}
+          </div>
+          <div className='flex justify-between gap-x-10'>
+            <div>
+              <p>Guild</p>
+              <p>{user.guild}</p>
+            </div>
+            <div>Heo</div>
           </div>
           <p>Other details</p>
           <p>Form to add profile pic and bio</p>

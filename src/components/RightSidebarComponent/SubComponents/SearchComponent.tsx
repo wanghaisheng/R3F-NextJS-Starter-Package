@@ -38,14 +38,16 @@ export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn,
             <p>Searched Items</p>
           </div>
         </div>
-        <div className='mt-2 flex h-1/3 w-full justify-between gap-x-2'>
-          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
-            <p>Searched Items</p>
+        {user && (
+          <div className='mt-2 flex h-1/3 w-full justify-between gap-x-2'>
+            <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+              <p>Searched Items</p>
+            </div>
+            <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+              <p>Searched Items</p>
+            </div>
           </div>
-          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
-            <p>Searched Items</p>
-          </div>
-        </div>
+        )}
       </div>
 
       {!user && (
