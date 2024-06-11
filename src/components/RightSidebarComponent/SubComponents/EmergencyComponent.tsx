@@ -6,7 +6,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function EmergencyComponent({ setActiveTab }) {
+export default function EmergencyComponent({ setActiveTab, setShowSignUp }) {
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   const { user } = useUser()
@@ -18,6 +18,7 @@ export default function EmergencyComponent({ setActiveTab }) {
 
   const handleSignUpClick = () => {
     setActiveTab('search')
+    setShowSignUp(true)
   }
 
   return (

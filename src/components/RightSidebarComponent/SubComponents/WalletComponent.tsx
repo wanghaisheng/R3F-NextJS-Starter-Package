@@ -2,11 +2,12 @@ import Wallet from '@/components/card/TypeCard/Wallet'
 import TopUpWalletTabs from './TopUpWalletTabs'
 import { useUser } from '@/context/UserContext/UserContext'
 
-export default function WalletComponent({ setActiveTab }) {
+export default function WalletComponent({ setActiveTab, setShowSignUp }) {
   const { user } = useUser()
 
   const handleSignUpClick = () => {
     setActiveTab('search')
+    setShowSignUp(true)
   }
 
   return (

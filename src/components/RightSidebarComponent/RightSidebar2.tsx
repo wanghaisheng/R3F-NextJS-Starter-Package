@@ -6,23 +6,24 @@ import { PiCardsFill } from 'react-icons/pi'
 import { TbEmergencyBed } from 'react-icons/tb'
 import { FaOpencart } from 'react-icons/fa'
 import Image from 'next/image'
-
+import { useUser } from '@/context/UserContext/UserContext'
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
 import EmergencyComponent from './SubComponents/EmergencyComponent'
 
-const RightSidebar2 = () => {
+const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [activeTab, setActiveTab] = useState('search')
+  const { user } = useUser()
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab)
   }
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
+    setShowSignUp(false)
+    setShowSignIn(false)
     setActiveTab('search')
   }
 
@@ -48,7 +49,17 @@ const RightSidebar2 = () => {
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>
-          <h2 className='text-xl font-bold'>{activeTab.toUpperCase()}</h2>
+          {activeTab === 'search' ? (
+            <>
+              {!user ? (
+                <h2 className='text-xl font-bold'>SIGNUP | SIGNIN | SEARCH </h2>
+              ) : (
+                <h2 className='text-xl font-bold'>SEARCH</h2>
+              )}
+            </>
+          ) : (
+            <h2 className='text-xl font-bold'>{activeTab.toUpperCase()}</h2>
+          )}
           <button className='text-blue-600 hover:text-white/60' onClick={toggleSidebar}>
             <svg xmlns='http://www.w3.org/2000/svg' className='size-6' viewBox='0 0 20 20' fill='currentColor'>
               <path
@@ -63,10 +74,19 @@ const RightSidebar2 = () => {
         <div className='flex flex-col md:h-screen md:flex-row md:justify-between'>
           {activeTab && (
             <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
-              {activeTab === 'search' && <SearchComponent />}
-              {activeTab === 'wallet' && <WalletComponent setActiveTab={setActiveTab} />}
+              {activeTab === 'search' && (
+                <SearchComponent
+                  showSignUp={showSignUp}
+                  setShowSignUp={setShowSignUp}
+                  showSignIn={showSignIn}
+                  setShowSignIn={setShowSignIn}
+                />
+              )}
+              {activeTab === 'wallet' && <WalletComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />}
               {activeTab === 'shop' && <ShopComponent />}
-              {activeTab === 'emergency' && <EmergencyComponent setActiveTab={setActiveTab} />}
+              {activeTab === 'emergency' && (
+                <EmergencyComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
+              )}
             </div>
           )}
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import StarsCanvas from '@/components/StarsCanvas/StarBackground'
 import Navbar from '@/components/Navbar/Navbar'
@@ -13,6 +13,11 @@ const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
 const Layout = ({ children }) => {
   const ref = useRef()
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  const [showSignUp, setShowSignUp] = useState(false)
+  const [showSignIn, setShowSignIn] = useState(false)
 
   return (
     <div
@@ -27,7 +32,14 @@ const Layout = ({ children }) => {
         zIndex: '2',
       }}
     >
-      <Navbar />
+      <Navbar
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+        setShowSignIn={setShowSignIn}
+        setShowSignUp={setShowSignUp}
+        showSignIn={showSignIn}
+        showSignUp={showSignUp}
+      />
       {/* <StarsCanvas />
       <PurpleVoid /> */}
       {children}
@@ -45,7 +57,14 @@ const Layout = ({ children }) => {
       /> */}
 
       <div>
-        <RightSidebar2 />
+        <RightSidebar2
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+          setShowSignIn={setShowSignIn}
+          setShowSignUp={setShowSignUp}
+          showSignIn={showSignIn}
+          showSignUp={showSignUp}
+        />
       </div>
 
       <div className='absolute bottom-0 w-full '>

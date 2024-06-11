@@ -9,10 +9,8 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { IoIosArrowBack } from 'react-icons/io'
 
-export default function SearchComponent() {
+export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn, setShowSignIn }) {
   const { user } = useUser()
-  const [showSignUp, setShowSignUp] = useState(false)
-  const [showSignIn, setShowSignIn] = useState(false)
 
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp)
