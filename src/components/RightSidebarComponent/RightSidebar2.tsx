@@ -13,6 +13,7 @@ import ShopComponent from './SubComponents/ShopComponent'
 import EmergencyComponent from './SubComponents/EmergencyComponent'
 import { CgProfile } from 'react-icons/cg'
 import ProfileComponent from './SubComponents/ProfileComponent'
+import { Toaster } from 'react-hot-toast'
 
 const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [activeTab, setActiveTab] = useState('search') //active tab state
@@ -33,6 +34,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
 
   return (
     <>
+      <Toaster />
       {isSidebarOpen && (
         <div
           className='absolute top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'

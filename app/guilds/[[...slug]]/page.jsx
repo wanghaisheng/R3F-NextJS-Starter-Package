@@ -179,6 +179,23 @@ const Factions = ({ params }) => {
   }, [])
 
   useEffect(() => {
+    const mapGuildInfo = () => {
+      const guilds = publicUsers.map((publicUser) => ({
+        name: publicUser.first_name + ' ' + publicUser.last_name,
+        description: publicUser.description,
+        guild: guildData.find((guild) => guild.id === publicUser.guild_id).guild_name,
+        avatarimg: publicUser.avatar[0].avatar_url,
+        continent: continents.find((continent) => continent.continent_code === publicUser.region.continent_code)
+          .continent_name,
+      }))
+      setGuilds(guilds)
+    }
+    if (publicUsers.length !== 0) {
+      mapGuildInfo()
+    }
+  }, [])
+
+  useEffect(() => {
     console.log(guildData)
     console.log(publicUsers)
   }, [guildData, publicUsers])
