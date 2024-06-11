@@ -64,9 +64,9 @@ const RightSidebar2 = () => {
           {activeTab && (
             <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
               {activeTab === 'search' && <SearchComponent />}
-              {activeTab === 'wallet' && <WalletComponent />}
+              {activeTab === 'wallet' && <WalletComponent setActiveTab={setActiveTab} />}
               {activeTab === 'shop' && <ShopComponent />}
-              {activeTab === 'emergency' && <EmergencyComponent />}
+              {activeTab === 'emergency' && <EmergencyComponent setActiveTab={setActiveTab} />}
             </div>
           )}
 

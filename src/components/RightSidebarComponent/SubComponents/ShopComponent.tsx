@@ -200,7 +200,7 @@ export default function ShopComponent() {
       <div className='-mt-2 grid grid-cols-2 gap-4'>
         {searchedProducts.map((product) => (
           <div key={product.productId} className='relative overflow-hidden rounded-md bg-white shadow-md'>
-            <div className='h-24 w-full overflow-hidden'>
+            <div className='h-24 w-full overflow-hidden rounded-md bg-purple-800/30 shadow-md'>
               <Image
                 src={product.imageUrl}
                 unoptimized
@@ -211,7 +211,7 @@ export default function ShopComponent() {
                 className='object-cover'
               />
             </div>
-            <div className='h-14 w-full bg-gray-300 p-1'>
+            <div className='h-14 w-full bg-purple-600/40 p-1 backdrop-blur-sm'>
               <h1 className='font-medium text-black'>${product.price}</h1>
               <h2 className='text-sm text-black'>{product.name.slice(0, 10)}...</h2>
               {/* <p className='mt-1 text-sm text-gray-600'>{product.description.slice(0, 22)}...</p> */}

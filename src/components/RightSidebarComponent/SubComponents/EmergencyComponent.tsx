@@ -6,7 +6,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function EmergencyComponent() {
+export default function EmergencyComponent({ setActiveTab }) {
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   const { user } = useUser()
@@ -16,31 +16,43 @@ export default function EmergencyComponent() {
     setIsFlipped(!isFlipped)
   }
 
-  console.log(user)
+  const handleSignUpClick = () => {
+    setActiveTab('search')
+  }
 
   return (
     <>
       {user && user.cards[0] ? (
-        <div className='group h-[239px] [prespective:1000px]'>
-          <EmergencyCard
-            type='emergency'
-            isFlipped={isFlipped}
-            handleFlip={handleFlip}
-            user={user}
-            name={user.first_name + ' ' + user.last_name}
-            blood_group={user.cards[0].blood_group}
-            emergency_contact={user.cards[0].emergency_contact}
-            emergency_details={user.cards[0].emergency_details}
-            emergency_address={user.cards[0].emergency_address}
-            imgSrc={imgSrc}
-          />
-        </div>
+        <>
+          <div className='group h-[239px] [prespective:1000px]'>
+            <EmergencyCard
+              type='emergency'
+              isFlipped={isFlipped}
+              handleFlip={handleFlip}
+              user={user}
+              name={user.first_name + ' ' + user.last_name}
+              blood_group={user.cards[0].blood_group}
+              emergency_contact={user.cards[0].emergency_contact}
+              emergency_details={user.cards[0].emergency_details}
+              emergency_address={user.cards[0].emergency_address}
+              imgSrc={imgSrc}
+            />
+          </div>
+          <div>Okay</div>
+        </>
       ) : (
-        <div className='flex h-96 items-center justify-center'>
-          <div className='text-3xl text-gray-400'>SignUp</div>
-        </div>
+        <>
+          <>
+            <div>You must signin to view this tab</div>
+            <div
+              onClick={handleSignUpClick}
+              className='mt-2 flex cursor-pointer justify-center rounded border border-purple-700 bg-purple-800/30 p-2 transition-colors hover:bg-purple-800/40 hover:text-purple-200'
+            >
+              Signup
+            </div>
+          </>
+        </>
       )}
-      <div>Okay</div>
     </>
   )
 }
