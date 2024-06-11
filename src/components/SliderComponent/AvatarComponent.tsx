@@ -106,7 +106,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-  const [modelSrc, setModelSrc] = useState('')
+  const [modelSrc, setModelSrc] = useState(
+    'https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0',
+  ) // Default model
 
   //GuildsData
   useEffect(() => {
@@ -130,7 +132,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     if (user && guildData[0].id !== '') {
       setUserGuild()
     }
-  }, [user])
+  }, [user, guildData])
 
   // AvatarsData
   useEffect(() => {
@@ -145,7 +147,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     if (user) {
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
-  }, [user])
+  }, [user, avatarsData])
 
   useEffect(() => {
     if (avatarsData.length > 0) {
@@ -153,14 +155,16 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     }
   }, [avatarsData])
 
-  // useEffect(() => {})
-
   const handleGuildUpdate = async (e: any) => {
     e.preventDefault()
     try {
+      const formData = new FormData(e.target)
+      const guildId = formData.get('guildId') // Get the guild ID from the form data
+
       const submit = {
-        guild_id: selectedGuildData.id,
+        guild_id: guildId,
       }
+
       console.log(submit)
       await axios({
         url: `/api/internal/users/${user.gg_id}`,
@@ -168,10 +172,44 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         data: submit,
       })
       toast.success('user guild updated')
+      onNextButtonClick()
     } catch (error) {
       toast.error('Failed to update user guild')
     }
   }
+
+  const memoizedAvatar = useMemo(() => {
+    if (memoizedAvatarsData && memoizedAvatarsData.length != 0) {
+      return (
+        <Avatar
+          key={modelSrc}
+          modelSrc={modelSrc}
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      )
+    } else {
+      return (
+        <Avatar
+          modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      )
+    }
+  }, [modelSrc, avatarsData])
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
@@ -188,39 +226,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Avatar and AvatarImageComponent Container */}
               <div className='flex flex-col items-center justify-center lg:w-[35%]'>
-                {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-                  <div className='relative'>
-                    <Avatar
-                      key={modelSrc}
-                      // modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-                      modelSrc={modelSrc}
-                      // shadows
-                      animationSrc='/male-idle-3.fbx'
-                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
-                      fov={40}
-                      cameraTarget={1.5}
-                      cameraInitialDistance={30}
-                      effects={{
-                        ambientOcclusion: true,
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className='relative'>
-                    <Avatar
-                      modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-                      // shadows
-                      animationSrc='/male-idle-3.fbx'
-                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
-                      fov={40}
-                      cameraTarget={1.5}
-                      cameraInitialDistance={30}
-                      effects={{
-                        ambientOcclusion: true,
-                      }}
-                    />
-                  </div>
-                )}
+                <div className='relative'>{memoizedAvatar}</div>
               </div>
               {/* Guilds Component */}
               <div className='size-full p-4 lg:w-[65%]'>
@@ -228,6 +234,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
                   {/* {user && checkUserGuild() !== true ? ( */}
                   <form onSubmit={handleGuildUpdate}>
+                    {/* Hidden Input Field for Guild ID */}
+                    <input type='hidden' name='guildId' value={selectedGuildData.id} />
                     <label
                       htmlFor='guilds'
                       className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
@@ -335,7 +343,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   setIsCardModalOpen(true)
                 }}
               >
-                Create Avatar &emsp; +
+                Create Avatar   +
               </DrawOutlineButton>
             </div>
             {isCardModalOpen && (
