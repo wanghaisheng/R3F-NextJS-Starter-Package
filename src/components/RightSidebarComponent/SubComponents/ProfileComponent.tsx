@@ -5,6 +5,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import Image from 'next/image'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
@@ -30,7 +31,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
   }, [user])
 
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState(user.description)
   const [imageUrl, setImageUrl] = useState('')
 
   function handelImageUrlChange(newImageUrl: string) {
@@ -66,6 +67,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-8xl font-bold uppercase'>
             {user.first_name} {user.last_name}!
           </p>
+          <Image src={imageUrl} alt='porfilepic' height={30} width={30} unoptimized />
+          <p>{imageUrl}</p>
           <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
@@ -97,8 +100,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
           <div className='flex justify-between gap-x-10'>
             <div>
-              <p>Guild</p>
-              <p>{user.guild}</p>
+              <p>Bio: {description}</p>
             </div>
             <div>Heo</div>
           </div>
