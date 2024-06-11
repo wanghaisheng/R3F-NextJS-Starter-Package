@@ -13,7 +13,7 @@ const NavigateUser = () => {
   useEffect(() => {
     const checkUserInfoStatus = () => {
       if (user.first_name && user.last_name && user.email && user.dob) {
-        if (user.avatar.length !== 0 && user.guilds.length !== 0) {
+        if (user.avatar.length !== 0) {
           setUserInfoStatus(true)
         }
       }

@@ -173,7 +173,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
           </div>
           <Tabs>
             {/* TabList */}
-            <TabList className='mt-20 flex flex-col overflow-x-auto sm:flex-row sm:items-start sm:justify-start lg:my-6'>
+            <TabList className='mt-20 flex overflow-x-auto  sm:items-start sm:justify-start lg:my-6'>
               {projects.map((project, index) => (
                 <Tab
                   key={index}

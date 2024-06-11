@@ -228,7 +228,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
           </div>
           <Tabs>
             {/* TabList */}
-            <TabList className='mt-20 flex flex-col overflow-x-auto sm:flex-row sm:items-start sm:justify-start lg:my-6'>
+            <TabList className='mt-20 flex  overflow-x-auto  sm:items-start sm:justify-start lg:my-6'>
               {cards.map((card, index) => (
                 <Tab
                   key={index}
