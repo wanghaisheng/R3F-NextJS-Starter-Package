@@ -20,7 +20,7 @@ export default function Slide1({ user, skillsData }) {
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
                           borderRadius: '50%',
-                          border: `2px solid ${user.guilds[0].color}`,
+                          // border: `2px solid ${user.guilds[0].color}`,
                         }}
                       ></div>
                       <div className='flex flex-col pl-4 '>
@@ -33,7 +33,7 @@ export default function Slide1({ user, skillsData }) {
                     </div>
                     <p className='flex justify-end'></p>
                     <p className='mt-2'>DOB: {user.dob}</p>
-                    <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p>
+                    {/* <p className='mt-2'>Guild: {user.guilds[0].guild_name}</p> */}
                   </div>
                   <div className='my-4 flex items-center justify-center gap-x-5'>
                     <h1>

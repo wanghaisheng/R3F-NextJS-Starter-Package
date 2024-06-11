@@ -41,7 +41,20 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const guilds = await prisma.guilds.findMany()
+    const guilds = await prisma.guilds.findMany({
+      select: {
+        id: true,
+        description: true,
+        guild_name: true,
+        avatar_img: true,
+        skills: true,
+        additionalSkills: true,
+        symbol: true,
+        color: true,
+        alignment: true,
+        element: true,
+      },
+    })
     return NextResponse.json(guilds)
   } catch (error) {
     console.error('error fetching guilds', error)
