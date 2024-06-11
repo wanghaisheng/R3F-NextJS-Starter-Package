@@ -30,7 +30,9 @@ export default function SearchComponent() {
       {user ? (
         <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
           {/* User is signed in, show a message or other content */}
-          <p>Welcome, {user.name}!</p>
+          <p>
+            Welcome, {user.first_name} {user.last_name}!
+          </p>
         </div>
       ) : (
         <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>

@@ -22,23 +22,26 @@ export default function EmergencyComponent({ setActiveTab }) {
 
   return (
     <>
-      {user && user.cards[0] ? (
+      {user ? (
         <>
-          <div className='group h-[239px] [prespective:1000px]'>
-            <EmergencyCard
-              type='emergency'
-              isFlipped={isFlipped}
-              handleFlip={handleFlip}
-              user={user}
-              name={user.first_name + ' ' + user.last_name}
-              blood_group={user.cards[0].blood_group}
-              emergency_contact={user.cards[0].emergency_contact}
-              emergency_details={user.cards[0].emergency_details}
-              emergency_address={user.cards[0].emergency_address}
-              imgSrc={imgSrc}
-            />
-          </div>
-          <div>Okay</div>
+          {user.cards[0] ? (
+            <div className='group h-[239px] [prespective:1000px]'>
+              <EmergencyCard
+                type='emergency'
+                isFlipped={isFlipped}
+                handleFlip={handleFlip}
+                user={user}
+                name={user.first_name + ' ' + user.last_name}
+                blood_group={user.cards[0].blood_group}
+                emergency_contact={user.cards[0].emergency_contact}
+                emergency_details={user.cards[0].emergency_details}
+                emergency_address={user.cards[0].emergency_address}
+                imgSrc={imgSrc}
+              />
+            </div>
+          ) : (
+            <div>Okay</div>
+          )}
         </>
       ) : (
         <>
