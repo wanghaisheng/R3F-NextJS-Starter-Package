@@ -156,7 +156,7 @@ export default function ShopComponent() {
           placeholder='Search products...'
           value={searchTerm}
           onChange={handleSearchChange}
-          className='-mt-4 w-full rounded-md border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
+          className='-mt-4 w-full rounded-md border border-purple-700 bg-purple-950/20 px-3 py-2 text-purple-200 focus:outline-none'
         />
       </div>
       {/* Carousel */}
@@ -170,8 +170,10 @@ export default function ShopComponent() {
           >
             <SwiperSlide className='shrink-0 pb-4'>
               <button
-                className={`w-full justify-center rounded-md p-2 ${
-                  selectedCategory === null ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                className={`w-full justify-center rounded-md  p-2  ${
+                  selectedCategory === null
+                    ? ' border border-purple-600 bg-black/20 text-white'
+                    : ' bg-purple-800/30 text-gray-200'
                 }`}
                 onClick={() => handleCategoryClick(null)}
               >
@@ -182,7 +184,9 @@ export default function ShopComponent() {
               <SwiperSlide key={category} className='shrink-0 pb-4'>
                 <button
                   className={`w-full justify-center rounded-md p-2 ${
-                    selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                    selectedCategory === category
+                      ? 'border border-purple-600 bg-black/20 text-white'
+                      : ' bg-purple-800/30 text-gray-200'
                   }`}
                   onClick={() => handleCategoryClick(category)}
                 >
