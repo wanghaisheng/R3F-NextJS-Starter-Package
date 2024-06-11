@@ -61,11 +61,11 @@ export default function AvatarImageComponent() {
 
   return (
     <div className='flex justify-center'>
-      <div className='overflow-hidden lg:w-full' ref={emblaRef}>
+      <div className='w-[45%] overflow-hidden' ref={emblaRef}>
         <div className='flex items-center gap-x-2 '>
           {avatarsData && avatarsData.length != 0 ? (
             avatarsData.map((avatar) => (
-              <div className='w-[35%] shrink-0 grow md:min-w-0' key={avatar}>
+              <div className='shrink-0 grow md:min-w-0' key={avatar}>
                 <div>
                   {/* <img src={`${avatar.avatar_url}`} alt='' height='120px' width='120px' /> */}
                   {/* src='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.png?size=1024?quality=100' */}
@@ -88,7 +88,7 @@ export default function AvatarImageComponent() {
               </div>
             ))
           ) : (
-            <div className='grid gap-4'>
+            <div className='flex items-center justify-center'>
               <div className='rounded-lg'>No Avatar to show</div>
             </div>
           )}
