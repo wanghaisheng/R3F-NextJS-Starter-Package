@@ -121,7 +121,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       }
     }
     fetchGuildData()
-  }, [guildData])
+  }, [])
 
   // for displaying users guild
   useEffect(() => {
