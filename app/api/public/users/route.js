@@ -65,6 +65,7 @@ export async function GET() {
         description: true,
         guild_id: true,
         address: true,
+        region: true,
         cards: true,
         experience: true,
         avatar: true,
