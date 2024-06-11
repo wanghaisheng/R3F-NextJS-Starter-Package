@@ -22,160 +22,195 @@ async function getAvatarById(id: string) {
   }
 }
 
-const guildData = [
-  {
-    guild_name: 'BUDDHA',
-    symbol: '/guild/buddha.png',
-    color: 'white',
-    element: 'Space',
-    description: 'Development, Engineering & ITAI Services',
-    skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
-    alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
-    additionalSkills: ['Innovation', 'data analysis', 'research'],
-  },
-  {
-    guild_name: 'VAJRA',
-    symbol: '/guild/vajra.png',
-    color: 'blue',
-    element: 'Water',
-    description: 'All Departments & ITAI Services',
-    skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
-    alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
-    additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
-  },
-  {
-    guild_name: 'KARMA',
-    symbol: '/guild/karma.png',
-    color: 'green',
-    element: 'Wind',
-    description: 'Sales & Marketing',
-    skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
-    alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
-    additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
-  },
-  {
-    guild_name: 'RATNA',
-    symbol: '/guild/ratna.png',
-    color: 'yellow',
-    element: 'Earth',
-    description: 'Admin & Customer Support',
-    skills: ['Stability', 'reliability', 'patience', 'empathy'],
-    alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
-    additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
-  },
-  {
-    guild_name: 'PADMA',
-    symbol: '/guild/padma.png',
-    color: 'red',
-    element: 'Fire',
-    description: 'Design & Creative (Working Class)',
-    skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
-    alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
-    additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
-  },
-]
+async function getGuilds() {
+  try {
+    const res = await axios.get('/api/internal/guilds')
+    if (res.status !== 200) {
+      toast.error('Failed to fetch guilds data')
+    }
+    return res.data
+  } catch (error) {
+    toast.error('Failed to fetch guilds data')
+  }
+}
 
 export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+  const [guildData, setGuildData] = useState([
+    {
+      id: '',
+      guild_name: 'BUDDHA',
+      symbol: '/guild/buddha.png',
+      color: 'white',
+      element: 'Space',
+      description: 'Development, Engineering & ITAI Services',
+      skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
+      alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
+      additionalSkills: ['Innovation', 'data analysis', 'research'],
+    },
+    {
+      id: '',
+      guild_name: 'VAJRA',
+      symbol: '/guild/vajra.png',
+      color: 'blue',
+      element: 'Water',
+      description: 'All Departments & ITAI Services',
+      avatar_img: '',
+      continent: '',
+      skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
+      alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
+      additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
+    },
+    {
+      id: '',
+      guild_name: 'KARMA',
+      symbol: '/guild/karma.png',
+      color: 'green',
+      element: 'Wind',
+      description: 'Sales & Marketing',
+      avatar_img: '',
+      continent: '',
+      skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
+      alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
+      additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
+    },
+    {
+      id: '',
+      guild_name: 'RATNA',
+      symbol: '/guild/ratna.png',
+      color: 'yellow',
+      element: 'Earth',
+      description: 'Admin & Customer Support',
+      avatar_img: '',
+      continent: '',
+      skills: ['Stability', 'reliability', 'patience', 'empathy'],
+      alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
+      additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
+    },
+    {
+      id: '',
+      guild_name: 'PADMA',
+      symbol: '/guild/padma.png',
+      color: 'red',
+      element: 'Fire',
+      description: 'Design & Creative (Working Class)',
+      avatar_img: '',
+      continent: '',
+      skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
+      alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
+      additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
+    },
+  ])
+  const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
+  const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
+  const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
+  const [modelSrc, setModelSrc] = useState(
+    'https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0',
+  ) // Default model
 
+  //GuildsData
+  useEffect(() => {
+    const fetchGuildData = async () => {
+      try {
+        const guildData = await getGuilds()
+        setGuildData(guildData)
+      } catch (error) {
+        toast.error('Failed to set avatar data')
+      }
+    }
+    fetchGuildData()
+  }, [guildData])
+
+  // for displaying users guild
+  useEffect(() => {
+    const setUserGuild = async () => {
+      const guild = guildData.find((guild) => guild.id === user.guild_id)
+      setSelectedGuild(guild.guild_name)
+    }
+    if (user && guildData[0].id !== '') {
+      setUserGuild()
+    }
+  }, [user, guildData])
+
+  // AvatarsData
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
         const testData = await getAvatarById(user.gg_id)
         setAvatarsData(testData)
       } catch (error) {
-        toast.error('Failed to fetch avatar data')
+        toast.error('Failed to set avatar data')
       }
     }
     if (user) {
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
-  }, [user])
-  const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
+  }, [user, avatarsData])
 
-  const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
-  useEffect(() => {
-    const setGuild = () => {
-      if (user.guilds.length !== 0) {
-        setSelectedGuild(user.guilds[0].guild_name)
-      }
-    }
-    if (user) {
-      setGuild()
-    }
-  }, [user])
-  const [index, setIndex] = useState(0)
-  const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-  useEffect(() => {
-    const getIndex = guildData.findIndex((guild) => guild.guild_name === selectedGuild)
-    setIndex(getIndex)
-  }, [guildData, selectedGuild])
-  const checkUserGuild = () => {
-    if (user.guilds.length !== 0) {
-      return true
-    }
-    return false
-  }
-  const handleGuildSubmit = async (e: any) => {
-    e.preventDefault()
-    const submit = {
-      description: guildData[index].description,
-      guild_name: guildData[index].guild_name,
-      avatar_img: user.avatar.avatar_img,
-      soft_skills: guildData[index].skills,
-      color: guildData[index].color,
-      additional_skills: guildData[index].additionalSkills,
-      alignment: guildData[index].alignment,
-      symbol: guildData[index].symbol,
-      gg_id: user.gg_id,
-      element: guildData[index].element,
-    }
-    try {
-      await axios({
-        url: '/api/internal/guilds',
-        method: 'POST',
-        data: submit,
-      })
-      toast.success('Generated Sucessfully')
-      onNextButtonClick() // Move to next slide after successful generation
-    } catch (error) {
-      toast.error('Generation Failed')
-    }
-  }
-  const handleGuildUpdate = async (e: any) => {
-    e.preventDefault()
-    const submit = {
-      description: guildData[index].description,
-      guild_name: guildData[index].guild_name,
-      avatar_img: user.avatar.avatar_img,
-      soft_skills: guildData[index].skills,
-      color: guildData[index].color,
-      additional_skills: guildData[index].additionalSkills,
-      alignment: guildData[index].alignment,
-      symbol: guildData[index].symbol,
-      gg_id: user.gg_id,
-      element: guildData[index].element,
-    }
-    try {
-      await axios({
-        url: `/api/internal/guilds/${user.guilds[0].id}`,
-        method: 'PUT',
-        data: submit,
-      })
-      toast.success('Updated Sucessfully')
-      onNextButtonClick() // Move to next slide after successful update
-    } catch (error) {
-      toast.error('Update Failed')
-    }
-  }
-  const [modelSrc, setModelSrc] = useState('')
   useEffect(() => {
     if (avatarsData.length > 0) {
       setModelSrc(avatarsData[avatarsData.length - 1].avatar_url)
     }
   }, [avatarsData])
+
+  const handleGuildUpdate = async (e: any) => {
+    e.preventDefault()
+    try {
+      const formData = new FormData(e.target)
+      const guildId = formData.get('guildId') // Get the guild ID from the form data
+
+      const submit = {
+        guild_id: guildId,
+      }
+
+      console.log(submit)
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'PUT',
+        data: submit,
+      })
+      toast.success('user guild updated')
+      onNextButtonClick()
+    } catch (error) {
+      toast.error('Failed to update user guild')
+    }
+  }
+
+  const memoizedAvatar = useMemo(() => {
+    if (memoizedAvatarsData && memoizedAvatarsData.length != 0) {
+      return (
+        <Avatar
+          key={modelSrc}
+          modelSrc={modelSrc}
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      )
+    } else {
+      return (
+        <Avatar
+          modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+          animationSrc='/male-idle-3.fbx'
+          style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
+          fov={40}
+          cameraTarget={1.5}
+          cameraInitialDistance={30}
+          effects={{
+            ambientOcclusion: true,
+          }}
+        />
+      )
+    }
+  }, [modelSrc, avatarsData])
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
@@ -191,46 +226,16 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Avatar and AvatarImageComponent Container */}
               <div className='flex flex-col items-center justify-center lg:w-[35%]'>
-                {memoizedAvatarsData && memoizedAvatarsData.length != 0 ? (
-                  <div className='relative'>
-                    <Avatar
-                      key={modelSrc}
-                      // modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-                      modelSrc={modelSrc}
-                      // shadows
-                      animationSrc='/male-idle-3.fbx'
-                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
-                      fov={40}
-                      cameraTarget={1.5}
-                      cameraInitialDistance={30}
-                      effects={{
-                        ambientOcclusion: true,
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className='relative'>
-                    <Avatar
-                      modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-                      // shadows
-                      animationSrc='/male-idle-3.fbx'
-                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
-                      fov={40}
-                      cameraTarget={1.5}
-                      cameraInitialDistance={30}
-                      effects={{
-                        ambientOcclusion: true,
-                      }}
-                    />
-                  </div>
-                )}
+                <div className='relative'>{memoizedAvatar}</div>
               </div>
               {/* Guilds Component */}
               <div className='size-full p-4 lg:w-[65%]'>
                 {/* GUILDS SELECTION */}
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
                   {/* {user && checkUserGuild() !== true ? ( */}
-                  <form onSubmit={user && checkUserGuild() !== true ? handleGuildSubmit : handleGuildUpdate}>
+                  <form onSubmit={handleGuildUpdate}>
+                    {/* Hidden Input Field for Guild ID */}
+                    <input type='hidden' name='guildId' value={selectedGuildData.id} />
                     <label
                       htmlFor='guilds'
                       className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'
@@ -338,7 +343,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   setIsCardModalOpen(true)
                 }}
               >
-                Create Avatar &emsp; +
+                Create Avatar   +
               </DrawOutlineButton>
             </div>
             {isCardModalOpen && (

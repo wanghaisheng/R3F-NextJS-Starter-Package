@@ -1,10 +1,8 @@
 'use client'
 
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
+import { CardBody } from '@/components/card/card'
 import Image from 'next/image'
-
 import { useState, useEffect } from 'react'
-
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
@@ -15,7 +13,6 @@ export default function GeniusIDFlipCard({
   dob,
   contact,
   address,
-  inSlider,
   // selectedGuild,
   // guildData,
 }) {
@@ -44,11 +41,6 @@ export default function GeniusIDFlipCard({
     <>
       <CardBody>
         <div className='group h-[239px] p-4 [prespective:1000px]'>
-          {!inSlider && (
-            <button type='button' aria-label='hide-unhide button' onClick={checkHidden}>
-              H/U
-            </button>
-          )}
           {/* Flip the card when clicked */}
           <div
             className={`relative size-full rounded-xl shadow-md transition-all  duration-500 [transform-style:preserve-3d] 
@@ -65,17 +57,7 @@ export default function GeniusIDFlipCard({
               className='rounded-lg object-cover'
             />
             <div className='absolute top-0 flex w-full justify-end'>
-              {inSlider ? (
-                <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>GENIUS ID</p>
-              ) : (
-                <>
-                  {isHidden ? (
-                    <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>******</p>
-                  ) : (
-                    <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>87698</p>
-                  )}
-                </>
-              )}
+              <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>GENIUS ID</p>
             </div>
             <div className='absolute inset-0 cursor-default rounded-xl'>
               {/* Card Details */}

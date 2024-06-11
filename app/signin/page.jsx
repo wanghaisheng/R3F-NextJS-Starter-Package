@@ -121,9 +121,7 @@ const SignIn = () => {
         >
           <div className='card flex h-auto  flex-col items-center justify-center gap-2 rounded-3xl bg-violet-300 shadow-lg shadow-purple-700 backdrop-blur-sm md:w-3/5 lg:w-4/5 dark:bg-black/30'>
             <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
-              <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>
-                SIGN IN AS <span className='text-gray-300'>BETA TESTER</span>
-              </h2>
+              <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN IN</h2>
             </div>
             <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
               <label htmlFor='email' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
@@ -218,8 +216,7 @@ const SignIn = () => {
             </div>
             <div className='m-5 flex items-center justify-center '>
               <p className=' text-sm text-purple-950 dark:text-purple-200'>
-                {/* Not a Genius User yet? */}
-                Not a Beta Tester yet?
+                Not a Genius User yet?
                 <a href='/signup' className='ml-1 text-blue-500 transition-colors hover:text-blue-700'>
                   Sign Up Now
                 </a>

@@ -228,9 +228,12 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
           </div>
           <Tabs>
             {/* TabList */}
-            <TabList className='mt-20 flex flex-col sm:flex-row sm:items-start sm:justify-start lg:my-6'>
+            <TabList className='mt-20 flex  overflow-x-auto  sm:items-start sm:justify-start lg:my-6'>
               {cards.map((card, index) => (
-                <Tab key={index} className='ml-4 flex cursor-pointer px-1 text-purple-950 dark:text-purple-200'>
+                <Tab
+                  key={index}
+                  className='ml-4 flex cursor-pointer whitespace-nowrap px-1 text-purple-950 dark:text-purple-200'
+                >
                   {card.type}
                   {index !== 0 && ( // Condition to check if it's not the first tab
                     <button

@@ -5,14 +5,17 @@ import { enqueueSnackbar } from 'notistack'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useUser } from '@/context/UserContext/UserContext'
-const createConfig: AvatarCreatorConfig = {
+import toast from 'react-hot-toast'
+
+const config: AvatarCreatorConfig = {
   clearCache: true,
   bodyType: 'fullbody',
   quickStart: false,
   language: 'en',
 }
+
 // const editConfig: AvatarCreatorConfig = {
-//   clearCache: true,
+//   clearCache: false,
 //   bodyType: 'fullbody',
 //   quickStart: false,
 //   language: 'en',
@@ -22,6 +25,13 @@ const createConfig: AvatarCreatorConfig = {
 export default function App() {
   const [avatarUrl, setAvatarUrl] = useState('')
   const { user } = useUser()
+
+  // const [id, setId] = useState('')
+  // useEffect(() => {
+  //   setId(avatarId)
+  // }, [avatarId])
+
+  // editConfig.avatarId = id
 
   const handleOnAvatarExported = (event: AvatarExportedEvent) => {
     console.log(event.data.avatarId)
@@ -36,33 +46,27 @@ export default function App() {
       }
       console.log('Submit: ', submit)
       try {
-        const { data } = await axios({
+        await axios({
           url: '/api/internal/avatar',
           method: 'POST',
           data: submit,
         })
-        console.log('Response:', data)
-        enqueueSnackbar('Avatar Created Sucessfully', {
-          autoHideDuration: 2000,
-          variant: 'success',
-        })
+        toast.success('Avatar Created Sucessfully')
       } catch (error) {
         console.error('Error: ', error)
-        enqueueSnackbar('Failed to create the avatar', {
-          autoHideDuration: 2000,
-          variant: 'error',
-        })
+        toast.error('Failed to create the avatar')
       }
     }
     if (user && avatarUrl !== '') {
       createAvatar()
     }
   }, [avatarUrl])
+
   return (
     <>
       <AvatarCreator
         subdomain='gguser'
-        config={createConfig}
+        config={config}
         className='-ml-4 size-full rounded-lg border-none lg:ml-0'
         onAvatarExported={handleOnAvatarExported}
       />
