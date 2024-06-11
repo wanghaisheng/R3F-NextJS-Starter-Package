@@ -20,19 +20,35 @@ export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn,
     setShowSignIn(!showSignIn)
   }
   return (
-    <div className='mb-32 flex h-full flex-col'>
-      <div className='flex-1 p-4'>
-        <h2>Search tab</h2>
+    <div className='mb-12 flex h-full flex-col'>
+      <div className='flex-1 px-4'>
+        <div className='mb-4 flex items-center gap-2'>
+          <input
+            type='text'
+            placeholder='Search ...'
+            // onChange={}
+            className='-mt-4 w-full rounded-md border border-purple-700 bg-purple-950/20 px-3 py-2 text-purple-200 focus:outline-none'
+          />
+        </div>
+        <div className='flex h-1/2 w-full justify-between gap-x-2'>
+          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+            <p>Searched Items</p>
+          </div>
+          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+            <p>Searched Items</p>
+          </div>
+        </div>
+        <div className='mt-2 flex h-1/3 w-full justify-between gap-x-2'>
+          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+            <p>Searched Items</p>
+          </div>
+          <div className='flex-1 animate-pulse rounded bg-white/20 p-2'>
+            <p>Searched Items</p>
+          </div>
+        </div>
       </div>
 
-      {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
-          {/* User is signed in, show a message or other content */}
-          <p>
-            Welcome, {user.first_name} {user.last_name}!
-          </p>
-        </div>
-      ) : (
+      {!user && (
         <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
           {!showSignUp && !showSignIn ? (
             <div className='mx-auto max-w-xs flex-1 p-4'>
