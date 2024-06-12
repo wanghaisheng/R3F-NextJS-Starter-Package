@@ -7,10 +7,10 @@ const prisma = new PrismaClient()
 export async function POST(request) {
   try {
     const data = await request.json()
-    const { email, password } = data
+    const { username, email, password } = data
 
     // Check if email or password is null
-    if (!email || !password) {
+    if (!username || !email || !password) {
       return NextResponse.json(
         {
           message: 'Email and password are required fields.',
@@ -23,14 +23,14 @@ export async function POST(request) {
 
     // Check if the email already exists
     const existingEmail = await prisma.users.findUnique({
-      where: { email },
+      where: { username, email },
     })
 
     if (existingEmail) {
       return NextResponse.json(
         {
           users: null,
-          message: 'User with this email already exists!!!',
+          message: 'User with this email and username already exists!!!',
         },
         {
           status: 409,
@@ -48,6 +48,7 @@ export async function POST(request) {
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = await prisma.users.create({
       data: {
+        username,
         email,
         password: hashedPassword,
         region: {
