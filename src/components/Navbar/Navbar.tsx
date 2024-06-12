@@ -137,30 +137,19 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
               <div className='flex h-16 items-center justify-center gap-2 rounded-full px-20 py-2 shadow-md shadow-[#6B37CA] backdrop-blur-md md:gap-7 lg:gap-14'>
-                {pathname === '/maps' ? (
+                {pathname === '/avatars' ? (
                   <Link href='/avatars' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    AVATARS
+                    AVTR-EXP
                   </Link>
                 ) : (
                   <Link
                     href='/avatars'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    AVATARS
+                    AVTR-EXP
                   </Link>
                 )}
-                {pathname === '/cmgsoon' ? (
-                  <Link href='#' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    CMGSOON
-                  </Link>
-                ) : (
-                  <Link
-                    href='#'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    CMGSOON
-                  </Link>
-                )}
+
                 {pathname === '/hero' ? (
                   <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HOME
@@ -183,18 +172,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     REGIONS
-                  </Link>
-                )}
-                {pathname === '/experience' ? (
-                  <Link href='/experience' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    EXP
-                  </Link>
-                ) : (
-                  <Link
-                    href='/experience'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    EXP
                   </Link>
                 )}
               </div>
@@ -259,13 +236,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
             )}
             <ul className='flex flex-col gap-y-4'>
               <li>
+                {/* avatar and exp */}
                 <Link href='/avatars' className='hover:text-violet-400' onClick={closeMenu}>
-                  AVATARS
-                </Link>
-              </li>
-              <li>
-                <Link href='#' className='hover:text-violet-400' onClick={closeMenu}>
-                  CMGSOON
+                  AVTR-EXP
                 </Link>
               </li>
               <li>
@@ -278,16 +251,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   REGIONS
                 </Link>
               </li>
-              <li>
-                <Link href='/experience' className='hover:text-violet-400' onClick={closeMenu}>
-                  EXP
-                </Link>
-              </li>
-              <li>
-                <Link href='/my-profile' className='hover:text-violet-400' onClick={closeMenu}>
-                  Profile
-                </Link>
-              </li>
+
+              {user && (
+                <li>
+                  <Link href='/my-profile' className='hover:text-violet-400' onClick={closeMenu}>
+                    Profile
+                  </Link>
+                </li>
+              )}
               <li className='fixed bottom-5 left-10'>
                 {user ? (
                   <Link
