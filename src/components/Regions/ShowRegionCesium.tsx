@@ -1,13 +1,30 @@
 import CesiumMap from '../LeafletMap/CesiumMap'
 import Image from 'next/image'
 import { Suspense } from 'react'
+import ShowGuild from '../Guilds/ShowGuild'
+import GuildHeader from '../Guilds/GuildHeader'
+
 async function getCountries() {
   // const response = await fetch('https://restcountries.com/v3.1/all')
   const response = await fetch('https://restcountries.com/v3.1/region/asia')
   const data = await response.json()
   return data
 }
-export default function ShowRegionCesium({ filter }: { filter: string }) {
+export default function ShowRegionCesium({
+  filter,
+  guilds,
+  selectedGuildFilter,
+  searchTerm,
+  handleFilterGuildChange,
+  setSearchTerm,
+}: {
+  filter: string
+  guilds: any
+  selectedGuildFilter: string
+  searchTerm: string
+  handleFilterGuildChange: (event: any) => void
+  setSearchTerm: (event: any) => void
+}) {
   const regions = [
     {
       name: 'East Asia',
@@ -77,11 +94,13 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
             <div className='absolute right-0 top-14 mr-4 h-[66vh] w-[44vh] rounded-lg bg-violet-400/10 p-4'>
-              <div className='flex size-full animate-pulse items-center justify-center'>
-                <h1 className='text-center text-3xl font-bold text-white'>
-                  ELITE AVATARS <br />
-                  <br /> COMMING SOON!!!
-                </h1>
+              <GuildHeader
+                onFilterChange={handleFilterGuildChange}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
+              <div className='flex flex-row overflow-auto'>
+                <ShowGuild users={guilds} filterguild={selectedGuildFilter} searchTerm={searchTerm} />
               </div>
             </div>
           </div>

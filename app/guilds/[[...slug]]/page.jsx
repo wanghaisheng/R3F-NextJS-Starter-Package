@@ -39,8 +39,39 @@ const getGuilds = async () => {
   }
 }
 
+const continents = [
+  {
+    continent_name: 'africa',
+    continent_code: 'af',
+  },
+  {
+    continent_name: 'antartica',
+    continent_code: 'an',
+  },
+  {
+    continent_name: 'asia',
+    continent_code: 'as',
+  },
+  {
+    continent_name: 'europe',
+    continent_code: 'eu',
+  },
+  {
+    continent_name: 'north america',
+    continent_code: 'na',
+  },
+  {
+    continent_name: 'oceania',
+    continent_code: 'oc',
+  },
+  {
+    continent_name: 'south and central america',
+    continent_code: 'sa',
+  },
+]
+
 const Factions = ({ params }) => {
-  const [selectedFilter, setSelectedFilter] = useState(null)
+  const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [publicUsers, setPublicUsers] = useState([])
   const [guildData, setGuildData] = useState([])
@@ -117,39 +148,9 @@ const Factions = ({ params }) => {
       continent: 'SUB-SAHARAN-AFRICA',
     },
   ])
-  const continents = [
-    {
-      continent_name: 'africa',
-      continent_code: 'af',
-    },
-    {
-      continent_name: 'antartica',
-      continent_code: 'an',
-    },
-    {
-      continent_name: 'asia',
-      continent_code: 'as',
-    },
-    {
-      continent_name: 'europe',
-      continent_code: 'eu',
-    },
-    {
-      continent_name: 'north america',
-      continent_code: 'na',
-    },
-    {
-      continent_name: 'oceania',
-      continent_code: 'oc',
-    },
-    {
-      continent_name: 'south and central america',
-      continent_code: 'sa',
-    },
-  ]
 
-  const handleFilterChange = (filter) => {
-    setSelectedFilter(filter)
+  const handleFilterGuildChange = (filter) => {
+    setSelectedGuildFilter(filter)
     setSearchTerm('')
   }
 
@@ -192,7 +193,7 @@ const Factions = ({ params }) => {
     if (publicUsers.length !== 0 && guildData.length !== 0) {
       mapGuildInfo()
     }
-  }, [publicUsers, guildData, continents])
+  }, [publicUsers, guildData])
 
   return (
     <>
@@ -222,10 +223,10 @@ const Factions = ({ params }) => {
         </div>
       ) : (
         <>
-          <GuildHeader onFilterChange={handleFilterChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <GuildHeader onFilterChange={handleFilterGuildChange} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
           <div className='flex-col lg:ml-72 lg:flex lg:justify-start'>
-            <ShowGuild users={guilds} filter={selectedFilter} searchTerm={searchTerm} />
+            <ShowGuild users={guilds} filterguild={selectedGuildFilter} searchTerm={searchTerm} />
           </div>
         </>
       )}

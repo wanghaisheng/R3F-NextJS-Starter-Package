@@ -38,9 +38,11 @@ export default function GuildHeader({
   return (
     <div className='relative'>
       <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
-        <div className='flex h-12 w-[80%] items-center justify-between px-5 py-2 md:gap-14 lg:w-full'>
+        {/* <div className='flex h-12 w-[80%] items-center justify-between px-5 py-2 md:gap-14 lg:w-full'> */}
+        <div className='flex h-12 items-center justify-between px-5 py-2 md:gap-14'>
           {/* search */}
-          <div className='mx-auto flex max-w-sm items-center lg:pl-32'>
+          {/* <div className='mx-auto flex max-w-sm items-center lg:pl-32'> */}
+          <div className='mx-auto flex max-w-sm items-center'>
             <svg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
@@ -79,7 +81,7 @@ export default function GuildHeader({
           </div>
         </div>
 
-        {isSmallScreen && (
+        {!isSmallScreen && (
           <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
             <a
               href='#'
@@ -149,7 +151,7 @@ export default function GuildHeader({
       </div>
 
       {/* Sidebar */}
-      <div className='fixed top-0 hidden items-center justify-start font-semibold lg:flex'>
+      <div className='fixed top-0 hidden items-center justify-start font-semibold lg:hidden'>
         <ul className='flex h-[800px] w-[310px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40%'>
           <li className='mt-[60%]'>
             <a

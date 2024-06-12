@@ -3,15 +3,23 @@ import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
 import { FaDiamond } from 'react-icons/fa6'
 import { BsOctagonFill } from 'react-icons/bs'
 import { MdHexagon } from 'react-icons/md'
-export default function ShowGuild({ users, filter, searchTerm }: { users: any; filter: string; searchTerm: string }) {
-  const filteredFactions = filter ? users.filter((user) => user.guild === filter) : users
+export default function ShowGuild({
+  users,
+  filterguild,
+  searchTerm,
+}: {
+  users: any
+  filterguild: string
+  searchTerm: string
+}) {
+  const filteredFactions = filterguild ? users.filter((user) => user.guild === filterguild) : users
   const filteredAndSearchedFactions = filteredFactions.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
   return (
     <>
       <div className='flex justify-start'>
-        <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:justify-start'>
+        <div className='mx-10 my-6 flex justify-center gap-5 lg:justify-start'>
           {filteredAndSearchedFactions.map((user, index) => (
             <a
               href={`/guilds/${user.name.toLowerCase().replace(' ', '-')}`}
