@@ -133,10 +133,10 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
         <div
           id='Genius ID'
-          className='relative flex h-[770px] w-[300px] rounded bg-[#F5F5F5] px-2 py-4 shadow-md md:w-[500px] md:rounded-3xl md:px-10 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+          className='relative flex h-[770px] w-[300px] rounded bg-[#F5F5F5]/20 px-2 py-4 shadow-md md:w-[500px] md:rounded-3xl md:px-10 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
         >
           <div className='flex w-full flex-col'>
-            <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
+            <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
               GENIUS ID
             </div>
             <div className='mt-5 rounded-[20px] '>
@@ -162,7 +162,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                     onSubmit={handleSubmit}
                     className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                   >
-                    <div className='flex w-full flex-col gap-y-2 px-4  text-purple-950 dark:text-purple-200'>
+                    <div className='flex w-full flex-col gap-y-2 px-4  text-purple-200'>
                       <div className='flex flex-col lg:flex-row lg:justify-between '>
                         <label htmlFor='' className='font-semibold'>
                           First Name
@@ -173,7 +173,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={first_name}
                           onChange={(e) => handleFirstNameChange(e.target.value)}
                           placeholder='First Name'
-                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
+                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                           required
                           aria-label='First Name'
                         />
@@ -188,7 +188,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={last_name}
                           onChange={(e) => handleLastNameChange(e.target.value)}
                           placeholder='Last Name'
-                          className='rounded-md  px-3 lg:w-[70%] dark:bg-white/20'
+                          className='rounded-md  bg-white/20 px-3 lg:w-[70%]'
                           required
                           aria-label='Last Name'
                         />
@@ -203,7 +203,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={email}
                           onChange={(e) => handleEmailChange(e.target.value)}
                           placeholder='Email'
-                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
+                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                           required
                           aria-label='Email'
                         />
@@ -218,7 +218,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={address}
                           onChange={(e) => handleAddressChange(e.target.value)}
                           placeholder='Address'
-                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
+                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                           aria-label='Address'
                         />
                       </div>
@@ -232,7 +232,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           value={phone_number}
                           onChange={(e) => handlePhoneNumberChange(e.target.value)}
                           placeholder='Phone Number'
-                          className='rounded-md px-3 lg:w-[70%] dark:bg-white/20'
+                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
                           aria-label='Phone Number'
                         />
                       </div>
@@ -245,7 +245,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           type='date'
                           value={dob}
                           onChange={(e) => handleDOBChange(e.target.value)}
-                          className='rounded-md px-3 lg:w-[70%]  dark:bg-white/20'
+                          className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                           required
                           aria-label='Date of Birth'
                         />
@@ -259,7 +259,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           type='checkbox'
                           checked={regionStatus}
                           onChange={(e) => handleRegionStatus(e.target.checked)}
-                          className='rounded-md px-3 lg:w-[70%]  dark:bg-white/20'
+                          className='rounded-md bg-white/20 px-3  lg:w-[70%]'
                           aria-label='region status'
                         />
                       </div>
@@ -280,7 +280,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                         </div>
                       </>
                     ) : (
-                      <div className='absolute -bottom-4 right-4'>
+                      <div className='absolute bottom-2 right-4'>
                         <DrawOutlineButton type='submit' aria-label='next slide'>
                           Next
                         </DrawOutlineButton>

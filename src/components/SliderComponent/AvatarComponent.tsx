@@ -171,10 +171,10 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='My Avatar'
-        className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5] py-4 md:w-[600px] md:rounded-3xl md:px-10  md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+        className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10  md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
             AVATAR & GUILDS
           </div>
 
@@ -274,7 +274,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
 
                   {selectedGuildData && (
                     <div
-                      className='relative h-80 rounded-lg border text-purple-950 lg:ml-4 lg:w-72 dark:text-gray-300'
+                      className='relative h-80 rounded-lg border text-gray-300 lg:ml-4 lg:w-72'
                       style={{ borderColor: selectedGuildData.color }}
                     >
                       <div className='absolute -right-3 -top-3 scale-125'>
@@ -286,9 +286,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                         <h3 className='absolute -top-7 text-xl font-bold' style={{ color: selectedGuildData.color }}>
                           {selectedGuildData.guild_name}
                         </h3>
-                        <p className='mt-3 text-xl font-bold text-black dark:text-white'>
-                          {selectedGuildData.description}
-                        </p>
+                        <p className='mt-3 text-xl font-bold text-white'>{selectedGuildData.description}</p>
                       </div>
                       <div className='absolute -right-14 top-20 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
                         <div className=' flex flex-col items-center justify-center p-4 text-lg font-extrabold'>

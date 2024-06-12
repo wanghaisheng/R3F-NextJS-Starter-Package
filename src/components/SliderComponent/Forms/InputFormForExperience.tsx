@@ -10,12 +10,12 @@ export default function InputFormForExperience({
   index,
 }) {
   return (
-    <div className='flex w-full flex-col gap-y-2 px-4 text-purple-950 dark:text-purple-200'>
+    <div className='flex w-full flex-col gap-y-2 px-4 text-purple-200'>
       <div className='flex flex-row items-center justify-between '>
         <div>
           <label
             htmlFor='educational'
-            className={` ${project.type === 'educational' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+            className={` ${project.type === 'educational' ? 'font-bold text-purple-200' : 'text-purple-200 hover:text-purple-400'}`}
           >
             Educational
           </label>
@@ -43,7 +43,7 @@ export default function InputFormForExperience({
           />
           <label
             htmlFor='work'
-            className={`${project.type === 'work' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+            className={`${project.type === 'work' ? 'font-bold  text-purple-200' : 'text-purple-200 hover:text-purple-400'}`}
           >
             Work
           </label>
@@ -61,7 +61,7 @@ export default function InputFormForExperience({
           />
           <label
             htmlFor='other'
-            className={` ${project.type === 'other' ? 'font-bold text-purple-950 dark:text-purple-200' : 'text-purple-950 hover:text-purple-700 dark:text-purple-200 hover:dark:text-purple-400'}`}
+            className={` ${project.type === 'other' ? 'font-bold text-purple-200' : 'text-purple-200 hover:text-purple-400'}`}
           >
             Other
           </label>
@@ -78,7 +78,7 @@ export default function InputFormForExperience({
           value={project.name}
           onChange={(e) => handleProjectNameChange(index, e.target.value)}
           placeholder='Project Name'
-          className='rounded-md border px-3 lg:w-[70%] dark:border-none dark:bg-white/20'
+          className='rounded-md border border-none bg-white/20 px-3 lg:w-[70%]'
           required
         />
       </div>
@@ -93,7 +93,7 @@ export default function InputFormForExperience({
           value={project.description}
           onChange={(e) => handleProjectDescriptionChange(index, e.target.value)}
           placeholder='Project Description'
-          className='rounded-md border px-3 lg:w-[70%] dark:border-none  dark:bg-white/20'
+          className='rounded-md border border-none bg-white/20 px-3 lg:w-[70%]'
         />
       </div>
       <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -101,7 +101,7 @@ export default function InputFormForExperience({
           ProjPic
         </label>
         <input
-          className='block cursor-pointer rounded-lg border text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:border-none dark:bg-black/30 dark:text-white dark:placeholder:text-white'
+          className='block cursor-pointer rounded-lg border border-none bg-black/30 text-sm text-white placeholder:text-white focus:outline-none lg:w-[70%]'
           id='file_input'
           type='file'
           aria-label='file_input'
@@ -111,7 +111,7 @@ export default function InputFormForExperience({
         <label htmlFor='' className='font-semibold'>
           Skills
         </label>
-        <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%]  dark:text-black dark:placeholder:text-black'>
+        <div className='text-sm text-black placeholder:text-black  focus:outline-none lg:w-[70%]'>
           <TagsInput
             value={project.project_skills}
             onChange={(tags) => handleSkillsChange(index, tags)}
@@ -125,7 +125,7 @@ export default function InputFormForExperience({
         <label htmlFor='' className='font-semibold'>
           Tools
         </label>
-        <div className='text-sm text-gray-900 focus:outline-none lg:w-[70%] dark:text-black dark:placeholder:text-black'>
+        <div className='text-sm  text-black placeholder:text-black focus:outline-none lg:w-[70%]'>
           <TagsInput
             value={project.tools}
             onChange={(tags) => handleToolsChange(index, tags)}

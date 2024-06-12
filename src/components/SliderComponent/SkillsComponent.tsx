@@ -179,10 +179,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[770px] w-[300px] flex-col rounded bg-[#F5F5F5] px-2 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+        className='relative flex h-[770px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 px-2 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
       >
         <div className='flex w-full flex-col'>
-          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
             SKILLS STATS
             <div className='absolute top-10 text-sm lg:right-0 '>
               <DrawOutlineButton
@@ -198,10 +198,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
           <Tabs>
             <TabList className='mt-20 flex overflow-x-auto lg:my-6'>
               {skills.map((element, index) => (
-                <Tab
-                  key={index}
-                  className='ml-3 flex cursor-pointer whitespace-nowrap px-1 text-purple-950 dark:text-purple-200 '
-                >
+                <Tab key={index} className='ml-3 flex cursor-pointer whitespace-nowrap px-1 text-purple-200 '>
                   {element.skill_name}
                   {index !== 0 && (
                     <button
@@ -217,7 +214,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
             </TabList>
             {/* TabPanel */}
             <div className='flex flex-col gap-y-5 lg:flex-row lg:gap-x-5 lg:gap-y-0'>
-              <div className='w-[300px] text-purple-950 md:w-[500px] lg:w-[60%] dark:text-purple-200'>
+              <div className='w-[300px] text-purple-200 md:w-[500px] lg:w-[60%]'>
                 {skills.map((element, index) => (
                   <div key={index}>
                     <form
@@ -236,7 +233,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                 value={element.skill_name}
                                 onChange={(e) => handleSkillNameChange(index, e.target.value)}
                                 placeholder='Skill Name'
-                                className='w-full rounded-md border p-1 dark:border-none dark:bg-white/20'
+                                className='w-full rounded-md border border-none bg-white/20 p-1'
                                 aria-label='skill name'
                               />
                               <div className='my-4 flex'>
@@ -249,17 +246,15 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                   onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                                   aria-label='slider'
                                 />
-                                <p className='pl-2 text-sm text-purple-950 dark:text-purple-200'>
-                                  {element.percentage}%
-                                </p>
+                                <p className='pl-2 text-sm text-purple-200'>{element.percentage}%</p>
                               </div>
                             </div>
                           </div>
-                          <label className='text-gray-900 dark:text-purple-200' htmlFor='file_input'>
+                          <label className='text-purple-200' htmlFor='file_input'>
                             Certifications
                           </label>
                           <input
-                            className='block w-full cursor-pointer rounded-lg border text-sm text-gray-900 focus:outline-none dark:border-none dark:bg-white/20 dark:text-gray-400 dark:placeholder:text-gray-400'
+                            className='block w-full cursor-pointer rounded-lg border border-none bg-white/20 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none'
                             id='file_input'
                             type='file'
                             aria-label='file input'
@@ -293,7 +288,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 ))}
               </div>
               <div className='mt-4 w-[300px] rounded-[20px] p-3 md:w-[500px]  lg:ml-2 lg:mt-0 lg:w-[45%]'>
-                <p className='mb-2 flex justify-center text-purple-950 dark:text-purple-200'>Specification</p>
+                <p className='mb-2 flex justify-center text-purple-200'>Specification</p>
 
                 {/* Condition for changing barchart chart and radar chart*/}
                 <SkillsChartComponent key={skills.length} skills={skills} />
