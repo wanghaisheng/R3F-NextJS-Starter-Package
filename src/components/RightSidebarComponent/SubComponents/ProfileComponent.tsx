@@ -31,7 +31,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
   }, [user])
 
-  const [description, setDescription] = useState(user.description)
+  const [description, setDescription] = useState(user ? user.description : '')
   const [imageUrl, setImageUrl] = useState('')
 
   function handelImageUrlChange(newImageUrl: string) {

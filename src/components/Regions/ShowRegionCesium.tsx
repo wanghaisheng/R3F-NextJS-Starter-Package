@@ -1,13 +1,30 @@
 import CesiumMap from '../LeafletMap/CesiumMap'
 import Image from 'next/image'
 import { Suspense } from 'react'
+import ShowGuild from '../Guilds/ShowGuild'
+import GuildHeader from '../Guilds/GuildHeader'
+
 async function getCountries() {
   // const response = await fetch('https://restcountries.com/v3.1/all')
   const response = await fetch('https://restcountries.com/v3.1/region/asia')
   const data = await response.json()
   return data
 }
-export default function ShowRegionCesium({ filter }: { filter: string }) {
+export default function ShowRegionCesium({
+  selectedRegionFilter,
+  guilds,
+  selectedGuildFilter,
+  searchTerm,
+  handleFilterGuildChange,
+  setSearchTerm,
+}: {
+  selectedRegionFilter: string
+  guilds: any
+  selectedGuildFilter: string
+  searchTerm: string
+  handleFilterGuildChange: (event: any) => void
+  setSearchTerm: (event: any) => void
+}) {
   const regions = [
     {
       name: 'East Asia',
@@ -45,8 +62,8 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
         'https://imgs.search.brave.com/G7zOwnpcKRoEWw2tPhmfU7pdbPImUNKWtOSH4eNqslY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vdW5pdGVjaC1n/bG9iYWwtcmVzb3Vy/Y2UvaW1hZ2UvdXBs/b2FkL3YxNTgyNzAw/NTEwL25hbWliaWEx/X2gzMzFxbi5qcGc',
     },
   ]
-  const filteredRegions = filter
-    ? regions.filter((region) => region.continent === filter)
+  const filteredRegions = selectedRegionFilter
+    ? regions.filter((region) => region.continent === selectedRegionFilter)
     : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
   return (
     <>
@@ -71,17 +88,24 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
                     height: '100%',
                   }}
                 >
-                  <CesiumMap filteredContinent={filter} />
+                  <CesiumMap filteredContinent={selectedRegionFilter} />
                 </div>
               </div>
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
             <div className='absolute right-0 top-14 mr-4 h-[66vh] w-[44vh] rounded-lg bg-violet-400/10 p-4'>
-              <div className='flex size-full animate-pulse items-center justify-center'>
-                <h1 className='text-center text-3xl font-bold text-white'>
-                  ELITE AVATARS <br />
-                  <br /> COMMING SOON!!!
-                </h1>
+              <GuildHeader
+                onFilterChange={handleFilterGuildChange}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
+              <div className='flex flex-row overflow-auto'>
+                <ShowGuild
+                  users={guilds}
+                  selectedRegionFilter={selectedRegionFilter}
+                  filterguild={selectedGuildFilter}
+                  searchTerm={searchTerm}
+                />
               </div>
             </div>
           </div>
@@ -91,7 +115,7 @@ export default function ShowRegionCesium({ filter }: { filter: string }) {
         <div className='flex flex-wrap justify-center gap-x-5 py-2'>
           {filteredRegions.map((region, index) => (
             <a
-              href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
+              href={`#`} // filter the guilds based on the country
               className='relative flex aspect-[2/1] size-20 min-w-0 flex-col items-center justify-center rounded-lg transition duration-500 ease-out hover:scale-105'
               key={index}
             >
