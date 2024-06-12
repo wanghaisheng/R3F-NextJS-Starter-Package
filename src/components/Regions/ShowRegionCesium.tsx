@@ -25,6 +25,8 @@ export default function ShowRegionCesium({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
+  console.log(guilds)
+
   const regions = [
     {
       name: 'East Asia',

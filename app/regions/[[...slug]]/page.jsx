@@ -27,6 +27,7 @@ const getUsers = async () => {
       (user) =>
         user.first_name &&
         user.last_name &&
+        user.username &&
         user.email &&
         user.description &&
         user.region.ip &&
@@ -150,6 +151,7 @@ const Regions = ({ params }) => {
 
         return {
           name: publicUser.first_name + ' ' + publicUser.last_name,
+          username: publicUser.username,
           description: publicUser.description,
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),

@@ -60,6 +60,7 @@ export async function GET() {
       select: {
         first_name: true,
         last_name: true,
+        username: true,
         email: true,
         image_url: true,
         description: true,

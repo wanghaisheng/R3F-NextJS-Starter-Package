@@ -71,6 +71,7 @@ model users {
   dob            String?      @db.VarChar
   region         Json?
   guild_id       String?      @db.Uuid
+  username       String?      @unique
   avatar         avatar[]
   cards          cards[]
   experience     experience[]

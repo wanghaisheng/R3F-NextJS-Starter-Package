@@ -8,9 +8,25 @@ import { usePathname } from 'next/navigation'
 import useEmblaCarousel from 'embla-carousel-react'
 import Slide1 from './PublicProfileComponent/Slide1'
 import Slide2 from './PublicProfileComponent/Slide2'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-export default function PublicProfile() {
-  const { user } = useUser()
+
+const getSelectedPublicUser = async (username) => {
+  try {
+    const res = await axios.get(`/api/public/users/${username}`)
+    if (res.status !== 200) {
+      return toast.error('Failed to get the user')
+    }
+    return res.data
+  } catch (error) {
+    toast.error('Internal server error')
+  }
+}
+
+export default function PublicProfile({ username }) {
+  // const { user } = useUser()
+  const [user, setUser] = useState(null)
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
@@ -43,6 +59,14 @@ export default function PublicProfile() {
     },
     [emblaApi],
   )
+
+  useEffect(() => {
+    const getPublicUser = async () => {
+      const publicUser = await getSelectedPublicUser(username)
+      setUser(publicUser)
+    }
+    getPublicUser()
+  }, [])
 
   useEffect(() => {
     window.addEventListener('wheel', handleScroll)

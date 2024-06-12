@@ -13,8 +13,10 @@ import Image from 'next/image'
 const { log } = console
 export default function Page() {
   const router = useRouter()
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [usernameError, setUsernameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [generalError, setGeneralError] = useState('')
@@ -22,9 +24,20 @@ export default function Page() {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return re.test(String(email).toLowerCase())
   }
+  const validateUsername = (username) => {
+    // Allow alphanumeric characters, underscores, and hyphens
+    const re = /^[a-zA-Z0-9_-]+$/
+    return re.test(username)
+  }
   const handleSubmit = async (event) => {
     event.preventDefault()
     let valid = true
+    if (!validateUsername(username)) {
+      setUsernameError('Invalid username')
+      valid = false
+    } else {
+      setUsernameError('')
+    }
     if (!validateEmail(email)) {
       setEmailError('Invalid email address.')
       valid = false
@@ -39,6 +52,7 @@ export default function Page() {
     }
     if (!valid) return
     const submit = {
+      username,
       email,
       password,
     }
@@ -109,6 +123,30 @@ export default function Page() {
           </div>
           <form action='#' className='flex flex-col items-center justify-center gap-2 p-3'>
             <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
+              Username
+            </label>
+
+            <div
+              className={`input-group m-2 flex rounded-md border-2 ${usernameError ? ' border-red-500' : 'border-violet-400 '}`}
+            >
+              <div
+                className={`flex items-center justify-center px-1 text-2xl ${usernameError ? ' text-red-300' : 'darK:text-purple-200 text-purple-600'}`}
+              >
+                <LiaSignInAltSolid />
+              </div>
+              <input
+                type='text'
+                name='username'
+                className='rounded-md bg-transparent  p-2 text-purple-950 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 '
+                value={username}
+                placeholder='username'
+                onChange={({ target }) => setUsername(target?.value)}
+                required
+              />
+            </div>
+            {usernameError && <p className='-mt-3 text-xs text-red-500'>{usernameError}</p>}
+            {generalError && <p className='-mt-3 text-xs text-red-500'>{generalError}</p>}
+            <label htmlFor='' className='text-xl font-semibold text-purple-950 dark:text-purple-200'>
               Email
             </label>
 
@@ -127,6 +165,7 @@ export default function Page() {
                 value={email}
                 placeholder='Email'
                 onChange={({ target }) => setEmail(target?.value)}
+                required
               />
             </div>
             {emailError && <p className='-mt-3 text-xs text-red-500'>{emailError}</p>}
@@ -150,6 +189,7 @@ export default function Page() {
                 value={password}
                 placeholder='Password'
                 onChange={({ target }) => setPassword(target?.value)}
+                required
               />
             </div>
             {passwordError && <p className='-mt-3 text-xs text-red-500'>{passwordError}</p>}

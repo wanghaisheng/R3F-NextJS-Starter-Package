@@ -10,18 +10,6 @@ import axios from 'axios'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-async function getAvatarById(id: string) {
-  try {
-    const res = await axios.get(`/api/internal/avatar/${id}`)
-    if (res.status !== 200) {
-      toast.error('Failed to fetch avatar data')
-    }
-    return res.data
-  } catch (error) {
-    toast.error('Failed to fetch avatar data')
-  }
-}
-
 async function getGuilds() {
   try {
     const res = await axios.get('/api/internal/guilds')
@@ -115,7 +103,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         const guildData = await getGuilds()
         setGuildData(guildData)
       } catch (error) {
-        toast.error('Failed to set avatar data')
+        toast.error('Failed to set guild data')
       }
     }
     fetchGuildData()
@@ -125,19 +113,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   useEffect(() => {
     const setUserGuild = async () => {
       const guild = guildData.find((guild) => guild.id === user.guild_id)
-      setSelectedGuild(guild.guild_name)
+      if (guild) {
+        setSelectedGuild(guild.guild_name)
+      }
     }
-    if (user && guildData[0].id !== '') {
+    if (user && guildData[0].id) {
       setUserGuild()
     }
-  }, [user])
+  }, [user, guildData])
 
   // AvatarsData
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
-        const testData = await getAvatarById(user.gg_id)
-        setAvatarsData(testData)
+        setAvatarsData(user.avatar)
       } catch (error) {
         toast.error('Failed to set avatar data')
       }
