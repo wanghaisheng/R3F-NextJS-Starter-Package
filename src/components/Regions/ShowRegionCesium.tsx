@@ -25,8 +25,6 @@ export default function ShowRegionCesium({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
-  console.log(guilds)
-
   const regions = [
     {
       name: 'East Asia',
@@ -68,7 +66,6 @@ export default function ShowRegionCesium({
     ? regions.filter((region) => region.continent === selectedRegionFilter)
     : regions.filter((region) => region.continent === 'NA') // default is this region
 
-  console.log(selectedRegionFilter)
   return (
     <>
       <div className='relative flex-1'>
