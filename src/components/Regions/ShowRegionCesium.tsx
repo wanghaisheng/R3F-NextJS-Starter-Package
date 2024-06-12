@@ -96,7 +96,7 @@ export default function ShowRegionCesium({
               </div>
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
-            <div className='absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-white/20 p-2 backdrop-blur-md'>
+            <div className='absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md shadow-purple-700 backdrop-blur-md'>
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
