@@ -1,8 +1,14 @@
+'use client'
+import dynamic from 'next/dynamic'
+
 import CesiumMap from '../LeafletMap/CesiumMap'
-import Image from 'next/image'
+import { useState } from 'react'
 import { Suspense } from 'react'
 import ShowGuild from '../Guilds/ShowGuild'
 import GuildHeader from '../Guilds/GuildHeader'
+const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
+  ssr: false,
+})
 
 async function getCountries() {
   // const response = await fetch('https://restcountries.com/v3.1/all')
@@ -25,6 +31,11 @@ export default function ShowRegionCesium({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
+  const [mapChange, setMapChange] = useState(false)
+  const handleMapChange = () => {
+    setMapChange(!mapChange)
+  }
+
   const regions = [
     {
       name: 'East Asia',
@@ -87,13 +98,24 @@ export default function ShowRegionCesium({
                     left: 0,
                     width: '100%',
                     height: '100%',
+                    zIndex: 0,
                   }}
                 >
-                  <CesiumMap filteredContinent={selectedRegionFilter} />
+                  {!mapChange ? (
+                    <CesiumMap filteredContinent={selectedRegionFilter} />
+                  ) : (
+                    <MapComponent filteredContinent={selectedRegionFilter} />
+                  )}
                 </div>
               </div>
             </Suspense>
             {/* Guilds showcase */}
+            <button
+              className='absolute right-10 top-2 z-30 flex w-32 cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500'
+              onClick={handleMapChange}
+            >
+              Change
+            </button>
             <div
               className={`absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
             >
@@ -102,6 +124,7 @@ export default function ShowRegionCesium({
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
+
               <div className='flex w-full overflow-auto'>
                 <ShowGuild
                   users={guilds}
