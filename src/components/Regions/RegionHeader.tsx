@@ -1,9 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import { MdClearAll } from 'react-icons/md'
-import { FaDiamond } from 'react-icons/fa6'
+import Image from 'next/image'
 
 export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -51,19 +49,19 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`cursor-pointer text-red-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-red-500'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
-              E
+              EU
             </a>
             <a
               className={`cursor-pointer text-yellow-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-yellow-500'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
-              A
+              AS
             </a>
             <a
               className={`cursor-pointer text-emerald-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-emerald-500'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
-              AU
+              OC
             </a>
             <a
               className={`cursor-pointer text-gray-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-gray-500'}`}
@@ -82,7 +80,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
             >
-              <FaDiamond />
+              <Image src='/continents/na.png' height={20} width={20} alt='na' />
               NORTH AMERICA
             </a>
           </li>
@@ -91,7 +89,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('SOUTH AMERICA')}
             >
-              <FaDiamond />
+              <Image src='/continents/sa.png' height={20} width={20} alt='na' />
               SOUTH AMERICA
             </a>
           </li>
@@ -100,7 +98,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
-              <FaDiamond />
+              <Image src='/continents/af.png' height={20} width={20} alt='na' />
               AFRICA
             </a>
           </li>
@@ -109,7 +107,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
-              <FaDiamond />
+              <Image src='/continents/eu.png' height={20} width={20} alt='na' />
               EUROPE
             </a>
           </li>
@@ -118,7 +116,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
-              <FaDiamond />
+              <Image src='/continents/eu.png' height={20} width={20} alt='na' />
               ASIA
             </a>
           </li>
@@ -127,7 +125,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
-              <FaDiamond />
+              <Image src='/continents/oc.png' height={20} width={20} alt='na' />
               AUSTRALIA & OCEANIA
             </a>
           </li>
@@ -136,7 +134,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
               onClick={() => handleFilterClick('ANTARCTICA')}
             >
-              <FaDiamond />
+              <Image src='/continents/na.png' height={20} width={20} alt='na' />
               ANTARCTICA
             </a>
           </li>
