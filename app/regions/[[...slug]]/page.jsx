@@ -291,7 +291,7 @@ const Regions = ({ params }) => {
               {/* <ShowRegion2 filter={selectedFilter} /> */}
 
               <ShowRegionCesium
-                filter={selectedRegionFilter}
+                selectedRegionFilter={selectedRegionFilter}
                 guilds={guilds}
                 selectedGuildFilter={selectedGuildFilter}
                 searchTerm={searchTerm}

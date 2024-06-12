@@ -6,21 +6,27 @@ import { MdHexagon } from 'react-icons/md'
 export default function ShowGuild({
   users,
   filterguild,
+  selectedRegionFilter,
   searchTerm,
 }: {
   users: any
   filterguild: string
+  selectedRegionFilter: string
   searchTerm: string
 }) {
-  const filteredFactions = filterguild ? users.filter((user) => user.guild === filterguild) : users
-  const filteredAndSearchedFactions = filteredFactions.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  // Filter based on guild, continent, and search term
+  const filteredFactions = users.filter((user) => {
+    return (
+      (filterguild ? user.guild === filterguild : true) &&
+      (selectedRegionFilter ? user.continent === selectedRegionFilter : true) &&
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  })
   return (
     <>
       <div className='flex justify-start'>
         <div className='mx-10 my-6 flex justify-center gap-5 lg:justify-start'>
-          {filteredAndSearchedFactions.map((user, index) => (
+          {filteredFactions.map((user, index) => (
             <a
               href={`/regions/${user.name.toLowerCase().replace(' ', '-')}`}
               key={index}

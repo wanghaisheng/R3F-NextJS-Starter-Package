@@ -11,14 +11,14 @@ async function getCountries() {
   return data
 }
 export default function ShowRegionCesium({
-  filter,
+  selectedRegionFilter,
   guilds,
   selectedGuildFilter,
   searchTerm,
   handleFilterGuildChange,
   setSearchTerm,
 }: {
-  filter: string
+  selectedRegionFilter: string
   guilds: any
   selectedGuildFilter: string
   searchTerm: string
@@ -62,8 +62,8 @@ export default function ShowRegionCesium({
         'https://imgs.search.brave.com/G7zOwnpcKRoEWw2tPhmfU7pdbPImUNKWtOSH4eNqslY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vdW5pdGVjaC1n/bG9iYWwtcmVzb3Vy/Y2UvaW1hZ2UvdXBs/b2FkL3YxNTgyNzAw/NTEwL25hbWliaWEx/X2gzMzFxbi5qcGc',
     },
   ]
-  const filteredRegions = filter
-    ? regions.filter((region) => region.continent === filter)
+  const filteredRegions = selectedRegionFilter
+    ? regions.filter((region) => region.continent === selectedRegionFilter)
     : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
   return (
     <>
@@ -88,7 +88,7 @@ export default function ShowRegionCesium({
                     height: '100%',
                   }}
                 >
-                  <CesiumMap filteredContinent={filter} />
+                  <CesiumMap filteredContinent={selectedRegionFilter} />
                 </div>
               </div>
             </Suspense>
@@ -100,7 +100,12 @@ export default function ShowRegionCesium({
                 setSearchTerm={setSearchTerm}
               />
               <div className='flex flex-row overflow-auto'>
-                <ShowGuild users={guilds} filterguild={selectedGuildFilter} searchTerm={searchTerm} />
+                <ShowGuild
+                  users={guilds}
+                  selectedRegionFilter={selectedRegionFilter}
+                  filterguild={selectedGuildFilter}
+                  searchTerm={searchTerm}
+                />
               </div>
             </div>
           </div>
