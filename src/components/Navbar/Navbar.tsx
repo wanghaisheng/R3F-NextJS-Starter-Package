@@ -149,16 +149,16 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     AVATARS
                   </Link>
                 )}
-                {pathname === '/guilds' ? (
-                  <Link href='/guilds' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    GUILDS
+                {pathname === '/cmgsoon' ? (
+                  <Link href='#' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    CMGSOON
                   </Link>
                 ) : (
                   <Link
-                    href='/guilds'
+                    href='#'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    GUILDS
+                    CMGSOON
                   </Link>
                 )}
                 {pathname === '/hero' ? (
@@ -264,8 +264,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 </Link>
               </li>
               <li>
-                <Link href='/guilds' className='hover:text-violet-400' onClick={closeMenu}>
-                  GUILDS
+                <Link href='#' className='hover:text-violet-400' onClick={closeMenu}>
+                  CMGSOON
                 </Link>
               </li>
               <li>

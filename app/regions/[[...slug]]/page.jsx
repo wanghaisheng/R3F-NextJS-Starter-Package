@@ -257,22 +257,22 @@ const Regions = ({ params }) => {
           </div>
         ) : params.slug?.length === 1 ? ( // regions/something
           <div>
-            {/* Render background image */}
-            {/* <div
-              style={{
-                position: 'absolute',
-                top: -110,
-                left: 0,
-                width: '100%',
-                height: '100vh',
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                filter: 'blur(8px)',
-              }}
-            ></div> */}
-            <RegionDetails continent={params.slug[0]} />
-            <div className='mx-10 flex justify-end'>{params.slug[0].toUpperCase()}</div>
+            <div className='relative h-[80vh] flex-1 items-center justify-center'>
+              <div className='mx-10 flex justify-start font-semibold'>{params.slug[0].toUpperCase()}</div>
+
+              <div className='mt-6 flex animate-pulse flex-col items-center justify-center lg:mt-10'>
+                <h1 className='text-center text-3xl font-bold text-white'>
+                  Developers are working on this page. <br />
+                  Any feedback will be helpful.
+                </h1>
+              </div>
+              <div className='absolute bottom-0 flex h-[48vh] w-full px-10 lg:bottom-10 '>
+                <iframe
+                  className='w-full rounded'
+                  src='https://ggrelativity.xyz/ticket-form/c4ca4238a0b923820dcc509a6f75849b'
+                ></iframe>
+              </div>
+            </div>
           </div>
         ) : (
           <>

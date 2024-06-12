@@ -110,7 +110,7 @@ export default function ShowRegionCesium({
         <div className='flex flex-wrap justify-center gap-x-5 py-2'>
           {filteredRegions.map((region, index) => (
             <a
-              href={`/regions/${region.name.toLowerCase().replace(' ', '-')}`}
+              href={`#`} // filter the guilds based on the country
               className='relative flex aspect-[2/1] size-20 min-w-0 flex-col items-center justify-center rounded-lg transition duration-500 ease-out hover:scale-105'
               key={index}
             >

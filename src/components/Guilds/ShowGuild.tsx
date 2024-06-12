@@ -22,7 +22,7 @@ export default function ShowGuild({
         <div className='mx-10 my-6 flex justify-center gap-5 lg:justify-start'>
           {filteredAndSearchedFactions.map((user, index) => (
             <a
-              href={`/guilds/${user.name.toLowerCase().replace(' ', '-')}`}
+              href={`/regions/${user.name.toLowerCase().replace(' ', '-')}`}
               key={index}
               className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-lg shadow-sm backdrop-blur-md transition duration-500 ease-out'
             >
