@@ -43,7 +43,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       )}
       {!isSidebarOpen && (
         <button
-          className='fixed right-0 top-32 z-50 size-10 rounded-l-md bg-black/20 p-1 shadow-lg'
+          className='fixed right-0 top-36 z-50 size-10 rounded-l-md bg-black/20 p-1 shadow-lg'
           onClick={toggleSidebar}
         >
           <Image src='/GGlogo.png' alt='sidebar' height={30} width={30}></Image>
@@ -66,7 +66,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
           ) : (
             <h2 className='text-xl font-bold'>{activeTab.toUpperCase()}</h2>
           )}
-          <button className='text-blue-600 hover:text-white/60' onClick={toggleSidebar}>
+          <button className='z-50 text-blue-600 hover:text-white/60' onClick={toggleSidebar}>
             <svg xmlns='http://www.w3.org/2000/svg' className='size-6' viewBox='0 0 20 20' fill='currentColor'>
               <path
                 fillRule='evenodd'
