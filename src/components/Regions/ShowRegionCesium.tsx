@@ -96,13 +96,13 @@ export default function ShowRegionCesium({
               </div>
             </Suspense>
             {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
-            <div className='absolute right-0 top-14 mr-4 h-[66vh] w-[44vh] rounded-lg bg-violet-400/10 p-4'>
+            <div className='absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-white/20 p-2 backdrop-blur-md'>
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
-              <div className='flex flex-row overflow-auto'>
+              <div className='flex w-full overflow-auto'>
                 <ShowGuild
                   users={guilds}
                   selectedRegionFilter={selectedRegionFilter}
@@ -114,7 +114,7 @@ export default function ShowRegionCesium({
           </div>
         </div>
       </div>
-      <div className='fixed bottom-0 left-[50%] z-50 flex h-auto w-[60%] -translate-x-1/2 items-center justify-center '>
+      {/* <div className='fixed bottom-0 left-[50%] z-50 flex h-auto w-[60%] -translate-x-1/2 items-center justify-center '>
         <div className='flex flex-wrap justify-center gap-x-5 py-2'>
           {filteredRegions.map((region, index) => (
             <a
@@ -131,7 +131,6 @@ export default function ShowRegionCesium({
                 // height={100}
                 loading='lazy'
               />
-              {/* Symbol */}
               <span className='absolute top-0 flex size-20 items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
                 <Image
                   src={region.icon}
@@ -148,7 +147,7 @@ export default function ShowRegionCesium({
             </a>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

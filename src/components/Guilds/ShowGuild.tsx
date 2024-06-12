@@ -1,3 +1,8 @@
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import { Pagination, Scrollbar } from 'swiper/modules'
 import Image from 'next/image'
 import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
 import { FaDiamond } from 'react-icons/fa6'
@@ -24,89 +29,91 @@ export default function ShowGuild({
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
+
   return (
-    <>
-      <div className='flex justify-start'>
-        <div className='mx-10 my-6 flex justify-center gap-5 lg:justify-start'>
-          {filteredFactions.map((user, index) => (
-            <Link
-              href={`/public-profile/${user.username}`}
-              key={index}
-              className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-lg shadow-sm backdrop-blur-md transition duration-500 ease-out'
+    <Swiper
+      modules={[Pagination, Scrollbar]}
+      scrollbar={{ draggable: true, hide: false }}
+      pagination={{ clickable: true }}
+      spaceBetween={2}
+      slidesPerView={2}
+      className='h-[300px] w-full'
+    >
+      {filteredFactions.map((user, index) => (
+        <SwiperSlide key={index}>
+          <Link
+            href={`/public-profile/${user.username}`}
+            className='relative ml-2 flex h-[260px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+            // style={{
+            //   background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user.avatarimg})`,
+            //   backgroundSize: 'cover',
+            //   backgroundPosition: 'center',
+            //   objectFit: 'cover',
+            //   filter: `drop-shadow( 0px 0px 3px rgba(${
+            //     user.guild === 'PADMA'
+            //       ? '255, 0, 0, 1'
+            //       : user.guild === 'VAJRA'
+            //         ? '0, 0, 255, 1'
+            //         : user.guild === 'RATNA'
+            //           ? '255, 255, 0, 1'
+            //           : user.guild === 'KARMA'
+            //             ? '0, 255, 0, 1'
+            //             : '255, 255, 255, 1'
+            //   }))`,
+            // }}
+          >
+            <Image
+              className='absolute top-0 h-[230px] rounded-t-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
+              src={user.avatarimg}
+              alt=''
+              width={240}
+              height={280}
+              style={{
+                objectFit: 'cover',
+                filter: `drop-shadow(-1px -2px 4px rgba(${
+                  user.guild === 'PADMA'
+                    ? '255, 0, 0, 0.5'
+                    : user.guild === 'VAJRA'
+                      ? '0, 0, 255, 0.5'
+                      : user.guild === 'RATNA'
+                        ? '255, 255, 0, 0.5'
+                        : user.guild === 'KARMA'
+                          ? '0, 255, 0, 0.5'
+                          : '255, 255, 255, 0.5'
+                }))`,
+              }}
+            />
+            <span
+              className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
             >
-              <Image
-                className='absolute top-0 w-[240px] rounded-t-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
-                src={user.avatarimg}
-                alt=''
-                width={240}
-                height={280}
-                style={{
-                  objectFit: 'cover',
-                  filter: `drop-shadow(-1px -2px 4px rgba(${
-                    user.guild === 'PADMA'
-                      ? '255, 0, 0, 0.5'
-                      : user.guild === 'VAJRA'
-                        ? '0, 0, 255, 0.5'
-                        : user.guild === 'RATNA'
-                          ? '255, 255, 0, 0.5'
-                          : user.guild === 'KARMA'
-                            ? '0, 255, 0, 0.5'
-                            : '255, 255, 255, 0.5'
-                  }))`,
-                }}
-                //On hover remove the drop shadow
-                // onMouseOver={(e) => {
-                //   e.currentTarget.style.filter = 'none'
-                // }}
-                // onMouseOut={(e) => {
-                //   e.currentTarget.style.filter = `drop-shadow(-1px -2px 4px rgba(${
-                //     user.guild === 'PADMA'
-                //       ? '255, 0, 0, 0.5'
-                //       : user.guild === 'VAJRA'
-                //         ? '0, 0, 255, 0.5'
-                //         : user.guild === 'RATNA'
-                //           ? '255, 255, 0, 0.5'
-                //           : user.guild === 'KARMA'
-                //             ? '0, 255, 0, 0.5'
-                //             : '255, 255, 255, 0.5'
-                //   }))`
-                // }}
-              />
-              {/* <span className='absolute top-0 flex size-full items-center justify-center opacity-0 transition duration-500 ease-out hover:bg-black/80 hover:opacity-100'>
-                <p>{user.description}</p>
-              </span> */}
-              <span
-                className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
-              >
-                <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out'>
-                  {user.name.toUpperCase()}
-                  {user.guild.toUpperCase() === 'PADMA' ? (
-                    <p className='text-red-500'>
-                      <IoTriangleSharp />
-                    </p>
-                  ) : user.guild.toUpperCase() === 'VAJRA' ? (
-                    <p className=' text-blue-500'>
-                      <BsOctagonFill />
-                    </p>
-                  ) : user.guild.toUpperCase() === 'KARMA' ? (
-                    <p className=' text-green-500'>
-                      <FaDiamond />
-                    </p>
-                  ) : user.guild.toUpperCase() === 'RATNA' ? (
-                    <p className=' text-yellow-500'>
-                      <IoCubeSharp />
-                    </p>
-                  ) : (
-                    <p className='text-white'>
-                      <MdHexagon />
-                    </p>
-                  )}
-                </h1>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </>
+              <h1 className='flex w-full items-center justify-between gap-x-4 font-bold transition duration-300 ease-in-out'>
+                {user.name.toUpperCase()}
+                {user.guild.toUpperCase() === 'PADMA' ? (
+                  <p className='text-red-500'>
+                    <IoTriangleSharp />
+                  </p>
+                ) : user.guild.toUpperCase() === 'VAJRA' ? (
+                  <p className=' text-blue-500'>
+                    <BsOctagonFill />
+                  </p>
+                ) : user.guild.toUpperCase() === 'KARMA' ? (
+                  <p className=' text-green-500'>
+                    <FaDiamond />
+                  </p>
+                ) : user.guild.toUpperCase() === 'RATNA' ? (
+                  <p className=' text-yellow-500'>
+                    <IoCubeSharp />
+                  </p>
+                ) : (
+                  <p className='text-white'>
+                    <MdHexagon />
+                  </p>
+                )}
+              </h1>
+            </span>
+          </Link>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   )
 }
