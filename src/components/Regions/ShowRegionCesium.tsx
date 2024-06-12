@@ -64,7 +64,9 @@ export default function ShowRegionCesium({
   ]
   const filteredRegions = selectedRegionFilter
     ? regions.filter((region) => region.continent === selectedRegionFilter)
-    : regions.filter((region) => region.continent === 'NORTH AMERICA') // default is this region
+    : regions.filter((region) => region.continent === 'NA') // default is this region
+
+  console.log(selectedRegionFilter)
   return (
     <>
       <div className='relative flex-1'>

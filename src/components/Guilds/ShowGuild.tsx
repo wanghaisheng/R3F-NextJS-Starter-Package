@@ -18,7 +18,7 @@ export default function ShowGuild({
   const filteredFactions = users.filter((user) => {
     return (
       (filterguild ? user.guild === filterguild : true) &&
-      (selectedRegionFilter ? user.continent === selectedRegionFilter : true) &&
+      (selectedRegionFilter ? user.continent === selectedRegionFilter.toUpperCase() : true) &&
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })

@@ -53,147 +53,72 @@ const getGuilds = async () => {
 
 const continents = [
   {
-    continent_name: 'africa',
-    continent_code: 'af',
+    continent_name: 'AFRICA',
+    continent_code: 'AF',
   },
   {
-    continent_name: 'antartica',
-    continent_code: 'an',
+    continent_name: 'ANTARCTICA',
+    continent_code: 'AN',
   },
   {
-    continent_name: 'asia',
-    continent_code: 'as',
+    continent_name: 'ASIA',
+    continent_code: 'AS',
   },
   {
-    continent_name: 'europe',
-    continent_code: 'eu',
+    continent_name: 'EUROPE',
+    continent_code: 'EU',
   },
   {
-    continent_name: 'north america',
-    continent_code: 'na',
+    continent_name: 'NORTH AMERICA',
+    continent_code: 'NA',
   },
   {
-    continent_name: 'oceania',
-    continent_code: 'oc',
+    continent_name: 'OCEANIA',
+    continent_code: 'OC',
   },
   {
-    continent_name: 'south and central america',
-    continent_code: 'sa',
+    continent_name: 'SOUTH AMERICA',
+    continent_code: 'SA',
   },
 ]
 
 const Regions = ({ params }) => {
-  const [selectedRegionFilter, setSelectedRegionFilter] = useState('NORTH AMERICA')
-
+  const [selectedRegionFilter, setSelectedRegionFilter] = useState('NA') // Using continent code
   const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
-
   const [searchTerm, setSearchTerm] = useState('')
-
   const [publicUsers, setPublicUsers] = useState([])
   const [guildData, setGuildData] = useState([])
-  const [guilds, setGuilds] = useState([
-    {
-      name: 'Rohit Shrestha',
-      description: 'description',
-      guild: 'VAJRA',
-      avatarimg: 'https://models.readyplayer.me/65ef1f0dda9d855fa6c65f91.png',
-      continent: 'EAST-ASIA',
-    },
-    {
-      name: 'Ram Kumar',
-      description: 'description',
-      guild: 'KARMA',
-      avatarimg: 'https://models.readyplayer.me/6630d85ee2cc95da16c0484b.png',
-      // avatarimg: 'https://i0.wp.com/vrscout.com/wp-content/uploads/2021/10/TimmuToke_4.png?ssl=1',
-      continent: 'EAST-ASIA',
-    },
-    {
-      name: 'Siri',
-      description: 'description',
-      guild: 'RATNA',
-      avatarimg: 'https://models.readyplayer.me/6630d82746fb66980728a6c6.png',
-      continent: 'SOUTH-ASIA',
-    },
-    {
-      name: 'Alexa',
-      description: 'description',
-      guild: 'RATNA',
-      avatarimg: 'https://models.readyplayer.me/6630d82746fb66980728a6c6.png',
-      continent: 'SOUTH-ASIA',
-    },
-    {
-      name: 'Hari Bahadur',
-      description: 'description',
-      guild: 'VAJRA',
-      avatarimg: 'https://models.readyplayer.me/6630d7f8168713af984b742e.png',
-      continent: 'EAST-ASIA',
-    },
-    {
-      name: 'Rohit Shrestha',
-      description: 'description',
-      guild: 'BUDDHA',
-      avatarimg: 'https://models.readyplayer.me/66038d9e2aa392635c277ea9.png',
-      continent: 'NORTH-AMERICA',
-    },
-    {
-      name: 'Ram Kumar',
-      description: 'description',
-      guild: 'KARMA',
-      avatarimg: 'https://models.readyplayer.me/6630d7f8168713af984b742e.png',
-      continent: 'NORTH-AFRICA',
-    },
-    {
-      name: 'Satkar Niraula',
-      description: 'description',
-      guild: 'PADMA',
-      avatarimg: 'https://models.readyplayer.me/6630d85ee2cc95da16c0484b.png',
-      continent: 'NORTH-AFRICA',
-    },
-    {
-      name: 'Shaligram B.K.',
-      description: 'description',
-      guild: 'VAJRA',
-      avatarimg: 'https://models.readyplayer.me/6630d85ee2cc95da16c0484b.png',
-      continent: 'SUB-SAHARAN-AFRICA',
-    },
-    {
-      name: 'John Doe',
-      description: 'description',
-      guild: 'PADMA',
-      avatarimg: 'https://models.readyplayer.me/6630d85ee2cc95da16c0484b.png',
-      continent: 'SUB-SAHARAN-AFRICA',
-    },
-  ])
+  const [guilds, setGuilds] = useState([])
 
-  const [backgroundImage, setBackgroundImage] = useState(
-    'https://imgs.search.brave.com/UJlFq2-QeOeMj6KkDAOZrJ0dKdwRbCdgP5ts7Ets3RM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWxsZXJzd29ybGR3/aWRlLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wNi9z/aHV0dGVyc3RvY2tf/NjMyOTQxMDMxLWUx/Njg2NTk2OTI1OTcy/LnBuZw',
-  )
+  // const [backgroundImage, setBackgroundImage] = useState(
+  //   'https://imgs.search.brave.com/UJlFq2-QeOeMj6KkDAOZrJ0dKdwRbCdgP5ts7Ets3RM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWxsZXJzd29ybGR3/aWRlLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wNi9z/aHV0dGVyc3RvY2tf/NjMyOTQxMDMxLWUx/Njg2NTk2OTI1OTcy/LnBuZw',
+  // )
 
   const handleRegionFilterChange = (filter) => {
     setSelectedRegionFilter(filter)
     setSearchTerm('')
     // Change background image based on filter
-    setBackgroundImage(getBackgroundImageForFilter(filter))
+    // setBackgroundImage(getBackgroundImageForFilter(filter))
   }
 
   // Function to get background image based on selected filter
-  const getBackgroundImageForFilter = (selectedFilter) => {
-    if (selectedFilter.toUpperCase() === 'NORTH AMERICA') {
-      return 'https://imgs.search.brave.com/UJlFq2-QeOeMj6KkDAOZrJ0dKdwRbCdgP5ts7Ets3RM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWxsZXJzd29ybGR3/aWRlLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wNi9z/aHV0dGVyc3RvY2tf/NjMyOTQxMDMxLWUx/Njg2NTk2OTI1OTcy/LnBuZw'
-    } else if (selectedFilter.toUpperCase() === 'SOUTH AMERICA') {
-      return 'DEFAULT_BACKGROUND_IMAGE_URL'
-    } else if (selectedFilter.toUpperCase() === 'EUROPE') {
-      return 'DEFAULT_BACKGROUND_IMAGE_URL'
-    } else if (selectedFilter.toUpperCase() === 'ASIA') {
-      return 'https://imgs.search.brave.com/CHR1lb38tg1-9E8kcVdsTqaK2sEmUZCZo7PSvKWy3tM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yYXdt/YWxyb2Ftcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MDgvMjVEQzg5RTEt/MDA2Mi00NDNFLUFG/MUQtQ0Y1ODAxMzcy/RjI4LTEwMjR4Njg0/LmpwZWc'
-    } else if (selectedFilter.toUpperCase() === 'AFRICA') {
-      return 'https://imgs.search.brave.com/sdPLZjS3Z9AOVh1q6THgtwaL4UU_ug4VwT_dkE3LZRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmFzc2V0cy50aGVk/aXNjb3ZlcmVyLmNv/bS8yMDE5LzA1L2Jl/YXV0aWZ1bC1hZnJp/Y2EuanBn'
-    } else if (selectedFilter.toUpperCase() === 'AUSTRALIA') {
-      return 'DEFAULT_BACKGROUND_IMAGE_URL'
-    } else {
-      return ''
-    }
-  }
+  // const getBackgroundImageForFilter = (selectedFilter) => {
+  //   if (selectedFilter.toUpperCase() === 'NORTH AMERICA') {
+  //     return 'https://imgs.search.brave.com/UJlFq2-QeOeMj6KkDAOZrJ0dKdwRbCdgP5ts7Ets3RM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWxsZXJzd29ybGR3/aWRlLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wNi9z/aHV0dGVyc3RvY2tf/NjMyOTQxMDMxLWUx/Njg2NTk2OTI1OTcy/LnBuZw'
+  //   } else if (selectedFilter.toUpperCase() === 'SOUTH AMERICA') {
+  //     return 'DEFAULT_BACKGROUND_IMAGE_URL'
+  //   } else if (selectedFilter.toUpperCase() === 'EUROPE') {
+  //     return 'DEFAULT_BACKGROUND_IMAGE_URL'
+  //   } else if (selectedFilter.toUpperCase() === 'ASIA') {
+  //     return 'https://imgs.search.brave.com/CHR1lb38tg1-9E8kcVdsTqaK2sEmUZCZo7PSvKWy3tM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yYXdt/YWxyb2Ftcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MDgvMjVEQzg5RTEt/MDA2Mi00NDNFLUFG/MUQtQ0Y1ODAxMzcy/RjI4LTEwMjR4Njg0/LmpwZWc'
+  //   } else if (selectedFilter.toUpperCase() === 'AFRICA') {
+  //     return 'https://imgs.search.brave.com/sdPLZjS3Z9AOVh1q6THgtwaL4UU_ug4VwT_dkE3LZRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmFzc2V0cy50aGVk/aXNjb3ZlcmVyLmNv/bS8yMDE5LzA1L2Jl/YXV0aWZ1bC1hZnJp/Y2EuanBn'
+  //   } else if (selectedFilter.toUpperCase() === 'AUSTRALIA') {
+  //     return 'DEFAULT_BACKGROUND_IMAGE_URL'
+  //   } else {
+  //     return ''
+  //   }
+  // }
 
   const handleFilterGuildChange = (filter) => {
     setSelectedGuildFilter(filter)
@@ -219,10 +144,8 @@ const Regions = ({ params }) => {
   useEffect(() => {
     const mapGuildInfo = () => {
       const guilds = publicUsers.map((publicUser) => {
-        const guild = guildData.find((guild) => guild.id === publicUser.guild_id)
-        const continent = continents.find(
-          (continent) => continent.continent_code.toUpperCase() === publicUser.region.continent_code,
-        )
+        const guild = guildData.find((g) => g.id === publicUser.guild_id)
+        const continent = continents.find((continent) => continent.continent_code === publicUser.region.continent_code)
         const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
 
         return {
