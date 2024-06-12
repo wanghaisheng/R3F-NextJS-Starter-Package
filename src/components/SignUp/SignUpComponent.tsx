@@ -22,8 +22,9 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
         <h2 className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN UP</h2>
       </div>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ username: '', email: '', password: '' }}
         validationSchema={Yup.object().shape({
+          username: Yup.string().required('Username is required').min(5, 'Password must be at least 5 characters'),
           email: Yup.string().email('Invalid email format').required('Email is required'),
           password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
         })}
@@ -55,6 +56,18 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
       >
         {({ isSubmitting }) => (
           <Form className='flex w-full flex-col items-center justify-center gap-2 px-2'>
+            <div className='m-2 flex w-full rounded-md border-2 border-violet-400'>
+              <div className={`flex items-center justify-center px-1 text-2xl text-purple-600 dark:text-purple-200`}>
+                <LiaSignInAltSolid />
+              </div>
+              <Field
+                type='text'
+                name='username'
+                className='w-full rounded-md bg-transparent p-2 text-purple-950 focus:outline-none dark:text-purple-200'
+                placeholder='Username'
+              />
+            </div>
+            <ErrorMessage name='username' component='p' className='-mt-3 text-xs text-red-500' />
             <div className='m-2 flex w-full rounded-md border-2 border-violet-400'>
               <div className={`flex items-center justify-center px-1 text-2xl text-purple-600 dark:text-purple-200`}>
                 <LiaSignInAltSolid />
