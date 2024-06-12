@@ -10,18 +10,6 @@ import axios from 'axios'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-async function getAvatarById(id: string) {
-  try {
-    const res = await axios.get(`/api/internal/avatar/${id}`)
-    if (res.status !== 200) {
-      toast.error('Failed to fetch avatar data')
-    }
-    return res.data
-  } catch (error) {
-    toast.error('Failed to fetch avatar data')
-  }
-}
-
 async function getGuilds() {
   try {
     const res = await axios.get('/api/internal/guilds')
@@ -106,9 +94,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
   const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
   const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
-  const [modelSrc, setModelSrc] = useState(
-    'https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0',
-  ) // Default model
+  const [modelSrc, setModelSrc] = useState<string | null>(null)
 
   //GuildsData
   useEffect(() => {
@@ -117,19 +103,21 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         const guildData = await getGuilds()
         setGuildData(guildData)
       } catch (error) {
-        toast.error('Failed to set avatar data')
+        toast.error('Failed to set guild data')
       }
     }
     fetchGuildData()
-  }, [guildData])
+  }, [])
 
   // for displaying users guild
   useEffect(() => {
     const setUserGuild = async () => {
       const guild = guildData.find((guild) => guild.id === user.guild_id)
-      setSelectedGuild(guild.guild_name)
+      if (guild) {
+        setSelectedGuild(guild.guild_name)
+      }
     }
-    if (user && guildData[0].id !== '') {
+    if (user && guildData[0].id) {
       setUserGuild()
     }
   }, [user, guildData])
@@ -138,8 +126,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
-        const testData = await getAvatarById(user.gg_id)
-        setAvatarsData(testData)
+        setAvatarsData(user.avatar)
       } catch (error) {
         toast.error('Failed to set avatar data')
       }
@@ -147,10 +134,16 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     if (user) {
       fetchAvatarsData() // Fetch data only if user is available and avatarsData is empty
     }
-  }, [user, avatarsData])
 
+    // Set interval to fetch avatar data every 7 seconds
+    const intervalId = setInterval(fetchAvatarsData, 7000)
+    return () => clearInterval(intervalId) // Clear interval on component unmount
+  }, [user])
+
+  // This useEffect will run whenever `avatarsData` changes.
+  // It updates the `modelSrc` state, which will trigger a re-render.
   useEffect(() => {
-    if (avatarsData.length > 0) {
+    if (avatarsData && avatarsData.length > 0) {
       setModelSrc(avatarsData[avatarsData.length - 1].avatar_url)
     }
   }, [avatarsData])
@@ -158,13 +151,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const handleGuildUpdate = async (e: any) => {
     e.preventDefault()
     try {
-      const formData = new FormData(e.target)
-      const guildId = formData.get('guildId') // Get the guild ID from the form data
-
       const submit = {
-        guild_id: guildId,
+        guild_id: selectedGuildData.id,
       }
-
       console.log(submit)
       await axios({
         url: `/api/internal/users/${user.gg_id}`,
@@ -177,39 +166,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       toast.error('Failed to update user guild')
     }
   }
-
-  const memoizedAvatar = useMemo(() => {
-    if (memoizedAvatarsData && memoizedAvatarsData.length != 0) {
-      return (
-        <Avatar
-          key={modelSrc}
-          modelSrc={modelSrc}
-          animationSrc='/male-idle-3.fbx'
-          style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
-          fov={40}
-          cameraTarget={1.5}
-          cameraInitialDistance={30}
-          effects={{
-            ambientOcclusion: true,
-          }}
-        />
-      )
-    } else {
-      return (
-        <Avatar
-          modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
-          animationSrc='/male-idle-3.fbx'
-          style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
-          fov={40}
-          cameraTarget={1.5}
-          cameraInitialDistance={30}
-          effects={{
-            ambientOcclusion: true,
-          }}
-        />
-      )
-    }
-  }, [modelSrc, avatarsData])
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
@@ -226,7 +182,36 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
             <div className='flex flex-col lg:flex-row lg:justify-between'>
               {/* Avatar and AvatarImageComponent Container */}
               <div className='flex flex-col items-center justify-center lg:w-[35%]'>
-                <div className='relative'>{memoizedAvatar}</div>
+                {memoizedAvatarsData && modelSrc && memoizedAvatarsData.length != 0 ? (
+                  <div className='relative'>
+                    <Avatar
+                      key={modelSrc}
+                      modelSrc={modelSrc}
+                      animationSrc='/male-idle-3.fbx'
+                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
+                      fov={40}
+                      cameraTarget={1.5}
+                      cameraInitialDistance={30}
+                      effects={{
+                        ambientOcclusion: true,
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div className='relative'>
+                    <Avatar
+                      modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
+                      animationSrc='/male-idle-3.fbx'
+                      style={{ background: 'rgb(9,20,26)', width: '350px', height: '350px', pointerEvents: 'none' }}
+                      fov={40}
+                      cameraTarget={1.5}
+                      cameraInitialDistance={30}
+                      effects={{
+                        ambientOcclusion: true,
+                      }}
+                    />
+                  </div>
+                )}
               </div>
               {/* Guilds Component */}
               <div className='size-full p-4 lg:w-[65%]'>
@@ -234,8 +219,6 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                 <div className='flex h-full flex-col lg:flex-row lg:items-center lg:justify-between'>
                   {/* {user && checkUserGuild() !== true ? ( */}
                   <form onSubmit={handleGuildUpdate}>
-                    {/* Hidden Input Field for Guild ID */}
-                    <input type='hidden' name='guildId' value={selectedGuildData.id} />
                     <label
                       htmlFor='guilds'
                       className='flex justify-center text-lg font-semibold text-gray-700 lg:-mt-8 lg:text-xl'

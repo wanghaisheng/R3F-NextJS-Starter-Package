@@ -38,9 +38,11 @@ export default function GuildHeader({
   return (
     <div className='relative'>
       <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
-        <div className='flex h-12 w-[80%] items-center justify-between px-5 py-2 md:gap-14 lg:w-full'>
+        {/* <div className='flex h-12 w-[80%] items-center justify-between px-5 py-2 md:gap-14 lg:w-full'> */}
+        <div className='flex h-12 items-center justify-between px-5 py-2 md:gap-14'>
           {/* search */}
-          <div className='mx-auto flex max-w-sm items-center lg:pl-32'>
+          {/* <div className='mx-auto flex max-w-sm items-center lg:pl-32'> */}
+          <div className='mx-auto flex max-w-sm items-center'>
             <svg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
@@ -79,77 +81,75 @@ export default function GuildHeader({
           </div>
         </div>
 
-        {isSmallScreen && (
-          <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
-            <a
-              href='#'
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
-              onClick={() => handleFilterClick('BUDDHA')}
-            >
-              <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11' cy='11' r='11' fill='white' />
-                <path
-                  d='M6.17881 4.75887L10.8764 5.64775M6.17881 4.75887L3 10.0544M6.17881 4.75887L8.29801 3H14.2848L15.5916 4.75887M10.8764 5.64775V11.1891M10.8764 5.64775L15.5916 4.75887M10.8764 11.1891L6.17881 13.8369M10.8764 11.1891L15.5916 13.8369M6.17881 13.8369L3 10.0544M6.17881 13.8369L7.69757 19M3 10.0544V12.4563L5.47241 17.7329L7.69757 19M15.5916 4.75887L18.3996 10.0544M18.3996 10.0544L15.5916 13.8369M18.3996 10.0544L19 12.4563L16.2804 17.7329L14.2848 19M15.5916 13.8369L14.2848 19M7.69757 19H14.2848'
-                  stroke='black'
-                />
-              </svg>
-            </a>
-            <a
-              href='#'
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
-              onClick={() => handleFilterClick('VAJRA')}
-            >
-              <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11' cy='11' r='11' fill='#4A9BD5' />
-                <path
-                  d='M10.6428 3L3 7.00455M10.6428 3L19 7.00455M10.6428 3V6.27645M3 7.00455V15.0137M3 7.00455L10.6428 6.27645M3 7.00455L5.87957 13.3026M3 15.0137L10.6428 19M3 15.0137L5.87957 13.3026M10.6428 19L19 15.0137M10.6428 19L5.87957 13.3026M10.6428 19L15.2544 13.3026M19 15.0137V7.00455M19 15.0137L15.2544 13.3026M19 7.00455L10.6428 6.27645M19 7.00455L15.2544 13.3026M10.6428 6.27645L5.87957 13.3026M10.6428 6.27645L15.2544 13.3026M5.87957 13.3026H15.2544'
-                  stroke='#030303'
-                />
-              </svg>
-            </a>
-            <a
-              href='#'
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
-              onClick={() => handleFilterClick('KARMA')}
-            >
-              <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11' cy='11' r='11' fill='#46B58F' />
-                <path
-                  d='M3 7.02733L10.9046 3L19 7.02733M3 7.02733L10.9046 10.7995M3 7.02733V15.0638L10.9046 19M19 7.02733L10.9046 10.7995M19 7.02733V15.0638L10.9046 19M10.9046 10.7995V19'
-                  stroke='black'
-                />
-              </svg>
-            </a>
-            <a
-              href='#'
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
-              onClick={() => handleFilterClick('RATNA')}
-            >
-              <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11' cy='11' r='11' fill='#F0BE65' />
-                <path
-                  d='M3 6.87713H19M3 6.87713L11.0758 3L19 6.87713M3 6.87713V15.3595L11.0758 19M3 6.87713L11.0758 19M19 6.87713L11.0758 19M19 6.87713V15.3595L11.0758 19'
-                  stroke='black'
-                />
-              </svg>
-            </a>
-            <a
-              href='#'
-              className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
-              onClick={() => handleFilterClick('PADMA')}
-            >
-              <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11' cy='11' r='11' fill='#DA4C5C' />
-                <path d='M4 17L10.9521 3L18 17M4 17H18M4 17L10.9521 12.5073L18 17' stroke='black' />
-                <path d='M11 12.7351V3' stroke='black' />
-              </svg>
-            </a>
-          </div>
-        )}
+        <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
+            onClick={() => handleFilterClick('BUDDHA')}
+          >
+            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <circle cx='11' cy='11' r='11' fill='white' />
+              <path
+                d='M6.17881 4.75887L10.8764 5.64775M6.17881 4.75887L3 10.0544M6.17881 4.75887L8.29801 3H14.2848L15.5916 4.75887M10.8764 5.64775V11.1891M10.8764 5.64775L15.5916 4.75887M10.8764 11.1891L6.17881 13.8369M10.8764 11.1891L15.5916 13.8369M6.17881 13.8369L3 10.0544M6.17881 13.8369L7.69757 19M3 10.0544V12.4563L5.47241 17.7329L7.69757 19M15.5916 4.75887L18.3996 10.0544M18.3996 10.0544L15.5916 13.8369M18.3996 10.0544L19 12.4563L16.2804 17.7329L14.2848 19M15.5916 13.8369L14.2848 19M7.69757 19H14.2848'
+                stroke='black'
+              />
+            </svg>
+          </a>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
+            onClick={() => handleFilterClick('VAJRA')}
+          >
+            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <circle cx='11' cy='11' r='11' fill='#4A9BD5' />
+              <path
+                d='M10.6428 3L3 7.00455M10.6428 3L19 7.00455M10.6428 3V6.27645M3 7.00455V15.0137M3 7.00455L10.6428 6.27645M3 7.00455L5.87957 13.3026M3 15.0137L10.6428 19M3 15.0137L5.87957 13.3026M10.6428 19L19 15.0137M10.6428 19L5.87957 13.3026M10.6428 19L15.2544 13.3026M19 15.0137V7.00455M19 15.0137L15.2544 13.3026M19 7.00455L10.6428 6.27645M19 7.00455L15.2544 13.3026M10.6428 6.27645L5.87957 13.3026M10.6428 6.27645L15.2544 13.3026M5.87957 13.3026H15.2544'
+                stroke='#030303'
+              />
+            </svg>
+          </a>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
+            onClick={() => handleFilterClick('KARMA')}
+          >
+            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <circle cx='11' cy='11' r='11' fill='#46B58F' />
+              <path
+                d='M3 7.02733L10.9046 3L19 7.02733M3 7.02733L10.9046 10.7995M3 7.02733V15.0638L10.9046 19M19 7.02733L10.9046 10.7995M19 7.02733V15.0638L10.9046 19M10.9046 10.7995V19'
+                stroke='black'
+              />
+            </svg>
+          </a>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
+            onClick={() => handleFilterClick('RATNA')}
+          >
+            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <circle cx='11' cy='11' r='11' fill='#F0BE65' />
+              <path
+                d='M3 6.87713H19M3 6.87713L11.0758 3L19 6.87713M3 6.87713V15.3595L11.0758 19M3 6.87713L11.0758 19M19 6.87713L11.0758 19M19 6.87713V15.3595L11.0758 19'
+                stroke='black'
+              />
+            </svg>
+          </a>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
+            onClick={() => handleFilterClick('PADMA')}
+          >
+            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <circle cx='11' cy='11' r='11' fill='#DA4C5C' />
+              <path d='M4 17L10.9521 3L18 17M4 17H18M4 17L10.9521 12.5073L18 17' stroke='black' />
+              <path d='M11 12.7351V3' stroke='black' />
+            </svg>
+          </a>
+        </div>
       </div>
 
       {/* Sidebar */}
-      <div className='fixed top-0 hidden items-center justify-start font-semibold lg:flex'>
+      <div className='fixed top-0 hidden items-center justify-start font-semibold lg:hidden'>
         <ul className='flex h-[800px] w-[310px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40%'>
           <li className='mt-[60%]'>
             <a

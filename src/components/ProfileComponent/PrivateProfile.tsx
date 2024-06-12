@@ -299,7 +299,6 @@ export default function PrivateProfile() {
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
-                                  inSlider={true}
                                   first_name={user.first_name}
                                   last_name={user.last_name}
                                   email={user.email}
@@ -399,7 +398,6 @@ export default function PrivateProfile() {
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
-                                  inSlider={true}
                                   first_name='DEFAULT'
                                   last_name='DEFAULT'
                                   email='DEFAULT@'
@@ -454,7 +452,7 @@ export default function PrivateProfile() {
                       <p className='mb-4 px-4 text-center'>Some premium features for paid users</p>
                       <div className='flex justify-center gap-x-2'>
                         <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
-                        <Link href='/public-profile'>
+                        <Link href='/my-profile'>
                           <DrawOutlineButton>View Public Profile</DrawOutlineButton>
                         </Link>
                       </div>

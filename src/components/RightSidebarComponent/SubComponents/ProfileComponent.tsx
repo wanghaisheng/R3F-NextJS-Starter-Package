@@ -3,6 +3,9 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext/UserContext'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import Image from 'next/image'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
@@ -28,6 +31,35 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
   }, [user])
 
+  const [description, setDescription] = useState(user ? user.description : '')
+  const [imageUrl, setImageUrl] = useState('')
+
+  function handelImageUrlChange(newImageUrl: string) {
+    setImageUrl(newImageUrl)
+  }
+
+  function handelDescriptionChange(newDescription: string) {
+    setDescription(newDescription)
+  }
+
+  const handleImgBioUpdate = async (e) => {
+    e.preventDefault()
+    const submit = {
+      image_url: imageUrl,
+      description: description,
+    }
+    try {
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Profile pic and bio updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic and bio!')
+    }
+  }
+
   return (
     <div className='mb-32 flex h-full flex-col'>
       {user ? (
@@ -35,6 +67,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-8xl font-bold uppercase'>
             {user.first_name} {user.last_name}!
           </p>
+          <Image src={imageUrl} alt='porfilepic' height={30} width={30} unoptimized />
+          <p>{imageUrl}</p>
           <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
@@ -66,13 +100,32 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
           <div className='flex justify-between gap-x-10'>
             <div>
-              <p>Guild</p>
-              <p>{user.guild}</p>
+              <p>Bio: {description}</p>
             </div>
             <div>Heo</div>
           </div>
           <p>Other details</p>
           <p>Form to add profile pic and bio</p>
+          <form onSubmit={handleImgBioUpdate} className='mt-32'>
+            <input
+              type='file'
+              name='profile_pic'
+              id='profile_pic'
+              accept='image/*'
+              value={imageUrl}
+              onChange={(e) => handelImageUrlChange(e.target.value)}
+            />
+            <input
+              type='text'
+              name='bio'
+              id='bio'
+              placeholder='Bio'
+              value={description}
+              className='text-black'
+              onChange={(e) => handelDescriptionChange(e.target.value)}
+            />
+            <button type='submit'>Submit</button>
+          </form>
         </div>
       ) : (
         <>

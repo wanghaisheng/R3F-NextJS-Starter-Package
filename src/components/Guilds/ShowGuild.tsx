@@ -3,18 +3,34 @@ import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
 import { FaDiamond } from 'react-icons/fa6'
 import { BsOctagonFill } from 'react-icons/bs'
 import { MdHexagon } from 'react-icons/md'
-export default function ShowGuild({ users, filter, searchTerm }: { users: any; filter: string; searchTerm: string }) {
-  const filteredFactions = filter ? users.filter((user) => user.guild === filter) : users
-  const filteredAndSearchedFactions = filteredFactions.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+import Link from 'next/link'
+
+export default function ShowGuild({
+  users,
+  filterguild,
+  selectedRegionFilter,
+  searchTerm,
+}: {
+  users: any
+  filterguild: string
+  selectedRegionFilter: string
+  searchTerm: string
+}) {
+  // Filter based on guild, continent, and search term
+  const filteredFactions = users.filter((user) => {
+    return (
+      (filterguild ? user.guild === filterguild : true) &&
+      (selectedRegionFilter ? user.continent === selectedRegionFilter.toUpperCase() : true) &&
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  })
   return (
     <>
       <div className='flex justify-start'>
-        <div className='mx-10 my-6 flex flex-wrap justify-center gap-5 lg:justify-start'>
-          {filteredAndSearchedFactions.map((user, index) => (
-            <a
-              href={`/guilds/${user.name.toLowerCase().replace(' ', '-')}`}
+        <div className='mx-10 my-6 flex justify-center gap-5 lg:justify-start'>
+          {filteredFactions.map((user, index) => (
+            <Link
+              href={`/public-profile/${user.username}`}
               key={index}
               className='relative flex h-[280px] w-[240px] flex-col items-center justify-center rounded-lg shadow-sm backdrop-blur-md transition duration-500 ease-out'
             >
@@ -87,7 +103,7 @@ export default function ShowGuild({ users, filter, searchTerm }: { users: any; f
                   )}
                 </h1>
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
