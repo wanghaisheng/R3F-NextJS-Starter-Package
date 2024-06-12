@@ -188,7 +188,7 @@ export default function PublicProfile({ username }) {
             )}
 
             {avatarsData && avatarsData.length !== 0 && (
-              <div className='fixed left-24 top-0 z-40 h-full'>
+              <div className='fixed left-24 top-0 z-50 h-full'>
                 <Avatar
                   modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                   shadows

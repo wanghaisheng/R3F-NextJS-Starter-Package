@@ -18,7 +18,6 @@ const Hud = () => {
       pathname === '/signin' ||
       pathname === '/signup' ||
       pathname === '/guilds' ||
-      pathname === '/regions' ||
       pathname === '/adminpage' ||
       pathname === '/homepage-bg'
       // ||

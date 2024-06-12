@@ -25,8 +25,6 @@ export default function ShowRegionCesium({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
-  console.log(guilds)
-
   const regions = [
     {
       name: 'East Asia',
@@ -95,8 +93,10 @@ export default function ShowRegionCesium({
                 </div>
               </div>
             </Suspense>
-            {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
-            <div className='absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md shadow-purple-700 backdrop-blur-md'>
+            {/* Guilds showcase */}
+            <div
+              className={`absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+            >
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
@@ -150,4 +150,22 @@ export default function ShowRegionCesium({
       </div> */}
     </>
   )
+}
+
+// Function to determine the shadow color based on the guild
+function getBorderColor(guild: string): string {
+  switch (guild) {
+    case 'BUDDHA':
+      return 'shadow-white'
+    case 'VAJRA':
+      return 'shadow-blue-500'
+    case 'KARMA':
+      return 'shadow-green-500'
+    case 'RATNA':
+      return 'shadow-yellow-500'
+    case 'PADMA':
+      return 'shadow-red-500'
+    default:
+      return 'shadow-purple-700'
+  }
 }

@@ -10,7 +10,7 @@ import { EffectCards } from 'swiper/modules'
 export default function ExperienceShowcase({ experience, user }) {
   return (
     <>
-      <div className='mb-24 flex size-full flex-col px-4 lg:flex-row lg:justify-end'>
+      <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
         {user && experience.length != 0 ? (
           <Swiper
             effect={'cards'}
