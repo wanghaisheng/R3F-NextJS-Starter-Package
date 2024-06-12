@@ -1,13 +1,12 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-import useEmblaCarousel from 'embla-carousel-react'
-import Slide1 from './PublicProfileComponent/Slide1'
-import Slide2 from './PublicProfileComponent/Slide2'
+import UserInfoShowcase from './PublicProfileComponent/UserInfoShowcase'
+import ExperienceShowcase from './PublicProfileComponent/ExperienceShowcase'
+
 import axios from 'axios'
 import toast from 'react-hot-toast'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
@@ -18,6 +17,7 @@ const getSelectedPublicUser = async (username) => {
     if (res.status !== 200) {
       return toast.error('Failed to get the user')
     }
+    console.log('user', res.data)
     return res.data
   } catch (error) {
     toast.error('Internal server error')
@@ -25,40 +25,11 @@ const getSelectedPublicUser = async (username) => {
 }
 
 export default function PublicProfile({ username }) {
-  // const { user } = useUser()
   const [user, setUser] = useState(null)
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, axis: 'y' })
-  const isScrollingRef = useRef(false)
-
-  const handleChangeSlide = (index) => {
-    if (emblaApi) emblaApi.scrollTo(index)
-  }
-
-  const handleScroll = useCallback(
-    (event) => {
-      if (!emblaApi || isScrollingRef.current) return
-
-      isScrollingRef.current = true
-
-      const deltaY = event.deltaY
-
-      if (deltaY > 0) {
-        emblaApi.scrollNext()
-      } else if (deltaY < 0) {
-        emblaApi.scrollPrev()
-      }
-
-      setTimeout(() => {
-        isScrollingRef.current = false
-      }, 500) // Adjust debounce delay as needed
-    },
-    [emblaApi],
-  )
 
   useEffect(() => {
     const getPublicUser = async () => {
@@ -67,45 +38,6 @@ export default function PublicProfile({ username }) {
     }
     getPublicUser()
   }, [])
-
-  useEffect(() => {
-    window.addEventListener('wheel', handleScroll)
-    return () => {
-      window.removeEventListener('wheel', handleScroll)
-    }
-  }, [handleScroll])
-  // Main Carousel
-
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()) // Access API
-    }
-  }, [emblaApi])
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
-
-  // Carousel inside slide 2
-  const [emblaRef3, emblaApi3] = useEmblaCarousel({ loop: true })
-
-  useEffect(() => {
-    if (emblaApi3) {
-      console.log(emblaApi3.slideNodes()) // Access API
-    }
-  }, [emblaApi3])
-
-  const scrollPrev3 = useCallback(() => {
-    if (emblaApi3) emblaApi3.scrollPrev()
-  }, [emblaApi3])
-
-  const scrollNext3 = useCallback(() => {
-    if (emblaApi3) emblaApi3.scrollNext()
-  }, [emblaApi3])
 
   // Experience data
   useEffect(() => {
@@ -235,75 +167,61 @@ export default function PublicProfile({ username }) {
   }, [user])
 
   return (
-    <div className='relative flex flex-col lg:size-full'>
-      <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[40%]'>
-        {user && (
-          <>
-            <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
-              {user.first_name.toUpperCase()}
-            </div>
+    <div className='relative flex justify-between lg:size-full'>
+      {user ? (
+        <>
+          <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[27%]'>
+            {user && (
+              <>
+                <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
+                  {user.first_name.toUpperCase()}
+                </div>
 
-            <div className='absolute left-28 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
-              <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
-                {user.first_name.split('').map((letter, index) => (
-                  <span key={index}>{letter.toUpperCase()}</span>
-                ))}
+                <div className='fixed left-16 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+                  <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+                    {username.split('').map((letter, index) => (
+                      <span key={index}>{letter.toUpperCase()}</span>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {avatarsData && avatarsData.length !== 0 && (
+              <div className='fixed left-24 top-0 z-40 h-full'>
+                <Avatar
+                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                  shadows
+                  animationSrc='/male-spawn-animation.fbx'
+                  style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
+                  fov={40}
+                  cameraTarget={1.5}
+                  cameraInitialDistance={30}
+                  effects={{
+                    ambientOcclusion: true,
+                  }}
+                />
               </div>
-            </div>
-          </>
-        )}
-        {/* <div className='absolute top-[40%] z-10 flex h-[360px] w-full items-center justify-center lg:relative lg:h-[650px]'> */}
-        {avatarsData && avatarsData.length !== 0 ? (
-          <Avatar
-            modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-            shadows
-            animationSrc='/male-spawn-animation.fbx'
-            style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-            fov={40}
-            cameraTarget={1.5}
-            cameraInitialDistance={30}
-            effects={{
-              ambientOcclusion: true,
-            }}
-          />
-        ) : (
-          <Avatar
-            modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true'
-            shadows
-            animationSrc='/male-idle-3.fbx'
-            style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-            fov={40}
-            cameraTarget={1.5}
-            cameraInitialDistance={30}
-            effects={{
-              ambientOcclusion: true,
-            }}
-          />
-        )}
-      </div>
+            )}
+          </div>
 
-      {/* Carousel */}
-      <div className='top-0 flex size-full flex-col justify-end px-4 lg:absolute'>
-        <div className='h-screen overflow-hidden py-4' ref={emblaRef}>
-          <div className='flex h-full flex-col'>
-            {/* Slide 1 */}
-            <div className='w-full flex-1 shrink-0 grow lg:min-w-0 '>
-              <Slide1 user={user} skillsData={skillsData} />
+          {/* Carousel */}
+
+          <div className='flex size-full flex-col'>
+            <div className='flex w-full justify-center'>
+              <UserInfoShowcase user={user} skillsData={skillsData} />
             </div>
             {/* Slide 2 */}
-            <div className='w-full flex-1 shrink-0 grow lg:min-w-0'>
-              <Slide2
-                emblaRef={emblaRef}
-                emblaRef3={emblaRef3}
-                experience={experience}
-                user={user}
-                scrollPrev3={scrollPrev3}
-                scrollNext3={scrollNext3}
-              />
+            <div className='mt-5 w-full flex-1'>
+              <ExperienceShowcase experience={experience} user={user} />
             </div>
           </div>
+        </>
+      ) : (
+        <div className='flex size-full items-center justify-center'>
+          <div className='text-center text-2xl font-bold'>Loading</div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

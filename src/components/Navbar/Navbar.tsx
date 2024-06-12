@@ -66,10 +66,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           {/* Logo */}
           <Link href='/hero' className='flex items-center justify-center pl-1 '>
             <Image
-              src='/GGlogo.png'
+              src='/Karma.svg'
               className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-              height={85}
-              width={85}
+              height={75}
+              width={75}
               alt='GG Logo'
             />
           </Link>
@@ -152,14 +152,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
                 {pathname === '/hero' ? (
                   <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    HOME
+                    HUD
                   </Link>
                 ) : (
                   <Link
                     href='/hero'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    HOME
+                    HUD
                   </Link>
                 )}
                 {pathname.startsWith('/regions') ? (
@@ -243,7 +243,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
               </li>
               <li>
                 <Link href='/hero' className='hover:text-violet-400' onClick={closeMenu}>
-                  HOME
+                  HUD
                 </Link>
               </li>
               <li>
