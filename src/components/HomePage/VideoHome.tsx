@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -7,12 +7,25 @@ import 'swiper/css/navigation'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
-import { GoArrowDown } from 'react-icons/go'
+// import axios from 'axios'
+// import { toast } from 'react-hot-toast'
+
+// async function getGuilds() {
+//   try {
+//     const res = await axios.get('/api/internal/guilds')
+//     if (res.status !== 200) {
+//       toast.error('Failed to fetch guilds data')
+//     }
+//     return res.data
+//   } catch (error) {
+//     toast.error('Failed to fetch guilds data')
+//   }
+// }
 
 const guildData = [
   {
     guild_name: 'BUDDHA',
-    symbol: '/guild/buddha.png',
+    symbol: '/homepage/Buddha.svg',
     color: 'white',
     element: 'Space',
     guild_video: '/livewallpapers/buddha.mp4',
@@ -23,7 +36,7 @@ const guildData = [
   },
   {
     guild_name: 'VAJRA',
-    symbol: '/guild/vajra.png',
+    symbol: '/homepage/Vajra.svg',
     color: 'blue',
     element: 'Water',
     guild_video: '/livewallpapers/candles.mp4',
@@ -34,7 +47,7 @@ const guildData = [
   },
   {
     guild_name: 'KARMA',
-    symbol: '/guild/karma.png',
+    symbol: '/homepage/Karma.svg',
     color: 'green',
     element: 'Wind',
     guild_video: '/livewallpapers/karma.mp4',
@@ -45,7 +58,7 @@ const guildData = [
   },
   {
     guild_name: 'RATNA',
-    symbol: '/guild/ratna.png',
+    symbol: '/homepage/Ratna.svg',
     color: 'yellow',
     element: 'Earth',
     guild_video: '/livewallpapers/earth.mp4',
@@ -56,7 +69,7 @@ const guildData = [
   },
   {
     guild_name: 'PADMA',
-    symbol: '/guild/padma.png',
+    symbol: '/homepage/Padma.svg',
     color: 'red',
     element: 'Fire',
     guild_video: '/livewallpapers/fire.mp4',
@@ -75,6 +88,20 @@ export default function VideoHome() {
     progressCircle.current.style.setProperty('--progress', 1 - progress)
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
   }
+  // const [guildData, setGuildData] = useState([])
+
+  // //GuildsData
+  // useEffect(() => {
+  //   const fetchGuildData = async () => {
+  //     try {
+  //       const guildData = await getGuilds()
+  //       setGuildData(guildData)
+  //     } catch (error) {
+  //       toast.error('Failed to set guild data')
+  //     }
+  //   }
+  //   fetchGuildData()
+  // }, [])
 
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
@@ -154,14 +181,14 @@ export default function VideoHome() {
               Get Started
               <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
             </Link>
-            <div className='absolute bottom-10 text-white'>
+            {/* <div className='absolute bottom-10 text-white'>
               <button
                 className='animate-bounce rounded-full border border-white p-3 hover:bg-purple-400'
                 aria-label='down button'
               >
                 <GoArrowDown />
               </button>
-            </div>
+            </div> */}
           </div>
         </SwiperSlide>
 
@@ -177,12 +204,15 @@ export default function VideoHome() {
                 ))}
               </div>
             </div>
+            <div className='absolute top-36 z-20 flex size-full justify-center'>
+              <p className='text-3xl font-bold lg:text-6xl'>{guild.description}</p>
+            </div>
             <div className='absolute z-20 flex size-full flex-col items-center justify-center'>
-              <p className='text-3xl font-bold'>{guild.description}</p>
               <p>{guild.skills.join(', ')}</p>
               <p>{guild.additionalSkills.join(', ')}</p>
               <p>{guild.alignment.join(', ')}</p>
             </div>
+            <div className='absolute z-20 size-96 ' style={{ backgroundImage: '/homepage/VajraSplash.svg' }}></div>
             <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
               <source src={guild.guild_video} type='video/mp4' />
             </video>
@@ -193,9 +223,33 @@ export default function VideoHome() {
         ))}
 
         <SwiperSlide className='bg-cover bg-center'>
+          <div className='absolute top-20 z-20 flex w-full items-center justify-center overflow-hidden text-6xl font-extrabold md:text-9xl lg:hidden'>
+            G-ONE
+          </div>
+          <div className='absolute left-20 z-20 hidden h-full items-center justify-center lg:flex lg:flex-col'>
+            <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+              <p>G</p>
+              <p>-</p>
+              <p>O</p>
+              <p>N</p>
+              <p>E</p>
+            </div>
+          </div>
+          <div className='absolute top-36 z-20 flex size-full justify-center'>
+            <p className='text-3xl font-bold lg:text-6xl'>DESC</p>
+          </div>
+          <div className='absolute z-20 flex size-full flex-col items-center justify-center'>
+            {/* <p>{guild.skills.join(', ')}</p>
+            <p>{guild.additionalSkills.join(', ')}</p>
+            <p>{guild.alignment.join(', ')}</p> */}
+          </div>
+          <div className='absolute z-20 size-96 ' style={{ backgroundImage: '/homepage/VajraSplash.svg' }}></div>
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src='/livewallpapers/forest.mp4' type='video/mp4' />
           </video>
+          <div className='absolute z-20 flex h-full items-end lg:right-20 lg:items-center'>
+            <Image src='/homepage/GONE.svg' height={200} width={200} alt='guild symbol' />
+          </div>
         </SwiperSlide>
         <SwiperSlide className='bg-cover bg-center'>
           <div
@@ -226,14 +280,14 @@ export default function VideoHome() {
                 <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
               </Link>
             </div>
-            <div className='absolute bottom-10 text-white'>
+            {/* <div className='absolute bottom-10 text-white'>
               <button
                 className='animate-bounce rounded-full border border-white p-3 hover:bg-purple-400'
                 aria-label='down button'
               >
                 <GoArrowDown />
               </button>
-            </div>
+            </div> */}
           </div>
         </SwiperSlide>
         <div
