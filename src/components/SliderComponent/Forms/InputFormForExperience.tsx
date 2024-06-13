@@ -1,14 +1,62 @@
+'use client'
 import { TagsInput } from 'react-tag-input-component'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
+import { useState, useEffect } from 'react'
+import { useUser } from '@/context/UserContext/UserContext'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export default function InputFormForExperience({
+  exp_id,
   project,
   handleProjectTypeChange,
   handleProjectNameChange,
   handleProjectDescriptionChange,
   handleSkillsChange,
   handleToolsChange,
+  handleProjectLinkChange,
   index,
 }) {
+  const [imageUrls, setImageUrls] = useState([])
+  const handleChangeEvent = (items) => {
+    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
+    const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
+    setImageUrls(imageUrls) // Update cdnUrls state
+  }
+
+  useEffect(() => {
+    const updateImage = () => {
+      if (exp_id) {
+        handleImgUpdate(imageUrls[imageUrls.length - 1])
+      }
+      toast.error('cannot update projPic')
+    }
+    if (imageUrls.length !== 0) {
+      updateImage()
+    }
+  }, [imageUrls])
+
+  useEffect(() => {
+    console.log(imageUrls[imageUrls.length - 1])
+  }, [imageUrls])
+
+  const handleImgUpdate = async (image_url) => {
+    const submit = {
+      project_picture: image_url,
+    }
+    try {
+      await axios({
+        url: `/api/internal/experience/${exp_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Project pic updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic and bio!')
+    }
+  }
+
   return (
     <div className='flex w-full flex-col gap-y-2 px-4 text-purple-200'>
       <div className='flex flex-row items-center justify-between '>
@@ -33,11 +81,11 @@ export default function InputFormForExperience({
         <div>
           <input
             type='radio'
-            aria-label='work'
+            aria-label='business'
             id='work'
             name='type'
             value='work'
-            checked={project.type === 'work'}
+            checked={project.type === 'business'}
             onChange={(e) => handleProjectTypeChange(index, e.target.value)}
             className='hidden'
           />
@@ -45,7 +93,7 @@ export default function InputFormForExperience({
             htmlFor='work'
             className={`${project.type === 'work' ? 'font-bold  text-purple-200' : 'text-purple-200 hover:text-purple-400'}`}
           >
-            Work
+            Business
           </label>
         </div>
         <div>
@@ -100,11 +148,12 @@ export default function InputFormForExperience({
         <label className='font-semibold' htmlFor='file_input'>
           ProjPic
         </label>
-        <input
-          className='block cursor-pointer rounded-lg border border-none bg-black/30 text-sm text-white placeholder:text-white focus:outline-none lg:w-[70%]'
-          id='file_input'
-          type='file'
-          aria-label='file_input'
+        <FileUploaderRegular
+          onChange={handleChangeEvent}
+          pubkey={'aff2bf9d09cde0f92516'}
+          maxLocalFileSizeBytes={10000000}
+          imgOnly={true}
+          sourceList='local, url, camera'
         />
       </div>
       <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -134,6 +183,20 @@ export default function InputFormForExperience({
             placeHolder='Enter tools used'
           />
         </div>
+      </div>
+      <div className='flex flex-col lg:flex-row lg:justify-between'>
+        <label htmlFor='link' className='font-semibold'>
+          Link
+        </label>
+        <input
+          id='link'
+          aria-label='link'
+          type='text'
+          value={project.link}
+          onChange={(e) => handleProjectLinkChange(index, e.target.value)}
+          placeholder='Project Link'
+          className='rounded-md border px-3 lg:w-[70%] dark:border-none  dark:bg-white/20'
+        />
       </div>
     </div>
   )

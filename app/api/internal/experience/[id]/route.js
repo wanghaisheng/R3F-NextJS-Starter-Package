@@ -25,8 +25,16 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { gg_id, type, name, description, tools, project_skills } = await request.json()
+    const { gg_id, type, name, description, tools, project_skills, project_picture, link } = await request.json()
     const id = params.id
+
+    const existingExp = await prisma.experience.findUnique({
+      where: { experience_id: id },
+    })
+
+    const newImageUrls = [...existingExp.project_pictures, project_picture ? project_picture : '']
+
+    const filteredImageUrls = newImageUrls.filter((element) => element !== '')
 
     // Update the experience
     const updatedexperience = await prisma.experience.update({
@@ -38,6 +46,8 @@ export async function PUT(request, { params }) {
         description,
         tools,
         project_skills,
+        project_pictures: filteredImageUrls,
+        link,
       },
     })
 
