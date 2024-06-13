@@ -65,7 +65,7 @@ model users {
   oauth_token    String?      @db.VarChar(255)
   otp            Int?
   created_at     DateTime?    @default(now()) @db.Timestamp(6)
-  image_url      String?      @db.VarChar(255)
+  image_urls     String[]
   description    String?
   address        String?      @db.VarChar(200)
   dob            String?      @db.VarChar

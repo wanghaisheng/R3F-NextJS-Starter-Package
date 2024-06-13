@@ -12,7 +12,16 @@ export async function GET(request, { params }) {
     const user = await prisma.users.findUnique({
       where: { username: username },
       // manage the access of the relations
-      include: {
+      select: {
+        first_name: true,
+        last_name: true,
+        username: true,
+        email: true,
+        image_urls: true,
+        description: true,
+        guild_id: true,
+        address: true,
+        region: true,
         cards: true,
         experience: true,
         avatar: true,
