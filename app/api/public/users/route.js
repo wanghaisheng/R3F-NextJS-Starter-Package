@@ -62,7 +62,7 @@ export async function GET() {
         last_name: true,
         username: true,
         email: true,
-        image_url: true,
+        image_urls: true,
         description: true,
         guild_id: true,
         address: true,

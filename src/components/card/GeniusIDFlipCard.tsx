@@ -10,7 +10,6 @@ export default function GeniusIDFlipCard({
   first_name,
   last_name,
   email,
-  dob,
   contact,
   address,
   // selectedGuild,
@@ -78,9 +77,6 @@ export default function GeniusIDFlipCard({
                     </li>
                     <li className='mb-1 w-full'>
                       <p className='text-gray-400 dark:text-purple-500'>{email ? email : 'abc@gmail.com'}</p>
-                    </li>
-                    <li className='w-full'>
-                      <p>DOB : {dob && dob}</p>
                     </li>
                     <li className='w-full'>
                       <p>Address : {address && address}</p>

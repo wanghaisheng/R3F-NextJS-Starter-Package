@@ -38,47 +38,6 @@ export default function ShowRegionCesium({
     setMapChange(!mapChange)
   }
 
-  const regions = [
-    {
-      name: 'East Asia',
-      icon: 'https://cdn-icons-png.flaticon.com/128/15865/15865373.png',
-      continent: 'ASIA',
-      image:
-        'https://imgs.search.brave.com/aSDKpjkUcexmRKTgD4x46WheLrZPpHQzTNQ5uuFYx5k/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/bXlnbG9iYWx2aWV3/cG9pbnQuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIzLzA4/L1BhbGF3YW4tMS5q/cGc',
-    },
-    {
-      name: 'South Asia',
-      icon: 'https://cdn-icons-png.flaticon.com/128/356/356749.png',
-      continent: 'ASIA',
-      image:
-        'https://imgs.search.brave.com/CHR1lb38tg1-9E8kcVdsTqaK2sEmUZCZo7PSvKWy3tM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yYXdt/YWxyb2Ftcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MDgvMjVEQzg5RTEt/MDA2Mi00NDNFLUFG/MUQtQ0Y1ODAxMzcy/RjI4LTEwMjR4Njg0/LmpwZWc',
-    },
-    {
-      name: 'Meso America',
-      icon: 'https://cdn-icons-png.flaticon.com/128/2492/2492046.png',
-      continent: 'NORTH AMERICA',
-      image:
-        'https://imgs.search.brave.com/t4ZToHbheBsGuZBsU4WvRJd7VQmyNn0xtgOon50vsSA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5jbnRyYXZlbGVy/LmNvbS9waG90b3Mv/NjU0ODVlNTk1M2My/NTc2YTRlMjBmODkz/L21hc3Rlci93XzMy/MCxjX2xpbWl0L0Jp/Zy1TdXItdGhvbWFz/LWNpc3pld3NraS1l/ckFwbWZSWDdlby11/bnNwbGFzaC5qcGc',
-    },
-    {
-      name: 'North Africa',
-      icon: 'https://cdn-icons-png.flaticon.com/128/15597/15597373.png',
-      continent: 'AFRICA',
-      image:
-        'https://imgs.search.brave.com/sdPLZjS3Z9AOVh1q6THgtwaL4UU_ug4VwT_dkE3LZRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmFzc2V0cy50aGVk/aXNjb3ZlcmVyLmNv/bS8yMDE5LzA1L2Jl/YXV0aWZ1bC1hZnJp/Y2EuanBn',
-    },
-    {
-      name: 'Sub-Saharan Africa',
-      icon: 'https://cdn-icons-png.flaticon.com/128/15597/15597373.png',
-      continent: 'AFRICA',
-      image:
-        'https://imgs.search.brave.com/G7zOwnpcKRoEWw2tPhmfU7pdbPImUNKWtOSH4eNqslY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vdW5pdGVjaC1n/bG9iYWwtcmVzb3Vy/Y2UvaW1hZ2UvdXBs/b2FkL3YxNTgyNzAw/NTEwL25hbWliaWEx/X2gzMzFxbi5qcGc',
-    },
-  ]
-  const filteredRegions = selectedRegionFilter
-    ? regions.filter((region) => region.continent === selectedRegionFilter)
-    : regions.filter((region) => region.continent === 'NA') // default is this region
-
   return (
     <>
       <div className='relative flex-1'>
@@ -92,7 +51,7 @@ export default function ShowRegionCesium({
           </div> */}
           <div className='size-full'>
             <Suspense fallback={<div>Loading map...</div>}>
-              <div className='absolute -top-20 h-screen w-full'>
+              <div className='absolute top-0 h-screen w-full'>
                 <div
                   style={{
                     position: 'absolute',
@@ -113,13 +72,13 @@ export default function ShowRegionCesium({
             </Suspense>
             {/* Guilds showcase */}
             <button
-              className='absolute right-4 top-0 z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500'
+              className='absolute right-4 top-20 z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500'
               onClick={handleMapChange}
             >
               {mapChange ? <FaEarthAmericas className='size-6' /> : <FaMap className='size-6' />}
             </button>
             <div
-              className={`absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+              className={`absolute right-0 top-36 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
             >
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}

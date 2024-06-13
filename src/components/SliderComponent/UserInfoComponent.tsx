@@ -150,7 +150,6 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                       first_name={first_name}
                       last_name={last_name}
                       email={email}
-                      dob={dob}
                       contact={phone_number}
                       address={address}
                     />
@@ -208,20 +207,22 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           aria-label='Email'
                         />
                       </div>
-                      <div className='flex flex-col lg:flex-row lg:justify-between'>
-                        <label htmlFor='' className='font-semibold'>
-                          Address
-                        </label>
+                      {!regionStatus && (
+                        <div className='flex flex-col lg:flex-row lg:justify-between'>
+                          <label htmlFor='' className='font-semibold'>
+                            Address
+                          </label>
 
-                        <input
-                          type='text'
-                          value={address}
-                          onChange={(e) => handleAddressChange(e.target.value)}
-                          placeholder='Address'
-                          className='rounded-md bg-white/20 px-3 lg:w-[70%]'
-                          aria-label='Address'
-                        />
-                      </div>
+                          <input
+                            type='text'
+                            value={address}
+                            onChange={(e) => handleAddressChange(e.target.value)}
+                            placeholder='Address'
+                            className='rounded-md bg-white/20 px-3 lg:w-[70%]'
+                            aria-label='Address'
+                          />
+                        </div>
+                      )}
                       <div className='flex flex-col lg:flex-row lg:justify-between'>
                         <label htmlFor='' className='font-semibold'>
                           Contact
@@ -250,16 +251,16 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
                           aria-label='Date of Birth'
                         />
                       </div>
-                      <div className='flex flex-col lg:flex-row lg:justify-between'>
+                      <div className='flex'>
                         <label htmlFor='' className='font-semibold'>
-                          region
+                          Region
                         </label>
 
                         <input
                           type='checkbox'
                           checked={regionStatus}
                           onChange={(e) => handleRegionStatus(e.target.checked)}
-                          className='rounded-md bg-white/20 px-3  lg:w-[70%]'
+                          className='ml-10 flex size-5 justify-start'
                           aria-label='region status'
                         />
                       </div>

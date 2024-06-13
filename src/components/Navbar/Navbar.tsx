@@ -8,6 +8,8 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
+import Lottie from 'lottie-react'
+import { AiFillDribbbleCircle } from 'react-icons/ai'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
@@ -25,29 +27,26 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   }
 
   useEffect(() => {
-    if (
-      pathname === '/' ||
-      pathname === '/slider' ||
-      pathname === '/signin' ||
-      pathname === '/signup' ||
-      pathname === '/public-profile' ||
-      pathname === '/homepage-bg'
-    ) {
+    if (pathname === '/slider') {
       setHideMiddleNav(true)
     } else {
       setHideMiddleNav(false)
-    }
-
-    if (pathname === '/signin' || pathname === '/signup') {
-      setHideTopRightNav(true)
-    } else {
-      setHideTopRightNav(false)
     }
   }, [pathname])
 
   const { user, logout } = useUser()
   // State to hold the current guild color
   const [guildColor, setGuildColor] = useState(null)
+  const [animations, setAnimations] = useState([])
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation1 = await fetch('/lottieAnimation/animate.json').then((response) => response.json())
+      setAnimations([animation1])
+    }
+
+    fetchAnimations()
+  }, [])
 
   // Update guildColor whenever user changes
   useEffect(() => {
@@ -60,16 +59,26 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      <motion.nav className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
+      <motion.nav className='container fixed top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
-          <Link href='/hero' className='flex items-center justify-center pl-1 '>
+          <Link href='/hero' className='flex items-center justify-center pl-4 '>
+            {/* {animations.length > 0 ? (
+              <Lottie
+                animationData={animations[0]}
+                loop={true}
+                autoplay={true}
+                style={{ width: 60, height: 60, zIndex: 20 }}
+              />
+            ) : (
+              <AiFillDribbbleCircle />
+            )} */}
             <Image
-              src='/Karma.svg'
-              className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-              height={75}
-              width={75}
+              src='/logos/lgo.png'
+              className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+              height={65}
+              width={65}
               alt='GG Logo'
             />
           </Link>
@@ -136,20 +145,19 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
-              <div className='flex h-16 items-center justify-center gap-2 rounded-full px-20 py-2 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
-                {pathname === '/avatars' ? (
-                  <Link href='/avatars' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    AVTR-EXP
+              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+                {pathname === '/homepage' ? (
+                  <Link href='/homepage' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    HOME
                   </Link>
                 ) : (
                   <Link
-                    href='/avatars'
+                    href='/homepage'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    AVTR-EXP
+                    HOME
                   </Link>
                 )}
-
                 {pathname === '/hero' ? (
                   <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HUD
@@ -162,6 +170,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     HUD
                   </Link>
                 )}
+
                 {pathname.startsWith('/regions') ? (
                   <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     REGIONS
@@ -237,8 +246,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
             <ul className='flex flex-col gap-y-4'>
               <li>
                 {/* avatar and exp */}
-                <Link href='/avatars' className='hover:text-violet-400' onClick={closeMenu}>
-                  AVTR-EXP
+                <Link href='/homepage' className='hover:text-violet-400' onClick={closeMenu}>
+                  HOME
                 </Link>
               </li>
               <li>

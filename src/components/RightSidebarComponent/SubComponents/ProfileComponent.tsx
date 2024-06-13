@@ -6,14 +6,13 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
-
-  console.log('user:', user)
-
   const handleSignUpClick = () => {
     setActiveTab('search')
     setShowSignUp(true)
@@ -33,20 +32,53 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   }, [user])
 
   const [description, setDescription] = useState(user ? user.description : '')
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageUrls, setImageUrls] = useState([])
+  const [files, setFiles] = useState([])
 
-  function handelImageUrlChange(newImageUrl: string) {
-    setImageUrl(newImageUrl)
+  let profileImage = imageUrls.length !== 0 ? imageUrls[imageUrls.length - 1] : ''
+
+  const handleChangeEvent = (items) => {
+    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
+    setFiles(successfulFiles)
+    const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
+    setImageUrls(imageUrls) // Update cdnUrls state
   }
+
+  useEffect(() => {
+    const saveImage = () => {
+      handleImgUpdate(imageUrls[imageUrls.length - 1])
+    }
+    if (imageUrls.length !== 0) {
+      saveImage()
+    }
+  }, [imageUrls])
 
   function handelDescriptionChange(newDescription: string) {
     setDescription(newDescription)
   }
 
-  const handleImgBioUpdate = async (e) => {
+  useEffect(() => {
+    console.log(imageUrls[imageUrls.length - 1])
+  }, [imageUrls])
+
+  const handleImgUpdate = async (image_url) => {
+    const submit = {
+      image_url: image_url,
+    }
+    try {
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Profile pic updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic!')
+    }
+  }
+  const handleBioUpdate = async (e) => {
     e.preventDefault()
     const submit = {
-      image_url: imageUrl,
       description: description,
     }
     try {
@@ -55,21 +87,32 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         method: 'put',
         data: submit,
       })
-      toast.success('Profile pic and bio updated successfully!')
+      toast.success('Bio updated successfully!')
     } catch (error) {
-      toast.error('Error updating profile pic and bio!')
+      toast.error('Error updating bio!')
     }
   }
 
   return (
-    <div className='mb-32 flex h-full flex-col'>
+    <div className='mb-20 flex h-full flex-col'>
       {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black p-3 text-white'>
-          <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-6xl font-bold uppercase'>
+        <div className='flex-1 items-center justify-center rounded-lg bg-black/40 p-3 text-white'>
+          <div className='h-[170px] w-full rounded'>
+            <Image
+              src={
+                profileImage !== '' ? profileImage : user.image_urls ? user.image_urls[user.image_urls.length - 1] : ''
+              }
+              alt='porfilepic'
+              height={170}
+              width={500}
+              unoptimized
+              className='rounded'
+            />
+          </div>
+          <p className='my-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
             {user.username}
           </p>
-          <Image src={imageUrl} alt='porfilepic' height={30} width={30} unoptimized />
-          <p>{imageUrl}</p>
+
           <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
@@ -99,32 +142,34 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             )}
           </div>
-          <div className='flex justify-between gap-x-10'>
-            <div>
-              <p>Bio: {description}</p>
-            </div>
-            <div>Heo</div>
+          <div className='flex h-16 justify-center gap-x-10 overflow-auto pt-2'>
+            <span className='text-lg font-semibold text-blue-400'>{description}</span>
           </div>
-          <p>Other details</p>
-          <p>Form to add profile pic and bio</p>
-          <form onSubmit={handleImgBioUpdate} className='mt-28'>
-            <input
-              type='file'
-              name='profile_pic'
-              id='profile_pic'
-              accept='image/*'
-              value={imageUrl}
-              onChange={(e) => handelImageUrlChange(e.target.value)}
-            />
-            <input
-              type='text'
-              name='bio'
-              id='bio'
-              placeholder='Bio'
-              value={description}
-              className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
-              onChange={(e) => handelDescriptionChange(e.target.value)}
-            />
+          <form onSubmit={handleBioUpdate}>
+            <div className='my-2 flex w-full items-center justify-center'>
+              <FileUploaderRegular
+                onChange={handleChangeEvent}
+                pubkey={'aff2bf9d09cde0f92516'}
+                maxLocalFileSizeBytes={10000000}
+                imgOnly={true}
+                sourceList='local, url, camera'
+                className='w-fit rounded-lg bg-black p-1'
+              />
+            </div>
+            <div className='flex items-center  gap-x-2'>
+              <label htmlFor='bio' className='text-xl font-bold'>
+                Bio
+              </label>
+              <input
+                type='text'
+                name='bio'
+                id='bio'
+                placeholder='Bio'
+                value={description}
+                className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
+                onChange={(e) => handelDescriptionChange(e.target.value)}
+              />
+            </div>
             <button
               type='submit'
               className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all

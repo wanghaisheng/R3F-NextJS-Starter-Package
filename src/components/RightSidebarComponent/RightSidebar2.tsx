@@ -55,17 +55,20 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>
-          {activeTab === 'search' ? (
-            <>
-              {!user ? (
-                <h2 className='text-xl font-bold'>SIGNUP | SIGNIN | SEARCH </h2>
-              ) : (
-                <h2 className='text-xl font-bold'>SEARCH</h2>
-              )}
-            </>
-          ) : (
-            <h2 className='text-xl font-bold'>{activeTab.toUpperCase()}</h2>
-          )}
+          <div className='flex w-full justify-center'>
+            {activeTab === 'search' ? (
+              <>
+                {!user ? (
+                  <h2 className='text-xl font-bold'>SIGNUP | SIGNIN | SEARCH </h2>
+                ) : (
+                  <h2 className='text-xl font-bold'>SEARCH</h2>
+                )}
+              </>
+            ) : (
+              <h2 className='text-xl font-bold'>{activeTab.toUpperCase()}</h2>
+            )}
+          </div>
+
           <button className='z-50 text-blue-600 hover:text-white/60' onClick={toggleSidebar}>
             <svg xmlns='http://www.w3.org/2000/svg' className='size-6' viewBox='0 0 20 20' fill='currentColor'>
               <path

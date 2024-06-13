@@ -174,7 +174,7 @@ export default function PublicProfile({ username }) {
             {user && (
               <>
                 <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
-                  {user.first_name.toUpperCase()}
+                  {user.username.toUpperCase()}
                 </div>
 
                 <div className='fixed left-16 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
@@ -207,7 +207,7 @@ export default function PublicProfile({ username }) {
 
           {/* Carousel */}
 
-          <div className='flex size-full flex-col'>
+          <div className='mt-20 flex size-full flex-col'>
             <div className='flex w-full justify-center'>
               <UserInfoShowcase user={user} skillsData={skillsData} />
             </div>
