@@ -69,9 +69,9 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         method: 'put',
         data: submit,
       })
-      toast.success('Profile pic and bio updated successfully!')
+      toast.success('Profile pic updated successfully!')
     } catch (error) {
-      toast.error('Error updating profile pic and bio!')
+      toast.error('Error updating profile pic!')
     }
   }
   const handleBioUpdate = async (e) => {
@@ -85,17 +85,17 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         method: 'put',
         data: submit,
       })
-      toast.success('Profile pic and bio updated successfully!')
+      toast.success('Bio updated successfully!')
     } catch (error) {
-      toast.error('Error updating profile pic and bio!')
+      toast.error('Error updating bio!')
     }
   }
 
   return (
-    <div className='mb-32 flex h-full flex-col'>
+    <div className='mb-20 flex h-full flex-col'>
       {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black p-3 text-white'>
-          <div className='h-[170px] w-full'>
+        <div className='flex-1 items-center justify-center rounded-lg bg-black/40 p-3 text-white'>
+          <div className='h-[170px] w-full rounded'>
             <Image
               src={
                 imageUrls.length !== 0
@@ -108,9 +108,10 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               height={170}
               width={500}
               unoptimized
+              className='rounded'
             />
           </div>
-          <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-6xl font-bold uppercase'>
+          <p className='my-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
             {user.username}
           </p>
 
@@ -143,31 +144,34 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             )}
           </div>
-          <div className='flex justify-between gap-x-10'>
-            <div>
-              <p>Bio: {description}</p>
-            </div>
-            <div>Heo</div>
+          <div className='flex h-16 justify-center gap-x-10 overflow-auto pt-2'>
+            <span className='text-lg font-semibold text-blue-400'>{description}</span>
           </div>
-          <p>Other details</p>
-          <p>Form to add profile pic and bio</p>
-          <form onSubmit={handleBioUpdate} className='mt-32'>
-            <FileUploaderRegular
-              onChange={handleChangeEvent}
-              pubkey={'aff2bf9d09cde0f92516'}
-              maxLocalFileSizeBytes={10000000}
-              imgOnly={true}
-              sourceList='local, url, camera'
-            />
-            <input
-              type='text'
-              name='bio'
-              id='bio'
-              placeholder='Bio'
-              value={description}
-              className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
-              onChange={(e) => handelDescriptionChange(e.target.value)}
-            />
+          <form onSubmit={handleBioUpdate}>
+            <div className='my-2 flex w-full items-center justify-center'>
+              <FileUploaderRegular
+                onChange={handleChangeEvent}
+                pubkey={'aff2bf9d09cde0f92516'}
+                maxLocalFileSizeBytes={10000000}
+                imgOnly={true}
+                sourceList='local, url, camera'
+                className='w-fit rounded-lg bg-black p-1'
+              />
+            </div>
+            <div className='flex items-center  gap-x-2'>
+              <label htmlFor='bio' className='text-xl font-bold'>
+                Bio
+              </label>
+              <input
+                type='text'
+                name='bio'
+                id='bio'
+                placeholder='Bio'
+                value={description}
+                className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
+                onChange={(e) => handelDescriptionChange(e.target.value)}
+              />
+            </div>
             <button
               type='submit'
               className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
