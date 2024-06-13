@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
-
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
@@ -14,6 +13,7 @@ const getUsers = async () => {
     const res = await axios.get('/api/public/users')
     if (res.status !== 200) {
       toast.error('Failed to fetch users data')
+      return []
     }
     const users = res.data.filter(
       (user) =>
@@ -21,7 +21,6 @@ const getUsers = async () => {
         user.last_name &&
         user.username &&
         user.email &&
-        user.description &&
         user.region.ip &&
         user.avatar.length !== 0 &&
         user.guild_id,
@@ -29,6 +28,7 @@ const getUsers = async () => {
     return users
   } catch (error) {
     toast.error('Internal Server Error')
+    return []
   }
 }
 
@@ -37,10 +37,12 @@ const getGuilds = async () => {
     const res = await axios.get('/api/public/guilds')
     if (res.status !== 200) {
       toast.error('Failed to fetch guilds data')
+      return []
     }
     return res.data
   } catch (error) {
     toast.error('Internal Server Error')
+    return []
   }
 }
 
@@ -117,7 +119,7 @@ const Regions = () => {
         const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
 
         return {
-          name: publicUser.first_name + ' ' + publicUser.last_name,
+          name: `${publicUser.first_name} ${publicUser.last_name}`,
           username: publicUser.username,
           description: publicUser.description,
           guild: guild ? guild.guild_name : 'Unknown Guild',
@@ -128,7 +130,7 @@ const Regions = () => {
       setGuilds(guilds)
     }
 
-    if (publicUsers.length !== 0 && guildData.length !== 0) {
+    if (Array.isArray(publicUsers) && publicUsers.length !== 0 && Array.isArray(guildData) && guildData.length !== 0) {
       mapGuildInfo()
     }
   }, [publicUsers, guildData])

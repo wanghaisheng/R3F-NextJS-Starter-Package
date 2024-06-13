@@ -27,16 +27,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   }
 
   useEffect(() => {
-    if (pathname === '/' || pathname === '/slider') {
+    if (pathname === '/slider') {
       setHideMiddleNav(true)
     } else {
       setHideMiddleNav(false)
-    }
-
-    if (pathname === '/signin' || pathname === '/signup') {
-      setHideTopRightNav(true)
-    } else {
-      setHideTopRightNav(false)
     }
   }, [pathname])
 
@@ -152,19 +146,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
               <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
-                {pathname === '/avatars' ? (
-                  <Link href='/avatars' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    AVTR-EXP
-                  </Link>
-                ) : (
-                  <Link
-                    href='/avatars'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    AVTR-EXP
-                  </Link>
-                )}
-
                 {pathname === '/hero' ? (
                   <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HUD
@@ -175,6 +156,18 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     HUD
+                  </Link>
+                )}
+                {pathname === '/homepage' ? (
+                  <Link href='/homepage' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    HOME
+                  </Link>
+                ) : (
+                  <Link
+                    href='/homepage'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
+                    HOME
                   </Link>
                 )}
                 {pathname.startsWith('/regions') ? (
@@ -252,8 +245,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
             <ul className='flex flex-col gap-y-4'>
               <li>
                 {/* avatar and exp */}
-                <Link href='/avatars' className='hover:text-violet-400' onClick={closeMenu}>
-                  AVTR-EXP
+                <Link href='/homepage' className='hover:text-violet-400' onClick={closeMenu}>
+                  HOME
                 </Link>
               </li>
               <li>

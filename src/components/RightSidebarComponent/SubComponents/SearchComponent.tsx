@@ -112,7 +112,7 @@ export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn,
                   </button>
                 </a>
               </div>
-              <div className='mt-4 text-center'>
+              {/* <div className='mt-4 text-center'>
                 <a href='#' className='text-blue-400'>
                   <button
                     className='w-full rounded-full bg-black/10 py-2 text-center text-white shadow-md shadow-purple-700 backdrop-blur-md transition-colors duration-500 hover:bg-purple-800/20'
@@ -121,7 +121,7 @@ export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn,
                     Sign In As a Developer
                   </button>
                 </a>
-              </div>
+              </div> */}
             </div>
           ) : (
             <>
