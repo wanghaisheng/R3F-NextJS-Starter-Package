@@ -17,7 +17,7 @@ const Hud = () => {
 
   useEffect(() => {
     const fetchAnimations = async () => {
-      const animation1 = await fetch('/lottieAnimation/circ.json').then((response) => response.json())
+      const animation1 = await fetch('/lottieAnimation/circle.json').then((response) => response.json())
       const animation2 = await fetch('/lottieAnimation/slider.json').then((response) => response.json())
       setAnimations([animation1, animation2])
     }
@@ -51,7 +51,7 @@ const Hud = () => {
           <div className='container mx-auto flex h-16 items-center justify-center px-0 py-2 '>
             <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
             <div className='hidden md:flex'>
-              <div className='flex h-10 items-center justify-center gap-2 rounded-full px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+              <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-black/80 px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 <Link
                   href='/slider'
                   aria-label='Go to slider'
@@ -107,8 +107,7 @@ const Hud = () => {
                     width={50}
                     height={50}
                     alt='GG Logo'
-                    // className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-                    className='z-10'
+                    className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
                   />
                   {animations.length > 0 ? (
                     <Lottie
@@ -116,7 +115,7 @@ const Hud = () => {
                       loop={true}
                       autoplay={true}
                       style={{ width: 50, height: 50 }}
-                      className='absolute top-0'
+                      className='absolute -top-1'
                     />
                   ) : (
                     <TbSwipe />

@@ -242,7 +242,7 @@ export default function PrivateProfile() {
     }
   }, [user])
   return (
-    <div className='relative flex flex-col lg:size-full'>
+    <div className='relative mt-20 flex flex-col lg:size-full'>
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar

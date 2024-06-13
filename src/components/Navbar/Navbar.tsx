@@ -65,7 +65,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      <motion.nav className='container sticky top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
+      <motion.nav className='container fixed top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
@@ -151,7 +151,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
-              <div className='flex h-16 items-center justify-center gap-2 rounded-full px-20 py-2 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 {pathname === '/avatars' ? (
                   <Link href='/avatars' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     AVTR-EXP

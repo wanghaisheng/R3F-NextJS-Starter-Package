@@ -6,6 +6,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const guildData = [
   {
@@ -91,6 +92,39 @@ export default function VideoHome() {
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-lg'
       >
+        <SwiperSlide className='bg-cover bg-center'>
+          <div
+            className='size-full lg:ml-auto lg:w-[50%]'
+            style={{
+              backgroundImage: 'url(/homepage/image.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          ></div>
+          <div className='absolute inset-0 flex flex-col items-center justify-center'>
+            <div className='w-[800px]'>
+              <h1 className='text-center text-2xl font-bold leading-10 text-white lg:text-6xl'>
+                One Genius ID for every
+                <br />
+                <p className='mt-4'>Genius Tech</p>
+              </h1>
+              <p className='mt-10 text-center text-sm text-white lg:text-2xl'>
+                Keep all your Genius Services secured with 1 Genius ID <br /> Developer Features Coming Soon
+              </p>
+              <div className='flex justify-center'>
+                <Link
+                  className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
+                  href='/slider'
+                >
+                  Get Started
+                  <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+
         {guildData.map((guild, index) => (
           <SwiperSlide key={index} className='bg-cover bg-center'>
             <div className='absolute top-20 z-20 flex w-full items-center justify-center overflow-hidden text-6xl font-extrabold md:text-9xl lg:hidden'>
@@ -117,6 +151,7 @@ export default function VideoHome() {
             </div>
           </SwiperSlide>
         ))}
+
         <SwiperSlide className='bg-cover bg-center'>
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src='/livewallpapers/forest.mp4' type='video/mp4' />
