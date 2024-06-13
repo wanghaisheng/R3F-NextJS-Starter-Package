@@ -7,6 +7,7 @@ import 'swiper/css/navigation'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
+import { GoArrowDown } from 'react-icons/go'
 
 const guildData = [
   {
@@ -115,12 +116,51 @@ export default function VideoHome() {
               <div className='flex justify-center'>
                 <Link
                   className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
-                  href='/slider'
+                  href='/hero'
+                  aria-label='get started button'
                 >
                   Get Started
                   <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
                 </Link>
               </div>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className='bg-cover bg-center'>
+          <div
+            className='size-full lg:ml-auto'
+            style={{
+              backgroundImage: 'url(/homepage/image2.png)', // Updated background image
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          ></div>
+          <div className='absolute inset-0 bg-black/65'></div>
+          <div className='absolute inset-0 flex flex-col items-center justify-center'>
+            <h1 className='bg-custom-gradient bg-clip-text text-center text-lg font-extrabold text-transparent drop-shadow-sm lg:text-6xl'>
+              Customized Avatar For
+              <br />
+              <p className='mt-4'>3d WEB</p>
+            </h1>
+            <p className='mt-7 text-center text-white lg:text-lg '>
+              3d Web made more accessible with 3d Avatar to travel in 3d WEB
+            </p>
+            <Link
+              className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
+              href='/hero'
+              aria-label='get started button'
+            >
+              Get Started
+              <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
+            </Link>
+            <div className='absolute bottom-10 text-white'>
+              <button
+                className='animate-bounce rounded-full border border-white p-3 hover:bg-purple-400'
+                aria-label='down button'
+              >
+                <GoArrowDown />
+              </button>
             </div>
           </div>
         </SwiperSlide>
@@ -156,6 +196,45 @@ export default function VideoHome() {
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src='/livewallpapers/forest.mp4' type='video/mp4' />
           </video>
+        </SwiperSlide>
+        <SwiperSlide className='bg-cover bg-center'>
+          <div
+            className='size-full lg:ml-auto'
+            style={{
+              backgroundImage: 'url(/homepage/img2.png)', // Updated background image
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          ></div>
+          <div className='absolute inset-0 bg-black/65'></div>
+          <div className='absolute inset-0 flex flex-col items-center justify-center'>
+            <h1 className='bg-custom-gradient-two bg-clip-text text-center text-lg font-extrabold text-transparent drop-shadow-sm lg:text-6xl'>
+              Find Genius People
+              <br />
+              <p className='mt-4'>Around the Universe</p>
+            </h1>
+            <p className='mt-7 text-center text-white lg:text-2xl '>
+              Hidden in Different dimension on the basis of Guild Theory
+            </p>
+            <div className='flex justify-center'>
+              <Link
+                className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
+                href='/regions'
+              >
+                Regions
+                <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
+              </Link>
+            </div>
+            <div className='absolute bottom-10 text-white'>
+              <button
+                className='animate-bounce rounded-full border border-white p-3 hover:bg-purple-400'
+                aria-label='down button'
+              >
+                <GoArrowDown />
+              </button>
+            </div>
+          </div>
         </SwiperSlide>
         <div
           className='absolute bottom-4 right-4 z-10 flex size-12 items-center justify-center font-bold'
