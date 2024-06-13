@@ -84,14 +84,20 @@ const Hud = () => {
                   target='_blank'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <AiFillClockCircle />
+                  <Image
+                    src='/logos/relativity.svg'
+                    width={45}
+                    height={45}
+                    alt='GG Logo'
+                    className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+                  />
                   <div
                     className={`
           invisible absolute -left-7 top-0 -translate-y-8 whitespace-nowrap
           rounded-md bg-indigo-100 px-2 py-1
           text-sm text-indigo-800 opacity-20 transition-all
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
+          `}
                   >
                     GG Relativity
                   </div>
@@ -123,11 +129,11 @@ const Hud = () => {
 
                   <div
                     className={`
-          invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm text-indigo-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
+                      invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
+                      rounded-md bg-indigo-100 px-2 py-1
+                      text-sm text-indigo-800 opacity-20 transition-all
+                      group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+                      `}
                   >
                     Going Genius
                   </div>
@@ -138,8 +144,13 @@ const Hud = () => {
                   target='_blank'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  {/* <SiExpertsexchange onClick={() => setIsOpen(true)} /> */}
-                  <AiFillDribbbleCircle />
+                  <Image
+                    src='/logos/portals.svg'
+                    width={45}
+                    height={45}
+                    alt='GG Logo'
+                    className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+                  />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -156,7 +167,13 @@ const Hud = () => {
                   aria-label=''
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <AiFillCheckCircle />
+                  <Image
+                    src='/logos/lgo.png'
+                    width={35}
+                    height={35}
+                    alt='GG Logo'
+                    className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+                  />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap

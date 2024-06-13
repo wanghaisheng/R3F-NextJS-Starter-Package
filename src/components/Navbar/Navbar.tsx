@@ -63,8 +63,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* Logo and Sign In/Sign Out */}
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
-          <Link href='/hero' className='flex items-center justify-center pl-1 '>
-            {animations.length > 0 ? (
+          <Link href='/hero' className='flex items-center justify-center pl-4 '>
+            {/* {animations.length > 0 ? (
               <Lottie
                 animationData={animations[0]}
                 loop={true}
@@ -73,12 +73,12 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
               />
             ) : (
               <AiFillDribbbleCircle />
-            )}
+            )} */}
             <Image
-              src='/Karma.svg'
+              src='/logos/lgo.png'
               className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-              height={75}
-              width={75}
+              height={65}
+              width={65}
               alt='GG Logo'
             />
           </Link>
