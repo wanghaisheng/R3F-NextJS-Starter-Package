@@ -95,7 +95,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     <div className='mb-32 flex h-full flex-col'>
       {user ? (
         <div className='flex-1 items-center justify-center rounded-lg bg-black p-3 text-white'>
-          <div className='h-[300px] w-full'>
+          <div className='h-[170px] w-full'>
             <Image
               src={
                 imageUrls.length !== 0
@@ -105,7 +105,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                     : ''
               }
               alt='porfilepic'
-              fill
+              height={170}
+              width={500}
               unoptimized
             />
           </div>
