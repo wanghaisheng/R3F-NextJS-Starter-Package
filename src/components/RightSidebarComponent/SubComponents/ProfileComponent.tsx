@@ -95,22 +95,23 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     <div className='mb-32 flex h-full flex-col'>
       {user ? (
         <div className='flex-1 items-center justify-center rounded-lg bg-black p-3 text-white'>
+          <div className='h-[300px] w-full'>
+            <Image
+              src={
+                imageUrls.length !== 0
+                  ? imageUrls[imageUrls.length - 1]
+                  : user.image_urls
+                    ? user.image_urls[user.image_urls.length - 1]
+                    : ''
+              }
+              alt='porfilepic'
+              fill
+              unoptimized
+            />
+          </div>
           <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-6xl font-bold uppercase'>
             {user.username}
           </p>
-          <Image
-            src={
-              imageUrls.length !== 0
-                ? imageUrls[imageUrls.length - 1]
-                : user.image_urls
-                  ? user.image_urls[user.image_urls.length - 1]
-                  : ''
-            }
-            alt='porfilepic'
-            height={30}
-            width={30}
-            unoptimized
-          />
 
           <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
