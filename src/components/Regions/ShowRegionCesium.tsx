@@ -1,8 +1,16 @@
+'use client'
+import dynamic from 'next/dynamic'
+
 import CesiumMap from '../LeafletMap/CesiumMap'
-import Image from 'next/image'
+import { useState } from 'react'
 import { Suspense } from 'react'
 import ShowGuild from '../Guilds/ShowGuild'
 import GuildHeader from '../Guilds/GuildHeader'
+const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
+  ssr: false,
+})
+import { FaEarthAmericas } from 'react-icons/fa6'
+import { FaMap } from 'react-icons/fa'
 
 async function getCountries() {
   // const response = await fetch('https://restcountries.com/v3.1/all')
@@ -25,7 +33,10 @@ export default function ShowRegionCesium({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
-  console.log(guilds)
+  const [mapChange, setMapChange] = useState(false)
+  const handleMapChange = () => {
+    setMapChange(!mapChange)
+  }
 
   const regions = [
     {
@@ -89,20 +100,34 @@ export default function ShowRegionCesium({
                     left: 0,
                     width: '100%',
                     height: '100%',
+                    zIndex: 0,
                   }}
                 >
-                  <CesiumMap filteredContinent={selectedRegionFilter} />
+                  {!mapChange ? (
+                    <CesiumMap filteredContinent={selectedRegionFilter} />
+                  ) : (
+                    <MapComponent filteredContinent={selectedRegionFilter} />
+                  )}
                 </div>
               </div>
             </Suspense>
-            {/* <Image src='/svgs/na.svg' width={500} height={500} alt='world map' /> */}
-            <div className='absolute right-0 top-14 mr-4 h-[66vh] w-[44vh] rounded-lg bg-violet-400/10 p-4'>
+            {/* Guilds showcase */}
+            <button
+              className='absolute right-4 top-0 z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500'
+              onClick={handleMapChange}
+            >
+              {mapChange ? <FaEarthAmericas className='size-6' /> : <FaMap className='size-6' />}
+            </button>
+            <div
+              className={`absolute right-0 top-14 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+            >
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
-              <div className='flex flex-row overflow-auto'>
+
+              <div className='flex w-full overflow-auto'>
                 <ShowGuild
                   users={guilds}
                   selectedRegionFilter={selectedRegionFilter}
@@ -114,7 +139,7 @@ export default function ShowRegionCesium({
           </div>
         </div>
       </div>
-      <div className='fixed bottom-0 left-[50%] z-50 flex h-auto w-[60%] -translate-x-1/2 items-center justify-center '>
+      {/* <div className='fixed bottom-0 left-[50%] z-50 flex h-auto w-[60%] -translate-x-1/2 items-center justify-center '>
         <div className='flex flex-wrap justify-center gap-x-5 py-2'>
           {filteredRegions.map((region, index) => (
             <a
@@ -131,7 +156,6 @@ export default function ShowRegionCesium({
                 // height={100}
                 loading='lazy'
               />
-              {/* Symbol */}
               <span className='absolute top-0 flex size-20 items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
                 <Image
                   src={region.icon}
@@ -148,7 +172,25 @@ export default function ShowRegionCesium({
             </a>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   )
+}
+
+// Function to determine the shadow color based on the guild
+function getBorderColor(guild: string): string {
+  switch (guild) {
+    case 'BUDDHA':
+      return 'shadow-white'
+    case 'VAJRA':
+      return 'shadow-blue-500'
+    case 'KARMA':
+      return 'shadow-green-500'
+    case 'RATNA':
+      return 'shadow-yellow-500'
+    case 'PADMA':
+      return 'shadow-red-500'
+    default:
+      return 'shadow-purple-700'
+  }
 }

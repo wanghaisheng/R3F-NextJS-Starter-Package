@@ -156,9 +156,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
   }
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
-      <div className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5] py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'>
+      <div className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'>
         <div className='flex h-screen w-full flex-col '>
-          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
+          <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
             EXPERIENCE
             <div className='absolute top-10 text-sm lg:right-0'>
               <DrawOutlineButton
@@ -175,10 +175,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
             {/* TabList */}
             <TabList className='mt-20 flex overflow-x-auto  sm:items-start sm:justify-start lg:my-6'>
               {projects.map((project, index) => (
-                <Tab
-                  key={index}
-                  className='ml-3 flex cursor-pointer  whitespace-nowrap px-1 text-purple-950 dark:text-purple-200'
-                >
+                <Tab key={index} className='ml-3 flex cursor-pointer  whitespace-nowrap px-1 text-purple-200'>
                   {project.name}
                   {index !== 0 && ( // Condition to check if it's not the first tab
                     <button

@@ -21,7 +21,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
   return (
     <>
       {/* Event Image  */}
-      <div className='group h-[600px] w-[400px] p-6 [prespective:1000px] lg:h-[600px] lg:w-[810px]'>
+      <div className='group h-[550px] w-[400px] p-6 [prespective:1000px] lg:h-[550px] lg:w-[810px]'>
         {/* Flip the card when clicked */}
         <div
           className={`relative size-full rounded-xl shadow-md transition-all duration-500 [transform-style:preserve-3d] 
@@ -50,7 +50,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
               </nav>
             </div>
           </div>
-          <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
+          <div className='absolute bottom-4 left-4 flex w-full items-center justify-between'>
             <div className='text-base font-bold text-purple-300'>GOING GENIUS</div>
             <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
           </div>

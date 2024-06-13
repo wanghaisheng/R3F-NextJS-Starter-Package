@@ -84,7 +84,7 @@ export default function GuildHeader({
         <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
           <a
             href='#'
-            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'text-gray-400' : 'text-gray-300'}`}
+            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'BUDDHA' ? 'rotate-180 scale-125' : 'scale-100'}`}
             onClick={() => handleFilterClick('BUDDHA')}
           >
             <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -97,7 +97,7 @@ export default function GuildHeader({
           </a>
           <a
             href='#'
-            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'text-blue-500' : 'text-blue-200'}`}
+            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'VAJRA' ? 'rotate-180 scale-125' : 'scale-100'}`}
             onClick={() => handleFilterClick('VAJRA')}
           >
             <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -110,7 +110,7 @@ export default function GuildHeader({
           </a>
           <a
             href='#'
-            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'text-green-500' : 'text-green-200'}`}
+            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'KARMA' ? 'rotate-180 scale-125' : 'scale-100'}`}
             onClick={() => handleFilterClick('KARMA')}
           >
             <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -123,7 +123,7 @@ export default function GuildHeader({
           </a>
           <a
             href='#'
-            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'text-yellow-500' : 'text-yellow-200'}`}
+            className={`cursor-pointer transition duration-300 ease-out  ${activeFilter === 'RATNA' ? 'rotate-180 scale-125' : 'scale-100'}`}
             onClick={() => handleFilterClick('RATNA')}
           >
             <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -136,7 +136,7 @@ export default function GuildHeader({
           </a>
           <a
             href='#'
-            className={`cursor-pointer transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'text-red-500' : 'text-red-200'}`}
+            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'PADMA' ? 'rotate-180 scale-125' : 'scale-100'}`}
             onClick={() => handleFilterClick('PADMA')}
           >
             <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -149,7 +149,7 @@ export default function GuildHeader({
       </div>
 
       {/* Sidebar */}
-      <div className='fixed top-0 hidden items-center justify-start font-semibold lg:hidden'>
+      {/* <div className='fixed top-0 hidden items-center justify-start font-semibold lg:hidden'>
         <ul className='flex h-[800px] w-[310px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40%'>
           <li className='mt-[60%]'>
             <a
@@ -187,13 +187,6 @@ export default function GuildHeader({
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'bg-gradient-to-r from-green-500/70' : 'text-green-200'}`}
               onClick={() => handleFilterClick('KARMA')}
             >
-              {/* <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <circle cx='11' cy='11' r='11' fill='#46B58F' />
-                <path
-                  d='M3 7.02733L10.9046 3L19 7.02733M3 7.02733L10.9046 10.7995M3 7.02733V15.0638L10.9046 19M19 7.02733L10.9046 10.7995M19 7.02733V15.0638L10.9046 19M10.9046 10.7995V19'
-                  stroke='black'
-                />
-              </svg> */}
               <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M1 5.53075L9.89271 1L19 5.53075M1 5.53075L9.89271 9.77449M1 5.53075V14.5718L9.89271 19M19 5.53075L9.89271 9.77449M19 5.53075V14.5718L9.89271 19M9.89271 9.77449V19'
@@ -232,7 +225,7 @@ export default function GuildHeader({
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   )
 }

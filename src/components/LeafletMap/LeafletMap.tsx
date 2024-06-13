@@ -36,13 +36,13 @@ const MapComponent = ({ filteredContinent }: { filteredContinent: string }) => {
   }, [filteredContinent])
 
   return (
-    <div className='h-[550px] w-full'>
+    <div className='z-0 h-screen w-full'>
       {/* Map */}
       <MapContainer
         key={mapCenter[0]}
         center={mapCenter}
         zoom={3}
-        className='h-[550px] rounded-lg'
+        className='h-full rounded-lg'
         // scrollWheelZoom={false}
       >
         <GeoJSON

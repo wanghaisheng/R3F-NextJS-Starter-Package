@@ -6,6 +6,7 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
@@ -64,8 +65,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     <div className='mb-32 flex h-full flex-col'>
       {user ? (
         <div className='flex-1 items-center justify-center rounded-lg bg-black p-3 text-white'>
-          <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-8xl font-bold uppercase'>
-            {user.first_name} {user.last_name}!
+          <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-6xl font-bold uppercase'>
+            {user.username}
           </p>
           <Image src={imageUrl} alt='porfilepic' height={30} width={30} unoptimized />
           <p>{imageUrl}</p>
@@ -106,7 +107,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
           <p>Other details</p>
           <p>Form to add profile pic and bio</p>
-          <form onSubmit={handleImgBioUpdate} className='mt-32'>
+          <form onSubmit={handleImgBioUpdate} className='mt-28'>
             <input
               type='file'
               name='profile_pic'
@@ -121,11 +122,25 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               id='bio'
               placeholder='Bio'
               value={description}
-              className='text-black'
+              className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
               onChange={(e) => handelDescriptionChange(e.target.value)}
             />
-            <button type='submit'>Submit</button>
+            <button
+              type='submit'
+              className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
+             ease-in-out hover:border-purple-500'
+            >
+              Submit
+            </button>
           </form>
+
+          <Link
+            href={`/public-profile/${user.username}`}
+            className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
+             ease-in-out hover:border-purple-500'
+          >
+            View Public Profile
+          </Link>
         </div>
       ) : (
         <>
