@@ -6,6 +6,8 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
@@ -107,14 +109,15 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <p>Other details</p>
           <p>Form to add profile pic and bio</p>
           <form onSubmit={handleImgBioUpdate} className='mt-32'>
-            <input
+            {/* <input
               type='file'
               name='profile_pic'
               id='profile_pic'
               accept='image/*'
               value={imageUrl}
               onChange={(e) => handelImageUrlChange(e.target.value)}
-            />
+            /> */}
+            <FileUploaderRegular pubkey='aff2bf9d09cde0f92516' />
             <input
               type='text'
               name='bio'
