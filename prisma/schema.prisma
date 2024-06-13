@@ -37,21 +37,24 @@ model cards {
 }
 
 model experience {
-  experience_id  String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  gg_id          String?  @db.Uuid
-  type           String?  @db.VarChar(50)
-  name           String?  @db.VarChar(50)
-  description    String?
-  tools          String[]
-  project_skills String[]
-  users          users?   @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
+  experience_id    String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  gg_id            String?  @db.Uuid
+  type             String?  @db.VarChar(50)
+  name             String?  @db.VarChar(50)
+  description      String?
+  tools            String[]
+  project_skills   String[]
+  project_pictures String[]
+  link             String?
+  users            users?   @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model skills {
-  skill_id String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  skill    Json[]
-  gg_id    String? @db.Uuid
-  users    users?  @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
+  skill_id       String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  skill          Json[]
+  gg_id          String?  @db.Uuid
+  certifications String[]
+  users          users?   @relation(fields: [gg_id], references: [gg_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model users {
