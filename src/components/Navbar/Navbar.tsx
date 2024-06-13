@@ -27,14 +27,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   }
 
   useEffect(() => {
-    if (
-      pathname === '/' ||
-      pathname === '/slider' ||
-      pathname === '/signin' ||
-      pathname === '/signup' ||
-      pathname === '/public-profile' ||
-      pathname === '/homepage-bg'
-    ) {
+    if (pathname === '/' || pathname === '/slider') {
       setHideMiddleNav(true)
     } else {
       setHideMiddleNav(false)

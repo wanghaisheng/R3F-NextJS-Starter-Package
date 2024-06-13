@@ -107,8 +107,20 @@ const Hud = () => {
                     width={50}
                     height={50}
                     alt='GG Logo'
-                    className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+                    // className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+                    className='z-10'
                   />
+                  {animations.length > 0 ? (
+                    <Lottie
+                      animationData={animations[0]}
+                      loop={true}
+                      autoplay={true}
+                      style={{ width: 50, height: 50 }}
+                      className='absolute top-0'
+                    />
+                  ) : (
+                    <TbSwipe />
+                  )}
 
                   <div
                     className={`
