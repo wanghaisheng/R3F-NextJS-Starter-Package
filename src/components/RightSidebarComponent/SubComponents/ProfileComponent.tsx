@@ -6,14 +6,13 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
-
-  console.log('user:', user)
-
   const handleSignUpClick = () => {
     setActiveTab('search')
     setShowSignUp(true)
@@ -33,20 +32,51 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   }, [user])
 
   const [description, setDescription] = useState(user ? user.description : '')
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageUrls, setImageUrls] = useState([])
+  const [files, setFiles] = useState([])
 
-  function handelImageUrlChange(newImageUrl: string) {
-    setImageUrl(newImageUrl)
+  const handleChangeEvent = (items) => {
+    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
+    setFiles(successfulFiles)
+    const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
+    setImageUrls(imageUrls) // Update cdnUrls state
   }
+
+  useEffect(() => {
+    const saveImage = () => {
+      handleImgUpdate(imageUrls[imageUrls.length - 1])
+    }
+    if (imageUrls.length !== 0) {
+      saveImage()
+    }
+  }, [imageUrls])
 
   function handelDescriptionChange(newDescription: string) {
     setDescription(newDescription)
   }
 
-  const handleImgBioUpdate = async (e) => {
+  useEffect(() => {
+    console.log(imageUrls[imageUrls.length - 1])
+  }, [imageUrls])
+
+  const handleImgUpdate = async (image_url) => {
+    const submit = {
+      image_url: image_url,
+    }
+    try {
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Profile pic and bio updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic and bio!')
+    }
+  }
+  const handleBioUpdate = async (e) => {
     e.preventDefault()
     const submit = {
-      image_url: imageUrl,
       description: description,
     }
     try {
@@ -68,8 +98,20 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <p className='flex items-center justify-center overflow-hidden whitespace-nowrap text-6xl font-bold uppercase'>
             {user.username}
           </p>
-          <Image src={imageUrl} alt='porfilepic' height={30} width={30} unoptimized />
-          <p>{imageUrl}</p>
+          <Image
+            src={
+              imageUrls.length !== 0
+                ? imageUrls[imageUrls.length - 1]
+                : user.image_urls
+                  ? user.image_urls[user.image_urls.length - 1]
+                  : ''
+            }
+            alt='porfilepic'
+            height={30}
+            width={30}
+            unoptimized
+          />
+
           <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
@@ -107,14 +149,13 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
           <p>Other details</p>
           <p>Form to add profile pic and bio</p>
-          <form onSubmit={handleImgBioUpdate} className='mt-28'>
-            <input
-              type='file'
-              name='profile_pic'
-              id='profile_pic'
-              accept='image/*'
-              value={imageUrl}
-              onChange={(e) => handelImageUrlChange(e.target.value)}
+          <form onSubmit={handleBioUpdate} className='mt-32'>
+            <FileUploaderRegular
+              onChange={handleChangeEvent}
+              pubkey={'aff2bf9d09cde0f92516'}
+              maxLocalFileSizeBytes={10000000}
+              imgOnly={true}
+              sourceList='local, url, camera'
             />
             <input
               type='text'

@@ -59,6 +59,9 @@ export async function PUT(request, { params }) {
     }
 
     // If the user exists, update their information
+
+    const newImageUrls = [...existingUser.image_urls, image_url]
+
     const updatedUser = await prisma.users.update({
       where: { gg_id: id },
       data: {
@@ -67,7 +70,7 @@ export async function PUT(request, { params }) {
         username,
         email,
         phone_number,
-        image_url,
+        image_urls: newImageUrls,
         description,
         address,
         dob,
