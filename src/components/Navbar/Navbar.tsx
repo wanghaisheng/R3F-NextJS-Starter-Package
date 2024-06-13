@@ -8,6 +8,8 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
+import Lottie from 'lottie-react'
+import { AiFillDribbbleCircle } from 'react-icons/ai'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
@@ -48,6 +50,16 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const { user, logout } = useUser()
   // State to hold the current guild color
   const [guildColor, setGuildColor] = useState(null)
+  const [animations, setAnimations] = useState([])
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation1 = await fetch('/lottieAnimation/animate.json').then((response) => response.json())
+      setAnimations([animation1])
+    }
+
+    fetchAnimations()
+  }, [])
 
   // Update guildColor whenever user changes
   useEffect(() => {
@@ -65,9 +77,19 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
           {/* Logo */}
           <Link href='/hero' className='flex items-center justify-center pl-1 '>
+            {animations.length > 0 ? (
+              <Lottie
+                animationData={animations[0]}
+                loop={true}
+                autoplay={true}
+                style={{ width: 60, height: 60, zIndex: 20 }}
+              />
+            ) : (
+              <AiFillDribbbleCircle />
+            )}
             <Image
               src='/Karma.svg'
-              className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+              className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
               height={75}
               width={75}
               alt='GG Logo'

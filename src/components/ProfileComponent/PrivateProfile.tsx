@@ -452,9 +452,11 @@ export default function PrivateProfile() {
                       <p className='mb-4 px-4 text-center'>Some premium features for paid users</p>
                       <div className='flex justify-center gap-x-2'>
                         <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
-                        <Link href='/my-profile'>
-                          <DrawOutlineButton>View Public Profile</DrawOutlineButton>
-                        </Link>
+                        {user && (
+                          <Link href={`/public-profile/${user.username}`}>
+                            <DrawOutlineButton>View Public Profile</DrawOutlineButton>
+                          </Link>
+                        )}
                       </div>
                     </div>
                     {/* Spring Pop Up Modal */}

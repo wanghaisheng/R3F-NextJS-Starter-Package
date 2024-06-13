@@ -1,20 +1,13 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
-import ShowRegion from '@/components/Regions/ShowRegion'
-import RegionDetails from '@/components/Regions/RegionDetails'
 
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
-import GuildHeader from '@/components/Guilds/GuildHeader'
-import ShowGuild from '@/components/Guilds/ShowGuild'
-
-import ShowRegion2 from '@/components/Regions/ShowRegion2'
-import ShowRegionCesium from '@/components/Regions/ShowRegionCesium'
-
-import Image from 'next/image'
+const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
 import GetUserLocation from '@/components/Regions/GetUserLocation'
 
 const getUsers = async () => {

@@ -5,11 +5,26 @@ import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { TbSwipe } from 'react-icons/tb'
 import { AiFillAlipayCircle, AiFillCheckCircle, AiFillClockCircle, AiFillDribbbleCircle } from 'react-icons/ai'
+import Image from 'next/image'
+
+import Lottie from 'lottie-react'
 import SpringModal from '../FormModal/SpringModal'
 const Hud = () => {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
+  const [animations, setAnimations] = useState([])
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation1 = await fetch('/lottieAnimation/circ.json').then((response) => response.json())
+      const animation2 = await fetch('/lottieAnimation/slider.json').then((response) => response.json())
+      setAnimations([animation1, animation2])
+    }
+
+    fetchAnimations()
+  }, [])
+
   useEffect(() => {
     if (
       pathname === '/' ||
@@ -42,7 +57,16 @@ const Hud = () => {
                   aria-label='Go to slider'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <TbSwipe />
+                  {animations.length > 0 ? (
+                    <Lottie
+                      animationData={animations[1]}
+                      loop={true}
+                      autoplay={true}
+                      style={{ width: 50, height: 50 }}
+                    />
+                  ) : (
+                    <TbSwipe />
+                  )}
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -78,7 +102,14 @@ const Hud = () => {
                   target='_blank'
                   className='group py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <AiFillAlipayCircle />
+                  <Image
+                    src='/gglogo.png'
+                    width={50}
+                    height={50}
+                    alt='GG Logo'
+                    className='animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+                  />
+
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
