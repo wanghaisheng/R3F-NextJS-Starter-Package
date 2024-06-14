@@ -8,7 +8,7 @@ import { useState } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function ExperienceFlipCard({ type, projectName, skills, toolsAndTech }) {
+export default function ExperienceFlipCard({ type, projectName, skills, toolsAndTech, imageUrl }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
@@ -59,7 +59,15 @@ export default function ExperienceFlipCard({ type, projectName, skills, toolsAnd
             </div>
 
             {/* QRCode */}
-            <div className='absolute inset-0  rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
+            <div
+              className='absolute inset-0  rounded-lg px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)] '
+              style={{
+                backgroundImage: imageUrl ? `url(${imageUrl})` : 'url(/card/abstract3.webp)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            >
               <div className='flex size-full items-center justify-center '>
                 {imgSrc && (
                   <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />

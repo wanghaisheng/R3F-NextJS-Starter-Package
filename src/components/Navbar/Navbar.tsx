@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { useUser } from '@/context/UserContext/UserContext'
 import { LuLogOut } from 'react-icons/lu'
 import Image from 'next/image'
@@ -59,26 +58,26 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      <motion.nav className='container fixed top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
+      <nav className={`fixed top-0 z-50 mx-auto flex w-full items-center justify-between`}>
         {/* Logo and Sign In/Sign Out */}
-        <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
+        <div className='fixed inset-x-0 top-0 mx-auto flex h-20 w-full items-center justify-between px-4 py-2'>
           {/* Logo */}
-          <Link href='/hero' className='flex items-center justify-center pl-4 '>
-            {/* {animations.length > 0 ? (
+          <Link href='/hud' className='flex items-center justify-center'>
+            {animations.length > 0 ? (
               <Lottie
                 animationData={animations[0]}
                 loop={true}
                 autoplay={true}
-                style={{ width: 60, height: 60, zIndex: 20 }}
+                style={{ width: 84, height: 84, zIndex: 20 }}
               />
             ) : (
               <AiFillDribbbleCircle />
-            )} */}
+            )}
             <Image
-              src='/logos/lgo.png'
+              src={'/logos/lgo.png'}
               className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-              height={65}
-              width={65}
+              height={60}
+              width={60}
               alt='GG Logo'
             />
           </Link>
@@ -86,27 +85,18 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                {user.first_name != null && (
-                  <div>
-                    <Link
-                      href='/my-profile'
-                      className='flex items-center px-2 text-sm font-medium text-purple-950 dark:text-violet-400 '
-                      onClick={closeMenu}
-                    >
-                      <div
-                        className='size-9 rounded-full'
-                        style={{
-                          backgroundImage: 'url(/image.png)', // img url profile
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                          borderRadius: '50%',
-                          border: `2px solid ${guildColor}`,
-                        }}
-                      ></div>
-                    </Link>
-                  </div>
-                )}
+                <div className='mr-2 mt-2 size-8 rounded-full bg-pink-300'>
+                  <Link href='/my-profile' onClick={closeMenu} className='size-8 rounded-full'>
+                    <Image
+                      src={user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'}
+                      className='rounded-full'
+                      width={40}
+                      height={40}
+                      alt='User Profile Image'
+                      unoptimized
+                    />
+                  </Link>
+                </div>
                 <div className='flex'>
                   <Link
                     href='/'
@@ -141,9 +131,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
             )}
           </div>
         </div>
+
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
-          <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
+          <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
               <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 {pathname === '/homepage' ? (
@@ -158,13 +149,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     HOME
                   </Link>
                 )}
-                {pathname === '/hero' ? (
-                  <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                {pathname === '/hud' ? (
+                  <Link href='/hud' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HUD
                   </Link>
                 ) : (
                   <Link
-                    href='/hero'
+                    href='/hud'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     HUD
@@ -251,7 +242,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 </Link>
               </li>
               <li>
-                <Link href='/hero' className='hover:text-violet-400' onClick={closeMenu}>
+                <Link href='/hud' className='hover:text-violet-400' onClick={closeMenu}>
                   HUD
                 </Link>
               </li>
@@ -292,7 +283,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           </div>
         </div>
         {/* Hamburger */}
-      </motion.nav>
+      </nav>
     </>
   )
 }
