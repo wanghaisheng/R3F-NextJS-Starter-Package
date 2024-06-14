@@ -567,7 +567,7 @@ export default function PrivateProfile() {
                     Skills
                     {user && (
                       <a
-                        className='absolute -top-5 right-9 px-2 py-1 text-sm text-black dark:text-white'
+                        className='absolute -top-5 right-12 px-2 py-1 text-sm text-black dark:text-white'
                         aria-label='edit button'
                         href='/slider'
                       >
