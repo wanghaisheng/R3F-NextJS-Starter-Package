@@ -74,7 +74,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
               <AiFillDribbbleCircle />
             )}
             <Image
-              src={user ? user.image_urls[user.image_urls.length - 1] : '/logos/lgo.png'}
+              src={'/logos/lgo.png'}
               className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
               height={60}
               width={60}
@@ -85,27 +85,18 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                {user.first_name != null && (
-                  <div>
-                    <Link
-                      href='/my-profile'
-                      className='flex items-center px-2 text-sm font-medium text-purple-950 dark:text-violet-400 '
-                      onClick={closeMenu}
-                    >
-                      <div
-                        className='size-9 rounded-full'
-                        style={{
-                          backgroundImage: 'url(/mnt/data/image.png)', // Updated img url
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                          borderRadius: '50%',
-                          border: `2px solid ${guildColor}`,
-                        }}
-                      ></div>
-                    </Link>
-                  </div>
-                )}
+                <div className='mr-2 mt-2 size-8 rounded-full bg-pink-300'>
+                  <Link href='/my-profile' onClick={closeMenu} className='size-8 rounded-full'>
+                    <Image
+                      src={user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'}
+                      className='rounded-full'
+                      width={40}
+                      height={40}
+                      alt='User Profile Image'
+                      unoptimized
+                    />
+                  </Link>
+                </div>
                 <div className='flex'>
                   <Link
                     href='/'
