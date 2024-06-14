@@ -33,8 +33,6 @@ export default function InputFormForExperience({
   useEffect(() => {
     const updateImage = () => {
       handleImgUpdate(imageUrls[imageUrls.length - 1])
-
-      toast.error('cannot update projPic')
     }
     if (imageUrls.length !== 0) {
       updateImage()
@@ -53,7 +51,7 @@ export default function InputFormForExperience({
       })
       toast.success('Project pic updated successfully!')
     } catch (error) {
-      toast.error('Error updating profile pic and bio!')
+      toast.error('Error updating project pic')
     }
   }
 
