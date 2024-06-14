@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 export async function POST(request) {
   try {
     const data = await request.json()
-    const { gg_id, type, name, description, tools, project_skills } = data
+    const { gg_id, type, name, description, tools, project_skills, project_picture, link } = data
 
     // Check if the user exists
     const existingUser = await prisma.users.findUnique({
@@ -18,6 +18,10 @@ export async function POST(request) {
       return NextResponse.error('User not found', 404)
     }
 
+    const newImageUrls = [project_picture ? project_picture : '']
+
+    const filteredImageUrls = newImageUrls.filter((element) => element !== '')
+
     // Create new experience with skills
     const newExperience = await prisma.experience.create({
       data: {
@@ -27,6 +31,8 @@ export async function POST(request) {
         description,
         tools,
         project_skills,
+        project_pictures: filteredImageUrls,
+        link,
       },
     })
 

@@ -13,15 +13,29 @@ import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { IoHome } from 'react-icons/io5'
 import InputFormForExperience from './Forms/InputFormForExperience'
+import Image from 'next/image'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
 
 export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const router = useRouter()
   const [projects, setProjects] = useState([
-    { experience_id: '', type: '', name: '', description: '', tools: [], project_skills: [] },
+    {
+      experience_id: '',
+      type: '',
+      name: '',
+      description: '',
+      tools: [],
+      project_skills: [],
+      project_pictures: [],
+      link: '',
+    },
   ])
+  const [imageUrls, setImageUrls] = useState([])
   const formRefs = useRef([])
   // fetch experience data
+
   useEffect(() => {
     const fetchExpData = () => {
       try {
@@ -48,6 +62,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       description: projects[index].description,
       tools: projects[index].tools,
       project_skills: projects[index].project_skills,
+      project_picture: imageUrls.length !== 0 ? imageUrls[imageUrls.length - 1] : '',
+      link: projects[index].link,
     }
     try {
       await axios({
@@ -70,6 +86,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       description: projects[index].description,
       tools: projects[index].tools,
       project_skills: projects[index].project_skills,
+      link: projects[index].link,
     }
     try {
       await axios({
@@ -91,7 +108,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       })
       toast.success('Deleted Sucessfully')
     } catch (error) {
-      toast.error('Deletion Failed')
+      // toast.error('Deletion Failed') ---> to be fixed
+      //
     }
   }
   const handleProjectNameChange = (index, newName) => {
@@ -100,6 +118,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       updatedProjects[index].name = newName
       return updatedProjects
     })
+  }
+  const handleImageUrlsChange = (newUrls) => {
+    setImageUrls(newUrls)
   }
   const handleProjectTypeChange = (index, newType) => {
     setProjects((prevProjects) => {
@@ -118,7 +139,16 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
   const handleAddProject = () => {
     setProjects((prevProjects) => [
       ...prevProjects,
-      { experience_id: '', type: '', name: 'Project Name', description: '', project_skills: [], tools: [] },
+      {
+        experience_id: '',
+        type: '',
+        name: 'Project Name',
+        description: '',
+        project_skills: [],
+        project_pictures: [],
+        tools: [],
+        link: '',
+      },
     ])
   }
   const handleDeleteProject = (index, experience_id) => {
@@ -138,10 +168,26 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       return updatedProjects
     })
   }
+
+  const handleProjectPictureChange = (index, newProjectPicture) => {
+    setProjects((prevProjects) => {
+      const updatedProjects = [...prevProjects]
+      updatedProjects[index].project_pictures = newProjectPicture
+      return updatedProjects
+    })
+  }
+
   const handleToolsChange = (index, newTools) => {
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects]
       updatedProjects[index].tools = newTools
+      return updatedProjects
+    })
+  }
+  const handleProjectLinkChange = (index, newLink) => {
+    setProjects((prevProjects) => {
+      const updatedProjects = [...prevProjects]
+      updatedProjects[index].link = newLink
       return updatedProjects
     })
   }
@@ -205,6 +251,16 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                         />
                       )}
                     </div>
+                    <Image
+                      src={
+                        project.project_pictures ? project.project_pictures[project.project_pictures.length - 1] : ''
+                      }
+                      alt='projPic'
+                      height={170}
+                      width={500}
+                      unoptimized
+                      className='rounded'
+                    />
                     <div className='mt-1 flex justify-center'>
                       <a
                         // href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
@@ -227,12 +283,15 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                       className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
                     >
                       <InputFormForExperience
+                        exp_id={project.experience_id}
                         project={project}
                         handleProjectTypeChange={handleProjectTypeChange}
                         handleProjectNameChange={handleProjectNameChange}
                         handleProjectDescriptionChange={handleProjectDescriptionChange}
                         handleSkillsChange={handleSkillsChange}
                         handleToolsChange={handleToolsChange}
+                        handleProjectLinkChange={handleProjectLinkChange}
+                        handleImageUrlsChange={handleImageUrlsChange}
                         index={index}
                       />
                       {/* Next */}
