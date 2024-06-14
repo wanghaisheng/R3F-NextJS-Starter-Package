@@ -108,7 +108,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       })
       toast.success('Deleted Sucessfully')
     } catch (error) {
-      toast.error('Deletion Failed')
+      // toast.error('Deletion Failed') ---> to be fixed
+      //
     }
   }
   const handleProjectNameChange = (index, newName) => {
