@@ -85,7 +85,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                <div className='mr-2 mt-2 size-8 rounded-full bg-pink-300'>
+                <div className='mr-2'>
                   <Link href='/my-profile' onClick={closeMenu} className='size-8 rounded-full'>
                     <Image
                       src={user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'}
