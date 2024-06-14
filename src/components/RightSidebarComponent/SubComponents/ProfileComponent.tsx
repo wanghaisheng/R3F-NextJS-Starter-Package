@@ -35,8 +35,6 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const [imageUrls, setImageUrls] = useState([])
   const [files, setFiles] = useState([])
 
-  let profileImage = imageUrls.length !== 0 ? imageUrls[imageUrls.length - 1] : ''
-
   const handleChangeEvent = (items) => {
     const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
     setFiles(successfulFiles)
@@ -100,7 +98,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <div className='h-[170px] w-full rounded'>
             <Image
               src={
-                profileImage !== '' ? profileImage : user.image_urls ? user.image_urls[user.image_urls.length - 1] : ''
+                imageUrls.length !== 0
+                  ? imageUrls[imageUrls.length - 1]
+                  : user.image_urls
+                    ? user.image_urls[user.image_urls.length - 1]
+                    : ''
               }
               alt='porfilepic'
               height={170}
