@@ -74,7 +74,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
               <AiFillDribbbleCircle />
             )}
             <Image
-              src='/logos/lgo.png'
+              src={user ? user.image_urls[user.image_urls.length - 1] : '/logos/lgo.png'}
               className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
               height={60}
               width={60}

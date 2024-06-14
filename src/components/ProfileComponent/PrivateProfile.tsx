@@ -254,6 +254,7 @@ export default function PrivateProfile() {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
   return (
     <div className='relative mt-20 flex flex-col lg:size-full'>
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
@@ -518,6 +519,11 @@ export default function PrivateProfile() {
                                       projectName={exp.name}
                                       skills={exp.project_skills.join(', ')}
                                       toolsAndTech={exp.tools}
+                                      imageUrl={
+                                        exp.project_pictures
+                                          ? exp.project_pictures[exp.project_pictures.length - 1]
+                                          : '/card/abstract3.webp'
+                                      } // Get the last image in the array
                                     />
                                   </div>
                                   <div className='my-3 flex justify-center'>
