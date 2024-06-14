@@ -6,12 +6,16 @@ const prisma = new PrismaClient()
 // Function to create a skill
 export async function POST(request) {
   try {
-    const { gg_id, skill } = await request.json()
+    const { gg_id, skill, certification } = await request.json()
+
+    const newImageUrls = [certification ? certification : '']
+    const filteredImageUrls = newImageUrls.filter((element) => element !== '')
 
     const newSkill = await prisma.skills.create({
       data: {
         gg_id,
         skill: [skill],
+        certifications: filteredImageUrls,
       },
     })
     return NextResponse.json(newSkill)
