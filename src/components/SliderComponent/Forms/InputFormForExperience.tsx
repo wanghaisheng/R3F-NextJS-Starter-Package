@@ -16,29 +16,29 @@ export default function InputFormForExperience({
   handleSkillsChange,
   handleToolsChange,
   handleProjectLinkChange,
+  handleImageUrlsChange,
   index,
 }) {
   const [imageUrls, setImageUrls] = useState([])
   const handleChangeEvent = (items) => {
     const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
     const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
-    setImageUrls(imageUrls) // Update cdnUrls state
+    if (exp_id) {
+      setImageUrls(imageUrls) // Update cdnUrls state
+    } else {
+      handleImageUrlsChange(imageUrls)
+    }
   }
 
   useEffect(() => {
     const updateImage = () => {
-      if (exp_id) {
-        handleImgUpdate(imageUrls[imageUrls.length - 1])
-      }
+      handleImgUpdate(imageUrls[imageUrls.length - 1])
+
       toast.error('cannot update projPic')
     }
     if (imageUrls.length !== 0) {
       updateImage()
     }
-  }, [imageUrls])
-
-  useEffect(() => {
-    console.log(imageUrls[imageUrls.length - 1])
   }, [imageUrls])
 
   const handleImgUpdate = async (image_url) => {

@@ -32,6 +32,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       link: '',
     },
   ])
+  const [imageUrls, setImageUrls] = useState([])
   const formRefs = useRef([])
   // fetch experience data
 
@@ -61,6 +62,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       description: projects[index].description,
       tools: projects[index].tools,
       project_skills: projects[index].project_skills,
+      project_picture: imageUrls.length !== 0 ? imageUrls[imageUrls.length - 1] : '',
       link: projects[index].link,
     }
     try {
@@ -115,6 +117,9 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       updatedProjects[index].name = newName
       return updatedProjects
     })
+  }
+  const handleImageUrlsChange = (newUrls) => {
+    setImageUrls(newUrls)
   }
   const handleProjectTypeChange = (index, newType) => {
     setProjects((prevProjects) => {
@@ -285,6 +290,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                         handleSkillsChange={handleSkillsChange}
                         handleToolsChange={handleToolsChange}
                         handleProjectLinkChange={handleProjectLinkChange}
+                        handleImageUrlsChange={handleImageUrlsChange}
                         index={index}
                       />
                       {/* Next */}
