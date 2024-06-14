@@ -4,10 +4,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { TbSwipe } from 'react-icons/tb'
-import { AiFillAlipayCircle, AiFillCheckCircle, AiFillClockCircle, AiFillDribbbleCircle } from 'react-icons/ai'
+import Lottie from 'lottie-react'
 import Image from 'next/image'
 
-import Lottie from 'lottie-react'
 import SpringModal from '../FormModal/SpringModal'
 const Hud = () => {
   const [isOpen, setIsOpen] = useState(false)

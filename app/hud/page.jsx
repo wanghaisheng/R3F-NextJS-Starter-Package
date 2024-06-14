@@ -1,6 +1,6 @@
 import PrivateProfile from '@/components/ProfileComponent/PrivateProfile'
 
-export default function Hero() {
+export default function Hud() {
   return (
     <div>
       <PrivateProfile />

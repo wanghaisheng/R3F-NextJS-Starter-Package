@@ -143,7 +143,7 @@ export default function VideoHome() {
               <div className='flex justify-center'>
                 <Link
                   className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
-                  href='/hero'
+                  href='/hud'
                   aria-label='get started button'
                 >
                   Get Started
@@ -175,7 +175,7 @@ export default function VideoHome() {
             </p>
             <Link
               className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
-              href='/hero'
+              href='/hud'
               aria-label='get started button'
             >
               Get Started

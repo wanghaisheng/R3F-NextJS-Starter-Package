@@ -63,13 +63,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* Logo and Sign In/Sign Out */}
         <div className='absolute mx-auto flex h-20 w-full items-center justify-between px-4 py-2 '>
           {/* Logo */}
-          <Link href='/hero' className='flex items-center justify-center pl-4 '>
+          <Link href='/hud' className='flex items-center justify-center pl-4 '>
             {animations.length > 0 ? (
               <Lottie
                 animationData={animations[0]}
                 loop={true}
                 autoplay={true}
-                style={{ width: 80, height: 80, zIndex: 20 }}
+                style={{ width: 84, height: 84, zIndex: 20 }}
               />
             ) : (
               <AiFillDribbbleCircle />
@@ -158,13 +158,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     HOME
                   </Link>
                 )}
-                {pathname === '/hero' ? (
-                  <Link href='/hero' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                {pathname === '/hud' ? (
+                  <Link href='/hud' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HUD
                   </Link>
                 ) : (
                   <Link
-                    href='/hero'
+                    href='/hud'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     HUD
@@ -251,7 +251,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 </Link>
               </li>
               <li>
-                <Link href='/hero' className='hover:text-violet-400' onClick={closeMenu}>
+                <Link href='/hud' className='hover:text-violet-400' onClick={closeMenu}>
                   HUD
                 </Link>
               </li>

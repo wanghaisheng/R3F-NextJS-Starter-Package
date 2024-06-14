@@ -151,7 +151,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       ? form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
       : true)
     if (isSubmitted) {
-      router.push('/hero') // Use router.push to navigate
+      router.push('/hud') // Use router.push to navigate
     }
   }
   return (

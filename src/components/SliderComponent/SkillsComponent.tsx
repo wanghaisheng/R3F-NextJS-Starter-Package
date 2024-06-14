@@ -111,7 +111,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Generate Skills Successfully')
-      router.push('/hero')
+      router.push('/hud')
     } catch (error) {
       toast.error('Failed to generate skills')
     }
@@ -131,7 +131,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Skills updated')
-      router.push('/hero')
+      router.push('/hud')
     } catch (error) {
       toast.error('Failed to update skills')
     }

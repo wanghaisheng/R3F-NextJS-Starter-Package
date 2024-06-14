@@ -80,7 +80,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
                 />
               </div>
               <ErrorMessage name='email' component='p' className='-mt-3 text-xs text-red-500' />
-              <div className={`input-group m-2 flex w-full rounded-md border-2 border-violet-400`}>
+              <div className={`group m-2 flex w-full rounded-md border-2 border-violet-400`}>
                 <div className={`flex items-center justify-center px-1 text-2xl text-purple-600 dark:text-purple-200`}>
                   <RiLockPasswordLine />
                 </div>
