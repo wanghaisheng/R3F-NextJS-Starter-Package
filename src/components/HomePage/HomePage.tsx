@@ -1,15 +1,19 @@
 'use client'
 import { useState } from 'react'
 
-import GuildHeader from '../Guilds/GuildHeader'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
 export default function HomePage() {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
 
-  const [activeFilter, setActiveFilter] = useState('')
+  const [activeFilter, setActiveFilter] = useState('BUDDHA')
 
   const handleGuildChange = (guild_name: string) => {
     setCurrentGuild(guild_name.toLowerCase())
+    setActiveFilter(guild_name.toUpperCase())
   }
 
   return (
@@ -28,6 +32,7 @@ export default function HomePage() {
         )}
       </video>
 
+      {/* Nav */}
       <div className='absolute top-20 z-10 w-full'>
         <div className='absolute top-0 flex w-full justify-center gap-x-6 font-semibold'>
           <a
@@ -95,6 +100,8 @@ export default function HomePage() {
           </a>
         </div>
       </div>
+
+      {/* Carousel */}
     </div>
   )
 }
