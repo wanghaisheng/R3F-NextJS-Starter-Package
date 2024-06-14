@@ -213,7 +213,7 @@ export default function VideoHome() {
             >
               {guild.guild_name.toUpperCase()}
             </div>
-            <div className='absolute left-20 z-20 hidden h-full items-center justify-center lg:flex lg:flex-col'>
+            <div className='absolute left-36 z-20 hidden h-full items-center justify-center lg:flex lg:flex-col'>
               <div
                 className={`flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8  ${
                   guild.guild_name === 'VAJRA'
@@ -232,25 +232,30 @@ export default function VideoHome() {
                 ))}
               </div>
             </div>
-            <div className='absolute left-[20%] top-36 z-30'>
+            <div className='absolute top-36 z-30 mt-20 flex w-full flex-col justify-center lg:mt-0'>
               <div className='flex size-full justify-center'>
-                <p className={`text-3xl font-bold lg:text-4xl`}>{guild.description}</p>
+                <p className={`text-2xl font-bold lg:text-4xl`}>{guild.description}</p>
               </div>
-              <div className='mt-10 flex size-full flex-col items-start justify-center'>
+              <div className='mt-10 flex size-full w-full flex-col items-center justify-center'>
                 <h1 className='text-2xl font-bold'>Skills</h1>
                 <p className='text-lg font-semibold'>{guild.skills.join(', ')}</p>
               </div>
-              <div className='flex h-[400px] w-[550px] animate-pulse items-center justify-center rounded-xl bg-black/20'>
-                <p className='text-2xl font-semibold '>
-                  Genius Profiles <br /> Comming Soon!!!
-                </p>
+              <div className='flex w-full items-center justify-center'>
+                <div className='flex h-[400px] w-[550px] animate-pulse items-center justify-center rounded-xl bg-black/20'>
+                  <p className='text-2xl font-semibold '>
+                    Genius Profiles <br /> Comming Soon!!!
+                  </p>
+                </div>
               </div>
             </div>
             <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
               <source src={guild.guild_video} type='video/mp4' />
             </video>
-            <div className='absolute z-30 flex h-full items-end lg:right-20 lg:items-center'>
-              <Image src={guild.symbol} height={300} width={300} alt='guild symbol' />
+            <div className='absolute z-30 hidden h-full lg:right-20 lg:flex lg:items-center'>
+              <Image src={guild.symbol} height={250} width={250} alt='guild symbol' />
+            </div>
+            <div className='absolute bottom-0 z-30 flex justify-center lg:hidden'>
+              <Image src={guild.symbol} height={80} width={80} alt='guild symbol' />
             </div>
             <div className='absolute right-36 z-20 flex h-[700px] w-[1000px]'>
               {guild.guild_name === 'VAJRA' && (
@@ -272,15 +277,20 @@ export default function VideoHome() {
               GG ONE
             </div>
 
-            <div className='mt-10 flex w-full flex-col justify-start gap-y-2 text-xl font-semibold lg:text-3xl'>
-              <p>One ID for Genius Services</p>
-              <p>3d Body for Web 3 Family</p>
-              <p>Genius Membership for Health, Knowledge and Business</p>
-              <p>Expertise with experience</p>
-              <p>Bring Powerful Skill to Light</p>
-              <p>Slider Sub Tagling</p>
-              <p>Open Source</p>
-              <p className='mt-10 text-2xl font-bold lg:text-4xl'>Get Yours Now</p>
+            <div className='mt-10 flex w-full flex-col justify-center gap-y-2 text-xl font-semibold lg:justify-start lg:text-3xl'>
+              <div className='flex w-full flex-col items-center justify-center lg:items-start lg:justify-start'>
+                <p>One ID for Genius Services</p>
+                <p>3d Body for Web 3 Family</p>
+                <p>
+                  Genius Membership for <br />
+                  Health, Knowledge and Business
+                </p>
+                <p>Expertise with experience</p>
+                <p>Bring Powerful Skill to Light</p>
+                <p>Slider Sub Tagling</p>
+                <p>Open Source</p>
+                <p className='mt-10 text-2xl font-bold lg:text-4xl'>Get Yours Now</p>
+              </div>
             </div>
           </div>
 
@@ -288,8 +298,11 @@ export default function VideoHome() {
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src='/livewallpapers/forest.mp4' type='video/mp4' />
           </video>
-          <div className='absolute z-20 mt-5 flex h-full items-end lg:right-44 lg:items-center'>
+          <div className='absolute z-30 hidden h-full lg:right-20 lg:flex lg:items-center'>
             <Image src='/homepage/GGONE.png' height={300} width={300} alt='guild symbol' />
+          </div>
+          <div className='absolute bottom-0 z-30 flex justify-center lg:hidden'>
+            <Image src='/homepage/GGONE.png' height={80} width={80} alt='guild symbol' />
           </div>
         </SwiperSlide>
         <SwiperSlide className='bg-cover bg-center'>
