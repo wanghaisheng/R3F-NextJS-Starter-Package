@@ -29,7 +29,7 @@ const guildData = [
     color: 'white',
     element: 'Space',
     guild_video: '/livewallpapers/buddha.mp4',
-    description: 'Development, Engineering & ITAI Services',
+    description: 'Research, Development, Philosophy',
     skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
     alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
     additionalSkills: ['Innovation', 'data analysis', 'research'],
@@ -40,7 +40,7 @@ const guildData = [
     color: 'blue',
     element: 'Water',
     guild_video: '/livewallpapers/candles.mp4',
-    description: 'All Departments & ITAI Services',
+    description: 'Arts, Education , Law, Teaching',
     skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
     alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
     additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
@@ -51,7 +51,7 @@ const guildData = [
     color: 'green',
     element: 'Wind',
     guild_video: '/livewallpapers/karma.mp4',
-    description: 'Sales & Marketing',
+    description: 'IT, Engineering, Computer, Gamer',
     skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
     alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
     additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
@@ -62,7 +62,7 @@ const guildData = [
     color: 'yellow',
     element: 'Earth',
     guild_video: '/livewallpapers/earth.mp4',
-    description: 'Admin & Customer Support',
+    description: 'Management, Finance, Health',
     skills: ['Stability', 'reliability', 'patience', 'empathy'],
     alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
     additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
@@ -74,7 +74,7 @@ const guildData = [
     element: 'Fire',
     guild_video: '/livewallpapers/fire.mp4',
 
-    description: 'Design & Creative (Working Class)',
+    description: 'Marketing, Designer, Content Creator',
     skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
     alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
     additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
@@ -250,7 +250,7 @@ export default function VideoHome() {
               <source src={guild.guild_video} type='video/mp4' />
             </video>
             <div className='absolute z-30 flex h-full items-end lg:right-20 lg:items-center'>
-              <Image src={guild.symbol} height={495} width={495} alt='guild symbol' />
+              <Image src={guild.symbol} height={300} width={300} alt='guild symbol' />
             </div>
             <div className='absolute right-36 z-20 flex h-[700px] w-[1000px]'>
               {guild.guild_name === 'VAJRA' && (
@@ -273,13 +273,13 @@ export default function VideoHome() {
             </div>
 
             <div className='mt-10 flex w-full flex-col justify-start gap-y-2 text-xl font-semibold lg:text-3xl'>
-              <p>ONE Block ID for WEB 3</p>
-              <p>Block Chain Based Security</p>
-              <p>Avatar</p>
-              <p>Profile</p>
-              <p>Wallet</p>
+              <p>One ID for Genius Services</p>
+              <p>3d Body for Web 3 Family</p>
+              <p>Genius Membership for Health, Knowledge and Business</p>
+              <p>Expertise with experience</p>
+              <p>Bring Powerful Skill to Light</p>
+              <p>Slider Sub Tagling</p>
               <p>Open Source</p>
-              <p>Unified ID and Services</p>
               <p className='mt-10 text-2xl font-bold lg:text-4xl'>Get Yours Now</p>
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function VideoHome() {
             <source src='/livewallpapers/forest.mp4' type='video/mp4' />
           </video>
           <div className='absolute z-20 mt-5 flex h-full items-end lg:right-44 lg:items-center'>
-            <Image src='/homepage/GGONE.png' height={450} width={450} alt='guild symbol' />
+            <Image src='/homepage/GGONE.png' height={300} width={300} alt='guild symbol' />
           </div>
         </SwiperSlide>
         <SwiperSlide className='bg-cover bg-center'>
