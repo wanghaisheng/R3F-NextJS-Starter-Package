@@ -1,9 +1,13 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import { Pagination, Scrollbar } from 'swiper/modules'
 import Link from 'next/link'
+import Lottie from 'lottie-react'
 
 export default function ShowGuild({
   users,
@@ -24,6 +28,16 @@ export default function ShowGuild({
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
+  const [animations, setAnimations] = useState([])
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const sliderAnimation = await fetch('/lottieAnimation/globalUsers.json').then((response) => response.json())
+      setAnimations([sliderAnimation])
+    }
+
+    fetchAnimations()
+  }, [])
 
   return (
     <div className='h-[300px] w-full'>
@@ -74,7 +88,13 @@ export default function ShowGuild({
           ))}
         </Swiper>
       ) : (
-        <div className='flex size-full items-center justify-center text-white'>No users found.</div>
+        <div className='flex size-full items-center justify-center text-white'>
+          {animations.length > 0 ? (
+            <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 300, height: 300 }} />
+          ) : (
+            ''
+          )}
+        </div>
       )}
     </div>
   )
