@@ -55,10 +55,6 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     setDescription(newDescription)
   }
 
-  useEffect(() => {
-    console.log(imageUrls[imageUrls.length - 1])
-  }, [imageUrls])
-
   const handleImgUpdate = async (image_url) => {
     const submit = {
       image_url: image_url,

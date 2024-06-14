@@ -12,12 +12,15 @@ import { IoHome } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
 
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const router = useRouter()
   const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
 
+  // check if the skills exists before the form submission
   const checkExistingSkills = (skill, exp_skills) => {
     return exp_skills.some((expSkill) => expSkill.includes(skill))
   }
@@ -91,6 +94,16 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     }
   }, [user])
 
+  const [imageUrls, setImageUrls] = useState([])
+  const [files, setFiles] = useState([])
+
+  const handleChangeEvent = (items) => {
+    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
+    setFiles(successfulFiles)
+    const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
+    setImageUrls(imageUrls) // Update cdnUrls state
+  }
+
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
   }
@@ -103,6 +116,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         skill_name: skills[index].skill_name,
         percentage: skills[index].percentage,
       },
+      certification: imageUrls.length !== 0 ? imageUrls[imageUrls.length - 1] : '',
     }
     try {
       await axios({
@@ -253,11 +267,13 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                           <label className='text-purple-200' htmlFor='file_input'>
                             Certifications
                           </label>
-                          <input
-                            className='block w-full cursor-pointer rounded-lg border border-none bg-white/20 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none'
-                            id='file_input'
-                            type='file'
-                            aria-label='file input'
+                          <FileUploaderRegular
+                            onChange={handleChangeEvent}
+                            pubkey={'aff2bf9d09cde0f92516'}
+                            maxLocalFileSizeBytes={10000000}
+                            imgOnly={true}
+                            sourceList='local, url, camera'
+                            className='w-fit rounded-lg bg-black p-1'
                           />
                         </div>
                         {/* Go Home and Generate Button */}
