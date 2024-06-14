@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Lottie from 'lottie-react'
 
 export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -21,6 +22,18 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
     onFilterChange(filter)
     setActiveFilter(filter)
   }
+
+  const [animations, setAnimations] = useState([])
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation1 = await fetch('/lottieAnimation/earthGlobe.json').then((response) => response.json())
+      const animation2 = await fetch('/lottieAnimation/slider.json').then((response) => response.json())
+      setAnimations([animation1, animation2])
+    }
+
+    fetchAnimations()
+  }, [])
 
   return (
     <div className='relative'>
@@ -74,67 +87,95 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
       </div>
       {/* Sidebar */}
       <div className='fixed top-0 hidden items-center justify-start  font-semibold lg:flex'>
-        <ul className='flex h-[800px] w-[330px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40% text-white'>
+        <ul className='flex h-[800px] w-[330px] flex-col gap-y-2 bg-gradient-to-r from-black/80 text-white'>
           <li className='mt-[40%]'>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
             >
-              <Image src='/continents/na.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/na.png' height={20} width={20} alt='na' />
+              )}
               NORTH AMERICA
             </a>
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'SOUTH AMERICA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('SOUTH AMERICA')}
             >
-              <Image src='/continents/sa.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/sa.png' height={20} width={20} alt='sa' />
+              )}
               SOUTH AMERICA
             </a>
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'AFRICA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
-              <Image src='/continents/af.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/af.png' height={20} width={20} alt='af' />
+              )}
               AFRICA
             </a>
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'EUROPE' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
-              <Image src='/continents/eu.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/eu.png' height={20} width={20} alt='eu' />
+              )}
               EUROPE
             </a>
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'ASIA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
-              <Image src='/continents/eu.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/as.png' height={20} width={20} alt='as' />
+              )}
               ASIA
             </a>
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'AUSTRALIA & OCEANIA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
-              <Image src='/continents/oc.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/oc.png' height={20} width={20} alt='oc' />
+              )}
               AUSTRALIA & OCEANIA
             </a>
           </li>
           <li>
             <a
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'gap-x-12 bg-gradient-to-r from-purple-400/50 text-purple-400'}`}
+              className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'ANTARCTICA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('ANTARCTICA')}
             >
-              <Image src='/continents/na.png' height={20} width={20} alt='na' />
+              {animations.length > 0 ? (
+                <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
+              ) : (
+                <Image src='/continents/na.png' height={20} width={20} alt='an' />
+              )}
               ANTARCTICA
             </a>
           </li>
