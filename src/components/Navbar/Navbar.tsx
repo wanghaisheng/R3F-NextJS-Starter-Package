@@ -58,12 +58,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      <nav
-        className={`fixed top-0 z-50 mx-auto flex w-full items-center justify-between ${pathname === '/slider' && 'pt-10'} 
-`}
-      >
+      <nav className={`fixed top-0 z-50 mx-auto flex w-full items-center justify-between`}>
         {/* Logo and Sign In/Sign Out */}
-        <div className='absolute mx-auto flex h-20 w-full items-center justify-between px-4 py-2 '>
+        <div className='fixed inset-x-0 top-0 mx-auto flex h-20 w-full items-center justify-between px-4 py-2'>
           {/* Logo */}
           <Link href='/hud' className='flex items-center justify-center'>
             {animations.length > 0 ? (
@@ -98,7 +95,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                       <div
                         className='size-9 rounded-full'
                         style={{
-                          backgroundImage: 'url(/image.png)', // img url profile
+                          backgroundImage: 'url(/mnt/data/image.png)', // Updated img url
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
@@ -143,6 +140,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
             )}
           </div>
         </div>
+
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
