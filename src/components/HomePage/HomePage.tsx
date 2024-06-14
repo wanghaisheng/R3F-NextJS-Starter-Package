@@ -6,6 +6,8 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
+import { Pagination } from 'swiper/modules'
+
 export default function HomePage() {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
 
@@ -102,6 +104,27 @@ export default function HomePage() {
       </div>
 
       {/* Carousel */}
+      <div className='absolute top-32 z-10 flex w-full items-center justify-center'>
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className='h-[530px] w-[400px] animate-pulse rounded-lg bg-white/20 p-4'
+        >
+          <SwiperSlide className='bg-cover bg-center'>
+            <div>has</div>
+          </SwiperSlide>
+          <SwiperSlide className='bg-cover bg-center'>
+            <div>a</div>
+          </SwiperSlide>
+          <SwiperSlide className='bg-cover bg-center'>
+            <div>Hello</div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
   )
 }
