@@ -248,10 +248,15 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                           projectName={project.name}
                           skills={project.project_skills.join(', ')}
                           toolsAndTech={project.tools.join(', ')}
+                          imageUrl={
+                            project.project_pictures
+                              ? project.project_pictures[project.project_pictures.length - 1]
+                              : ''
+                          }
                         />
                       )}
                     </div>
-                    <Image
+                    {/* <Image
                       src={
                         project.project_pictures ? project.project_pictures[project.project_pictures.length - 1] : ''
                       }
@@ -260,7 +265,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                       width={500}
                       unoptimized
                       className='rounded'
-                    />
+                    /> */}
                     <div className='mt-1 flex justify-center'>
                       <a
                         // href='https://quickslot.kinde.com/auth/cx/_:nav&m:login&psid:75967cd63ea14e95aeffecd5c6e34633'
