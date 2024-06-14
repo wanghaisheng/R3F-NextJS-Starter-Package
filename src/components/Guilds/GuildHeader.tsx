@@ -3,10 +3,6 @@
 import { useEffect, useState } from 'react'
 
 import { MdClearAll } from 'react-icons/md'
-import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
-import { FaDiamond } from 'react-icons/fa6'
-import { BsOctagonFill } from 'react-icons/bs'
-import { MdHexagon } from 'react-icons/md'
 
 export default function GuildHeader({
   onFilterChange,
