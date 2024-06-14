@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react' // Import useState
+import toast from 'react-hot-toast'
 
 const { log } = console
 
@@ -48,6 +49,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
               if (token) {
                 Cookies.set('token', token)
                 updateUser(token)
+                toast.success('Sign in successful')
                 router.push('/navigateuser')
               }
             } catch (error) {

@@ -59,26 +59,26 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      <motion.nav className='container fixed top-0 z-50 mx-auto flex flex-col items-center justify-between rounded-2xl text-slate-50 '>
+      <nav className='fixed top-0 z-50 mx-auto flex w-full items-center justify-between'>
         {/* Logo and Sign In/Sign Out */}
-        <div className='container absolute mx-auto flex h-20 items-center justify-between px-4 py-2 '>
+        <div className='absolute mx-auto flex h-20 w-full items-center justify-between px-4 py-2 '>
           {/* Logo */}
           <Link href='/hero' className='flex items-center justify-center pl-4 '>
-            {/* {animations.length > 0 ? (
+            {animations.length > 0 ? (
               <Lottie
                 animationData={animations[0]}
                 loop={true}
                 autoplay={true}
-                style={{ width: 60, height: 60, zIndex: 20 }}
+                style={{ width: 80, height: 80, zIndex: 20 }}
               />
             ) : (
               <AiFillDribbbleCircle />
-            )} */}
+            )}
             <Image
               src='/logos/lgo.png'
               className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-              height={65}
-              width={65}
+              height={60}
+              width={60}
               alt='GG Logo'
             />
           </Link>
@@ -292,7 +292,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           </div>
         </div>
         {/* Hamburger */}
-      </motion.nav>
+      </nav>
     </>
   )
 }
