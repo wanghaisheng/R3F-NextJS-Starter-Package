@@ -112,16 +112,32 @@ export default function HomePage() {
             clickable: true,
           }}
           modules={[Pagination]}
-          className='h-[530px] w-[400px] animate-pulse rounded-lg bg-white/20 p-4'
+          className='h-[530px] w-[400px] animate-pulse rounded-lg bg-white/20'
         >
-          <SwiperSlide className='bg-cover bg-center'>
-            <div>has</div>
+          <SwiperSlide className=' bg-cover bg-center p-4'>
+            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
+              Comming Soon!!!
+            </div>
           </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center'>
-            <div>a</div>
+          <SwiperSlide className='bg-cover bg-center p-4'>
+            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
+              Comming Soon!!!
+            </div>
           </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center'>
-            <div>Hello</div>
+          <SwiperSlide className='bg-cover bg-center p-4'>
+            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
+              Comming Soon!!!
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className='bg-cover bg-center p-4'>
+            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
+              Comming Soon!!!
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className='bg-cover bg-center p-4'>
+            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
+              Comming Soon!!!
+            </div>
           </SwiperSlide>
         </Swiper>
       </div>
