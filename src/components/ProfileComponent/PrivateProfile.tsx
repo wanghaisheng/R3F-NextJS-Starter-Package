@@ -302,7 +302,7 @@ export default function PrivateProfile() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a
+                                <Link
                                   className='absolute -top-5 right-9 px-2 py-1 text-sm text-black dark:text-white'
                                   aria-label='edit button'
                                   href='/slider'
@@ -317,7 +317,7 @@ export default function PrivateProfile() {
                                   ) : (
                                     ''
                                   )}
-                                </a>
+                                </Link>
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
@@ -336,7 +336,7 @@ export default function PrivateProfile() {
                                 <div className='flex flex-col justify-center'>
                                   <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                     {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
-                                    <a
+                                    <Link
                                       className='absolute -top-4 right-7 px-2 py-1 text-sm text-black dark:text-white'
                                       aria-label='edit button'
                                       href='/slider'
@@ -351,7 +351,7 @@ export default function PrivateProfile() {
                                       ) : (
                                         ''
                                       )}
-                                    </a>
+                                    </Link>
                                   </div>
                                   <div className='flex justify-center'>
                                     <CardsFlipCard
@@ -485,7 +485,7 @@ export default function PrivateProfile() {
                   <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Experience
                     {user && (
-                      <a
+                      <Link
                         className='absolute -top-5 right-9 px-2 py-1 text-sm text-black dark:text-white'
                         aria-label='edit button'
                         href='/slider'
@@ -500,7 +500,7 @@ export default function PrivateProfile() {
                         ) : (
                           ''
                         )}
-                      </a>
+                      </Link>
                     )}
                   </div>
                   <div className='flex flex-col items-center justify-center'>
@@ -552,13 +552,14 @@ export default function PrivateProfile() {
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
                     {user && (
-                      <a
+                      <Link
                         // href={`http://localhost:3001//api/public/users/${user.gg_id}`}
                         // target='_blank'
+                        href='#'
                         aria-label='Booking button'
                       >
                         <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>
@@ -566,7 +567,7 @@ export default function PrivateProfile() {
                   <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Skills
                     {user && (
-                      <a
+                      <Link
                         className='absolute -top-5 right-12 px-2 py-1 text-sm text-black dark:text-white'
                         aria-label='edit button'
                         href='/slider'
@@ -581,7 +582,7 @@ export default function PrivateProfile() {
                         ) : (
                           ''
                         )}
-                      </a>
+                      </Link>
                     )}
                   </div>
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>

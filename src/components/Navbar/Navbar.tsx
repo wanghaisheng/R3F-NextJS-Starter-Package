@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { useUser } from '@/context/UserContext/UserContext'
 import { LuLogOut } from 'react-icons/lu'
 import Image from 'next/image'
@@ -59,11 +58,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      <nav className='fixed top-0 z-50 mx-auto flex w-full items-center justify-between'>
+      <nav
+        className={`fixed top-0 z-50 mx-auto flex w-full items-center justify-between ${pathname === '/slider' && 'pt-10'} 
+`}
+      >
         {/* Logo and Sign In/Sign Out */}
         <div className='absolute mx-auto flex h-20 w-full items-center justify-between px-4 py-2 '>
           {/* Logo */}
-          <Link href='/hud' className='flex items-center justify-center pl-4 '>
+          <Link href='/hud' className='flex items-center justify-center'>
             {animations.length > 0 ? (
               <Lottie
                 animationData={animations[0]}
@@ -143,7 +145,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         </div>
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
-          <div className='container mx-auto flex h-20 items-center justify-center px-4 py-2 '>
+          <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
               <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 {pathname === '/homepage' ? (

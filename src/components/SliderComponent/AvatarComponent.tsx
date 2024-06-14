@@ -19,6 +19,7 @@ async function getGuilds() {
     return res.data
   } catch (error) {
     toast.error('Failed to fetch guilds data')
+    return [] // Return an empty array in case of error
   }
 }
 
@@ -92,8 +93,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     },
   ])
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
-  const [selectedGuild, setSelectedGuild] = useState(guildData[0].guild_name)
-  const selectedGuildData = guildData.find((guild) => guild.guild_name === selectedGuild)
+  const [selectedGuild, setSelectedGuild] = useState(guildData ? guildData[0].guild_name : 'BUDDHA') // Default selected guild is 'BUDDHA'
+  const selectedGuildData = guildData ? guildData.find((guild) => guild.guild_name === selectedGuild) : null
   const [modelSrc, setModelSrc] = useState<string | null>(null)
 
   //GuildsData
@@ -109,7 +110,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     fetchGuildData()
   }, [])
 
-  // for displaying users guild
+  // For displaying user's guild
   useEffect(() => {
     const setUserGuild = async () => {
       const guild = guildData.find((guild) => guild.id === user.guild_id)
@@ -117,7 +118,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         setSelectedGuild(guild.guild_name)
       }
     }
-    if (user && guildData[0].id) {
+    if (user && guildData.length > 0) {
       setUserGuild()
     }
   }, [user, guildData])
@@ -226,7 +227,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       <Image src='/guildlogo.svg' height={130} width={130} alt='guild logo' />
                     </label>
                     <div className='relative my-4 flex items-center justify-center gap-4 lg:my-0 lg:flex-col lg:gap-y-1 '>
-                      {guildData.map((guild, index) => (
+                      {guildData?.map((guild, index) => (
                         <div key={index} className='group lg:relative'>
                           <label htmlFor={guild.guild_name} className='cursor-pointer'>
                             <p
