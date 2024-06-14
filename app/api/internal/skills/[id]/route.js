@@ -25,13 +25,21 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { gg_id, skill } = await request.json()
+    const { gg_id, skill, certification } = await request.json()
     const id = params.id
+
+    const existingSkill = await prisma.skills.findUnique({
+      where: { skill_id: id },
+    })
+
+    const newImageUrls = [...existingSkill.certifications, certification ? certification : '']
+
+    const filteredImageUrls = newImageUrls.filter((element) => element !== '')
 
     // Update the skill
     const updatedSkill = await prisma.skills.update({
       where: { skill_id: id },
-      data: { gg_id, skill: [skill] },
+      data: { gg_id, skill: [skill], certifications: filteredImageUrls },
     })
 
     return NextResponse.json(updatedSkill)

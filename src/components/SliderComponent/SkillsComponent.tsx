@@ -14,11 +14,14 @@ import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
+import Image from 'next/image'
 
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const router = useRouter()
-  const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
+  const [skills, setSkills] = useState([
+    { gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0, certifications: [] },
+  ])
 
   // check if the skills exists before the form submission
   const checkExistingSkills = (skill, exp_skills) => {
@@ -40,6 +43,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 skill_id: skillObj.skill_id,
                 skill_name: skillObj.skill[0].skill_name,
                 percentage: skillObj.skill[0].percentage,
+                certifications: skillObj.certifications,
               }),
             )
             // Iterate over each skill element in skillObj.skill array
@@ -94,15 +98,54 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     }
   }, [user])
 
-  const [imageUrls, setImageUrls] = useState([])
+  // for file upload handle and upadate------------
+  const [imageUrlsSubmit, setImageUrlsSubmit] = useState([])
+  const [imageUrlsUpdate, setImageUrlsUpdate] = useState([])
   const [files, setFiles] = useState([])
+  const [skillIndex, setSKillIndex] = useState('')
 
-  const handleChangeEvent = (items) => {
+  const handleChangeEvent = (index) => (items) => {
     const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
     setFiles(successfulFiles)
     const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
-    setImageUrls(imageUrls) // Update cdnUrls state
+    if (skills[index].skill_id !== '') {
+      setSKillIndex(index)
+      setImageUrlsUpdate(imageUrls)
+    }
+    setImageUrlsSubmit(imageUrls) // Update cdnUrls state
   }
+
+  // state change handle for image upload
+  useEffect(() => {
+    const saveImage = () => {
+      handleImgUpdate(skillIndex, imageUrlsUpdate[imageUrlsUpdate.length - 1])
+    }
+    if (skillIndex && imageUrlsUpdate.length !== 0) {
+      saveImage()
+    }
+  }, [skillIndex, imageUrlsUpdate])
+  // state change handle for image upload
+
+  const handleImgUpdate = async (index, image_url) => {
+    const submit = {
+      skill: {
+        skill_name: skills[index].skill_name,
+        percentage: skills[index].percentage,
+      },
+      certification: image_url,
+    }
+    try {
+      await axios({
+        url: `/api/internal/skills/${skills[index].skill_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Profile pic updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic!')
+    }
+  }
+  // for file upload handle and upadate---------------
 
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
@@ -116,7 +159,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         skill_name: skills[index].skill_name,
         percentage: skills[index].percentage,
       },
-      certification: imageUrls.length !== 0 ? imageUrls[imageUrls.length - 1] : '',
+      certification:
+        imageUrlsSubmit.length !== 0
+          ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
+          : skills[index].certifications.length !== 0
+            ? skills[index].certifications
+            : '',
     }
     try {
       await axios({
@@ -176,7 +224,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     })
   }
   const handleAddSkill = () => {
-    setSkills((prevSkills) => [...prevSkills, { gg_id: '', skill_id: '', skill_name: 'skill', percentage: 0 }])
+    setSkills((prevSkills) => [
+      ...prevSkills,
+      { gg_id: '', skill_id: '', skill_name: 'skill', percentage: 0, certifications: [] },
+    ])
   }
   const handleDeleteSkill = (index) => {
     setSkills((prevSkills) => {
@@ -268,12 +319,28 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                             Certifications
                           </label>
                           <FileUploaderRegular
-                            onChange={handleChangeEvent}
+                            onChange={handleChangeEvent(index)}
                             pubkey={'aff2bf9d09cde0f92516'}
                             maxLocalFileSizeBytes={10000000}
                             imgOnly={true}
                             sourceList='local, url, camera'
                             className='w-fit rounded-lg bg-black p-1'
+                          />
+                          <Image
+                            src={
+                              imageUrlsSubmit.length !== 0
+                                ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
+                                : imageUrlsUpdate.length !== 0
+                                  ? imageUrlsUpdate[imageUrlsUpdate.length - 1]
+                                  : skills[index].certifications.length !== 0
+                                    ? skills[index].certifications[skills[index].certifications.length - 1]
+                                    : ''
+                            }
+                            alt='porfilepic'
+                            height={170}
+                            width={500}
+                            unoptimized
+                            className='rounded'
                           />
                         </div>
                         {/* Go Home and Generate Button */}
