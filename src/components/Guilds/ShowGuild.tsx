@@ -28,12 +28,24 @@ export default function ShowGuild({
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
-  const [animations, setAnimations] = useState([])
+  const [animateUsers, setAnimateUsers] = useState([])
+  const [animateLoadUsers, setAnimateLoadUsers] = useState([])
 
+  // for replacing no users found
   useEffect(() => {
     const fetchAnimations = async () => {
-      const sliderAnimation = await fetch('/lottieAnimation/globalUsers.json').then((response) => response.json())
-      setAnimations([sliderAnimation])
+      const animation = await fetch('/lottieAnimation/globalUsers.json').then((response) => response.json())
+      setAnimateUsers([animation])
+    }
+
+    fetchAnimations()
+  }, [])
+
+  // for replacing the all user display button
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
+      setAnimateLoadUsers([animation])
     }
 
     fetchAnimations()
@@ -89,8 +101,8 @@ export default function ShowGuild({
         </Swiper>
       ) : (
         <div className='flex size-full items-center justify-center text-white'>
-          {animations.length > 0 ? (
-            <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 300, height: 300 }} />
+          {animateUsers.length > 0 ? (
+            <Lottie animationData={animateUsers[0]} loop={true} autoplay={true} style={{ width: 300, height: 300 }} />
           ) : (
             ''
           )}

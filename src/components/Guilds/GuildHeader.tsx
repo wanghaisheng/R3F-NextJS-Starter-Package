@@ -7,6 +7,7 @@ import { IoTriangleSharp, IoCubeSharp } from 'react-icons/io5'
 import { FaDiamond } from 'react-icons/fa6'
 import { BsOctagonFill } from 'react-icons/bs'
 import { MdHexagon } from 'react-icons/md'
+import Lottie from 'lottie-react'
 
 export default function GuildHeader({
   onFilterChange,
@@ -34,6 +35,17 @@ export default function GuildHeader({
     onFilterChange(filter)
     setActiveFilter(filter)
   }
+  const [animateLoadUsers, setAnimateLoadUsers] = useState([])
+
+  // for replacing the all user display button
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
+      setAnimateLoadUsers([animation])
+    }
+
+    fetchAnimations()
+  }, [])
 
   return (
     <div className='relative'>
@@ -75,8 +87,18 @@ export default function GuildHeader({
               className='flex w-full cursor-pointer items-center text-3xl hover:text-purple-400'
               onClick={() => handleFilterClick(null)}
             >
-              <p className='mr-1 text-sm'>ALL</p>
-              <MdClearAll />
+              <p className='mr-1 text-sm'>
+                {animateLoadUsers.length > 0 ? (
+                  <Lottie
+                    animationData={animateLoadUsers[0]}
+                    loop={true}
+                    autoplay={true}
+                    style={{ width: 30, height: 30 }}
+                  />
+                ) : (
+                  ''
+                )}
+              </p>
             </div>
           </div>
         </div>
