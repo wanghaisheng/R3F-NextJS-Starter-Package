@@ -175,7 +175,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
-            AVATAR & GUILDS
+            PERSONA
           </div>
 
           <div className='mt-5 rounded-[20px] '>

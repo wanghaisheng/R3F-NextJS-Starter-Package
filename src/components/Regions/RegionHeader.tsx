@@ -96,7 +96,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/na.png' height={20} width={20} alt='na' />
+                <Image src='/continents/na.png' height={20} width={20} alt='na' className='m-5' />
               )}
               NORTH AMERICA
             </a>
@@ -109,7 +109,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/sa.png' height={20} width={20} alt='sa' />
+                <Image src='/continents/sa.png' height={20} width={20} alt='sa' className='m-5' />
               )}
               SOUTH AMERICA
             </a>
@@ -122,7 +122,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/af.png' height={20} width={20} alt='af' />
+                <Image src='/continents/af.png' height={20} width={20} alt='af' className='m-5' />
               )}
               AFRICA
             </a>
@@ -135,7 +135,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/eu.png' height={20} width={20} alt='eu' />
+                <Image src='/continents/eu.png' height={20} width={20} alt='eu' className='m-5' />
               )}
               EUROPE
             </a>
@@ -148,7 +148,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/as.png' height={20} width={20} alt='as' />
+                <Image src='/continents/eu.png' height={20} width={20} alt='as' className='m-5' />
               )}
               ASIA
             </a>
@@ -161,7 +161,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/oc.png' height={20} width={20} alt='oc' />
+                <Image src='/continents/oc.png' height={20} width={20} alt='oc' className='m-5' />
               )}
               AUSTRALIA & OCEANIA
             </a>
@@ -174,7 +174,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               {animations.length > 0 ? (
                 <Lottie animationData={animations[0]} loop={true} autoplay={true} style={{ width: 60, height: 60 }} />
               ) : (
-                <Image src='/continents/na.png' height={20} width={20} alt='an' />
+                <Image src='/continents/na.png' height={20} width={20} alt='an' className='m-5' />
               )}
               ANTARCTICA
             </a>
