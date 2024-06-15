@@ -27,6 +27,7 @@ export default function UserInfoShowcase({ user, skillsData }) {
                       </h1>
 
                       <p className='mt-2'>Bio: {user.description}</p>
+                      <p className='mt-2'>Age: {user.age}</p>
                     </div>
                   </div>
                 </div>

@@ -28,7 +28,7 @@ const NavigateUser = () => {
       if (!userInfoStatus) {
         router.push('/slider')
       } else {
-        router.push('/hero')
+        router.push('/hud')
       }
     }
 

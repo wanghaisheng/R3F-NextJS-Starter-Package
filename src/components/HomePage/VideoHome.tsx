@@ -29,7 +29,7 @@ const guildData = [
     color: 'white',
     element: 'Space',
     guild_video: '/livewallpapers/buddha.mp4',
-    description: 'Development, Engineering & ITAI Services',
+    description: 'Research, Development, Philosophy',
     skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
     alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
     additionalSkills: ['Innovation', 'data analysis', 'research'],
@@ -40,7 +40,7 @@ const guildData = [
     color: 'blue',
     element: 'Water',
     guild_video: '/livewallpapers/candles.mp4',
-    description: 'All Departments & ITAI Services',
+    description: 'Arts, Education , Law, Teaching',
     skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
     alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
     additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
@@ -51,7 +51,7 @@ const guildData = [
     color: 'green',
     element: 'Wind',
     guild_video: '/livewallpapers/karma.mp4',
-    description: 'Sales & Marketing',
+    description: 'IT, Engineering, Computer, Gamer',
     skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
     alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
     additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
@@ -62,7 +62,7 @@ const guildData = [
     color: 'yellow',
     element: 'Earth',
     guild_video: '/livewallpapers/earth.mp4',
-    description: 'Admin & Customer Support',
+    description: 'Management, Finance, Health',
     skills: ['Stability', 'reliability', 'patience', 'empathy'],
     alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
     additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
@@ -74,7 +74,7 @@ const guildData = [
     element: 'Fire',
     guild_video: '/livewallpapers/fire.mp4',
 
-    description: 'Design & Creative (Working Class)',
+    description: 'Marketing, Designer, Content Creator',
     skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
     alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
     additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
@@ -143,7 +143,7 @@ export default function VideoHome() {
               <div className='flex justify-center'>
                 <Link
                   className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
-                  href='/hero'
+                  href='/hud'
                   aria-label='get started button'
                 >
                   Get Started
@@ -175,7 +175,7 @@ export default function VideoHome() {
             </p>
             <Link
               className='relative mt-8 rounded-full bg-white px-6 py-2 text-sm font-medium text-black transition-transform duration-300 hover:scale-105 hover:bg-gray-200 '
-              href='/hero'
+              href='/hud'
               aria-label='get started button'
             >
               Get Started
@@ -213,7 +213,7 @@ export default function VideoHome() {
             >
               {guild.guild_name.toUpperCase()}
             </div>
-            <div className='absolute left-20 z-20 hidden h-full items-center justify-center lg:flex lg:flex-col'>
+            <div className='absolute left-36 z-20 hidden h-full items-center justify-center lg:flex lg:flex-col'>
               <div
                 className={`flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8  ${
                   guild.guild_name === 'VAJRA'
@@ -232,25 +232,30 @@ export default function VideoHome() {
                 ))}
               </div>
             </div>
-            <div className='absolute left-[20%] top-36 z-30'>
+            <div className='absolute top-36 z-30 mt-20 flex w-full flex-col justify-center lg:mt-0'>
               <div className='flex size-full justify-center'>
-                <p className={`text-3xl font-bold lg:text-4xl`}>{guild.description}</p>
+                <p className={`text-2xl font-bold lg:text-4xl`}>{guild.description}</p>
               </div>
-              <div className='mt-10 flex size-full flex-col items-start justify-center'>
+              <div className='mt-10 flex size-full w-full flex-col items-center justify-center'>
                 <h1 className='text-2xl font-bold'>Skills</h1>
                 <p className='text-lg font-semibold'>{guild.skills.join(', ')}</p>
               </div>
-              <div className='flex h-[400px] w-[550px] animate-pulse items-center justify-center rounded-xl bg-black/20'>
-                <p className='text-2xl font-semibold '>
-                  Genius Profiles <br /> Comming Soon!!!
-                </p>
+              <div className='flex w-full items-center justify-center'>
+                <div className='flex h-[400px] w-[550px] animate-pulse items-center justify-center rounded-xl bg-black/20'>
+                  <p className='text-2xl font-semibold '>
+                    Genius Profiles <br /> Comming Soon!!!
+                  </p>
+                </div>
               </div>
             </div>
             <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
               <source src={guild.guild_video} type='video/mp4' />
             </video>
-            <div className='absolute z-30 flex h-full items-end lg:right-20 lg:items-center'>
-              <Image src={guild.symbol} height={495} width={495} alt='guild symbol' />
+            <div className='absolute z-30 hidden h-full lg:right-20 lg:flex lg:items-center'>
+              <Image src={guild.symbol} height={250} width={250} alt='guild symbol' />
+            </div>
+            <div className='absolute bottom-0 z-30 flex justify-center lg:hidden'>
+              <Image src={guild.symbol} height={80} width={80} alt='guild symbol' />
             </div>
             <div className='absolute right-36 z-20 flex h-[700px] w-[1000px]'>
               {guild.guild_name === 'VAJRA' && (
@@ -272,15 +277,20 @@ export default function VideoHome() {
               GG ONE
             </div>
 
-            <div className='mt-10 flex w-full flex-col justify-start gap-y-2 text-xl font-semibold lg:text-3xl'>
-              <p>ONE Block ID for WEB 3</p>
-              <p>Block Chain Based Security</p>
-              <p>Avatar</p>
-              <p>Profile</p>
-              <p>Wallet</p>
-              <p>Open Source</p>
-              <p>Unified ID and Services</p>
-              <p className='mt-10 text-2xl font-bold lg:text-4xl'>Get Yours Now</p>
+            <div className='mt-10 flex w-full flex-col justify-center gap-y-2 text-xl font-semibold lg:justify-start lg:text-3xl'>
+              <div className='flex w-full flex-col items-center justify-center lg:items-start lg:justify-start'>
+                <p>One ID for Genius Services</p>
+                <p>3d Body for Web 3 Family</p>
+                <p>
+                  Genius Membership for <br />
+                  Health, Knowledge and Business
+                </p>
+                <p>Expertise with experience</p>
+                <p>Bring Powerful Skill to Light</p>
+                <p>Slider Sub Tagling</p>
+                <p>Open Source</p>
+                <p className='mt-10 text-2xl font-bold lg:text-4xl'>Get Yours Now</p>
+              </div>
             </div>
           </div>
 
@@ -288,8 +298,11 @@ export default function VideoHome() {
           <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             <source src='/livewallpapers/forest.mp4' type='video/mp4' />
           </video>
-          <div className='absolute z-20 mt-5 flex h-full items-end lg:right-44 lg:items-center'>
-            <Image src='/homepage/GGONE.png' height={450} width={450} alt='guild symbol' />
+          <div className='absolute z-30 hidden h-full lg:right-20 lg:flex lg:items-center'>
+            <Image src='/homepage/GGONE.png' height={300} width={300} alt='guild symbol' />
+          </div>
+          <div className='absolute bottom-0 z-30 flex justify-center lg:hidden'>
+            <Image src='/homepage/GGONE.png' height={80} width={80} alt='guild symbol' />
           </div>
         </SwiperSlide>
         <SwiperSlide className='bg-cover bg-center'>

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { motion } from 'framer-motion'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import toast from 'react-hot-toast'
 
 const { log } = console
 
@@ -39,6 +40,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
             })
             log('Response:', data)
             if (data != null) {
+              toast.success('Sign up successful')
               changetoSignIn()
             }
           } catch (error) {

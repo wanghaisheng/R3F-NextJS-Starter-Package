@@ -1,23 +1,20 @@
 'use client'
-
-import { useRef, useState } from 'react'
+import React, { useRef, ReactNode } from 'react'
 import dynamic from 'next/dynamic'
-import StarsCanvas from '@/components/StarsCanvas/StarBackground'
 import Navbar from '@/components/Navbar/Navbar'
 import Hud from '@/components/Hud/Hud'
 import RightSidebar2 from '../RightSidebarComponent/RightSidebar2'
-
-import PurpleVoid from '@/components/PurpleVoid/PurpleVoid'
+import { SidebarProvider, useSidebar } from './SidebarProvider'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
-const Layout = ({ children }) => {
-  const ref = useRef()
+interface LayoutProps {
+  children: ReactNode
+}
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false) // for toggling the right sidebar
-
-  const [showSignUp, setShowSignUp] = useState(false) // for showing the signup component in the right sidebar
-  const [showSignIn, setShowSignIn] = useState(false) // for showing the signin component in the right sidebar
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  const { isSidebarOpen, setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
 
   return (
     <div
@@ -25,11 +22,11 @@ const Layout = ({ children }) => {
       className='bg-black'
       style={{
         position: 'relative',
-        width: ' 100%',
+        width: '100%',
         height: '100%',
         overflow: 'auto',
         touchAction: 'auto',
-        zIndex: '2',
+        zIndex: 2,
       }}
     >
       <Navbar
@@ -40,22 +37,7 @@ const Layout = ({ children }) => {
         showSignIn={showSignIn}
         showSignUp={showSignUp}
       />
-      {/* <StarsCanvas />
-      <PurpleVoid /> */}
       {children}
-      {/* <Scene
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          pointerEvents: 'none',
-        }}
-        eventSource={ref}
-        eventPrefix='client'
-      /> */}
-
       <div>
         <RightSidebar2
           isSidebarOpen={isSidebarOpen}
@@ -66,8 +48,7 @@ const Layout = ({ children }) => {
           showSignUp={showSignUp}
         />
       </div>
-
-      <div className='absolute bottom-0 w-full '>
+      <div className='absolute bottom-0 w-full'>
         <div className='flex justify-center'>
           <Hud />
         </div>
@@ -76,4 +57,10 @@ const Layout = ({ children }) => {
   )
 }
 
-export { Layout }
+const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => (
+  <SidebarProvider>
+    <Layout>{children}</Layout>
+  </SidebarProvider>
+)
+
+export { LayoutWithProvider as Layout }

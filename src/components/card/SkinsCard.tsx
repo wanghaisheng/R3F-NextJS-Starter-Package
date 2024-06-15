@@ -39,7 +39,7 @@ export default function SkinsCard() {
 
   return (
     <div className='flex justify-center'>
-      <div className='relative mt-[-50px] size-[300px] rounded-lg '>
+      <div className='relative mt-[-50px] h-[260px] w-[300px] rounded-lg '>
         <Swiper
           ref={swiperRef}
           effect={'cube'}
@@ -53,7 +53,7 @@ export default function SkinsCard() {
           pagination={{
             clickable: false,
           }}
-          navigation={true}
+          navigation={false}
           modules={[EffectCube, Navigation, Pagination]}
           className='absolute left-1/2 top-1/2 size-72 -translate-x-1/2 -translate-y-1/2 rounded-lg'
         >
@@ -82,7 +82,7 @@ export default function SkinsCard() {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className='absolute top-36 z-10  flex w-full justify-between pl-2 text-2xl'>
+        <div className='absolute top-[110px] z-10  flex w-full justify-between pl-2 text-2xl'>
           <button onClick={() => swiperRef.current.swiper.slidePrev()}>
             <MdNavigateBefore />
           </button>

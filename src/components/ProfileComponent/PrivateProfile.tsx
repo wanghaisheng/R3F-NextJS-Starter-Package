@@ -6,8 +6,6 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import SpringModal from '@/components/FormModal/SpringModal'
 
-//icons
-import { FaRegEdit } from 'react-icons/fa'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -24,6 +22,9 @@ import CardsFlipCard from '@/components/card/cardsFlipCard'
 import ExperienceFlipCard from '../card/experienceFlipCard'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
+import Lottie from 'lottie-react'
+
+import { useSidebar } from '@/components/dom/SidebarProvider'
 
 export default function PrivateProfile() {
   const { user } = useUser()
@@ -34,6 +35,18 @@ export default function PrivateProfile() {
   const [isOpen, setIsOpen] = useState(false)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const isScrollingRef = useRef(false)
+  const [animations, setAnimations] = useState([])
+
+  const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const sliderAnimation = await fetch('/lottieAnimation/slider.json').then((response) => response.json())
+      setAnimations([sliderAnimation])
+    }
+
+    fetchAnimations()
+  }, [])
 
   const handleChangeSlide = (index) => {
     if (emblaApi) emblaApi.scrollTo(index)
@@ -241,6 +254,7 @@ export default function PrivateProfile() {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
   return (
     <div className='relative mt-20 flex flex-col lg:size-full'>
       <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
@@ -287,22 +301,30 @@ export default function PrivateProfile() {
                         <div className='flex items-center'>
                           <div className='w-full shrink-0 grow md:min-w-0 '>
                             <div className='flex flex-col justify-center'>
-                              <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
+                              <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
+                                <Link
+                                  className='absolute -top-5 right-9 px-2 py-1 text-sm text-black dark:text-white'
                                   aria-label='edit button'
                                   href='/slider'
                                 >
-                                  <FaRegEdit />
-                                </a>
+                                  {animations.length > 0 ? (
+                                    <Lottie
+                                      animationData={animations[0]}
+                                      loop={true}
+                                      autoplay={true}
+                                      style={{ width: 50, height: 50 }}
+                                    />
+                                  ) : (
+                                    ''
+                                  )}
+                                </Link>
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
                                   first_name={user.first_name}
                                   last_name={user.last_name}
                                   email={user.email}
-                                  dob={user.dob}
                                   contact={user.phone_number}
                                   address={user.address}
                                 />
@@ -315,13 +337,22 @@ export default function PrivateProfile() {
                                 <div className='flex flex-col justify-center'>
                                   <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                     {card.type.charAt(0).toUpperCase() + card.type.slice(1)}
-                                    <a
-                                      className=' px-2 py-1 text-sm text-black dark:text-white'
+                                    <Link
+                                      className='absolute -top-4 right-7 px-2 py-1 text-sm text-black dark:text-white'
                                       aria-label='edit button'
                                       href='/slider'
                                     >
-                                      <FaRegEdit />
-                                    </a>
+                                      {animations.length > 0 ? (
+                                        <Lottie
+                                          animationData={animations[0]}
+                                          loop={true}
+                                          autoplay={true}
+                                          style={{ width: 50, height: 50 }}
+                                        />
+                                      ) : (
+                                        ''
+                                      )}
+                                    </Link>
                                   </div>
                                   <div className='flex justify-center'>
                                     <CardsFlipCard
@@ -341,31 +372,7 @@ export default function PrivateProfile() {
                             ))
                           ) : (
                             <div className='w-full shrink-0 grow lg:min-w-0 '>
-                              <div className='flex flex-col justify-center'>
-                                <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                                  CARD2
-                                  <a
-                                    className=' px-2 py-1 text-sm text-black dark:text-white'
-                                    aria-label='edit button'
-                                    href='/slider'
-                                  >
-                                    <FaRegEdit />
-                                  </a>
-                                </div>
-                                <div className='flex justify-center'>
-                                  <CardsFlipCard
-                                    type='DEFAULT'
-                                    name='DEFAULT'
-                                    dateIn='DEFAULT'
-                                    dateOut='DEFAULT'
-                                    description={undefined}
-                                    blood_group={undefined}
-                                    emergency_contact={undefined}
-                                    emergency_address={undefined}
-                                    emergency_details={undefined}
-                                  />
-                                </div>
-                              </div>
+                              <div className='flex flex-col justify-center'>SignUp to create a card</div>
                             </div>
                           )}
                         </div>
@@ -388,20 +395,12 @@ export default function PrivateProfile() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 Genius ID
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
                               </div>
                               <div className='flex justify-center'>
                                 <GeniusIDFlipCard
                                   first_name='DEFAULT'
                                   last_name='DEFAULT'
                                   email='DEFAULT@'
-                                  dob='DEFAULT'
                                   contact='DEFAULT'
                                   address='DEFAULT'
                                 />
@@ -412,13 +411,6 @@ export default function PrivateProfile() {
                             <div className='flex flex-col justify-center'>
                               <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                                 CARD2
-                                <a
-                                  className=' px-2 py-1 text-sm text-black dark:text-white'
-                                  aria-label='edit button'
-                                  href='/slider'
-                                >
-                                  <FaRegEdit />
-                                </a>
                               </div>
                               <div className='flex justify-center'>
                                 <CardsFlipCard
@@ -452,10 +444,14 @@ export default function PrivateProfile() {
                       <p className='mb-4 px-4 text-center'>Some premium features for paid users</p>
                       <div className='flex justify-center gap-x-2'>
                         <DrawOutlineButton onClick={() => setIsOpen(true)}>GG+</DrawOutlineButton>
-                        {user && (
+                        {user ? (
                           <Link href={`/public-profile/${user.username}`}>
                             <DrawOutlineButton>View Public Profile</DrawOutlineButton>
                           </Link>
+                        ) : (
+                          <DrawOutlineButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                            SignUp to Create your own Card
+                          </DrawOutlineButton>
                         )}
                       </div>
                     </div>
@@ -464,19 +460,18 @@ export default function PrivateProfile() {
                   </div>
                 </div>
                 <div className='mt-60 h-full lg:mr-20 lg:mt-0 lg:w-[30%] '>
-                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
-                    Avatar
-                    <a
-                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                      aria-label='edit button'
-                      href='/slider'
-                    >
-                      <FaRegEdit />
-                    </a>
-                  </div>
+                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>Avatar</div>
                   <div className='flex min-h-48 items-center justify-center px-4'>
                     <div className='mb-7 flex min-h-48 items-center justify-center gap-x-14 px-4 md:px-8 xl:px-10'>
-                      <AvatarImageComponent />
+                      {user ? (
+                        <AvatarImageComponent />
+                      ) : (
+                        <div className='-mt-8'>
+                          <DrawOutlineButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                            SignUp to view your own Avatars
+                          </DrawOutlineButton>
+                        </div>
+                      )}
                     </div>
                   </div>
                   {/* Skin Card Component */}
@@ -490,13 +485,24 @@ export default function PrivateProfile() {
                 <div className='h-full lg:ml-24 lg:w-[27%]'>
                   <div className='relative my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Experience
-                    <a
-                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                      aria-label='edit button'
-                      href='/slider'
-                    >
-                      <FaRegEdit />
-                    </a>
+                    {user && (
+                      <Link
+                        className='absolute -top-5 right-9 px-2 py-1 text-sm text-black dark:text-white'
+                        aria-label='edit button'
+                        href='/slider'
+                      >
+                        {animations.length > 0 ? (
+                          <Lottie
+                            animationData={animations[0]}
+                            loop={true}
+                            autoplay={true}
+                            style={{ width: 50, height: 50 }}
+                          />
+                        ) : (
+                          ''
+                        )}
+                      </Link>
+                    )}
                   </div>
                   <div className='flex flex-col items-center justify-center'>
                     {/* Carousel */}
@@ -513,6 +519,11 @@ export default function PrivateProfile() {
                                       projectName={exp.name}
                                       skills={exp.project_skills.join(', ')}
                                       toolsAndTech={exp.tools}
+                                      imageUrl={
+                                        exp.project_pictures
+                                          ? exp.project_pictures[exp.project_pictures.length - 1]
+                                          : '/card/abstract3.webp'
+                                      } // Get the last image in the array
                                     />
                                   </div>
                                   <div className='my-3 flex justify-center'>
@@ -537,40 +548,48 @@ export default function PrivateProfile() {
                       </>
                     ) : (
                       <div className='flex flex-col justify-center'>
-                        <p className='flex text-center'>
-                          Seems like you have not generated an Experience card Yet, you want to generate one?
-                        </p>
-                        <div className='mt-5 flex justify-center'>
-                          <Link href='slider' aria-label='slider link'>
-                            <DrawOutlineButton>EDIT</DrawOutlineButton>
-                          </Link>
-                        </div>
+                        <p className='my-20 flex text-center'>Seems like you have not signed in yet...</p>
+                        <DrawOutlineButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                          SignUp to Create your Experience
+                        </DrawOutlineButton>
                       </div>
                     )}
                   </div>
                   <div className='mt-4 flex justify-center'>
                     {/* https://r3-f-next-js-starter-package.vercel.app/ */}
                     {user && (
-                      <a
+                      <Link
                         // href={`http://localhost:3001//api/public/users/${user.gg_id}`}
                         // target='_blank'
+                        href='#'
                         aria-label='Booking button'
                       >
                         <DrawOutlineButton>Booking Comming Soon!!</DrawOutlineButton>
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>
                 <div className='mt-60 h-full lg:mr-24 lg:mt-0 lg:w-[30%] '>
-                  <div className='my-4 flex justify-center pl-5 text-xl font-semibold drop-shadow md:text-5xl'>
+                  <div className='my-4 flex justify-center text-xl font-semibold drop-shadow md:text-5xl'>
                     Skills
-                    <a
-                      className=' px-2 py-1 text-sm text-black dark:text-white'
-                      aria-label='edit button'
-                      href='/slider'
-                    >
-                      <FaRegEdit />
-                    </a>
+                    {user && (
+                      <Link
+                        className='absolute -top-5 right-12 px-2 py-1 text-sm text-black dark:text-white'
+                        aria-label='edit button'
+                        href='/slider'
+                      >
+                        {animations.length > 0 ? (
+                          <Lottie
+                            animationData={animations[0]}
+                            loop={true}
+                            autoplay={true}
+                            style={{ width: 50, height: 50 }}
+                          />
+                        ) : (
+                          ''
+                        )}
+                      </Link>
+                    )}
                   </div>
                   <CardContainer className='mt-10 py-0 hover:shadow-3xl dark:border-none dark:hover:border-none dark:hover:shadow-3xl'>
                     <CardBody className='group/card relative'>
@@ -579,7 +598,11 @@ export default function PrivateProfile() {
                           <SkillsChartComponent skills={skillsData} />
                         ) : (
                           // Render loading indicator or placeholder while data is being fetched
-                          <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
+                          <div className='rounded-lg border p-5'>
+                            <DrawOutlineButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                              SignUp to View your Skills
+                            </DrawOutlineButton>
+                          </div>
                         )}
                       </div>
                     </CardBody>

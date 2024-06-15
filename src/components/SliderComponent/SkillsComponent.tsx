@@ -12,12 +12,18 @@ import { IoHome } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
+import { FileUploaderRegular } from '@uploadcare/react-uploader'
+import '@uploadcare/react-uploader/core.css'
+import Image from 'next/image'
 
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
   const router = useRouter()
-  const [skills, setSkills] = useState([{ gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0 }])
+  const [skills, setSkills] = useState([
+    { gg_id: '', skill_id: '', skill_name: 'skill1', percentage: 0, certifications: [] },
+  ])
 
+  // check if the skills exists before the form submission
   const checkExistingSkills = (skill, exp_skills) => {
     return exp_skills.some((expSkill) => expSkill.includes(skill))
   }
@@ -37,6 +43,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                 skill_id: skillObj.skill_id,
                 skill_name: skillObj.skill[0].skill_name,
                 percentage: skillObj.skill[0].percentage,
+                certifications: skillObj.certifications,
               }),
             )
             // Iterate over each skill element in skillObj.skill array
@@ -91,6 +98,55 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     }
   }, [user])
 
+  // for file upload handle and upadate------------
+  const [imageUrlsSubmit, setImageUrlsSubmit] = useState([])
+  const [imageUrlsUpdate, setImageUrlsUpdate] = useState([])
+  const [files, setFiles] = useState([])
+  const [skillIndex, setSKillIndex] = useState('')
+
+  const handleChangeEvent = (index) => (items) => {
+    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
+    setFiles(successfulFiles)
+    const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
+    if (skills[index].skill_id !== '') {
+      setSKillIndex(index)
+      setImageUrlsUpdate(imageUrls)
+    }
+    setImageUrlsSubmit(imageUrls) // Update cdnUrls state
+  }
+
+  // state change handle for image upload
+  useEffect(() => {
+    const saveImage = () => {
+      handleImgUpdate(skillIndex, imageUrlsUpdate[imageUrlsUpdate.length - 1])
+    }
+    if (skillIndex && imageUrlsUpdate.length !== 0) {
+      saveImage()
+    }
+  }, [skillIndex, imageUrlsUpdate])
+  // state change handle for image upload
+
+  const handleImgUpdate = async (index, image_url) => {
+    const submit = {
+      skill: {
+        skill_name: skills[index].skill_name,
+        percentage: skills[index].percentage,
+      },
+      certification: image_url,
+    }
+    try {
+      await axios({
+        url: `/api/internal/skills/${skills[index].skill_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Profile pic updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic!')
+    }
+  }
+  // for file upload handle and upadate---------------
+
   const checkActiveSkills = (element) => {
     return element.gg_id === user.gg_id
   }
@@ -103,6 +159,12 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         skill_name: skills[index].skill_name,
         percentage: skills[index].percentage,
       },
+      certification:
+        imageUrlsSubmit.length !== 0
+          ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
+          : skills[index].certifications.length !== 0
+            ? skills[index].certifications
+            : '',
     }
     try {
       await axios({
@@ -111,7 +173,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Generate Skills Successfully')
-      router.push('/hero')
+      router.push('/hud')
     } catch (error) {
       toast.error('Failed to generate skills')
     }
@@ -131,7 +193,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         data: submit,
       })
       toast.success('Skills updated')
-      router.push('/hero')
+      router.push('/hud')
     } catch (error) {
       toast.error('Failed to update skills')
     }
@@ -162,7 +224,10 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     })
   }
   const handleAddSkill = () => {
-    setSkills((prevSkills) => [...prevSkills, { gg_id: '', skill_id: '', skill_name: 'skill', percentage: 0 }])
+    setSkills((prevSkills) => [
+      ...prevSkills,
+      { gg_id: '', skill_id: '', skill_name: 'skill', percentage: 0, certifications: [] },
+    ])
   }
   const handleDeleteSkill = (index) => {
     setSkills((prevSkills) => {
@@ -253,11 +318,29 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                           <label className='text-purple-200' htmlFor='file_input'>
                             Certifications
                           </label>
-                          <input
-                            className='block w-full cursor-pointer rounded-lg border border-none bg-white/20 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none'
-                            id='file_input'
-                            type='file'
-                            aria-label='file input'
+                          <FileUploaderRegular
+                            onChange={handleChangeEvent(index)}
+                            pubkey={'aff2bf9d09cde0f92516'}
+                            maxLocalFileSizeBytes={10000000}
+                            imgOnly={true}
+                            sourceList='local, url, camera'
+                            className='w-fit rounded-lg bg-black p-1'
+                          />
+                          <Image
+                            src={
+                              imageUrlsSubmit.length !== 0
+                                ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
+                                : imageUrlsUpdate.length !== 0
+                                  ? imageUrlsUpdate[imageUrlsUpdate.length - 1]
+                                  : skills[index].certifications.length !== 0
+                                    ? skills[index].certifications[skills[index].certifications.length - 1]
+                                    : ''
+                            }
+                            alt='porfilepic'
+                            height={170}
+                            width={500}
+                            unoptimized
+                            className='rounded'
                           />
                         </div>
                         {/* Go Home and Generate Button */}
