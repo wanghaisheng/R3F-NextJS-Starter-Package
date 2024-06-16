@@ -332,11 +332,13 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
                                 ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
                                 : imageUrlsUpdate.length !== 0
                                   ? imageUrlsUpdate[imageUrlsUpdate.length - 1]
-                                  : skills[index].certifications.length !== 0
+                                  : skills[index] &&
+                                      skills[index].certifications &&
+                                      skills[index].certifications.length !== 0
                                     ? skills[index].certifications[skills[index].certifications.length - 1]
                                     : ''
                             }
-                            alt='porfilepic'
+                            alt='profilepic'
                             height={170}
                             width={500}
                             unoptimized

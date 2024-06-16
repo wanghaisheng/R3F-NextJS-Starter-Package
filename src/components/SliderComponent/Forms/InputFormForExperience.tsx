@@ -152,6 +152,7 @@ export default function InputFormForExperience({
           maxLocalFileSizeBytes={10000000}
           imgOnly={true}
           sourceList='local, url, camera'
+          className='w-[70%] rounded-lg bg-white'
         />
       </div>
       <div className='flex flex-col lg:flex-row lg:justify-between'>

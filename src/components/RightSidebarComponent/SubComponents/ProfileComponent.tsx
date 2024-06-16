@@ -151,7 +151,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                 maxLocalFileSizeBytes={10000000}
                 imgOnly={true}
                 sourceList='local, url, camera'
-                className='w-fit rounded-lg bg-black p-1'
+                className='w-fit rounded-lg bg-white p-1'
               />
             </div>
             <div className='flex items-center  gap-x-2'>
