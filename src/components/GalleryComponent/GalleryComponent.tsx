@@ -8,6 +8,7 @@ import 'swiper/css'
 import 'swiper/css/effect-cards'
 
 import { EffectCards } from 'swiper/modules'
+import Image from 'next/image'
 
 const getUserByUsername = async (username) => {
   try {
@@ -82,54 +83,64 @@ export default function GalleryComponent({ username }) {
       {activeTab !== '' && (
         <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
           {activeTab === 'profilePics' ? (
-            <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
+            <div className='flex size-full flex-row overflow-hidden px-4'>
               {user && profilePics.length > 0 ? (
                 <Swiper
                   effect={'cards'}
                   grabCursor={true}
                   modules={[EffectCards]}
-                  className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+                  className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
                 >
                   {profilePics.map((profilePic, index) => (
                     <SwiperSlide key={index}>
-                      <div className='flex justify-center'>
-                        <img src={profilePic} alt='' />
+                      <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                        <Image
+                          src={profilePic}
+                          alt='profile pictures'
+                          height={150}
+                          width={250}
+                          unoptimized
+                          className='rounded-lg'
+                          objectFit='cover'
+                        />
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               ) : (
                 <div className='flex justify-center'>
-                  <a href='#' onClick={() => handleTabClick('')}>
-                    <button>Back</button>
-                  </a>
-                  <p>no profile pictures to show</p>
+                  <p>No profile pictures to show</p>
                 </div>
               )}
             </div>
           ) : activeTab === 'projPics' ? (
-            <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
+            <div className='flex size-full flex-row overflow-hidden px-4'>
               {user && projPics.length > 0 ? (
                 <Swiper
                   effect={'cards'}
                   grabCursor={true}
                   modules={[EffectCards]}
-                  className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+                  className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
                 >
                   {projPics.map((projPic, index) => (
                     <SwiperSlide key={index}>
-                      <div className='flex justify-center'>
-                        <img src={projPic} alt='' />
+                      <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                        <Image
+                          src={projPic}
+                          alt='project pictures'
+                          height={150}
+                          width={250}
+                          unoptimized
+                          className='rounded-lg'
+                          objectFit='cover'
+                        />
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               ) : (
                 <div className='flex justify-center'>
-                  <a href='#' onClick={() => handleTabClick('')}>
-                    <button>Back</button>
-                  </a>
-                  <p>no project pictures to show</p>
+                  <p>No projects to show</p>
                 </div>
               )}
             </div>
@@ -140,22 +151,27 @@ export default function GalleryComponent({ username }) {
                   effect={'cards'}
                   grabCursor={true}
                   modules={[EffectCards]}
-                  className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+                  className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
                 >
                   {certificates.map((cert, index) => (
                     <SwiperSlide key={index}>
-                      <div className='flex justify-center'>
-                        <img src={cert} alt='' />
+                      <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                        <Image
+                          src={cert}
+                          alt='Certificates pictures'
+                          height={150}
+                          width={250}
+                          unoptimized
+                          className='rounded-lg'
+                          objectFit='cover'
+                        />
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               ) : (
                 <div className='flex justify-center'>
-                  <a href='#' onClick={() => handleTabClick('')}>
-                    <button>Back</button>
-                  </a>
-                  <p>no project pictures to show</p>
+                  <p>No Certificates to show</p>
                 </div>
               )}
             </div>
@@ -165,16 +181,25 @@ export default function GalleryComponent({ username }) {
         </div>
       )}
 
-      <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
-        <a href='#' onClick={() => handleTabClick('profilePics')}>
-          <button>ProfilePics</button>
-        </a>
-        <a href='#' onClick={() => handleTabClick('projPics')}>
-          <button>ProjPics</button>
-        </a>
-        <a href='#' onClick={() => handleTabClick('certificates')}>
-          <button>Certificates</button>
-        </a>
+      <div className='absolute top-16 flex w-full cursor-pointer justify-center gap-x-3 overflow-y-auto pr-4'>
+        <div
+          onClick={() => handleTabClick('profilePics')}
+          className={`${activeTab === 'profilePics' ? 'font-bold text-purple-600' : 'text-white'} hover:text-violet-300`}
+        >
+          Profile
+        </div>
+        <div
+          onClick={() => handleTabClick('projPics')}
+          className={`${activeTab === 'projPics' ? 'font-bold text-purple-600' : 'text-white'} hover:text-violet-300`}
+        >
+          ProjPics
+        </div>
+        <div
+          onClick={() => handleTabClick('certificates')}
+          className={`${activeTab === 'certificates' ? 'font-bold text-purple-600' : 'text-white'} hover:text-violet-300`}
+        >
+          Certificates
+        </div>
       </div>
     </>
   )
