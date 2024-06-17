@@ -31,9 +31,11 @@ export default function GalleryComponent({ username }) {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserByUsername(username)
-      const profilePics = user.image_urls
       setUser(user)
-      setProfilePics(profilePics)
+      if (user.image_urls?.length > 0) {
+        const profilePics = user.image_urls
+        setProfilePics(profilePics)
+      }
     }
     getUser()
   }, [])
