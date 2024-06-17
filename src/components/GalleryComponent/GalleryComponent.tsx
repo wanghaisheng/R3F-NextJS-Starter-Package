@@ -26,12 +26,6 @@ export default function GalleryComponent({ username }) {
   const [profilePics, setProfilePics] = useState([])
   const [projPics, setProjPics] = useState([])
   const [certificates, setCertificates] = useState([])
-  const [activeTab, setActiveTab] = useState('') //active tab state
-
-  const handleTabClick = (tab: string) => {
-    //function to handle tab click
-    setActiveTab(tab)
-  }
 
   //get user
   useEffect(() => {
@@ -75,6 +69,13 @@ export default function GalleryComponent({ username }) {
       getCertificates()
     }
   }, [user])
+
+  const [activeTab, setActiveTab] = useState('') //active tab state
+
+  const handleTabClick = (tab: string) => {
+    //function to handle tab click
+    setActiveTab(tab)
+  }
 
   return (
     <>
