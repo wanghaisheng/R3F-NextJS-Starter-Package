@@ -8,10 +8,12 @@ import 'swiper/css/scrollbar'
 import Link from 'next/link'
 
 import { Pagination, Scrollbar } from 'swiper/modules'
+import Image from 'next/image'
 
 export default function HomePage({ users, guilds }) {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
-  const [activeFilter, setActiveFilter] = useState('BUDDHA')
+  const [activeFilter, setActiveFilter] = useState('')
+
   const handleGuildChange = (guild_name: string) => {
     setCurrentGuild(guild_name.toLowerCase())
     setActiveFilter(guild_name.toUpperCase())
@@ -118,7 +120,7 @@ export default function HomePage({ users, guilds }) {
         </div>
       </div>
 
-      {/* Carousel */}
+      {/* Mid */}
       <div className='absolute top-32 z-10 flex w-full items-center justify-center'>
         <div className='flex h-[530px] w-[480px] flex-wrap overflow-auto rounded-lg bg-white/20 pb-4 pt-2'>
           {filteredUsers.map(
@@ -126,46 +128,80 @@ export default function HomePage({ users, guilds }) {
               user,
               index, // Use filteredUsers here
             ) => (
-              <div key={index}>
+              <div className='group' key={index}>
                 <Link
                   href={`/public-profile/${user.username}`}
-                  className='relative ml-2 flex h-[200px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                  className='group relative ml-2 flex h-[200px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
                 >
                   <div
-                    className='absolute inset-0 rounded-lg'
+                    className='absolute inset-0 rounded-lg transition-all duration-500 ease-in-out hover:-translate-y-4 hover:scale-105'
                     style={{
                       background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user && user.avatar[0].avatar_url.replace('glb', 'png')})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
-                      filter: `drop-shadow( 0px 0px 3px rgba(${
-                        user.guild === 'PADMA'
-                          ? '255, 0, 0, 1'
-                          : user.guild === 'VAJRA'
-                            ? '0, 0, 255, 1'
-                            : user.guild === 'RATNA'
-                              ? '255, 255, 0, 1'
-                              : user.guild === 'KARMA'
-                                ? '0, 255, 0, 1'
-                                : '255, 255, 255, 1'
+                      filter: `drop-shadow(-1px -2px 4px rgba(${
+                        // Use your pre-defined color values based on the activeFilter
+                        guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'PADMA'
+                          ? '255, 0, 0, 0.5'
+                          : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'VAJRA'
+                            ? '0, 0, 255, 0.5'
+                            : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'RATNA'
+                              ? '255, 255, 0, 0.5'
+                              : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'KARMA'
+                                ? '0, 255, 0, 0.5'
+                                : '255, 255, 255, 0.5' // Default to white if no color found
                       }))`,
                     }}
                   ></div>
-                  <span
-                    className={`group absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
-                  >
+                  {/* <Image
+                    className='absolute top-0 w-[240px] rounded-t-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
+                    src={user && user.avatar[0].avatar_url.replace('glb', 'png')}
+                    alt=''
+                    width={240}
+                    height={280}
+                    style={{
+                      objectFit: 'cover',
+                      filter: `drop-shadow(-1px -2px 4px rgba(${
+                        // Use your pre-defined color values based on the activeFilter
+                        guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'PADMA'
+                          ? '255, 0, 0, 0.5'
+                          : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'VAJRA'
+                            ? '0, 0, 255, 0.5'
+                            : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'RATNA'
+                              ? '255, 255, 0, 0.5'
+                              : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'KARMA'
+                                ? '0, 255, 0, 0.5'
+                                : '255, 255, 255, 0.5' // Default to white if no color found
+                      }))`,
+                    }}
+                  /> */}
+                  <span className='absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 '>
                     <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
                       {user.username.toUpperCase()}
                     </h1>
                   </span>
-                  <div className='invisible group-hover:visible'>{user.description}</div>
                 </Link>
+                {/* Left */}
+                <div
+                  className='
+          invisible absolute left-16 top-[70px] z-20 h-[460px] w-[400px] -translate-y-8 items-start justify-start whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm text-indigo-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      '
+                >
+                  {user.description}
+                </div>
               </div>
             ),
           )}
         </div>
       </div>
 
-      <div className='absolute left-0 top-32 z-10 flex w-full items-start justify-center'>ajklhdnvl</div>
+      {/* Right */}
+      <div className='absolute right-16 top-[166px] z-10 flex h-[460px] w-[400px] items-start justify-start rounded-lg bg-pink-300/20 '>
+        ajklhdnvl
+      </div>
     </div>
   )
 }
