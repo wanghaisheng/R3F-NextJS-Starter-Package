@@ -29,23 +29,13 @@ export default function ShowGuild({
     )
   })
   const [animateUsers, setAnimateUsers] = useState([])
-  const [animateLoadUsers, setAnimateLoadUsers] = useState([])
 
   // for replacing no users found
   useEffect(() => {
     const fetchAnimations = async () => {
       const animation = await fetch('/lottieAnimation/globalUsers.json').then((response) => response.json())
-      setAnimateUsers([animation])
-    }
-
-    fetchAnimations()
-  }, [])
-
-  // for replacing the all user display button
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animation = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
-      setAnimateLoadUsers([animation])
+      const animation2 = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
+      setAnimateUsers([animation, animation2])
     }
 
     fetchAnimations()

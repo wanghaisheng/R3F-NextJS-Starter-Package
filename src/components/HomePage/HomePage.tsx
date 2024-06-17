@@ -1,14 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
-
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
 import Link from 'next/link'
-
-import { Pagination, Scrollbar } from 'swiper/modules'
-import Image from 'next/image'
+import Lottie from 'lottie-react'
 
 export default function HomePage({ users, guilds }) {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
@@ -19,8 +12,16 @@ export default function HomePage({ users, guilds }) {
     setActiveFilter(guild_name.toUpperCase())
   }
 
-  console.log('users', users)
-  console.log('guilds', guilds)
+  const [animateUsers, setAnimateUsers] = useState([])
+  // for replacing the all user display button
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
+      setAnimateUsers([animation])
+    }
+
+    fetchAnimations()
+  }, [])
 
   // Filter users based on active guild
   const filteredUsers =
@@ -52,7 +53,11 @@ export default function HomePage({ users, guilds }) {
             className={`cursor-pointer transition duration-300 ease-out ${activeFilter === '' ? 'rotate-180 scale-125' : 'scale-100'}`}
             onClick={() => handleGuildChange('')}
           >
-            All
+            {animateUsers.length > 0 ? (
+              <Lottie animationData={animateUsers[0]} loop={true} autoplay={true} style={{ width: 22, height: 22 }} />
+            ) : (
+              'ALL'
+            )}
           </a>
           <a
             href='#'
