@@ -89,7 +89,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                   setShowSignUp={setShowSignUp}
                   showSignIn={showSignIn}
                   setShowSignIn={setShowSignIn}
-                  toggleSidebar={toggleSidebar}
+                  setActiveTab={setActiveTab}
                 />
               )}
               {activeTab === 'wallet' && <WalletComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />}
