@@ -99,7 +99,12 @@ export default function GalleryComponent({ username }) {
                   ))}
                 </Swiper>
               ) : (
-                <div className='flex justify-center'>no profile pictures to show</div>
+                <div className='flex justify-center'>
+                  <a href='#' onClick={() => handleTabClick('')}>
+                    <button>Back</button>
+                  </a>
+                  <p>no profile pictures to show</p>
+                </div>
               )}
             </div>
           ) : activeTab === 'projPics' ? (
@@ -120,7 +125,12 @@ export default function GalleryComponent({ username }) {
                   ))}
                 </Swiper>
               ) : (
-                <div className='flex justify-center'>no project pictures to show</div>
+                <div className='flex justify-center'>
+                  <a href='#' onClick={() => handleTabClick('')}>
+                    <button>Back</button>
+                  </a>
+                  <p>no project pictures to show</p>
+                </div>
               )}
             </div>
           ) : activeTab === 'certificates' ? (
@@ -141,7 +151,12 @@ export default function GalleryComponent({ username }) {
                   ))}
                 </Swiper>
               ) : (
-                <div className='flex justify-center'>no project pictures to show</div>
+                <div className='flex justify-center'>
+                  <a href='#' onClick={() => handleTabClick('')}>
+                    <button>Back</button>
+                  </a>
+                  <p>no project pictures to show</p>
+                </div>
               )}
             </div>
           ) : (

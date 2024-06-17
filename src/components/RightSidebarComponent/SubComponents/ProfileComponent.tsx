@@ -312,7 +312,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               </button>
             </div>
           </form>
-          <div className='flex justify-center'>
+          <div className='flex items-center justify-center gap-x-2'>
             <Link
               href={`/public-profile/${user.username}`}
               className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
@@ -320,6 +320,13 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             >
               View Public Profile
             </Link>
+            <div
+              onClick={setActiveTab.bind(this, 'gallery')}
+              className='mt-2 flex w-fit cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
+            ease-in-out hover:border-purple-500'
+            >
+              View Your Gallery
+            </div>
           </div>
         </div>
       ) : (
