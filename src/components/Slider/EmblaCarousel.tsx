@@ -17,7 +17,7 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   // const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
-  const tabs = ['Genius ID', 'Avatar', 'Card', 'Experience', 'Skills']
+  const tabs = ['Family', 'Membership', 'Experience', 'Skills']
   const [selected, setSelected] = useState(tabs[0])
   const [slideIndex, setSlideIndex] = useState(0)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -77,11 +77,11 @@ const EmblaCarousel: React.FC<PropType> = () => {
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='mb-5 flex'>
             {[
-              <UserInfoComponent
-                key='UserInfoComponent'
-                onNextButtonClick={() => emblaApi.scrollNext()}
-                isSmallScreen={isSmallScreen}
-              />,
+              // <UserInfoComponent
+              //   key='UserInfoComponent'
+              //   onNextButtonClick={() => emblaApi.scrollNext()}
+              //   isSmallScreen={isSmallScreen}
+              // />,
               <AvatarComponent
                 key='AvatarComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}

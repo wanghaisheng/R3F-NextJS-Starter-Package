@@ -15,6 +15,7 @@ export default function HomePage({ users }) {
     setActiveFilter(guild_name.toUpperCase())
   }
 
+  // console.log('users', users)
   return (
     <div className='relative h-screen'>
       <video key={currentGuild} className='absolute inset-0 size-full object-cover' autoPlay loop muted>

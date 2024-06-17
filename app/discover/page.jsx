@@ -1,14 +1,16 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import HomePage from '@/components/HomePage/HomePage'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
-export const getUsers = async () => {
+const getUsers = async () => {
   try {
     const res = await axios.get('/api/public/users')
     if (res.status !== 200) {
-      toast.error('error fetching users')
+      toast.error('Error fetching users')
+      return []
     }
     const users = res.data.filter(
       (user) =>
@@ -22,15 +24,28 @@ export const getUsers = async () => {
     )
     return users
   } catch (error) {
-    toast.error('Interal Server Error')
+    toast.error('Internal Server Error')
+    return []
   }
 }
 
-export default async function Avatars() {
-  const users = await getUsers()
+const Discover = () => {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const fetchedUsers = await getUsers()
+      setUsers(fetchedUsers)
+    }
+
+    fetchUsers()
+  }, [])
+
   return (
     <div>
       <HomePage users={users} />
     </div>
   )
 }
+
+export default Discover

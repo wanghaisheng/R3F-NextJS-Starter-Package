@@ -9,13 +9,75 @@ import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
+import GeniusID from '@/components/card/GeniusID'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
+  const [phone_number, setPhoneNumber] = useState('')
+  const [dob, setDob] = useState('')
+  const [regionStatus, setRegionStatus] = useState(false)
+  const [geoLocationInfo, setGeoLocationInfo] = useState({
+    ip: '',
+    city: '',
+    country: '',
+    continent_code: '',
+    latitude: '',
+    longitude: '',
+  })
+
   const [avatarsData, setAvatarsData] = useState([])
   const handleSignUpClick = () => {
     setActiveTab('search')
     setShowSignUp(true)
+  }
+
+  useEffect(() => {
+    const setUserInfo = () => {
+      setPhoneNumber(user.phone_number ? user.phone_number : '')
+      setDob(user.dob ? user.dob : '')
+      setGeoLocationInfo(user.region)
+    }
+    if (user) {
+      setUserInfo()
+    }
+  }, [user])
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+
+    const submit = {
+      phone_number,
+      dob,
+      description: description,
+      region:
+        geoLocationInfo.ip !== ''
+          ? {
+              ip: geoLocationInfo.ip,
+              city: geoLocationInfo.city,
+              country: geoLocationInfo.country,
+              continent_code: geoLocationInfo.continent_code,
+              latitude: geoLocationInfo.latitude,
+              longitude: geoLocationInfo.longitude,
+            }
+          : {
+              ip: '',
+              city: '',
+              country: '',
+              continent_code: '',
+              latitude: '',
+              longitude: '',
+            },
+    }
+    try {
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Successfully updated!')
+    } catch (error) {
+      toast.error('Update failed!')
+    }
   }
 
   useEffect(() => {
@@ -30,6 +92,36 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
+  const handlePhoneNumberChange = (newPhoneNumber: string) => {
+    setPhoneNumber(newPhoneNumber)
+  }
+  const handleDOBChange = (newDob: string) => {
+    setDob(newDob)
+  }
+
+  const handleRegionStatus = async (value: boolean) => {
+    setRegionStatus(value)
+    if (value === true) {
+      const response = await fetch('https://ipapi.co/json/')
+      const data = await response.json()
+      const isConfirmed = window.confirm('Do you want to share the location via your IP?')
+      if (isConfirmed) {
+        setGeoLocationInfo(data)
+      } else {
+        return
+      }
+    } else if (value === false) {
+      setGeoLocationInfo({
+        ip: '',
+        city: '',
+        country: '',
+        continent_code: '',
+        latitude: '',
+        longitude: '',
+      })
+    }
+  }
 
   const [description, setDescription] = useState(user ? user.description : '')
   const [imageUrls, setImageUrls] = useState([])
@@ -70,28 +162,12 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       toast.error('Error updating profile pic!')
     }
   }
-  const handleBioUpdate = async (e) => {
-    e.preventDefault()
-    const submit = {
-      description: description,
-    }
-    try {
-      await axios({
-        url: `/api/internal/users/${user.gg_id}`,
-        method: 'put',
-        data: submit,
-      })
-      toast.success('Bio updated successfully!')
-    } catch (error) {
-      toast.error('Error updating bio!')
-    }
-  }
 
   return (
-    <div className='mb-20 flex h-full flex-col'>
+    <div className='flex h-full flex-col overflow-hidden pb-8'>
       {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black/40 p-3 text-white'>
-          <div className='h-[170px] w-full rounded'>
+        <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
+          <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
               src={
                 imageUrls.length !== 0
@@ -106,12 +182,15 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               unoptimized
               className='rounded'
             />
+            <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
+              <span className='text-sm font-semibold text-pink-500'>{description}</span>
+            </p>
           </div>
-          <p className='my-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
+          <div className='-mt-2 mb-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
             {user.username}
-          </p>
+          </div>
 
-          <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
+          <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
                 modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -140,57 +219,108 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             )}
           </div>
-          <div className='flex h-16 justify-center gap-x-10 overflow-auto pt-2'>
-            <span className='text-lg font-semibold text-blue-400'>{description}</span>
-          </div>
-          <form onSubmit={handleBioUpdate}>
-            <div className='my-2 flex w-full items-center justify-center'>
-              <FileUploaderRegular
-                onChange={handleChangeEvent}
-                pubkey={'aff2bf9d09cde0f92516'}
-                maxLocalFileSizeBytes={10000000}
-                imgOnly={true}
-                sourceList='local, url, camera'
-                className='w-fit rounded-lg bg-white p-1'
-              />
-            </div>
-            <div className='flex items-center  gap-x-2'>
-              <label htmlFor='bio' className='text-xl font-bold'>
-                Bio
-              </label>
-              <input
-                type='text'
-                name='bio'
-                id='bio'
-                placeholder='Bio'
-                value={description}
-                className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
-                onChange={(e) => handelDescriptionChange(e.target.value)}
-              />
-            </div>
-            <button
-              type='submit'
-              className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-             ease-in-out hover:border-purple-500'
-            >
-              Submit
-            </button>
-          </form>
 
-          <Link
-            href={`/public-profile/${user.username}`}
-            className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-             ease-in-out hover:border-purple-500'
+          <div className='-mt-5 flex justify-center '>
+            <GeniusID dob={dob} contact={phone_number} />
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
           >
-            View Public Profile
-          </Link>
-          <Link
-            href={`/gallery/${user.username}`}
-            className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-             ease-in-out hover:border-purple-500'
-          >
-            View Gallery
-          </Link>
+            <div className='flex w-full flex-col gap-y-2 px-4  text-purple-200'>
+              <div className='flex flex-col'>
+                <label htmlFor='bio' className='font-semibold'>
+                  BIO
+                </label>
+                <input
+                  type='text'
+                  name='bio'
+                  id='bio'
+                  placeholder='Bio'
+                  value={description}
+                  className='rounded-md bg-white/20 px-3'
+                  onChange={(e) => handelDescriptionChange(e.target.value)}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='' className='font-semibold'>
+                  Contact
+                </label>
+
+                <input
+                  type='text'
+                  value={phone_number}
+                  onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                  placeholder='Phone Number'
+                  className='rounded-md bg-white/20 px-3'
+                  aria-label='Phone Number'
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='' className='font-semibold'>
+                  DOB
+                </label>
+
+                <input
+                  type='date'
+                  value={dob}
+                  onChange={(e) => handleDOBChange(e.target.value)}
+                  className='rounded-md bg-white/20 px-3'
+                  required
+                  aria-label='Date of Birth'
+                />
+              </div>
+              <div className='flex'>
+                <label htmlFor='' className='font-semibold'>
+                  Region
+                </label>
+
+                <input
+                  type='checkbox'
+                  checked={user ? (user.region ? !regionStatus : false) : false}
+                  onChange={(e) => handleRegionStatus(e.target.checked)}
+                  className='ml-2 flex size-5 items-center justify-start'
+                  aria-label='region status'
+                />
+              </div>
+              <form onSubmit={handleImgUpdate} className='flex items-center justify-between gap-x-2'>
+                <label htmlFor='' className='whitespace-nowrap font-semibold'>
+                  Profile Picture
+                </label>
+                <div className='my-2 flex w-full items-center justify-center'>
+                  <FileUploaderRegular
+                    onChange={handleChangeEvent}
+                    pubkey={'aff2bf9d09cde0f92516'}
+                    maxLocalFileSizeBytes={10000000}
+                    imgOnly={true}
+                    sourceList='local, url, camera'
+                    className='flex w-full justify-center rounded-lg bg-white'
+                  />
+                </div>
+              </form>
+            </div>
+
+            <div className='mt-4'>
+              <button
+                className='flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 transition-all
+            ease-in-out hover:border-purple-500'
+                type='submit'
+                aria-label='next'
+              >
+                <p className='px-4 py-1'>DONE</p>
+              </button>
+            </div>
+          </form>
+          <div className='flex justify-center'>
+            <Link
+              href={`/public-profile/${user.username}`}
+              className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
+            ease-in-out hover:border-purple-500'
+            >
+              View Public Profile
+            </Link>
+          </div>
         </div>
       ) : (
         <>

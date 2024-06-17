@@ -259,7 +259,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   </Link>
                 </li>
               )}
-              <li className='fixed bottom-5 left-10'>
+              <li className='fixed bottom-5 left-10 cursor-pointer '>
                 {user ? (
                   <Link
                     href='/'
