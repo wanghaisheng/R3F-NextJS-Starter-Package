@@ -48,6 +48,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     const submit = {
       phone_number,
       dob,
+      description: description,
       region:
         geoLocationInfo.ip !== ''
           ? {
@@ -161,27 +162,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       toast.error('Error updating profile pic!')
     }
   }
-  const handleBioUpdate = async (e) => {
-    e.preventDefault()
-    const submit = {
-      description: description,
-    }
-    try {
-      await axios({
-        url: `/api/internal/users/${user.gg_id}`,
-        method: 'put',
-        data: submit,
-      })
-      toast.success('Bio updated successfully!')
-    } catch (error) {
-      toast.error('Error updating bio!')
-    }
-  }
 
   return (
-    <div className='mb-20 flex h-full flex-col pb-20'>
+    <div className='flex h-full flex-col overflow-hidden pb-8'>
       {user ? (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black/40 p-3 text-white'>
+        <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
           <div className='h-[170px] w-full rounded'>
             <Image
               src={
@@ -234,7 +219,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <div className='flex h-16 justify-center gap-x-10 overflow-auto pt-2'>
             <span className='text-lg font-semibold text-blue-400'>{description}</span>
           </div>
-          <form onSubmit={handleBioUpdate}>
+          <form onSubmit={handleImgUpdate}>
             <div className='my-2 flex w-full items-center justify-center'>
               <FileUploaderRegular
                 onChange={handleChangeEvent}
@@ -293,7 +278,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
 
                 <input
                   type='checkbox'
-                  checked={regionStatus}
+                  checked={user ? (user.region ? !regionStatus : false) : false}
                   onChange={(e) => handleRegionStatus(e.target.checked)}
                   className='ml-10 flex size-5 justify-start'
                   aria-label='region status'
@@ -315,7 +300,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               </div>
             </div>
 
-            <div className='mb-20'>
+            <div className=''>
               <button
                 className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
                 type='submit'
