@@ -44,7 +44,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       )}
       {!isSidebarOpen && (
         <button
-          className='fixed right-0 top-36 z-50 size-10 rounded-l-md bg-black/20 p-1 shadow-lg'
+          className='fixed right-0 top-36 z-50 size-10 rounded-l-md border-y border-l border-pink-300 bg-black/20 p-1 shadow-lg'
           onClick={toggleSidebar}
         >
           <Image src='/GGlogo.png' alt='sidebar' height={30} width={30}></Image>
