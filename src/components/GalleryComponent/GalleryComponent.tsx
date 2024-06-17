@@ -26,6 +26,12 @@ export default function GalleryComponent({ username }) {
   const [profilePics, setProfilePics] = useState([])
   const [projPics, setProjPics] = useState([])
   const [certificates, setCertificates] = useState([])
+  const [activeTab, setActiveTab] = useState('') //active tab state
+
+  const handleTabClick = (tab: string) => {
+    //function to handle tab click
+    setActiveTab(tab)
+  }
 
   //get user
   useEffect(() => {
@@ -72,74 +78,88 @@ export default function GalleryComponent({ username }) {
 
   return (
     <>
-      {/* profile pictures */}
-      <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
-        {user && profilePics.length > 0 ? (
-          <Swiper
-            effect={'cards'}
-            grabCursor={true}
-            modules={[EffectCards]}
-            className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
-          >
-            {profilePics.map((profilePic, index) => (
-              <SwiperSlide key={index}>
-                <div className='flex justify-center'>
-                  <img src={profilePic} alt='' />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          <div className='flex justify-center'>no profile pictures to show</div>
-        )}
-      </div>
-      {/* profile pictures */}
+      {activeTab !== '' && (
+        <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
+          {activeTab === 'profilePics' ? (
+            <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
+              {user && profilePics.length > 0 ? (
+                <Swiper
+                  effect={'cards'}
+                  grabCursor={true}
+                  modules={[EffectCards]}
+                  className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+                >
+                  {profilePics.map((profilePic, index) => (
+                    <SwiperSlide key={index}>
+                      <div className='flex justify-center'>
+                        <img src={profilePic} alt='' />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className='flex justify-center'>no profile pictures to show</div>
+              )}
+            </div>
+          ) : activeTab === 'projPics' ? (
+            <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
+              {user && projPics.length > 0 ? (
+                <Swiper
+                  effect={'cards'}
+                  grabCursor={true}
+                  modules={[EffectCards]}
+                  className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+                >
+                  {projPics.map((projPic, index) => (
+                    <SwiperSlide key={index}>
+                      <div className='flex justify-center'>
+                        <img src={projPic} alt='' />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className='flex justify-center'>no project pictures to show</div>
+              )}
+            </div>
+          ) : activeTab === 'certificates' ? (
+            <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
+              {user && certificates.length > 0 ? (
+                <Swiper
+                  effect={'cards'}
+                  grabCursor={true}
+                  modules={[EffectCards]}
+                  className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+                >
+                  {certificates.map((cert, index) => (
+                    <SwiperSlide key={index}>
+                      <div className='flex justify-center'>
+                        <img src={cert} alt='' />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className='flex justify-center'>no project pictures to show</div>
+              )}
+            </div>
+          ) : (
+            <div>........</div>
+          )}
+        </div>
+      )}
 
-      {/* project pictures */}
-      <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
-        {user && projPics.length > 0 ? (
-          <Swiper
-            effect={'cards'}
-            grabCursor={true}
-            modules={[EffectCards]}
-            className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
-          >
-            {projPics.map((projPic, index) => (
-              <SwiperSlide key={index}>
-                <div className='flex justify-center'>
-                  <img src={projPic} alt='' />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          <div className='flex justify-center'>no project pictures to show</div>
-        )}
+      <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
+        <a href='#' onClick={() => handleTabClick('profilePics')}>
+          <button>ProfilePics</button>
+        </a>
+        <a href='#' onClick={() => handleTabClick('projPics')}>
+          <button>ProjPics</button>
+        </a>
+        <a href='#' onClick={() => handleTabClick('certificates')}>
+          <button>Certificates</button>
+        </a>
       </div>
-      {/* project pictures */}
-
-      {/* skill certificates */}
-      <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
-        {user && certificates.length > 0 ? (
-          <Swiper
-            effect={'cards'}
-            grabCursor={true}
-            modules={[EffectCards]}
-            className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
-          >
-            {certificates.map((cert, index) => (
-              <SwiperSlide key={index}>
-                <div className='flex justify-center'>
-                  <img src={cert} alt='' />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          <div className='flex justify-center'>no project pictures to show</div>
-        )}
-      </div>
-      {/* skill certificates */}
     </>
   )
 }

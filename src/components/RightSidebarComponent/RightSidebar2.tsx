@@ -11,7 +11,7 @@ import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
 import EmergencyComponent from './SubComponents/EmergencyComponent'
-import { CgProfile, CgPhotoscan } from 'react-icons/cg'
+import { CgProfile } from 'react-icons/cg'
 import ProfileComponent from './SubComponents/ProfileComponent'
 import { Toaster } from 'react-hot-toast'
 
