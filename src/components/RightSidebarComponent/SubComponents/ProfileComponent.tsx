@@ -184,6 +184,13 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           >
             View Public Profile
           </Link>
+          <Link
+            href={`/gallery/${user.username}`}
+            className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
+             ease-in-out hover:border-purple-500'
+          >
+            View Gallery
+          </Link>
         </div>
       ) : (
         <>
