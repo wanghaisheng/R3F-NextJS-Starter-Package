@@ -11,7 +11,8 @@ import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
 import EmergencyComponent from './SubComponents/EmergencyComponent'
-import { CgProfile } from 'react-icons/cg'
+import { CgProfile, CgPhotoscan } from 'react-icons/cg'
+import GalleryComponent from './SubComponents/GalleryComponent'
 import ProfileComponent from './SubComponents/ProfileComponent'
 import { Toaster } from 'react-hot-toast'
 
@@ -99,6 +100,9 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
               )}
               {activeTab === 'profile' && (
                 <ProfileComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
+              )}
+              {activeTab === 'gallery' && (
+                <GalleryComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
               )}
             </div>
           )}
@@ -216,6 +220,29 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       `}
                 >
                   Profile
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                className={`group flex items-center rounded-md p-2 ${
+                  activeTab === 'profile'
+                    ? 'bg-gray-100 text-gray-900'
+                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+                onClick={() => handleTabClick('profile')}
+              >
+                <CgPhotoscan />
+                <div
+                  className={`
+          invisible absolute top-0 -translate-y-8 whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm font-medium text-slate-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      `}
+                >
+                  Gallery
                 </div>
               </a>
             </li>
