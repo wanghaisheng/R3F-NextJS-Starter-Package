@@ -9,13 +9,74 @@ import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
+import GeniusID from '@/components/card/GeniusID'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
+  const [phone_number, setPhoneNumber] = useState('')
+  const [dob, setDob] = useState('')
+  const [regionStatus, setRegionStatus] = useState(false)
+  const [geoLocationInfo, setGeoLocationInfo] = useState({
+    ip: '',
+    city: '',
+    country: '',
+    continent_code: '',
+    latitude: '',
+    longitude: '',
+  })
+
   const [avatarsData, setAvatarsData] = useState([])
   const handleSignUpClick = () => {
     setActiveTab('search')
     setShowSignUp(true)
+  }
+
+  useEffect(() => {
+    const setUserInfo = () => {
+      setPhoneNumber(user.phone_number ? user.phone_number : '')
+      setDob(user.dob ? user.dob : '')
+      setGeoLocationInfo(user.region)
+    }
+    if (user) {
+      setUserInfo()
+    }
+  }, [user])
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+
+    const submit = {
+      phone_number,
+      dob,
+      region:
+        geoLocationInfo.ip !== ''
+          ? {
+              ip: geoLocationInfo.ip,
+              city: geoLocationInfo.city,
+              country: geoLocationInfo.country,
+              continent_code: geoLocationInfo.continent_code,
+              latitude: geoLocationInfo.latitude,
+              longitude: geoLocationInfo.longitude,
+            }
+          : {
+              ip: '',
+              city: '',
+              country: '',
+              continent_code: '',
+              latitude: '',
+              longitude: '',
+            },
+    }
+    try {
+      await axios({
+        url: `/api/internal/users/${user.gg_id}`,
+        method: 'put',
+        data: submit,
+      })
+      toast.success('Successfully updated!')
+    } catch (error) {
+      toast.error('Update failed!')
+    }
   }
 
   useEffect(() => {
@@ -30,6 +91,36 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
+  const handlePhoneNumberChange = (newPhoneNumber: string) => {
+    setPhoneNumber(newPhoneNumber)
+  }
+  const handleDOBChange = (newDob: string) => {
+    setDob(newDob)
+  }
+
+  const handleRegionStatus = async (value: boolean) => {
+    setRegionStatus(value)
+    if (value === true) {
+      const response = await fetch('https://ipapi.co/json/')
+      const data = await response.json()
+      const isConfirmed = window.confirm('Do you want to share the location via your IP?')
+      if (isConfirmed) {
+        setGeoLocationInfo(data)
+      } else {
+        return
+      }
+    } else if (value === false) {
+      setGeoLocationInfo({
+        ip: '',
+        city: '',
+        country: '',
+        continent_code: '',
+        latitude: '',
+        longitude: '',
+      })
+    }
+  }
 
   const [description, setDescription] = useState(user ? user.description : '')
   const [imageUrls, setImageUrls] = useState([])
@@ -88,7 +179,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   }
 
   return (
-    <div className='mb-20 flex h-full flex-col'>
+    <div className='mb-20 flex h-full flex-col pb-20'>
       {user ? (
         <div className='flex-1 items-center justify-center rounded-lg bg-black/40 p-3 text-white'>
           <div className='h-[170px] w-full rounded'>
@@ -154,27 +245,85 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                 className='w-fit rounded-lg bg-white p-1'
               />
             </div>
-            <div className='flex items-center  gap-x-2'>
-              <label htmlFor='bio' className='text-xl font-bold'>
-                Bio
-              </label>
-              <input
-                type='text'
-                name='bio'
-                id='bio'
-                placeholder='Bio'
-                value={description}
-                className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
-                onChange={(e) => handelDescriptionChange(e.target.value)}
-              />
+          </form>
+
+          <div className='flex flex-col'>
+            <div className='mt-2 flex justify-center '>
+              <GeniusID dob={dob} contact={phone_number} />
             </div>
-            <button
-              type='submit'
-              className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-             ease-in-out hover:border-purple-500'
-            >
-              Submit
-            </button>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
+          >
+            <div className='flex w-full flex-col gap-y-2 px-4  text-purple-200'>
+              <div className='flex flex-col'>
+                <label htmlFor='' className='font-semibold'>
+                  Contact
+                </label>
+
+                <input
+                  type='text'
+                  value={phone_number}
+                  onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                  placeholder='Phone Number'
+                  className='rounded-md bg-white/20 px-3'
+                  aria-label='Phone Number'
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='' className='font-semibold'>
+                  DOB
+                </label>
+
+                <input
+                  type='date'
+                  value={dob}
+                  onChange={(e) => handleDOBChange(e.target.value)}
+                  className='rounded-md bg-white/20 px-3'
+                  required
+                  aria-label='Date of Birth'
+                />
+              </div>
+              <div className='flex'>
+                <label htmlFor='' className='font-semibold'>
+                  Region
+                </label>
+
+                <input
+                  type='checkbox'
+                  checked={regionStatus}
+                  onChange={(e) => handleRegionStatus(e.target.checked)}
+                  className='ml-10 flex size-5 justify-start'
+                  aria-label='region status'
+                />
+              </div>
+              <div className='flex items-center  gap-x-2'>
+                <label htmlFor='bio' className='text-xl font-bold'>
+                  Bio
+                </label>
+                <input
+                  type='text'
+                  name='bio'
+                  id='bio'
+                  placeholder='Bio'
+                  value={description}
+                  className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
+                  onChange={(e) => handelDescriptionChange(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className='mb-20'>
+              <button
+                className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                type='submit'
+                aria-label='next'
+              >
+                <p className='p-4'>DONE</p>
+              </button>
+            </div>
           </form>
 
           <Link
