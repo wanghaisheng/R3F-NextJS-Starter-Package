@@ -9,7 +9,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { IoIosArrowBack } from 'react-icons/io'
 
-export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn, setShowSignIn }) {
+export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn, setShowSignIn, toggleSidebar }) {
   const { user } = useUser()
 
   const toggleSignUp = () => {
@@ -142,7 +142,11 @@ export default function SearchComponent({ showSignUp, setShowSignUp, showSignIn,
                   <div onClick={toggleSignIn} className='px-2'>
                     <IoIosArrowBack />
                   </div>
-                  <SignInComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} />
+                  <SignInComponent
+                    toggleSignIn={toggleSignIn}
+                    toggleSignUp={toggleSignUp}
+                    toggleSidebar={toggleSidebar}
+                  />
                 </div>
               )}
             </>
