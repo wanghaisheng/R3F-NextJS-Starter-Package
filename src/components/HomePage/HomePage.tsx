@@ -7,7 +7,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination } from 'swiper/modules'
 
-export default function HomePage({ users }) {
+export default function HomePage({ users, guilds }) {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
   const [activeFilter, setActiveFilter] = useState('BUDDHA')
   const handleGuildChange = (guild_name: string) => {

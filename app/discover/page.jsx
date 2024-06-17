@@ -12,7 +12,7 @@ const getUsers = async () => {
       toast.error('Error fetching users')
       return []
     }
-    const users = res.data.filter(
+    return res.data.filter(
       (user) =>
         user.first_name &&
         user.last_name &&
@@ -22,7 +22,20 @@ const getUsers = async () => {
         user.avatar.length !== 0 &&
         user.guild_id,
     )
-    return users
+  } catch (error) {
+    toast.error('Internal Server Error')
+    return []
+  }
+}
+
+const getGuilds = async () => {
+  try {
+    const res = await axios.get('/api/public/guilds')
+    if (res.status !== 200) {
+      toast.error('Failed to fetch guilds data')
+      return []
+    }
+    return res.data
   } catch (error) {
     toast.error('Internal Server Error')
     return []
@@ -31,19 +44,21 @@ const getUsers = async () => {
 
 const Discover = () => {
   const [users, setUsers] = useState([])
+  const [guilds, setGuilds] = useState([])
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       const fetchedUsers = await getUsers()
+      const fetchedGuilds = await getGuilds()
       setUsers(fetchedUsers)
+      setGuilds(fetchedGuilds)
     }
-
-    fetchUsers()
+    fetchData()
   }, [])
 
   return (
     <div>
-      <HomePage users={users} />
+      <HomePage users={users} guilds={guilds} />
     </div>
   )
 }
