@@ -44,7 +44,6 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
                 method: 'POST',
                 data: values,
               })
-              log('Response:', data)
               const token = data.token
               if (token) {
                 Cookies.set('token', token)

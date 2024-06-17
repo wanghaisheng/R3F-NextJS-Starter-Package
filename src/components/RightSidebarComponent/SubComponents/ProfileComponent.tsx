@@ -167,7 +167,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     <div className='flex h-full flex-col overflow-hidden pb-8'>
       {user ? (
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
-          <div className='h-[170px] w-full rounded'>
+          <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
               src={
                 imageUrls.length !== 0
@@ -182,12 +182,15 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               unoptimized
               className='rounded'
             />
+            <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
+              <span className='text-sm font-semibold text-pink-500'>{description}</span>
+            </p>
           </div>
-          <p className='my-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
+          <div className='-mt-2 mb-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
             {user.username}
-          </p>
+          </div>
 
-          <div className='absolute left-0 top-5 z-10 h-[360px] w-full'>
+          <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
                 modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
@@ -216,26 +219,9 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             )}
           </div>
-          <div className='flex h-16 justify-center gap-x-10 overflow-auto pt-2'>
-            <span className='text-lg font-semibold text-blue-400'>{description}</span>
-          </div>
-          <form onSubmit={handleImgUpdate}>
-            <div className='my-2 flex w-full items-center justify-center'>
-              <FileUploaderRegular
-                onChange={handleChangeEvent}
-                pubkey={'aff2bf9d09cde0f92516'}
-                maxLocalFileSizeBytes={10000000}
-                imgOnly={true}
-                sourceList='local, url, camera'
-                className='w-fit rounded-lg bg-white p-1'
-              />
-            </div>
-          </form>
 
-          <div className='flex flex-col'>
-            <div className='mt-2 flex justify-center '>
-              <GeniusID dob={dob} contact={phone_number} />
-            </div>
+          <div className='-mt-5 flex justify-center '>
+            <GeniusID dob={dob} contact={phone_number} />
           </div>
 
           <form
@@ -243,6 +229,20 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
           >
             <div className='flex w-full flex-col gap-y-2 px-4  text-purple-200'>
+              <div className='flex flex-col'>
+                <label htmlFor='bio' className='font-semibold'>
+                  BIO
+                </label>
+                <input
+                  type='text'
+                  name='bio'
+                  id='bio'
+                  placeholder='Bio'
+                  value={description}
+                  className='rounded-md bg-white/20 px-3'
+                  onChange={(e) => handelDescriptionChange(e.target.value)}
+                />
+              </div>
               <div className='flex flex-col'>
                 <label htmlFor='' className='font-semibold'>
                   Contact
@@ -280,44 +280,47 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                   type='checkbox'
                   checked={user ? (user.region ? !regionStatus : false) : false}
                   onChange={(e) => handleRegionStatus(e.target.checked)}
-                  className='ml-10 flex size-5 justify-start'
+                  className='ml-2 flex size-5 items-center justify-start'
                   aria-label='region status'
                 />
               </div>
-              <div className='flex items-center  gap-x-2'>
-                <label htmlFor='bio' className='text-xl font-bold'>
-                  Bio
+              <form onSubmit={handleImgUpdate} className='flex items-center justify-between gap-x-2'>
+                <label htmlFor='' className='whitespace-nowrap font-semibold'>
+                  Profile Picture
                 </label>
-                <input
-                  type='text'
-                  name='bio'
-                  id='bio'
-                  placeholder='Bio'
-                  value={description}
-                  className='mt-2 w-full rounded-lg border border-white bg-black p-2 text-white'
-                  onChange={(e) => handelDescriptionChange(e.target.value)}
-                />
-              </div>
+                <div className='my-2 flex w-full items-center justify-center'>
+                  <FileUploaderRegular
+                    onChange={handleChangeEvent}
+                    pubkey={'aff2bf9d09cde0f92516'}
+                    maxLocalFileSizeBytes={10000000}
+                    imgOnly={true}
+                    sourceList='local, url, camera'
+                    className='flex w-full justify-center rounded-lg bg-white'
+                  />
+                </div>
+              </form>
             </div>
 
-            <div className=''>
+            <div className='mt-4'>
               <button
-                className='rounded-full bg-black transition-all duration-150 hover:scale-105 hover:bg-purple-500 dark:bg-purple-400/20 hover:dark:bg-purple-300/30'
+                className='flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 transition-all
+            ease-in-out hover:border-purple-500'
                 type='submit'
                 aria-label='next'
               >
-                <p className='p-4'>DONE</p>
+                <p className='px-4 py-1'>DONE</p>
               </button>
             </div>
           </form>
-
-          <Link
-            href={`/public-profile/${user.username}`}
-            className='mt-2 flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-             ease-in-out hover:border-purple-500'
-          >
-            View Public Profile
-          </Link>
+          <div className='flex justify-center'>
+            <Link
+              href={`/public-profile/${user.username}`}
+              className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
+            ease-in-out hover:border-purple-500'
+            >
+              View Public Profile
+            </Link>
+          </div>
         </div>
       ) : (
         <>

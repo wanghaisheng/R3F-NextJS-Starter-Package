@@ -33,7 +33,7 @@ export default function GeniusID({ dob, contact }) {
   return (
     <>
       <CardBody>
-        <div className='group h-[239px] p-4 [prespective:1000px]'>
+        <div className='group h-[239px] p-2 [prespective:1000px]'>
           {/* Flip the card when clicked */}
           <div
             className={`relative size-full rounded-xl shadow-md transition-all  duration-500 [transform-style:preserve-3d] 
