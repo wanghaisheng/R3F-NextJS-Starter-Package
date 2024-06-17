@@ -1,18 +1,15 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-
 import { Pagination } from 'swiper/modules'
 
-export default function HomePage() {
+export default function HomePage({ users }) {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
-
   const [activeFilter, setActiveFilter] = useState('BUDDHA')
-
   const handleGuildChange = (guild_name: string) => {
     setCurrentGuild(guild_name.toLowerCase())
     setActiveFilter(guild_name.toUpperCase())
