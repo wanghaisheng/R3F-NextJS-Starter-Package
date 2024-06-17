@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { Pagination } from 'swiper/modules'
+import 'swiper/css/scrollbar'
+import Link from 'next/link'
+
+import { Pagination, Scrollbar } from 'swiper/modules'
 
 export default function HomePage({ users, guilds }) {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
@@ -15,7 +17,15 @@ export default function HomePage({ users, guilds }) {
     setActiveFilter(guild_name.toUpperCase())
   }
 
-  // console.log('users', users)
+  console.log('users', users)
+  console.log('guilds', guilds)
+
+  // Filter users based on active guild
+  const filteredUsers =
+    activeFilter === ''
+      ? users // Show all users if active filter is empty
+      : users.filter((user) => user.guild_id === guilds.find((guild) => guild.guild_name === activeFilter)?.id)
+
   return (
     <div className='relative h-screen'>
       <video key={currentGuild} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
@@ -35,6 +45,13 @@ export default function HomePage({ users, guilds }) {
       {/* Nav */}
       <div className='absolute top-20 z-10 w-full'>
         <div className='absolute top-0 flex w-full justify-center gap-x-6 font-semibold'>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === '' ? 'rotate-180 scale-125' : 'scale-100'}`}
+            onClick={() => handleGuildChange('')}
+          >
+            All
+          </a>
           <a
             href='#'
             className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'BUDDHA' ? 'rotate-180 scale-125' : 'scale-100'}`}
@@ -103,42 +120,52 @@ export default function HomePage({ users, guilds }) {
 
       {/* Carousel */}
       <div className='absolute top-32 z-10 flex w-full items-center justify-center'>
-        <Swiper
-          spaceBetween={30}
-          centeredSlides={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
-          className='h-[530px] w-[400px] animate-pulse rounded-lg bg-white/20'
-        >
-          <SwiperSlide className=' bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-        </Swiper>
+        <div className='flex h-[530px] w-[480px] flex-wrap overflow-auto rounded-lg bg-white/20 pb-4 pt-2'>
+          {filteredUsers.map(
+            (
+              user,
+              index, // Use filteredUsers here
+            ) => (
+              <div key={index}>
+                <Link
+                  href={`/public-profile/${user.username}`}
+                  className='relative ml-2 flex h-[200px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                >
+                  <div
+                    className='absolute inset-0 rounded-lg'
+                    style={{
+                      background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user && user.avatar[0].avatar_url.replace('glb', 'png')})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      filter: `drop-shadow( 0px 0px 3px rgba(${
+                        user.guild === 'PADMA'
+                          ? '255, 0, 0, 1'
+                          : user.guild === 'VAJRA'
+                            ? '0, 0, 255, 1'
+                            : user.guild === 'RATNA'
+                              ? '255, 255, 0, 1'
+                              : user.guild === 'KARMA'
+                                ? '0, 255, 0, 1'
+                                : '255, 255, 255, 1'
+                      }))`,
+                    }}
+                  ></div>
+                  <span
+                    className={`group absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
+                  >
+                    <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
+                      {user.username.toUpperCase()}
+                    </h1>
+                  </span>
+                  <div className='invisible group-hover:visible'>{user.description}</div>
+                </Link>
+              </div>
+            ),
+          )}
+        </div>
       </div>
+
+      <div className='absolute left-0 top-32 z-10 flex w-full items-start justify-center'>ajklhdnvl</div>
     </div>
   )
 }
