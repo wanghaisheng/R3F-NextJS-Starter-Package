@@ -8,19 +8,20 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 export async function POST(request) {
   try {
-    const { email, password } = await request.json()
+    const { username, phone_number, email, password } = await request.json()
 
     // Find the user by email
     const user = await prisma.users.findUnique({
-      where: { email },
+      where: {
+        OR: [{ username: username }, { email: email }, { phone_number: phone_number }],
+      },
     })
 
     // Check if user exists
     if (!user) {
       // If user doesn't exist, return error indicating incorrect email
 
-      return NextResponse.json({ error: 'User email does not exist' }, { status: 404 })
-
+      return NextResponse.json({ error: 'User does not exist' }, { status: 404 })
     }
 
     // Verify password
@@ -29,7 +30,6 @@ export async function POST(request) {
       // If password doesn't match, return error indicating incorrect password
 
       return NextResponse.json({ error: 'Incorrect password' }, { status: 401 })
-
     }
 
     // Generate JWT token
@@ -41,6 +41,5 @@ export async function POST(request) {
     console.error('Error signing in:', error)
 
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
-
   }
 }
