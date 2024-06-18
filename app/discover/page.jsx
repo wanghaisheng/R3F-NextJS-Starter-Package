@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import HomePage from '@/components/HomePage/HomePage'
+import HomePage2 from '@/components/HomePage/HomePage2'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
@@ -58,7 +59,8 @@ const Discover = () => {
 
   return (
     <div>
-      <HomePage users={users} guilds={guilds} />
+      {/* <HomePage users={users} guilds={guilds} /> */}
+      <HomePage2 users={users} guilds={guilds} />
     </div>
   )
 }

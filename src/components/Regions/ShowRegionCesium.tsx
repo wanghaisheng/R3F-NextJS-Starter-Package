@@ -1,7 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
 
-import CesiumMap from '../LeafletMap/CesiumMap'
+const CesiumMap = dynamic(() => import('../LeafletMap/CesiumMap'), {
+  ssr: false,
+})
 import { useState } from 'react'
 import { Suspense } from 'react'
 import ShowGuild from '../Guilds/ShowGuild'
