@@ -13,7 +13,7 @@ import toast from 'react-hot-toast'
 
 const { log } = console
 
-const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
+const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
   const router = useRouter()
   const { updateUser } = useUser()
   const [generalError, setGeneralError] = useState('') // State for managing error messages
@@ -44,13 +44,14 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
                 method: 'POST',
                 data: values,
               })
-              log('Response:', data)
               const token = data.token
               if (token) {
                 Cookies.set('token', token)
                 updateUser(token)
                 toast.success('Sign in successful')
-                router.push('/navigateuser')
+
+                setActiveTab('profile')
+                router.push('/discover')
               }
             } catch (error) {
               log('Error: ', error)

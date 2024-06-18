@@ -337,7 +337,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
             )}
 
             {/* Back Button */}
-            <div>
+            {/* <div>
               <div className='absolute bottom-4 left-4 mt-4'>
                 {!isSmallScreen ? (
                   <button
@@ -355,7 +355,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                   </DrawOutlineButton>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

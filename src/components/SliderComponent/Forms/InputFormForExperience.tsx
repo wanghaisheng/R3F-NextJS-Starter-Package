@@ -128,7 +128,7 @@ export default function InputFormForExperience({
           required
         />
       </div>
-      <div className='flex flex-col lg:flex-row lg:justify-between'>
+      <div className='flex flex-col lg:flex-row lg:justify-between '>
         <label htmlFor='description' className='font-semibold'>
           Description
         </label>
@@ -142,16 +142,23 @@ export default function InputFormForExperience({
           className='rounded-md border border-none bg-white/20 px-3 lg:w-[70%]'
         />
       </div>
-      <div className='flex flex-col lg:flex-row lg:justify-between'>
-        <label className='font-semibold' htmlFor='file_input'>
-          ProjPic
-        </label>
+      <div className='flex flex-col lg:flex-row lg:justify-between lg:gap-x-2'>
         <FileUploaderRegular
           onChange={handleChangeEvent}
           pubkey={'aff2bf9d09cde0f92516'}
           maxLocalFileSizeBytes={10000000}
           imgOnly={true}
           sourceList='local, url, camera'
+          className='rounded-lg bg-white'
+        />
+        <input
+          id='link'
+          aria-label='link'
+          type='text'
+          value={project.link}
+          onChange={(e) => handleProjectLinkChange(index, e.target.value)}
+          placeholder='Project Link'
+          className='rounded-md border px-3 lg:w-[70%] dark:border-none  dark:bg-white/20'
         />
       </div>
       <div className='flex flex-col lg:flex-row lg:justify-between'>
@@ -181,20 +188,6 @@ export default function InputFormForExperience({
             placeHolder='Enter tools used'
           />
         </div>
-      </div>
-      <div className='flex flex-col lg:flex-row lg:justify-between'>
-        <label htmlFor='link' className='font-semibold'>
-          Link
-        </label>
-        <input
-          id='link'
-          aria-label='link'
-          type='text'
-          value={project.link}
-          onChange={(e) => handleProjectLinkChange(index, e.target.value)}
-          placeholder='Project Link'
-          className='rounded-md border px-3 lg:w-[70%] dark:border-none  dark:bg-white/20'
-        />
       </div>
     </div>
   )

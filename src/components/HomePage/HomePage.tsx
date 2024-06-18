@@ -1,22 +1,33 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import Lottie from 'lottie-react'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-
-import { Pagination } from 'swiper/modules'
-
-export default function HomePage() {
+export default function HomePage({ users, guilds }) {
   const [currentGuild, setCurrentGuild] = useState('') //current guild state
-
-  const [activeFilter, setActiveFilter] = useState('BUDDHA')
+  const [activeFilter, setActiveFilter] = useState('')
 
   const handleGuildChange = (guild_name: string) => {
     setCurrentGuild(guild_name.toLowerCase())
     setActiveFilter(guild_name.toUpperCase())
   }
+
+  const [animateUsers, setAnimateUsers] = useState([])
+  // for replacing the all user display button
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animation = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
+      setAnimateUsers([animation])
+    }
+
+    fetchAnimations()
+  }, [])
+
+  // Filter users based on active guild
+  const filteredUsers =
+    activeFilter === ''
+      ? users // Show all users if active filter is empty
+      : users.filter((user) => user.guild_id === guilds.find((guild) => guild.guild_name === activeFilter)?.id)
 
   return (
     <div className='relative h-screen'>
@@ -37,6 +48,17 @@ export default function HomePage() {
       {/* Nav */}
       <div className='absolute top-20 z-10 w-full'>
         <div className='absolute top-0 flex w-full justify-center gap-x-6 font-semibold'>
+          <a
+            href='#'
+            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === '' ? 'rotate-180 scale-125' : 'scale-100'}`}
+            onClick={() => handleGuildChange('')}
+          >
+            {animateUsers.length > 0 ? (
+              <Lottie animationData={animateUsers[0]} loop={true} autoplay={true} style={{ width: 22, height: 22 }} />
+            ) : (
+              'ALL'
+            )}
+          </a>
           <a
             href='#'
             className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'BUDDHA' ? 'rotate-180 scale-125' : 'scale-100'}`}
@@ -103,43 +125,87 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Carousel */}
+      {/* Mid */}
       <div className='absolute top-32 z-10 flex w-full items-center justify-center'>
-        <Swiper
-          spaceBetween={30}
-          centeredSlides={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
-          className='h-[530px] w-[400px] animate-pulse rounded-lg bg-white/20'
-        >
-          <SwiperSlide className=' bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className='bg-cover bg-center p-4'>
-            <div className='flex size-full items-center justify-center text-xl font-semibold text-purple-200'>
-              Comming Soon!!!
-            </div>
-          </SwiperSlide>
-        </Swiper>
+        <div className='flex h-[530px] w-[480px] flex-wrap overflow-auto rounded-lg bg-white/20 pb-4 pt-2'>
+          {filteredUsers.map(
+            (
+              user,
+              index, // Use filteredUsers here
+            ) => (
+              <div className='group' key={index}>
+                <Link
+                  href={`/public-profile/${user.username}`}
+                  className='group relative ml-2 flex h-[200px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                >
+                  <div
+                    className='absolute inset-0 rounded-lg transition-all duration-500 ease-in-out hover:-translate-y-4 hover:scale-105'
+                    style={{
+                      background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user && user.avatar[0].avatar_url.replace('glb', 'png')})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      filter: `drop-shadow(-1px -2px 4px rgba(${
+                        // Use your pre-defined color values based on the activeFilter
+                        guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'PADMA'
+                          ? '255, 0, 0, 0.5'
+                          : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'VAJRA'
+                            ? '0, 0, 255, 0.5'
+                            : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'RATNA'
+                              ? '255, 255, 0, 0.5'
+                              : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'KARMA'
+                                ? '0, 255, 0, 0.5'
+                                : '255, 255, 255, 0.5' // Default to white if no color found
+                      }))`,
+                    }}
+                  ></div>
+                  {/* <Image
+                    className='absolute top-0 w-[240px] rounded-t-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
+                    src={user && user.avatar[0].avatar_url.replace('glb', 'png')}
+                    alt=''
+                    width={240}
+                    height={280}
+                    style={{
+                      objectFit: 'cover',
+                      filter: `drop-shadow(-1px -2px 4px rgba(${
+                        // Use your pre-defined color values based on the activeFilter
+                        guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'PADMA'
+                          ? '255, 0, 0, 0.5'
+                          : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'VAJRA'
+                            ? '0, 0, 255, 0.5'
+                            : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'RATNA'
+                              ? '255, 255, 0, 0.5'
+                              : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'KARMA'
+                                ? '0, 255, 0, 0.5'
+                                : '255, 255, 255, 0.5' // Default to white if no color found
+                      }))`,
+                    }}
+                  /> */}
+                  <span className='absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 '>
+                    <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
+                      {user.username.toUpperCase()}
+                    </h1>
+                  </span>
+                </Link>
+                {/* Left */}
+                <div
+                  className='
+          invisible absolute left-16 top-[70px] z-20 h-[460px] w-[400px] -translate-y-8 items-start justify-start whitespace-nowrap
+          rounded-md bg-indigo-100 px-2 py-1
+          text-sm text-indigo-800 opacity-20 transition-all
+          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
+      '
+                >
+                  {user.description}
+                </div>
+              </div>
+            ),
+          )}
+        </div>
+      </div>
+
+      {/* Right */}
+      <div className='absolute right-16 top-[166px] z-10 flex h-[460px] w-[400px] items-start justify-start rounded-lg bg-pink-300/20 '>
+        ajklhdnvl
       </div>
     </div>
   )

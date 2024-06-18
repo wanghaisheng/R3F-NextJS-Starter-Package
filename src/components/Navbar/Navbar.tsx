@@ -137,18 +137,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
               <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
-                {pathname === '/discover' ? (
-                  <Link href='/discover' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    DISCOVER
-                  </Link>
-                ) : (
-                  <Link
-                    href='/discover'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    DISCOVER
-                  </Link>
-                )}
                 {pathname === '/hud' ? (
                   <Link href='/hud' className='py-2 text-2xl font-bold text-[#AD00FF]'>
                     HUD
@@ -159,6 +147,18 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
                     HUD
+                  </Link>
+                )}
+                {pathname === '/discover' ? (
+                  <Link href='/discover' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                    DISCOVER
+                  </Link>
+                ) : (
+                  <Link
+                    href='/discover'
+                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
+                    DISCOVER
                   </Link>
                 )}
 
@@ -259,7 +259,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   </Link>
                 </li>
               )}
-              <li className='fixed bottom-5 left-10'>
+              <li className='fixed bottom-5 left-10 cursor-pointer '>
                 {user ? (
                   <Link
                     href='/'
