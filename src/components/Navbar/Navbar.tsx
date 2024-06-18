@@ -85,18 +85,17 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                <div className='mr-2'>
-                  <Link href='/my-profile' onClick={closeMenu} className='size-8 rounded-full'>
-                    <Image
-                      src={user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'}
-                      className='rounded-full'
-                      width={40}
-                      height={40}
-                      alt='User Profile Image'
-                      unoptimized
-                    />
-                  </Link>
-                </div>
+                <Link href='/my-profile' onClick={closeMenu}>
+                  <div
+                    className='mr-2 size-[38px] rounded-full bg-pink-400'
+                    style={{
+                      backgroundImage: `url(${user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  ></div>
+                </Link>
                 <div className='flex'>
                   <Link
                     href='/'
@@ -136,9 +135,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {hideMiddleNav ? null : (
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
-              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 {pathname === '/hud' ? (
-                  <Link href='/hud' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='/hud' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
                     HUD
                   </Link>
                 ) : (
@@ -150,7 +149,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   </Link>
                 )}
                 {pathname === '/discover' ? (
-                  <Link href='/discover' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='/discover' className='py-2 text-2xl font-bold text-pink-300 drop-shadow '>
                     DISCOVER
                   </Link>
                 ) : (
@@ -163,15 +162,15 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 )}
 
                 {pathname.startsWith('/regions') ? (
-                  <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    REGIONS
+                  <Link href='/regions' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
+                    RGS
                   </Link>
                 ) : (
                   <Link
                     href='/regions'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    REGIONS
+                    RGS
                   </Link>
                 )}
               </div>
