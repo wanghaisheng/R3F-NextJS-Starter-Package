@@ -108,7 +108,7 @@ export default function GallerySidebar({ username }) {
               ))}
             </Swiper>
           ) : (
-            <div className='flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
+            <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
               <p>No profile pictures to show</p>
             </div>
           )}
