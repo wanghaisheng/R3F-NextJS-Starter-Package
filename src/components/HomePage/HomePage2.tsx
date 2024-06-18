@@ -146,7 +146,9 @@ const HomePage2 = () => {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <RegionHeader onFilterChange={handleRegionFilterChange} />
+        <div className='absolute top-20 flex w-full justify-center lg:top-32 lg:justify-start'>
+          <RegionHeader onFilterChange={handleRegionFilterChange} />
+        </div>
       </div>
     </>
   )
