@@ -1,10 +1,22 @@
-import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
+'use client'
 
-export default function UserInfoShowcase({ user, skillsData }) {
+import { useState } from 'react'
+import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
+import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
+import { LuGalleryHorizontal } from 'react-icons/lu'
+import { IoBarChartOutline } from 'react-icons/io5'
+import Image from 'next/image'
+
+export default function UserInfoShowcase({ user, skillsData, guild }) {
+  const [toggle, setToggle] = useState(false)
+
+  const handletoggle = () => {
+    setToggle(!toggle)
+  }
   return (
     <>
       <div className='flex size-full flex-col'>
-        {user && (
+        {user && guild && (
           <>
             <div className='mt-10 flex size-full px-24 '>
               <div className='flex h-[520px] w-full flex-col flex-wrap justify-start rounded-xl bg-[#f5f5f5] px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
@@ -22,12 +34,20 @@ export default function UserInfoShowcase({ user, skillsData }) {
                       }}
                     ></div>
                     <div className='flex flex-col pl-4 '>
-                      <h1 className='text-lg font-bold lg:text-3xl'>
+                      <div className='text-lg font-bold lg:text-2xl'>
                         {user.first_name} {user.last_name}
-                      </h1>
+                      </div>
+                      <div className='absolute right-5 top-5'>
+                        <Image
+                          src={guild.find((guild) => guild.id === user.guild_id)?.symbol || 'N/A'}
+                          height={30}
+                          width={30}
+                          alt='guild'
+                        />
+                      </div>
 
-                      <p className='mt-2'>Bio: {user.description}</p>
-                      <p className='mt-2'>Age: {user.age}</p>
+                      <div className='mt-2'>Bio: {user.description}</div>
+                      <div className='mt-2'>Age: {user.age}</div>
                     </div>
                   </div>
                 </div>
@@ -41,11 +61,24 @@ export default function UserInfoShowcase({ user, skillsData }) {
                 </div>
                 <div className='flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'>
                   <div className='flex size-72 flex-col items-center justify-center rounded-xl px-4 py-2 md:w-96 md:px-8 xl:px-0'>
-                    {user && skillsData ? (
-                      <SkillsChartComponent skills={skillsData} />
+                    <button
+                      className='absolute bottom-14 left-20 animate-pulse rounded-lg bg-purple-700/30 p-2 transition-colors hover:bg-pink-300/40 hover:text-pink-200'
+                      aria-label='toggle gallery'
+                      onClick={handletoggle}
+                    >
+                      {toggle ? <LuGalleryHorizontal size={20} /> : <IoBarChartOutline size={20} />}
+                    </button>
+                    {toggle ? (
+                      <>
+                        {user && skillsData ? (
+                          <SkillsChartComponent skills={skillsData} />
+                        ) : (
+                          // Render loading indicator or placeholder while data is being fetched
+                          <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
+                        )}
+                      </>
                     ) : (
-                      // Render loading indicator or placeholder while data is being fetched
-                      <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
+                      <GalleryComponent username={user.username} />
                     )}
                   </div>
 

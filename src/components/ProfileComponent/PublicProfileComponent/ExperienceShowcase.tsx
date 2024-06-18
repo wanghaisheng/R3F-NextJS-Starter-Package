@@ -33,7 +33,7 @@ export default function ExperienceShowcase({ experience, user }) {
             ))}
           </Swiper>
         ) : (
-          <div>No Exp to show</div>
+          <div className='flex w-full items-center justify-center'>{user.username} has no Exp to show</div>
         )}
       </div>
     </>

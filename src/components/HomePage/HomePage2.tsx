@@ -1,12 +1,10 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-
-const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
+import DiscoverRegion from '../Regions/DiscoverRegion'
 
 const getUsers = async () => {
   try {
@@ -77,7 +75,7 @@ const continents = [
   },
 ]
 
-const Regions = () => {
+const HomePage2 = () => {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState('NA') // Using continent code
   const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -139,7 +137,7 @@ const Regions = () => {
     <>
       <div className='relative'>
         <div className='flex flex-col justify-center lg:justify-start'>
-          <ShowRegionCesium
+          <DiscoverRegion
             selectedRegionFilter={selectedRegionFilter}
             guilds={guilds}
             selectedGuildFilter={selectedGuildFilter}
@@ -148,10 +146,12 @@ const Regions = () => {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <RegionHeader onFilterChange={handleRegionFilterChange} />
+        <div className='absolute top-20 flex w-full justify-center lg:top-32 lg:justify-start'>
+          <RegionHeader onFilterChange={handleRegionFilterChange} />
+        </div>
       </div>
     </>
   )
 }
 
-export default Regions
+export default HomePage2

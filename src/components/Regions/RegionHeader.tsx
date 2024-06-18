@@ -39,7 +39,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
     <div className='relative'>
       <div className='container mx-auto mt-7 flex w-full items-center justify-center px-4 py-2 '>
         {isSmallScreen && (
-          <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
+          <div className='absolute -top-2 z-30 flex justify-center gap-x-6 font-semibold lg:-top-5'>
             <a
               className={`cursor-pointer text-pink-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-pink-500'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
@@ -87,7 +87,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
       </div>
       {/* Sidebar */}
       <div className='fixed top-0 hidden items-center justify-start  font-semibold lg:flex'>
-        <ul className='flex h-[800px] w-[330px] flex-col gap-y-2 bg-gradient-to-r from-black/80 text-white'>
+        <ul className='flex h-screen w-[330px] flex-col gap-y-2 overflow-hidden bg-gradient-to-r from-black/80 text-white'>
           <li className='mt-[40%]'>
             <a
               className={`flex cursor-pointer items-center gap-x-3 pl-5 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'bg-gradient-to-r from-purple-700/30 text-purple-200'}`}

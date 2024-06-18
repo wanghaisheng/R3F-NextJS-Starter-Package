@@ -158,28 +158,7 @@ export default function HomePage({ users, guilds }) {
                       }))`,
                     }}
                   ></div>
-                  {/* <Image
-                    className='absolute top-0 w-[240px] rounded-t-md transition duration-500 ease-out hover:-translate-y-3 hover:scale-110'
-                    src={user && user.avatar[0].avatar_url.replace('glb', 'png')}
-                    alt=''
-                    width={240}
-                    height={280}
-                    style={{
-                      objectFit: 'cover',
-                      filter: `drop-shadow(-1px -2px 4px rgba(${
-                        // Use your pre-defined color values based on the activeFilter
-                        guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'PADMA'
-                          ? '255, 0, 0, 0.5'
-                          : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'VAJRA'
-                            ? '0, 0, 255, 0.5'
-                            : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'RATNA'
-                              ? '255, 255, 0, 0.5'
-                              : guilds.find((guild) => guild.id === user.guild_id)?.guild_name === 'KARMA'
-                                ? '0, 255, 0, 0.5'
-                                : '255, 255, 255, 0.5' // Default to white if no color found
-                      }))`,
-                    }}
-                  /> */}
+
                   <span className='absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 '>
                     <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
                       {user.username.toUpperCase()}

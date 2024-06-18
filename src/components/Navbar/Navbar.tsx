@@ -38,6 +38,15 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const [guildColor, setGuildColor] = useState(null)
   const [animations, setAnimations] = useState([])
 
+  const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
+
+  // Update imageUrl whenever user's image_urls changes
+  useEffect(() => {
+    if (user && user.image_urls && user.image_urls.length > 0) {
+      setProfilePic(user.image_urls[user.image_urls.length - 1])
+    }
+  }, [user, user?.image_urls?.length])
+
   useEffect(() => {
     const fetchAnimations = async () => {
       const animation1 = await fetch('/lottieAnimation/animate.json').then((response) => response.json())
@@ -63,19 +72,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         <div className='fixed inset-x-0 top-0 mx-auto flex h-20 w-full items-center justify-between px-4 py-2'>
           {/* Logo */}
           <Link href='/hud' className='flex items-center justify-center'>
-            {animations.length > 0 ? (
-              <Lottie
-                animationData={animations[0]}
-                loop={true}
-                autoplay={true}
-                style={{ width: 84, height: 84, zIndex: 20 }}
-              />
-            ) : (
-              <AiFillDribbbleCircle />
-            )}
             <Image
               src={'/logos/lgo.png'}
-              className='absolute animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
+              className='absolute left-4 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
               height={60}
               width={60}
               alt='GG Logo'
@@ -85,18 +84,18 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                <div className='mr-2'>
-                  <Link href='/my-profile' onClick={closeMenu} className='size-8 rounded-full'>
-                    <Image
-                      src={user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'}
-                      className='rounded-full'
-                      width={40}
-                      height={40}
-                      alt='User Profile Image'
-                      unoptimized
-                    />
-                  </Link>
-                </div>
+                <Link href='/my-profile' onClick={closeMenu}>
+                  <div
+                    className='mr-2 size-[38px] rounded-full bg-pink-400'
+                    key={profilePic}
+                    style={{
+                      backgroundImage: `url(${profilePic})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  ></div>
+                </Link>
                 <div className='flex'>
                   <Link
                     href='/'
@@ -136,9 +135,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {hideMiddleNav ? null : (
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
             <div className='hidden md:flex'>
-              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/80 px-20 shadow-md shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 {pathname === '/hud' ? (
-                  <Link href='/hud' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='/hud' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
                     HUD
                   </Link>
                 ) : (
@@ -150,7 +149,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   </Link>
                 )}
                 {pathname === '/discover' ? (
-                  <Link href='/discover' className='py-2 text-2xl font-bold text-[#AD00FF]'>
+                  <Link href='/discover' className='py-2 text-2xl font-bold text-pink-300 drop-shadow '>
                     DISCOVER
                   </Link>
                 ) : (
@@ -163,15 +162,15 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 )}
 
                 {pathname.startsWith('/regions') ? (
-                  <Link href='/regions' className='py-2 text-2xl font-bold text-[#AD00FF]'>
-                    REGIONS
+                  <Link href='/regions' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
+                    RGS
                   </Link>
                 ) : (
                   <Link
                     href='/regions'
                     className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                   >
-                    REGIONS
+                    RGS
                   </Link>
                 )}
               </div>

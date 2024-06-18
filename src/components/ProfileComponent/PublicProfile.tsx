@@ -17,19 +17,43 @@ const getSelectedPublicUser = async (username) => {
     if (res.status !== 200) {
       return toast.error('Failed to get the user')
     }
-    console.log('user', res.data)
+    // console.log('user', res.data)
     return res.data
   } catch (error) {
     toast.error('Internal server error')
   }
 }
 
+const getGuilds = async () => {
+  try {
+    const res = await axios.get(`/api/public/guilds`)
+    if (res.status !== 200) {
+      toast.error('Failed to fetch guilds data')
+      return []
+    }
+    return res.data
+  } catch (error) {
+    toast.error('Internal Server Error')
+    return []
+  }
+}
+
 export default function PublicProfile({ username }) {
   const [user, setUser] = useState(null)
+
+  const [guilds, setGuilds] = useState([])
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedGuilds = await getGuilds()
+      setGuilds(fetchedGuilds)
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const getPublicUser = async () => {
@@ -168,6 +192,26 @@ export default function PublicProfile({ username }) {
 
   return (
     <div className='relative flex justify-between lg:size-full'>
+      <div className='absolute top-0 h-screen w-full'>
+        {user && (
+          <video key={user.guild_id} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
+            {user?.guild_id === guilds.find((guild) => guild.guild_name === 'BUDDHA')?.id ? (
+              <source src='/livewallpapers/buddha.mp4' type='video/mp4' />
+            ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'VAJRA')?.id ? (
+              <source src='/livewallpapers/candles.mp4' type='video/mp4' />
+            ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'PADMA')?.id ? (
+              <source src='/livewallpapers/fire.mp4' type='video/mp4' />
+            ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'KARMA')?.id ? (
+              <source src='/livewallpapers/karma.mp4' type='video/mp4' />
+            ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'RATNA')?.id ? (
+              <source src='/livewallpapers/earth.mp4' type='video/mp4' />
+            ) : (
+              <source src='/livewallpapers/forest.mp4' type='video/mp4' />
+            )}
+          </video>
+        )}
+      </div>
+
       {user ? (
         <>
           <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[27%]'>
@@ -207,11 +251,10 @@ export default function PublicProfile({ username }) {
 
           {/* Carousel */}
 
-          <div className='mt-20 flex size-full flex-col'>
+          <div className='z-20 mt-20 flex size-full flex-col'>
             <div className='flex w-full justify-center'>
-              <UserInfoShowcase user={user} skillsData={skillsData} />
+              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
             </div>
-            {/* Slide 2 */}
             <div className='mt-5 w-full flex-1'>
               <ExperienceShowcase experience={experience} user={user} />
             </div>

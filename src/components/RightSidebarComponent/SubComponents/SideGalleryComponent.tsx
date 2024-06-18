@@ -1,4 +1,4 @@
-import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
+import GallerySidebar from '@/components/GalleryComponent/GallerySidebar'
 import { useUser } from '@/context/UserContext/UserContext'
 
 export default function SideGalleryComponent({ setActiveTab, setShowSignUp }) {
@@ -11,7 +11,7 @@ export default function SideGalleryComponent({ setActiveTab, setShowSignUp }) {
   return (
     <>
       {user ? (
-        <GalleryComponent username={user ? user.username : ''} />
+        <GallerySidebar username={user ? user.username : ''} />
       ) : (
         <>
           <div>You must sign in to view this tab</div>

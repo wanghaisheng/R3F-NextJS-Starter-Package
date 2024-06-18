@@ -50,7 +50,7 @@ const Hud = () => {
           <div className='container mx-auto flex h-16 items-center justify-center px-0 py-2 '>
             <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
             <div className='hidden md:flex'>
-              <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-black/80 px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-gray-200 backdrop-blur-md md:gap-7 dark:shadow-[#6B37CA]'>
+              <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-black/30 px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-gray-200 backdrop-blur-md md:gap-7 dark:shadow-[#6B37CA]'>
                 <Link
                   href='/slider'
                   aria-label='Go to slider'
@@ -108,24 +108,12 @@ const Hud = () => {
                   className='group py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
                   <Image
-                    src='/gglogo.png'
+                    src='/gglogo.svg'
                     width={50}
                     height={50}
                     alt='GG Logo'
                     className='animate-rotate-y p-2 animate-duration-[4000ms] animate-infinite'
                   />
-                  {animations.length > 0 ? (
-                    <Lottie
-                      animationData={animations[0]}
-                      loop={true}
-                      autoplay={true}
-                      style={{ width: 50, height: 50 }}
-                      className='absolute -top-1'
-                    />
-                  ) : (
-                    <TbSwipe />
-                  )}
-
                   <div
                     className={`
                       invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
