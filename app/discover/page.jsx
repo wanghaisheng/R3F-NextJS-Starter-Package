@@ -60,7 +60,7 @@ const Discover = () => {
   return (
     <div>
       {/* <HomePage users={users} guilds={guilds} /> */}
-      <HomePage2 users={users} guilds={guilds} />
+      <HomePage2 />
     </div>
   )
 }

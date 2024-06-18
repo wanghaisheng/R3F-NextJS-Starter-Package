@@ -1,5 +1,4 @@
 'use client'
-import { useState } from 'react'
 import ShowGuildDiscover from '../Guilds/ShowGuildDiscover'
 import GuildHeader from '../Guilds/GuildHeader'
 

@@ -82,17 +82,17 @@ export default function GalleryComponent({ username }) {
     <>
       <div className='flex size-full flex-col items-center justify-center overflow-y-auto px-4'>
         {activeTab === 'profilePics' && (
-          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
+          <div className='flex h-[300px] w-full flex-row overflow-hidden p-4'>
             {user && profilePics.length > 0 ? (
               <Swiper
                 effect={'cards'}
                 grabCursor={true}
                 modules={[EffectCards]}
-                className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
+                className='flex h-[200px] w-[300px] items-center justify-center rounded-lg'
               >
                 {profilePics.map((profilePic, index) => (
                   <SwiperSlide key={index}>
-                    <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                    <div className='flex h-[190px] w-[290px] justify-center rounded-lg border border-violet-600'>
                       <Image
                         src={profilePic}
                         alt='profile pictures'
@@ -107,7 +107,7 @@ export default function GalleryComponent({ username }) {
                 ))}
               </Swiper>
             ) : (
-              <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
+              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No profile pictures to show</p>
               </div>
             )}
@@ -115,17 +115,17 @@ export default function GalleryComponent({ username }) {
         )}
 
         {activeTab === 'projPics' && (
-          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
+          <div className='flex h-[300px] w-full flex-row overflow-hidden p-4'>
             {user && projPics.length > 0 ? (
               <Swiper
                 effect={'cards'}
                 grabCursor={true}
                 modules={[EffectCards]}
-                className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
+                className='flex h-[200px] w-[300px] items-center justify-center rounded-lg'
               >
                 {projPics.map((projPic, index) => (
                   <SwiperSlide key={index}>
-                    <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                    <div className='flex h-[190px] w-[290px] justify-center rounded-lg border border-violet-600'>
                       <Image
                         src={projPic}
                         alt='project pictures'
@@ -140,7 +140,7 @@ export default function GalleryComponent({ username }) {
                 ))}
               </Swiper>
             ) : (
-              <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
+              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No projects to show</p>
               </div>
             )}
@@ -148,17 +148,17 @@ export default function GalleryComponent({ username }) {
         )}
 
         {activeTab === 'certificates' && (
-          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
+          <div className='flex h-[300px] w-full flex-row overflow-hidden p-4'>
             {user && certificates.length > 0 ? (
               <Swiper
                 effect={'cards'}
                 grabCursor={true}
                 modules={[EffectCards]}
-                className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
+                className='flex h-[200px] w-[300px] items-center justify-center rounded-lg'
               >
                 {certificates.map((cert, index) => (
                   <SwiperSlide key={index}>
-                    <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                    <div className='flex h-[190px] w-[290px] justify-center rounded-lg border border-violet-600'>
                       <Image
                         src={cert}
                         alt='Certificates pictures'
@@ -173,7 +173,7 @@ export default function GalleryComponent({ username }) {
                 ))}
               </Swiper>
             ) : (
-              <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
+              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No Certificates to show</p>
               </div>
             )}

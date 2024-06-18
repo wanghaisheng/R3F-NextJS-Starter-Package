@@ -5,8 +5,9 @@ import SkillsChartComponent from '@/components/SliderComponent/SkillsChartCompon
 import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
+import Image from 'next/image'
 
-export default function UserInfoShowcase({ user, skillsData }) {
+export default function UserInfoShowcase({ user, skillsData, guild }) {
   const [toggle, setToggle] = useState(false)
 
   const handletoggle = () => {
@@ -15,7 +16,7 @@ export default function UserInfoShowcase({ user, skillsData }) {
   return (
     <>
       <div className='flex size-full flex-col'>
-        {user && (
+        {user && guild && (
           <>
             <div className='mt-10 flex size-full px-24 '>
               <div className='flex h-[520px] w-full flex-col flex-wrap justify-start rounded-xl bg-[#f5f5f5] px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
@@ -33,12 +34,20 @@ export default function UserInfoShowcase({ user, skillsData }) {
                       }}
                     ></div>
                     <div className='flex flex-col pl-4 '>
-                      <h1 className='text-lg font-bold lg:text-3xl'>
+                      <div className='text-lg font-bold lg:text-2xl'>
                         {user.first_name} {user.last_name}
-                      </h1>
+                      </div>
+                      <div className='absolute right-5 top-5'>
+                        <Image
+                          src={guild.find((guild) => guild.id === user.guild_id)?.symbol || 'N/A'}
+                          height={30}
+                          width={30}
+                          alt='guild'
+                        />
+                      </div>
 
-                      <p className='mt-2'>Bio: {user.description}</p>
-                      <p className='mt-2'>Age: {user.age}</p>
+                      <div className='mt-2'>Bio: {user.description}</div>
+                      <div className='mt-2'>Age: {user.age}</div>
                     </div>
                   </div>
                 </div>
