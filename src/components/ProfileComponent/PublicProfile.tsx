@@ -17,7 +17,7 @@ const getSelectedPublicUser = async (username) => {
     if (res.status !== 200) {
       return toast.error('Failed to get the user')
     }
-    console.log('user', res.data)
+    // console.log('user', res.data)
     return res.data
   } catch (error) {
     toast.error('Internal server error')
@@ -211,7 +211,6 @@ export default function PublicProfile({ username }) {
             <div className='flex w-full justify-center'>
               <UserInfoShowcase user={user} skillsData={skillsData} />
             </div>
-            {/* Slide 2 */}
             <div className='mt-5 w-full flex-1'>
               <ExperienceShowcase experience={experience} user={user} />
             </div>

@@ -71,7 +71,7 @@ export default function GalleryComponent({ username }) {
     }
   }, [user])
 
-  const [activeTab, setActiveTab] = useState('') //active tab state
+  const [activeTab, setActiveTab] = useState('profilePics') //active tab state
 
   const handleTabClick = (tab: string) => {
     //function to handle tab click
@@ -80,15 +80,9 @@ export default function GalleryComponent({ username }) {
 
   return (
     <>
-      <div className='flex size-full flex-col items-center justify-center overflow-y-auto px-4 pb-24'>
-        <div
-          onClick={() => handleTabClick('profilePics')}
-          className={`${activeTab === 'profilePics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer hover:text-violet-300`}
-        >
-          Profile
-        </div>
+      <div className='flex size-full flex-col items-center justify-center overflow-y-auto px-4'>
         {activeTab === 'profilePics' && (
-          <div className='flex size-fit flex-row overflow-hidden p-4'>
+          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
             {user && profilePics.length > 0 ? (
               <Swiper
                 effect={'cards'}
@@ -113,21 +107,15 @@ export default function GalleryComponent({ username }) {
                 ))}
               </Swiper>
             ) : (
-              <div className='flex justify-center'>
+              <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No profile pictures to show</p>
               </div>
             )}
           </div>
         )}
 
-        <div
-          onClick={() => handleTabClick('projPics')}
-          className={`${activeTab === 'projPics' ? 'font-bold text-pink-300' : 'text-white'} hover:text-violet-300`}
-        >
-          ProjPics
-        </div>
         {activeTab === 'projPics' && (
-          <div className='flex size-fit flex-row overflow-hidden p-4'>
+          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
             {user && projPics.length > 0 ? (
               <Swiper
                 effect={'cards'}
@@ -152,21 +140,15 @@ export default function GalleryComponent({ username }) {
                 ))}
               </Swiper>
             ) : (
-              <div className='flex justify-center'>
+              <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No projects to show</p>
               </div>
             )}
           </div>
         )}
 
-        <div
-          onClick={() => handleTabClick('certificates')}
-          className={`${activeTab === 'certificates' ? 'font-bold text-pink-300' : 'text-white'} hover:text-violet-300`}
-        >
-          Certificates
-        </div>
         {activeTab === 'certificates' && (
-          <div className='flex size-fit flex-row overflow-hidden p-4'>
+          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
             {user && certificates.length > 0 ? (
               <Swiper
                 effect={'cards'}
@@ -191,12 +173,33 @@ export default function GalleryComponent({ username }) {
                 ))}
               </Swiper>
             ) : (
-              <div className='flex justify-center'>
+              <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No Certificates to show</p>
               </div>
             )}
           </div>
         )}
+
+        <div className='flex w-full justify-between'>
+          <div
+            onClick={() => handleTabClick('profilePics')}
+            className={`${activeTab === 'profilePics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer hover:text-violet-300`}
+          >
+            Profile
+          </div>
+          <div
+            onClick={() => handleTabClick('projPics')}
+            className={`${activeTab === 'projPics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
+          >
+            Projects
+          </div>
+          <div
+            onClick={() => handleTabClick('certificates')}
+            className={`${activeTab === 'certificates' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
+          >
+            Skills
+          </div>
+        </div>
       </div>
     </>
   )
