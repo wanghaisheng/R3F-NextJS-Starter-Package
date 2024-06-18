@@ -174,7 +174,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                   ? imageUrls[imageUrls.length - 1]
                   : user.image_urls
                     ? user.image_urls[user.image_urls.length - 1]
-                    : ''
+                    : '/card/defaultbuddha.svg'
               }
               alt='porfilepic'
               height={170}

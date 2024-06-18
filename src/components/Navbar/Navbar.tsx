@@ -38,6 +38,15 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const [guildColor, setGuildColor] = useState(null)
   const [animations, setAnimations] = useState([])
 
+  const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
+
+  // Update imageUrl whenever user's image_urls changes
+  useEffect(() => {
+    if (user && user.image_urls && user.image_urls.length > 0) {
+      setProfilePic(user.image_urls[user.image_urls.length - 1])
+    }
+  }, [user, user?.image_urls?.length])
+
   useEffect(() => {
     const fetchAnimations = async () => {
       const animation1 = await fetch('/lottieAnimation/animate.json').then((response) => response.json())
@@ -88,8 +97,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 <Link href='/my-profile' onClick={closeMenu}>
                   <div
                     className='mr-2 size-[38px] rounded-full bg-pink-400'
+                    key={profilePic}
                     style={{
-                      backgroundImage: `url(${user ? user.image_urls[user.image_urls.length - 1] : '/card/abstract2.png'})`,
+                      backgroundImage: `url(${profilePic})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
