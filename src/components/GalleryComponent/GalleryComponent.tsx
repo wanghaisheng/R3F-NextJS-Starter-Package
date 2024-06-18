@@ -96,8 +96,8 @@ export default function GalleryComponent({ username }) {
                       <Image
                         src={profilePic}
                         alt='profile pictures'
-                        height={150}
-                        width={250}
+                        height={190}
+                        width={290}
                         unoptimized
                         className='rounded-lg'
                         objectFit='cover'
@@ -129,8 +129,8 @@ export default function GalleryComponent({ username }) {
                       <Image
                         src={projPic}
                         alt='project pictures'
-                        height={150}
-                        width={250}
+                        height={190}
+                        width={290}
                         unoptimized
                         className='rounded-lg'
                         objectFit='cover'
@@ -162,8 +162,8 @@ export default function GalleryComponent({ username }) {
                       <Image
                         src={cert}
                         alt='Certificates pictures'
-                        height={150}
-                        width={250}
+                        height={190}
+                        width={290}
                         unoptimized
                         className='rounded-lg'
                         objectFit='cover'
