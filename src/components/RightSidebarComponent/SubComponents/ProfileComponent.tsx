@@ -186,7 +186,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               <span className='text-sm font-semibold text-pink-500'>{description}</span>
             </p>
           </div>
-          <div className='-mt-2 mb-3 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
+          <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
             {user.username}
           </div>
 
