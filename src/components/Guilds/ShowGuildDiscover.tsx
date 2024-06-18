@@ -1,13 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import { Pagination, Scrollbar } from 'swiper/modules'
 import Link from 'next/link'
 import Lottie from 'lottie-react'
+import Image from 'next/image'
 
 export default function ShowGuildDiscover({
   users,
@@ -44,19 +43,24 @@ export default function ShowGuildDiscover({
   return (
     <div className='h-[560px] w-full'>
       {filteredFactions.length > 0 ? (
-        <div className='flex h-[460px] w-[480px] flex-wrap overflow-y-auto overflow-x-hidden rounded-lg pb-4 pt-2'>
+        <div className='flex h-[460px] w-[480px] flex-wrap rounded-lg py-4'>
           {filteredFactions.map((user, index) => (
             <div className='group' key={index}>
               <Link
                 href={`/public-profile/${user.username}`}
                 className='group relative ml-2 flex h-[200px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
               >
-                <div
-                  className='absolute inset-0 rounded-lg transition-all duration-500 ease-in-out hover:-translate-y-4 hover:scale-105'
+                <Image
+                  className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
+                  src={user.avatarimg}
+                  alt={user.username}
+                  width={240}
+                  height={280}
                   style={{
-                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user.avatarimg})`,
+                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
+                    objectFit: 'cover',
                     filter: `drop-shadow( 0px 0px 3px rgba(${
                       user.guild === 'PADMA'
                         ? '255, 0, 0, 1'
@@ -69,9 +73,9 @@ export default function ShowGuildDiscover({
                               : '255, 255, 255, 1'
                     }))`,
                   }}
-                ></div>
+                />
                 <span
-                  className={`absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
+                  className={`absolute bottom-7 flex w-full items-center rounded-b-md bg-purple-950 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900 hover:text-purple-300 `}
                 >
                   <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
                     {user.username.toUpperCase()}

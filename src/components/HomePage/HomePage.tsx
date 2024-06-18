@@ -158,6 +158,7 @@ export default function HomePage({ users, guilds }) {
                       }))`,
                     }}
                   ></div>
+
                   <span className='absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 '>
                     <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
                       {user.username.toUpperCase()}

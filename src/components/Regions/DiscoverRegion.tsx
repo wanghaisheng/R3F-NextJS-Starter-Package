@@ -21,7 +21,7 @@ export default function DiscoverRegion({
   return (
     <>
       <div className='relative flex-1'>
-        <div className='flex w-full flex-col justify-center lg:flex-row lg:justify-end lg:pr-5'>
+        <div className='flex w-full flex-col justify-center'>
           <div className='size-full'>
             {/* Video section */}
             <div className='absolute top-0 h-screen w-full'>
@@ -44,7 +44,7 @@ export default function DiscoverRegion({
 
             <div className='relative top-20 flex w-full items-center justify-center'>
               <div
-                className={`z-10 h-[80vh] w-[66vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+                className={`z-10 h-[79vh] w-[66vh] rounded-lg p-2 shadow-md backdrop-blur ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
               >
                 <GuildHeader
                   onFilterChange={handleFilterGuildChange}
@@ -52,7 +52,7 @@ export default function DiscoverRegion({
                   setSearchTerm={setSearchTerm}
                 />
 
-                <div className='flex h-[466px] w-full overflow-auto'>
+                <div className='flex h-[466px] w-full overflow-y-auto overflow-x-hidden'>
                   <ShowGuildDiscover
                     users={guilds}
                     selectedRegionFilter={selectedRegionFilter}
