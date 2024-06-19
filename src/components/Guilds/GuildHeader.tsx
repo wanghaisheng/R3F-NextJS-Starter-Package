@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
-import Lottie from 'lottie-react'
+import { PiDiamondsFourLight } from 'react-icons/pi'
 
 export default function GuildHeader({
   onFilterChange,
@@ -30,17 +29,6 @@ export default function GuildHeader({
     onFilterChange(filter)
     setActiveFilter(filter)
   }
-  const [animateLoadUsers, setAnimateLoadUsers] = useState([])
-
-  // for replacing the all user display button
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animation = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
-      setAnimateLoadUsers([animation])
-    }
-
-    fetchAnimations()
-  }, [])
 
   return (
     <div className='relative'>
@@ -82,17 +70,10 @@ export default function GuildHeader({
               className='flex w-full cursor-pointer items-center text-3xl hover:text-purple-400'
               onClick={() => handleFilterClick(null)}
             >
-              <p className='mr-1 text-sm'>
-                {animateLoadUsers.length > 0 ? (
-                  <Lottie
-                    animationData={animateLoadUsers[0]}
-                    loop={true}
-                    autoplay={true}
-                    style={{ width: 30, height: 30 }}
-                  />
-                ) : (
-                  ''
-                )}
+              <p className={`mr-1 text-sm`}>
+                <PiDiamondsFourLight
+                  className={`size-5 transition-all duration-300 ${activeFilter === null && 'rotate-180 scale-110'}`}
+                />
               </p>
             </div>
           </div>

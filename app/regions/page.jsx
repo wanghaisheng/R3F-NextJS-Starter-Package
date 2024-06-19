@@ -1,13 +1,13 @@
 'use client'
-
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-
+// Cesium import
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
 
+// fetching public users to diplay
 const getUsers = async () => {
   try {
     const res = await axios.get('/api/public/users')
@@ -32,6 +32,7 @@ const getUsers = async () => {
   }
 }
 
+// fetching guilds to map with public users for filtering
 const getGuilds = async () => {
   try {
     const res = await axios.get('/api/public/guilds')
@@ -46,6 +47,7 @@ const getGuilds = async () => {
   }
 }
 
+// continents static data
 const continents = [
   {
     continent_name: 'AFRICA',
@@ -78,23 +80,26 @@ const continents = [
 ]
 
 const Regions = () => {
-  const [selectedRegionFilter, setSelectedRegionFilter] = useState('NA') // Using continent code
-  const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
+  const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA') // Default is Asia
+  const [selectedGuildFilter, setSelectedGuildFilter] = useState(null) // Default is all guilds
   const [searchTerm, setSearchTerm] = useState('')
   const [publicUsers, setPublicUsers] = useState([])
   const [guildData, setGuildData] = useState([])
   const [guilds, setGuilds] = useState([])
 
+  // Filter by region
   const handleRegionFilterChange = (filter) => {
     setSelectedRegionFilter(filter)
     setSearchTerm('')
   }
 
+  // Filter by guild
   const handleFilterGuildChange = (filter) => {
     setSelectedGuildFilter(filter)
     setSearchTerm('')
   }
 
+  // Fetching public users
   useEffect(() => {
     const savePublicUsers = async () => {
       const users = await getUsers()
@@ -103,6 +108,7 @@ const Regions = () => {
     savePublicUsers()
   }, [])
 
+  // Fetching guilds
   useEffect(() => {
     const saveGuilds = async () => {
       const guild = await getGuilds()
@@ -111,6 +117,7 @@ const Regions = () => {
     saveGuilds()
   }, [])
 
+  // Mapping guilds with public users
   useEffect(() => {
     const mapGuildInfo = () => {
       const guilds = publicUsers.map((publicUser) => {
@@ -127,9 +134,10 @@ const Regions = () => {
           continent: continent ? continent.continent_name : 'Unknown Continent',
         }
       })
-      setGuilds(guilds)
+      setGuilds(guilds) // Set guilds to state
     }
 
+    // Check if publicUsers and guildData are not empty
     if (Array.isArray(publicUsers) && publicUsers.length !== 0 && Array.isArray(guildData) && guildData.length !== 0) {
       mapGuildInfo()
     }
@@ -148,7 +156,9 @@ const Regions = () => {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <RegionHeader onFilterChange={handleRegionFilterChange} />
+        <div className='mt-24 lg:mt-0'>
+          <RegionHeader onFilterChange={handleRegionFilterChange} />
+        </div>
       </div>
     </>
   )
