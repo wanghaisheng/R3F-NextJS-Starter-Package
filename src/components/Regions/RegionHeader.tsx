@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { FaGlobeAfrica, FaGlobeEurope, FaGlobeAmericas, FaGlobeAsia } from 'react-icons/fa'
-import { HiGlobeAsiaAustralia } from 'react-icons/hi2'
+import { FaEarthOceania } from 'react-icons/fa6'
 import { BsGlobeCentralSouthAsia } from 'react-icons/bs'
 
 export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
@@ -139,7 +139,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition-all duration-300 ease-out hover:scale-105 hover:text-purple-300  ${activeFilter === 'AUSTRALIA & OCEANIA' && 'gap-x-9 bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
-              <HiGlobeAsiaAustralia
+              <FaEarthOceania
                 className={`size-7 rounded-full ${activeFilter === 'AUSTRALIA & OCEANIA' && 'scale-110 bg-gradient-to-r from-[#c31432] to-[#240b36] text-[#000046]'} transition-all duration-300`}
               />
               AUSTRALIA & OCEANIA

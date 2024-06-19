@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
+import { RiEarthFill } from 'react-icons/ri'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
@@ -132,45 +133,28 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
-            <div className='hidden md:flex'>
-              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
-                {pathname === '/hud' ? (
-                  <Link href='/hud' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
-                    HUD
-                  </Link>
-                ) : (
-                  <Link
-                    href='/hud'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    HUD
-                  </Link>
-                )}
-                {pathname === '/discover' ? (
-                  <Link href='/discover' className='py-2 text-2xl font-bold text-pink-300 drop-shadow '>
-                    DISCOVER
-                  </Link>
-                ) : (
-                  <Link
-                    href='/discover'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    DISCOVER
-                  </Link>
-                )}
+            <div className='hidden transition-all duration-300 md:flex'>
+              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md  md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+                <Link
+                  href='/hud'
+                  className={` ${pathname === '/hud' ? 'py-2 text-2xl font-bold text-pink-300 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                >
+                  HUD
+                </Link>
 
-                {pathname.startsWith('/regions') ? (
-                  <Link href='/regions' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
-                    RGS
-                  </Link>
-                ) : (
-                  <Link
-                    href='/regions'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    RGS
-                  </Link>
-                )}
+                <Link
+                  href='/discover'
+                  className={` ${pathname === '/discover' ? 'py-2 text-2xl font-bold text-pink-300 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                >
+                  DISCOVER
+                </Link>
+
+                <Link
+                  href='/regions'
+                  className={` ${pathname.startsWith('/regions') ? 'py-2 text-2xl font-bold text-pink-300 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                >
+                  <RiEarthFill className='size-5' />
+                </Link>
               </div>
             </div>
           </div>
