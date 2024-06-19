@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
-import { TbSwipe } from 'react-icons/tb'
+import { TbCards } from 'react-icons/tb'
 import Image from 'next/image'
 
 import SpringModal from '../FormModal/SpringModal'
@@ -44,7 +44,7 @@ const Hud = () => {
                   aria-label='Go to slider'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <TbSwipe className='size-4' />
+                  <TbCards className='size-6' />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
