@@ -7,8 +7,6 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
-import Lottie from 'lottie-react'
-import { AiFillDribbbleCircle } from 'react-icons/ai'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
@@ -107,7 +105,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     <LuLogOut className='mr-4 size-6 text-red-500' />
                   </Link>
                   <div className='-mr-2 flex items-center md:hidden'>
-                    <Hamburger toggled={isOpen} toggle={setOpen} />
+                    <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                   </div>
                 </div>
               </>

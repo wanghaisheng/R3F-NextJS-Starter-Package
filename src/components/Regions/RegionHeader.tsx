@@ -51,7 +51,8 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
               className={`cursor-pointer text-green-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-green-700'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
-              <FaGlobeAfrica />
+              {/* <FaGlobeAfrica /> */}
+              AF
             </a>
             <a
               className={`cursor-pointer text-red-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-red-500'}`}

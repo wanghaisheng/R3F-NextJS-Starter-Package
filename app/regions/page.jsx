@@ -156,7 +156,9 @@ const Regions = () => {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <RegionHeader onFilterChange={handleRegionFilterChange} />
+        <div className='mt-24 lg:mt-0'>
+          <RegionHeader onFilterChange={handleRegionFilterChange} />
+        </div>
       </div>
     </>
   )

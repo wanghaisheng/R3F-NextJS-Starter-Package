@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 const CesiumMap = dynamic(() => import('../LeafletMap/CesiumMap'), {
   ssr: false,
 })
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Suspense } from 'react'
 import ShowGuild from '../Guilds/ShowGuild'
 import GuildHeader from '../Guilds/GuildHeader'
@@ -40,14 +40,26 @@ export default function ShowRegionCesium({
   setSearchTerm: (event: any) => void
 }) {
   const [mapChange, setMapChange] = useState(true)
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
   const handleMapChange = () => {
     setMapChange(!mapChange)
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <>
       <div className='relative flex-1'>
-        <div className='flex w-full flex-col justify-center lg:flex-row lg:justify-end lg:pr-5'>
+        <div className='flex size-full flex-col justify-center lg:flex-row lg:justify-end lg:pr-5'>
           {/* <div>
             {countries.map((country) => (
               <div key={country.name.common}>
@@ -78,13 +90,14 @@ export default function ShowRegionCesium({
             </Suspense>
             {/* Guilds showcase */}
             <button
-              className='absolute right-4 top-20 z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500'
+              className='absolute right-4 top-[350px] z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500 lg:top-20'
               onClick={handleMapChange}
             >
               {mapChange ? <FaEarthAmericas className='size-6' /> : <FaMap className='size-6' />}
             </button>
+
             <div
-              className={`absolute right-0 top-36 mr-4 h-[57vh] w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% p-2 shadow-md backdrop-blur-md ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+              className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${isSmallScreen ? 'absolute top-[300px] h-[36vh] w-full px-4' : 'absolute right-0 top-36 mr-4 h-[57vh]  w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'}`}
             >
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
@@ -104,40 +117,6 @@ export default function ShowRegionCesium({
           </div>
         </div>
       </div>
-      {/* <div className='fixed bottom-0 left-[50%] z-50 flex h-auto w-[60%] -translate-x-1/2 items-center justify-center '>
-        <div className='flex flex-wrap justify-center gap-x-5 py-2'>
-          {filteredRegions.map((region, index) => (
-            <a
-              href={`#`} // filter the guilds based on the country
-              className='relative flex aspect-[2/1] size-20 min-w-0 flex-col items-center justify-center rounded-lg transition duration-500 ease-out hover:scale-105'
-              key={index}
-            >
-              <Image
-                className='rounded-lg object-cover'
-                src={region.image}
-                alt=''
-                layout='fill' // Use layout="fill" for responsive images
-                // width={200}
-                // height={100}
-                loading='lazy'
-              />
-              <span className='absolute top-0 flex size-20 items-center justify-center rounded-lg bg-black/40 opacity-100 transition duration-700 ease-out hover:opacity-0'>
-                <Image
-                  src={region.icon}
-                  alt='region icon'
-                  height={30}
-                  width={30}
-                  className='absolute top-[19%]'
-                  loading='lazy'
-                />
-              </span>
-              <span className='absolute bottom-0 flex w-full flex-col items-center rounded-b-md bg-purple-950 py-1 text-xs'>
-                <h1>{region.name}</h1>
-              </span>
-            </a>
-          ))}
-        </div>
-      </div> */}
     </>
   )
 }
