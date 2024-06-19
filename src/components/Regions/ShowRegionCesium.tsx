@@ -1,6 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic'
 
+// Import the CesiumMap component dynamically
 const CesiumMap = dynamic(() => import('../LeafletMap/CesiumMap'), {
   ssr: false,
 })
@@ -8,18 +9,21 @@ import { useState } from 'react'
 import { Suspense } from 'react'
 import ShowGuild from '../Guilds/ShowGuild'
 import GuildHeader from '../Guilds/GuildHeader'
+
+// Import the LeafletMap component dynamically
 const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
   ssr: false,
 })
 import { FaEarthAmericas } from 'react-icons/fa6'
 import { FaMap } from 'react-icons/fa'
 
-async function getCountries() {
-  // const response = await fetch('https://restcountries.com/v3.1/all')
-  const response = await fetch('https://restcountries.com/v3.1/region/asia')
-  const data = await response.json()
-  return data
-}
+// async function getCountries() {
+//   // const response = await fetch('https://restcountries.com/v3.1/all')
+//   const response = await fetch('https://restcountries.com/v3.1/region/asia')
+//   const data = await response.json()
+//   return data
+// }
+
 export default function ShowRegionCesium({
   selectedRegionFilter,
   guilds,
@@ -35,7 +39,7 @@ export default function ShowRegionCesium({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
-  const [mapChange, setMapChange] = useState(false)
+  const [mapChange, setMapChange] = useState(true)
   const handleMapChange = () => {
     setMapChange(!mapChange)
   }

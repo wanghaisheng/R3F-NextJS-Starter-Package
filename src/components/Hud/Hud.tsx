@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { TbSwipe } from 'react-icons/tb'
-import Lottie from 'lottie-react'
 import Image from 'next/image'
 
 import SpringModal from '../FormModal/SpringModal'
@@ -12,17 +11,6 @@ const Hud = () => {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
-  const [animations, setAnimations] = useState([])
-
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animation1 = await fetch('/lottieAnimation/circle.json').then((response) => response.json())
-      const animation2 = await fetch('/lottieAnimation/slider.json').then((response) => response.json())
-      setAnimations([animation1, animation2])
-    }
-
-    fetchAnimations()
-  }, [])
 
   useEffect(() => {
     if (
@@ -56,16 +44,7 @@ const Hud = () => {
                   aria-label='Go to slider'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  {animations.length > 0 ? (
-                    <Lottie
-                      animationData={animations[1]}
-                      loop={true}
-                      autoplay={true}
-                      style={{ width: 50, height: 50 }}
-                    />
-                  ) : (
-                    <TbSwipe />
-                  )}
+                  <TbSwipe className='size-4' />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -83,13 +62,7 @@ const Hud = () => {
                   target='_blank'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <Image
-                    src='/logos/relativity.svg'
-                    width={45}
-                    height={45}
-                    alt='GG Logo'
-                    className='animate-rotate-y p-2 animate-duration-[4000ms] animate-infinite'
-                  />
+                  <Image src='/logos/relativity.svg' width={45} height={45} alt='GG Logo' className='p-2' />
                   <div
                     className={`
           invisible absolute -left-7 top-0 -translate-y-8 whitespace-nowrap
@@ -107,13 +80,7 @@ const Hud = () => {
                   target='_blank'
                   className='group py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <Image
-                    src='/gglogo.svg'
-                    width={50}
-                    height={50}
-                    alt='GG Logo'
-                    className='animate-rotate-y p-2 animate-duration-[4000ms] animate-infinite'
-                  />
+                  <Image src='/gglogo.svg' width={50} height={50} alt='GG Logo' className='p-2' />
                   <div
                     className={`
                       invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -131,13 +98,7 @@ const Hud = () => {
                   target='_blank'
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <Image
-                    src='/logos/portals.svg'
-                    width={45}
-                    height={45}
-                    alt='GG Logo'
-                    className='animate-rotate-y p-2 animate-duration-[4000ms] animate-infinite'
-                  />
+                  <Image src='/logos/portals.svg' width={45} height={45} alt='GG Logo' className='p-2' />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
@@ -154,13 +115,7 @@ const Hud = () => {
                   aria-label=''
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
-                  <Image
-                    src='/logos/lgo.png'
-                    width={35}
-                    height={35}
-                    alt='GG Logo'
-                    className='animate-rotate-y p-2 animate-duration-[4000ms] animate-infinite'
-                  />
+                  <Image src='/logos/lgo.png' width={35} height={35} alt='GG Logo' className='p-2' />
                   <div
                     className={`
           invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap

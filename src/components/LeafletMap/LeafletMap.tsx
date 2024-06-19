@@ -6,10 +6,10 @@ import worldGeoJSON from 'geojson-world-map'
 
 import { GeoJsonObject } from 'geojson'
 
-import { MapContainer, TileLayer, GeoJSON, useMap, useMapEvent, Rectangle } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 
 const MapComponent = ({ filteredContinent }: { filteredContinent: string }) => {
-  const [mapCenter, setMapCenter] = useState<[number, number]>([0, 20]) // Initial map center
+  const [mapCenter, setMapCenter] = useState<[number, number]>([30, 100]) // Initial map center to asia
 
   const handleFlyTo = (center: [number, number]) => {
     setMapCenter(center) // Update the map center state
