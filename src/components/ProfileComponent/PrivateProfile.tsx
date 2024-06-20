@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { useUser } from '@/context/UserContext/UserContext'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import SpringModal from '@/components/FormModal/SpringModal'
+import { TbCards } from 'react-icons/tb'
 
 // For the card flip QR code
 import QRCode from 'qrcode'
@@ -35,18 +36,7 @@ export default function PrivateProfile() {
   const [isOpen, setIsOpen] = useState(false)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const isScrollingRef = useRef(false)
-  const [animations, setAnimations] = useState([])
-
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
-
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const sliderAnimation = await fetch('/lottieAnimation/slider.json').then((response) => response.json())
-      setAnimations([sliderAnimation])
-    }
-
-    fetchAnimations()
-  }, [])
 
   const handleChangeSlide = (index) => {
     if (emblaApi) emblaApi.scrollTo(index)
@@ -308,16 +298,7 @@ export default function PrivateProfile() {
                                   aria-label='edit button'
                                   href='/slider'
                                 >
-                                  {animations.length > 0 ? (
-                                    <Lottie
-                                      animationData={animations[0]}
-                                      loop={true}
-                                      autoplay={true}
-                                      style={{ width: 50, height: 50 }}
-                                    />
-                                  ) : (
-                                    ''
-                                  )}
+                                  <TbCards />
                                 </Link>
                               </div>
                               <div className='flex justify-center'>
@@ -342,16 +323,7 @@ export default function PrivateProfile() {
                                       aria-label='edit button'
                                       href='/slider'
                                     >
-                                      {animations.length > 0 ? (
-                                        <Lottie
-                                          animationData={animations[0]}
-                                          loop={true}
-                                          autoplay={true}
-                                          style={{ width: 50, height: 50 }}
-                                        />
-                                      ) : (
-                                        ''
-                                      )}
+                                      <TbCards />
                                     </Link>
                                   </div>
                                   <div className='flex justify-center'>
@@ -491,16 +463,7 @@ export default function PrivateProfile() {
                         aria-label='edit button'
                         href='/slider'
                       >
-                        {animations.length > 0 ? (
-                          <Lottie
-                            animationData={animations[0]}
-                            loop={true}
-                            autoplay={true}
-                            style={{ width: 50, height: 50 }}
-                          />
-                        ) : (
-                          ''
-                        )}
+                        <TbCards />
                       </Link>
                     )}
                   </div>
@@ -578,16 +541,7 @@ export default function PrivateProfile() {
                         aria-label='edit button'
                         href='/slider'
                       >
-                        {animations.length > 0 ? (
-                          <Lottie
-                            animationData={animations[0]}
-                            loop={true}
-                            autoplay={true}
-                            style={{ width: 50, height: 50 }}
-                          />
-                        ) : (
-                          ''
-                        )}
+                        <TbCards />
                       </Link>
                     )}
                   </div>

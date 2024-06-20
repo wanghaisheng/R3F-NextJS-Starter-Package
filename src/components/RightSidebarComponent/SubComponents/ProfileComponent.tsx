@@ -10,6 +10,7 @@ import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
+<<<<<<< HEAD
 import { useRouter } from 'next/navigation'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
@@ -26,64 +27,128 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     continent_code: '',
     latitude: '',
     longitude: '',
+=======
+import { RiGalleryFill } from 'react-icons/ri'
+
+export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
+  const { user } = useUser()
+
+  const [form, setForm] = useState({
+    username: user?.username || '',
+    phone_number: user?.phone_number || '',
+    dob: user?.dob || '',
+    description: user?.description || '',
+    region: user?.region || {
+      ip: '',
+      city: '',
+      country: '',
+      continent_code: '',
+      latitude: '',
+      longitude: '',
+    },
+    image_urls: user?.image_urls || [],
+>>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
   })
 
-  const [avatarsData, setAvatarsData] = useState([])
-  const handleSignUpClick = () => {
-    setActiveTab('search')
-    setShowSignUp(true)
+  const [regionStatus, setRegionStatus] = useState(false)
+  const [avatarsData, setAvatarsData] = useState(user?.avatar || [])
+  const [files, setFiles] = useState([])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }))
+  }
+
+  const handleRegionStatus = async (value) => {
+    setRegionStatus(value)
+    if (value) {
+      const response = await fetch('https://ipapi.co/json/')
+      const data = await response.json()
+      if (window.confirm('Do you want to share the location via your IP?')) {
+        setForm((prevForm) => ({
+          ...prevForm,
+          region: data,
+        }))
+      }
+    } else {
+      setForm((prevForm) => ({
+        ...prevForm,
+        region: {
+          ip: '',
+          city: '',
+          country: '',
+          continent_code: '',
+          latitude: '',
+          longitude: '',
+        },
+      }))
+    }
+  }
+
+  const handleImageChange = (items) => {
+    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
+    setFiles(successfulFiles)
+    const imageUrls = successfulFiles.map((file) => file.cdnUrl)
+    setForm((prevForm) => ({
+      ...prevForm,
+      image_urls: imageUrls,
+    }))
   }
 
   useEffect(() => {
+<<<<<<< HEAD
     const setUserInfo = () => {
       setPhoneNumber(user.phone_number ? user.phone_number : '')
       setDob(user.dob ? user.dob : '')
       setUserImages(user.image_urls ? (user.image_urls !== 0 ? user.image_urls : []) : [])
       setGeoLocationInfo(user.region)
+=======
+    if (files.length) {
+      const imageUrl = form.image_urls[form.image_urls.length - 1]
+      handleImgUpdate(imageUrl)
+>>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
     }
-    if (user) {
-      setUserInfo()
-    }
-  }, [user])
+  }, [files])
 
-  const handleSubmit = async (e: any) => {
+  const handleImgUpdate = async (image_url) => {
+    try {
+      await axios.put(`/api/internal/users/${user.gg_id}`, { image_url })
+      toast.success('Profile pic updated successfully!')
+    } catch (error) {
+      toast.error('Error updating profile pic!')
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-
-    const submit = {
-      phone_number,
-      dob,
-      description: description,
-      region:
-        geoLocationInfo.ip !== ''
-          ? {
-              ip: geoLocationInfo.ip,
-              city: geoLocationInfo.city,
-              country: geoLocationInfo.country,
-              continent_code: geoLocationInfo.continent_code,
-              latitude: geoLocationInfo.latitude,
-              longitude: geoLocationInfo.longitude,
-            }
-          : {
-              ip: '',
-              city: '',
-              country: '',
-              continent_code: '',
-              latitude: '',
-              longitude: '',
-            },
+    const submitData = {
+      username: form.username,
+      phone_number: form.phone_number,
+      dob: form.dob,
+      description: form.description,
+      region: form.region.ip
+        ? form.region
+        : {
+            ip: '',
+            city: '',
+            country: '',
+            continent_code: '',
+            latitude: '',
+            longitude: '',
+          },
     }
     try {
-      await axios({
-        url: `/api/internal/users/${user.gg_id}`,
-        method: 'put',
-        data: submit,
-      })
+      await axios.put(`/api/internal/users/${user.gg_id}`, submitData)
       toast.success('Successfully updated!')
     } catch (error) {
       toast.error('Update failed!')
     }
   }
 
+<<<<<<< HEAD
   useEffect(() => {
     const fetchAvatarsData = async () => {
       try {
@@ -166,6 +231,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     } catch (error) {
       toast.error('Error updating profile pic!')
     }
+=======
+  const handleSignUpClick = () => {
+    setActiveTab('search')
+    setShowSignUp(true)
+>>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
   }
 
   useEffect(() => {
@@ -178,7 +248,15 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
+<<<<<<< HEAD
               src={userImages.length !== 0 ? userImages[userImages.length - 1] : '/card/defaultbuddha.svg'}
+=======
+              src={
+                form.image_urls.length
+                  ? form.image_urls[form.image_urls.length - 1]
+                  : user.image_urls?.[user.image_urls.length - 1] || '/card/defaultbuddha.svg'
+              }
+>>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
               alt='porfilepic'
               height={170}
               width={500}
@@ -186,7 +264,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               className='rounded'
             />
             <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
-              <span className='text-sm font-semibold text-pink-500'>{description}</span>
+              <span className='text-sm font-semibold text-pink-500'>{form.description}</span>
             </p>
           </div>
           <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
@@ -224,7 +302,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
 
           <div className='-mt-5 flex justify-center '>
-            <GeniusID dob={dob} contact={phone_number} />
+            <GeniusID dob={form.dob} contact={form.phone_number} />
           </div>
 
           <form
@@ -233,42 +311,58 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           >
             <div className='flex w-full flex-col gap-y-2 px-4  text-purple-200'>
               <div className='flex flex-col'>
-                <label htmlFor='bio' className='font-semibold'>
+                <label htmlFor='description' className='font-semibold'>
+                  USERNAME
+                </label>
+                <input
+                  type='text'
+                  name='username'
+                  id='username'
+                  placeholder='Username'
+                  value={form.username}
+                  className='rounded-md bg-white/20 px-3'
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='description' className='font-semibold'>
                   BIO
                 </label>
                 <input
                   type='text'
-                  name='bio'
+                  name='description'
                   id='bio'
                   placeholder='Bio'
-                  value={description}
+                  value={form.description}
                   className='rounded-md bg-white/20 px-3'
-                  onChange={(e) => handelDescriptionChange(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className='flex flex-col'>
-                <label htmlFor='' className='font-semibold'>
+                <label htmlFor='phone_number' className='font-semibold'>
                   Contact
                 </label>
 
                 <input
                   type='text'
-                  value={phone_number}
-                  onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                  name='phone_number'
+                  value={form.phone_number}
+                  onChange={handleInputChange}
                   placeholder='Phone Number'
                   className='rounded-md bg-white/20 px-3'
                   aria-label='Phone Number'
                 />
               </div>
               <div className='flex flex-col'>
-                <label htmlFor='' className='font-semibold'>
+                <label htmlFor='dob' className='font-semibold'>
                   DOB
                 </label>
 
                 <input
                   type='date'
-                  value={dob}
-                  onChange={(e) => handleDOBChange(e.target.value)}
+                  name='dob'
+                  value={form.dob}
+                  onChange={handleInputChange}
                   className='rounded-md bg-white/20 px-3'
                   required
                   aria-label='Date of Birth'
@@ -281,19 +375,20 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
 
                 <input
                   type='checkbox'
-                  checked={user ? (user.region ? !regionStatus : false) : false}
+                  id='region_status'
+                  checked={regionStatus}
                   onChange={(e) => handleRegionStatus(e.target.checked)}
                   className='ml-2 flex size-5 items-center justify-start'
                   aria-label='region status'
                 />
               </div>
-              <form onSubmit={handleImgUpdate} className='flex items-center justify-between gap-x-2'>
-                <label htmlFor='' className='whitespace-nowrap font-semibold'>
+              <div className='flex items-center justify-between gap-x-2'>
+                <label htmlFor='profile_picture' className='whitespace-nowrap font-semibold'>
                   Profile Picture
                 </label>
                 <div className='my-2 flex w-full items-center justify-center'>
                   <FileUploaderRegular
-                    onChange={handleChangeEvent}
+                    onChange={handleImageChange}
                     pubkey={'aff2bf9d09cde0f92516'}
                     maxLocalFileSizeBytes={10000000}
                     imgOnly={true}
@@ -301,7 +396,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                     className='flex w-full justify-center rounded-lg bg-white'
                   />
                 </div>
-              </form>
+              </div>
             </div>
 
             <div className='mt-4'>
@@ -328,7 +423,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               className='mt-2 flex w-fit cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
             ease-in-out hover:border-purple-500'
             >
-              View Your Gallery
+              <RiGalleryFill />
             </div>
           </div>
         </div>

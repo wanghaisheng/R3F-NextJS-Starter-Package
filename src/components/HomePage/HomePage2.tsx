@@ -76,7 +76,7 @@ const continents = [
 ]
 
 const HomePage2 = () => {
-  const [selectedRegionFilter, setSelectedRegionFilter] = useState('NA') // Using continent code
+  const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA') // Using continent asia
   const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [publicUsers, setPublicUsers] = useState([])

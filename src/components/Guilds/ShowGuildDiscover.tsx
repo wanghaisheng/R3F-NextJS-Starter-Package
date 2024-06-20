@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import Link from 'next/link'
-import Lottie from 'lottie-react'
 import Image from 'next/image'
+
 import { useUser } from '@/context/UserContext/UserContext'
 
 export default function ShowGuildDiscover({
@@ -21,6 +20,7 @@ export default function ShowGuildDiscover({
   searchTerm: string
 }) {
   const { user } = useUser()
+
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
@@ -29,18 +29,6 @@ export default function ShowGuildDiscover({
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
-  const [animateUsers, setAnimateUsers] = useState([])
-
-  // for replacing no users found
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animation = await fetch('/lottieAnimation/globalUsers.json').then((response) => response.json())
-      const animation2 = await fetch('/lottieAnimation/allUsersAnimate.json').then((response) => response.json())
-      setAnimateUsers([animation, animation2])
-    }
-
-    fetchAnimations()
-  }, [])
 
   return (
     <div className='w-full lg:h-[560px]'>
@@ -117,13 +105,7 @@ export default function ShowGuildDiscover({
           ))}
         </div>
       ) : (
-        <div className='flex size-full items-center justify-center text-white'>
-          {animateUsers.length > 0 ? (
-            <Lottie animationData={animateUsers[0]} loop={true} autoplay={true} style={{ width: 300, height: 300 }} />
-          ) : (
-            ''
-          )}
-        </div>
+        <div className='flex size-full items-center justify-center text-white'>!!!</div>
       )}
       {/* Right */}
       <div className='absolute right-[-450px] top-[55px] z-10 hidden h-[490px] w-[400px] items-start justify-start rounded-lg bg-pink-300/20 lg:flex'>

@@ -7,8 +7,9 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
-import Lottie from 'lottie-react'
-import { AiFillDribbbleCircle } from 'react-icons/ai'
+import { RiEarthFill } from 'react-icons/ri'
+import { GiShipWheel } from 'react-icons/gi'
+import { GiBarbedStar } from 'react-icons/gi'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
@@ -107,7 +108,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                     <LuLogOut className='mr-4 size-6 text-red-500' />
                   </Link>
                   <div className='-mr-2 flex items-center md:hidden'>
-                    <Hamburger toggled={isOpen} toggle={setOpen} />
+                    <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                   </div>
                 </div>
               </>
@@ -133,46 +134,29 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
-          <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 '>
-            <div className='hidden md:flex'>
-              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
-                {pathname === '/hud' ? (
-                  <Link href='/hud' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
-                    HUD
-                  </Link>
-                ) : (
-                  <Link
-                    href='/hud'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    HUD
-                  </Link>
-                )}
-                {pathname === '/discover' ? (
-                  <Link href='/discover' className='py-2 text-2xl font-bold text-pink-300 drop-shadow '>
-                    DISCOVER
-                  </Link>
-                ) : (
-                  <Link
-                    href='/discover'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    DISCOVER
-                  </Link>
-                )}
+          <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 transition-all duration-300 '>
+            <div className='hidden  md:flex'>
+              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md  md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+                <Link
+                  href='/hud'
+                  className={` ${pathname === '/hud' ? 'scale-110 py-2 text-2xl font-bold text-pink-700 drop-shadow' : 'py-2 font-semibold transition-all duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                >
+                  <GiShipWheel size={25} />
+                </Link>
 
-                {pathname.startsWith('/regions') ? (
-                  <Link href='/regions' className='py-2 text-2xl font-bold text-pink-300 drop-shadow'>
-                    RGS
-                  </Link>
-                ) : (
-                  <Link
-                    href='/regions'
-                    className='py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                  >
-                    RGS
-                  </Link>
-                )}
+                <Link
+                  href='/discover'
+                  className={` ${pathname === '/discover' ? 'scale-110 py-2 text-2xl font-bold text-pink-700 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                >
+                  <GiBarbedStar size={30} />
+                </Link>
+
+                <Link
+                  href='/regions'
+                  className={` ${pathname.startsWith('/regions') ? 'scale-110 py-2 text-2xl font-bold text-pink-700 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                >
+                  <RiEarthFill size={25} />
+                </Link>
               </div>
             </div>
           </div>
