@@ -10,24 +10,6 @@ import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
-<<<<<<< HEAD
-import { useRouter } from 'next/navigation'
-
-export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
-  const { user } = useUser()
-  const [phone_number, setPhoneNumber] = useState('')
-  const [dob, setDob] = useState('')
-  const [regionStatus, setRegionStatus] = useState(false)
-  const [userImages, setUserImages] = useState([])
-  const router = useRouter()
-  const [geoLocationInfo, setGeoLocationInfo] = useState({
-    ip: '',
-    city: '',
-    country: '',
-    continent_code: '',
-    latitude: '',
-    longitude: '',
-=======
 import { RiGalleryFill } from 'react-icons/ri'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
@@ -47,7 +29,6 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       longitude: '',
     },
     image_urls: user?.image_urls || [],
->>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
   })
 
   const [regionStatus, setRegionStatus] = useState(false)
@@ -99,17 +80,9 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   }
 
   useEffect(() => {
-<<<<<<< HEAD
-    const setUserInfo = () => {
-      setPhoneNumber(user.phone_number ? user.phone_number : '')
-      setDob(user.dob ? user.dob : '')
-      setUserImages(user.image_urls ? (user.image_urls !== 0 ? user.image_urls : []) : [])
-      setGeoLocationInfo(user.region)
-=======
     if (files.length) {
       const imageUrl = form.image_urls[form.image_urls.length - 1]
       handleImgUpdate(imageUrl)
->>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
     }
   }, [files])
 
@@ -148,99 +121,10 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
   }
 
-<<<<<<< HEAD
-  useEffect(() => {
-    const fetchAvatarsData = async () => {
-      try {
-        setAvatarsData(user.avatar)
-      } catch (error) {
-        console.log('Error fetching avatars data:', error)
-      }
-    }
-    if (user) {
-      fetchAvatarsData() // Fetch data only if user is available
-    }
-  }, [user])
-
-  const handlePhoneNumberChange = (newPhoneNumber: string) => {
-    setPhoneNumber(newPhoneNumber)
-  }
-  const handleDOBChange = (newDob: string) => {
-    setDob(newDob)
-  }
-
-  const handleRegionStatus = async (value: boolean) => {
-    setRegionStatus(value)
-    if (value === true) {
-      const response = await fetch('https://ipapi.co/json/')
-      const data = await response.json()
-      const isConfirmed = window.confirm('Do you want to share the location via your IP?')
-      if (isConfirmed) {
-        setGeoLocationInfo(data)
-      } else {
-        return
-      }
-    } else if (value === false) {
-      setGeoLocationInfo({
-        ip: '',
-        city: '',
-        country: '',
-        continent_code: '',
-        latitude: '',
-        longitude: '',
-      })
-    }
-  }
-
-  const [description, setDescription] = useState(user ? user.description : '')
-  const [imageUrls, setImageUrls] = useState([])
-  const [files, setFiles] = useState([])
-
-  const handleChangeEvent = (items) => {
-    const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
-    setFiles(successfulFiles)
-    const imageUrls = successfulFiles.map((file) => file.cdnUrl) // Extract cdnUrls
-    setImageUrls(imageUrls) // Update cdnUrls state
-  }
-
-  useEffect(() => {
-    const saveImage = () => {
-      handleImgUpdate(imageUrls[imageUrls.length - 1])
-    }
-    if (imageUrls.length !== 0) {
-      saveImage()
-    }
-  }, [imageUrls])
-
-  function handelDescriptionChange(newDescription: string) {
-    setDescription(newDescription)
-  }
-
-  const handleImgUpdate = async (image_url) => {
-    const submit = {
-      image_url: image_url,
-    }
-    try {
-      const { data } = await axios({
-        url: `/api/internal/users/${user.gg_id}`,
-        method: 'put',
-        data: submit,
-      })
-      setUserImages((oldUserImages) => [...oldUserImages, data.image_urls[data.image_urls.length - 1]])
-      toast.success('Profile pic updated successfully!')
-    } catch (error) {
-      toast.error('Error updating profile pic!')
-    }
-=======
   const handleSignUpClick = () => {
     setActiveTab('search')
     setShowSignUp(true)
->>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
   }
-
-  useEffect(() => {
-    console.log(userImages)
-  }, [userImages])
 
   return (
     <div className='flex h-full flex-col overflow-hidden pb-8'>
@@ -248,15 +132,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
-<<<<<<< HEAD
-              src={userImages.length !== 0 ? userImages[userImages.length - 1] : '/card/defaultbuddha.svg'}
-=======
               src={
                 form.image_urls.length
                   ? form.image_urls[form.image_urls.length - 1]
                   : user.image_urls?.[user.image_urls.length - 1] || '/card/defaultbuddha.svg'
               }
->>>>>>> e8bc137f37a9242946745e55fe97338e3ee477b2
               alt='porfilepic'
               height={170}
               width={500}

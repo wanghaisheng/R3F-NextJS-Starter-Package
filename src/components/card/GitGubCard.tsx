@@ -39,12 +39,13 @@ export default function GitHubCard() {
   useEffect(() => {
     const fetchGitData = async () => {
       try {
-        const response = await axios.get(`https://api.github.com/users/${username}`, {
+        const response = await fetch(`https://api.github.com/users/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-        setGitData(response.data)
+        const gitData = await response.json()
+        setGitData(gitData)
       } catch (error) {
         console.error('Error fetching user data:', error)
       }
@@ -57,13 +58,15 @@ export default function GitHubCard() {
     if (gitData.repos_url) {
       const fetchTopLanguages = async () => {
         try {
-          const response = await axios.get(gitData.repos_url, {
+          const response = await fetch(gitData.repos_url, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           })
 
-          const languages = response.data.reduce((acc: Record<string, number>, repo: Repo) => {
+          const data = await response.json()
+
+          const languages = data.reduce((acc: Record<string, number>, repo: Repo) => {
             if (repo.language) {
               acc[repo.language] = acc[repo.language] ? acc[repo.language] + 1 : 1
             }
@@ -94,13 +97,15 @@ export default function GitHubCard() {
     if (gitData.login) {
       const fetchActivity = async () => {
         try {
-          const response = await axios.get(`https://api.github.com/users/${username}/events`, {
+          const response = await fetch(`https://api.github.com/users/${username}/events`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           })
 
-          const days = response.data.reduce((acc: Record<string, number>, event: any) => {
+          const data = await response.json()
+
+          const days = data.reduce((acc: Record<string, number>, event: any) => {
             const date = new Date(event.created_at)
             const day = date.getDay()
             acc[day] = acc[day] ? acc[day] + 1 : 1
@@ -127,13 +132,15 @@ export default function GitHubCard() {
   useEffect(() => {
     const fetchStarredRepo = async () => {
       try {
-        const response = await axios.get(`https://api.github.com/users/${gitData.login}/starred`, {
+        const response = await fetch(`https://api.github.com/users/${gitData.login}/starred`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
 
-        setStarredRepo(response.data)
+        const data = await response.json()
+
+        setStarredRepo(data)
       } catch (error) {
         console.error('Error fetching user data:', error)
       }
@@ -154,7 +161,7 @@ export default function GitHubCard() {
     const fetchPullRequestsMerged = async () => {
       if (gitData.login) {
         try {
-          const response = await axios.get(
+          const response = await fetch(
             `https://api.github.com/search/issues?q=author:${gitData.login}+is:pr+is:merged`,
             {
               headers: {
@@ -163,7 +170,9 @@ export default function GitHubCard() {
             },
           )
 
-          setPullRequestsMerged(response.data.total_count)
+          const data = await response.json()
+
+          setPullRequestsMerged(data.total_count)
         } catch (error) {
           console.error('Error fetching pull requests merged:', error)
         }
@@ -177,13 +186,15 @@ export default function GitHubCard() {
     const fetchContributions = async () => {
       if (gitData.login) {
         try {
-          const response = await axios.get(`https://api.github.com/users/${gitData.login}/events`, {
+          const response = await fetch(`https://api.github.com/users/${gitData.login}/events`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           })
 
-          const contributions = response.data.filter((event) => event.type === 'PushEvent')
+          const data = await response.json()
+
+          const contributions = data.filter((event) => event.type === 'PushEvent')
           setContributionsCount(contributions.length)
         } catch (error) {
           console.error('Error fetching contributions:', error)

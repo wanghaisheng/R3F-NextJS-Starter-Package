@@ -18,11 +18,18 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async (userId, token) => {
     try {
-      const { data: userData } = await axios.get(`/api/internal/users/${userId}`, {
+      const response = await fetch(`/api/internal/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
+
+      if (!response.ok) {
+        // Handle the error if the response is not successful (status not in the range 200-299)
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+
+      const userData = await response.json()
       setUser(userData)
     } catch (error) {
       console.error('Error fetching user data:', error)
