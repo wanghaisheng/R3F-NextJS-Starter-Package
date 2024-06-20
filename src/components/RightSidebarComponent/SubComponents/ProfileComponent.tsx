@@ -11,10 +11,12 @@ import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
 import { RiGalleryFill } from 'react-icons/ri'
+// import RevalidateUser from '@/revalidateUser/page'
+// import Cookies from 'js-cookie'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
-  const { user } = useUser()
-
+  const { user, updateUser } = useUser()
+  // const token = Cookies.get('token')
   const [form, setForm] = useState({
     username: user?.username || '',
     phone_number: user?.phone_number || '',
@@ -89,6 +91,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const handleImgUpdate = async (image_url) => {
     try {
       await axios.put(`/api/internal/users/${user.gg_id}`, { image_url })
+      setForm((prevForm) => ({
+        ...prevForm,
+        image_urls: [...user.image_urls, image_url],
+      }))
+      // updateUser(token)
       toast.success('Profile pic updated successfully!')
     } catch (error) {
       toast.error('Error updating profile pic!')
@@ -115,6 +122,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
     try {
       await axios.put(`/api/internal/users/${user.gg_id}`, submitData)
+      // await RevalidateUser()
+      // updateUser(token)
       toast.success('Successfully updated!')
     } catch (error) {
       toast.error('Update failed!')
@@ -132,11 +141,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
-              src={
-                form.image_urls.length
-                  ? form.image_urls[form.image_urls.length - 1]
-                  : user.image_urls?.[user.image_urls.length - 1] || '/card/defaultbuddha.svg'
-              }
+              src={form.image_urls.length > 0 ? form.image_urls[form.image_urls.length - 1] : '/card/defaultbuddha.svg'}
               alt='porfilepic'
               height={170}
               width={500}

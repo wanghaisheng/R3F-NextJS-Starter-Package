@@ -18,11 +18,15 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async (userId, token) => {
     try {
-      const response = await fetch(`/api/internal/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `/api/internal/users/${userId}`,
+        { next: { tags: ['user'] } },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
 
       if (!response.ok) {
         // Handle the error if the response is not successful (status not in the range 200-299)

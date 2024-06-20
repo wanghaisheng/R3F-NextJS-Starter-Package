@@ -80,6 +80,7 @@ export async function PUT(request, { params }) {
         guild_id,
       },
     })
+
     return NextResponse.json(updatedUser)
   } catch (error) {
     console.error('Error Updating user', error)
