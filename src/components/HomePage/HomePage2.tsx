@@ -136,8 +136,8 @@ const HomePage2 = () => {
 
   return (
     <>
-      <div className='relative'>
-        <div className='flex flex-col justify-center lg:justify-start'>
+      <div className='relative h-screen w-full'>
+        <div className='flex size-full justify-center'>
           <DiscoverRegion
             selectedRegionFilter={selectedRegionFilter}
             guilds={guilds}

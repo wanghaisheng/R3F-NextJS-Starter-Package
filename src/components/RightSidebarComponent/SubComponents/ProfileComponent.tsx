@@ -11,8 +11,7 @@ import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
 import { RiGalleryFill } from 'react-icons/ri'
-// import RevalidateUser from '@/revalidateUser/page'
-// import Cookies from 'js-cookie'
+import { GiRamProfile } from 'react-icons/gi'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
@@ -149,7 +148,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               className='rounded'
             />
             <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
-              <span className='text-sm font-semibold text-pink-500'>{form.description}</span>
+              <span className='text-sm font-semibold text-pink-300'>{form.description}</span>
             </p>
           </div>
           <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
@@ -301,7 +300,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
             ease-in-out hover:border-purple-500'
             >
-              View Public Profile
+              <GiRamProfile />
             </Link>
             <div
               onClick={setActiveTab.bind(this, 'gallery')}
@@ -314,7 +313,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         </div>
       ) : (
         <>
-          <div>You must sign in to view this tab</div>
+          <div>You must sign In to view this tab</div>
           <div
             onClick={handleSignUpClick}
             className='mt-2 flex cursor-pointer justify-center rounded border border-purple-700 bg-purple-800/30 p-2 transition-colors hover:bg-purple-800/40 hover:text-purple-200'
