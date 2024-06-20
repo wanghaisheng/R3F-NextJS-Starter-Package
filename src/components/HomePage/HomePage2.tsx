@@ -8,12 +8,13 @@ import DiscoverRegion from '../Regions/DiscoverRegion'
 
 const getUsers = async () => {
   try {
-    const res = await axios.get('/api/public/users')
-    if (res.status !== 200) {
+    const res = await fetch('/api/public/users')
+    if (!res.ok) {
       toast.error('Failed to fetch users data')
       return []
     }
-    const users = res.data.filter(
+    const users = await res.json()
+    const filteredUsers = users.filter(
       (user) =>
         user.first_name &&
         user.last_name &&
@@ -23,7 +24,7 @@ const getUsers = async () => {
         user.avatar.length !== 0 &&
         user.guild_id,
     )
-    return users
+    return filteredUsers
   } catch (error) {
     toast.error('Internal Server Error')
     return []
@@ -32,12 +33,12 @@ const getUsers = async () => {
 
 const getGuilds = async () => {
   try {
-    const res = await axios.get('/api/public/guilds')
-    if (res.status !== 200) {
+    const res = await fetch('/api/public/guilds')
+    if (!res.ok) {
       toast.error('Failed to fetch guilds data')
       return []
     }
-    return res.data
+    return res.json()
   } catch (error) {
     toast.error('Internal Server Error')
     return []
@@ -135,8 +136,8 @@ const HomePage2 = () => {
 
   return (
     <>
-      <div className='relative'>
-        <div className='flex flex-col justify-center lg:justify-start'>
+      <div className='relative h-screen w-full'>
+        <div className='flex size-full justify-center'>
           <DiscoverRegion
             selectedRegionFilter={selectedRegionFilter}
             guilds={guilds}

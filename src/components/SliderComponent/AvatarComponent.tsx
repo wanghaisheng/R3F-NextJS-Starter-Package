@@ -12,11 +12,11 @@ import { FaArrowRight } from 'react-icons/fa'
 
 async function getGuilds() {
   try {
-    const res = await axios.get('/api/internal/guilds')
-    if (res.status !== 200) {
+    const res = await fetch('/api/internal/guilds')
+    if (!res.ok) {
       toast.error('Failed to fetch guilds data')
     }
-    return res.data
+    return res.json()
   } catch (error) {
     toast.error('Failed to fetch guilds data')
     return [] // Return an empty array in case of error

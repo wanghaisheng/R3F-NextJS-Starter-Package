@@ -1,5 +1,3 @@
-'use client'
-
 // import { useState, useEffect } from 'react'
 // import HomePage from '@/components/HomePage/HomePage'
 import HomePage2 from '@/components/HomePage/HomePage2'
@@ -56,7 +54,9 @@ const Discover = () => {
   //   }
   //   fetchData()
   // }, [])
-
+  // const cookieStorage = cookies()
+  // const token = cookieStorage.get('token')
+  // console.log(token)
   return (
     <div>
       {/* <HomePage users={users} guilds={guilds} /> */}

@@ -19,47 +19,43 @@ export default function DiscoverRegion({
 }) {
   return (
     <>
-      <div className='relative flex-1'>
-        <div className='flex w-full flex-col justify-center'>
-          <div className='size-full'>
-            {/* Video section */}
-            <div className='absolute top-0 h-screen w-full'>
-              <video key={selectedGuildFilter} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
-                {selectedGuildFilter === 'BUDDHA' ? (
-                  <source src='/livewallpapers/buddha.mp4' type='video/mp4' />
-                ) : selectedGuildFilter === 'VAJRA' ? (
-                  <source src='/livewallpapers/candles.mp4' type='video/mp4' />
-                ) : selectedGuildFilter === 'PADMA' ? (
-                  <source src='/livewallpapers/fire.mp4' type='video/mp4' />
-                ) : selectedGuildFilter === 'KARMA' ? (
-                  <source src='/livewallpapers/karma.mp4' type='video/mp4' />
-                ) : selectedGuildFilter === 'RATNA' ? (
-                  <source src='/livewallpapers/earth.mp4' type='video/mp4' />
-                ) : (
-                  <source src='/livewallpapers/forest.mp4' type='video/mp4' />
-                )}
-              </video>
+      <div className='flex size-full items-center justify-center'>
+        {/* Video section */}
+        <div className='absolute top-0 h-screen w-full'>
+          <video key={selectedGuildFilter} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
+            {selectedGuildFilter === 'BUDDHA' ? (
+              <source src='/livewallpapers/buddha.mp4' type='video/mp4' />
+            ) : selectedGuildFilter === 'VAJRA' ? (
+              <source src='/livewallpapers/vajra.mp4' type='video/mp4' />
+            ) : selectedGuildFilter === 'PADMA' ? (
+              <source src='/livewallpapers/padma.mp4' type='video/mp4' />
+            ) : selectedGuildFilter === 'KARMA' ? (
+              <source src='/livewallpapers/karma.mp4' type='video/mp4' />
+            ) : selectedGuildFilter === 'RATNA' ? (
+              <source src='/livewallpapers/earth.mp4' type='video/mp4' />
+            ) : (
+              <source src='/livewallpapers/forest.mp4' type='video/mp4' />
+            )}
+          </video>
+        </div>
+        <div className='flex size-full flex-col items-center justify-center'>
+          <div
+            className={`z-10 flex h-[50%] w-[40vh] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur lg:h-[510px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+          >
+            <div className='relative z-10 w-full '>
+              <GuildHeader
+                onFilterChange={handleFilterGuildChange}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
             </div>
-
-            <div className='relative top-24 flex w-full items-center justify-center'>
-              <div
-                className={`z-10 rounded-lg p-2 shadow-md backdrop-blur lg:h-[77vh] lg:w-[66vh] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
-              >
-                <GuildHeader
-                  onFilterChange={handleFilterGuildChange}
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                />
-
-                <div className='flex w-full overflow-y-auto overflow-x-hidden lg:h-[460px]'>
-                  <ShowGuildDiscover
-                    users={guilds}
-                    selectedRegionFilter={selectedRegionFilter}
-                    filterguild={selectedGuildFilter}
-                    searchTerm={searchTerm}
-                  />
-                </div>
-              </div>
+            <div className='z-20 size-full'>
+              <ShowGuildDiscover
+                users={guilds}
+                selectedRegionFilter={selectedRegionFilter}
+                filterguild={selectedGuildFilter}
+                searchTerm={searchTerm}
+              />
             </div>
           </div>
         </div>

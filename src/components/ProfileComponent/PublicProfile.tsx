@@ -13,12 +13,12 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 
 const getSelectedPublicUser = async (username) => {
   try {
-    const res = await axios.get(`/api/public/users/${username}`)
-    if (res.status !== 200) {
+    const res = await fetch(`/api/public/users/${username}`)
+    if (!res.ok) {
       return toast.error('Failed to get the user')
     }
     // console.log('user', res.data)
-    return res.data
+    return res.json()
   } catch (error) {
     toast.error('Internal server error')
   }
@@ -26,12 +26,12 @@ const getSelectedPublicUser = async (username) => {
 
 const getGuilds = async () => {
   try {
-    const res = await axios.get(`/api/public/guilds`)
-    if (res.status !== 200) {
+    const res = await fetch(`/api/public/guilds`)
+    if (!res.ok) {
       toast.error('Failed to fetch guilds data')
       return []
     }
-    return res.data
+    return res.json()
   } catch (error) {
     toast.error('Internal Server Error')
     return []
@@ -198,9 +198,9 @@ export default function PublicProfile({ username }) {
             {user?.guild_id === guilds.find((guild) => guild.guild_name === 'BUDDHA')?.id ? (
               <source src='/livewallpapers/buddha.mp4' type='video/mp4' />
             ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'VAJRA')?.id ? (
-              <source src='/livewallpapers/candles.mp4' type='video/mp4' />
+              <source src='/livewallpapers/vajra.mp4' type='video/mp4' />
             ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'PADMA')?.id ? (
-              <source src='/livewallpapers/fire.mp4' type='video/mp4' />
+              <source src='/livewallpapers/padma.mp4' type='video/mp4' />
             ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'KARMA')?.id ? (
               <source src='/livewallpapers/karma.mp4' type='video/mp4' />
             ) : user?.guild_id === guilds.find((guild) => guild.guild_name === 'RATNA')?.id ? (
