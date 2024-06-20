@@ -28,9 +28,9 @@ export default function DiscoverRegion({
                 {selectedGuildFilter === 'BUDDHA' ? (
                   <source src='/livewallpapers/buddha.mp4' type='video/mp4' />
                 ) : selectedGuildFilter === 'VAJRA' ? (
-                  <source src='/livewallpapers/candles.mp4' type='video/mp4' />
+                  <source src='/livewallpapers/vajra.mp4' type='video/mp4' />
                 ) : selectedGuildFilter === 'PADMA' ? (
-                  <source src='/livewallpapers/fire.mp4' type='video/mp4' />
+                  <source src='/livewallpapers/padma.mp4' type='video/mp4' />
                 ) : selectedGuildFilter === 'KARMA' ? (
                   <source src='/livewallpapers/karma.mp4' type='video/mp4' />
                 ) : selectedGuildFilter === 'RATNA' ? (
