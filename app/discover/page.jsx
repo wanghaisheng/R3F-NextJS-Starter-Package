@@ -1,5 +1,3 @@
-'use client'
-
 // import { useState, useEffect } from 'react'
 // import HomePage from '@/components/HomePage/HomePage'
 import HomePage2 from '@/components/HomePage/HomePage2'
