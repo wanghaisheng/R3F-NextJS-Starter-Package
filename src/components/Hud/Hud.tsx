@@ -5,8 +5,10 @@ import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { TbCards } from 'react-icons/tb'
 import Image from 'next/image'
+import CustomToolTip from './CustomToolTip'
 
 import SpringModal from '../FormModal/SpringModal'
+import { Tooltip } from 'recharts'
 const Hud = () => {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
@@ -45,16 +47,7 @@ const Hud = () => {
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
                   <TbCards className='size-6' />
-                  <div
-                    className={`
-          invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm text-indigo-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                  >
-                    Slider
-                  </div>
+                  <CustomToolTip content='Slider' top='-7' left='-13' translateY='-20' />
                 </Link>
                 <Link
                   href='https://ggrelativity.xyz/login'
@@ -63,16 +56,7 @@ const Hud = () => {
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
                   <Image src='/logos/relativity.svg' width={45} height={45} alt='GG Logo' className='p-2' />
-                  <div
-                    className={`
-          invisible absolute -left-7 top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm text-indigo-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-          `}
-                  >
-                    GG Relativity
-                  </div>
+                  <CustomToolTip content='GG Relativity' top='-7' left='-20' translateY='-10' />
                 </Link>
                 <Link
                   href='https://office.goinggenius.com.np/signin'
@@ -81,16 +65,7 @@ const Hud = () => {
                   className='group py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
                   <Image src='/gglogo.svg' width={50} height={50} alt='GG Logo' className='p-2' />
-                  <div
-                    className={`
-                      invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
-                      rounded-md bg-indigo-100 px-2 py-1
-                      text-sm text-indigo-800 opacity-20 transition-all
-                      group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-                      `}
-                  >
-                    Going Genius
-                  </div>
+                  <CustomToolTip content='Going Genius' top='-7' left='-22' translateY='-10' />
                 </Link>
                 <Link
                   href='https://portals.goinggenius.com.np/users/login'
@@ -99,16 +74,7 @@ const Hud = () => {
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
                   <Image src='/logos/portals.svg' width={45} height={45} alt='GG Logo' className='p-2' />
-                  <div
-                    className={`
-          invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm text-indigo-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                  >
-                    GG Portals
-                  </div>
+                  <CustomToolTip content='GG Protals' top='-7' left='-19' translateY='-10' />
                 </Link>
                 <Link
                   href='#'
@@ -116,16 +82,7 @@ const Hud = () => {
                   className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
                 >
                   <Image src='/logos/lgo.png' width={35} height={35} alt='GG Logo' className='p-2' />
-                  <div
-                    className={`
-          invisible absolute -left-5 top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm text-indigo-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                  >
-                    Coming Soon
-                  </div>
+                  <CustomToolTip content='Coming Soon' top='-7' left='-24' translateY='-10' />
                 </Link>
               </div>
             </div>
