@@ -10,12 +10,15 @@ import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
+import { useRouter } from 'next/navigation'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
   const [phone_number, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
   const [regionStatus, setRegionStatus] = useState(false)
+  const [userImages, setUserImages] = useState([])
+  const router = useRouter()
   const [geoLocationInfo, setGeoLocationInfo] = useState({
     ip: '',
     city: '',
@@ -35,6 +38,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     const setUserInfo = () => {
       setPhoneNumber(user.phone_number ? user.phone_number : '')
       setDob(user.dob ? user.dob : '')
+      setUserImages(user.image_urls ? (user.image_urls !== 0 ? user.image_urls : []) : [])
       setGeoLocationInfo(user.region)
     }
     if (user) {
@@ -152,16 +156,21 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       image_url: image_url,
     }
     try {
-      await axios({
+      const { data } = await axios({
         url: `/api/internal/users/${user.gg_id}`,
         method: 'put',
         data: submit,
       })
+      setUserImages((oldUserImages) => [...oldUserImages, data.image_urls[data.image_urls.length - 1]])
       toast.success('Profile pic updated successfully!')
     } catch (error) {
       toast.error('Error updating profile pic!')
     }
   }
+
+  useEffect(() => {
+    console.log(userImages)
+  }, [userImages])
 
   return (
     <div className='flex h-full flex-col overflow-hidden pb-8'>
@@ -169,13 +178,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
-              src={
-                imageUrls.length !== 0
-                  ? imageUrls[imageUrls.length - 1]
-                  : user.image_urls
-                    ? user.image_urls[user.image_urls.length - 1]
-                    : '/card/defaultbuddha.svg'
-              }
+              src={userImages.length !== 0 ? userImages[userImages.length - 1] : '/card/defaultbuddha.svg'}
               alt='porfilepic'
               height={170}
               width={500}

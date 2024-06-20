@@ -1,4 +1,6 @@
-'use client'
+// 'use client'
+
+// import { cookies } from 'next/headers'
 
 // import { useState, useEffect } from 'react'
 // import HomePage from '@/components/HomePage/HomePage'
@@ -56,7 +58,9 @@ const Discover = () => {
   //   }
   //   fetchData()
   // }, [])
-
+  // const cookieStorage = cookies()
+  // const token = cookieStorage.get('token')
+  // console.log(token)
   return (
     <div>
       {/* <HomePage users={users} guilds={guilds} /> */}
