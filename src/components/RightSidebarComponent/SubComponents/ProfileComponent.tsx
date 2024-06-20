@@ -145,7 +145,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               className='rounded'
             />
             <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
-              <span className='text-sm font-semibold text-pink-500'>{form.description}</span>
+              <span className='text-sm font-semibold text-pink-300'>{form.description}</span>
             </p>
           </div>
           <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>

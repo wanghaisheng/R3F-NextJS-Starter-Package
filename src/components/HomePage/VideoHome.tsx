@@ -1,26 +1,11 @@
 'use client'
-import { useRef, useEffect, useState } from 'react'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import { Autoplay, Pagination } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
-// import axios from 'axios'
-// import { toast } from 'react-hot-toast'
-
-// async function getGuilds() {
-//   try {
-//     const res = await axios.get('/api/internal/guilds')
-//     if (res.status !== 200) {
-//       toast.error('Failed to fetch guilds data')
-//     }
-//     return res.data
-//   } catch (error) {
-//     toast.error('Failed to fetch guilds data')
-//   }
-// }
 
 const guildData = [
   {
@@ -39,7 +24,7 @@ const guildData = [
     symbol: '/homepage/Vajra.svg',
     color: 'blue',
     element: 'Water',
-    guild_video: '/livewallpapers/candles.mp4',
+    guild_video: '/livewallpapers/vajra.mp4',
     description: 'Arts, Education , Law, Teaching',
     skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
     alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
@@ -72,7 +57,7 @@ const guildData = [
     symbol: '/homepage/Padma.svg',
     color: 'red',
     element: 'Fire',
-    guild_video: '/livewallpapers/fire.mp4',
+    guild_video: '/livewallpapers/padma.mp4',
 
     description: 'Marketing, Designer, Content Creator',
     skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
@@ -82,27 +67,12 @@ const guildData = [
 ]
 
 export default function VideoHome() {
-  const progressCircle = useRef(null)
-  const progressContent = useRef(null)
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress)
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>'
+    },
   }
-  // const [guildData, setGuildData] = useState([])
-
-  // //GuildsData
-  // useEffect(() => {
-  //   const fetchGuildData = async () => {
-  //     try {
-  //       const guildData = await getGuilds()
-  //       setGuildData(guildData)
-  //     } catch (error) {
-  //       toast.error('Failed to set guild data')
-  //     }
-  //   }
-  //   fetchGuildData()
-  // }, [])
-
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
@@ -113,11 +83,10 @@ export default function VideoHome() {
           disableOnInteraction: false,
         }}
         pagination={{
-          clickable: true,
+          dynamicBullets: true,
         }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        onAutoplayTimeLeft={onAutoplayTimeLeft}
+        modules={[Autoplay, Pagination]}
         className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-lg'
       >
         <SwiperSlide className='bg-cover bg-center'>
@@ -334,25 +303,8 @@ export default function VideoHome() {
                 <div className='absolute right-0 top-0 size-3 animate-ping rounded-full bg-blue-300'></div>
               </Link>
             </div>
-            {/* <div className='absolute bottom-10 text-white'>
-              <button
-                className='animate-bounce rounded-full border border-white p-3 hover:bg-purple-400'
-                aria-label='down button'
-              >
-                <GoArrowDown />
-              </button>
-            </div> */}
           </div>
         </SwiperSlide>
-        <div
-          className='absolute bottom-4 right-4 z-10 flex size-12 items-center justify-center font-bold'
-          slot='container-end'
-        >
-          <svg viewBox='0 0 48 48' ref={progressCircle}>
-            <circle cx='24' cy='24' r='20'></circle>
-          </svg>
-          <span className='absolute' ref={progressContent}></span>
-        </div>
       </Swiper>
     </div>
   )
