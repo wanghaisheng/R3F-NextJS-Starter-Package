@@ -310,7 +310,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         </div>
       ) : (
         <>
-          <div>You must sign in to view this tab</div>
+          <div>You must sign In to view this tab</div>
           <div
             onClick={handleSignUpClick}
             className='mt-2 flex cursor-pointer justify-center rounded border border-purple-700 bg-purple-800/30 p-2 transition-colors hover:bg-purple-800/40 hover:text-purple-200'
