@@ -49,14 +49,14 @@ export default function ShowGuild({
           scrollbar={{ draggable: true, hide: false }}
           pagination={{ clickable: true }}
           spaceBetween={2}
-          slidesPerView={2}
+          slidesPerView={1}
           className='h-[300px] w-full'
         >
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
               <Link
                 href={`/public-profile/${user.username}`}
-                className='relative ml-2 flex h-[260px] w-[140px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                className='relative ml-4 flex h-[260px] w-[283px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
               >
                 <div
                   className='absolute inset-0 rounded-lg'
