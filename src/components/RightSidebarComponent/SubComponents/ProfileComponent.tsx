@@ -11,6 +11,7 @@ import '@uploadcare/react-uploader/core.css'
 import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
 import { RiGalleryFill } from 'react-icons/ri'
+import { GiRamProfile } from 'react-icons/gi'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user } = useUser()
@@ -296,7 +297,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
             ease-in-out hover:border-purple-500'
             >
-              View Public Profile
+              <GiRamProfile />
             </Link>
             <div
               onClick={setActiveTab.bind(this, 'gallery')}
