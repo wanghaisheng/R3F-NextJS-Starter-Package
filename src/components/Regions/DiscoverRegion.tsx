@@ -42,14 +42,14 @@ export default function DiscoverRegion({
           <div
             className={`z-10 flex h-[50%] w-[40vh] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur lg:h-[510px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
-            <div className='relative w-full '>
+            <div className='relative z-10 w-full '>
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
             </div>
-            <div className='size-full'>
+            <div className='z-20 size-full'>
               <ShowGuildDiscover
                 users={guilds}
                 selectedRegionFilter={selectedRegionFilter}
