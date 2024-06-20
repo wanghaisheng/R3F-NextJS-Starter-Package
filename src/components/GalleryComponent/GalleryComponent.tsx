@@ -12,11 +12,11 @@ import Image from 'next/image'
 
 const getUserByUsername = async (username) => {
   try {
-    const res = await axios.get(`/api/public/users/${username}`)
-    if (res.status !== 200) {
+    const res = await fetch(`/api/public/users/${username}`)
+    if (!res.ok) {
       return toast.error('Failed to get the user')
     }
-    return res.data
+    return res.json()
   } catch (error) {
     toast.error('Internal server error')
   }

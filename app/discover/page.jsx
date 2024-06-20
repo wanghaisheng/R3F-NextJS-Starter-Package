@@ -54,7 +54,9 @@ const Discover = () => {
   //   }
   //   fetchData()
   // }, [])
-
+  // const cookieStorage = cookies()
+  // const token = cookieStorage.get('token')
+  // console.log(token)
   return (
     <div>
       {/* <HomePage users={users} guilds={guilds} /> */}
