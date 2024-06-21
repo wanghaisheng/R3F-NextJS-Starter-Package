@@ -74,7 +74,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* Logo and Sign In/Sign Out */}
         <div className='fixed inset-x-0 top-0 mx-auto flex h-20 w-full items-center justify-between px-4 py-2'>
           {/* Logo */}
-          <Link href='/hud' className='flex items-center justify-center'>
+          <Link href='/discover' className='flex items-center justify-center'>
             <Image
               src={'/logos/lgo.png'}
               className='absolute left-4 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
