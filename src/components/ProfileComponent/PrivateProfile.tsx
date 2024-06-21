@@ -23,7 +23,6 @@ import CardsFlipCard from '@/components/card/cardsFlipCard'
 import ExperienceFlipCard from '../card/experienceFlipCard'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
-import Lottie from 'lottie-react'
 
 import { useSidebar } from '@/components/dom/SidebarProvider'
 
