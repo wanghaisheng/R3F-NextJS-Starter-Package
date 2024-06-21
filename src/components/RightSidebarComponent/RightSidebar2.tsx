@@ -17,7 +17,7 @@ import { Toaster } from 'react-hot-toast'
 import CustomToolTip from '../Hud/CustomToolTip'
 
 const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
-  const [activeTab, setActiveTab] = useState('search') //active tab state
+  const [activeTab, setActiveTab] = useState('profile') //active tab state
   const { user } = useUser()
 
   const handleTabClick = (tab: string) => {
@@ -30,7 +30,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
     setIsSidebarOpen(!isSidebarOpen)
     setShowSignUp(false)
     setShowSignIn(false)
-    setActiveTab('search')
+    setActiveTab('profile')
   }
 
   return (
