@@ -155,7 +155,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
-                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?textureQuality=low`}
+                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
                 shadows
                 animationSrc='/male-spawn-animation.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -168,7 +168,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             ) : (
               <Avatar
-                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true?textureQuality=low'
+                modelSrc='https://models.readyplayer.me/65ba39f18f9cbe2fcfec8a10.glb?quality=low'
                 shadows
                 animationSrc='/male-idle-3.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -280,14 +280,14 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               </div>
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-4 w-full px-4'>
               <button
-                className='flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 transition-all
+                className='flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-1 transition-all
             ease-in-out hover:border-purple-500'
                 type='submit'
                 aria-label='next'
               >
-                <p className='px-4 py-1'>DONE</p>
+                SUBMIT
               </button>
             </div>
           </form>

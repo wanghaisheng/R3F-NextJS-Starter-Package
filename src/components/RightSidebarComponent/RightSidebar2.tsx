@@ -12,7 +12,7 @@ import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
 import EmergencyComponent from './SubComponents/EmergencyComponent'
 import { CgProfile, CgPhotoscan } from 'react-icons/cg'
-import ProfileComponent from './SubComponents/ProfileComponent'
+import SideProfile from './Tabs/SideProfile'
 import { Toaster } from 'react-hot-toast'
 import SideGalleryComponent from './SubComponents/SideGalleryComponent'
 import { RiGalleryFill } from 'react-icons/ri'
@@ -59,12 +59,12 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       >
         <div className='flex items-center justify-between px-4 py-6'>
           <div className='flex w-full justify-center'>
-            {activeTab === 'search' ? (
+            {activeTab === 'profile' ? (
               <>
                 {!user ? (
-                  <h2 className='text-xl font-bold'>SIGNUP | SIGNIN | SEARCH </h2>
+                  <h2 className='text-xl font-bold'>SIGNUP | SIGNIN</h2>
                 ) : (
-                  <h2 className='text-xl font-bold'>SEARCH</h2>
+                  <h2 className='text-xl font-bold'>PROFILE</h2>
                 )}
               </>
             ) : (
@@ -86,8 +86,8 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
         <div className='flex flex-col md:h-screen md:flex-row md:justify-between'>
           {activeTab && (
             <div className='flex size-full flex-col overflow-y-auto px-4 pb-24 pt-4'>
-              {activeTab === 'search' && (
-                <SearchComponent
+              {activeTab === 'profile' && (
+                <SideProfile
                   showSignUp={showSignUp}
                   setShowSignUp={setShowSignUp}
                   showSignIn={showSignIn}
@@ -100,9 +100,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
               {activeTab === 'emergency' && (
                 <EmergencyComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
               )}
-              {activeTab === 'profile' && (
-                <ProfileComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
-              )}
+              {activeTab === 'search' && <SearchComponent />}
               {activeTab === 'gallery' && (
                 <SideGalleryComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
               )}
@@ -110,83 +108,75 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
           )}
 
           <ul className='fixed bottom-0 flex w-full flex-row space-x-2 space-y-0 bg-black p-2 font-medium'>
-            <li>
-              <p
-                className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'search'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                onClick={() => handleTabClick('search')}
-              >
-                <FaSearch />
-                <CustomToolTip content='Search' top={0} translateY={-28} left={-3} />
-              </p>
+            <li
+              className={`group flex items-center rounded-md p-2 ${
+                activeTab === 'profile'
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => handleTabClick('profile')}
+            >
+              <CgProfile />
+              {user ? (
+                <CustomToolTip content='Profile' top={0} translateY={-28} left={-3} />
+              ) : (
+                <CustomToolTip content='SignUp' top={0} translateY={-28} left={-3} />
+              )}
             </li>
-            <li>
-              <p
-                className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'wallet'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                onClick={() => handleTabClick('wallet')}
-              >
-                <PiCardsFill />
-                <CustomToolTip content='Wallet' top={0} translateY={-28} left={37} />
-              </p>
+            <li
+              className={`group flex items-center rounded-md p-2 ${
+                activeTab === 'wallet'
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => handleTabClick('wallet')}
+            >
+              <PiCardsFill />
+              <CustomToolTip content='Wallet' top={0} translateY={-28} left={37} />
             </li>
-            <li>
-              <p
-                className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'shop'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                onClick={() => handleTabClick('shop')}
-              >
-                <FaOpencart />
-                <CustomToolTip content='Shop' top={0} translateY={-28} left={80} />
-              </p>
+            <li
+              className={`group flex items-center rounded-md p-2 ${
+                activeTab === 'shop'
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => handleTabClick('shop')}
+            >
+              <FaOpencart />
+              <CustomToolTip content='Shop' top={0} translateY={-28} left={80} />
             </li>
-            <li>
-              <p
-                className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'emergency'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                onClick={() => handleTabClick('emergency')}
-              >
-                <TbEmergencyBed />
-                <CustomToolTip content='Emergency' top={0} translateY={-28} left={106} />
-              </p>
+            <li
+              className={`group flex items-center rounded-md p-2 ${
+                activeTab === 'emergency'
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => handleTabClick('emergency')}
+            >
+              <TbEmergencyBed />
+              <CustomToolTip content='Emergency' top={0} translateY={-28} left={106} />
             </li>
-            <li>
-              <p
-                className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'profile'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                onClick={() => handleTabClick('profile')}
-              >
-                <CgProfile />
-                <CustomToolTip content='Profile' top={0} translateY={-28} left={158} />
-              </p>
+            <li
+              className={`group flex items-center rounded-md p-2 ${
+                activeTab === 'search'
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => handleTabClick('search')}
+            >
+              <FaSearch />
+              <CustomToolTip content='Search' top={0} translateY={-28} left={158} />
             </li>
-            <li>
-              <p
-                className={`group flex items-center rounded-md p-2 ${
-                  activeTab === 'gallery'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-                onClick={() => handleTabClick('gallery')}
-              >
-                <RiGalleryFill />
-                <CustomToolTip content='Gallery' top={0} translateY={-28} left={195} />
-              </p>
+            <li
+              className={`group flex items-center rounded-md p-2 ${
+                activeTab === 'gallery'
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => handleTabClick('gallery')}
+            >
+              <RiGalleryFill />
+              <CustomToolTip content='Gallery' top={0} translateY={-28} left={195} />
             </li>
           </ul>
         </div>
