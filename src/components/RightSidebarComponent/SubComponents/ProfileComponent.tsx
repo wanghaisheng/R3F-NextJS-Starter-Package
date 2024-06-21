@@ -8,14 +8,11 @@ import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
-import { RiGalleryFill } from 'react-icons/ri'
-import { GiRamProfile } from 'react-icons/gi'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
-  const { user } = useUser()
-
+  const { user, updateUser } = useUser()
+  // const token = Cookies.get('token')
   const [form, setForm] = useState({
     username: user?.username || '',
     phone_number: user?.phone_number || '',
@@ -90,6 +87,11 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const handleImgUpdate = async (image_url) => {
     try {
       await axios.put(`/api/internal/users/${user.gg_id}`, { image_url })
+      setForm((prevForm) => ({
+        ...prevForm,
+        image_urls: [...user.image_urls, image_url],
+      }))
+      // updateUser(token)
       toast.success('Profile pic updated successfully!')
     } catch (error) {
       toast.error('Error updating profile pic!')
@@ -116,6 +118,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
     try {
       await axios.put(`/api/internal/users/${user.gg_id}`, submitData)
+      // await RevalidateUser()
+      // updateUser(token)
       toast.success('Successfully updated!')
     } catch (error) {
       toast.error('Update failed!')
@@ -133,11 +137,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-black/40 p-3 text-white'>
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
-              src={
-                form.image_urls.length
-                  ? form.image_urls[form.image_urls.length - 1]
-                  : user.image_urls?.[user.image_urls.length - 1] || '/card/defaultbuddha.svg'
-              }
+              src={form.image_urls.length > 0 ? form.image_urls[form.image_urls.length - 1] : '/card/defaultbuddha.svg'}
               alt='porfilepic'
               height={170}
               width={500}
@@ -155,7 +155,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
-                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
                 shadows
                 animationSrc='/male-spawn-animation.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -168,7 +168,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             ) : (
               <Avatar
-                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true'
+                modelSrc='https://models.readyplayer.me/65ba39f18f9cbe2fcfec8a10.glb?quality=low'
                 shadows
                 animationSrc='/male-idle-3.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -280,33 +280,17 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               </div>
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-4 w-full px-4'>
               <button
-                className='flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 transition-all
+                className='flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-1 transition-all
             ease-in-out hover:border-purple-500'
                 type='submit'
                 aria-label='next'
               >
-                <p className='px-4 py-1'>DONE</p>
+                SUBMIT
               </button>
             </div>
           </form>
-          <div className='flex items-center justify-center gap-x-2'>
-            <Link
-              href={`/public-profile/${user.username}`}
-              className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-            ease-in-out hover:border-purple-500'
-            >
-              <GiRamProfile />
-            </Link>
-            <div
-              onClick={setActiveTab.bind(this, 'gallery')}
-              className='mt-2 flex w-fit cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-            ease-in-out hover:border-purple-500'
-            >
-              <RiGalleryFill />
-            </div>
-          </div>
         </div>
       ) : (
         <>
