@@ -12,6 +12,7 @@ import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
 import { RiGalleryFill } from 'react-icons/ri'
 import { GiRamProfile } from 'react-icons/gi'
+import CustomToolTip from '@/components/Hud/CustomToolTip'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
@@ -294,22 +295,6 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               </button>
             </div>
           </form>
-          <div className='flex items-center justify-center gap-x-2'>
-            <Link
-              href={`/public-profile/${user.username}`}
-              className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-            ease-in-out hover:border-purple-500'
-            >
-              <GiRamProfile />
-            </Link>
-            <div
-              onClick={setActiveTab.bind(this, 'gallery')}
-              className='mt-2 flex w-fit cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-            ease-in-out hover:border-purple-500'
-            >
-              <RiGalleryFill />
-            </div>
-          </div>
         </div>
       ) : (
         <>
