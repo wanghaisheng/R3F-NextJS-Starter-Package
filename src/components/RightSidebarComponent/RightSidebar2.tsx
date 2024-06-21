@@ -16,6 +16,7 @@ import ProfileComponent from './SubComponents/ProfileComponent'
 import { Toaster } from 'react-hot-toast'
 import SideGalleryComponent from './SubComponents/SideGalleryComponent'
 import { RiGalleryFill } from 'react-icons/ri'
+import CustomToolTip from '../Hud/CustomToolTip'
 
 const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [activeTab, setActiveTab] = useState('search') //active tab state
@@ -108,10 +109,9 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
             </div>
           )}
 
-          <ul className='fixed bottom-0 flex w-full flex-row space-x-2 space-y-0 bg-black p-2'>
+          <ul className='fixed bottom-0 flex w-full flex-row space-x-2 space-y-0 bg-black p-2 font-medium'>
             <li>
-              <a
-                href='#'
+              <p
                 className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'search'
                     ? 'bg-gray-100 text-gray-900'
@@ -120,21 +120,11 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 onClick={() => handleTabClick('search')}
               >
                 <FaSearch />
-                <div
-                  className={`
-          invisible absolute top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm font-medium text-slate-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                >
-                  Search
-                </div>
-              </a>
+                <CustomToolTip content='Search' top={0} translateY={-28} left={-3} />
+              </p>
             </li>
             <li>
-              <a
-                href='#'
+              <p
                 className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'wallet'
                     ? 'bg-gray-100 text-gray-900'
@@ -143,21 +133,11 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 onClick={() => handleTabClick('wallet')}
               >
                 <PiCardsFill />
-                <div
-                  className={`
-          invisible absolute top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm font-medium text-slate-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                >
-                  Wallet
-                </div>
-              </a>
+                <CustomToolTip content='Wallet' top={0} translateY={-28} left={37} />
+              </p>
             </li>
             <li>
-              <a
-                href='#'
+              <p
                 className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'shop'
                     ? 'bg-gray-100 text-gray-900'
@@ -166,21 +146,11 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 onClick={() => handleTabClick('shop')}
               >
                 <FaOpencart />
-                <div
-                  className={`
-          invisible absolute top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm font-medium text-slate-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                >
-                  Shop
-                </div>
-              </a>
+                <CustomToolTip content='Shop' top={0} translateY={-28} left={80} />
+              </p>
             </li>
             <li>
-              <a
-                href='#'
+              <p
                 className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'emergency'
                     ? 'bg-gray-100 text-gray-900'
@@ -189,21 +159,11 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 onClick={() => handleTabClick('emergency')}
               >
                 <TbEmergencyBed />
-                <div
-                  className={`
-          invisible absolute top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm font-medium text-slate-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                >
-                  Emergency
-                </div>
-              </a>
+                <CustomToolTip content='Emergency' top={0} translateY={-28} left={106} />
+              </p>
             </li>
             <li>
-              <a
-                href='#'
+              <p
                 className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'profile'
                     ? 'bg-gray-100 text-gray-900'
@@ -212,21 +172,11 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 onClick={() => handleTabClick('profile')}
               >
                 <CgProfile />
-                <div
-                  className={`
-          invisible absolute top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm font-medium text-slate-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                >
-                  Profile
-                </div>
-              </a>
+                <CustomToolTip content='Profile' top={0} translateY={-28} left={158} />
+              </p>
             </li>
             <li>
-              <a
-                href='#'
+              <p
                 className={`group flex items-center rounded-md p-2 ${
                   activeTab === 'gallery'
                     ? 'bg-gray-100 text-gray-900'
@@ -235,17 +185,8 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 onClick={() => handleTabClick('gallery')}
               >
                 <RiGalleryFill />
-                <div
-                  className={`
-          invisible absolute top-0 -translate-y-8 whitespace-nowrap
-          rounded-md bg-indigo-100 px-2 py-1
-          text-sm font-medium text-slate-800 opacity-20 transition-all
-          group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-      `}
-                >
-                  Gallery
-                </div>
-              </a>
+                <CustomToolTip content='Gallery' top={0} translateY={-28} left={195} />
+              </p>
             </li>
           </ul>
         </div>

@@ -155,7 +155,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
-                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?textureQuality=low`}
                 shadows
                 animationSrc='/male-spawn-animation.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -168,7 +168,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             ) : (
               <Avatar
-                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true'
+                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true?textureQuality=low'
                 shadows
                 animationSrc='/male-idle-3.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}

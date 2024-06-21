@@ -25,6 +25,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
     setShowSignUp(true)
+    setOpen(false)
   }
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                <Link href='/my-profile' onClick={closeMenu}>
+                <div onClick={toggleSidebar}>
                   <div
                     className='mr-2 size-[38px] rounded-full bg-pink-400'
                     key={profilePic}
@@ -97,7 +98,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                       backgroundRepeat: 'no-repeat',
                     }}
                   ></div>
-                </Link>
+                </div>
                 <div className='flex'>
                   <Link
                     href='/'
@@ -124,7 +125,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                       REGISTER
                     </div>
                     <div className='-mr-2 flex items-center md:hidden'>
-                      <Hamburger toggled={isOpen} toggle={setOpen} />
+                      <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                     </div>
                   </div>
                 )}
@@ -191,7 +192,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           </div>
           <div className='px-4 py-6 '>
             {/* Navbar for Hamburger */}
-            {user ? (
+            {/* {user ? (
               <div className='-mt-6 flex justify-end pb-4'>
                 {user.first_name != null && (
                   <div>
@@ -220,7 +221,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
               <div className='-mt-6 flex justify-end pb-4'>
                 <span className='text-sm font-medium text-purple-950 dark:text-violet-400'>Guest User</span>
               </div>
-            )}
+            )} */}
             <ul className='flex flex-col gap-y-4'>
               <li>
                 {/* avatar and exp */}
@@ -241,9 +242,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
               {user && (
                 <li>
-                  <Link href='/my-profile' className='hover:text-violet-400' onClick={closeMenu}>
-                    Profile
-                  </Link>
+                  <p className='hover:text-violet-400' onClick={toggleSidebar}>
+                    PROFILE
+                  </p>
                 </li>
               )}
               <li className='fixed bottom-5 left-10 cursor-pointer '>
