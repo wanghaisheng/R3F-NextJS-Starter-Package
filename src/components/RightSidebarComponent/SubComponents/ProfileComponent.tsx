@@ -8,11 +8,7 @@ import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
-import { RiGalleryFill } from 'react-icons/ri'
-import { GiRamProfile } from 'react-icons/gi'
-import CustomToolTip from '@/components/Hud/CustomToolTip'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()

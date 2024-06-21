@@ -38,8 +38,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   const { user, logout } = useUser()
   // State to hold the current guild color
-  const [guildColor, setGuildColor] = useState(null)
-  const [animations, setAnimations] = useState([])
 
   const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
 
@@ -49,24 +47,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
       setProfilePic(user.image_urls[user.image_urls.length - 1])
     }
   }, [user, user?.image_urls?.length])
-
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animation1 = await fetch('/lottieAnimation/animate.json').then((response) => response.json())
-      setAnimations([animation1])
-    }
-
-    fetchAnimations()
-  }, [])
-
-  // Update guildColor whenever user changes
-  useEffect(() => {
-    if (user && user.guilds && user.guilds.length > 0) {
-      setGuildColor(user.guilds[0].color || 'black') // Default to black if no color
-    } else {
-      setGuildColor('black') // Default to black if no user or guilds
-    }
-  }, [user])
 
   return (
     <>
