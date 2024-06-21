@@ -26,10 +26,10 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
     setShowSignIn(!showSignIn)
   }
   return (
-    <div className='mb-12 flex h-full flex-col'>
-      <div className='flex-1 px-4'>
+    <div className='flex h-full flex-col'>
+      <div className='flex-1'>
         {user && (
-          <div className='mb-20 flex w-full flex-col'>
+          <div className='mb-32 flex w-full flex-col'>
             <div className='absolute right-8 top-14 z-20'>
               <Link
                 href={`/public-profile/${user.username}`}
