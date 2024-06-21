@@ -73,7 +73,7 @@ export default function GallerySidebar({ username }) {
 
   return (
     <>
-      <div className='relative -mt-8 flex size-full flex-col items-center justify-center overflow-y-auto px-4'>
+      <div className='relative -mt-8 flex size-full flex-col items-center justify-center overflow-y-auto'>
         <div className='absolute left-0 top-8 flex cursor-pointer flex-col items-center justify-center font-bold leading-4 text-pink-300 hover:text-violet-300'>
           <p>P</p>
           <p>R</p>
@@ -83,7 +83,7 @@ export default function GallerySidebar({ username }) {
           <p>L</p>
           <p>E</p>
         </div>
-        <div className=' flex h-[260px] w-full flex-row overflow-hidden p-4'>
+        <div className=' flex h-[200px] w-full flex-row overflow-hidden p-4'>
           {user && profilePics.length > 0 ? (
             <Swiper
               effect={'cards'}
@@ -124,7 +124,7 @@ export default function GallerySidebar({ username }) {
           <p>T</p>
           <p>S</p>
         </div>
-        <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
+        <div className='flex h-[216px] w-full flex-row overflow-hidden p-4'>
           {user && projPics.length > 0 ? (
             <Swiper
               effect={'cards'}

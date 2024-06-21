@@ -9,6 +9,7 @@ import { useUser } from '@/context/UserContext/UserContext'
 import { LogosFacebook } from '@/logo/LogosFacebook'
 import { IoIosArrowBack } from 'react-icons/io'
 import ProfileComponent from '../SubComponents/ProfileComponent'
+import GallerySidebar from '@/components/GalleryComponent/GallerySidebar'
 
 export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, setShowSignIn, setActiveTab }) {
   const { user } = useUser()
@@ -24,14 +25,15 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
     <div className='mb-12 flex h-full flex-col'>
       <div className='flex-1 px-4'>
         {user && (
-          <div className='mb-20 flex w-full'>
+          <div className='mb-20 flex w-full flex-col'>
             <ProfileComponent setShowSignUp={setShowSignUp} setActiveTab={setActiveTab} />
+            <GallerySidebar username={user ? user.username : ''} />
           </div>
         )}
       </div>
 
       {!user && (
-        <div className='flex-1 items-center justify-center rounded-lg bg-black text-white'>
+        <div className='flex size-full items-center justify-center rounded-lg bg-black text-white'>
           {!showSignUp && !showSignIn ? (
             <div className='mx-auto max-w-xs flex-1 p-4'>
               {/* <div className='mb-4'>

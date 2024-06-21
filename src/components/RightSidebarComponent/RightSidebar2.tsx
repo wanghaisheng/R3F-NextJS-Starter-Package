@@ -14,8 +14,6 @@ import EmergencyComponent from './SubComponents/EmergencyComponent'
 import { CgProfile, CgPhotoscan } from 'react-icons/cg'
 import SideProfile from './Tabs/SideProfile'
 import { Toaster } from 'react-hot-toast'
-import SideGalleryComponent from './SubComponents/SideGalleryComponent'
-import { RiGalleryFill } from 'react-icons/ri'
 import CustomToolTip from '../Hud/CustomToolTip'
 
 const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
@@ -101,9 +99,6 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
                 <EmergencyComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
               )}
               {activeTab === 'search' && <SearchComponent />}
-              {activeTab === 'gallery' && (
-                <SideGalleryComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
-              )}
             </div>
           )}
 
@@ -166,17 +161,6 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
             >
               <FaSearch />
               <CustomToolTip content='Search' top={0} translateY={-28} left={158} />
-            </li>
-            <li
-              className={`group flex items-center rounded-md p-2 ${
-                activeTab === 'gallery'
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-200 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-              onClick={() => handleTabClick('gallery')}
-            >
-              <RiGalleryFill />
-              <CustomToolTip content='Gallery' top={0} translateY={-28} left={195} />
             </li>
           </ul>
         </div>
