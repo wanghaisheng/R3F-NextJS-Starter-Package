@@ -6,7 +6,8 @@ import { Avatar } from 'src/components/Avatar'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 
 import { useCallback, useState, useEffect } from 'react'
 

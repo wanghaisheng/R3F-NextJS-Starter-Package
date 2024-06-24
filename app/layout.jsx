@@ -1,6 +1,7 @@
 import { Layout } from '@/components/dom/Layout'
 import '@/global.css'
-import { UserProvider } from '@/context/UserContext/UserContext'
+// import { UserProvider } from '@/context/UserContext/UserContext'
+import UserProvider from './UserProvider'
 import StarsCanvas from '@/components/StarsCanvas/StarBackground'
 import MainContent from '@/components/MainContent/MainContent'
 

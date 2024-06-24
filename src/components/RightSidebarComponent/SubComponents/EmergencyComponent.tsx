@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import EmergencyCard from '@/components/card/TypeCard/EmergencyCard'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 

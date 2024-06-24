@@ -2,7 +2,8 @@
 
 import toast from 'react-hot-toast'
 import { useState, useEffect, useRef } from 'react'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 import { FaArrowLeft } from 'react-icons/fa6'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'

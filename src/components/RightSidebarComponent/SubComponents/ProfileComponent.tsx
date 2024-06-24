@@ -1,7 +1,8 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import axios from 'axios'
 import toast from 'react-hot-toast'

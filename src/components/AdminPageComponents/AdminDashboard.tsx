@@ -5,7 +5,8 @@ import { LuGauge } from 'react-icons/lu'
 
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 
 export default function AdminDashboard() {
   const { user } = useUser()

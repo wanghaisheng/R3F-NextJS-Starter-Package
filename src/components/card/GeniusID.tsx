@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 
 export default function GeniusID({ username, contact }) {
   const { user } = useUser()

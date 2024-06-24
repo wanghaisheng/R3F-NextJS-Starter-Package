@@ -1,6 +1,7 @@
 import Wallet from '@/components/card/TypeCard/Wallet'
 import TopUpWalletTabs from './TopUpWalletTabs'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 
 export default function WalletComponent({ setActiveTab, setShowSignUp }) {
   const { user } = useUser()

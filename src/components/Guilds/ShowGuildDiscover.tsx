@@ -8,7 +8,8 @@ import { Pagination, Scrollbar } from 'swiper/modules'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 
 export default function ShowGuildDiscover({
   users,

@@ -1,7 +1,8 @@
 'use client'
 
 import { Formik, Field, Form } from 'formik'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 import toast from 'react-hot-toast'
 import { revalidateUser } from '@/revalidateUser'
 

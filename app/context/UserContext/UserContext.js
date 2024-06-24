@@ -51,7 +51,9 @@ export const UserProvider = ({ children }) => {
   return <UserContext.Provider value={{ user, updateUser, logout }}>{children}</UserContext.Provider>
 }
 
-// const response = unstable_cache(
+export const useUser = () => useContext(UserContext)
+
+// export const revalidateUser = unstable_cache(
 //   async (userId, token) =>
 //     await fetch(`/api/internal/users/${userId}`, {
 //       headers: {
@@ -64,8 +66,6 @@ export const UserProvider = ({ children }) => {
 //     }),
 //   ['my-app-user'],
 // )
-
-export const useUser = () => useContext(UserContext)
 
 // 'use client'
 // import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react'
