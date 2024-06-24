@@ -1,6 +1,6 @@
 'use server'
 import { revalidateTag } from 'next/cache'
 
-export default async function RevalidateUser() {
+export  async function revalidateUser() {
   return revalidateTag('user')
 }

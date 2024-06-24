@@ -1,8 +1,8 @@
 'use client'
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
-import axios from 'axios'
 import Cookies from 'js-cookie'
+import { unstable_cache } from 'next/cache'
 
 const UserContext = createContext()
 
@@ -18,21 +18,19 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async (userId, token) => {
     try {
-      const response = await fetch(
-        `/api/internal/users/${userId}`,
-        { next: { tags: ['user'] } },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await fetch(`/api/internal/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json', // Add this header if required
         },
-      )
-
+        next: {
+          tags: ['user'],
+        },
+      })
       if (!response.ok) {
         // Handle the error if the response is not successful (status not in the range 200-299)
         throw new Error(`HTTP error! Status: ${response.status}`)
       }
-
       const userData = await response.json()
       setUser(userData)
     } catch (error) {
@@ -52,6 +50,20 @@ export const UserProvider = ({ children }) => {
 
   return <UserContext.Provider value={{ user, updateUser, logout }}>{children}</UserContext.Provider>
 }
+
+// const response = unstable_cache(
+//   async (userId, token) =>
+//     await fetch(`/api/internal/users/${userId}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         'Content-Type': 'application/json', // Add this header if required
+//       },
+//       next: {
+//         tags: ['user'],
+//       },
+//     }),
+//   ['my-app-user'],
+// )
 
 export const useUser = () => useContext(UserContext)
 

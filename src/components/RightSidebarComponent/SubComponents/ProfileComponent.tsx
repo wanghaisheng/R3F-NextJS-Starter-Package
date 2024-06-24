@@ -15,7 +15,6 @@ import { GiRamProfile } from 'react-icons/gi'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
-  // const token = Cookies.get('token')
   const [form, setForm] = useState({
     username: user?.username || '',
     phone_number: user?.phone_number || '',
