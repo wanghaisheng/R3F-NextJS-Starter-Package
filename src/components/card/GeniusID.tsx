@@ -7,7 +7,7 @@ import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import { useUser } from '@/context/UserContext/UserContext'
 
-export default function GeniusID({ dob, contact }) {
+export default function GeniusID({ username, contact }) {
   const { user } = useUser()
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
@@ -64,8 +64,10 @@ export default function GeniusID({ dob, contact }) {
                     {/* {guildData.find((guild) => guild.name === selectedGuild)?.symbol}
                       </li>
                     )} */}
-                    <li className='mb-1 w-full text-xl font-semibold'>
-                      <p>{user ? user.username : 'GUEST'}</p>
+                    <li
+                      className={`mb-1 w-full text-xl font-semibold ${user ? (user.username === username ? '' : 'border-b border-pink-300 ') : ''}`}
+                    >
+                      <p>{username}</p>
                     </li>
                     <li className='mb-1 w-full'>
                       <p className='text-gray-400 dark:text-purple-500'>{user ? user.email : ''}</p>
