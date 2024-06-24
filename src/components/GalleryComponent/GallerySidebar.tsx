@@ -1,5 +1,4 @@
 'use client'
-import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -12,7 +11,11 @@ import Image from 'next/image'
 
 const getUserByUsername = async (username) => {
   try {
-    const res = await fetch(`/api/public/users/${username}`)
+    const res = await fetch(`/api/public/users/${username}`, {
+      next: {
+        revalidate: 30,
+      },
+    })
     if (!res.ok) {
       return toast.error('Failed to get the user')
     }
@@ -39,7 +42,7 @@ export default function GallerySidebar({ username }) {
       }
     }
     getUser()
-  }, [])
+  }, [username])
 
   // Get project pictures
   useEffect(() => {
