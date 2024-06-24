@@ -1,9 +1,9 @@
 'use client'
-import { CardBody, CardContainer, CardItem } from '@/components/card/card'
+import { CardBody, CardContainer, CardItem } from '@/components/card/card' //----------------> module not found error in my branch
 import Image from 'next/image'
 import { useState } from 'react'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import EmergencyCard from './TypeCard/EmergencyCard'

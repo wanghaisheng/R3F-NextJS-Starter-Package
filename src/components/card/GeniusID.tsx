@@ -1,12 +1,12 @@
 'use client'
 
-import { CardBody } from '@/components/card/card'
+import { CardBody } from '@/components/card/card' //----------------> module not found error in my branch
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 
 export default function GeniusID({ username, contact }) {
   const { user } = useUser()

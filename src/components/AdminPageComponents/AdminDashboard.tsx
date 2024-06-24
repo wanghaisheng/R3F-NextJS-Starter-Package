@@ -6,7 +6,8 @@ import { LuGauge } from 'react-icons/lu'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 
 export default function AdminDashboard() {
   const { user } = useUser()

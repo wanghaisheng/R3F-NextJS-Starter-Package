@@ -4,7 +4,7 @@ import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import { useState, useEffect } from 'react'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import axios from 'axios'
 import toast from 'react-hot-toast'
 

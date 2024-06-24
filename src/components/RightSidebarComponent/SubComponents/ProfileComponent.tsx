@@ -2,14 +2,14 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false }) //----------------> module not found error in my branch
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import GeniusID from '@/components/card/GeniusID'
+import GeniusID from '@/components/card/GeniusID' //----------------> module not found error in my branch
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()

@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import FormModal2 from '../FormModal/Modal2'
-import Avatar_creator from '@/components/avatar-creator/avatar'
+import Avatar_creator from '@/components/avatar-creator/avatar' //----------------> module not found error in my branch
 
 export default function AvatarImageComponent() {
   const router = useRouter()

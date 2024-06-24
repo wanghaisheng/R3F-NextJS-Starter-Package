@@ -2,7 +2,7 @@
 import 'react-tabs/style/react-tabs.css'
 import { useState, useEffect } from 'react'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import axios from 'axios'
 import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'

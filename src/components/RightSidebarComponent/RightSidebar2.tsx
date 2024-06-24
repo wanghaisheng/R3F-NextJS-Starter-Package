@@ -7,7 +7,7 @@ import { TbEmergencyBed } from 'react-icons/tb'
 import { FaOpencart } from 'react-icons/fa'
 import Image from 'next/image'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import WalletComponent from './SubComponents/WalletComponent'
 import SearchComponent from './SubComponents/SearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'

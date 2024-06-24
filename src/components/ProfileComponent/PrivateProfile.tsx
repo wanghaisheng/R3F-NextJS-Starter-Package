@@ -1,11 +1,11 @@
 'use client'
-import { CardBody, CardContainer } from '@/components/card/card'
-import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
+import { CardBody, CardContainer } from '@/components/card/card' //----------------> module not found error in my branch
+import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent' //----------------> module not found error in my branch
 import dynamic from 'next/dynamic'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import { useCallback, useEffect, useState, useRef } from 'react'
-import SpringModal from '@/components/FormModal/SpringModal'
+import SpringModal from '@/components/FormModal/SpringModal' //----------------> module not found error in my branch
 import { TbCards } from 'react-icons/tb'
 
 // For the card flip QR code
@@ -16,16 +16,16 @@ import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 // For carousel inside slide 1
 import AvatarImageComponent from '../avatarImage/AvatarImage'
-import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
+import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton' //----------------> module not found error in my branch
 import Link from 'next/link'
 // Cards
-import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard'
-import CardsFlipCard from '@/components/card/cardsFlipCard'
+import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard' //----------------> module not found error in my branch
+import CardsFlipCard from '@/components/card/cardsFlipCard' //----------------> module not found error in my branch
 import ExperienceFlipCard from '../card/experienceFlipCard'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false })
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false }) //----------------> module not found error in my branch
+const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false }) //----------------> module not found error in my branch
 
-import { useSidebar } from '@/components/dom/SidebarProvider'
+import { useSidebar } from '@/components/dom/SidebarProvider' //----------------> module not found error in my branch
 
 export default function PrivateProfile() {
   const { user } = useUser()
