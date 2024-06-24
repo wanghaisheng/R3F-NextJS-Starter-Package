@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import { Pagination, Scrollbar } from 'swiper/modules'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -22,8 +21,6 @@ export default function ShowGuildDiscover({
   selectedRegionFilter: string
   searchTerm: string
 }) {
-  const { user } = useUser()
-
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
@@ -37,25 +34,14 @@ export default function ShowGuildDiscover({
     <div className='size-full'>
       {filteredFactions.length > 0 ? (
         <div className='flex size-full justify-center rounded-lg py-4'>
-          <Swiper
-            className='flex h-[400px] w-full'
-            spaceBetween={50}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Pagination]}
-          >
+          <Swiper className='flex h-[400px] w-full' spaceBetween={50}>
             {filteredFactions.map((publicUser, index) => (
               <SwiperSlide key={index}>
                 <Swiper
                   className='flex size-full'
                   direction={'vertical'}
                   spaceBetween={50}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  initialSlide={1} // Default slide number 2
-                  modules={[Pagination]}
+                  initialSlide={1} // Default slide number 2\
                 >
                   <SwiperSlide className='text-black'>Vertical Slide 1</SwiperSlide>
                   <SwiperSlide>
