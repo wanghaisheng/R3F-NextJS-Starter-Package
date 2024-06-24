@@ -1,18 +1,18 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
-import { useUser } from '@/context/UserContext/UserContext'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false }) //----------------> module not found error in my branch
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import GeniusID from '@/components/card/GeniusID'
+import GeniusID from '@/components/card/GeniusID' //----------------> module not found error in my branch
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
-  // const token = Cookies.get('token')
   const [form, setForm] = useState({
     username: user?.username || '',
     phone_number: user?.phone_number || '',
@@ -41,10 +41,21 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }))
   }
 
+  // Check if user has region data and set region status accordingly
+  useEffect(() => {
+    if (user && user.region && user.region.ip) {
+      setRegionStatus(true)
+    }
+  }, [user])
+
   const handleRegionStatus = async (value) => {
     setRegionStatus(value)
     if (value) {
-      const response = await fetch('https://ipapi.co/json/')
+      const response = await fetch('https://ipapi.co/json/', {
+        next: {
+          revalidate: 30,
+        },
+      })
       const data = await response.json()
       if (window.confirm('Do you want to share the location via your IP?')) {
         setForm((prevForm) => ({
@@ -149,7 +160,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             </p>
           </div>
           <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
-            {user.username}
+            {form.username}
           </div>
 
           <div className='z-10 mt-[-250px] h-[360px] w-full'>
@@ -183,7 +194,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
 
           <div className='-mt-5 flex justify-center '>
-            <GeniusID dob={form.dob} contact={form.phone_number} />
+            <GeniusID username={form.username} contact={form.phone_number} />
           </div>
 
           <form
@@ -261,6 +272,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                   onChange={(e) => handleRegionStatus(e.target.checked)}
                   className='ml-2 flex size-5 items-center justify-start'
                   aria-label='region status'
+                  disabled={regionStatus} // Disable checkbox if regionStatus is true
                 />
               </div>
               <div className='flex items-center justify-between gap-x-2'>

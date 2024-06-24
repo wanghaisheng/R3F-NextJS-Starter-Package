@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation'
 import { enqueueSnackbar } from 'notistack'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import toast from 'react-hot-toast'
 
 const config: AvatarCreatorConfig = {

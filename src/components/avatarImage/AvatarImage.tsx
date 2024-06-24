@@ -6,7 +6,8 @@ import { Avatar } from 'src/components/Avatar'
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
 
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider'
 
 import { useCallback, useState, useEffect } from 'react'
 
@@ -14,7 +15,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import FormModal2 from '../FormModal/Modal2'
-import Avatar_creator from '@/components/avatar-creator/avatar'
+import Avatar_creator from '@/components/avatar-creator/avatar' //----------------> module not found error in my branch
 
 export default function AvatarImageComponent() {
   const router = useRouter()

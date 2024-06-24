@@ -1,11 +1,12 @@
 'use client'
 import Image from 'next/image'
 import toast from 'react-hot-toast'
-import { Avatar } from 'src/components/Avatar'
-import { useUser } from '@/context/UserContext/UserContext'
+import { Avatar } from 'src/components/Avatar' //----------------> module not found error in my branch
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import { useState, useEffect, useMemo } from 'react'
 import FormModal2 from '../FormModal/Modal2'
-import Avatar_creator from '@/components/avatar-creator/avatar'
+import Avatar_creator from '@/components/avatar-creator/avatar' //----------------> module not found error in my branch
 import axios from 'axios'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowRight } from 'react-icons/fa'

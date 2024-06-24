@@ -1,6 +1,7 @@
-import Wallet from '@/components/card/TypeCard/Wallet'
+import Wallet from '@/components/card/TypeCard/Wallet' //----------------> module not found error in my branch
 import TopUpWalletTabs from './TopUpWalletTabs'
-import { useUser } from '@/context/UserContext/UserContext'
+// import { useUser } from '@/context/UserContext/UserContext'
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 
 export default function WalletComponent({ setActiveTab, setShowSignUp }) {
   const { user } = useUser()
