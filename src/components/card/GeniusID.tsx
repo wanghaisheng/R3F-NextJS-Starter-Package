@@ -55,7 +55,7 @@ export default function GeniusID({ username, contact }) {
             <div className='absolute inset-0 cursor-default rounded-xl'>
               {/* Card Details */}
               <div className='absolute top-5 flex flex-col p-5 text-sm text-white'>
-                <nav className='mb-1 flex list-none flex-wrap'>
+                <nav className='mb-1 flex w-full list-none flex-wrap'>
                   <ul>
                     {/* Display selected guild's symbol */}
                     {/* {selectedGuild && (
@@ -72,7 +72,9 @@ export default function GeniusID({ username, contact }) {
                     <li className='mb-1 w-full'>
                       <p className='text-gray-400 dark:text-purple-500'>{user ? user.email : ''}</p>
                     </li>
-                    <li className='w-full'>
+                    <li
+                      className={`w-full ${user ? (user.phone_number === contact ? '' : 'border-b border-pink-300 ') : ''}`}
+                    >
                       <p>Contact : {contact && contact}</p>
                     </li>
                   </ul>
