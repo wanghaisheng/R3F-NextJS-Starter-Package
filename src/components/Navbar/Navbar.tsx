@@ -25,6 +25,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
     setShowSignUp(true)
+    setOpen(false)
   }
 
   useEffect(() => {
@@ -37,8 +38,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   const { user, logout } = useUser()
   // State to hold the current guild color
-  const [guildColor, setGuildColor] = useState(null)
-  const [animations, setAnimations] = useState([])
 
   const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
 
@@ -49,31 +48,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
     }
   }, [user, user?.image_urls?.length])
 
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animation1 = await fetch('/lottieAnimation/animate.json').then((response) => response.json())
-      setAnimations([animation1])
-    }
-
-    fetchAnimations()
-  }, [])
-
-  // Update guildColor whenever user changes
-  useEffect(() => {
-    if (user && user.guilds && user.guilds.length > 0) {
-      setGuildColor(user.guilds[0].color || 'black') // Default to black if no color
-    } else {
-      setGuildColor('black') // Default to black if no user or guilds
-    }
-  }, [user])
-
   return (
     <>
       <nav className={`fixed top-0 z-50 mx-auto flex w-full items-center justify-between`}>
         {/* Logo and Sign In/Sign Out */}
         <div className='fixed inset-x-0 top-0 mx-auto flex h-20 w-full items-center justify-between px-4 py-2'>
           {/* Logo */}
-          <Link href='/hud' className='flex items-center justify-center'>
+          <Link href='/discover' className='flex items-center justify-center'>
             <Image
               src={'/logos/lgo.png'}
               className='absolute left-4 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
@@ -86,7 +67,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           <div className='flex items-center justify-center text-black dark:text-white'>
             {user ? (
               <>
-                <Link href='/my-profile' onClick={closeMenu}>
+                <div onClick={toggleSidebar}>
                   <div
                     className='mr-2 size-[38px] rounded-full bg-pink-400'
                     key={profilePic}
@@ -97,7 +78,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                       backgroundRepeat: 'no-repeat',
                     }}
                   ></div>
-                </Link>
+                </div>
                 <div className='flex'>
                   <Link
                     href='/'
@@ -124,7 +105,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                       REGISTER
                     </div>
                     <div className='-mr-2 flex items-center md:hidden'>
-                      <Hamburger toggled={isOpen} toggle={setOpen} />
+                      <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                     </div>
                   </div>
                 )}
@@ -191,7 +172,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           </div>
           <div className='px-4 py-6 '>
             {/* Navbar for Hamburger */}
-            {user ? (
+            {/* {user ? (
               <div className='-mt-6 flex justify-end pb-4'>
                 {user.first_name != null && (
                   <div>
@@ -220,7 +201,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
               <div className='-mt-6 flex justify-end pb-4'>
                 <span className='text-sm font-medium text-purple-950 dark:text-violet-400'>Guest User</span>
               </div>
-            )}
+            )} */}
             <ul className='flex flex-col gap-y-4'>
               <li>
                 {/* avatar and exp */}
@@ -241,9 +222,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
               {user && (
                 <li>
-                  <Link href='/my-profile' className='hover:text-violet-400' onClick={closeMenu}>
-                    Profile
-                  </Link>
+                  <p className='hover:text-violet-400' onClick={toggleSidebar}>
+                    PROFILE
+                  </p>
                 </li>
               )}
               <li className='fixed bottom-5 left-10 cursor-pointer '>

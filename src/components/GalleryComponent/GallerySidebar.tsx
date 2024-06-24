@@ -1,5 +1,4 @@
 'use client'
-import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -12,7 +11,11 @@ import Image from 'next/image'
 
 const getUserByUsername = async (username) => {
   try {
-    const res = await fetch(`/api/public/users/${username}`)
+    const res = await fetch(`/api/public/users/${username}`, {
+      next: {
+        revalidate: 30,
+      },
+    })
     if (!res.ok) {
       return toast.error('Failed to get the user')
     }
@@ -39,7 +42,7 @@ export default function GallerySidebar({ username }) {
       }
     }
     getUser()
-  }, [])
+  }, [username])
 
   // Get project pictures
   useEffect(() => {
@@ -73,7 +76,7 @@ export default function GallerySidebar({ username }) {
 
   return (
     <>
-      <div className='relative -mt-8 flex size-full flex-col items-center justify-center overflow-y-auto px-4'>
+      <div className='relative -mt-8 flex size-full flex-col items-center justify-center overflow-y-auto'>
         <div className='absolute left-0 top-8 flex cursor-pointer flex-col items-center justify-center font-bold leading-4 text-pink-300 hover:text-violet-300'>
           <p>P</p>
           <p>R</p>
@@ -83,24 +86,24 @@ export default function GallerySidebar({ username }) {
           <p>L</p>
           <p>E</p>
         </div>
-        <div className=' flex h-[260px] w-full flex-row overflow-hidden p-4'>
+        <div className=' flex h-[200px] w-full flex-row overflow-hidden p-4'>
           {user && profilePics.length > 0 ? (
             <Swiper
               effect={'cards'}
               grabCursor={true}
               modules={[EffectCards]}
-              className='flex h-[160px] w-[260px] items-center justify-center rounded-lg'
+              className='flex h-[160px] w-[260px] items-center justify-center rounded'
             >
               {profilePics.map((profilePic, index) => (
                 <SwiperSlide key={index}>
-                  <div className='flex h-[150px] w-[250px] justify-center rounded-lg border border-violet-600'>
+                  <div className='flex h-[150px] w-[250px] justify-center rounded border border-violet-600'>
                     <Image
                       src={profilePic}
                       alt='profile pictures'
                       height={150}
                       width={250}
                       unoptimized
-                      className='rounded-lg'
+                      className='rounded'
                       objectFit='cover'
                     />
                   </div>
@@ -114,18 +117,18 @@ export default function GallerySidebar({ username }) {
           )}
         </div>
 
-        <div className='absolute left-0 top-[233px] flex cursor-pointer flex-col items-center justify-center font-bold leading-4 text-pink-300 hover:text-violet-300'>
-          <p>P</p>
-          <p>R</p>
-          <p>O</p>
-          <p>J</p>
-          <p>E</p>
-          <p>C</p>
-          <p>T</p>
-          <p>S</p>
-        </div>
-        <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
-          {user && projPics.length > 0 ? (
+        {user && projPics.length > 0 && (
+          <div className='flex h-[216px] w-full flex-row overflow-hidden p-4'>
+            <div className='absolute left-0 top-[233px] flex cursor-pointer flex-col items-center justify-center font-bold leading-4 text-pink-300 hover:text-violet-300'>
+              <p>P</p>
+              <p>R</p>
+              <p>O</p>
+              <p>J</p>
+              <p>E</p>
+              <p>C</p>
+              <p>T</p>
+              <p>S</p>
+            </div>
             <Swiper
               effect={'cards'}
               grabCursor={true}
@@ -148,23 +151,19 @@ export default function GallerySidebar({ username }) {
                 </SwiperSlide>
               ))}
             </Swiper>
-          ) : (
-            <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
-              <p>No projects to show</p>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        <div className='absolute left-0 top-[457px] flex cursor-pointer flex-col items-center justify-center font-bold leading-4 text-pink-300 hover:text-violet-300'>
-          <p>S</p>
-          <p>K</p>
-          <p>L</p>
-          <p>L</p>
-          <p>S</p>
-          <p>S</p>
-        </div>
-        <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
-          {user && certificates.length > 0 ? (
+        {user && certificates.length > 0 && (
+          <div className='flex h-[260px] w-full flex-row overflow-hidden p-4'>
+            <div className='absolute left-0 top-[457px] flex cursor-pointer flex-col items-center justify-center font-bold leading-4 text-pink-300 hover:text-violet-300'>
+              <p>S</p>
+              <p>K</p>
+              <p>L</p>
+              <p>L</p>
+              <p>S</p>
+              <p>S</p>
+            </div>
             <Swiper
               effect={'cards'}
               grabCursor={true}
@@ -187,12 +186,8 @@ export default function GallerySidebar({ username }) {
                 </SwiperSlide>
               ))}
             </Swiper>
-          ) : (
-            <div className='ml-4 flex h-[160px] w-[260px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
-              <p>No Certificates to show</p>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   )

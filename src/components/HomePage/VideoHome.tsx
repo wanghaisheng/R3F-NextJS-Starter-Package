@@ -3,10 +3,15 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Autoplay, Pagination } from 'swiper/modules'
+import 'swiper/css/navigation'
+import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRef } from 'react'
+import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md'
+import { motion } from 'framer-motion'
 
+//static data
 const guildData = [
   {
     guild_name: 'BUDDHA',
@@ -67,12 +72,8 @@ const guildData = [
 ]
 
 export default function VideoHome() {
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + '</span>'
-    },
-  }
+  const navigationPrevRef = useRef(null)
+  const navigationNextRef = useRef(null)
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
@@ -82,11 +83,15 @@ export default function VideoHome() {
           delay: 5000,
           disableOnInteraction: false,
         }}
+        loop={true}
         pagination={{
           dynamicBullets: true,
         }}
-        navigation={true}
-        modules={[Autoplay, Pagination]}
+        navigation={{
+          prevEl: navigationPrevRef.current,
+          nextEl: navigationNextRef.current,
+        }}
+        modules={[Autoplay, Pagination, Navigation]}
         className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-lg'
       >
         <SwiperSlide className='bg-cover bg-center'>
@@ -226,7 +231,7 @@ export default function VideoHome() {
             <div className='absolute bottom-0 z-30 flex justify-center lg:hidden'>
               <Image src={guild.symbol} height={80} width={80} alt='guild symbol' />
             </div>
-            <div className='absolute right-36 z-20 flex h-[700px] w-[1000px]'>
+            {/* <div className='absolute right-36 z-20 flex h-[700px] w-[1000px]'>
               {guild.guild_name === 'VAJRA' && (
                 <Image
                   src='/homepage/VajraSplash.svg'
@@ -236,7 +241,7 @@ export default function VideoHome() {
                   className='rotate-12'
                 />
               )}
-            </div>
+            </div> */}
           </SwiperSlide>
         ))}
 
@@ -305,6 +310,26 @@ export default function VideoHome() {
             </div>
           </div>
         </SwiperSlide>
+        <div className='absolute left-0 top-0 flex h-full items-center'>
+          <motion.div
+            ref={navigationPrevRef}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 0.8 }}
+            className='z-20 ml-5'
+          >
+            <MdOutlineNavigateBefore size={30} />
+          </motion.div>
+        </div>
+        <div className='absolute right-0 top-0 flex h-full items-center'>
+          <motion.div
+            ref={navigationNextRef}
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 0.8 }}
+            className='z-20 mr-5'
+          >
+            <MdOutlineNavigateNext size={30} />
+          </motion.div>
+        </div>
       </Swiper>
     </div>
   )

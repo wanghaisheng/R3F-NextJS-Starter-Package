@@ -13,7 +13,11 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 
 const getSelectedPublicUser = async (username) => {
   try {
-    const res = await fetch(`/api/public/users/${username}`)
+    const res = await fetch(`/api/public/users/${username}`, {
+      next: {
+        revalidate: 30,
+      },
+    })
     if (!res.ok) {
       return toast.error('Failed to get the user')
     }

@@ -7,7 +7,7 @@ import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import { useUser } from '@/context/UserContext/UserContext'
 
-export default function GeniusID({ dob, contact }) {
+export default function GeniusID({ username, contact }) {
   const { user } = useUser()
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
@@ -55,7 +55,7 @@ export default function GeniusID({ dob, contact }) {
             <div className='absolute inset-0 cursor-default rounded-xl'>
               {/* Card Details */}
               <div className='absolute top-5 flex flex-col p-5 text-sm text-white'>
-                <nav className='mb-1 flex list-none flex-wrap'>
+                <nav className='mb-1 flex w-full list-none flex-wrap'>
                   <ul>
                     {/* Display selected guild's symbol */}
                     {/* {selectedGuild && (
@@ -64,13 +64,17 @@ export default function GeniusID({ dob, contact }) {
                     {/* {guildData.find((guild) => guild.name === selectedGuild)?.symbol}
                       </li>
                     )} */}
-                    <li className='mb-1 w-full text-xl font-semibold'>
-                      <p>{user ? user.username : 'GUEST'}</p>
+                    <li
+                      className={`mb-1 w-full text-xl font-semibold ${user ? (user.username === username ? '' : 'border-b border-pink-300 ') : ''}`}
+                    >
+                      <p>{username}</p>
                     </li>
                     <li className='mb-1 w-full'>
                       <p className='text-gray-400 dark:text-purple-500'>{user ? user.email : ''}</p>
                     </li>
-                    <li className='w-full'>
+                    <li
+                      className={`w-full ${user ? (user.phone_number === contact ? '' : 'border-b border-pink-300 ') : ''}`}
+                    >
                       <p>Contact : {contact && contact}</p>
                     </li>
                   </ul>

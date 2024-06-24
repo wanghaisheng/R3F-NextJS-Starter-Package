@@ -8,10 +8,7 @@ import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import Link from 'next/link'
 import GeniusID from '@/components/card/GeniusID'
-import { RiGalleryFill } from 'react-icons/ri'
-import { GiRamProfile } from 'react-icons/gi'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
@@ -43,10 +40,21 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }))
   }
 
+  // Check if user has region data and set region status accordingly
+  useEffect(() => {
+    if (user && user.region && user.region.ip) {
+      setRegionStatus(true)
+    }
+  }, [user])
+
   const handleRegionStatus = async (value) => {
     setRegionStatus(value)
     if (value) {
-      const response = await fetch('https://ipapi.co/json/')
+      const response = await fetch('https://ipapi.co/json/', {
+        next: {
+          revalidate: 30,
+        },
+      })
       const data = await response.json()
       if (window.confirm('Do you want to share the location via your IP?')) {
         setForm((prevForm) => ({
@@ -151,13 +159,13 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             </p>
           </div>
           <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase'>
-            {user.username}
+            {form.username}
           </div>
 
           <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
-                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
                 shadows
                 animationSrc='/male-spawn-animation.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -170,7 +178,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               />
             ) : (
               <Avatar
-                modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=1024&pose=A&useHands=true'
+                modelSrc='https://models.readyplayer.me/65ba39f18f9cbe2fcfec8a10.glb?quality=low'
                 shadows
                 animationSrc='/male-idle-3.fbx'
                 style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -185,7 +193,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
           </div>
 
           <div className='-mt-5 flex justify-center '>
-            <GeniusID dob={form.dob} contact={form.phone_number} />
+            <GeniusID username={form.username} contact={form.phone_number} />
           </div>
 
           <form
@@ -263,6 +271,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                   onChange={(e) => handleRegionStatus(e.target.checked)}
                   className='ml-2 flex size-5 items-center justify-start'
                   aria-label='region status'
+                  disabled={regionStatus} // Disable checkbox if regionStatus is true
                 />
               </div>
               <div className='flex items-center justify-between gap-x-2'>
@@ -282,33 +291,17 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               </div>
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-4 w-full px-4'>
               <button
-                className='flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 transition-all
+                className='flex w-full items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-1 transition-all
             ease-in-out hover:border-purple-500'
                 type='submit'
                 aria-label='next'
               >
-                <p className='px-4 py-1'>DONE</p>
+                SUBMIT
               </button>
             </div>
           </form>
-          <div className='flex items-center justify-center gap-x-2'>
-            <Link
-              href={`/public-profile/${user.username}`}
-              className='mt-2 flex w-fit items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-            ease-in-out hover:border-purple-500'
-            >
-              <GiRamProfile />
-            </Link>
-            <div
-              onClick={setActiveTab.bind(this, 'gallery')}
-              className='mt-2 flex w-fit cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all
-            ease-in-out hover:border-purple-500'
-            >
-              <RiGalleryFill />
-            </div>
-          </div>
         </div>
       ) : (
         <>

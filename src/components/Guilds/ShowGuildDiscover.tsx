@@ -48,14 +48,13 @@ export default function ShowGuildDiscover({
               <SwiperSlide key={index}>
                 <Link
                   href={`/public-profile/${publicUser.username}`}
-                  className='group relative ml-4 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                  className='group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
                 >
                   <Image
                     className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
                     src={publicUser.avatarimg}
                     alt={publicUser.username}
-                    width={282}
-                    height={256}
+                    fill
                     style={{
                       background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
                       backgroundSize: 'cover',
