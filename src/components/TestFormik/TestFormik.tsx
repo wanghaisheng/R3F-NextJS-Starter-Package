@@ -4,7 +4,7 @@ import { Formik, Field, Form } from 'formik'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider'
 import toast from 'react-hot-toast'
-import { revalidateUser } from '@/revalidateUser'
+import { revalidateUser } from '../../../lib/actions'
 
 const TestFormik = () => {
   const { user } = useUser()
@@ -28,7 +28,7 @@ const TestFormik = () => {
                   body: JSON.stringify(values),
                 })
                 if (res.ok) {
-                  revalidateUser()
+                  await revalidateUser()
                   toast.success('username updated')
                 }
               } else {
@@ -36,12 +36,12 @@ const TestFormik = () => {
               }
             }}
           >
-            <Form>
+            <Form action={revalidateUser}>
               <label className='mr-8' htmlFor='username'>
                 Username
               </label>
               <Field className='text-black' id='username' name='username' placeholder='username' />
-              <button type='submit'>Submit</button>
+              <button type='submit'>update</button>
             </Form>
           </Formik>
         </div>
