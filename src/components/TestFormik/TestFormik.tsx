@@ -36,7 +36,7 @@ const TestFormik = () => {
               }
             }}
           >
-            <Form action={revalidateUser}>
+            <Form>
               <label className='mr-8' htmlFor='username'>
                 Username
               </label>
