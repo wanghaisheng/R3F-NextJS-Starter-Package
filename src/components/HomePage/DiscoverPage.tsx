@@ -112,6 +112,8 @@ const DiscoverPage = () => {
     savePublicUsers()
   }, [])
 
+  console.log('publicUsers', publicUsers)
+
   useEffect(() => {
     const saveGuilds = async () => {
       const guild = await getGuilds()
@@ -127,6 +129,7 @@ const DiscoverPage = () => {
         const continent = continents.find((continent) => continent.continent_code === publicUser.region.continent_code)
         const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[publicUser.avatar.length - 1].avatar_url : ''
         const userImages = publicUser.image_urls
+        const experience = publicUser.experience
 
         return {
           name: `${publicUser.first_name} ${publicUser.last_name}`,
@@ -136,6 +139,7 @@ const DiscoverPage = () => {
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
           continent: continent ? continent.continent_name : 'Unknown Continent',
+          experience: experience,
         }
       })
       setGuilds(guilds)

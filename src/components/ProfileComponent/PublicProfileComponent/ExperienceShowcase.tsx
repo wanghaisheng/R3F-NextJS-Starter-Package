@@ -1,13 +1,13 @@
-import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton'
 import ExpProfileView from '@/components/card/ExpProfileView'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
 import 'swiper/css/effect-cards'
+import 'swiper/css/pagination'
 
-import { EffectCards } from 'swiper/modules'
+import { EffectCards, Pagination } from 'swiper/modules'
 
-export default function ExperienceShowcase({ experience, user }) {
+export default function ExperienceShowcase({ experience, user, height, width, pagination }) {
   return (
     <>
       <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
@@ -16,7 +16,9 @@ export default function ExperienceShowcase({ experience, user }) {
             effect={'cards'}
             grabCursor={true}
             modules={[EffectCards]}
-            className='flex size-72 h-[550px] w-[800px] items-center justify-center rounded-lg'
+            pagination={pagination ? { clickable: true } : false}
+            className='flex items-center justify-center rounded-lg'
+            style={{ height: `${height}px`, width: `${width}px` }}
           >
             {experience.map((exp, index) => (
               <SwiperSlide key={index}>

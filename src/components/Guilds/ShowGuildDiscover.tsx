@@ -9,6 +9,7 @@ import Image from 'next/image'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import { FcLike } from 'react-icons/fc'
+import ExperienceShowcase from '../ProfileComponent/PublicProfileComponent/ExperienceShowcase'
 
 export default function ShowGuildDiscover({
   users,
@@ -45,11 +46,50 @@ export default function ShowGuildDiscover({
                   className='flex size-full'
                   direction={'vertical'}
                   spaceBetween={50}
-                  initialSlide={1} // Default slide number 2\
+                  initialSlide={0} // Default slide number 1\
                   navigation={false}
                   loop
                   modules={[Navigation]}
                 >
+                  <SwiperSlide>
+                    <div
+                      className={`group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out hover:scale-105 ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
+                    >
+                      <Image
+                        className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
+                        src={publicUser.avatarimg}
+                        alt={publicUser.username}
+                        loading='lazy'
+                        fill
+                        style={{
+                          background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          objectFit: 'cover',
+                          filter: `drop-shadow( 0px 0px 3px rgba(${
+                            publicUser.guild === 'PADMA'
+                              ? '255, 0, 0, 1'
+                              : publicUser.guild === 'VAJRA'
+                                ? '0, 0, 255, 1'
+                                : publicUser.guild === 'RATNA'
+                                  ? '255, 255, 0, 1'
+                                  : publicUser.guild === 'KARMA'
+                                    ? '0, 255, 0, 1'
+                                    : '255, 255, 255, 1'
+                          }))`,
+                        }}
+                      />
+                    </div>
+                    <div className='flex w-full justify-between px-9 py-4'>
+                      <div>
+                        <FcLike />
+                      </div>
+                      <div>
+                        <p>View More</p>
+                      </div>
+                      <div>!</div>
+                    </div>
+                  </SwiperSlide>
                   <SwiperSlide className='flex items-center justify-center p-6'>
                     {/* Info */}
                     <div
@@ -82,50 +122,22 @@ export default function ShowGuildDiscover({
                         <div className='flex w-full justify-center text-center font-semibold italic'>
                           {publicUser.description}
                         </div>
-                        <p className='text-sm text-indigo-800'>Guild: {publicUser.guild}</p>
-                        <p className='text-sm text-indigo-800'>Continent: {publicUser.continent}</p>
+                        <Link href={`/public-profile/${publicUser.username}`}>View {publicUser.username}s Profile</Link>
                       </div>
                     </div>
                   </SwiperSlide>
-                  <SwiperSlide>
-                    <div
-                      // href={`/public-profile/${publicUser.username}`}
-                      className={`group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out hover:scale-105 ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
-                    >
-                      <Image
-                        className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
-                        src={publicUser.avatarimg}
-                        alt={publicUser.username}
-                        loading='lazy'
-                        fill
-                        style={{
-                          background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          objectFit: 'cover',
-                          filter: `drop-shadow( 0px 0px 3px rgba(${
-                            publicUser.guild === 'PADMA'
-                              ? '255, 0, 0, 1'
-                              : publicUser.guild === 'VAJRA'
-                                ? '0, 0, 255, 1'
-                                : publicUser.guild === 'RATNA'
-                                  ? '255, 255, 0, 1'
-                                  : publicUser.guild === 'KARMA'
-                                    ? '0, 255, 0, 1'
-                                    : '255, 255, 255, 1'
-                          }))`,
-                        }}
+                  {viewExp && (
+                    <SwiperSlide>
+                      laksjdf
+                      <ExperienceShowcase
+                        experience={publicUser.experience}
+                        user={publicUser}
+                        height={300}
+                        width={300}
+                        pagination={true}
                       />
-                    </div>
-                    <div className='flex w-full justify-between px-9 py-4'>
-                      <div>
-                        <FcLike />
-                      </div>
-                      <div>!</div>
-                      <div>!</div>
-                    </div>
-                  </SwiperSlide>
-                  {viewExp && <SwiperSlide>sa</SwiperSlide>}
+                    </SwiperSlide>
+                  )}
                 </Swiper>
               </SwiperSlide>
             ))}
