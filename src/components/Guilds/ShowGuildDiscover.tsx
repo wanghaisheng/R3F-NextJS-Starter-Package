@@ -9,8 +9,13 @@ import Image from 'next/image'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import { FcLike } from 'react-icons/fc'
-import ExperienceShowcase from '../ProfileComponent/PublicProfileComponent/ExperienceShowcase'
+import dynamic from 'next/dynamic'
 import { useRef } from 'react'
+import { MdArrowUpward } from 'react-icons/md'
+
+const ExperienceShowcase = dynamic(() =>
+  import('../ProfileComponent/PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
+)
 
 export default function ShowGuildDiscover({
   users,
@@ -36,8 +41,6 @@ export default function ShowGuildDiscover({
     )
   })
 
-  console.log('filteredFactions', filteredFactions)
-
   return (
     <div className='size-full'>
       {filteredFactions.length > 0 ? (
@@ -59,7 +62,8 @@ export default function ShowGuildDiscover({
                 >
                   <SwiperSlide>
                     <div
-                      className={`group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out hover:scale-105 ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
+                      className={`group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
+                      onClick={() => swiperRefs.current[index]?.slideNext()}
                     >
                       <Image
                         className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
@@ -103,34 +107,51 @@ export default function ShowGuildDiscover({
                     <div
                       className={`
           size-full items-start justify-start
-          whitespace-nowrap rounded-md border-2 bg-violet-300
-         text-sm text-indigo-800
+          whitespace-nowrap rounded-md border-2 bg-violet-300 text-sm
+         text-indigo-800 backdrop-blur-lg
           transition-all ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}
       `}
                     >
-                      <div className='flex w-full flex-col p-4'>
+                      <button
+                        aria-label='Go up'
+                        onClick={() => swiperRefs.current[index]?.slidePrev()}
+                        className='ml-2 mt-2 cursor-pointer rounded-full bg-purple-800 p-2 text-white transition-all duration-300 ease-in-out hover:bg-violet-500 hover:text-indigo-900'
+                      >
+                        <MdArrowUpward />
+                      </button>
+                      <div className='flex w-full flex-col'>
                         <div className='text-center text-lg font-bold md:text-xl lg:text-3xl'>
                           {publicUser ? publicUser.username.toUpperCase() : ''}
                         </div>
-                        <div className='flex h-[200px] w-full justify-center rounded'>
+
+                        <Link
+                          href={`/public-profile/${publicUser.username}`}
+                          className='absolute right-7 top-7 flex size-12 justify-center rounded-full'
+                        >
                           <Image
                             src={
                               publicUser.image_urls
                                 ? publicUser.image_urls[publicUser.image_urls.length - 1]
                                 : '/card/abstract3.webp'
                             } // if no image, show image of their guild -- can be done
-                            height={200}
-                            width={400}
+                            height={80}
+                            width={80}
                             loading='lazy'
                             unoptimized
-                            className='rounded'
+                            className='rounded-full'
                             alt={`${publicUser.username}'s pic`}
                           />
-                        </div>
+                        </Link>
+
                         <div className='flex w-full justify-center text-center font-semibold italic'>
                           {publicUser.description}
                         </div>
-                        <Link href={`/public-profile/${publicUser.username}`}>View {publicUser.username}s Profile</Link>
+                        <Link
+                          className='fixed bottom-2 w-full text-center font-semibold text-purple-950'
+                          href={`/public-profile/${publicUser.username}`}
+                        >
+                          View {publicUser.username}s Profile
+                        </Link>
                       </div>
                     </div>
                   </SwiperSlide>
