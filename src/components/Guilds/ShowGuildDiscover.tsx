@@ -112,14 +112,14 @@ export default function ShowGuildDiscover({
                         <div className='text-center text-lg font-bold md:text-xl lg:text-3xl'>
                           {publicUser ? publicUser.username.toUpperCase() : ''}
                         </div>
-                        <div className='flex h-[150px] w-full justify-center rounded'>
+                        <div className='flex h-[200px] w-full justify-center rounded'>
                           <Image
                             src={
                               publicUser.image_urls
                                 ? publicUser.image_urls[publicUser.image_urls.length - 1]
                                 : '/card/abstract3.webp'
                             } // if no image, show image of their guild -- can be done
-                            height={150}
+                            height={200}
                             width={400}
                             loading='lazy'
                             unoptimized

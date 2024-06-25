@@ -67,7 +67,7 @@ export default function DiscoverRegion({
             </div>
           </div>
         </div>
-        <div className='absolute right-10 top-20'>
+        <div className='absolute right-20 top-32 z-10'>
           <button className='rounded bg-pink-300 p-2' onClick={() => handleFilterView()}>
             EXP
           </button>

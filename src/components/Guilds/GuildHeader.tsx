@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import { PiDiamondsFourLight } from 'react-icons/pi'
+import dynamic from 'next/dynamic'
+
+// import CustomToolTip from '../Hud/CustomToolTip'
+
+const CustomToolTip = dynamic(() => import('../Hud/CustomToolTip').then((mod) => mod.default))
 
 export default function GuildHeader({
   onFilterChange,
@@ -79,68 +84,88 @@ export default function GuildHeader({
         </div>
 
         <div className='absolute -top-5 flex justify-center gap-x-6 font-semibold'>
-          <a
-            href='#'
-            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'BUDDHA' ? 'rotate-180 scale-125' : 'scale-100'}`}
-            onClick={() => handleFilterClick('BUDDHA')}
-          >
-            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <a href='#' className={`group cursor-pointer`} onClick={() => handleFilterClick('BUDDHA')}>
+            <svg
+              className={`transition duration-300 ease-out ${activeFilter === 'BUDDHA' ? 'rotate-180 scale-125' : 'scale-100'}`}
+              width='22'
+              height='22'
+              viewBox='0 0 22 22'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle cx='11' cy='11' r='11' fill='white' />
               <path
                 d='M6.17881 4.75887L10.8764 5.64775M6.17881 4.75887L3 10.0544M6.17881 4.75887L8.29801 3H14.2848L15.5916 4.75887M10.8764 5.64775V11.1891M10.8764 5.64775L15.5916 4.75887M10.8764 11.1891L6.17881 13.8369M10.8764 11.1891L15.5916 13.8369M6.17881 13.8369L3 10.0544M6.17881 13.8369L7.69757 19M3 10.0544V12.4563L5.47241 17.7329L7.69757 19M15.5916 4.75887L18.3996 10.0544M18.3996 10.0544L15.5916 13.8369M18.3996 10.0544L19 12.4563L16.2804 17.7329L14.2848 19M15.5916 13.8369L14.2848 19M7.69757 19H14.2848'
                 stroke='black'
               />
             </svg>
+            <CustomToolTip content='Buddha' top={-10} left={-20} translateY={-22} />
           </a>
-          <a
-            href='#'
-            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'VAJRA' ? 'rotate-180 scale-125' : 'scale-100'}`}
-            onClick={() => handleFilterClick('VAJRA')}
-          >
-            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <a href='#' className={`group cursor-pointer`} onClick={() => handleFilterClick('VAJRA')}>
+            <svg
+              className={`transition duration-300 ease-out ${activeFilter === 'VAJRA' ? 'rotate-180 scale-125' : 'scale-100'}`}
+              width='22'
+              height='22'
+              viewBox='0 0 22 22'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle cx='11' cy='11' r='11' fill='#4A9BD5' />
               <path
                 d='M10.6428 3L3 7.00455M10.6428 3L19 7.00455M10.6428 3V6.27645M3 7.00455V15.0137M3 7.00455L10.6428 6.27645M3 7.00455L5.87957 13.3026M3 15.0137L10.6428 19M3 15.0137L5.87957 13.3026M10.6428 19L19 15.0137M10.6428 19L5.87957 13.3026M10.6428 19L15.2544 13.3026M19 15.0137V7.00455M19 15.0137L15.2544 13.3026M19 7.00455L10.6428 6.27645M19 7.00455L15.2544 13.3026M10.6428 6.27645L5.87957 13.3026M10.6428 6.27645L15.2544 13.3026M5.87957 13.3026H15.2544'
                 stroke='#030303'
               />
             </svg>
+            <CustomToolTip content='Vajra' top={-10} left={30} translateY={-22} />
           </a>
-          <a
-            href='#'
-            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'KARMA' ? 'rotate-180 scale-125' : 'scale-100'}`}
-            onClick={() => handleFilterClick('KARMA')}
-          >
-            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <a href='#' className={`group cursor-pointer`} onClick={() => handleFilterClick('KARMA')}>
+            <svg
+              className={` transition duration-300 ease-out ${activeFilter === 'KARMA' ? 'rotate-180 scale-125' : 'scale-100'}`}
+              width='22'
+              height='22'
+              viewBox='0 0 22 22'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle cx='11' cy='11' r='11' fill='#46B58F' />
               <path
                 d='M3 7.02733L10.9046 3L19 7.02733M3 7.02733L10.9046 10.7995M3 7.02733V15.0638L10.9046 19M19 7.02733L10.9046 10.7995M19 7.02733V15.0638L10.9046 19M10.9046 10.7995V19'
                 stroke='black'
               />
             </svg>
+            <CustomToolTip content='Karma' top={-10} left={75} translateY={-22} />
           </a>
-          <a
-            href='#'
-            className={`cursor-pointer transition duration-300 ease-out  ${activeFilter === 'RATNA' ? 'rotate-180 scale-125' : 'scale-100'}`}
-            onClick={() => handleFilterClick('RATNA')}
-          >
-            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <a href='#' className={`group cursor-pointer `} onClick={() => handleFilterClick('RATNA')}>
+            <svg
+              className={`transition duration-300 ease-out  ${activeFilter === 'RATNA' ? 'rotate-180 scale-125' : 'scale-100'}`}
+              width='22'
+              height='22'
+              viewBox='0 0 22 22'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle cx='11' cy='11' r='11' fill='#F0BE65' />
               <path
                 d='M3 6.87713H19M3 6.87713L11.0758 3L19 6.87713M3 6.87713V15.3595L11.0758 19M3 6.87713L11.0758 19M19 6.87713L11.0758 19M19 6.87713V15.3595L11.0758 19'
                 stroke='black'
               />
             </svg>
+            <CustomToolTip content='Ratna' top={-10} left={126} translateY={-22} />
           </a>
-          <a
-            href='#'
-            className={`cursor-pointer transition duration-300 ease-out ${activeFilter === 'PADMA' ? 'rotate-180 scale-125' : 'scale-100'}`}
-            onClick={() => handleFilterClick('PADMA')}
-          >
-            <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <a href='#' className={`group cursor-pointer `} onClick={() => handleFilterClick('PADMA')}>
+            <svg
+              className={`transition duration-300 ease-out ${activeFilter === 'PADMA' ? 'rotate-180 scale-125' : 'scale-100'}`}
+              width='22'
+              height='22'
+              viewBox='0 0 22 22'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle cx='11' cy='11' r='11' fill='#DA4C5C' />
               <path d='M4 17L10.9521 3L18 17M4 17H18M4 17L10.9521 12.5073L18 17' stroke='black' />
               <path d='M11 12.7351V3' stroke='black' />
             </svg>
+            <CustomToolTip content='Padma' top={-10} left={165} translateY={-22} />
           </a>
         </div>
       </div>
