@@ -25,7 +25,7 @@ export default function ShowGuildDiscover({
   searchTerm: string
   viewExp: boolean
 }) {
-  const swiperRef = useRef(null)
+  const swiperRefs = useRef([])
 
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
@@ -54,7 +54,7 @@ export default function ShowGuildDiscover({
                   loop
                   modules={[Navigation]}
                   onSwiper={(swiper) => {
-                    if (index === 0) swiperRef.current = swiper
+                    swiperRefs.current[index] = swiper
                   }}
                 >
                   <SwiperSlide>
@@ -91,7 +91,7 @@ export default function ShowGuildDiscover({
                         <FcLike />
                       </div>
                       <div>
-                        <p onClick={() => swiperRef.current?.slideNext()} className='cursor-pointer'>
+                        <p onClick={() => swiperRefs.current[index]?.slideNext()} className='cursor-pointer'>
                           View More
                         </p>
                       </div>
