@@ -10,6 +10,7 @@ import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import { FcLike } from 'react-icons/fc'
 import ExperienceShowcase from '../ProfileComponent/PublicProfileComponent/ExperienceShowcase'
+import { useRef } from 'react'
 
 export default function ShowGuildDiscover({
   users,
@@ -24,6 +25,8 @@ export default function ShowGuildDiscover({
   searchTerm: string
   viewExp: boolean
 }) {
+  const swiperRef = useRef(null)
+
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
@@ -50,6 +53,9 @@ export default function ShowGuildDiscover({
                   navigation={false}
                   loop
                   modules={[Navigation]}
+                  onSwiper={(swiper) => {
+                    if (index === 0) swiperRef.current = swiper
+                  }}
                 >
                   <SwiperSlide>
                     <div
@@ -85,7 +91,9 @@ export default function ShowGuildDiscover({
                         <FcLike />
                       </div>
                       <div>
-                        <p>View More</p>
+                        <p onClick={() => swiperRef.current?.slideNext()} className='cursor-pointer'>
+                          View More
+                        </p>
                       </div>
                       <div>!</div>
                     </div>
