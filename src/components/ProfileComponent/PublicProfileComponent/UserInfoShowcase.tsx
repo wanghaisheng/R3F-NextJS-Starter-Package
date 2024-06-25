@@ -6,6 +6,8 @@ import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 
 export default function UserInfoShowcase({ user, skillsData, guild }) {
   const [toggle, setToggle] = useState(false)
@@ -13,6 +15,10 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
   const handletoggle = () => {
     setToggle(!toggle)
   }
+
+  console.log('user', user)
+  console.log('guild', guild)
+
   return (
     <>
       <div className='flex size-full flex-col'>
@@ -25,7 +31,7 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                     <div
                       className='size-12 rounded-full'
                       style={{
-                        backgroundImage: 'url(/image.png)',
+                        backgroundImage: `url(${user.image_urls[user.image_urls.length - 1]}/image.png)`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
@@ -37,12 +43,19 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                       <div className='text-lg font-bold lg:text-2xl'>
                         {user.first_name} {user.last_name}
                       </div>
-                      <div className='absolute right-5 top-5'>
+                      <div className='group absolute right-5 top-5'>
                         <Image
-                          src={guild.find((guild) => guild.id === user.guild_id)?.symbol || 'N/A'}
+                          src={guild.find((guild) => guild.id === user.guild_id)?.symbol || ''}
                           height={30}
                           width={30}
                           alt='guild'
+                          loading='lazy'
+                        />
+                        <HoverGuild
+                          hoveredGuild={guild.find((guild) => guild.id === user.guild_id)?.guild_name}
+                          top={10}
+                          left={-350}
+                          translateY={10}
                         />
                       </div>
 

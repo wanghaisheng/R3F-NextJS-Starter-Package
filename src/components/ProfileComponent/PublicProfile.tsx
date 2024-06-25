@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import UserInfoShowcase from './PublicProfileComponent/UserInfoShowcase'
-import ExperienceShowcase from './PublicProfileComponent/ExperienceShowcase'
 import toast from 'react-hot-toast'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
+const ExperienceShowcase = dynamic(() =>
+  import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
+)
 
 const getSelectedPublicUser = async (username) => {
   try {
