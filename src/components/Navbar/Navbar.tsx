@@ -84,13 +84,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   <Link
                     href='/'
                     onClick={logout}
-                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none md:flex'
+                    className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none lg:flex'
                     id='user-menu-button'
                     aria-label='Sign Out'
                   >
                     <LuLogOut className='mr-4 size-6 text-red-500' />
                   </Link>
-                  <div className='-mr-2 flex items-center md:hidden'>
+                  <div className='-mr-2 flex items-center lg:hidden'>
                     <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 transition-all duration-300 '>
-            <div className='hidden  md:flex'>
+            <div className='hidden  lg:flex'>
               <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md  md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
                 <Link
                   href='/hud'
@@ -151,7 +151,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* Hamburger */}
 
         <div
-          className={`fixed inset-0 md:hidden ${isOpen ? 'bg-black/30 opacity-100' : 'pointer-events-none opacity-0 '}`}
+          className={`fixed inset-0 lg:hidden ${isOpen ? 'bg-black/30 opacity-100' : 'pointer-events-none opacity-0 '}`}
           onClick={closeMenu}
         ></div>
         <div

@@ -23,6 +23,7 @@ export default function DiscoverRegion({
   const handleFilterView = () => {
     setViewExp(!viewExp)
   }
+
   return (
     <>
       <div className='flex size-full items-center justify-center'>
@@ -46,7 +47,7 @@ export default function DiscoverRegion({
         </div>
         <div className='flex size-full flex-col items-center justify-center'>
           <div
-            className={`z-10 flex flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+            className={`z-10 flex w-[350px] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur md:w-[400px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
             <div className='relative z-10 w-full '>
               <GuildHeader

@@ -32,7 +32,7 @@ export default function ShowGuildDiscover({
     )
   })
 
-  console.log('asf', filteredFactions)
+  console.log('filteredFactions', filteredFactions)
 
   return (
     <div className='size-full'>
@@ -64,13 +64,19 @@ export default function ShowGuildDiscover({
                         <div className='text-center text-lg font-bold md:text-xl lg:text-3xl'>
                           {publicUser ? publicUser.username.toUpperCase() : ''}
                         </div>
-                        <div className='flex w-full justify-center'>
+                        <div className='flex h-[150px] w-full justify-center rounded'>
                           <Image
-                            src={publicUser.avatarimg}
-                            height={100}
-                            width={200}
+                            src={
+                              publicUser.image_urls
+                                ? publicUser.image_urls[publicUser.image_urls.length - 1]
+                                : '/card/abstract3.webp'
+                            } // if no image, show image of their guild -- can be done
+                            height={150}
+                            width={400}
+                            loading='lazy'
                             unoptimized
-                            alt={`${publicUser.username}'s avatar pic`}
+                            className='rounded'
+                            alt={`${publicUser.username}'s pic`}
                           />
                         </div>
                         <div className='flex w-full justify-center text-center font-semibold italic'>
@@ -90,6 +96,7 @@ export default function ShowGuildDiscover({
                         className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
                         src={publicUser.avatarimg}
                         alt={publicUser.username}
+                        loading='lazy'
                         fill
                         style={{
                           background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,

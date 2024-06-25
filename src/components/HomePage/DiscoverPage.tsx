@@ -125,13 +125,14 @@ const DiscoverPage = () => {
       const guilds = publicUsers.map((publicUser) => {
         const guild = guildData.find((g) => g.id === publicUser.guild_id)
         const continent = continents.find((continent) => continent.continent_code === publicUser.region.continent_code)
-        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
+        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[publicUser.avatar.length - 1].avatar_url : ''
+        const userImages = publicUser.image_urls
 
         return {
           name: `${publicUser.first_name} ${publicUser.last_name}`,
           username: publicUser.username,
           description: publicUser.description,
-          image_urls: publicUser.image_urls,
+          image_urls: userImages,
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
           continent: continent ? continent.continent_name : 'Unknown Continent',
