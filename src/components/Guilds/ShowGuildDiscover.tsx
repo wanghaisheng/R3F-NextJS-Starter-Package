@@ -6,20 +6,22 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import Link from 'next/link'
 import Image from 'next/image'
-
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import 'swiper/css/navigation'
+import { Navigation } from 'swiper/modules'
+import { FcLike } from 'react-icons/fc'
 
 export default function ShowGuildDiscover({
   users,
   filterguild,
   selectedRegionFilter,
   searchTerm,
+  viewExp,
 }: {
   users: any
   filterguild: string
   selectedRegionFilter: string
   searchTerm: string
+  viewExp: boolean
 }) {
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
@@ -29,6 +31,8 @@ export default function ShowGuildDiscover({
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
+
+  console.log('asf', filteredFactions)
 
   return (
     <div className='size-full'>
@@ -42,12 +46,45 @@ export default function ShowGuildDiscover({
                   direction={'vertical'}
                   spaceBetween={50}
                   initialSlide={1} // Default slide number 2\
+                  navigation={false}
+                  loop
+                  modules={[Navigation]}
                 >
-                  <SwiperSlide className='text-black'>Vertical Slide 1</SwiperSlide>
+                  <SwiperSlide className='flex items-center justify-center p-6'>
+                    {/* Info */}
+                    <div
+                      className={`
+          size-full items-start justify-start
+          whitespace-nowrap rounded-md border-2 bg-violet-300
+         text-sm text-indigo-800
+          transition-all ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}
+      `}
+                    >
+                      <div className='flex w-full flex-col p-4'>
+                        <div className='text-center text-lg font-bold md:text-xl lg:text-3xl'>
+                          {publicUser ? publicUser.username.toUpperCase() : ''}
+                        </div>
+                        <div className='flex w-full justify-center'>
+                          <Image
+                            src={publicUser.avatarimg}
+                            height={100}
+                            width={200}
+                            unoptimized
+                            alt={`${publicUser.username}'s avatar pic`}
+                          />
+                        </div>
+                        <div className='flex w-full justify-center text-center font-semibold italic'>
+                          {publicUser.description}
+                        </div>
+                        <p className='text-sm text-indigo-800'>Guild: {publicUser.guild}</p>
+                        <p className='text-sm text-indigo-800'>Continent: {publicUser.continent}</p>
+                      </div>
+                    </div>
+                  </SwiperSlide>
                   <SwiperSlide>
-                    <Link
-                      href={`/public-profile/${publicUser.username}`}
-                      className='group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                    <div
+                      // href={`/public-profile/${publicUser.username}`}
+                      className={`group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out hover:scale-105 ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
                     >
                       <Image
                         className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
@@ -72,53 +109,28 @@ export default function ShowGuildDiscover({
                           }))`,
                         }}
                       />
-                      <span
-                        className={`group absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
-                      >
-                        <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
-                          {publicUser.username.toUpperCase()}
-                        </h1>
-                      </span>
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    {/* Info */}
-                    <div
-                      className='
-          h-[490px] w-[400px] items-start justify-start
-          whitespace-nowrap rounded-md bg-indigo-200 px-2 py-1
-          text-sm text-indigo-800
-          transition-all
-      '
-                    >
-                      <div className='flex w-full flex-col p-4'>
-                        <div className='text-center text-3xl font-bold'>
-                          {publicUser ? publicUser.username.toUpperCase() : ''}
-                        </div>
-                        <div className='my-4 flex w-full justify-center'>
-                          <Image
-                            src={publicUser.avatarimg}
-                            height={100}
-                            width={200}
-                            unoptimized
-                            alt={`${publicUser.username}'s avatar pic`}
-                          />
-                        </div>
-                        <div className='flex w-full justify-center text-center font-semibold italic'>
-                          {publicUser.description}
-                        </div>
-                        <p className='text-sm text-indigo-800'>Guild: {publicUser.guild}</p>
-                        <p className='text-sm text-indigo-800'>Continent: {publicUser.continent}</p>
+                    </div>
+                    <div className='flex w-full justify-between px-9 py-4'>
+                      <div>
+                        <FcLike />
                       </div>
+                      <div>!</div>
+                      <div>!</div>
                     </div>
                   </SwiperSlide>
+                  {viewExp && <SwiperSlide>sa</SwiperSlide>}
                 </Swiper>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       ) : (
-        <div className='flex size-full items-center justify-center text-white'>!!!</div>
+        <div className='flex size-full items-center justify-center p-4'>
+          <div className='flex size-[380px] animate-pulse items-center justify-center rounded bg-white/20 text-white'>
+            {' '}
+            !!!
+          </div>
+        </div>
       )}
     </div>
   )

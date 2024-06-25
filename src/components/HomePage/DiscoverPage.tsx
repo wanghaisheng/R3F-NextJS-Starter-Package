@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import toast from 'react-hot-toast'
-import axios from 'axios'
 import DiscoverRegion from '../Regions/DiscoverRegion'
 
 const getUsers = async () => {
@@ -18,12 +17,15 @@ const getUsers = async () => {
       return []
     }
     const users = await res.json()
+
+    console.log('users', users)
     const filteredUsers = users.filter(
       (user) =>
         user.first_name &&
         user.last_name &&
         user.username &&
         user.email &&
+        user.description &&
         user.region.ip &&
         user.avatar.length !== 0 &&
         user.guild_id,
@@ -84,7 +86,7 @@ const continents = [
   },
 ]
 
-const HomePage2 = () => {
+const DiscoverPage = () => {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA') // Using continent asia
   const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -129,6 +131,7 @@ const HomePage2 = () => {
           name: `${publicUser.first_name} ${publicUser.last_name}`,
           username: publicUser.username,
           description: publicUser.description,
+          image_urls: publicUser.image_urls,
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
           continent: continent ? continent.continent_name : 'Unknown Continent',
@@ -163,4 +166,4 @@ const HomePage2 = () => {
   )
 }
 
-export default HomePage2
+export default DiscoverPage

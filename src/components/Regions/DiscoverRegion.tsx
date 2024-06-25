@@ -1,6 +1,7 @@
 'use client'
 import ShowGuildDiscover from '../Guilds/ShowGuildDiscover'
 import GuildHeader from '../Guilds/GuildHeader'
+import { useState } from 'react'
 
 export default function DiscoverRegion({
   selectedRegionFilter,
@@ -17,6 +18,11 @@ export default function DiscoverRegion({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
+  const [viewExp, setViewExp] = useState(false)
+
+  const handleFilterView = () => {
+    setViewExp(!viewExp)
+  }
   return (
     <>
       <div className='flex size-full items-center justify-center'>
@@ -40,7 +46,7 @@ export default function DiscoverRegion({
         </div>
         <div className='flex size-full flex-col items-center justify-center'>
           <div
-            className={`z-10 flex h-[50%] w-[40vh] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur lg:h-[510px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+            className={`z-10 flex flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
             <div className='relative z-10 w-full '>
               <GuildHeader
@@ -55,9 +61,15 @@ export default function DiscoverRegion({
                 selectedRegionFilter={selectedRegionFilter}
                 filterguild={selectedGuildFilter}
                 searchTerm={searchTerm}
+                viewExp={viewExp}
               />
             </div>
           </div>
+        </div>
+        <div className='absolute right-10 top-20'>
+          <button className='rounded bg-pink-300 p-2' onClick={() => handleFilterView()}>
+            EXP
+          </button>
         </div>
       </div>
     </>
