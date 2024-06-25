@@ -18,10 +18,10 @@ export default function DiscoverRegion({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
-  const [viewExp, setViewExp] = useState(false)
+  const [viewBusiness, setViewBusiness] = useState(false)
 
-  const handleFilterView = () => {
-    setViewExp(!viewExp)
+  const handleBusinessFilterView = () => {
+    setViewBusiness(!viewBusiness)
   }
 
   return (
@@ -62,15 +62,21 @@ export default function DiscoverRegion({
                 selectedRegionFilter={selectedRegionFilter}
                 filterguild={selectedGuildFilter}
                 searchTerm={searchTerm}
-                viewExp={viewExp}
+                viewExp={viewBusiness}
               />
             </div>
           </div>
         </div>
-        <div className='absolute right-20 top-32 z-10'>
-          <button className='rounded bg-pink-300 p-2' onClick={() => handleFilterView()}>
-            EXP
-          </button>
+        <div className='absolute right-24 top-36 z-10 flex h-[450px] w-[350px] flex-col gap-y-2'>
+          <div className='flex w-full justify-between gap-x-2'>
+            <button className='w-full rounded bg-pink-300/20 p-2' onClick={() => handleBusinessFilterView()}>
+              BUSINESS
+            </button>
+            <button className='w-full rounded bg-pink-300/20 p-2'>GIRLS</button>
+            <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
+          </div>
+
+          <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
         </div>
       </div>
     </>
