@@ -36,7 +36,7 @@ export function middleware(request) {
 
   // If it's a protected route and user has no token, redirect to signin
   if (isProtectedRoute && !token) {
-    return NextResponse.redirect(new URL('/signin', request.url))
+    return NextResponse.redirect(new URL('/discover', request.url))
   }
 
   return NextResponse.next()

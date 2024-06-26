@@ -28,7 +28,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
   }
 
   return (
-    <div className='flex h-auto flex-col items-center justify-center rounded-3xl bg-violet-300 backdrop-blur-sm  dark:bg-black/30'>
+    <div className='flex h-auto flex-col items-center justify-center  dark:bg-black/30'>
       <div className='m-0 mb-2 flex w-full items-center justify-center rounded-t-3xl py-3 font-bold'>
         <h2 className='text-center text-xl text-purple-950 dark:text-purple-400'>SIGN UP</h2>
       </div>
