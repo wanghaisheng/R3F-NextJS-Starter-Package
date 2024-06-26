@@ -50,6 +50,7 @@ export default function DiscoverRegion({
             className={`z-10 flex w-[350px] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur md:w-[400px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
             <div className='relative z-10 w-full '>
+              {/* Header to showcase the guilds to filter between */}
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
@@ -57,6 +58,7 @@ export default function DiscoverRegion({
               />
             </div>
             <div className='z-20 size-full'>
+              {/* Guilds to display based on the filter */}
               <ShowGuildDiscover
                 users={guilds}
                 selectedRegionFilter={selectedRegionFilter}

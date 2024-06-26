@@ -152,6 +152,7 @@ const DiscoverPage = () => {
     <>
       <div className='relative h-screen w-full'>
         <div className='flex size-full justify-center'>
+          {/* Discover Page Main Content */}
           <DiscoverRegion
             selectedRegionFilter={selectedRegionFilter}
             guilds={guilds}
@@ -162,6 +163,7 @@ const DiscoverPage = () => {
           />
         </div>
         <div className='absolute top-20 flex w-full justify-center lg:top-32 lg:justify-start'>
+          {/* Left Sidebar/Header Section to showcase the regions to filter with */}
           <RegionHeader onFilterChange={handleRegionFilterChange} />
         </div>
       </div>
