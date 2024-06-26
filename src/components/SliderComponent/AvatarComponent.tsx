@@ -39,6 +39,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       skills: ['Clear vision', 'leadership', 'adaptability', 'communication'],
       alignment: ['Strategic', 'planning', 'project management', 'problem-solving'],
       additionalSkills: ['Innovation', 'data analysis', 'research'],
+      faculty: [
+        {
+          faculty_name: 'research',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'philosophy',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'development',
+          faculty_description: '',
+        },
+      ],
     },
     {
       id: '',
@@ -52,6 +66,24 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       skills: ['Wisdom', 'clarity', 'calmness', 'emotional intelligence'],
       alignment: ['Leadership across departments', 'conflict resolution', 'team building'],
       additionalSkills: ['Active listening', 'problem-solving from multiple perspectives'],
+      faculty: [
+        {
+          faculty_name: 'arts',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'education',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'teaching',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'law',
+          faculty_description: '',
+        },
+      ],
     },
     {
       id: '',
@@ -65,6 +97,24 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       skills: ['Action-oriented', 'perseverance', 'resourcefulness', 'decisiveness'],
       alignment: ['Sales strategy', 'negotiation', 'marketing campaigns', 'lead generation'],
       additionalSkills: ['Public speaking', 'persuasion', 'social media expertise'],
+      faculty: [
+        {
+          faculty_name: 'information technology',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'engineering',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'gamer',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'computer',
+          faculty_description: '',
+        },
+      ],
     },
     {
       id: '',
@@ -78,6 +128,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       skills: ['Stability', 'reliability', 'patience', 'empathy'],
       alignment: ['Operations management', 'customer service', 'finance', 'human resources'],
       additionalSkills: ['Organization', 'detail-orientation', 'conflict resolution'],
+      faculty: [
+        {
+          faculty_name: 'management',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'finance',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'health',
+          faculty_description: '',
+        },
+      ],
     },
     {
       id: '',
@@ -91,6 +155,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       skills: ['Creativity', 'passion', 'discernment', 'inspiration'],
       alignment: ['Product design', 'brand development', 'content creation', 'innovation'],
       additionalSkills: ['Storytelling', 'user experience (UX) design', 'trend analysis'],
+      faculty: [
+        {
+          faculty_name: 'marketing',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'designer',
+          faculty_description: '',
+        },
+        {
+          faculty_name: 'content creator',
+          faculty_description: '',
+        },
+      ],
     },
   ])
   const memoizedAvatarsData = useMemo(() => avatarsData, [avatarsData]) // Memoize the avatars data to prevent re-rendering
