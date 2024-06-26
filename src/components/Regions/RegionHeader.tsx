@@ -28,7 +28,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
     <div className='relative'>
       {isSmallScreen ? (
         <div className='fixed left-0 top-0 items-center justify-start font-semibold'>
-          <ul className='flex h-screen w-[33px] flex-col gap-y-7 overflow-hidden bg-gradient-to-r from-black/80 px-2 text-white'>
+          <ul className='z-30 flex h-screen w-[33px] flex-col gap-y-7 overflow-hidden bg-gradient-to-r from-black/80 px-2 text-white'>
             <li
               className={`mt-[200px] cursor-pointer text-yellow-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-yellow-500'}`}
               onClick={() => handleFilterClick('ASIA')}

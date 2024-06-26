@@ -68,7 +68,7 @@ export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
   return (
     <div
       className='invisible absolute
-          rounded-md px-2 py-1
+          z-30 rounded-md px-2 py-1
           text-sm text-indigo-800 opacity-20 transition-all
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'
       style={{
@@ -78,8 +78,8 @@ export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
       }}
     >
       <div
-        className={`h-80 w-[288px] rounded-lg border-2 ${guild.guild_name !== 'BUDDHA' ? 'text-gray-300' : 'text-black'}`}
-        style={{ backgroundColor: guild.color }}
+        className={`h-80 w-[288px] rounded-lg border-2 bg-black ${guild.guild_name !== 'BUDDHA' ? 'text-gray-300' : 'text-black'}`}
+        style={{ borderColor: `${guild.color}` }}
       >
         <div className='absolute -right-3 -top-3 scale-125'>
           <h2 className='font-bold'>
@@ -94,7 +94,7 @@ export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
             {guild.description}
           </p>
         </div>
-        <div className='absolute -right-14 top-20 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
+        <div className='absolute -right-14 top-20 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
           <div className=' flex flex-col items-center justify-center p-4 text-lg font-extrabold'>
             {guild.element.split('').map((letter, index) => (
               <span key={index} style={{ color: guild.color }}>

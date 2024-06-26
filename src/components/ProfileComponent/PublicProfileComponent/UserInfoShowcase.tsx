@@ -16,9 +16,6 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
     setToggle(!toggle)
   }
 
-  console.log('user', user)
-  console.log('guild', guild)
-
   return (
     <>
       <div className='flex size-full flex-col'>
@@ -36,7 +33,6 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         borderRadius: '50%',
-                        // border: `2px solid ${user.guilds[0].color}`,
                       }}
                     ></div>
                     <div className='flex flex-col pl-4 '>

@@ -47,9 +47,9 @@ export default function DiscoverRegion({
         </div>
         <div className='flex size-full flex-col items-center justify-center'>
           <div
-            className={`z-10 flex w-[350px] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur md:w-[400px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+            className={`z-10 flex w-[75%] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur sm:w-[400px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
-            <div className='relative z-10 w-full '>
+            <div className='relative z-10 w-full'>
               {/* Header to showcase the guilds to filter between */}
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
@@ -57,7 +57,7 @@ export default function DiscoverRegion({
                 setSearchTerm={setSearchTerm}
               />
             </div>
-            <div className='z-20 size-full'>
+            <div className='z-10 size-full'>
               {/* Guilds to display based on the filter */}
               <ShowGuildDiscover
                 users={guilds}
@@ -69,12 +69,12 @@ export default function DiscoverRegion({
             </div>
           </div>
         </div>
-        <div className='absolute right-24 top-36 z-10 flex h-[450px] w-[350px] flex-col gap-y-2'>
+        <div className='absolute top-36 z-10 hidden h-[450px] flex-col gap-y-2 lg:right-6 lg:flex lg:w-[250px] xl:right-20 xl:w-[320px]'>
           <div className='flex w-full justify-between gap-x-2'>
             <button className='w-full rounded bg-pink-300/20 p-2' onClick={() => handleBusinessFilterView()}>
               BUSINESS
             </button>
-            <button className='w-full rounded bg-pink-300/20 p-2'>GIRLS</button>
+            <button className='w-full rounded bg-pink-300/20 p-2'>MATES</button>
             <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
           </div>
 
