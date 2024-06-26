@@ -61,7 +61,7 @@ export async function POST(request) {
         },
         guild_id: guild.id,
         faculty: {
-          primary_facluty: '',
+          primary_faculty: '',
           optional_faculty: '',
         },
       },
