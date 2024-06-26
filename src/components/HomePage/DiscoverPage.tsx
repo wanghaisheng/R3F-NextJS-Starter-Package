@@ -112,8 +112,6 @@ const DiscoverPage = () => {
     savePublicUsers()
   }, [])
 
-  console.log('publicUsers', publicUsers)
-
   useEffect(() => {
     const saveGuilds = async () => {
       const guild = await getGuilds()
