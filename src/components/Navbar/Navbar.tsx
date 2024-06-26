@@ -101,11 +101,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   <div className='text-black dark:text-white'>
                     <div
                       onClick={toggleSidebar}
-                      className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 md:flex'
+                      className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 lg:flex'
                     >
                       REGISTER
                     </div>
-                    <div className='-mr-2 flex items-center md:hidden'>
+                    <div className='-mr-2 flex items-center lg:hidden'>
                       <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                     </div>
                   </div>
@@ -155,7 +155,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           onClick={closeMenu}
         ></div>
         <div
-          className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 md:hidden ${
+          className={`fixed inset-y-0 left-0 z-30 transition-all duration-200 lg:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
           } flex w-[75%] flex-col bg-slate-800 shadow-xl dark:bg-black`}
         >
