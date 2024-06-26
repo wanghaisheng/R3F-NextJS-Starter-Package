@@ -38,9 +38,9 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
   return (
     <>
       <div className='flex h-auto flex-col items-center justify-center rounded-3xl bg-violet-300 backdrop-blur-sm dark:bg-black/30'>
-        <div className='m-0 mb-2 flex w-full items-center justify-between rounded-t-3xl p-2 font-bold'>
-          <div className='p-2 text-center text-xl text-purple-950 dark:text-purple-400'>SIGN IN</div>
-          <div>
+        <div className='m-0 mb-2 flex w-full items-center justify-between rounded-t-3xl py-3 font-bold'>
+          <div className='text-center text-xl text-purple-950 dark:text-purple-400'>SIGN IN</div>
+          <div className='transition-all duration-300 hover:scale-110'>
             <IoQrCodeOutline size={25} />
           </div>
         </div>
@@ -83,7 +83,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
         >
           {({ isSubmitting, errors, touched, handleChange }) => (
             <Form className='flex w-full flex-col items-center justify-center'>
-              <p className='-mb-2 flex w-full items-center justify-start text-sm text-violet-400'>
+              <p className='-mb-2 flex w-full cursor-pointer items-center justify-start text-sm text-violet-400'>
                 Email <span className='pl-1 text-base text-red-500'>*</span>
               </p>
               <div
@@ -105,7 +105,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
                 />
               </div>
               <ErrorMessage name='email' component='p' className='-mt-2 text-xs text-red-500' />
-              <p className='-mb-2 flex w-full items-center justify-start text-sm text-violet-400'>
+              <p className='-mb-2 flex w-full cursor-pointer items-center justify-start text-sm text-violet-400'>
                 Password <span className='pl-1 text-base text-red-500'>*</span>
               </p>
               <div
@@ -188,7 +188,7 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
               </div> */}
         </div>
         <div className='mb-5 flex flex-col items-center justify-center '>
-          <p className=' cursor-default text-xs text-purple-950 dark:text-purple-200'>Not a Genius User yet?</p>
+          <p className='cursor-default text-xs text-purple-950 dark:text-purple-200'>Not a Genius User yet?</p>
           <div
             onClick={changetoSignUp}
             className='cursor-pointer text-xs text-violet-400 transition-colors hover:text-blue-700'

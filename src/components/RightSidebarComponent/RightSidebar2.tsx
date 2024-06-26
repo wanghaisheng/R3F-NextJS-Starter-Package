@@ -29,7 +29,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
   const toggleSidebar = () => {
     //function to toggle sidebar
     setIsSidebarOpen(!isSidebarOpen)
-    setShowSignUp(false)
+    setShowSignUp(true)
     setShowSignIn(false)
     setActiveTab('profile')
   }
