@@ -49,7 +49,7 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
 
       {/* Show Signup and signin of user is not logged in */}
       {!user && (
-        <div className='flex size-full items-center justify-center rounded-lg bg-black text-white'>
+        <div className='flex size-full items-center justify-center rounded-lg bg-gray-200 text-black dark:bg-black dark:text-white'>
           <>
             {showSignUp && (
               <div>
