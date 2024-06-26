@@ -52,30 +52,6 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
         <div className='flex size-full items-center justify-center rounded-lg bg-black text-white'>
           {!showSignUp && !showSignIn ? (
             <div className='mx-auto max-w-xs flex-1 p-4'>
-              {/* <div className='mb-4'>
-                <div className='mb-2 flex w-full items-center justify-center rounded-full bg-white/10 py-2 text-white shadow transition-all duration-500 hover:bg-blue-300/10 hover:text-purple-200 hover:backdrop-blur-md'>
-                  Sign up with
-                </div>
-                <div className='mb-2 flex w-full items-center justify-center'>
-                  <div className='flex justify-center gap-12 p-5'>
-                    <a href='#'>
-                      <FcGoogle className='text-3xl transition-transform hover:scale-125' />
-                    </a>
-                    <a href='#'>
-                      <FaApple className='text-3xl text-white transition-transform hover:scale-125' />
-                    </a>
-                    <a href='#'>
-                      <LogosFacebook className='text-3xl transition-transform hover:scale-125' />
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className='relative mb-4 flex cursor-default items-center justify-center'>
-                <div className='absolute inset-0 flex items-center'>
-                  <div className='w-full border-t border-gray-500'></div>
-                </div>
-                <div className='relative bg-black px-3 text-gray-500'>or</div>
-              </div> */}
               <div className='mt-4'>
                 <button
                   className='w-full rounded-full bg-black/10 py-2 text-center text-white shadow-md shadow-purple-700 backdrop-blur-md transition-colors duration-500 hover:bg-purple-800/20'
@@ -84,7 +60,7 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
                   Create account
                 </button>
               </div>
-              <div className='mt-4 text-xs text-gray-500'>
+              <div className='mt-4 text-center text-xs text-gray-500'>
                 By signing up, you agree to the{' '}
                 <a href='#' className='text-blue-400'>
                   Terms of Service

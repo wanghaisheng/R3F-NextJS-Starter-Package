@@ -11,12 +11,18 @@ import toast from 'react-hot-toast'
 const { log } = console
 
 export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSignIn }) {
-  const [generalError, setGeneralError] = useState('')
+  const [generalError, setGeneralError] = useState('') // State for managing error messages
+  const [showPassword, setShowPassword] = useState(false) // State for managing password visibility
 
   const changetoSignIn = () => {
     toggleSignUp()
     setShowSignIn(true)
   }
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <div className='flex h-auto flex-col items-center justify-center rounded-3xl bg-violet-300 backdrop-blur-sm  dark:bg-black/30'>
       <div className='m-0 mb-5 rounded-t-3xl p-2 font-bold'>
