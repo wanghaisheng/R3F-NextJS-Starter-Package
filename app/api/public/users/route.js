@@ -71,6 +71,7 @@ export async function GET() {
         experience: true,
         avatar: true,
         skills: true,
+        faculty: true,
       },
     })
     return NextResponse.json(users)

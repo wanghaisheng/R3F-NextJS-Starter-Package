@@ -75,6 +75,7 @@ model users {
   region         Json?
   guild_id       String?      @db.Uuid
   username       String?      @unique
+  faculty        Json?
   avatar         avatar[]
   cards          cards[]
   experience     experience[]
@@ -93,6 +94,7 @@ model guilds {
   alignment        String[]
   id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   element          String?
+  faculty          Json[]
 }
 
 model continents {

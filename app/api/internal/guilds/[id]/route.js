@@ -27,8 +27,18 @@ export async function PUT(request, { params }) {
   try {
     const id = params.id
     const data = await request.json()
-    const { description, guild_name, avatar_img, soft_skills, additional_skills, color, symbol, alignment, element } =
-      data
+    const {
+      description,
+      guild_name,
+      avatar_img,
+      soft_skills,
+      additional_skills,
+      color,
+      symbol,
+      alignment,
+      element,
+      faculty,
+    } = data
     const updated_guild = await prisma.guilds.update({
       where: {
         id: id,
@@ -43,6 +53,7 @@ export async function PUT(request, { params }) {
         symbol,
         alignment,
         element,
+        faculty,
       },
     })
     return NextResponse.json(updated_guild)

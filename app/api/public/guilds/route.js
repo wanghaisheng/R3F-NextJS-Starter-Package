@@ -53,6 +53,7 @@ export async function GET(request) {
         color: true,
         alignment: true,
         element: true,
+        faculty: true,
       },
     })
     return NextResponse.json(guilds)

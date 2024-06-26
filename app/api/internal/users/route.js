@@ -60,6 +60,10 @@ export async function POST(request) {
           longitude: '',
         },
         guild_id: guild.id,
+        faculty: {
+          primary_facluty: '',
+          optional_faculty: '',
+        },
       },
     })
 
