@@ -37,6 +37,15 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
   return (
     <>
       <Toaster />
+      {/* if sidebar is open, show a backdrop */}
+      {isSidebarOpen && (
+        <div
+          className='absolute top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'
+          onClick={toggleSidebar}
+        ></div>
+      )}
+
+      {/* if sidebar is closed, show a button */}
       {!isSidebarOpen && (
         <button
           className='fixed right-0 top-36 z-50 size-10 rounded-l-md border-y border-l border-pink-300 bg-gray-300 dark:bg-black/50'
