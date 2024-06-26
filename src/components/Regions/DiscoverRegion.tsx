@@ -69,7 +69,7 @@ export default function DiscoverRegion({
             </div>
           </div>
         </div>
-        <div className='absolute top-36 z-10 hidden h-[450px] flex-col gap-y-2 lg:right-6 lg:flex lg:w-[250px] xl:right-20 xl:w-[320px]'>
+        <div className='absolute top-36 z-10 hidden h-[450px] flex-col gap-y-2 transition-all duration-300 lg:right-6 lg:flex lg:w-[250px] xl:right-20 xl:w-[320px]'>
           <div className='flex w-full justify-between gap-x-2'>
             <button className='w-full rounded bg-pink-300/20 p-2' onClick={() => handleBusinessFilterView()}>
               BUSINESS

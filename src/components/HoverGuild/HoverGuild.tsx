@@ -68,7 +68,7 @@ export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
   return (
     <div
       className='invisible absolute
-          z-30 rounded-md px-2 py-1
+          z-40 rounded-md px-2 py-1
           text-sm text-indigo-800 opacity-20 transition-all
           group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'
       style={{
@@ -78,7 +78,7 @@ export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
       }}
     >
       <div
-        className={`h-80 w-[288px] rounded-lg border-2 bg-black ${guild.guild_name !== 'BUDDHA' ? 'text-gray-300' : 'text-black'}`}
+        className={`h-80 w-[288px] rounded-lg border-2 bg-gray-300 text-black shadow-lg dark:bg-black dark:text-white`}
         style={{ borderColor: `${guild.color}` }}
       >
         <div className='absolute -right-3 -top-3 scale-125'>
@@ -90,9 +90,7 @@ export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
           <h3 className='absolute -top-7 text-xl font-bold' style={{ color: guild.color }}>
             {guild.guild_name}
           </h3>
-          <p className={`mt-3 text-xl font-bold ${guild.guild_name !== 'BUDDHA' ? 'text-white' : 'text-black'}`}>
-            {guild.description}
-          </p>
+          <p className={`mt-3 text-xl font-bold text-black dark:text-white`}>{guild.description}</p>
         </div>
         <div className='absolute -right-14 top-20 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
           <div className=' flex flex-col items-center justify-center p-4 text-lg font-extrabold'>

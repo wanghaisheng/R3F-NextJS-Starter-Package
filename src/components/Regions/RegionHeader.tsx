@@ -25,7 +25,7 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
   }
 
   return (
-    <div className='relative'>
+    <div className='relative transition-all duration-300'>
       {isSmallScreen ? (
         <div className='fixed left-0 top-0 items-center justify-start font-semibold'>
           <ul className='z-30 flex h-screen w-[33px] flex-col gap-y-7 overflow-hidden bg-gradient-to-r from-black/80 px-2 text-white'>

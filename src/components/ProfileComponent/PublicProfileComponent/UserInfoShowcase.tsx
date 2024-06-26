@@ -22,7 +22,7 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
         {user && guild && (
           <>
             <div className='mt-10 flex size-full px-24 '>
-              <div className='flex h-[520px] w-full flex-col flex-wrap justify-start rounded-xl bg-[#f5f5f5] px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
+              <div className='flex h-[520px] w-full flex-col flex-wrap justify-start rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
                 <div>
                   <div className='flex items-center justify-start'>
                     <div

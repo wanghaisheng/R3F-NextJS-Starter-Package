@@ -236,9 +236,9 @@ export default function PublicProfile({ username }) {
             )}
 
             {avatarsData && avatarsData.length !== 0 && (
-              <div className='fixed left-24 top-0 z-50 h-full'>
+              <div className='fixed left-24 top-0 z-30 h-full'>
                 <Avatar
-                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
                   shadows
                   animationSrc='/male-spawn-animation.fbx'
                   style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
