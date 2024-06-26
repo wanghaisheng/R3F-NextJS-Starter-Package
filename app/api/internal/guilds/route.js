@@ -6,8 +6,18 @@ const prisma = new PrismaClient()
 export async function POST(request) {
   try {
     const data = await request.json()
-    const { description, guild_name, avatar_img, soft_skills, additional_skills, color, symbol, alignment, element } =
-      data
+    const {
+      description,
+      guild_name,
+      avatar_img,
+      soft_skills,
+      additional_skills,
+      color,
+      symbol,
+      alignment,
+      element,
+      faculty,
+    } = data
     const new_guild = await prisma.guilds.create({
       data: {
         description,
@@ -19,6 +29,7 @@ export async function POST(request) {
         symbol,
         alignment,
         element,
+        faculty,
       },
     })
     return NextResponse.json(new_guild)

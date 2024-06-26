@@ -45,6 +45,7 @@ export async function GET(request, { params }) {
         experience: true,
         avatar: true,
         skills: true,
+        faculty: true,
       },
     })
 
@@ -63,6 +64,7 @@ export async function GET(request, { params }) {
       experience: user.experience,
       avatar: user.avatar,
       skills: user.skills,
+      faculty: user.faculty,
     }
 
     if (!user) {
