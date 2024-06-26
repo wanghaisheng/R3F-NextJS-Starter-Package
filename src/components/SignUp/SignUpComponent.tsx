@@ -112,7 +112,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
               />
             </div>
             <ErrorMessage name='email' component='p' className='-mt-2 text-xs text-red-500' />
-            <p className='-mb-2 flex w-full cursor-pointer items-center justify-start text-sm text-violet-400'>
+            <p className='-mb-2 flex w-full cursor-pointer items-center justify-start text-sm text-black dark:text-violet-400'>
               Password <span className='pl-1 text-base text-red-500'>*</span>
             </p>
             <div
