@@ -2,11 +2,10 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/pagination'
-import { Autoplay, Pagination } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md'
 import { motion } from 'framer-motion'
 
@@ -71,7 +70,15 @@ const guildData = [
 ]
 
 export default function VideoHome() {
-  const swiperRefs = useRef([])
+  const paginationLabels = ['HOME', 'AVATAR', 'BUDDHA', 'VAJRA', 'KARMA', 'RATNA', 'PADMA', 'GGONE', 'DISCOVER']
+  const swiperRefs = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const handleHudClick = (index) => {
+    setCurrentSlide(index)
+    swiperRefs.current?.slideTo(index, 0)
+  }
+
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
@@ -81,14 +88,16 @@ export default function VideoHome() {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        loop={true}
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay]}
         className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2'
         onSwiper={(swiper) => {
-          swiperRefs.current[0] = swiper
+          swiperRefs.current = swiper // Store the Swiper instance in a ref
+        }}
+        onSlideChange={(e) => {
+          setCurrentSlide(e.activeIndex) // Update the state when slide changes
+        }}
+        pagination={{
+          clickable: true,
         }}
       >
         <SwiperSlide className='bg-cover bg-center'>
@@ -307,12 +316,31 @@ export default function VideoHome() {
             </div>
           </div>
         </SwiperSlide>
+
+        {/* HUD at the bottom */}
+        <div className='absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 gap-4'>
+          {paginationLabels.map((label, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className={`cursor-pointer rounded-md bg-gray-800 px-4 py-2 text-white ${
+                currentSlide === index ? 'bg-gray-700' : ''
+              }`}
+              onClick={() => handleHudClick(index)}
+            >
+              {label}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows */}
         <div className='absolute left-0 top-0 flex h-full items-center'>
           <motion.div
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 ml-5'
-            onClick={() => swiperRefs.current[0]?.slidePrev()}
+            onClick={() => swiperRefs.current?.slidePrev()}
           >
             <MdOutlineNavigateBefore size={30} />
           </motion.div>
@@ -322,7 +350,7 @@ export default function VideoHome() {
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 mr-5'
-            onClick={() => swiperRefs.current[0]?.slideNext()}
+            onClick={() => swiperRefs.current?.slideNext()}
           >
             <MdOutlineNavigateNext size={30} />
           </motion.div>
