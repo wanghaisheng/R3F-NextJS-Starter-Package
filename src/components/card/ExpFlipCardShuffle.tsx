@@ -1,10 +1,12 @@
 'use client'
+
+import { CardBody } from '@/components/card/card'
 import Image from 'next/image'
 import { useState } from 'react'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function ExpProfileView({ type, projectName, skills, toolsAndTech, description }) {
+export default function ExpFlipCardShuffle({ type, projectName, skills, toolsAndTech, description }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
@@ -19,14 +21,14 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
   return (
     <>
       {/* Event Image  */}
-      <div className='group mb-4 size-full'>
+      <div className='group h-[550px] w-[400px] p-6 [prespective:1000px] lg:h-[550px] lg:w-[810px]'>
         {/* Flip the card when clicked */}
         <div
           className={`relative size-full rounded-xl shadow-md transition-all duration-500 [transform-style:preserve-3d] 
             ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
           onClick={handleFlip}
         >
-          <Image unoptimized src='/card/abstract2.webp' alt='Experience' fill className='rounded-lg object-cover' />
+          <Image unoptimized src='/card/ljsd.png' alt='Experience' layout='fill' className='rounded-lg object-cover' />
           <div className='absolute top-0 flex w-full justify-end'>
             <p className='pr-3 pt-1 font-bold text-pink-300'>{type.toUpperCase()}</p>
           </div>

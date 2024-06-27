@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { FaGlobeAfrica, FaGlobeEurope, FaGlobeAmericas, FaGlobeAsia } from 'react-icons/fa'
 import { FaEarthOceania } from 'react-icons/fa6'
 import { BsGlobeCentralSouthAsia } from 'react-icons/bs'
+import CustomToolTip from '../Hud/CustomToolTip'
 
 export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -25,65 +26,72 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
   }
 
   return (
-    <div className='relative transition-all duration-300'>
+    <div className='relative z-20 transition-all duration-300'>
       {isSmallScreen ? (
-        <div className='fixed left-0 top-0 items-center justify-start font-semibold'>
-          <ul className='z-30 flex h-screen w-[33px] flex-col gap-y-7 overflow-hidden bg-gradient-to-r from-black/80 px-2 text-white'>
+        <div className='fixed left-0 top-0 flex h-screen w-[33px] flex-col items-start justify-center  bg-gradient-to-r from-black/80 font-semibold'>
+          <ul className='flex flex-col gap-y-7 px-2 text-white'>
             <li
-              className={`mt-[200px] cursor-pointer text-yellow-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-yellow-500'}`}
+              className={`group cursor-pointer text-yellow-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'text-yellow-500'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
               <FaGlobeAsia
                 className={`size-5 rounded-full ${activeFilter === 'ASIA' && 'scale-110 bg-gradient-to-r from-[#FFD700] to-[#544a7d] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='ASIA' top={-3} left={23} translateY={0} />
             </li>
             <li
-              className={`cursor-pointer text-pink-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-pink-500'}`}
+              className={`group cursor-pointer text-pink-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'NORTH AMERICA' && 'text-pink-500'}`}
               onClick={() => handleFilterClick('NORTH AMERICA')}
             >
               <FaGlobeAmericas
                 className={`size-5 rounded-full ${activeFilter === 'NORTH AMERICA' && 'scale-110 bg-gradient-to-r from-[#52c234] to-[#061700] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='NORTH AMERICA' top={-3} left={23} translateY={0} />
             </li>
             <li
-              className={`cursor-pointer text-blue-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'text-blue-500'}`}
+              className={`group cursor-pointer text-blue-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'SOUTH AMERICA' && 'text-blue-500'}`}
               onClick={() => handleFilterClick('SOUTH AMERICA')}
             >
               <FaGlobeAmericas
                 className={`size-5 rounded-full ${activeFilter === 'SOUTH AMERICA' && 'scale-110 bg-gradient-to-r from-[#FF0099] to-[#493240] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='SOUTH AMERICA' top={-3} left={23} translateY={0} />
             </li>
             <li
-              className={`cursor-pointer text-green-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-green-700'}`}
+              className={`group cursor-pointer text-green-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AFRICA' && 'text-green-700'}`}
               onClick={() => handleFilterClick('AFRICA')}
             >
               <FaGlobeAfrica
                 className={`size-5 rounded-full ${activeFilter === 'AFRICA' && 'scale-110 bg-gradient-to-r from-[#f12711] to-[#f5af19] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='AFRICA' top={-3} left={23} translateY={0} />
             </li>
             <li
-              className={`cursor-pointer text-red-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-red-500'}`}
+              className={`group cursor-pointer text-red-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'EUROPE' && 'text-red-500'}`}
               onClick={() => handleFilterClick('EUROPE')}
             >
               <FaGlobeEurope
                 className={`size-5 rounded-full ${activeFilter === 'EUROPE' && 'scale-110  bg-gradient-to-r from-[#1488CC] to-[#2B32B2] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='EUROPE' top={-3} left={23} translateY={0} />
             </li>
             <li
-              className={`cursor-pointer text-emerald-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-emerald-500'}`}
+              className={`group cursor-pointer text-emerald-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'AUSTRALIA & OCEANIA' && 'text-emerald-500'}`}
               onClick={() => handleFilterClick('AUSTRALIA & OCEANIA')}
             >
               <FaEarthOceania
                 className={`size-5 rounded-full ${activeFilter === 'AUSTRALIA & OCEANIA' && 'scale-110 bg-gradient-to-r from-[#c31432] to-[#240b36] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='AUSTRALIA & OCEANIA' top={-3} left={23} translateY={0} />
             </li>
             <li
-              className={`cursor-pointer text-gray-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-gray-500'}`}
+              className={`group cursor-pointer text-gray-300 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ANTARCTICA' && 'text-gray-500'}`}
               onClick={() => handleFilterClick('ANTARCTICA')}
             >
               <BsGlobeCentralSouthAsia
                 className={`size-5 rounded-full ${activeFilter === 'ANTARCTICA' && 'scale-110  bg-gradient-to-r from-[#6DD5FA] to-[#FFFFFF] text-[#000046]'} transition-all duration-300`}
               />
+              <CustomToolTip content='ANTARCTICA' top={-3} left={23} translateY={0} />
             </li>
           </ul>
         </div>

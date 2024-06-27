@@ -73,12 +73,13 @@ export default function GuildHeader({
           {/* filter */}
           <div className='mx-auto flex w-fit items-center'>
             <div
-              className='w-fit cursor-pointer text-3xl hover:text-purple-400'
+              className='group w-fit cursor-pointer text-3xl font-semibold hover:text-purple-400'
               onClick={() => handleFilterClick(null)}
             >
               <PiDiamondsFourLight
                 className={`size-5 transition-all duration-300 ${activeFilter === null && 'rotate-180 scale-110'}`}
               />
+              <CustomToolTip content='All' top={0} left={395} translateY={-12} />
             </div>
           </div>
         </div>
@@ -169,85 +170,6 @@ export default function GuildHeader({
           </a>
         </div>
       </div>
-
-      {/* Sidebar */}
-      {/* <div className='fixed top-0 hidden items-center justify-start font-semibold lg:hidden'>
-        <ul className='flex h-[800px] w-[310px] flex-col gap-y-7 bg-gradient-to-r from-black/80 from-40%'>
-          <li className='mt-[60%]'>
-            <a
-              href='#'
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'BUDDHA' ? 'bg-gradient-to-r from-white/70' : 'text-gray-300'}`}
-              onClick={() => handleFilterClick('BUDDHA')}
-            >
-              <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M4.57616 2.97872L9.86093 3.97872M4.57616 2.97872L1 8.93617M4.57616 2.97872L6.96027 1H13.6954L15.1656 2.97872M9.86093 3.97872V10.2128M9.86093 3.97872L15.1656 2.97872M9.86093 10.2128L4.57616 13.1915M9.86093 10.2128L15.1656 13.1915M4.57616 13.1915L1 8.93617M4.57616 13.1915L6.28477 19M1 8.93617V11.6383L3.78146 17.5745L6.28477 19M15.1656 2.97872L18.3245 8.93617M18.3245 8.93617L15.1656 13.1915M18.3245 8.93617L19 11.6383L15.9404 17.5745L13.6954 19M15.1656 13.1915L13.6954 19M6.28477 19H13.6954'
-                  stroke='white'
-                />
-              </svg>
-              BUDDHA
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'VAJRA' ? 'bg-gradient-to-r from-blue-500/70' : 'text-blue-200'}`}
-              onClick={() => handleFilterClick('VAJRA')}
-            >
-              <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M9.59811 1L1 5.50512M9.59811 1L19 5.50512M9.59811 1V4.68601M1 5.50512V14.5154M1 5.50512L9.59811 4.68601M1 5.50512L4.23951 12.5904M1 14.5154L9.59811 19M1 14.5154L4.23951 12.5904M9.59811 19L19 14.5154M9.59811 19L4.23951 12.5904M9.59811 19L14.7862 12.5904M19 14.5154V5.50512M19 14.5154L14.7862 12.5904M19 5.50512L9.59811 4.68601M19 5.50512L14.7862 12.5904M9.59811 4.68601L4.23951 12.5904M9.59811 4.68601L14.7862 12.5904M4.23951 12.5904H14.7862'
-                  stroke='#4A9BD5'
-                />
-              </svg>
-              VAJRA
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'KARMA' ? 'bg-gradient-to-r from-green-500/70' : 'text-green-200'}`}
-              onClick={() => handleFilterClick('KARMA')}
-            >
-              <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M1 5.53075L9.89271 1L19 5.53075M1 5.53075L9.89271 9.77449M1 5.53075V14.5718L9.89271 19M19 5.53075L9.89271 9.77449M19 5.53075V14.5718L9.89271 19M9.89271 9.77449V19'
-                  stroke='#46B58F'
-                />
-              </svg>
-              KARMA
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'RATNA' ? 'bg-gradient-to-r from-yellow-500/70' : 'text-yellow-200'}`}
-              onClick={() => handleFilterClick('RATNA')}
-            >
-              <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M1 5.36177H19M1 5.36177L10.0853 1L19 5.36177M1 5.36177V14.9044L10.0853 19M1 5.36177L10.0853 19M19 5.36177L10.0853 19M19 5.36177V14.9044L10.0853 19'
-                  stroke='#F0BE65'
-                />
-              </svg>
-              RATNA
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'PADMA' ? 'bg-gradient-to-r from-red-500/70' : 'text-red-200'}`}
-              onClick={() => handleFilterClick('PADMA')}
-            >
-              <svg width='20' height='21' viewBox='0 0 20 21' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path d='M1 20L9.93836 2L19 20M1 20H19M1 20L9.93836 14.2237L19 20' stroke='#DA4C5C' />
-                <path d='M10 14.5166V2' stroke='#DA4C5C' />
-              </svg>
-              PADMA
-            </a>
-          </li>
-        </ul>
-      </div> */}
     </div>
   )
 }
