@@ -19,9 +19,16 @@ export default function DiscoverRegion({
   setSearchTerm: (event: any) => void
 }) {
   const [viewBusiness, setViewBusiness] = useState(false)
+  const [viewMates, setViewMates] = useState(false)
 
   const handleBusinessFilterView = () => {
-    setViewBusiness(!viewBusiness)
+    setViewBusiness(true)
+    setViewMates(false)
+  }
+
+  const handleMatesFilterView = () => {
+    setViewMates(true)
+    setViewBusiness(false)
   }
 
   return (
@@ -65,6 +72,7 @@ export default function DiscoverRegion({
                 filterguild={selectedGuildFilter}
                 searchTerm={searchTerm}
                 viewExp={viewBusiness}
+                viewMates={viewMates}
               />
             </div>
           </div>
@@ -74,7 +82,9 @@ export default function DiscoverRegion({
             <button className='w-full rounded bg-pink-300/20 p-2' onClick={() => handleBusinessFilterView()}>
               BUSINESS
             </button>
-            <button className='w-full rounded bg-pink-300/20 p-2'>MATES</button>
+            <button className='w-full rounded bg-pink-300/20 p-2' onClick={() => handleMatesFilterView()}>
+              MATES
+            </button>
             <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
           </div>
 
