@@ -10,6 +10,7 @@ import Avatar_creator from '@/components/avatar-creator/avatar' //--------------
 import axios from 'axios'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { FaArrowRight } from 'react-icons/fa'
+import { revalidateUser } from 'lib/actions'
 
 async function getGuilds() {
   try {
@@ -240,6 +241,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'PUT',
         data: submit,
       })
+      revalidateUser()
       toast.success('user guild updated')
       onNextButtonClick()
     } catch (error) {

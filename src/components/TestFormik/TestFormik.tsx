@@ -1,13 +1,15 @@
 'use client'
 
 import { Formik, Field, Form } from 'formik'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+// import { useUser } from './UserClientProvider'
+import { useUser } from '@/UserClientProvider'
 import toast from 'react-hot-toast'
-import { revalidateUser } from '../../../lib/actions'
+import { revalidateUser } from 'lib/actions'
+// import Cookies from 'js-cookie'
 
 const TestFormik = () => {
-  const { user } = useUser()
+  const { user, updateUser } = useUser()
+  // const token = Cookies.get('token')
   const id = user ? user.gg_id : ''
   return (
     <>
@@ -28,15 +30,18 @@ const TestFormik = () => {
                   body: JSON.stringify(values),
                 })
                 if (res.ok) {
-                  await revalidateUser()
+                  // await revalidateUser()
+                  // updateUser(token)
                   toast.success('username updated')
+                } else {
+                  toast.error('Update failed')
                 }
               } else {
                 toast.error('id not loaded')
               }
             }}
           >
-            <Form>
+            <Form action={revalidateUser}>
               <label className='mr-8' htmlFor='username'>
                 Username
               </label>

@@ -16,6 +16,7 @@ import SkillsChartComponent from './SkillsChartComponent'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import Image from 'next/image'
+import { revalidateUser } from 'lib/actions'
 
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
@@ -141,6 +142,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'put',
         data: submit,
       })
+      revalidateUser()
       toast.success('Profile pic updated successfully!')
     } catch (error) {
       toast.error('Error updating profile pic!')
@@ -173,6 +175,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'POST',
         data: submit,
       })
+      revalidateUser()
       toast.success('Generate Skills Successfully')
       router.push('/hud')
     } catch (error) {
@@ -193,6 +196,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         method: 'PUT',
         data: submit,
       })
+      revalidateUser()
       toast.success('Skills updated')
       router.push('/hud')
     } catch (error) {
@@ -205,6 +209,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
         url: `/api/internal/skills/${skills[index].skill_id}`,
         method: 'DELETE',
       })
+      revalidateUser()
       toast.success('Skills deleted')
     } catch (error) {
       toast.error('Failed to delete skills')

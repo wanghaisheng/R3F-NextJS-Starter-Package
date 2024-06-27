@@ -11,6 +11,7 @@ import { TiDelete } from 'react-icons/ti'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { revalidateUser } from 'lib/actions'
 
 export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
@@ -66,6 +67,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'POST',
         data: submit,
       })
+      revalidateUser()
       toast.success('Generated Sucessfully')
       onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
@@ -92,6 +94,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'PUT',
         data: submit,
       })
+      revalidateUser()
       toast.success('Updated Sucessfully')
       onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
