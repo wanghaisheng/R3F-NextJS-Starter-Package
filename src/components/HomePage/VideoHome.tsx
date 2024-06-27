@@ -3,8 +3,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import { Autoplay, Pagination } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
@@ -72,8 +71,7 @@ const guildData = [
 ]
 
 export default function VideoHome() {
-  const navigationPrevRef = useRef(null)
-  const navigationNextRef = useRef(null)
+  const swiperRefs = useRef([])
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
@@ -87,12 +85,11 @@ export default function VideoHome() {
         pagination={{
           dynamicBullets: true,
         }}
-        navigation={{
-          prevEl: navigationPrevRef.current,
-          nextEl: navigationNextRef.current,
+        modules={[Autoplay, Pagination]}
+        className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2'
+        onSwiper={(swiper) => {
+          swiperRefs.current[0] = swiper
         }}
-        modules={[Autoplay, Pagination, Navigation]}
-        className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-lg'
       >
         <SwiperSlide className='bg-cover bg-center'>
           <div
@@ -312,20 +309,20 @@ export default function VideoHome() {
         </SwiperSlide>
         <div className='absolute left-0 top-0 flex h-full items-center'>
           <motion.div
-            ref={navigationPrevRef}
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 ml-5'
+            onClick={() => swiperRefs.current[0]?.slidePrev()}
           >
             <MdOutlineNavigateBefore size={30} />
           </motion.div>
         </div>
         <div className='absolute right-0 top-0 flex h-full items-center'>
           <motion.div
-            ref={navigationNextRef}
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 mr-5'
+            onClick={() => swiperRefs.current[0]?.slideNext()}
           >
             <MdOutlineNavigateNext size={30} />
           </motion.div>
