@@ -1,21 +1,18 @@
-// /app/UserProvider.js
-import React from 'react'
 import { cookies } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
 
 import UserClientProvider from './UserClientProvider.js'
 
 const fetchUserData = async (userId, token) => {
-  const response = await fetch(
-    `http:/localhost:3000/api/internal/users/${userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`http://localhost:3000/api/internal/users/${userId}`, {
+    method: 'GET',
+    cache: 'force-cache',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
-    { next: { tags: ['user'] } },
-  )
+    next: { tags: ['user'] },
+  })
 
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`)

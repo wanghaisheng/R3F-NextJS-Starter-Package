@@ -1,15 +1,15 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import UserInfoShowcase from './PublicProfileComponent/UserInfoShowcase'
-import ExperienceShowcase from './PublicProfileComponent/ExperienceShowcase'
-
-import axios from 'axios'
 import toast from 'react-hot-toast'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
+const ExperienceShowcase = dynamic(() =>
+  import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
+)
 
 const getSelectedPublicUser = async (username) => {
   try {
@@ -196,7 +196,7 @@ export default function PublicProfile({ username }) {
 
   return (
     <div className='relative flex justify-between lg:size-full'>
-      <div className='absolute top-0 h-screen w-full'>
+      <div className='fixed top-0 h-screen w-full'>
         {user && (
           <video key={user.guild_id} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
             {user?.guild_id === guilds.find((guild) => guild.guild_name === 'BUDDHA')?.id ? (
@@ -236,9 +236,9 @@ export default function PublicProfile({ username }) {
             )}
 
             {avatarsData && avatarsData.length !== 0 && (
-              <div className='fixed left-24 top-0 z-50 h-full'>
+              <div className='fixed left-24 top-0 z-30 h-full'>
                 <Avatar
-                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
                   shadows
                   animationSrc='/male-spawn-animation.fbx'
                   style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
@@ -260,13 +260,13 @@ export default function PublicProfile({ username }) {
               <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
             </div>
             <div className='mt-5 w-full flex-1'>
-              <ExperienceShowcase experience={experience} user={user} />
+              <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
             </div>
           </div>
         </>
       ) : (
-        <div className='flex size-full items-center justify-center'>
-          <div className='text-center text-2xl font-bold'>Loading</div>
+        <div className='flex h-screen w-full items-center justify-center'>
+          <div className='text-center text-2xl font-bold'>Loading...</div>
         </div>
       )}
     </div>

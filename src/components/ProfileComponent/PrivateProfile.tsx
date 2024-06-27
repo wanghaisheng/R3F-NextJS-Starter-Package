@@ -344,7 +344,9 @@ export default function PrivateProfile() {
                             ))
                           ) : (
                             <div className='w-full shrink-0 grow lg:min-w-0 '>
-                              <div className='flex flex-col justify-center'>SignUp to create a card</div>
+                              <DrawOutlineButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                                SignUp to create a card
+                              </DrawOutlineButton>
                             </div>
                           )}
                         </div>

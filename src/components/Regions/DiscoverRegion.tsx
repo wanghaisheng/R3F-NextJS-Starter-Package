@@ -1,6 +1,7 @@
 'use client'
 import ShowGuildDiscover from '../Guilds/ShowGuildDiscover'
 import GuildHeader from '../Guilds/GuildHeader'
+import { useState } from 'react'
 
 export default function DiscoverRegion({
   selectedRegionFilter,
@@ -17,6 +18,19 @@ export default function DiscoverRegion({
   handleFilterGuildChange: (event: any) => void
   setSearchTerm: (event: any) => void
 }) {
+  const [viewBusiness, setViewBusiness] = useState(false)
+  const [viewMates, setViewMates] = useState(true)
+
+  const handleBusinessFilterView = () => {
+    setViewBusiness(true)
+    setViewMates(false)
+  }
+
+  const handleMatesFilterView = () => {
+    setViewMates(true)
+    setViewBusiness(false)
+  }
+
   return (
     <>
       <div className='flex size-full items-center justify-center'>
@@ -40,24 +54,47 @@ export default function DiscoverRegion({
         </div>
         <div className='flex size-full flex-col items-center justify-center'>
           <div
-            className={`z-10 flex h-[50%] w-[40vh] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur lg:h-[510px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
+            className={`z-10 flex w-[75%] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur sm:w-[400px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
-            <div className='relative z-10 w-full '>
+            <div className='relative w-full'>
+              {/* Header to showcase the guilds to filter between */}
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
             </div>
-            <div className='z-20 size-full'>
+            <div className='size-full'>
+              {/* Guilds to display based on the filter */}
               <ShowGuildDiscover
                 users={guilds}
                 selectedRegionFilter={selectedRegionFilter}
                 filterguild={selectedGuildFilter}
                 searchTerm={searchTerm}
+                viewExp={viewBusiness}
+                viewMates={viewMates}
               />
             </div>
           </div>
+        </div>
+        <div className='absolute top-36 z-10 hidden h-[450px] flex-col gap-y-2 transition-all duration-300 lg:right-6 lg:flex lg:w-[250px] xl:right-20 xl:w-[320px]'>
+          <div className='flex w-full justify-between gap-x-2'>
+            <button
+              className={`w-full rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewBusiness && 'dark:bg-pink-300/70'}`}
+              onClick={() => handleBusinessFilterView()}
+            >
+              BUSINESS
+            </button>
+            <button
+              className={`w-full rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewMates && 'dark:bg-pink-300/70'}`}
+              onClick={() => handleMatesFilterView()}
+            >
+              MATES
+            </button>
+            <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
+          </div>
+
+          <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
         </div>
       </div>
     </>

@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import EmergencyCard from '@/components/card/TypeCard/EmergencyCard' //----------------> module not found error in my branch
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import EmergencyCard from '@/components/card/TypeCard/EmergencyCard'
+import { useUser } from '@/UserClientProvider'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
@@ -11,14 +10,17 @@ export default function EmergencyComponent({ setActiveTab, setShowSignUp }) {
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   const { user } = useUser()
-  QRCode.toDataURL(pathname).then(setImgSrc)
-  const [isFlipped, setIsFlipped] = useState(false)
+
+  QRCode.toDataURL(pathname).then(setImgSrc) // QRCode.toDataURL(pathname) is a promise that returns a data URL of the QR code of the current URL
+
+  const [isFlipped, setIsFlipped] = useState(false) // isFlipped is a boolean state variable that is used to determine if the card is flipped or not
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
 
+  // handleSignUpClick is a function that sets the active tab to profile and shows the signup modal
   const handleSignUpClick = () => {
-    setActiveTab('search')
+    setActiveTab('profile')
     setShowSignUp(true)
   }
 
@@ -66,7 +68,7 @@ export default function EmergencyComponent({ setActiveTab, setShowSignUp }) {
             <div>You must signin to view this tab</div>
             <div
               onClick={handleSignUpClick}
-              className='mt-2 flex cursor-pointer justify-center rounded border border-purple-700 bg-purple-800/30 p-2 transition-colors hover:bg-purple-800/40 hover:text-purple-200'
+              className='mt-2 flex cursor-pointer justify-center rounded border bg-black p-2 transition-colors hover:bg-gray-300 hover:text-black  dark:border-purple-700 dark:bg-purple-800/30 dark:hover:bg-purple-800/40 dark:hover:text-purple-200'
             >
               Signup
             </div>

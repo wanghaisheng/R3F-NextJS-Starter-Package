@@ -15,7 +15,7 @@ const SidebarContext = createContext<SidebarContextProps | undefined>(undefined)
 
 export const SidebarProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [showSignUp, setShowSignUp] = useState(false)
+  const [showSignUp, setShowSignUp] = useState(true)
   const [showSignIn, setShowSignIn] = useState(false)
 
   return (

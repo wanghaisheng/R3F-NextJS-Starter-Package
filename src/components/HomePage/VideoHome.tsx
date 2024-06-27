@@ -2,12 +2,10 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md'
 import { motion } from 'framer-motion'
 
@@ -72,8 +70,15 @@ const guildData = [
 ]
 
 export default function VideoHome() {
-  const navigationPrevRef = useRef(null)
-  const navigationNextRef = useRef(null)
+  const paginationLabels = ['HOME', 'AVATAR', 'BUDDHA', 'VAJRA', 'KARMA', 'RATNA', 'PADMA', 'GGONE', 'DISCOVER']
+  const swiperRefs = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const handleHudClick = (index) => {
+    setCurrentSlide(index)
+    swiperRefs.current?.slideTo(index, 0)
+  }
+
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
@@ -83,16 +88,17 @@ export default function VideoHome() {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        loop={true}
+        modules={[Autoplay]}
+        className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2'
+        onSwiper={(swiper) => {
+          swiperRefs.current = swiper // Store the Swiper instance in a ref
+        }}
+        onSlideChange={(e) => {
+          setCurrentSlide(e.activeIndex) // Update the state when slide changes
+        }}
         pagination={{
-          dynamicBullets: true,
+          clickable: true,
         }}
-        navigation={{
-          prevEl: navigationPrevRef.current,
-          nextEl: navigationNextRef.current,
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-        className='absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-lg'
       >
         <SwiperSlide className='bg-cover bg-center'>
           <div
@@ -160,6 +166,7 @@ export default function VideoHome() {
 
         {guildData.map((guild, index) => (
           <SwiperSlide key={index} className='bg-cover bg-center'>
+            {/* Div for each guild where the opacity of the div is based on the guild color and reduced to 20% */}
             {guild.guild_name === 'VAJRA' ? (
               <div className='absolute z-20 h-screen w-full bg-[#0C2E5C]/20'></div>
             ) : guild.guild_name === 'BUDDHA' ? (
@@ -310,22 +317,41 @@ export default function VideoHome() {
             </div>
           </div>
         </SwiperSlide>
+
+        {/* HUD at the bottom */}
+        <div className='absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 gap-2 rounded-full px-2 py-1 shadow shadow-white dark:shadow-purple-700'>
+          {paginationLabels.map((label, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className={`cursor-pointer rounded-md bg-gray-800 px-4 py-2 text-xs text-white ${
+                currentSlide === index ? 'bg-gray-700' : ''
+              }`}
+              onClick={() => handleHudClick(index)}
+            >
+              {label}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows */}
         <div className='absolute left-0 top-0 flex h-full items-center'>
           <motion.div
-            ref={navigationPrevRef}
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 ml-5'
+            onClick={() => swiperRefs.current?.slidePrev()}
           >
             <MdOutlineNavigateBefore size={30} />
           </motion.div>
         </div>
         <div className='absolute right-0 top-0 flex h-full items-center'>
           <motion.div
-            ref={navigationNextRef}
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 mr-5'
+            onClick={() => swiperRefs.current?.slideNext()}
           >
             <MdOutlineNavigateNext size={30} />
           </motion.div>

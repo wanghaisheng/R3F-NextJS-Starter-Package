@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
+import { revalidateUser } from 'lib/actions'
+import { revalidateTag } from 'next/cache'
 
 const prisma = new PrismaClient()
 
@@ -80,7 +82,8 @@ export async function PUT(request, { params }) {
         guild_id,
       },
     })
-
+    await revalidateUser()
+    // revalidateTag('user')
     return NextResponse.json(updatedUser)
   } catch (error) {
     console.error('Error Updating user', error)

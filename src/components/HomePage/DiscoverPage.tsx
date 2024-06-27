@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import toast from 'react-hot-toast'
-import axios from 'axios'
 import DiscoverRegion from '../Regions/DiscoverRegion'
 
 const getUsers = async () => {
@@ -18,12 +17,15 @@ const getUsers = async () => {
       return []
     }
     const users = await res.json()
+
+    console.log('users', users)
     const filteredUsers = users.filter(
       (user) =>
         user.first_name &&
         user.last_name &&
         user.username &&
         user.email &&
+        user.description &&
         user.region.ip &&
         user.avatar.length !== 0 &&
         user.guild_id,
@@ -84,7 +86,7 @@ const continents = [
   },
 ]
 
-const HomePage2 = () => {
+const DiscoverPage = () => {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA') // Using continent asia
   const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -123,15 +125,19 @@ const HomePage2 = () => {
       const guilds = publicUsers.map((publicUser) => {
         const guild = guildData.find((g) => g.id === publicUser.guild_id)
         const continent = continents.find((continent) => continent.continent_code === publicUser.region.continent_code)
-        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
+        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[publicUser.avatar.length - 1].avatar_url : ''
+        const userImages = publicUser.image_urls
+        const experience = publicUser.experience
 
         return {
           name: `${publicUser.first_name} ${publicUser.last_name}`,
           username: publicUser.username,
           description: publicUser.description,
+          image_urls: userImages,
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
           continent: continent ? continent.continent_name : 'Unknown Continent',
+          experience: experience,
         }
       })
       setGuilds(guilds)
@@ -146,6 +152,7 @@ const HomePage2 = () => {
     <>
       <div className='relative h-screen w-full'>
         <div className='flex size-full justify-center'>
+          {/* Discover Page Main Content */}
           <DiscoverRegion
             selectedRegionFilter={selectedRegionFilter}
             guilds={guilds}
@@ -156,6 +163,7 @@ const HomePage2 = () => {
           />
         </div>
         <div className='absolute top-20 flex w-full justify-center lg:top-32 lg:justify-start'>
+          {/* Left Sidebar/Header Section to showcase the regions to filter with */}
           <RegionHeader onFilterChange={handleRegionFilterChange} />
         </div>
       </div>
@@ -163,4 +171,4 @@ const HomePage2 = () => {
   )
 }
 
-export default HomePage2
+export default DiscoverPage

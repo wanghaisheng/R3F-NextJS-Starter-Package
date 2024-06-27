@@ -6,13 +6,18 @@ import { usePathname } from 'next/navigation'
 import { TbCards } from 'react-icons/tb'
 import Image from 'next/image'
 import CustomToolTip from './CustomToolTip'
-
 import SpringModal from '../FormModal/SpringModal'
-import { Tooltip } from 'recharts'
+import { useUser } from '@/UserClientProvider'
+import { useSidebar } from '../dom/SidebarProvider'
+import Cookies from 'js-cookie'
+
 const Hud = () => {
+  const user = useUser()
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
+  const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
+  const token = Cookies.get('token')
 
   useEffect(() => {
     if (
@@ -41,14 +46,26 @@ const Hud = () => {
             <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
             <div className='hidden md:flex'>
               <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-black/30 px-14 py-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] shadow-gray-200 backdrop-blur-md md:gap-7 dark:shadow-[#6B37CA]'>
-                <Link
-                  href='/slider'
-                  aria-label='Go to slider'
-                  className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
-                >
-                  <TbCards className='size-6' />
-                  <CustomToolTip content='Slider' top='-7' left='-13' translateY='-20' />
-                </Link>
+                {token ? (
+                  <Link
+                    href='/slider'
+                    aria-label='Go to slider'
+                    className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                  >
+                    <TbCards className='size-6' />
+                    <CustomToolTip content='Slider' top='-7' left='-13' translateY='-20' />
+                  </Link>
+                ) : (
+                  <button
+                    aria-label='Go to slider'
+                    className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                  >
+                    <TbCards className='size-6' />
+                    <CustomToolTip content='Slider' top='-7' left='-13' translateY='-20' />
+                  </button>
+                )}
+
                 <Link
                   href='https://ggrelativity.xyz/login'
                   aria-label='gg relativity'
@@ -59,7 +76,7 @@ const Hud = () => {
                   <CustomToolTip content='GG Relativity' top='-7' left='-20' translateY='-10' />
                 </Link>
                 <Link
-                  href='https://office.goinggenius.com.np/signin'
+                  href='https://www.goinggenius.com.np/'
                   aria-label='GG Office'
                   target='_blank'
                   className='group py-2 text-2xl font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'

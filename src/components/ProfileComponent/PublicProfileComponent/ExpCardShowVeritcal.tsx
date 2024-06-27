@@ -1,29 +1,23 @@
-import ExpFlipCardShuffle from '@/components/card/ExpFlipCardShuffle'
+import ExpProfileView from '@/components/card/ExpProfileView'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
-import 'swiper/css/effect-cards'
-import 'swiper/css/pagination'
 
-import { EffectCards, Pagination } from 'swiper/modules'
-
-export default function ExperienceShowcase({ experience, user, height, width, pagination }) {
+export default function ExpCardShowVertical({ experience, user, pagination }) {
   return (
     <>
-      <div className='mb-24 flex size-full flex-row overflow-hidden px-4'>
+      <div className='flex size-full flex-row overflow-hidden p-4'>
         {user && experience.length != 0 ? (
           <Swiper
             effect={'cards'}
-            grabCursor={true}
-            modules={[EffectCards]}
+            direction={'vertical'}
             pagination={pagination ? { clickable: true } : false}
-            className='flex items-center justify-center rounded-lg'
-            style={{ height: `${height}px`, width: `${width}px` }}
+            className='flex size-full items-center justify-center rounded-lg'
           >
             {experience.map((exp, index) => (
               <SwiperSlide key={index}>
-                <div className='flex justify-center'>
-                  <ExpFlipCardShuffle
+                <div className='size-full rounded-lg pb-5'>
+                  <ExpProfileView
                     type={exp.type}
                     projectName={exp.name}
                     skills={exp.project_skills.join(', ')}

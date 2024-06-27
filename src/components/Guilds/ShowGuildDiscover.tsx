@@ -6,21 +6,34 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import Link from 'next/link'
 import Image from 'next/image'
+import 'swiper/css/navigation'
+import { Navigation } from 'swiper/modules'
+import { FcLike } from 'react-icons/fc'
+import dynamic from 'next/dynamic'
+import { useRef } from 'react'
+import { MdArrowUpward } from 'react-icons/md'
 
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+const ExpCardShowVertical = dynamic(() =>
+  import('../ProfileComponent/PublicProfileComponent/ExpCardShowVeritcal').then((mod) => mod.default),
+)
 
 export default function ShowGuildDiscover({
   users,
   filterguild,
   selectedRegionFilter,
   searchTerm,
+  viewExp,
+  viewMates,
 }: {
   users: any
   filterguild: string
   selectedRegionFilter: string
   searchTerm: string
+  viewExp: boolean
+  viewMates: boolean
 }) {
+  const swiperRefs = useRef([])
+
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
@@ -37,88 +50,137 @@ export default function ShowGuildDiscover({
           <Swiper className='flex h-[400px] w-full' spaceBetween={50}>
             {filteredFactions.map((publicUser, index) => (
               <SwiperSlide key={index}>
-                <Swiper
-                  className='flex size-full'
-                  direction={'vertical'}
-                  spaceBetween={50}
-                  initialSlide={1} // Default slide number 2\
-                >
-                  <SwiperSlide className='text-black'>Vertical Slide 1</SwiperSlide>
-                  <SwiperSlide>
-                    <Link
-                      href={`/public-profile/${publicUser.username}`}
-                      className='group relative ml-6 flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
-                    >
-                      <Image
-                        className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
-                        src={publicUser.avatarimg}
-                        alt={publicUser.username}
-                        fill
-                        style={{
-                          background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          objectFit: 'cover',
-                          filter: `drop-shadow( 0px 0px 3px rgba(${
-                            publicUser.guild === 'PADMA'
-                              ? '255, 0, 0, 1'
-                              : publicUser.guild === 'VAJRA'
-                                ? '0, 0, 255, 1'
-                                : publicUser.guild === 'RATNA'
-                                  ? '255, 255, 0, 1'
-                                  : publicUser.guild === 'KARMA'
-                                    ? '0, 255, 0, 1'
-                                    : '255, 255, 255, 1'
-                          }))`,
-                        }}
-                      />
-                      <span
-                        className={`group absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
+                {viewMates && (
+                  <Swiper
+                    className='flex size-full'
+                    direction={'vertical'}
+                    spaceBetween={50}
+                    initialSlide={0} // Default slide number 1\
+                    navigation={false}
+                    loop
+                    modules={[Navigation]}
+                    onSwiper={(swiper) => {
+                      swiperRefs.current[index] = swiper
+                    }}
+                  >
+                    <SwiperSlide>
+                      <div
+                        className={`group relative mx-auto flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
+                        onClick={() => swiperRefs.current[index]?.slideNext()}
                       >
-                        <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
-                          {publicUser.username.toUpperCase()}
-                        </h1>
-                      </span>
-                    </Link>
-                  </SwiperSlide>
+                        <Image
+                          className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
+                          src={publicUser.avatarimg}
+                          alt={publicUser.username}
+                          loading='lazy'
+                          fill
+                          style={{
+                            background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            objectFit: 'cover',
+                            filter: `drop-shadow( 0px 0px 3px rgba(${
+                              publicUser.guild === 'PADMA'
+                                ? '255, 0, 0, 1'
+                                : publicUser.guild === 'VAJRA'
+                                  ? '0, 0, 255, 1'
+                                  : publicUser.guild === 'RATNA'
+                                    ? '255, 255, 0, 1'
+                                    : publicUser.guild === 'KARMA'
+                                      ? '0, 255, 0, 1'
+                                      : '255, 255, 255, 1'
+                            }))`,
+                          }}
+                        />
+                      </div>
+                      <div className='flex w-full justify-between px-9 py-4'>
+                        <div>
+                          <FcLike />
+                        </div>
+                        <div>
+                          <p onClick={() => swiperRefs.current[index]?.slideNext()} className='cursor-pointer'>
+                            View More
+                          </p>
+                        </div>
+                        <div>!</div>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide className='flex items-center justify-center p-6'>
+                      {/* Info */}
+                      <div
+                        className={`
+          size-full items-start justify-start
+          whitespace-nowrap rounded-md border-2 bg-violet-300 text-sm
+         text-indigo-800 backdrop-blur-lg
+          transition-all ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}
+      `}
+                      >
+                        <button
+                          aria-label='Go up'
+                          onClick={() => swiperRefs.current[index]?.slidePrev()}
+                          className='ml-2 mt-2 cursor-pointer rounded-full bg-purple-800 p-2 text-white transition-all duration-300 ease-in-out hover:bg-violet-500 hover:text-indigo-900'
+                        >
+                          <MdArrowUpward />
+                        </button>
+                        <div className='flex w-full flex-col'>
+                          <div className='text-center text-lg font-bold md:text-xl lg:text-3xl'>
+                            {publicUser ? publicUser.username.toUpperCase() : ''}
+                          </div>
+
+                          <Link
+                            href={`/public-profile/${publicUser.username}`}
+                            className='absolute right-7 top-7 flex size-12 justify-center rounded-full'
+                          >
+                            <Image
+                              src={
+                                publicUser.image_urls
+                                  ? publicUser.image_urls[publicUser.image_urls.length - 1]
+                                  : '/card/abstract3.webp'
+                              } // if no image, show image of their guild -- can be done
+                              height={80}
+                              width={80}
+                              loading='lazy'
+                              unoptimized
+                              className='rounded-full'
+                              alt={`${publicUser.username}'s pic`}
+                            />
+                          </Link>
+
+                          <div className='flex w-full justify-center text-center font-semibold italic'>
+                            {publicUser.description}
+                          </div>
+                          <Link
+                            className='fixed bottom-2 w-full text-center font-semibold text-purple-950'
+                            href={`/public-profile/${publicUser.username}`}
+                          >
+                            View {publicUser.username}s Profile
+                          </Link>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                )}
+                {viewExp && (
                   <SwiperSlide>
-                    {/* Info */}
-                    <div
-                      className='
-          h-[490px] w-[400px] items-start justify-start
-          whitespace-nowrap rounded-md bg-indigo-200 px-2 py-1
-          text-sm text-indigo-800
-          transition-all
-      '
-                    >
-                      <div className='flex w-full flex-col p-4'>
-                        <div className='text-center text-3xl font-bold'>
-                          {publicUser ? publicUser.username.toUpperCase() : ''}
-                        </div>
-                        <div className='my-4 flex w-full justify-center'>
-                          <Image
-                            src={publicUser.avatarimg}
-                            height={100}
-                            width={200}
-                            unoptimized
-                            alt={`${publicUser.username}'s avatar pic`}
-                          />
-                        </div>
-                        <div className='flex w-full justify-center text-center font-semibold italic'>
-                          {publicUser.description}
-                        </div>
-                        <p className='text-sm text-indigo-800'>Guild: {publicUser.guild}</p>
-                        <p className='text-sm text-indigo-800'>Continent: {publicUser.continent}</p>
+                    <div className='flex size-full items-center justify-center'>
+                      <div className='mx-2 size-full'>
+                        <p className='text-center'>{publicUser.username && publicUser.username}</p>
+                        <ExpCardShowVertical experience={publicUser.experience} user={publicUser} pagination={true} />
                       </div>
                     </div>
                   </SwiperSlide>
-                </Swiper>
+                )}
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       ) : (
-        <div className='flex size-full items-center justify-center text-white'>!!!</div>
+        <div className='flex size-full items-center justify-center p-4'>
+          <div className='flex size-[380px] animate-pulse items-center justify-center rounded bg-white/20 text-white'>
+            {' '}
+            !!!
+          </div>
+        </div>
       )}
     </div>
   )

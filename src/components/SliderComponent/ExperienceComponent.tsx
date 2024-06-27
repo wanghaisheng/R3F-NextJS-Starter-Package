@@ -17,6 +17,7 @@ import InputFormForExperience from './Forms/InputFormForExperience'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
+import { revalidateUser } from 'lib/actions'
 
 export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const { user } = useUser()
@@ -72,6 +73,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'POST',
         data: submit,
       })
+      revalidateUser()
       toast.success('Generated Sucessfully')
       onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
@@ -95,6 +97,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'PUT',
         data: submit,
       })
+      revalidateUser()
       toast.success('Updated Sucessfully')
       onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
@@ -107,6 +110,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
+      revalidateUser()
       toast.success('Deleted Sucessfully')
     } catch (error) {
       // toast.error('Deletion Failed') ---> to be fixed

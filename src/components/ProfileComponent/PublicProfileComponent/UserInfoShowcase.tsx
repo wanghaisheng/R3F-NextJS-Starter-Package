@@ -6,6 +6,8 @@ import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 
 export default function UserInfoShowcase({ user, skillsData, guild }) {
   const [toggle, setToggle] = useState(false)
@@ -13,36 +15,43 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
   const handletoggle = () => {
     setToggle(!toggle)
   }
+
   return (
     <>
       <div className='flex size-full flex-col'>
         {user && guild && (
           <>
             <div className='mt-10 flex size-full px-24 '>
-              <div className='flex h-[520px] w-full flex-col flex-wrap justify-start rounded-xl bg-[#f5f5f5] px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
+              <div className='flex h-[520px] w-full flex-col flex-wrap justify-start rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
                 <div>
                   <div className='flex items-center justify-start'>
                     <div
                       className='size-12 rounded-full'
                       style={{
-                        backgroundImage: 'url(/image.png)',
+                        backgroundImage: `url(${user.image_urls[user.image_urls.length - 1]}/image.png)`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         borderRadius: '50%',
-                        // border: `2px solid ${user.guilds[0].color}`,
                       }}
                     ></div>
                     <div className='flex flex-col pl-4 '>
                       <div className='text-lg font-bold lg:text-2xl'>
                         {user.first_name} {user.last_name}
                       </div>
-                      <div className='absolute right-5 top-5'>
+                      <div className='group absolute right-5 top-5'>
                         <Image
-                          src={guild.find((guild) => guild.id === user.guild_id)?.symbol || 'N/A'}
+                          src={guild.find((guild) => guild.id === user.guild_id)?.symbol || ''}
                           height={30}
                           width={30}
                           alt='guild'
+                          loading='lazy'
+                        />
+                        <HoverGuild
+                          hoveredGuild={guild.find((guild) => guild.id === user.guild_id)?.guild_name}
+                          top={10}
+                          left={-350}
+                          translateY={10}
                         />
                       </div>
 

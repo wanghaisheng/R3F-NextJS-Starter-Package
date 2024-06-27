@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { revalidateUser } from 'lib/actions'
 
 export default function InputFormForExperience({
   exp_id,
@@ -50,6 +51,7 @@ export default function InputFormForExperience({
         method: 'put',
         data: submit,
       })
+      revalidateUser()
       toast.success('Project pic updated successfully!')
     } catch (error) {
       toast.error('Error updating project pic')
