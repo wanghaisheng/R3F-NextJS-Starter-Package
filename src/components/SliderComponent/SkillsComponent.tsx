@@ -119,11 +119,11 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
 
   // state change handle for image upload
   useEffect(() => {
-    const saveImage = () => {
+    const updateImage = () => {
       handleImgUpdate(skillIndex, imageUrlsUpdate[imageUrlsUpdate.length - 1])
     }
     if (skillIndex && imageUrlsUpdate.length !== 0) {
-      saveImage()
+      updateImage()
     }
   }, [skillIndex, imageUrlsUpdate])
   // state change handle for image upload
@@ -139,7 +139,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     try {
       await axios({
         url: `/api/internal/skills/${skills[index].skill_id}`,
-        method: 'put',
+        method: 'PUT',
         data: submit,
       })
       revalidateUser()

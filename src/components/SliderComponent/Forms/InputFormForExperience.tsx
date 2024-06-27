@@ -41,6 +41,8 @@ export default function InputFormForExperience({
     }
   }, [imageUrls])
 
+  // console.log(project)
+
   const handleImgUpdate = async (image_url) => {
     const submit = {
       project_picture: image_url,
