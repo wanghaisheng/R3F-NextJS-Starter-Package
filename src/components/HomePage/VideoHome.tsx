@@ -166,6 +166,7 @@ export default function VideoHome() {
 
         {guildData.map((guild, index) => (
           <SwiperSlide key={index} className='bg-cover bg-center'>
+            {/* Div for each guild where the opacity of the div is based on the guild color and reduced to 20% */}
             {guild.guild_name === 'VAJRA' ? (
               <div className='absolute z-20 h-screen w-full bg-[#0C2E5C]/20'></div>
             ) : guild.guild_name === 'BUDDHA' ? (

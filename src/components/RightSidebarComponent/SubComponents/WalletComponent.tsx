@@ -1,13 +1,13 @@
-import Wallet from '@/components/card/TypeCard/Wallet' //----------------> module not found error in my branch
+import Wallet from '@/components/card/TypeCard/Wallet'
 import TopUpWalletTabs from './TopUpWalletTabs'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider'
 
 export default function WalletComponent({ setActiveTab, setShowSignUp }) {
   const { user } = useUser()
 
+  // handleSignUpClick is a function that sets the active tab to profile and shows the signup modal
   const handleSignUpClick = () => {
-    setActiveTab('search')
+    setActiveTab('profile')
     setShowSignUp(true)
   }
 
@@ -28,7 +28,6 @@ export default function WalletComponent({ setActiveTab, setShowSignUp }) {
             <div className='mt-8'>
               <h1 className='text-lg font-semibold text-white'>Wallet</h1>
             </div>
-            <hr className=' border-t-2 border-purple-700 transition-colors hover:border-purple-400' />
 
             <div className='mb-10'>
               <TopUpWalletTabs />
@@ -39,7 +38,7 @@ export default function WalletComponent({ setActiveTab, setShowSignUp }) {
             <div>You must signin to view this tab</div>
             <div
               onClick={handleSignUpClick}
-              className='mt-2 flex cursor-pointer justify-center rounded border border-purple-700 bg-purple-800/30 p-2 transition-colors hover:bg-purple-800/40 hover:text-purple-200'
+              className='mt-2 flex cursor-pointer justify-center rounded border bg-black p-2 transition-colors hover:bg-gray-300 hover:text-black  dark:border-purple-700 dark:bg-purple-800/30 dark:hover:bg-purple-800/40 dark:hover:text-purple-200'
             >
               Signup
             </div>

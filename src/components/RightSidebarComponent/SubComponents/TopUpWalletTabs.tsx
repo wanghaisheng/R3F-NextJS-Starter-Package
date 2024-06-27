@@ -3,16 +3,11 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Scrollbar } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/scrollbar'
-
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
 export default function TopUpWalletTabs() {
-  const [activeTab, setActiveTab] = useState('tab1')
+  const [activeTab, setActiveTab] = useState('redeem')
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab)
@@ -59,11 +54,11 @@ export default function TopUpWalletTabs() {
           <li className='w-full'>
             <div
               className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2 transition-colors duration-300 ${
-                activeTab === 'tab1'
-                  ? 'bg-purple-700/30 text-purple-200'
-                  : 'bg-transparent text-gray-200 hover:bg-purple-700/30'
+                activeTab === 'redeem'
+                  ? 'bg-gray-300 text-black dark:bg-purple-700/30 dark:text-purple-200'
+                  : 'bg-transparent text-white hover:bg-gray-300/30 dark:hover:bg-purple-700/30'
               }`}
-              onClick={() => handleTabClick('tab1')}
+              onClick={() => handleTabClick('redeem')}
             >
               REDEEM
             </div>
@@ -71,11 +66,11 @@ export default function TopUpWalletTabs() {
           <li className='w-full'>
             <div
               className={`flex w-full cursor-pointer items-center justify-center rounded-md py-2 transition-colors duration-300 ${
-                activeTab === 'tab2'
-                  ? 'bg-purple-700/30 text-purple-200'
-                  : 'bg-transparent text-gray-200 hover:bg-purple-700/30'
+                activeTab === 'topup'
+                  ? 'bg-gray-300 text-black dark:bg-purple-700/30 dark:text-purple-200'
+                  : 'bg-transparent text-white hover:bg-gray-300/30 dark:hover:bg-purple-700/30'
               }`}
-              onClick={() => handleTabClick('tab2')}
+              onClick={() => handleTabClick('topup')}
             >
               TOPUP
             </div>
@@ -83,12 +78,12 @@ export default function TopUpWalletTabs() {
         </ul>
       </div>
 
-      <hr className=' border-t-2 border-purple-700 transition-colors hover:border-purple-400' />
+      <hr className=' border-t-2 border-black transition-colors  dark:border-purple-700' />
 
       <div className='h-52 overflow-auto'>
         {activeTab && (
           <div className='flex w-full flex-col p-4'>
-            {activeTab === 'tab1' && (
+            {activeTab === 'redeem' && (
               <div className='w-full'>
                 <Formik
                   initialValues={{ redeemCode: '' }}
@@ -107,7 +102,7 @@ export default function TopUpWalletTabs() {
                 >
                   {({ isSubmitting }) => (
                     <Form className='flex w-full flex-col items-center justify-center'>
-                      <label htmlFor='redeemCode' className='mb-2 w-full font-semibold text-violet-300'>
+                      <label htmlFor='redeemCode' className='mb-2 w-full font-semibold text-white dark:text-violet-300'>
                         Redeem Code:
                       </label>
                       <Field
@@ -115,13 +110,13 @@ export default function TopUpWalletTabs() {
                         type='text'
                         name='redeemCode'
                         placeholder='Enter redeem code'
-                        className='w-full rounded-md bg-black/20 px-3 py-2 text-white shadow shadow-purple-700 backdrop-blur-sm focus:outline-none '
+                        className='w-full rounded-md bg-black/20 px-3 py-2 text-white shadow shadow-white backdrop-blur-sm focus:outline-none dark:shadow-purple-700 '
                       />
                       <ErrorMessage name='redeemCode' component='p' className='mt-1 text-xs text-red-500' />
                       <button
                         type='submit'
                         disabled={isSubmitting}
-                        className='mt-4 w-fit rounded border border-purple-800 bg-black/20 px-4 py-2 font-bold text-white transition-colors  hover:bg-purple-700/20 focus:outline-none'
+                        className='mt-4 w-fit rounded border bg-black px-4 py-2 font-bold text-white transition-colors hover:bg-gray-300/30 hover:text-black focus:outline-none dark:border-purple-800  dark:bg-black/20 dark:hover:bg-purple-700/20'
                       >
                         Redeem
                       </button>
@@ -130,11 +125,14 @@ export default function TopUpWalletTabs() {
                 </Formik>
               </div>
             )}
-            {activeTab === 'tab2' && (
+            {activeTab === 'topup' && (
               <div>
                 <div className='-mt-2 grid grid-cols-2 gap-4'>
                   {topupMethods.map((product) => (
-                    <div key={product.id} className='relative overflow-hidden rounded-md bg-purple-800/30 shadow-md'>
+                    <div
+                      key={product.id}
+                      className='relative overflow-hidden rounded-md bg-white/50 shadow-md dark:bg-purple-800/30'
+                    >
                       <div className='h-24 w-full overflow-hidden'>
                         <Image
                           src={product.image}
@@ -146,9 +144,9 @@ export default function TopUpWalletTabs() {
                           className='object-cover'
                         />
                       </div>
-                      <div className='h-14 w-full bg-purple-600/40 p-1 backdrop-blur-sm'>
-                        <h1 className='font-medium text-white'>{product.amount}</h1>
-                        <h2 className='text-sm text-purple-200'>{product.description}</h2>
+                      <div className='h-14 w-full bg-white p-1 backdrop-blur-sm dark:bg-purple-600/40'>
+                        <h1 className='font-medium text-black dark:text-white'>{product.amount}</h1>
+                        <h2 className='text-sm text-black dark:text-purple-200'>{product.description}</h2>
                       </div>
                     </div>
                   ))}
