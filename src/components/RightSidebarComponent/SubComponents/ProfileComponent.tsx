@@ -10,9 +10,12 @@ import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import GeniusID from '@/components/card/GeniusID' //----------------> module not found error in my branch
+import { revalidateUser } from 'lib/actions'
+import Cookies from 'js-cookie'
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
+  const token = Cookies.get('token')
   const [form, setForm] = useState({
     username: user?.username || '',
     phone_number: user?.phone_number || '',
@@ -102,7 +105,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         ...prevForm,
         image_urls: [...user.image_urls, image_url],
       }))
-      // updateUser(token)
+      updateUser(token)
       toast.success('Profile pic updated successfully!')
     } catch (error) {
       toast.error('Error updating profile pic!')
@@ -130,7 +133,8 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     try {
       await axios.put(`/api/internal/users/${user.gg_id}`, submitData)
       // await RevalidateUser()
-      // updateUser(token)
+      updateUser(token)
+      // revalidateUser()
       toast.success('Successfully updated!')
     } catch (error) {
       toast.error('Update failed!')
