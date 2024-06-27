@@ -19,7 +19,7 @@ export default function DiscoverRegion({
   setSearchTerm: (event: any) => void
 }) {
   const [viewBusiness, setViewBusiness] = useState(false)
-  const [viewMates, setViewMates] = useState(false)
+  const [viewMates, setViewMates] = useState(true)
 
   const handleBusinessFilterView = () => {
     setViewBusiness(true)
@@ -56,7 +56,7 @@ export default function DiscoverRegion({
           <div
             className={`z-10 flex w-[75%] flex-col items-center justify-center rounded-lg p-2 shadow-md backdrop-blur sm:w-[400px] lg:w-[473px] ${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'}`}
           >
-            <div className='relative z-10 w-full'>
+            <div className='relative w-full'>
               {/* Header to showcase the guilds to filter between */}
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
@@ -64,7 +64,7 @@ export default function DiscoverRegion({
                 setSearchTerm={setSearchTerm}
               />
             </div>
-            <div className='z-10 size-full'>
+            <div className='size-full'>
               {/* Guilds to display based on the filter */}
               <ShowGuildDiscover
                 users={guilds}
