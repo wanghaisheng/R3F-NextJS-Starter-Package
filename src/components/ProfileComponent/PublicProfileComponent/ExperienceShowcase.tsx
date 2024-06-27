@@ -1,4 +1,4 @@
-import ExpProfileView from '@/components/card/ExpProfileView'
+import ExpFlipCardShuffle from '@/components/card/ExpFlipCardShuffle'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
@@ -23,7 +23,7 @@ export default function ExperienceShowcase({ experience, user, height, width, pa
             {experience.map((exp, index) => (
               <SwiperSlide key={index}>
                 <div className='flex justify-center'>
-                  <ExpProfileView
+                  <ExpFlipCardShuffle
                     type={exp.type}
                     projectName={exp.name}
                     skills={exp.project_skills.join(', ')}
