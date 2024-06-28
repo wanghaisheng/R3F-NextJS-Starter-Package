@@ -5,7 +5,7 @@ import 'swiper/css'
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md'
 import { motion } from 'framer-motion'
 
@@ -74,10 +74,22 @@ export default function VideoHome() {
   const swiperRefs = useRef(null)
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
   const handleHudClick = (index) => {
     setCurrentSlide(index)
     swiperRefs.current?.slideTo(index, 0)
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
@@ -325,12 +337,12 @@ export default function VideoHome() {
               key={index}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className={`cursor-pointer rounded-full border-b border-white px-4 py-2 text-xs font-semibold  backdrop-blur-lg dark:border-violet-700 ${
+              className={`size-4 cursor-pointer rounded-full border-b border-white text-center text-xs font-semibold backdrop-blur-lg lg:size-fit lg:px-4 lg:py-2 dark:border-violet-700 ${
                 currentSlide === index ? 'bg-pink-300 text-black' : 'text-white'
               }`}
               onClick={() => handleHudClick(index)}
             >
-              {label}
+              {isSmallScreen ? label.substring(0, 1) : label}
             </motion.div>
           ))}
         </div>
