@@ -7,11 +7,7 @@ import DiscoverRegion from '../Regions/DiscoverRegion'
 
 const getUsers = async () => {
   try {
-    const res = await fetch('/api/public/users', {
-      next: {
-        revalidate: 30,
-      },
-    })
+    const res = await fetch('/api/public/users')
     if (!res.ok) {
       toast.error('Failed to fetch users data')
       return []
@@ -39,11 +35,7 @@ const getUsers = async () => {
 
 const getGuilds = async () => {
   try {
-    const res = await fetch('/api/public/guilds', {
-      next: {
-        revalidate: 30,
-      },
-    })
+    const res = await fetch('/api/public/guilds')
     if (!res.ok) {
       toast.error('Failed to fetch guilds data')
       return []
