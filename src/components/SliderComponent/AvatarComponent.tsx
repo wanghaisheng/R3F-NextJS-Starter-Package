@@ -25,8 +25,8 @@ async function getGuilds() {
   }
 }
 
-export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
-  const { user } = useUser()
+export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen, token }) {
+  const { user, updateUser } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [guildData, setGuildData] = useState([
@@ -241,7 +241,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'PUT',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('user guild updated')
       onNextButtonClick()
     } catch (error) {

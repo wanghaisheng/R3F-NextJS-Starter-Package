@@ -20,6 +20,8 @@ export default function InputFormForExperience({
   handleProjectLinkChange,
   handleImageUrlsChange,
   index,
+  token,
+  updateUser,
 }) {
   const [imageUrls, setImageUrls] = useState([])
   const handleChangeEvent = (items) => {
@@ -53,7 +55,8 @@ export default function InputFormForExperience({
         method: 'put',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('Project pic updated successfully!')
     } catch (error) {
       toast.error('Error updating project pic')

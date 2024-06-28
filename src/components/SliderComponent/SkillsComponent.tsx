@@ -18,7 +18,7 @@ import '@uploadcare/react-uploader/core.css'
 import Image from 'next/image'
 import { revalidateUser } from 'lib/actions'
 
-export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
+export default function SkillsComponent({ onPrevButtonClick, isSmallScreen, token }) {
   const { user } = useUser()
   const router = useRouter()
   const [skills, setSkills] = useState([
