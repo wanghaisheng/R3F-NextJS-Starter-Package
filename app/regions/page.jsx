@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import toast from 'react-hot-toast'
-import axios from 'axios'
 // Cesium import
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
 

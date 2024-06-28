@@ -106,7 +106,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
             </div>
           )}
 
-          <ul className='fixed bottom-0 flex w-full flex-row space-x-2 space-y-0 bg-gray-300 p-2 font-medium dark:bg-black'>
+          <ul className='fixed bottom-0 z-30 flex w-full flex-row space-x-2 space-y-0 bg-gray-300 p-2 font-medium dark:bg-black'>
             <li
               className={`group flex items-center rounded-md p-2 ${
                 activeTab === 'profile'
