@@ -35,10 +35,14 @@ export default function ShowGuildDiscover({
   viewMates: boolean
 }) {
   const swiperRefs = useRef([])
-  const [changePosture, setChangePosture] = useState(false)
+  const [postureStates, setPostureStates] = useState(users.map(() => false))
 
-  const handlePostureChange = () => {
-    setChangePosture(!changePosture)
+  const handlePostureChange = (index) => {
+    setPostureStates((prevStates) => {
+      const newStates = [...prevStates]
+      newStates[index] = !newStates[index]
+      return newStates
+    })
   }
 
   // Filter based on guild, continent, and search term
@@ -62,7 +66,7 @@ export default function ShowGuildDiscover({
                     className='flex size-full'
                     direction={'vertical'}
                     spaceBetween={50}
-                    initialSlide={0} // Default slide number 1\
+                    initialSlide={0} // Default slide number 1
                     navigation={false}
                     loop
                     modules={[Navigation]}
@@ -70,6 +74,7 @@ export default function ShowGuildDiscover({
                       swiperRefs.current[index] = swiper
                     }}
                   >
+                    {/* Upper Section | Head | Overview*/}
                     <SwiperSlide>
                       <div
                         className={`group relative mx-auto flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
@@ -94,9 +99,9 @@ export default function ShowGuildDiscover({
                             }))`,
                           }}
                         >
-                          {changePosture ? (
+                          {!postureStates[index] ? (
                             <Image
-                              className='z-10 transition-all duration-300 ease-in-out hover:mt-[2px] hover:-translate-y-3 hover:scale-105'
+                              className='z-10 transition-all duration-1000 ease-in-out hover:mt-[2px] hover:-translate-y-3 hover:scale-105'
                               src={publicUser.avatarimg}
                               alt={publicUser.username}
                               loading='lazy'
@@ -107,10 +112,10 @@ export default function ShowGuildDiscover({
                             <div className='flex size-full items-center justify-center'>Different posture</div>
                           )}
                           <button
-                            className={`absolute bottom-2 right-2 z-20 transition-all duration-300 ${changePosture ? 'rotate-180' : 'rotate-0'}`}
-                            onClick={handlePostureChange}
+                            className={`absolute bottom-2 right-2 z-20 transition-all duration-300 ${postureStates[index] ? 'rotate-180' : 'rotate-0'}`}
+                            onClick={() => handlePostureChange(index)}
                           >
-                            <MdOutlineChangeCircle size={20} />
+                            <MdOutlineChangeCircle size={26} />
                           </button>
                         </div>
                       </div>
@@ -129,24 +134,42 @@ export default function ShowGuildDiscover({
                         <div>!</div>
                       </div>
                     </SwiperSlide>
+                    {/* Lower Section | Body | Description */}
                     <SwiperSlide className='flex items-center justify-center p-6'>
                       {/* Info */}
                       <div
                         className={`
-          size-full items-start justify-start
-          whitespace-nowrap rounded-md border-2 bg-violet-300 text-sm
-         text-indigo-800 backdrop-blur-lg
-          transition-all ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}
-      `}
+                          size-full items-start justify-start
+                          whitespace-nowrap rounded-md border-2 text-sm
+                          text-indigo-800 backdrop-blur-lg
+                          transition-all ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}
+                        `}
+                        style={{
+                          background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          objectFit: 'cover',
+                          filter: `drop-shadow( 0px 0px 0px rgba(${
+                            publicUser.guild === 'PADMA'
+                              ? '255, 0, 0, 0.4'
+                              : publicUser.guild === 'VAJRA'
+                                ? '0, 0, 255, 0.4'
+                                : publicUser.guild === 'RATNA'
+                                  ? '255, 255, 0, 0.4'
+                                  : publicUser.guild === 'KARMA'
+                                    ? '0, 255, 0, 0.4'
+                                    : '255, 255, 255, 1'
+                          }))`,
+                        }}
                       >
                         <button
                           aria-label='Go up'
                           onClick={() => swiperRefs.current[index]?.slidePrev()}
-                          className='ml-2 mt-2 cursor-pointer rounded-full bg-purple-800 p-2 text-white transition-all duration-300 ease-in-out hover:bg-violet-500 hover:text-indigo-900'
+                          className='ml-2 mt-2 cursor-pointer rounded-full border bg-violet-400 p-2 text-white transition-all duration-300 ease-in-out hover:bg-violet-500 hover:text-indigo-900'
                         >
                           <MdArrowUpward />
                         </button>
-                        <div className='flex w-full flex-col'>
+                        <div className='flex w-full flex-col text-white'>
                           <div className='text-center text-lg font-bold md:text-xl lg:text-3xl'>
                             {publicUser ? publicUser.username.toUpperCase() : ''}
                           </div>
@@ -165,19 +188,40 @@ export default function ShowGuildDiscover({
                               width={80}
                               loading='lazy'
                               unoptimized
-                              className='rounded-full'
+                              className='rounded-full border-2 border-black bg-white'
                               alt={`${publicUser.username}'s pic`}
                             />
                           </Link>
 
-                          <div className='flex w-full justify-center text-center font-semibold italic'>
-                            {publicUser.description}
+                          <div className='flex w-full justify-center font-semibold italic'>
+                            Bio: {publicUser.description}
                           </div>
+                          <div className='my-2 grid h-[200px] w-full grid-cols-2 gap-3 px-10 font-semibold'>
+                            <div className='flex size-full flex-wrap rounded bg-white/20'>
+                              <p>
+                                Student / <br /> Business Owner / ...
+                              </p>
+                            </div>
+                            <div className='flex size-full flex-wrap rounded bg-white/20'>
+                              <p>Followers | Following</p>
+                            </div>
+                            <div className='flex size-full flex-wrap rounded bg-white/20'>
+                              <p>No. of Interactions</p>
+                            </div>
+                            <div className='flex size-full flex-wrap rounded bg-white/20'>
+                              <p>
+                                Achievements |<br /> Tier list in a <br /> league/leaderboard
+                              </p>
+                            </div>
+                          </div>
+
                           <Link
-                            className='fixed bottom-2 w-full text-center font-semibold text-purple-950'
+                            className='fixed bottom-2 flex w-full justify-center font-semibold'
                             href={`/public-profile/${publicUser.username}`}
                           >
-                            View {publicUser.username}s Profile
+                            <p className='flex w-fit rounded bg-violet-300 px-2 font-semibold text-black transition-all duration-300 hover:scale-105'>
+                              View {publicUser.username}s Profile
+                            </p>
                           </Link>
                         </div>
                       </div>
