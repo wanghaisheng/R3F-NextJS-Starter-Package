@@ -8,7 +8,6 @@ const UserContext = createContext()
 
 const UserClientProvider = ({ children, user: initialUser }) => {
   const [user, setUser] = useState(initialUser)
-  const [timer, setTimer] = useState(null)
 
   const updateUser = (token) => {
     const decoded = jwtDecode(token)
@@ -19,7 +18,6 @@ const UserClientProvider = ({ children, user: initialUser }) => {
     try {
       const response = await fetch(`http://localhost:3000/api/internal/users/${userId}`, {
         method: 'GET',
-        // cache: 'reload',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

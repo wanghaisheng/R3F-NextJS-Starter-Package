@@ -13,8 +13,8 @@ import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { revalidateUser } from 'lib/actions'
 
-export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
-  const { user } = useUser()
+export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen, token }) {
+  const { user, updateUser } = useUser()
   const [cards, setCards] = useState([
     {
       card_id: '',
@@ -67,7 +67,8 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'POST',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('Generated Sucessfully')
       onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
@@ -94,7 +95,8 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         method: 'PUT',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('Updated Sucessfully')
       onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
@@ -107,6 +109,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
         url: `/api/internal/card/${id}`,
         method: 'DELETE',
       })
+      updateUser(token)
       toast.success('Deleted Sucessfully')
     } catch (error) {
       toast.error('Failed to Delete')

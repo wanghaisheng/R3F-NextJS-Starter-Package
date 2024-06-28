@@ -10,11 +10,13 @@ import ExperienceComponent from '@/components/SliderComponent/ExperienceComponen
 import UserInfoComponent from '@/components/SliderComponent/UserInfoComponent'
 import Card2Component from '@/components/SliderComponent/Card2Component'
 import toast, { Toaster } from 'react-hot-toast'
+import Cookies = require('js-cookie')
 
 type PropType = {
   slides: number[]
 }
 const EmblaCarousel: React.FC<PropType> = () => {
+  const token = Cookies.get('token')
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   // const tabs = ['Genius ID', 'Avatar', 'Card', 'Connection', 'Experience', 'Skills']
   const tabs = ['Family', 'Membership', 'Experience', 'Skills']
@@ -87,12 +89,14 @@ const EmblaCarousel: React.FC<PropType> = () => {
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
+                token={token}
               />,
               <Card2Component
                 key='Card2Component'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
+                token={token}
               />,
 
               // <ConnectionComponent
@@ -107,11 +111,13 @@ const EmblaCarousel: React.FC<PropType> = () => {
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 onNextButtonClick={() => emblaApi.scrollNext()}
                 isSmallScreen={isSmallScreen}
+                token={token}
               />,
               <SkillsComponent
                 key='SkillsComponent'
                 onPrevButtonClick={() => emblaApi.scrollPrev()}
                 isSmallScreen={isSmallScreen}
+                token={token}
               />,
             ].map((Component) => (
               <div key={Component.key} className='w-[900px] min-w-0 flex-none pl-4'>

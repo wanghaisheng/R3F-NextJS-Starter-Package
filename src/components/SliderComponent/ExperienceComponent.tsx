@@ -18,9 +18,10 @@ import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import { revalidateUser } from 'lib/actions'
+import { redirect } from 'next/navigation'
 
-export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
-  const { user } = useUser()
+export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen, token }) {
+  const { user, updateUser } = useUser()
   const router = useRouter()
   const [projects, setProjects] = useState([
     {
@@ -43,6 +44,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       try {
         if (user.experience.length !== 0) {
           setProjects(user.experience)
+          console.log(user)
         }
       } catch (error) {
         toast.error(error)
@@ -73,7 +75,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'POST',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('Generated Sucessfully')
       onNextButtonClick() // Move to next slide after successful generation
     } catch (error) {
@@ -97,7 +100,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         method: 'PUT',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('Updated Sucessfully')
       onNextButtonClick() // Move to next slide after successful update
     } catch (error) {
@@ -110,7 +114,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
         url: `/api/internal/experience/${experience_id}`,
         method: 'DELETE',
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('Deleted Sucessfully')
     } catch (error) {
       // toast.error('Deletion Failed') ---> to be fixed
@@ -203,8 +208,10 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
       : true)
     if (isSubmitted) {
       router.push('/hud') // Use router.push to navigate
+      // redirect('/hud')
     }
   }
+
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
       <div className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'>
@@ -303,6 +310,8 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
                         handleProjectLinkChange={handleProjectLinkChange}
                         handleImageUrlsChange={handleImageUrlsChange}
                         index={index}
+                        updateUser={updateUser}
+                        token={token}
                       />
                       {/* Next */}
                       {!isSmallScreen ? (
