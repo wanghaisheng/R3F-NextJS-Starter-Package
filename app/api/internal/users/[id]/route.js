@@ -48,6 +48,7 @@ export async function PUT(request, { params }) {
       dob,
       region,
       guild_id,
+      faculty,
     } = data
     const id = params.id
 
@@ -80,6 +81,7 @@ export async function PUT(request, { params }) {
         dob,
         region,
         guild_id,
+        faculty,
       },
     })
     await revalidateUser()
