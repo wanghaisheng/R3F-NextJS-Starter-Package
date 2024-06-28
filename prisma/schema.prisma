@@ -95,6 +95,7 @@ model guilds {
   id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   element          String?
   faculty          Json[]
+  guild_frame      String?
 }
 
 model continents {

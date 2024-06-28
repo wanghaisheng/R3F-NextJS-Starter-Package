@@ -54,6 +54,7 @@ export async function GET(request) {
         alignment: true,
         element: true,
         faculty: true,
+        guild_frame: true,
       },
     })
     return NextResponse.json(guilds)
