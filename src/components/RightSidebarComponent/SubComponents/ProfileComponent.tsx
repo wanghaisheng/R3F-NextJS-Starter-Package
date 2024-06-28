@@ -61,11 +61,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const handleRegionStatus = async (value) => {
     setRegionStatus(value)
     if (value) {
-      const response = await fetch('https://ipapi.co/json/', {
-        next: {
-          revalidate: 30,
-        },
-      })
+      const response = await fetch('https://ipapi.co/json/')
       const data = await response.json()
       if (window.confirm('Do you want to share the location via your IP?')) {
         setForm((prevForm) => ({
