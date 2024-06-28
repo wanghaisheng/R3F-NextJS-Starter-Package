@@ -77,24 +77,29 @@ export default function DiscoverRegion({
             </div>
           </div>
         </div>
-        <div className='absolute top-36 z-10 hidden h-[450px] flex-col gap-y-2 transition-all duration-300 lg:right-6 lg:flex lg:w-[250px] xl:right-20 xl:w-[320px]'>
-          <div className='flex w-full justify-between gap-x-2'>
-            <button
-              className={`w-full rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewBusiness && 'dark:bg-pink-300/70'}`}
-              onClick={() => handleBusinessFilterView()}
-            >
-              BUSINESS
-            </button>
-            <button
-              className={`w-full rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewMates && 'dark:bg-pink-300/70'}`}
-              onClick={() => handleMatesFilterView()}
-            >
-              MATES
-            </button>
-            <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
-          </div>
+        <div className='absolute z-10 xl:right-20'>
+          <div className='hidden h-[450px] flex-col gap-y-2  xl:flex xl:w-[316px]'>
+            <div className='grid grid-cols-3 gap-3'>
+              <button
+                className={`w-[100px] rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewBusiness && 'dark:bg-pink-300/70'}`}
+                onClick={() => handleBusinessFilterView()}
+              >
+                BUSINESS
+              </button>
+              <button
+                className={`w-[100px] rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewMates && 'dark:bg-pink-300/70'}`}
+                onClick={() => handleMatesFilterView()}
+              >
+                MATES
+              </button>
+              <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
+              <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
+              <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
+              <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
+            </div>
 
-          <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
+            <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
+          </div>
         </div>
       </div>
     </>

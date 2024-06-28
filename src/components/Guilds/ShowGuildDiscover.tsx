@@ -10,8 +10,10 @@ import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import { FcLike } from 'react-icons/fc'
 import dynamic from 'next/dynamic'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { MdArrowUpward } from 'react-icons/md'
+import { MdOutlineChangeCircle } from 'react-icons/md'
+import { FaChevronDown } from 'react-icons/fa'
 
 const ExpCardShowVertical = dynamic(() =>
   import('../ProfileComponent/PublicProfileComponent/ExpCardShowVeritcal').then((mod) => mod.default),
@@ -33,6 +35,11 @@ export default function ShowGuildDiscover({
   viewMates: boolean
 }) {
   const swiperRefs = useRef([])
+  const [changePosture, setChangePosture] = useState(false)
+
+  const handlePostureChange = () => {
+    setChangePosture(!changePosture)
+  }
 
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
@@ -66,14 +73,9 @@ export default function ShowGuildDiscover({
                     <SwiperSlide>
                       <div
                         className={`group relative mx-auto flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
-                        onClick={() => swiperRefs.current[index]?.slideNext()}
                       >
-                        <Image
-                          className='absolute inset-0 rounded-lg transition-all duration-300 ease-in-out'
-                          src={publicUser.avatarimg}
-                          alt={publicUser.username}
-                          loading='lazy'
-                          fill
+                        <div
+                          className='relative size-full rounded-lg'
                           style={{
                             background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
                             backgroundSize: 'cover',
@@ -91,15 +93,37 @@ export default function ShowGuildDiscover({
                                       : '255, 255, 255, 1'
                             }))`,
                           }}
-                        />
+                        >
+                          {changePosture ? (
+                            <Image
+                              className='z-10 transition-all duration-300 ease-in-out hover:mt-[2px] hover:-translate-y-3 hover:scale-105'
+                              src={publicUser.avatarimg}
+                              alt={publicUser.username}
+                              loading='lazy'
+                              fill
+                              onClick={() => swiperRefs.current[index]?.slideNext()}
+                            />
+                          ) : (
+                            <div className='flex size-full items-center justify-center'>Different posture</div>
+                          )}
+                          <button
+                            className={`absolute bottom-2 right-2 z-20 transition-all duration-300 ${changePosture ? 'rotate-180' : 'rotate-0'}`}
+                            onClick={handlePostureChange}
+                          >
+                            <MdOutlineChangeCircle size={20} />
+                          </button>
+                        </div>
                       </div>
                       <div className='flex w-full justify-between px-9 py-4'>
                         <div>
                           <FcLike />
                         </div>
                         <div>
-                          <p onClick={() => swiperRefs.current[index]?.slideNext()} className='cursor-pointer'>
-                            View More
+                          <p
+                            onClick={() => swiperRefs.current[index]?.slideNext()}
+                            className='animate-bounce cursor-pointer transition-all duration-300 ease-in-out hover:text-purple-400'
+                          >
+                            <FaChevronDown />
                           </p>
                         </div>
                         <div>!</div>
