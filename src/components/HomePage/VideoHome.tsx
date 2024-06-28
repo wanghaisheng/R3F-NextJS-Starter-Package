@@ -5,7 +5,7 @@ import 'swiper/css'
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md'
 import { motion } from 'framer-motion'
 
@@ -74,10 +74,22 @@ export default function VideoHome() {
   const swiperRefs = useRef(null)
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
   const handleHudClick = (index) => {
     setCurrentSlide(index)
     swiperRefs.current?.slideTo(index, 0)
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
@@ -319,18 +331,18 @@ export default function VideoHome() {
         </SwiperSlide>
 
         {/* HUD at the bottom */}
-        <div className='absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 gap-2 rounded-full px-2 py-1 shadow shadow-white dark:shadow-purple-700'>
+        <div className='absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 gap-2 rounded-full px-2 py-1 shadow shadow-white dark:shadow-purple-700'>
           {paginationLabels.map((label, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className={`cursor-pointer rounded-md bg-gray-800 px-4 py-2 text-xs text-white ${
-                currentSlide === index ? 'bg-gray-700' : ''
+              className={`size-4 cursor-pointer rounded-full border-b border-white text-center text-xs font-semibold backdrop-blur-lg lg:size-fit lg:px-4 lg:py-2 dark:border-violet-700 ${
+                currentSlide === index ? 'bg-pink-300 text-black' : 'text-white'
               }`}
               onClick={() => handleHudClick(index)}
             >
-              {label}
+              {isSmallScreen ? label.substring(0, 1) : label}
             </motion.div>
           ))}
         </div>
