@@ -319,14 +319,14 @@ export default function VideoHome() {
         </SwiperSlide>
 
         {/* HUD at the bottom */}
-        <div className='absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 gap-2 rounded-full px-2 py-1 shadow shadow-white dark:shadow-purple-700'>
+        <div className='absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 gap-2 rounded-full px-2 py-1 shadow shadow-white dark:shadow-purple-700'>
           {paginationLabels.map((label, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className={`cursor-pointer rounded-md bg-gray-800 px-4 py-2 text-xs text-white ${
-                currentSlide === index ? 'bg-gray-700' : ''
+              className={`cursor-pointer rounded-full border-b border-white px-4 py-2 text-xs font-semibold  backdrop-blur-lg dark:border-violet-700 ${
+                currentSlide === index ? 'bg-pink-300 text-black' : 'text-white'
               }`}
               onClick={() => handleHudClick(index)}
             >
