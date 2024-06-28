@@ -52,22 +52,23 @@ export default function DiscoverRegion({
             )}
           </video>
         </div>
+        {/* Rigth Side Filter section */}
         <div className='z-10 mb-10 mt-24 transition-all duration-200 md:absolute md:right-4 md:my-0 md:w-[22%] lg:right-10 xl:right-20'>
           <div className='flex h-fit w-full flex-col gap-y-2 md:h-[450px]'>
-            <div className='flex gap-3 overflow-auto'>
+            <div className='flex items-center gap-3 font-semibold'>
               <button
-                className={`w-[100px] rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewBusiness && 'dark:bg-pink-300/70'}`}
+                className={`w-[100px] rounded bg-white p-2 text-black transition-all duration-300 dark:bg-pink-300/20 dark:text-white ${viewBusiness && 'bg-gray-400 dark:bg-pink-300/70'}`}
                 onClick={() => handleBusinessFilterView()}
               >
                 BUSINESS
               </button>
               <button
-                className={`w-[100px] rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewMates && 'dark:bg-pink-300/70'}`}
+                className={`w-[100px] rounded bg-white p-2 text-black transition-all duration-300 dark:bg-pink-300/20 dark:text-white ${viewMates && 'bg-gray-400 dark:bg-pink-300/70'}`}
                 onClick={() => handleMatesFilterView()}
               >
                 MATES
               </button>
-              <button className='w-[100px] rounded bg-pink-300/20 p-2'>...</button>
+              <button className='w-[100px] rounded bg-pink-300/20 p-2 text-black dark:text-white'>...</button>
             </div>
 
             <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
