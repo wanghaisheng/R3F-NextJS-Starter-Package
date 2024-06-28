@@ -49,6 +49,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
     }
   }, [user, user?.image_urls?.length])
 
+  const logoutAndToggleSidebar = () => {
+    logout()
+    setIsSidebarOpen(true) // Opens the sidebar
+  }
+
   return (
     <>
       <nav className={`fixed top-0 z-50 mx-auto flex w-full items-center justify-between`}>
@@ -83,7 +88,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 <div className='flex'>
                   <Link
                     href='/'
-                    onClick={logout}
+                    onClick={logoutAndToggleSidebar}
                     className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none lg:flex'
                     id='user-menu-button'
                     aria-label='Sign Out'
@@ -232,7 +237,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 {user ? (
                   <Link
                     href='/'
-                    onClick={logout}
+                    onClick={logoutAndToggleSidebar}
                     className='py-4 text-red-500 hover:text-fuchsia-300'
                     aria-label='Sign Out'
                   >
