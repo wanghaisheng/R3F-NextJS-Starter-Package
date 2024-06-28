@@ -17,7 +17,7 @@ import { IoChevronBack } from 'react-icons/io5'
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
   const token = Cookies.get('token')
-  const [showForm, setShowForm] = useState(true)
+  const [showForm, setShowForm] = useState(false)
 
   const [form, setForm] = useState({
     username: user?.username || '',
