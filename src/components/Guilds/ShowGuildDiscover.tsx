@@ -80,7 +80,7 @@ export default function ShowGuildDiscover({
                         className={`group relative mx-auto flex h-[87%] w-[90%] flex-col items-center justify-center rounded-lg border-2 shadow-sm transition duration-500 ease-out ${publicUser.guild === 'PADMA' ? 'border-red-500' : publicUser.guild === 'VAJRA' ? 'border-blue-500' : publicUser.guild === 'RATNA' ? 'border-yellow-500' : publicUser.guild === 'KARMA' ? 'border-green-500' : 'border-white'}`}
                       >
                         <div
-                          className='relative size-full rounded-lg'
+                          className='relative flex size-full items-center justify-center rounded-lg'
                           style={{
                             background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
                             backgroundSize: 'cover',
@@ -101,12 +101,14 @@ export default function ShowGuildDiscover({
                         >
                           {!postureStates[index] ? (
                             <Image
-                              className='z-10 transition-all duration-1000 ease-in-out hover:mt-[2px] hover:-translate-y-3 hover:scale-105'
+                              className='z-10 mt-1 transition-all duration-300 ease-in-out hover:mt-[10px] hover:-translate-y-3 hover:scale-105'
                               src={publicUser.avatarimg}
                               alt={publicUser.username}
                               loading='lazy'
-                              fill
+                              height={340}
+                              width={340}
                               onClick={() => swiperRefs.current[index]?.slideNext()}
+                              objectFit='cover'
                             />
                           ) : (
                             <div className='flex size-full items-center justify-center'>Different posture</div>
@@ -176,7 +178,7 @@ export default function ShowGuildDiscover({
 
                           <Link
                             href={`/public-profile/${publicUser.username}`}
-                            className='absolute right-7 top-7 flex size-12 justify-center rounded-full'
+                            className='absolute right-7 top-7 flex size-10 justify-center rounded-full'
                           >
                             <Image
                               src={
@@ -184,8 +186,8 @@ export default function ShowGuildDiscover({
                                   ? publicUser.image_urls[publicUser.image_urls.length - 1]
                                   : '/card/abstract3.webp'
                               } // if no image, show image of their guild -- can be done
-                              height={80}
-                              width={80}
+                              height={60}
+                              width={60}
                               loading='lazy'
                               unoptimized
                               className='rounded-full border-2 border-black bg-white'
