@@ -26,7 +26,14 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
             ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
           onClick={handleFlip}
         >
-          <Image unoptimized src='/card/abstract2.webp' alt='Experience' fill className='rounded-lg object-cover' />
+          <Image
+            unoptimized
+            src='/card/abstract2.webp'
+            alt='Experience'
+            fill
+            className='rounded-lg object-cover'
+            priority
+          />
           <div className='absolute top-0 flex w-full justify-end'>
             <p className='pr-3 pt-1 font-bold text-pink-300'>{type.toUpperCase()}</p>
           </div>
