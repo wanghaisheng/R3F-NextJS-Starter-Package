@@ -14,6 +14,29 @@ import { revalidateUser } from 'lib/actions'
 import Cookies from 'js-cookie'
 import { IoChevronBack } from 'react-icons/io5'
 
+async function getAllFaculties() {
+  try {
+    const res = await fetch('/api/internal/faculties/all-faculties')
+    if (!res.ok) {
+      throw new Error(`failded to fetch faculties`)
+    }
+    return res.json()
+  } catch (error) {
+    console.error('Internal server error')
+  }
+}
+async function getGuildFaculty() {
+  try {
+    const res = await fetch('/api/internal/faculties/guild-faculty')
+    if (!res.ok) {
+      throw new Error(`failded to fetch faculties`)
+    }
+    return res.json()
+  } catch (error) {
+    console.error('Internal server error')
+  }
+}
+
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
   const token = Cookies.get('token')
@@ -38,6 +61,37 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const [regionStatus, setRegionStatus] = useState(false)
   const [avatarsData, setAvatarsData] = useState(user?.avatar || [])
   const [files, setFiles] = useState([])
+
+  const [primaryFaculty, setPrimaryFaculty] = useState('')
+  const [optionalFaculty, setOptionalFaculty] = useState('')
+  const [guild_faculty, setGuild_Faculty] = useState([])
+  const [faculties, setFaculties] = useState([])
+
+  //get all faculties
+  useEffect(() => {
+    const fetchFaculties = async () => {
+      const faculties = await getAllFaculties()
+      setFaculties(faculties)
+    }
+    fetchFaculties()
+  }, [])
+
+  //get guild based faculties
+  useEffect(() => {
+    const fetchGuildFaculty = async () => {
+      const guild_faculty = await getAllFaculties()
+      setFaculties(guild_faculty)
+    }
+    fetchGuildFaculty()
+  }, [])
+
+  useEffect(() => {
+    console.log(faculties)
+  }, [faculties])
+
+  useEffect(() => {
+    console.log(guild_faculty)
+  }, [guild_faculty])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target

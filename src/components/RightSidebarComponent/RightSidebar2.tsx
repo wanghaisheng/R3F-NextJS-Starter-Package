@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { PiCardsFill } from 'react-icons/pi'
 import { TbEmergencyBed } from 'react-icons/tb'
