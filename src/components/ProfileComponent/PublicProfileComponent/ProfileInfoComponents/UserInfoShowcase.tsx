@@ -20,12 +20,14 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
     setToggle(!toggle)
   }
 
+  console.log('userImg', user.image_urls.length)
+
   return (
     <>
       <div className='flex size-full flex-col'>
         {user && guild && (
           <>
-            <div className='mt-10 flex size-full'>
+            <div className='flex size-full'>
               <div className='flex w-full flex-col flex-wrap rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
                 <div className='flex w-full items-center justify-center'>
                   <CoverPhoto coverPhotoUrl={user.username} height={160} />
@@ -33,7 +35,14 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
 
                 <div className='flex w-full items-center gap-x-5 py-8'>
                   <div className=''>
-                    <ProfilePic profilePicUrl={user.image_urls[user.image_urls.length - 1]} size={160} />
+                    <ProfilePic
+                      profilePicUrl={
+                        user.image_urls.length !== 0
+                          ? user.image_urls[user.image_urls.length - 1]
+                          : '/card/defaultbuddha.svg'
+                      }
+                      size={160}
+                    />
                   </div>
                   <div className='grow'>
                     <AboutUser userData={user} />
@@ -53,7 +62,7 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                       loading='lazy'
                     />
                     <HoverGuild
-                      hoveredGuild={guild.find((guild) => guild.id === user.guild_id)?.guild_name}
+                      hoveredGuild={guild.find((guild) => guild.id === user.guild_id)?.guild_name.toUpperCase() || ''}
                       top={10}
                       left={-350}
                       translateY={10}

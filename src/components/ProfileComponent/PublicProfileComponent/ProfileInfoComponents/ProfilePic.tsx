@@ -15,6 +15,7 @@ export default function ProfilePic({ profilePicUrl, size }) {
         alt='profile-pic'
         fill
         unoptimized
+        objectFit='cover'
         className='rounded-full transition-all duration-[2500ms] ease-in-out hover:scale-125'
       />
     </div>

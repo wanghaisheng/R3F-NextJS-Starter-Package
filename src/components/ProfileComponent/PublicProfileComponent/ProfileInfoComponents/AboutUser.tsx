@@ -1,9 +1,14 @@
+import { useUser } from '@/UserClientProvider'
+
 export default function AboutUser({ userData }) {
+  const { user } = useUser()
+
   return (
     <div>
-      <div>
+      <div className='flex'>
         {userData.first_name} {userData.last_name}
-        <button>Edit Profile</button>
+        {user && user.username === userData.username && <button>Edit Profile</button>}
+        <p className='text-xs'>Tick/Badge of the user membership</p>
       </div>
       <div>
         @{userData.username} ‧ <span className='text-lg font-semibold'>10</span> Followers ‧{' '}

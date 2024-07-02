@@ -278,7 +278,7 @@ export default function PublicProfile({ username }) {
           {/* Carousel */}
 
           <div className='relative z-30 flex w-full justify-center'>
-            <div className={`flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-16'}`}>
+            <div className={`flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
               <div className='flex w-full justify-center'>
                 <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
               </div>
