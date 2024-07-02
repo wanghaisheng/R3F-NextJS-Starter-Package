@@ -38,7 +38,7 @@ export default function AboutUser({ userData }) {
       </div>
       {/* Row 2 */}
       <div>
-        <div className='flex items-center gap-x-2'>
+        <div className='flex w-full flex-wrap items-center gap-x-2'>
           <h1 className='cursor-pointer font-semibold'>
             10 <span className='text-sm font-normal hover:underline'>Followers</span>
           </h1>
