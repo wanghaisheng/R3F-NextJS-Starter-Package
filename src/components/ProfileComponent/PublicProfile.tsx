@@ -40,12 +40,23 @@ const getGuilds = async () => {
 
 export default function PublicProfile({ username }) {
   const [user, setUser] = useState(null)
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   const [guilds, setGuilds] = useState([])
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,7 +202,7 @@ export default function PublicProfile({ username }) {
   }, [user])
 
   return (
-    <div className='relative flex justify-between lg:size-full'>
+    <div>
       <div className='fixed top-0 h-screen w-full'>
         {user && (
           <video key={user.guild_id} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
@@ -214,40 +225,45 @@ export default function PublicProfile({ username }) {
 
       {user ? (
         <>
-          <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[27%]'>
-            {user && (
-              <>
-                <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
-                  {user.username.toUpperCase()}
-                </div>
-
-                <div className='fixed left-16 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
-                  <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
-                    {username.split('').map((letter, index) => (
-                      <span key={index}>{letter.toUpperCase()}</span>
-                    ))}
+          {!isSmallScreen && (
+            <div className='fixed flex h-screen w-[700px] items-center justify-center overflow-y-hidden'>
+              {user && (
+                <>
+                  <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
+                    {user.username.toUpperCase()}
                   </div>
-                </div>
-              </>
-            )}
 
-            {avatarsData && avatarsData.length !== 0 && (
-              <div className='fixed left-24 top-0 z-30 h-full'>
-                <Avatar
-                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
-                  shadows
-                  animationSrc='/male-spawn-animation.fbx'
-                  style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                  fov={40}
-                  cameraTarget={1.5}
-                  cameraInitialDistance={30}
-                  effects={{
-                    ambientOcclusion: true,
-                  }}
-                />
-              </div>
-            )}
-          </div>
+                  <div className='fixed left-16 z-0 hidden h-full w-1/4 items-start justify-center lg:flex lg:flex-col'>
+                    <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+                      {username.split('').map((letter, index) => (
+                        <span key={index}>{letter.toUpperCase()}</span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {!isSmallScreen && (
+                <>
+                  {avatarsData && avatarsData.length !== 0 && (
+                    <div className='z-30 size-full '>
+                      <Avatar
+                        modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                        animationSrc='/male-spawn-animation.fbx'
+                        style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
+                        fov={40}
+                        cameraTarget={1.5}
+                        cameraInitialDistance={30}
+                        effects={{
+                          ambientOcclusion: true,
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          )}
 
           {/* Carousel */}
 

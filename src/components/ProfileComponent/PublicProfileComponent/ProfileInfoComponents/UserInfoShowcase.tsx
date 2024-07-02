@@ -9,7 +9,6 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import CoverPhoto from './CoverPhoto'
 import ProfilePic from './ProfilePic'
-import DescriptionComponent from './DescriptionComponent'
 const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 import AchievementsComponent from './AchievementsComponent'
 import AboutUser from './AboutUser'
@@ -27,19 +26,22 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
         {user && guild && (
           <>
             <div className='mt-10 flex size-full px-24 '>
-              <div className='flex h-[520px] w-full flex-col flex-wrap rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
+              <div className='flex w-full flex-col flex-wrap rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
                 <div className='flex w-full items-center justify-center'>
                   <CoverPhoto coverPhotoUrl={user.username} />
                 </div>
 
                 <div className='flex w-full gap-x-5 py-8'>
                   <div>
-                    <ProfilePic profilePicUrl={user.image_urls[user.image_urls.length - 1]} size={50} />
+                    <ProfilePic profilePicUrl={user.image_urls[user.image_urls.length - 1]} size={150} />
                   </div>
                   <div className='grow'>
                     <AboutUser userData={user} />
                   </div>
                 </div>
+
+                <AchievementsComponent userData={user} />
+
                 <div className='flex flex-col pl-4 '>
                   <div className='group absolute right-5 top-5'>
                     {/* Guild */}
@@ -57,8 +59,6 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                       translateY={10}
                     />
                   </div>
-
-                  <DescriptionComponent userData={user} />
                 </div>
 
                 <div className='flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'>
@@ -83,8 +83,6 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                       <GalleryComponent username={user.username} />
                     )}
                   </div>
-
-                  <AchievementsComponent userData={user} />
                 </div>
               </div>
             </div>
