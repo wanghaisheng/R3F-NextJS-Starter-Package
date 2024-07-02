@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-import UserInfoShowcase from './PublicProfileComponent/UserInfoShowcase'
+import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
 import toast from 'react-hot-toast'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
 const ExperienceShowcase = dynamic(() =>
@@ -40,12 +40,23 @@ const getGuilds = async () => {
 
 export default function PublicProfile({ username }) {
   const [user, setUser] = useState(null)
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   const [guilds, setGuilds] = useState([])
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,7 +202,7 @@ export default function PublicProfile({ username }) {
   }, [user])
 
   return (
-    <div className='relative flex justify-between lg:size-full'>
+    <div className='flex size-full'>
       <div className='fixed top-0 h-screen w-full'>
         {user && (
           <video key={user.guild_id} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
@@ -214,49 +225,67 @@ export default function PublicProfile({ username }) {
 
       {user ? (
         <>
-          <div className='relative flex h-[360px] w-full items-center justify-center overflow-y-hidden lg:relative lg:h-screen lg:w-[27%]'>
-            {user && (
-              <>
-                <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
-                  {user.username.toUpperCase()}
-                </div>
-
-                <div className='fixed left-16 top-0 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
-                  <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
-                    {username.split('').map((letter, index) => (
-                      <span key={index}>{letter.toUpperCase()}</span>
-                    ))}
+          {!isSmallScreen ? (
+            <div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
+              {user && (
+                <>
+                  <div className='fixed left-6 z-0 flex h-full w-1/4 flex-col items-start justify-center'>
+                    <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold drop-shadow'>
+                      {username.split('').map((letter, index) => (
+                        <span key={index}>{letter.toUpperCase()}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
+                </>
+              )}
 
-            {avatarsData && avatarsData.length !== 0 && (
-              <div className='fixed left-24 top-0 z-30 h-full'>
-                <Avatar
-                  modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
-                  shadows
-                  animationSrc='/male-spawn-animation.fbx'
-                  style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                  fov={40}
-                  cameraTarget={1.5}
-                  cameraInitialDistance={30}
-                  effects={{
-                    ambientOcclusion: true,
-                  }}
-                />
-              </div>
-            )}
-          </div>
+              {avatarsData && avatarsData.length !== 0 && (
+                <div className='z-40 size-full'>
+                  <Avatar
+                    modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                    animationSrc='/male-spawn-animation.fbx'
+                    // style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
+                    fov={40}
+                    cameraTarget={1.5}
+                    cameraInitialDistance={30}
+                    effects={{
+                      ambientOcclusion: true,
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              {avatarsData && avatarsData.length !== 0 && (
+                <div className='fixed top-7 h-[700px] w-full'>
+                  <Avatar
+                    modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                    animationSrc='/male-spawn-animation.fbx'
+                    style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
+                    fov={40}
+                    cameraTarget={1.5}
+                    cameraInitialDistance={30}
+                    effects={{
+                      ambientOcclusion: true,
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
 
           {/* Carousel */}
 
-          <div className='z-20 mt-20 flex size-full flex-col'>
-            <div className='flex w-full justify-center'>
-              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
-            </div>
-            <div className='mt-5 w-full flex-1'>
-              <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
+          <div className='relative z-30 flex w-full justify-center'>
+            <div className={`flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
+              <div className='flex w-full justify-center'>
+                <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
+              </div>
+
+              <div className='mt-5 w-full flex-1'>
+                <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
+              </div>
             </div>
           </div>
         </>
