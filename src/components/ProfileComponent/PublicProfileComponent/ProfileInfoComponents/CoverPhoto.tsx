@@ -1,7 +1,9 @@
-export default function CoverPhoto({ coverPhotoUrl }) {
+export default function CoverPhoto({ coverPhotoUrl, height }) {
   return (
     <>
-      <div className='h-[130px] w-full rounded-lg bg-pink-300'>{coverPhotoUrl}</div>
+      <div className='w-full rounded-lg bg-pink-300' style={{ height: height }}>
+        {coverPhotoUrl}
+      </div>
     </>
   )
 }
