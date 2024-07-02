@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
-import UserInfoShowcase from './PublicProfileComponent/UserInfoShowcase'
+import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
 import toast from 'react-hot-toast'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
 const ExperienceShowcase = dynamic(() =>
