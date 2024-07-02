@@ -225,7 +225,7 @@ export default function PublicProfile({ username }) {
 
       {user ? (
         <>
-          {!isSmallScreen && (
+          {!isSmallScreen ? (
             <div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
               {user && (
                 <>
@@ -239,35 +239,50 @@ export default function PublicProfile({ username }) {
                 </>
               )}
 
-              {!isSmallScreen && (
-                <>
-                  {avatarsData && avatarsData.length !== 0 && (
-                    <div className='z-30 size-full'>
-                      <Avatar
-                        modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
-                        animationSrc='/male-spawn-animation.fbx'
-                        style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                        fov={40}
-                        cameraTarget={1.5}
-                        cameraInitialDistance={30}
-                        effects={{
-                          ambientOcclusion: true,
-                        }}
-                      />
-                    </div>
-                  )}
-                </>
+              {avatarsData && avatarsData.length !== 0 && (
+                <div className='z-40 size-full'>
+                  <Avatar
+                    modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                    animationSrc='/male-spawn-animation.fbx'
+                    // style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
+                    fov={40}
+                    cameraTarget={1.5}
+                    cameraInitialDistance={30}
+                    effects={{
+                      ambientOcclusion: true,
+                    }}
+                  />
+                </div>
               )}
             </div>
+          ) : (
+            <>
+              {avatarsData && avatarsData.length !== 0 && (
+                <div className='fixed top-7 h-[700px] w-full'>
+                  <Avatar
+                    modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
+                    animationSrc='/male-spawn-animation.fbx'
+                    style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
+                    fov={40}
+                    cameraTarget={1.5}
+                    cameraInitialDistance={30}
+                    effects={{
+                      ambientOcclusion: true,
+                    }}
+                  />
+                </div>
+              )}
+            </>
           )}
 
           {/* Carousel */}
 
-          <div className='relative flex w-full justify-center '>
-            <div className='z-20 mt-20 flex size-full flex-col lg:w-[50%]'>
+          <div className='relative z-30 flex w-full justify-center'>
+            <div className={`flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-16'}`}>
               <div className='flex w-full justify-center'>
                 <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
               </div>
+
               <div className='mt-5 w-full flex-1'>
                 <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
               </div>
