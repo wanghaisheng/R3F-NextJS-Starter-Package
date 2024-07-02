@@ -49,7 +49,9 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                   </div>
                 </div>
 
-                <AchievementsComponent userData={user} />
+                <div className='flex w-full overflow-hidden'>
+                  <AchievementsComponent userData={user} />
+                </div>
 
                 <div className='flex flex-col pl-4 '>
                   <div className='group absolute right-5 top-5'>
