@@ -202,7 +202,7 @@ export default function PublicProfile({ username }) {
   }, [user])
 
   return (
-    <div>
+    <div className='flex size-full'>
       <div className='fixed top-0 h-screen w-full'>
         {user && (
           <video key={user.guild_id} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
@@ -226,15 +226,11 @@ export default function PublicProfile({ username }) {
       {user ? (
         <>
           {!isSmallScreen && (
-            <div className='fixed flex h-screen w-[700px] items-center justify-center overflow-y-hidden'>
+            <div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
               {user && (
                 <>
-                  <div className='absolute top-20 z-0 flex w-full items-center justify-center overflow-hidden text-8xl font-extrabold md:text-9xl lg:hidden'>
-                    {user.username.toUpperCase()}
-                  </div>
-
-                  <div className='fixed left-16 z-0 hidden h-full w-1/4 items-start justify-center lg:flex lg:flex-col'>
-                    <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold lg:pl-8'>
+                  <div className='fixed left-6 z-0 flex h-full w-1/4 flex-col items-start justify-center'>
+                    <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold drop-shadow'>
                       {username.split('').map((letter, index) => (
                         <span key={index}>{letter.toUpperCase()}</span>
                       ))}
@@ -246,7 +242,7 @@ export default function PublicProfile({ username }) {
               {!isSmallScreen && (
                 <>
                   {avatarsData && avatarsData.length !== 0 && (
-                    <div className='z-30 size-full '>
+                    <div className='z-30 size-full'>
                       <Avatar
                         modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
                         animationSrc='/male-spawn-animation.fbx'
@@ -267,12 +263,14 @@ export default function PublicProfile({ username }) {
 
           {/* Carousel */}
 
-          <div className='z-20 mt-20 flex size-full flex-col'>
-            <div className='flex w-full justify-center'>
-              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
-            </div>
-            <div className='mt-5 w-full flex-1'>
-              <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
+          <div className='relative flex w-full justify-center '>
+            <div className='z-20 mt-20 flex size-full flex-col lg:w-[50%]'>
+              <div className='flex w-full justify-center'>
+                <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
+              </div>
+              <div className='mt-5 w-full flex-1'>
+                <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
+              </div>
             </div>
           </div>
         </>

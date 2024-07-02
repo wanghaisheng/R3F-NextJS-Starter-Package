@@ -25,7 +25,7 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
       <div className='flex size-full flex-col'>
         {user && guild && (
           <>
-            <div className='mt-10 flex size-full px-24 '>
+            <div className='mt-10 flex size-full'>
               <div className='flex w-full flex-col flex-wrap rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
                 <div className='flex w-full items-center justify-center'>
                   <CoverPhoto coverPhotoUrl={user.username} />
