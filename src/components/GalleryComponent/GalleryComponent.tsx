@@ -89,7 +89,7 @@ export default function GalleryComponent({ username }) {
           effect={'cards'}
           grabCursor={true}
           modules={[EffectCards]}
-          className='flex h-[200px] w-[300px] items-center justify-center rounded-lg bg-white'
+          className='flex h-[200px] w-[300px] items-center justify-center rounded-lg'
         >
           {pictures.map((pic, index) => (
             <SwiperSlide key={index}>

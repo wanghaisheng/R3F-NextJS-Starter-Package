@@ -85,7 +85,7 @@ export default function AboutUser({ userData }) {
         </p>
       </div>
       {/* Row 6 */}
-      <div className='mt-2 flex gap-x-2'>
+      <div className='sticky top-20 z-10 mt-2 flex gap-x-2'>
         <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Follow</button>
         <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Interact</button>
         <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Message</button>

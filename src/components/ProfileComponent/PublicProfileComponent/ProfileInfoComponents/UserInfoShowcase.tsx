@@ -33,7 +33,7 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
 
   return (
     <>
-      <div className='flex size-full flex-col'>
+      <div className='relative flex size-full flex-col'>
         {user && guild && (
           <>
             <div className='flex size-full'>
