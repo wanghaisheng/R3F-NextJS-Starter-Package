@@ -87,24 +87,19 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                 {/* Skills Chart and Gallery */}
                 <div className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'>
                   <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
-                    <button
-                      className='absolute right-2 top-6 animate-pulse rounded-lg bg-purple-700/30 p-2 transition-colors hover:bg-pink-300/40 hover:text-pink-200'
-                      aria-label='toggle gallery'
-                      onClick={handletoggle}
-                    >
-                      {toggle ? <LuGalleryHorizontal size={20} /> : <IoBarChartOutline size={20} />}
-                    </button>
+                    {user && skillsData && (
+                      <button
+                        className='absolute right-2 top-2 rounded-lg bg-purple-700/30 p-2 transition-colors hover:bg-pink-300/40 hover:text-pink-200'
+                        aria-label='toggle gallery'
+                        onClick={handletoggle}
+                      >
+                        {toggle ? <LuGalleryHorizontal size={20} /> : <IoBarChartOutline size={20} />}
+                      </button>
+                    )}
                     {toggle ? (
-                      <>
-                        {user && skillsData ? (
-                          <SkillsChartComponent skills={skillsData} />
-                        ) : (
-                          // Render loading indicator or placeholder while data is being fetched
-                          <div className='rounded-lg border p-5'>Recommendations for Skills Card</div>
-                        )}
-                      </>
+                      <>{user && skillsData && <SkillsChartComponent skills={skillsData} />}</>
                     ) : (
-                      <div>
+                      <div className='w-full'>
                         <GalleryComponent username={user.username} />
                       </div>
                     )}

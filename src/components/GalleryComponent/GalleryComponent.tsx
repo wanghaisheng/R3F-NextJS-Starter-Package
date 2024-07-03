@@ -1,6 +1,6 @@
 'use client'
 import toast from 'react-hot-toast'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
@@ -30,6 +30,17 @@ export default function GalleryComponent({ username }) {
   const [showMoreProfilePics, setShowMoreProfilePics] = useState(false)
   const [showMoreProjPics, setShowMoreProjPics] = useState(false)
   const [showMoreCertificates, setShowMoreCertificates] = useState(false)
+
+  const [activeTab, setActiveTab] = useState('profilePics') //active tab state
+  const [lineStyle, setLineStyle] = useState({})
+  const profileRef = useRef(null)
+  const projectsRef = useRef(null)
+  const skillsRef = useRef(null)
+
+  const handleTabClick = (tab: string) => {
+    //function to handle tab click
+    setActiveTab(tab)
+  }
 
   //get user
   useEffect(() => {
@@ -74,13 +85,37 @@ export default function GalleryComponent({ username }) {
     }
   }, [user])
 
-  const [activeTab, setActiveTab] = useState('profilePics') //active tab state
+  // Dynamic Line Slide under the active tab style
+  useEffect(() => {
+    const updateLineStyle = () => {
+      let ref
+      switch (activeTab) {
+        case 'profilePics':
+          ref = profileRef.current
+          break
+        case 'projPics':
+          ref = projectsRef.current
+          break
+        case 'certificates':
+          ref = skillsRef.current
+          break
+        default:
+          ref = profileRef.current
+      }
+      if (ref) {
+        setLineStyle({
+          width: ref.offsetWidth,
+          left: ref.offsetLeft,
+        })
+      }
+    }
 
-  const handleTabClick = (tab: string) => {
-    //function to handle tab click
-    setActiveTab(tab)
-  }
+    updateLineStyle()
+    window.addEventListener('resize', updateLineStyle)
+    return () => window.removeEventListener('resize', updateLineStyle)
+  }, [activeTab])
 
+  // Function to render pictures
   const renderPictures = (pictures, showMore, setShowMore) => {
     if (pictures.length < 6) {
       return (
@@ -139,25 +174,35 @@ export default function GalleryComponent({ username }) {
 
   return (
     <>
-      <div className='flex w-full justify-between px-10 transition-all duration-300 ease-in-out'>
-        <div
-          onClick={() => handleTabClick('profilePics')}
-          className={`${activeTab === 'profilePics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer hover:text-violet-300`}
-        >
-          Profile
+      <div className='relative'>
+        <div className='flex w-full justify-between px-10 transition-all duration-300 ease-in-out'>
+          <div
+            ref={profileRef}
+            onClick={() => handleTabClick('profilePics')}
+            className={`${activeTab === 'profilePics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer hover:text-violet-300`}
+          >
+            Profile
+          </div>
+          <div
+            ref={projectsRef}
+            onClick={() => handleTabClick('projPics')}
+            className={`${activeTab === 'projPics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
+          >
+            Projects
+          </div>
+          <div
+            ref={skillsRef}
+            onClick={() => handleTabClick('certificates')}
+            className={`${activeTab === 'certificates' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
+          >
+            Skills
+          </div>
         </div>
         <div
-          onClick={() => handleTabClick('projPics')}
-          className={`${activeTab === 'projPics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
-        >
-          Projects
-        </div>
-        <div
-          onClick={() => handleTabClick('certificates')}
-          className={`${activeTab === 'certificates' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
-        >
-          Skills
-        </div>
+          className='absolute bottom-0 h-1 bg-purple-200 transition-all duration-300 ease-in-out'
+          style={lineStyle}
+        ></div>
+        <hr className='mt-2 border border-gray-700' />
       </div>
 
       <div className='flex size-full flex-col items-center justify-center'>
