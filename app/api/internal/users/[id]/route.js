@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
-import { revalidateUser } from 'lib/actions'
-import { revalidateTag } from 'next/cache'
+// import { revalidateUser } from 'lib/actions'
+// import { revalidateTag } from 'next/cache'
 
 const prisma = new PrismaClient()
 
@@ -69,7 +69,7 @@ export async function PUT(request, { params }) {
     const filteredImageUrls = newImageUrls.filter((element) => element !== '')
 
     // cover images section
-    const newCoverImages = [...existingUser.cover_images, cover_image ? cover_image : '']
+    const newCoverImages = [...existingUser.cover_images, cover_image.length !== 0 ? cover_image : '']
     const filteredCoverImages = newCoverImages.filter((element) => element !== '')
 
     const updatedUser = await prisma.users.update({
@@ -90,7 +90,7 @@ export async function PUT(request, { params }) {
         cover_images: filteredCoverImages,
       },
     })
-    await revalidateUser()
+    // await revalidateUser()
     // revalidateTag('user')
     return NextResponse.json(updatedUser)
   } catch (error) {
