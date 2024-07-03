@@ -19,7 +19,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
   return (
     <>
       {/* Event Image  */}
-      <div className='group mb-4 size-full'>
+      <div className='group relative mb-4 size-full'>
         {/* Flip the card when clicked */}
         <div
           className={`relative size-full rounded-xl shadow-md transition-all duration-500 [transform-style:preserve-3d] 

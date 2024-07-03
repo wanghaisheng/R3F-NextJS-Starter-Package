@@ -6,7 +6,7 @@ import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
 import toast from 'react-hot-toast'
-import { FaArrowUp } from 'react-icons/fa'
+import { FaAnglesUp } from 'react-icons/fa6'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
 const ExperienceShowcase = dynamic(() =>
   import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
@@ -302,15 +302,16 @@ export default function PublicProfile({ username }) {
               <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} experience={experience} />
             </div>
           </div>
+
           {/* Scroll to top button */}
-          {showScrollToTop && (
-            <button
-              className='fixed bottom-10 right-10 rounded-full bg-purple-700/30 p-3 text-white transition-colors hover:bg-pink-300/40 hover:text-pink-200'
-              onClick={scrollToTop}
-            >
-              <FaArrowUp size={24} />
-            </button>
-          )}
+          <button
+            className={`fixed bottom-10 right-10 z-50 ${
+              showScrollToTop ? 'translate-y-0' : 'translate-y-[-100rem]'
+            } rounded-full bg-purple-700/30 p-3 text-white transition-all duration-500 hover:bg-pink-300/40 hover:text-pink-200`}
+            onClick={scrollToTop}
+          >
+            <FaAnglesUp size={24} />
+          </button>
         </>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>
