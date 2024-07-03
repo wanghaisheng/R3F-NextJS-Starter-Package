@@ -50,7 +50,7 @@ export default function ShowGuildDiscover({
     return (
       (filterguild ? user.guild === filterguild : true) &&
       (selectedRegionFilter ? user.continent === selectedRegionFilter.toUpperCase() : true) &&
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
 
