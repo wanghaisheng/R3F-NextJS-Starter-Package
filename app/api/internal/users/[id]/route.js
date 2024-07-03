@@ -49,6 +49,7 @@ export async function PUT(request, { params }) {
       region,
       guild_id,
       faculty,
+      cover_image,
     } = data
     const id = params.id
 
@@ -63,9 +64,13 @@ export async function PUT(request, { params }) {
 
     // If the user exists, update their information
 
+    // profile image section
     const newImageUrls = [...existingUser.image_urls, image_url ? image_url : '']
-
     const filteredImageUrls = newImageUrls.filter((element) => element !== '')
+
+    // cover images section
+    const newCoverImages = [...existingUser.cover_images, cover_image ? cover_image : '']
+    const filteredCoverImages = newCoverImages.filter((element) => element !== '')
 
     const updatedUser = await prisma.users.update({
       where: { gg_id: id },
@@ -82,6 +87,7 @@ export async function PUT(request, { params }) {
         region,
         guild_id,
         faculty,
+        cover_images: filteredCoverImages,
       },
     })
     await revalidateUser()
