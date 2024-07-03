@@ -13,9 +13,8 @@ const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 import AchievementsComponent from './AchievementsComponent'
 import AboutUser from './AboutUser'
 import ProfileButtons from './ProfileButtons'
-import ExperienceShow from '../ExperienceShow'
 
-export default function UserInfoShowcase({ user, skillsData, guild, experience, handleIsFlip }) {
+export default function UserInfoShowcase({ user, skillsData, guild }) {
   const [toggle, setToggle] = useState(false)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -105,11 +104,6 @@ export default function UserInfoShowcase({ user, skillsData, guild, experience, 
                     </div>
                   )}
                 </div>
-              </div>
-
-              {/* Experience */}
-              <div className='relative flex w-full'>
-                <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
               </div>
             </div>
           </div>

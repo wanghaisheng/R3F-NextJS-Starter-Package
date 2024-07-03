@@ -25,7 +25,7 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
         {/* Flip the card when clicked */}
         <div
           className={`relative size-full rounded-xl shadow-md transition-all duration-500 [transform-style:preserve-3d] 
-            ${isFlipped ? 'z-[100] [transform:rotateY(180deg)] ' : ''}`}
+            ${isFlipped ? 'z-40 [transform:rotateY(180deg)] ' : ''}`}
           onClick={handleFlip}
         >
           <Image

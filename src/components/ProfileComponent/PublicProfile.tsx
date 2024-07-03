@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
 import toast from 'react-hot-toast'
 import { FaAnglesUp } from 'react-icons/fa6'
+import ExperienceShow from './PublicProfileComponent/ExperienceShow'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
 const ExperienceShowcase = dynamic(() =>
   import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
@@ -293,15 +294,13 @@ export default function PublicProfile({ username }) {
 
           {/* Carousel */}
           <div className='flex w-full justify-center'>
-            <div className={`fixed top-0 z-0 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
+            <div className={`fixed top-0 z-20 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
             <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
-              <UserInfoShowcase
-                user={user}
-                skillsData={skillsData}
-                guild={guilds}
-                experience={experience}
-                handleIsFlip={handleIsFlip}
-              />
+              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
+              {/* Experience */}
+              <div className='relative flex size-full px-10 py-3'>
+                <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
+              </div>
             </div>
           </div>
 
