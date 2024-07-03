@@ -348,9 +348,11 @@ export default function VideoHome() {
         </div>
 
         {/* Navigation Arrows */}
-        <div className='absolute left-0 top-0 flex h-full items-center'>
+        <div
+          className={`absolute left-0 top-0 h-full items-center text-purple-200 ${currentSlide === 0 ? 'hidden' : 'flex'}`}
+        >
           <motion.div
-            whileHover={{ scale: 1.3 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 ml-5'
             onClick={() => swiperRefs.current?.slidePrev()}
@@ -358,9 +360,11 @@ export default function VideoHome() {
             <MdOutlineNavigateBefore size={30} />
           </motion.div>
         </div>
-        <div className='absolute right-0 top-0 flex h-full items-center'>
+        <div
+          className={`absolute right-0 top-0 flex h-full items-center text-purple-200 ${currentSlide === 8 ? 'hidden' : 'flex'}`}
+        >
           <motion.div
-            whileHover={{ scale: 1.3 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
             className='z-20 mr-5'
             onClick={() => swiperRefs.current?.slideNext()}

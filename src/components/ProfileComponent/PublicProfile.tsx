@@ -6,6 +6,8 @@ import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
 import toast from 'react-hot-toast'
+import { FaAnglesUp } from 'react-icons/fa6'
+import ExperienceShow from './PublicProfileComponent/ExperienceShow'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
 const ExperienceShowcase = dynamic(() =>
   import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
@@ -177,15 +179,10 @@ export default function PublicProfile({ username }) {
       fetchCardsData() // Fetch data only if user is available
     }
   }, [user])
-  // Flip Card QR
+  // Check if flipped or not
   const [isFlipped, setIsFlipped] = useState(false)
-  const [imgSrc, setImgSrc] = useState('')
-  const pathname = usePathname()
-  QRCode.toDataURL(pathname).then(setImgSrc)
-  // Flip Card QR end
-  // Flip Card QR
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped)
+  const handleIsFlip = (newState) => {
+    setIsFlipped(newState)
   }
   // Avatar
   useEffect(() => {
@@ -200,6 +197,25 @@ export default function PublicProfile({ username }) {
       fetchAvatarsData() // Fetch data only if user is available
     }
   }, [user])
+
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTop(window.pageYOffset > 200) // Show the button after scrolling 200px down
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Function to scroll to the top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling
+    })
+  }
 
   return (
     <div className='flex size-full'>
@@ -225,6 +241,7 @@ export default function PublicProfile({ username }) {
 
       {user ? (
         <>
+          {/* Avatar and Username */}
           {!isSmallScreen ? (
             <div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
               {user && (
@@ -276,18 +293,26 @@ export default function PublicProfile({ username }) {
           )}
 
           {/* Carousel */}
-
-          <div className='relative z-30 flex w-full justify-center'>
-            <div className={`flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
-              <div className='flex w-full justify-center'>
-                <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
-              </div>
-
-              <div className='mt-5 w-full flex-1'>
-                <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
+          <div className='flex w-full justify-center'>
+            <div className={`fixed top-0 z-20 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
+            <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
+              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
+              {/* Experience */}
+              <div className='relative flex size-full px-10 py-3'>
+                <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
               </div>
             </div>
           </div>
+
+          {/* Scroll to top button */}
+          <button
+            className={`fixed bottom-10 right-10 z-50 ${
+              showScrollToTop ? 'translate-y-0' : 'translate-y-[-100rem]'
+            } rounded-full bg-purple-700/30 p-3 text-white transition-all duration-500 hover:bg-pink-300/40 hover:text-pink-200`}
+            onClick={scrollToTop}
+          >
+            <FaAnglesUp size={24} />
+          </button>
         </>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>

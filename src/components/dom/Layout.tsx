@@ -17,18 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { isSidebarOpen, setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
 
   return (
-    <div
-      ref={ref}
-      className='bg-black'
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-        touchAction: 'auto',
-        zIndex: 2,
-      }}
-    >
+    <div ref={ref}>
       <Navbar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}

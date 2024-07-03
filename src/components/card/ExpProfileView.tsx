@@ -2,9 +2,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import QRCode from 'qrcode'
+import { MdFlipCameraAndroid } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
 
-export default function ExpProfileView({ type, projectName, skills, toolsAndTech, description }) {
+export default function ExpProfileView({ type, projectName, skills, toolsAndTech, description, handleIsFlip }) {
   // Flip Card QR
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
@@ -15,15 +16,16 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
+    handleIsFlip(!isFlipped)
   }
   return (
     <>
       {/* Event Image  */}
-      <div className='group mb-4 size-full'>
+      <div className='group relative mb-4 size-full'>
         {/* Flip the card when clicked */}
         <div
           className={`relative size-full rounded-xl shadow-md transition-all duration-500 [transform-style:preserve-3d] 
-            ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
+            ${isFlipped ? 'z-40 [transform:rotateY(180deg)] ' : ''}`}
           onClick={handleFlip}
         >
           <Image
@@ -54,23 +56,23 @@ export default function ExpProfileView({ type, projectName, skills, toolsAndTech
                 </ul>
               </nav>
             </div>
-          </div>
-          <div className='absolute bottom-4 left-4 flex w-full items-center justify-between'>
-            <div className='text-base font-bold text-purple-300'>GOING GENIUS</div>
-            <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
+            <div className='absolute bottom-2 right-2'>
+              <MdFlipCameraAndroid size={24} color='white' />
+            </div>
           </div>
 
-          {/* QRCode */}
-          <div className='absolute inset-0 rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
-            <div className='flex size-full items-center justify-between'>
-              {imgSrc && (
-                <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
-              )}
+          {/* Back */}
+          <div className='absolute inset-0 rounded-lg text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]'>
+            <div className='relative size-full bg-black'>
+              <div className='relative size-[90px]'>
+                {imgSrc && (
+                  <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={92} height={92} />
+                )}
+              </div>
               <div>{description}</div>
-            </div>
-            <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-              <div className='text-base font-bold text-purple-600'>GOING GENIUS</div>
-              <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
+              <div className='absolute bottom-2 right-2'>
+                <MdFlipCameraAndroid size={24} color='white' />
+              </div>
             </div>
           </div>
         </div>
