@@ -1,6 +1,6 @@
 import ExpProfileView from '@/components/card/ExpProfileView'
 
-export default function ExperienceShow({ experience, user }) {
+export default function ExperienceShow({ experience, user, handleIsFlip }) {
   return (
     <>
       {user && experience.length !== 0 ? (
@@ -14,6 +14,7 @@ export default function ExperienceShow({ experience, user }) {
                   skills={exp.project_skills.join(', ')}
                   toolsAndTech={exp.tools}
                   description={exp.description}
+                  handleIsFlip={handleIsFlip}
                 />
               </div>
             </div>

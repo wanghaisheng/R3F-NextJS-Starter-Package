@@ -178,15 +178,10 @@ export default function PublicProfile({ username }) {
       fetchCardsData() // Fetch data only if user is available
     }
   }, [user])
-  // Flip Card QR
+  // Check if flipped or not
   const [isFlipped, setIsFlipped] = useState(false)
-  const [imgSrc, setImgSrc] = useState('')
-  const pathname = usePathname()
-  QRCode.toDataURL(pathname).then(setImgSrc)
-  // Flip Card QR end
-  // Flip Card QR
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped)
+  const handleIsFlip = (newState) => {
+    setIsFlipped(newState)
   }
   // Avatar
   useEffect(() => {
@@ -297,9 +292,16 @@ export default function PublicProfile({ username }) {
           )}
 
           {/* Carousel */}
-          <div className='z-30 flex w-full justify-center'>
+          <div className='flex w-full justify-center'>
+            <div className={`fixed top-0 z-0 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
             <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
-              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} experience={experience} />
+              <UserInfoShowcase
+                user={user}
+                skillsData={skillsData}
+                guild={guilds}
+                experience={experience}
+                handleIsFlip={handleIsFlip}
+              />
             </div>
           </div>
 
