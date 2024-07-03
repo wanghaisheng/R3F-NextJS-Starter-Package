@@ -29,8 +29,8 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
   const toggleSidebar = () => {
     //function to toggle sidebar
     setIsSidebarOpen(!isSidebarOpen)
-    setShowSignUp(true)
-    setShowSignIn(false)
+    setShowSignUp(false)
+    setShowSignIn(true)
     setActiveTab('profile')
   }
 
@@ -40,7 +40,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       {/* if sidebar is open, show a backdrop */}
       {isSidebarOpen && (
         <div
-          className='absolute top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'
+          className='fixed top-0 z-50 h-screen w-full bg-black/30 transition-all duration-300'
           onClick={toggleSidebar}
         ></div>
       )}
@@ -61,6 +61,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       >
         <div className='flex items-center justify-between px-4 py-6'>
           <div className='flex w-full justify-center'>
+            {/* Condition to show the title for profile tab */}
             {activeTab === 'profile' ? (
               <>
                 {!user ? (
@@ -106,6 +107,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
             </div>
           )}
 
+          {/* Bottom Navigation */}
           <ul className='fixed bottom-0 z-30 flex w-full flex-row space-x-2 space-y-0 bg-gray-300 p-2 font-medium dark:bg-black'>
             <li
               className={`group flex items-center rounded-md p-2 ${

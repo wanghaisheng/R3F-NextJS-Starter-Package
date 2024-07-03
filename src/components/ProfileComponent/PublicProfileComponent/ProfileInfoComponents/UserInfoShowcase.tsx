@@ -13,7 +13,7 @@ const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 import AchievementsComponent from './AchievementsComponent'
 import AboutUser from './AboutUser'
 import ProfileButtons from './ProfileButtons'
-import ExpCardShowVertical from '@/components/ProfileComponent/PublicProfileComponent/ExpCardShowVeritcal'
+import ExperienceShow from '../ExperienceShow'
 
 export default function UserInfoShowcase({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -110,7 +110,7 @@ export default function UserInfoShowcase({ user, skillsData, guild, experience }
 
                 {/* Experience */}
                 <div className='relative flex w-full'>
-                  <ExpCardShowVertical user={user} experience={experience} />
+                  <ExperienceShow user={user} experience={experience} />
                 </div>
               </div>
             </div>

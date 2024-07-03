@@ -92,7 +92,7 @@ export default function VideoHome() {
   }, [])
 
   return (
-    <div className='relative h-screen w-screen overflow-hidden text-white'>
+    <div className='relative h-screen w-screen overflow-hidden'>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
