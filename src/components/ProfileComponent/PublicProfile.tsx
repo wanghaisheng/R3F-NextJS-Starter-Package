@@ -225,6 +225,7 @@ export default function PublicProfile({ username }) {
 
       {user ? (
         <>
+          {/* Avatar and Username */}
           {!isSmallScreen ? (
             <div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
               {user && (
@@ -276,12 +277,9 @@ export default function PublicProfile({ username }) {
           )}
 
           {/* Carousel */}
-
-          <div className='relative z-30 flex w-full justify-center'>
-            <div className={`flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
-              <div className='flex w-full justify-center'>
-                <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
-              </div>
+          <div className='z-30 flex w-full justify-center'>
+            <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
+              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
 
               <div className='mt-5 w-full flex-1'>
                 <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />

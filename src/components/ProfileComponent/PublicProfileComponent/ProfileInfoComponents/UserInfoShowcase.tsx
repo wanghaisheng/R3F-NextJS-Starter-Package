@@ -12,6 +12,7 @@ import ProfilePic from './ProfilePic'
 const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 import AchievementsComponent from './AchievementsComponent'
 import AboutUser from './AboutUser'
+import ProfileButtons from './ProfileButtons'
 
 export default function UserInfoShowcase({ user, skillsData, guild }) {
   const [toggle, setToggle] = useState(false)
@@ -60,8 +61,13 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                   </div>
                 </div>
 
+                {/* interaction Buttons */}
+                <div className='sticky top-20 z-30 -mt-7 flex w-full justify-center'>
+                  <ProfileButtons />
+                </div>
+
                 {/* User's Achievement */}
-                <div className='flex w-full overflow-hidden'>
+                <div className='mt-5 flex w-full overflow-hidden'>
                   <AchievementsComponent userData={user} />
                 </div>
 

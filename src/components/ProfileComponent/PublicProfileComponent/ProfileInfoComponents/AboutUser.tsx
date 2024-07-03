@@ -18,7 +18,7 @@ export default function AboutUser({ userData }) {
   ]
 
   return (
-    <div>
+    <>
       {/* Row 1 */}
       <div className='flex items-center gap-x-3'>
         <h1 className='text-[30px] font-semibold'>
@@ -78,19 +78,12 @@ export default function AboutUser({ userData }) {
         </div>
       </div>
       {/* Row 5 */}
-      <div className='mt-5'>
+      <div className='mb-3 mt-5'>
         <p className='text-xs font-normal text-gray-200'>
           Followed by <span className='font-bold text-white'>Person1</span> and{' '}
           <span className='font-bold text-white'>Person2</span>
         </p>
       </div>
-      {/* Row 6 */}
-      <div className='sticky top-20 z-10 mt-2 flex gap-x-2'>
-        <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Follow</button>
-        <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Interact</button>
-        <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Message</button>
-        <button className='rounded-lg bg-white/30 px-2 py-1 text-white hover:bg-slate-800'>Swipe</button>
-      </div>
-    </div>
+    </>
   )
 }
