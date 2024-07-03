@@ -13,8 +13,9 @@ const HoverGuild = dynamic(() => import('@/components/HoverGuild/HoverGuild'))
 import AchievementsComponent from './AchievementsComponent'
 import AboutUser from './AboutUser'
 import ProfileButtons from './ProfileButtons'
+import ExpCardShowVertical from '@/components/ProfileComponent/PublicProfileComponent/ExpCardShowVeritcal'
 
-export default function UserInfoShowcase({ user, skillsData, guild }) {
+export default function UserInfoShowcase({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -43,7 +44,6 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                 <div className='flex w-full items-center justify-center'>
                   <CoverPhoto coverPhotoUrl={user.username} height={160} />
                 </div>
-
                 {/* Profile Picture And User Info */}
                 <div className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'>
                   <div className='-mt-20 md:mt-0'>
@@ -60,17 +60,14 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                     <AboutUser userData={user} />
                   </div>
                 </div>
-
                 {/* interaction Buttons */}
                 <div className='sticky top-20 z-30 -mt-7 flex w-full justify-center'>
                   <ProfileButtons />
                 </div>
-
                 {/* User's Achievement */}
                 <div className='mt-5 flex w-full overflow-hidden'>
                   <AchievementsComponent userData={user} />
                 </div>
-
                 {/* Guild */}
                 <div className='flex flex-col pl-4 '>
                   <div className='group absolute right-5 top-5'>
@@ -89,7 +86,6 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                     />
                   </div>
                 </div>
-
                 {/* Skills Chart and Gallery */}
                 <div className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'>
                   <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
@@ -110,6 +106,11 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                       </div>
                     )}
                   </div>
+                </div>
+
+                {/* Experience */}
+                <div className='relative flex w-full'>
+                  <ExpCardShowVertical user={user} experience={experience} />
                 </div>
               </div>
             </div>

@@ -137,7 +137,7 @@ export default function GalleryComponent({ username }) {
       )
     } else {
       // Grid View
-      const picturesToShow = showMore ? pictures : pictures.slice(0, 20)
+      const picturesToShow = showMore ? pictures : pictures.slice(0, 14)
       return (
         <div className='flex w-full flex-col'>
           <div className='flex size-full flex-wrap justify-center gap-3'>
@@ -158,7 +158,7 @@ export default function GalleryComponent({ username }) {
             ))}
           </div>
           <div className='flex w-full justify-center'>
-            {pictures.length > 20 && (
+            {pictures.length > 14 && (
               <button
                 onClick={() => setShowMore(!showMore)}
                 className='mt-4 rounded bg-violet-600 p-2 text-white hover:bg-violet-800'

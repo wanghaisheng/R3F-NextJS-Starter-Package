@@ -6,6 +6,7 @@ import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
 import toast from 'react-hot-toast'
+import { FaArrowUp } from 'react-icons/fa'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
 const ExperienceShowcase = dynamic(() =>
   import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
@@ -201,6 +202,25 @@ export default function PublicProfile({ username }) {
     }
   }, [user])
 
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTop(window.pageYOffset > 200) // Show the button after scrolling 200px down
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Function to scroll to the top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling
+    })
+  }
+
   return (
     <div className='flex size-full'>
       <div className='fixed top-0 h-screen w-full'>
@@ -279,13 +299,18 @@ export default function PublicProfile({ username }) {
           {/* Carousel */}
           <div className='z-30 flex w-full justify-center'>
             <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
-              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
-
-              <div className='mt-5 w-full flex-1'>
-                <ExperienceShowcase experience={experience} user={user} height={550} width={800} pagination={false} />
-              </div>
+              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} experience={experience} />
             </div>
           </div>
+          {/* Scroll to top button */}
+          {showScrollToTop && (
+            <button
+              className='fixed bottom-10 right-10 rounded-full bg-purple-700/30 p-3 text-white transition-colors hover:bg-pink-300/40 hover:text-pink-200'
+              onClick={scrollToTop}
+            >
+              <FaArrowUp size={24} />
+            </button>
+          )}
         </>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>
