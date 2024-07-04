@@ -152,7 +152,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     } else if (type === 'cover') {
       setForm((prevForm) => ({
         ...prevForm,
-        cover_images: [{ cover_image: imageUrls[imageUrls.length - 1] }],
+        cover_images: imageUrls,
       }))
       if (imageUrls && imageUrls.length > 0) {
         handleCoverImgUpdate(imageUrls[imageUrls.length - 1])
@@ -176,14 +176,10 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
 
   const handleCoverImgUpdate = async (image_url) => {
     try {
-      await axios.put(`/api/internal/users/${user.gg_id}`, {
-        cover_image: {
-          cover_image: image_url,
-        },
-      })
+      await axios.put(`/api/internal/users/${user.gg_id}`, { cover_image: image_url })
       setForm((prevForm) => ({
         ...prevForm,
-        cover_images: [...user.cover_images, { cover_image: image_url }],
+        cover_images: [...user.cover_images, image_url],
       }))
       updateUser(token)
       toast.success('cover image updated successfully!')
@@ -234,7 +230,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             <Image
               src={
                 form.cover_images.length > 0
-                  ? form.cover_images[form.cover_images.length - 1].cover_image
+                  ? form.cover_images[form.cover_images.length - 1]
                   : '/card/defaultbuddha.svg'
               }
               alt='porfilepic'
