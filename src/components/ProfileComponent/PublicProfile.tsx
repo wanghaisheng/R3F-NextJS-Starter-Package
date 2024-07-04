@@ -1,17 +1,10 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useEffect, useState, useRef, useLayoutEffect } from 'react'
-// For the card flip QR code
-import QRCode from 'qrcode'
-import { usePathname } from 'next/navigation'
-import UserInfoShowcase from './PublicProfileComponent/ProfileInfoComponents/UserInfoShowcase'
+import { useEffect, useState, useRef } from 'react'
 import toast from 'react-hot-toast'
 import { FaAnglesUp } from 'react-icons/fa6'
-import ExperienceShow from './PublicProfileComponent/ExperienceShow'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
-const ExperienceShowcase = dynamic(() =>
-  import('./PublicProfileComponent/ExperienceShowcase').then((mod) => mod.default),
-)
+import UserContent from './PublicProfileComponent/UserContent'
 
 const getSelectedPublicUser = async (username) => {
   try {
@@ -49,13 +42,6 @@ export default function PublicProfile({ username }) {
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
-
-  const targetRef = useRef(null)
-  useLayoutEffect(() => {
-    if (targetRef.current) {
-      targetRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, []) // Run only once after the component mounts
 
   useEffect(() => {
     const handleResize = () => {
@@ -186,11 +172,7 @@ export default function PublicProfile({ username }) {
       fetchCardsData() // Fetch data only if user is available
     }
   }, [user])
-  // Check if flipped or not
-  const [isFlipped, setIsFlipped] = useState(false)
-  const handleIsFlip = (newState) => {
-    setIsFlipped(newState)
-  }
+
   // Avatar
   useEffect(() => {
     const fetchAvatarsData = async () => {
@@ -301,17 +283,7 @@ export default function PublicProfile({ username }) {
 
           {/* Mid Part */}
           <div className='flex w-full justify-center'>
-            <button onClick={() => targetRef.current.scrollIntoView({ behavior: 'smooth' })} className='mb-20'>
-              Exp
-            </button>
-            <div className={`fixed top-0 z-20 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
-            <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
-              <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
-              {/* Experience */}
-              <div className='relative flex size-full px-10 py-3' ref={targetRef} id='target-section'>
-                <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
-              </div>
-            </div>
+            <UserContent user={user} skillsData={skillsData} guild={guilds} experience={experience} />
           </div>
 
           {/* Scroll to top button */}
