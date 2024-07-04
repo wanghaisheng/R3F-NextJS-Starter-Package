@@ -50,7 +50,7 @@ export default function AchievementsComponent({ userData }) {
       >
         {Array.from({ length: val }).map((_, i) => (
           <SwiperSlide key={i}>
-            <div className='size-16 rounded-full bg-pink-300'></div>
+            <div className='size-16 rounded-full bg-slate-800'></div>
           </SwiperSlide>
         ))}
       </Swiper>
