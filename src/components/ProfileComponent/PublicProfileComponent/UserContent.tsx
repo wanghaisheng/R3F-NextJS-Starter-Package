@@ -14,6 +14,10 @@ import AchievementsComponent from './ProfileInfoComponents/AchievementsComponent
 import AboutUser from './ProfileInfoComponents/AboutUser'
 import ProfileButtons from './ProfileInfoComponents/ProfileButtons'
 import ExperienceShow from './ExperienceShow'
+import { HiOutlineInformationCircle } from 'react-icons/hi2'
+import { RiMedalLine } from 'react-icons/ri'
+import { IoMdPhotos } from 'react-icons/io'
+import { SiCompilerexplorer } from 'react-icons/si'
 
 export default function UserContent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -96,38 +100,40 @@ export default function UserContent({ user, skillsData, guild, experience }) {
           <>
             <div className='flex size-full flex-col rounded-xl  bg-violet-300/30 lg:w-[50%] dark:bg-black/20'>
               <div className='flex w-full flex-col flex-wrap  px-10 py-3'>
-                <nav className='sticky top-20 z-40 flex justify-center bg-white font-bold text-black transition-all duration-300 animate-ease-in-out'>
-                  <button
-                    className={`transition-all duration-500 ${visibleSection !== 'section0' ? 'bg-transparent' : 'bg-pink-300'}`}
-                    onClick={() => scrollToSection(section0Ref)}
-                  >
-                    Info
-                  </button>
+                <nav className='sticky top-20 z-40 flex justify-center font-bold text-white transition-all duration-300 animate-ease-in-out'>
+                  <div className='flex items-center justify-center gap-x-4 rounded-full bg-black px-4 py-1 text-xl'>
+                    <button
+                      className={`rounded-full transition-all duration-500 ${visibleSection !== 'section0' ? 'text-white' : 'text-violet-500'}`}
+                      onClick={() => scrollToSection(section0Ref)}
+                    >
+                      <HiOutlineInformationCircle />
+                    </button>
 
-                  <button
-                    className={`transition-all duration-500 ${visibleSection !== 'section1' ? 'bg-transparent' : 'bg-pink-300'}`}
-                    onClick={() => scrollToSection(section1Ref)}
-                  >
-                    Achievements
-                  </button>
+                    <button
+                      className={`rounded-full transition-all duration-500 ${visibleSection !== 'section1' ? 'text-white' : 'text-violet-500'}`}
+                      onClick={() => scrollToSection(section1Ref)}
+                    >
+                      <RiMedalLine />
+                    </button>
 
-                  <button
-                    className={`transition-all duration-500 ${visibleSection !== 'section2' ? 'bg-transparent' : 'bg-pink-300'}`}
-                    onClick={() => scrollToSection(section2Ref)}
-                  >
-                    Skills
-                  </button>
+                    <button
+                      className={`rounded-full transition-all duration-500 ${visibleSection !== 'section2' ? 'text-white' : 'text-violet-500'}`}
+                      onClick={() => scrollToSection(section2Ref)}
+                    >
+                      <IoMdPhotos />
+                    </button>
 
-                  <button
-                    className={`transition-all duration-500 ${visibleSection !== 'section3' ? 'bg-transparent' : 'bg-pink-300'}`}
-                    onClick={() => scrollToSection(section3Ref)}
-                  >
-                    JIJH
-                  </button>
+                    <button
+                      className={`rounded-full transition-all duration-500 ${visibleSection !== 'section3' ? 'text-white' : 'text-violet-500'}`}
+                      onClick={() => scrollToSection(section3Ref)}
+                    >
+                      <SiCompilerexplorer />
+                    </button>
+                  </div>
                 </nav>
 
                 {/* CoverPicture */}
-                <div className='flex w-full items-center justify-center'>
+                <div className='mt-3 flex w-full items-center justify-center'>
                   <CoverPhoto coverPhotoUrl={user.username} height={160} />
                 </div>
                 {/* Profile Picture And User Info */}
