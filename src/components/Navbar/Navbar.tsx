@@ -26,6 +26,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
     setShowSignUp(true)
+    setShowSignIn(false)
     setOpen(false)
   }
 
