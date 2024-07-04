@@ -1,6 +1,7 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useRef, useLayoutEffect } from 'react'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -11,6 +12,14 @@ import { useState, useEffect } from 'react'
 
 const IframePage = () => {
   const [showButton, setShowButton] = useState(false)
+
+  const targetRef = useRef(null)
+
+  useLayoutEffect(() => {
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, []) // Run only once after the component mounts
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +57,10 @@ const IframePage = () => {
 
       <div className='relative size-full'>
         {/* Row 1 */}
+        <div ref={targetRef} id='target-section'>
+          <h2>Target Section</h2>
+          <p>This is the target section.</p>
+        </div>
         <div className='flex items-center gap-x-3'>
           <h1 className='text-[30px] font-semibold'>aljlskbvnk</h1>
           <p className='-ml-2 text-xs'>
@@ -179,6 +192,15 @@ const IframePage = () => {
       <div className='h-screen bg-gray-200 p-10'>
         This example demonstrates how to create a scroll to top button that becomes visible{' '}
         <strong>when the user starts to scroll the page</strong>.
+      </div>
+
+      <div>
+        <h1>Page Content</h1>
+        <p>Some content here.</p>
+
+        <button onClick={() => targetRef.current.scrollIntoView({ behavior: 'smooth' })} className='mb-20'>
+          Go to Target Section
+        </button>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 // For the card flip QR code
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
@@ -49,6 +49,13 @@ export default function PublicProfile({ username }) {
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
   const [experience, setExperience] = useState([])
+
+  const targetRef = useRef(null)
+  useLayoutEffect(() => {
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, []) // Run only once after the component mounts
 
   useEffect(() => {
     const handleResize = () => {
@@ -292,13 +299,16 @@ export default function PublicProfile({ username }) {
             </>
           )}
 
-          {/* Carousel */}
+          {/* Mid Part */}
           <div className='flex w-full justify-center'>
+            <button onClick={() => targetRef.current.scrollIntoView({ behavior: 'smooth' })} className='mb-20'>
+              Exp
+            </button>
             <div className={`fixed top-0 z-20 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
             <div className={`relative flex size-full flex-col lg:w-[50%] ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}>
               <UserInfoShowcase user={user} skillsData={skillsData} guild={guilds} />
               {/* Experience */}
-              <div className='relative flex size-full px-10 py-3'>
+              <div className='relative flex size-full px-10 py-3' ref={targetRef} id='target-section'>
                 <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
               </div>
             </div>

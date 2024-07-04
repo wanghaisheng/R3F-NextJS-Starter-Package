@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import { LuGalleryHorizontal } from 'react-icons/lu'
@@ -17,6 +17,15 @@ import ProfileButtons from './ProfileButtons'
 export default function UserInfoShowcase({ user, skillsData, guild }) {
   const [toggle, setToggle] = useState(false)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const [activeTarget, setActiveTarget] = useState(null) // Track the active target
+  const targetRefs = useRef([]) // Store refs for all target sections
+
+  const handleClick = (index) => {
+    setActiveTarget(index) // Set the active target index
+    // Adjust scroll position to leave space at the top
+    const scrollTop = index === 0 ? 0 : 20 // Set the scroll position
+    targetRefs.current[index].scrollIntoView({ behavior: 'smooth', top: scrollTop }) // Scroll to the target
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,12 +47,20 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
         <>
           <div className='flex size-full'>
             <div className='flex w-full flex-col flex-wrap rounded-xl bg-violet-300 px-10 py-3 backdrop-blur-md lg:shadow lg:shadow-purple-500 dark:bg-transparent dark:lg:bg-purple-950/20'>
+              <div className='flex'>
+                <button onClick={() => handleClick(0)}>User Info</button>
+                <button onClick={() => handleClick(1)}>Achievement</button>
+              </div>
               {/* CoverPicture */}
               <div className='flex w-full items-center justify-center'>
                 <CoverPhoto coverPhotoUrl={user.username} height={160} />
               </div>
               {/* Profile Picture And User Info */}
-              <div className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'>
+              <div
+                className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'
+                ref={(el) => (targetRefs.current[0] = el)}
+                id='aboutUser'
+              >
                 <div className='-mt-20 md:mt-0'>
                   <ProfilePic
                     profilePicUrl={
@@ -63,7 +80,11 @@ export default function UserInfoShowcase({ user, skillsData, guild }) {
                 <ProfileButtons />
               </div>
               {/* User's Achievement */}
-              <div className='mt-5 flex w-full overflow-hidden'>
+              <div
+                className='mt-5 flex w-full overflow-hidden'
+                ref={(el) => (targetRefs.current[1] = el)}
+                id='achievements'
+              >
                 <AchievementsComponent userData={user} />
               </div>
               {/* Guild */}
