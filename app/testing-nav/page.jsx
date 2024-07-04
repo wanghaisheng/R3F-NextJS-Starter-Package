@@ -54,10 +54,25 @@ export default function Home() {
       <div className='h-screen bg-pink-200'>
         <h1>Hello</h1>
       </div>
-      <nav className='sticky top-20 flex justify-center bg-white font-bold text-black'>
-        {visibleSection !== 'section1' && <button onClick={() => scrollToSection(section1Ref)}>Go to Section 1</button>}
-        {visibleSection !== 'section2' && <button onClick={() => scrollToSection(section2Ref)}>Go to Section 2</button>}
-        {visibleSection !== 'section3' && <button onClick={() => scrollToSection(section3Ref)}>Go to Section 3</button>}
+      <nav className='sticky top-20 flex justify-center bg-white font-bold text-black transition-all duration-300 animate-ease-in-out'>
+        <button
+          className={`transition-all duration-500 ${visibleSection !== 'section1' ? 'translate-y-0' : 'translate-y-[-40rem]'}`}
+          onClick={() => scrollToSection(section1Ref)}
+        >
+          Home
+        </button>
+        <button
+          className={`transition-all duration-500 ${visibleSection !== 'section2' ? 'translate-y-0' : 'translate-y-[-40rem]'}`}
+          onClick={() => scrollToSection(section2Ref)}
+        >
+          KHG
+        </button>
+        <button
+          className={`transition-all duration-500 ${visibleSection !== 'section3' ? 'translate-y-0' : 'translate-y-[-40rem]'}`}
+          onClick={() => scrollToSection(section3Ref)}
+        >
+          JIJH
+        </button>
       </nav>
 
       <div id='section1' ref={section1Ref} style={{ height: '100vh', background: 'lightblue' }}>
