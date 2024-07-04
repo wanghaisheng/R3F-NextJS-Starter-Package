@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef, useLayoutEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import { LuGalleryHorizontal } from 'react-icons/lu'
@@ -24,15 +24,6 @@ export default function UserContent({ user, skillsData, guild, experience }) {
   }
 
   const [isSmallScreen, setIsSmallScreen] = useState(false)
-  const [activeTarget, setActiveTarget] = useState(null) // Track the active target
-  const targetRefs = useRef([]) // Store refs for all target sections
-
-  const handleClick = (index) => {
-    setActiveTarget(index) // Set the active target index
-    // Adjust scroll position to leave space at the top
-    const scrollTop = index === 0 ? 0 : 20 // Set the scroll position
-    targetRefs.current[index].scrollIntoView({ behavior: 'smooth', top: scrollTop }) // Scroll to the target
-  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,6 +39,53 @@ export default function UserContent({ user, skillsData, guild, experience }) {
     setToggle(!toggle)
   }
 
+  const section0Ref = useRef(null)
+  const section1Ref = useRef(null)
+  const section2Ref = useRef(null)
+  const section3Ref = useRef(null)
+  const [visibleSection, setVisibleSection] = useState(null)
+  const scrollOffset = 80 // Adjust this value to change the top offset
+
+  const scrollToSection = (sectionRef) => {
+    window.scrollTo({
+      top: sectionRef.current.offsetTop - scrollOffset,
+      behavior: 'smooth',
+    })
+  }
+
+  useEffect(() => {
+    const sectionRefs = [section0Ref, section1Ref, section2Ref, section3Ref]
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSection(entry.target.id)
+          }
+        })
+      },
+      {
+        root: null,
+        rootMargin: `-${scrollOffset}px 0px 0px 0px`,
+        threshold: 0.5,
+      },
+    )
+
+    sectionRefs.forEach((sectionRef) => {
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current)
+      }
+    })
+
+    return () => {
+      sectionRefs.forEach((sectionRef) => {
+        if (sectionRef.current) {
+          observer.unobserve(sectionRef.current)
+        }
+      })
+    }
+  }, [])
+
   return (
     <>
       <div
@@ -58,10 +96,35 @@ export default function UserContent({ user, skillsData, guild, experience }) {
           <>
             <div className='flex size-full flex-col rounded-xl  bg-violet-300/30 lg:w-[50%] dark:bg-black/20'>
               <div className='flex w-full flex-col flex-wrap  px-10 py-3'>
-                <div className='flex'>
-                  <button onClick={() => handleClick(0)}>Uoknfo</button>
-                  <button onClick={() => handleClick(1)}>Achievement</button>
-                </div>
+                <nav className='sticky top-20 z-40 flex justify-center bg-white font-bold text-black transition-all duration-300 animate-ease-in-out'>
+                  <button
+                    className={`transition-all duration-500 ${visibleSection !== 'section0' ? 'bg-transparent' : 'bg-pink-300'}`}
+                    onClick={() => scrollToSection(section0Ref)}
+                  >
+                    Info
+                  </button>
+
+                  <button
+                    className={`transition-all duration-500 ${visibleSection !== 'section1' ? 'bg-transparent' : 'bg-pink-300'}`}
+                    onClick={() => scrollToSection(section1Ref)}
+                  >
+                    Achievements
+                  </button>
+
+                  <button
+                    className={`transition-all duration-500 ${visibleSection !== 'section2' ? 'bg-transparent' : 'bg-pink-300'}`}
+                    onClick={() => scrollToSection(section2Ref)}
+                  >
+                    Skills
+                  </button>
+
+                  <button
+                    className={`transition-all duration-500 ${visibleSection !== 'section3' ? 'bg-transparent' : 'bg-pink-300'}`}
+                    onClick={() => scrollToSection(section3Ref)}
+                  >
+                    JIJH
+                  </button>
+                </nav>
 
                 {/* CoverPicture */}
                 <div className='flex w-full items-center justify-center'>
@@ -70,8 +133,8 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 {/* Profile Picture And User Info */}
                 <div
                   className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'
-                  ref={(el) => (targetRefs.current[0] = el)}
-                  id='aboutUser'
+                  id='section0'
+                  ref={section0Ref}
                 >
                   <div className='-mt-20 md:mt-0'>
                     <ProfilePic
@@ -88,15 +151,11 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                   </div>
                 </div>
                 {/* interaction Buttons */}
-                <div className='sticky top-20 z-50 -mt-7 flex w-full justify-center'>
+                <div className='sticky top-28 z-50 -mt-7 flex w-full justify-center'>
                   <ProfileButtons />
                 </div>
                 {/* User's Achievement */}
-                <div
-                  className='mt-5 flex w-full overflow-hidden'
-                  ref={(el) => (targetRefs.current[1] = el)}
-                  id='achievements'
-                >
+                <div className='mt-5 flex w-full overflow-hidden' id='section1' ref={section1Ref}>
                   <AchievementsComponent userData={user} />
                 </div>
                 {/* Guild */}
@@ -118,7 +177,11 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                   </div>
                 </div>
                 {/* Skills Chart and Gallery */}
-                <div className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'>
+                <div
+                  className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'
+                  id='section2'
+                  ref={section2Ref}
+                >
                   <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
                     {user && skillsData && (
                       <button
@@ -139,7 +202,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                   </div>
                 </div>
               </div>
-              <div className='relative flex size-full px-10 py-3'>
+              <div className='relative flex size-full px-10 py-3' id='section3' ref={section3Ref}>
                 <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
               </div>
             </div>
