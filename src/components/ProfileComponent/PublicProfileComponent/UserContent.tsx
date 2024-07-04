@@ -43,10 +43,9 @@ export default function UserContent({ user, skillsData, guild, experience }) {
     setToggle(!toggle)
   }
 
-  const section0Ref = useRef(null)
-  const section1Ref = useRef(null)
-  const section2Ref = useRef(null)
-  const section3Ref = useRef(null)
+  const sectionInfoRef = useRef(null)
+  const sectionGalleryRef = useRef(null)
+  const sectionExperienceRef = useRef(null)
   const [visibleSection, setVisibleSection] = useState(null)
   const scrollOffset = 80 // Adjust this value to change the top offset
 
@@ -58,7 +57,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
   }
 
   useEffect(() => {
-    const sectionRefs = [section0Ref, section1Ref, section2Ref, section3Ref]
+    const sectionRefs = [sectionInfoRef, sectionGalleryRef, sectionExperienceRef]
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -93,39 +92,33 @@ export default function UserContent({ user, skillsData, guild, experience }) {
   return (
     <>
       <div
-        className={`relative flex size-full flex-col items-center justify-center ${isSmallScreen ? 'mt-[600px]' : 'mt-20'}`}
+        className={`relative flex size-full flex-col items-center justify-center ${isSmallScreen ? 'mt-[600px]' : 'mt-[68px]'}`}
       >
         <div className={`fixed top-0 z-20 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
         {user && guild && (
           <>
             <div className='flex size-full flex-col rounded-xl  bg-violet-300/30 lg:w-[50%] dark:bg-black/20'>
-              <div className='flex w-full flex-col flex-wrap  px-10 py-3'>
+              <div className='flex w-full flex-col flex-wrap  px-5 py-3'>
+                {/* Navigation */}
                 <nav className='sticky top-20 z-40 flex justify-center font-bold text-white transition-all duration-300 animate-ease-in-out'>
                   <div className='flex items-center justify-center gap-x-4 rounded-full bg-black px-4 py-1 text-xl'>
                     <button
                       className={`rounded-full transition-all duration-500 ${visibleSection !== 'section0' ? 'text-white' : 'text-violet-500'}`}
-                      onClick={() => scrollToSection(section0Ref)}
+                      onClick={() => scrollToSection(sectionInfoRef)}
                     >
                       <HiOutlineInformationCircle />
                     </button>
 
                     <button
-                      className={`rounded-full transition-all duration-500 ${visibleSection !== 'section1' ? 'text-white' : 'text-violet-500'}`}
-                      onClick={() => scrollToSection(section1Ref)}
-                    >
-                      <RiMedalLine />
-                    </button>
-
-                    <button
                       className={`rounded-full transition-all duration-500 ${visibleSection !== 'section2' ? 'text-white' : 'text-violet-500'}`}
-                      onClick={() => scrollToSection(section2Ref)}
+                      onClick={() => scrollToSection(sectionGalleryRef)}
                     >
                       <IoMdPhotos />
                     </button>
 
                     <button
                       className={`rounded-full transition-all duration-500 ${visibleSection !== 'section3' ? 'text-white' : 'text-violet-500'}`}
-                      onClick={() => scrollToSection(section3Ref)}
+                      onClick={() => scrollToSection(sectionExperienceRef)}
                     >
                       <SiCompilerexplorer />
                     </button>
@@ -133,15 +126,11 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 </nav>
 
                 {/* CoverPicture */}
-                <div className='mt-3 flex w-full items-center justify-center'>
+                <div className='mt-3 flex w-full items-center justify-center' id='section0' ref={sectionInfoRef}>
                   <CoverPhoto coverPhotoUrl={user.username} height={160} />
                 </div>
                 {/* Profile Picture And User Info */}
-                <div
-                  className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'
-                  id='section0'
-                  ref={section0Ref}
-                >
+                <div className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'>
                   <div className='-mt-20 md:mt-0'>
                     <ProfilePic
                       profilePicUrl={
@@ -161,7 +150,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                   <ProfileButtons />
                 </div>
                 {/* User's Achievement */}
-                <div className='mt-5 flex w-full overflow-hidden' id='section1' ref={section1Ref}>
+                <div className='mt-5 flex w-full overflow-hidden'>
                   <AchievementsComponent userData={user} />
                 </div>
                 {/* Guild */}
@@ -186,7 +175,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 <div
                   className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'
                   id='section2'
-                  ref={section2Ref}
+                  ref={sectionGalleryRef}
                 >
                   <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
                     {user && skillsData && (
@@ -208,7 +197,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                   </div>
                 </div>
               </div>
-              <div className='relative flex size-full px-10 py-3' id='section3' ref={section3Ref}>
+              <div className='relative flex size-full px-10 py-3' id='section3' ref={sectionExperienceRef}>
                 <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
               </div>
             </div>
