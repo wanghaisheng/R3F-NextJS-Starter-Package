@@ -196,6 +196,8 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                   )}
                 </div>
               </div>
+
+              {/* Experience Card Show */}
               <div className='relative flex size-full px-10 py-3' id='section3' ref={sectionExperienceRef}>
                 <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
               </div>
