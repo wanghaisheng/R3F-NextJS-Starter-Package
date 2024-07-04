@@ -51,6 +51,7 @@ export async function PUT(request, { params }) {
       faculty,
       cover_image,
     } = data
+
     const id = params.id
 
     // Check if the user exists
@@ -69,7 +70,7 @@ export async function PUT(request, { params }) {
     const filteredImageUrls = newImageUrls.filter((element) => element !== '')
 
     // cover images section
-    const newCoverImages = [...existingUser.cover_images, cover_image.length !== 0 ? cover_image : '']
+    const newCoverImages = [...existingUser.cover_images, cover_image ? cover_image : '']
     const filteredCoverImages = newCoverImages.filter((element) => element !== '')
 
     const updatedUser = await prisma.users.update({
