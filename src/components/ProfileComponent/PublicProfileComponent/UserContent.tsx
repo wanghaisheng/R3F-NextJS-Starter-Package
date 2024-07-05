@@ -154,13 +154,14 @@ export default function UserContent({ user, skillsData, guild, experience }) {
               </div>
               {/* Guild */}
               <div className='flex flex-col pl-4 '>
-                <div className='group absolute right-5 top-5'>
+                <div className='group absolute right-7 top-16'>
                   <Image
                     src={guild.find((guild) => guild.id === user.guild_id)?.symbol || ''}
                     height={30}
                     width={30}
                     alt='guild'
                     loading='lazy'
+                    className='rounded-full border-2 border-white/50 transition-all duration-300 ease-in-out hover:rotate-180 group-hover:border-white/100'
                   />
                   <HoverGuild
                     hoveredGuild={guild.find((guild) => guild.id === user.guild_id)?.guild_name.toUpperCase() || ''}

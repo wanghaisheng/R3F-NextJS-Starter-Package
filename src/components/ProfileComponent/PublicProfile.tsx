@@ -208,6 +208,7 @@ export default function PublicProfile({ username }) {
 
   return (
     <div className='flex size-full'>
+      {/* Video BG */}
       <div className='fixed top-0 h-screen w-full'>
         {user && (
           <video key={user.guild_id} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
