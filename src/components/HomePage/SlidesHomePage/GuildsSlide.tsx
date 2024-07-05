@@ -72,14 +72,14 @@ export default function GuildsSlide({ guild, guilds }) {
           {guild.faculty.map((fac, facultyIndex) => (
             <div
               key={facultyIndex}
-              className='cursor-pointer rounded bg-white px-2 text-2xl font-bold text-black transition-all duration-500 ease-in-out hover:scale-105'
+              className={`cursor-pointer rounded px-2 text-2xl font-bold text-black transition-all duration-500 ease-in-out hover:scale-105 ${selectedFaculty === fac.faculty_name ? 'bg-gray-600 text-white' : 'bg-white text-black'}`}
               onClick={() => handleFacultySelection(fac.faculty_name)}
             >
               <p>{fac.faculty_name.toUpperCase()}</p>
             </div>
           ))}
           <button
-            className={`cursor-pointer px-2 text-2xl font-bold text-white transition-all duration-500 ease-in-out ${selectedFaculty === 'All' ? 'rotate-180 scale-110' : 'rotate-0 scale-100'}`}
+            className={`cursor-pointer px-2 text-2xl font-bold transition-all duration-500 ease-in-out ${selectedFaculty === 'All' ? 'rotate-180 scale-110 text-violet-300' : 'rotate-0 scale-100 text-white'}`}
             onClick={() => handleFacultySelection('All')}
           >
             <PiDiamondsFourLight />
