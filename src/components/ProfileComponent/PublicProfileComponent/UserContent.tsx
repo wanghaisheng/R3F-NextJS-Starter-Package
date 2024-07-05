@@ -97,8 +97,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
         <div className={`fixed top-0 z-20 h-screen w-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div>
         {user && guild && (
           <>
-            <div className='relative flex size-full flex-col rounded-xl  bg-violet-300/30 px-5 py-3 lg:w-[50%] dark:bg-black/20'>
-              <div className='absolute size-full rounded-xl backdrop-blur-sm'></div>
+            <div className='relative flex size-full flex-col rounded-xl bg-violet-300/50 px-5 py-3 shadow shadow-purple-700 lg:w-[50%] dark:bg-black/50'>
               {/* Navigation */}
               <nav className='sticky top-20 z-50 flex justify-center font-bold text-white transition-all duration-300 animate-ease-in-out'>
                 <div className='flex items-center justify-center gap-x-4 rounded-full bg-black px-4 py-1 text-xl'>
@@ -150,7 +149,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 <ProfileButtons />
               </div>
               {/* User's Achievement */}
-              <div className='mt-10 flex h-[220px] w-full overflow-hidden'>
+              <div className='mt-8 flex h-[220px] items-center justify-center px-2'>
                 <AchievementsComponent userData={user} />
               </div>
               {/* Guild */}
