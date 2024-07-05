@@ -29,6 +29,8 @@ const getUsers = async () => {
     }
     const users = await res.json()
 
+    console.log('users', users)
+
     const filteredUsers = users.filter(
       (user) =>
         user.first_name &&
@@ -36,6 +38,7 @@ const getUsers = async () => {
         user.username &&
         user.email &&
         user.description &&
+        user.faculty &&
         user.region.ip &&
         user.avatar.length !== 0 &&
         user.guild_id,
@@ -74,6 +77,9 @@ export default function VideoHome() {
   const [guildData, setGuildData] = useState([]) // Guilds data
   const [guilds, setGuilds] = useState([]) // Guilds data with user info
 
+  console.log('guildData', guildData)
+  console.log('guild', guilds)
+
   // Fetch the users and guilds data on mount
   useEffect(() => {
     const fetchDataAndMapGuildInfo = async () => {
@@ -90,6 +96,7 @@ export default function VideoHome() {
             username: user.username,
             description: user.description,
             image_urls: user.image_urls,
+            faculty: user.faculty,
             guild: guild ? guild.guild_name : 'Unknown Guild',
             avatarimg: avatarUrl.replace('glb', 'png'),
             experience: user.experience,

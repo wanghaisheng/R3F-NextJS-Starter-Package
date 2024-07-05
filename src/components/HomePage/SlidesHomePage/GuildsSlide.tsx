@@ -1,6 +1,8 @@
 import Image from 'next/image'
 
 export default function GuildsSlide({ guild, guilds }) {
+  console.log('guildInhsag', guild)
+
   return (
     <>
       {/* Div for each guild where the opacity of the div is based on the guild color and reduced to 20% */}
@@ -51,8 +53,12 @@ export default function GuildsSlide({ guild, guilds }) {
         </div>
       </div>
       <div className='absolute top-36 z-30 mt-20 flex w-full flex-col justify-center lg:mt-0'>
-        <div className='flex size-full justify-center'>
-          <p className={`text-2xl font-bold lg:text-4xl`}>{guild.description}</p>
+        <div className='flex items-center justify-center gap-x-3'>
+          {guild.faculty.map((fac, facultyIndex) => (
+            <div key={facultyIndex} className='rounded bg-white px-2 text-2xl font-bold text-black'>
+              <p>{fac.faculty_name.toUpperCase()}</p>
+            </div>
+          ))}
         </div>
         <div className='mt-10 flex size-full w-full flex-col items-center justify-center'>
           <h1 className='text-2xl font-bold'>Skills</h1>
@@ -61,16 +67,30 @@ export default function GuildsSlide({ guild, guilds }) {
 
         {/* Guild Members */}
         <div className='flex w-full items-center justify-center'>
-          <div className='w-[90%] max-w-[550px] rounded-xl bg-black/20 p-4'>
+          <div className='w-[90%] max-w-[450px] rounded-xl bg-black/20 p-4'>
             <h2 className='mb-4 text-center text-2xl font-bold'>Guild Members</h2>
             <div className='grid grid-cols-2 gap-4'>
               {guilds
                 .filter((user) => user.guild === guild.guild_name)
                 .slice(0, 4)
                 .map((user, userIndex) => (
-                  <div key={userIndex} className='flex flex-col items-center'>
-                    <Image src={user.avatarimg} alt={user.username} width={80} height={80} className='rounded-full' />
-                    <p className='mt-2 text-center text-sm font-medium'>{user.username}</p>
+                  <div
+                    key={userIndex}
+                    className=' flex flex-col items-center rounded border-2 transition duration-200 ease-in-out hover:scale-105'
+                  >
+                    <div className='relative flex h-[130px] w-full items-center justify-center overflow-hidden bg-white/20'>
+                      <Image
+                        src={user.avatarimg}
+                        alt={user.username}
+                        height={140}
+                        width={140}
+                        objectFit='cover'
+                        className='cursor-pointer rounded'
+                      />
+                    </div>
+                    <div className='flex w-full items-center justify-center bg-white text-black'>
+                      <p className='text-center text-sm font-medium'>{user.username}</p>
+                    </div>
                   </div>
                 ))}
             </div>
