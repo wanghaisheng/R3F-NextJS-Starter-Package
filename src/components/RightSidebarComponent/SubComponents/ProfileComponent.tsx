@@ -226,6 +226,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     <div className='flex h-full flex-col overflow-hidden pb-8'>
       {user ? (
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-gray-200 p-3 text-white dark:bg-black/40'>
+          {/* CoverImage */}
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
               src={
@@ -245,7 +246,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               maxLocalFileSizeBytes={10000000}
               imgOnly={true}
               sourceList='local, url, camera'
-              className='absolute flex w-full justify-center rounded-lg bg-black/30 dark:bg-white top-2 right-2'
+              className='absolute left-2 top-2 flex justify-center rounded-lg bg-black/30 dark:bg-white'
             />
             <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
               <span className='pl-2 text-sm font-semibold text-white drop-shadow'>{form.description}</span>
