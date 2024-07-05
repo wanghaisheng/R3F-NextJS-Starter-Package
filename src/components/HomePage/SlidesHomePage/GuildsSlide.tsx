@@ -1,6 +1,23 @@
+'use client'
+
 import Image from 'next/image'
+import { useState } from 'react'
+import { PiDiamondsFourLight } from 'react-icons/pi'
 
 export default function GuildsSlide({ guild, guilds }) {
+  const [selectedFaculty, setSelectedFaculty] = useState('All')
+
+  // handle faculty selection
+  const handleFacultySelection = (faculty) => {
+    setSelectedFaculty(faculty)
+  }
+
+  // Filter guild members based on selected faculty
+  const filteredGuildMembers =
+    selectedFaculty === 'All'
+      ? guilds.filter((user) => user.guild === guild.guild_name)
+      : guilds.filter((user) => user.guild === guild.guild_name && user.faculty.primary_faculty === selectedFaculty)
+
   return (
     <>
       {/* Div for each guild where the opacity of the div is based on the guild color and reduced to 20% */}
@@ -56,10 +73,17 @@ export default function GuildsSlide({ guild, guilds }) {
             <div
               key={facultyIndex}
               className='cursor-pointer rounded bg-white px-2 text-2xl font-bold text-black transition-all duration-500 ease-in-out hover:scale-105'
+              onClick={() => handleFacultySelection(fac.faculty_name)}
             >
               <p>{fac.faculty_name.toUpperCase()}</p>
             </div>
           ))}
+          <button
+            className={`cursor-pointer px-2 text-2xl font-bold text-white transition-all duration-500 ease-in-out ${selectedFaculty === 'All' ? 'rotate-180 scale-110' : 'rotate-0 scale-100'}`}
+            onClick={() => handleFacultySelection('All')}
+          >
+            <PiDiamondsFourLight />
+          </button>
         </div>
         <div className='mt-10 flex size-full w-full flex-col items-center justify-center'>
           <h1 className='text-2xl font-bold'>Skills</h1>
@@ -71,29 +95,26 @@ export default function GuildsSlide({ guild, guilds }) {
           <div className='w-[90%] max-w-[450px] rounded-xl bg-black/20 p-4'>
             <h2 className='mb-4 text-center text-2xl font-bold'>Guild Members</h2>
             <div className='grid grid-cols-2 gap-4'>
-              {guilds
-                .filter((user) => user.guild === guild.guild_name)
-                .slice(0, 4)
-                .map((user, userIndex) => (
-                  <div
-                    key={userIndex}
-                    className=' flex flex-col items-center rounded border-2 transition duration-200 ease-in-out hover:scale-105'
-                  >
-                    <div className='relative flex h-[130px] w-full items-center justify-center overflow-hidden bg-white/20'>
-                      <Image
-                        src={user.avatarimg}
-                        alt={user.username}
-                        height={140}
-                        width={140}
-                        objectFit='cover'
-                        className='cursor-pointer rounded'
-                      />
-                    </div>
-                    <div className='flex w-full items-center justify-center bg-white text-black'>
-                      <p className='text-center text-sm font-medium'>{user.username}</p>
-                    </div>
+              {filteredGuildMembers.slice(0, 4).map((user, userIndex) => (
+                <div
+                  key={userIndex}
+                  className=' flex flex-col items-center rounded border-2 transition duration-200 ease-in-out hover:scale-105'
+                >
+                  <div className='relative flex h-[130px] w-full items-center justify-center overflow-hidden bg-white/20'>
+                    <Image
+                      src={user.avatarimg}
+                      alt={user.username}
+                      height={140}
+                      width={140}
+                      objectFit='cover'
+                      className='cursor-pointer rounded'
+                    />
                   </div>
-                ))}
+                  <div className='flex w-full items-center justify-center bg-white text-black'>
+                    <p className='text-center text-sm font-medium'>{user.username} </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
