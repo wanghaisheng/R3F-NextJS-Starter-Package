@@ -2,8 +2,7 @@
 
 import toast from 'react-hot-toast'
 import { useState, useEffect, useRef } from 'react'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider'
 import { FaArrowLeft } from 'react-icons/fa6'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -15,7 +14,6 @@ import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import Image from 'next/image'
 import { revalidateUser } from 'lib/actions'
 
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen, token }) {
@@ -165,7 +163,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen, toke
       certification:
         imageUrlsSubmit.length !== 0
           ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
-          : skills[index].certifications.length !== 0
+          : skills[index].certifications && skills[index].certifications.length !== 0
             ? skills[index].certifications
             : '',
     }
