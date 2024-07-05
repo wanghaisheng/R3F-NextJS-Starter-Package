@@ -58,17 +58,19 @@ export default function GuildsSlide({ guild, guilds }) {
           <h1 className='text-2xl font-bold'>Skills</h1>
           <p className='text-lg font-semibold'>{guild.skills.join(', ')}</p>
         </div>
+
+        {/* Guild Members */}
         <div className='flex w-full items-center justify-center'>
           <div className='w-[90%] max-w-[550px] rounded-xl bg-black/20 p-4'>
             <h2 className='mb-4 text-center text-2xl font-bold'>Guild Members</h2>
-            <div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5'>
+            <div className='grid grid-cols-2 gap-4'>
               {guilds
                 .filter((user) => user.guild === guild.guild_name)
-                .slice(0, 15)
+                .slice(0, 4)
                 .map((user, userIndex) => (
                   <div key={userIndex} className='flex flex-col items-center'>
-                    <Image src={user.avatarimg} alt={user.username} width={60} height={60} className='rounded-full' />
-                    <p className='mt-2 text-center text-xs font-medium'>{user.username}</p>
+                    <Image src={user.avatarimg} alt={user.username} width={80} height={80} className='rounded-full' />
+                    <p className='mt-2 text-center text-sm font-medium'>{user.username}</p>
                   </div>
                 ))}
             </div>
