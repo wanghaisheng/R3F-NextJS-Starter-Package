@@ -1,8 +1,6 @@
 import Image from 'next/image'
 
 export default function GuildsSlide({ guild, guilds }) {
-  console.log('guildInhsag', guild)
-
   return (
     <>
       {/* Div for each guild where the opacity of the div is based on the guild color and reduced to 20% */}
@@ -55,7 +53,10 @@ export default function GuildsSlide({ guild, guilds }) {
       <div className='absolute top-36 z-30 mt-20 flex w-full flex-col justify-center lg:mt-0'>
         <div className='flex items-center justify-center gap-x-3'>
           {guild.faculty.map((fac, facultyIndex) => (
-            <div key={facultyIndex} className='rounded bg-white px-2 text-2xl font-bold text-black'>
+            <div
+              key={facultyIndex}
+              className='cursor-pointer rounded bg-white px-2 text-2xl font-bold text-black transition-all duration-500 ease-in-out hover:scale-105'
+            >
               <p>{fac.faculty_name.toUpperCase()}</p>
             </div>
           ))}

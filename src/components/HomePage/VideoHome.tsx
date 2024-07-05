@@ -12,6 +12,7 @@ import GgOne from './SlidesHomePage/GgOne'
 import GuildsSlide from './SlidesHomePage/GuildsSlide'
 import AvatarSlideHome from './SlidesHomePage/AvatarSlideHome'
 import HomeSlide from './SlidesHomePage/HomeSlide'
+import { FaPauseCircle, FaPlayCircle } from 'react-icons/fa'
 
 let cache = {
   users: null,
@@ -28,8 +29,6 @@ const getUsers = async () => {
       return []
     }
     const users = await res.json()
-
-    console.log('users', users)
 
     const filteredUsers = users.filter(
       (user) =>
@@ -77,8 +76,7 @@ export default function VideoHome() {
   const [guildData, setGuildData] = useState([]) // Guilds data
   const [guilds, setGuilds] = useState([]) // Guilds data with user info
 
-  console.log('guildData', guildData)
-  console.log('guild', guilds)
+  const [isPlaying, setIsPlaying] = useState(true) // State to track autoplay status
 
   // Fetch the users and guilds data on mount
   useEffect(() => {
@@ -126,6 +124,16 @@ export default function VideoHome() {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  // Handle play/pause button click
+  const togglePlayPause = () => {
+    if (isPlaying) {
+      swiperRefs.current?.autoplay.stop()
+    } else {
+      swiperRefs.current?.autoplay.start()
+    }
+    setIsPlaying(!isPlaying)
+  }
 
   return (
     <div className='relative h-screen w-screen overflow-hidden'>
@@ -213,6 +221,13 @@ export default function VideoHome() {
           >
             <MdOutlineNavigateNext size={30} />
           </motion.div>
+        </div>
+
+        {/* Play/Pause Button */}
+        <div className='absolute bottom-6 right-6 z-30'>
+          <button className='rounded-full border-2 bg-white text-black shadow-lg' onClick={togglePlayPause}>
+            {isPlaying ? <FaPauseCircle size={20} /> : <FaPlayCircle size={20} />}
+          </button>
         </div>
       </Swiper>
     </div>
