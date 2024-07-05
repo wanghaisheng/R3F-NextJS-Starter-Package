@@ -14,28 +14,28 @@ import { revalidateUser } from 'lib/actions'
 import Cookies from 'js-cookie'
 import { IoChevronBack } from 'react-icons/io5'
 
-async function getAllFaculties() {
-  try {
-    const res = await fetch('/api/internal/faculties/all-faculties')
-    if (!res.ok) {
-      throw new Error(`failded to fetch faculties`)
-    }
-    return res.json()
-  } catch (error) {
-    console.error('Internal server error')
-  }
-}
-async function getGuildFaculty() {
-  try {
-    const res = await fetch('/api/internal/faculties/guild-faculty')
-    if (!res.ok) {
-      throw new Error(`failded to fetch faculties`)
-    }
-    return res.json()
-  } catch (error) {
-    console.error('Internal server error')
-  }
-}
+// async function getAllFaculties() {
+//   try {
+//     const res = await fetch('/api/internal/faculties/all-faculties')
+//     if (!res.ok) {
+//       throw new Error(`failded to fetch faculties`)
+//     }
+//     return res.json()
+//   } catch (error) {
+//     console.error('Internal server error')
+//   }
+// }
+// async function getGuildFaculty() {
+//   try {
+//     const res = await fetch('/api/internal/faculties/guild-faculty')
+//     if (!res.ok) {
+//       throw new Error(`failded to fetch faculties`)
+//     }
+//     return res.json()
+//   } catch (error) {
+//     console.error('Internal server error')
+//   }
+// }
 
 export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
   const { user, updateUser } = useUser()
@@ -56,42 +56,42 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       longitude: '',
     },
     image_urls: user?.image_urls || [],
+    cover_images: user?.cover_images || [],
   })
 
   const [regionStatus, setRegionStatus] = useState(false)
   const [avatarsData, setAvatarsData] = useState(user?.avatar || [])
-  const [files, setFiles] = useState([])
 
-  const [primaryFaculty, setPrimaryFaculty] = useState('')
-  const [optionalFaculty, setOptionalFaculty] = useState('')
-  const [guild_faculty, setGuild_Faculty] = useState([])
-  const [faculties, setFaculties] = useState([])
+  // const [primaryFaculty, setPrimaryFaculty] = useState('')
+  // const [optionalFaculty, setOptionalFaculty] = useState('')
+  // const [guild_faculty, setGuild_Faculty] = useState([])
+  // const [faculties, setFaculties] = useState([])
 
   //get all faculties
-  useEffect(() => {
-    const fetchFaculties = async () => {
-      const faculties = await getAllFaculties()
-      setFaculties(faculties)
-    }
-    fetchFaculties()
-  }, [])
+  // useEffect(() => {
+  //   const fetchFaculties = async () => {
+  //     const faculties = await getAllFaculties()
+  //     setFaculties(faculties)
+  //   }
+  //   fetchFaculties()
+  // }, [])
 
-  //get guild based faculties
-  useEffect(() => {
-    const fetchGuildFaculty = async () => {
-      const guild_faculty = await getAllFaculties()
-      setFaculties(guild_faculty)
-    }
-    fetchGuildFaculty()
-  }, [])
+  // //get guild based faculties
+  // useEffect(() => {
+  //   const fetchGuildFaculty = async () => {
+  //     const guild_faculty = await getAllFaculties()
+  //     setFaculties(guild_faculty)
+  //   }
+  //   fetchGuildFaculty()
+  // }, [])
 
-  useEffect(() => {
-    console.log(faculties)
-  }, [faculties])
+  // useEffect(() => {
+  //   console.log(faculties)
+  // }, [faculties])
 
-  useEffect(() => {
-    console.log(guild_faculty)
-  }, [guild_faculty])
+  // useEffect(() => {
+  //   console.log(guild_faculty)
+  // }, [guild_faculty])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -138,26 +138,31 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
   }
 
-  const handleImageChange = (items) => {
+  const handleImageChange = (type) => (items) => {
     const successfulFiles = items.allEntries.filter((file) => file.status === 'success')
-    setFiles(successfulFiles)
     const imageUrls = successfulFiles.map((file) => file.cdnUrl)
-    setForm((prevForm) => ({
-      ...prevForm,
-      image_urls: imageUrls,
-    }))
+    if (type === 'profile') {
+      setForm((prevForm) => ({
+        ...prevForm,
+        image_urls: imageUrls,
+      }))
+      if (imageUrls && imageUrls.length > 0) {
+        handleProfileImgUpdate(imageUrls[imageUrls.length - 1])
+      }
+    } else if (type === 'cover') {
+      setForm((prevForm) => ({
+        ...prevForm,
+        cover_images: imageUrls,
+      }))
+      if (imageUrls && imageUrls.length > 0) {
+        handleCoverImgUpdate(imageUrls[imageUrls.length - 1])
+      }
+    }
   }
 
-  useEffect(() => {
-    if (files.length) {
-      const imageUrl = form.image_urls[form.image_urls.length - 1]
-      handleImgUpdate(imageUrl)
-    }
-  }, [files])
-
-  const handleImgUpdate = async (image_url) => {
+  const handleProfileImgUpdate = async (image_url) => {
     try {
-      await axios.put(`/api/internal/users/${user.gg_id}`, { image_url })
+      await axios.put(`/api/internal/users/${user.gg_id}`, { image_url: image_url })
       setForm((prevForm) => ({
         ...prevForm,
         image_urls: [...user.image_urls, image_url],
@@ -166,6 +171,20 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
       toast.success('Profile pic updated successfully!')
     } catch (error) {
       toast.error('Error updating profile pic!')
+    }
+  }
+
+  const handleCoverImgUpdate = async (image_url) => {
+    try {
+      await axios.put(`/api/internal/users/${user.gg_id}`, { cover_image: image_url })
+      setForm((prevForm) => ({
+        ...prevForm,
+        cover_images: [...user.cover_images, image_url],
+      }))
+      updateUser(token)
+      toast.success('cover image updated successfully!')
+    } catch (error) {
+      toast.error('Error updating cover image!')
     }
   }
 
@@ -209,12 +228,24 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-gray-200 p-3 text-white dark:bg-black/40'>
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
             <Image
-              src={form.image_urls.length > 0 ? form.image_urls[form.image_urls.length - 1] : '/card/defaultbuddha.svg'}
+              src={
+                form.cover_images.length > 0
+                  ? form.cover_images[form.cover_images.length - 1]
+                  : '/card/defaultbuddha.svg'
+              }
               alt='porfilepic'
               height={170}
               width={500}
               unoptimized
               className='rounded'
+            />
+            <FileUploaderRegular
+              onChange={handleImageChange('cover')}
+              pubkey={'aff2bf9d09cde0f92516'}
+              maxLocalFileSizeBytes={10000000}
+              imgOnly={true}
+              sourceList='local, url, camera'
+              className='absolute flex w-full justify-center rounded-lg bg-black/30 dark:bg-white top-2 right-2'
             />
             <p className='absolute bottom-2 flex justify-center overflow-hidden text-wrap pt-2'>
               <span className='pl-2 text-sm font-semibold text-white drop-shadow'>{form.description}</span>
@@ -361,7 +392,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                   </label>
                   <div className='my-2 flex w-full items-center justify-center'>
                     <FileUploaderRegular
-                      onChange={handleImageChange}
+                      onChange={handleImageChange('profile')}
                       pubkey={'aff2bf9d09cde0f92516'}
                       maxLocalFileSizeBytes={10000000}
                       imgOnly={true}
