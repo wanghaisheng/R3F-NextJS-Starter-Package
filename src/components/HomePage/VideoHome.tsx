@@ -1,5 +1,6 @@
 'use client'
 
+import toast from 'react-hot-toast'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { Autoplay } from 'swiper/modules'
@@ -69,6 +70,47 @@ const guildData = [
   },
 ]
 
+const getUsers = async () => {
+  try {
+    const res = await fetch('/api/public/users')
+    if (!res.ok) {
+      toast.error('Failed to fetch users data')
+      return []
+    }
+    const users = await res.json()
+
+    const filteredUsers = users.filter(
+      (user) =>
+        user.first_name &&
+        user.last_name &&
+        user.username &&
+        user.email &&
+        user.description &&
+        user.region.ip &&
+        user.avatar.length !== 0 &&
+        user.guild_id,
+    )
+    return filteredUsers
+  } catch (error) {
+    toast.error('Internal Server Error')
+    return []
+  }
+}
+
+const getGuilds = async () => {
+  try {
+    const res = await fetch('/api/public/guilds')
+    if (!res.ok) {
+      toast.error('Failed to fetch guilds data')
+      return []
+    }
+    return res.json()
+  } catch (error) {
+    toast.error('Internal Server Error')
+    return []
+  }
+}
+
 export default function VideoHome() {
   const paginationLabels = ['HOME', 'AVATAR', 'BUDDHA', 'VAJRA', 'KARMA', 'RATNA', 'PADMA', 'GGONE', 'DISCOVER']
   const swiperRefs = useRef(null)
@@ -76,11 +118,62 @@ export default function VideoHome() {
 
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
+  const [publicUsers, setPublicUsers] = useState([])
+  const [guildData, setGuildData] = useState([])
+  const [guilds, setGuilds] = useState([])
+
+  // Fetch the public users
+  useEffect(() => {
+    const savePublicUsers = async () => {
+      const users = await getUsers()
+      setPublicUsers(users)
+    }
+    savePublicUsers()
+  }, [])
+
+  // Fetch the guilds
+  useEffect(() => {
+    const saveGuilds = async () => {
+      const guild = await getGuilds()
+      setGuildData(guild)
+    }
+    saveGuilds()
+  }, [])
+
+  // Map the guilds with the public users
+  useEffect(() => {
+    const mapGuildInfo = () => {
+      const guilds = publicUsers.map((publicUser) => {
+        const guild = guildData.find((g) => g.id === publicUser.guild_id)
+        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[publicUser.avatar.length - 1].avatar_url : ''
+        const userImages = publicUser.image_urls
+        const experience = publicUser.experience
+
+        return {
+          name: `${publicUser.first_name} ${publicUser.last_name}`,
+          username: publicUser.username,
+          description: publicUser.description,
+          image_urls: userImages,
+          guild: guild ? guild.guild_name : 'Unknown Guild',
+          avatarimg: avatarUrl.replace('glb', 'png'),
+          experience: experience,
+        }
+      })
+      setGuilds(guilds)
+    }
+
+    if (Array.isArray(publicUsers) && publicUsers.length !== 0 && Array.isArray(guildData) && guildData.length !== 0) {
+      mapGuildInfo()
+    }
+  }, [publicUsers, guildData])
+
+  // Handle the click on the HUD on the bottom of the screen | HUD as an bottom nav bar
   const handleHudClick = (index) => {
     setCurrentSlide(index)
     swiperRefs.current?.slideTo(index, 0)
   }
 
+  // Check if the screen is small
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
@@ -234,10 +327,25 @@ export default function VideoHome() {
                 <p className='text-lg font-semibold'>{guild.skills.join(', ')}</p>
               </div>
               <div className='flex w-full items-center justify-center'>
-                <div className='flex h-[400px] w-[550px] animate-pulse items-center justify-center rounded-xl bg-black/20'>
-                  <p className='text-2xl font-semibold '>
-                    Genius Profiles <br /> Comming Soon!!!
-                  </p>
+                <div className='w-[90%] max-w-[550px] rounded-xl bg-black/20 p-4'>
+                  <h2 className='mb-4 text-center text-2xl font-bold'>Guild Members</h2>
+                  <div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5'>
+                    {guilds
+                      .filter((user) => user.guild === guild.guild_name)
+                      .slice(0, 15)
+                      .map((user, userIndex) => (
+                        <div key={userIndex} className='flex flex-col items-center'>
+                          <Image
+                            src={user.avatarimg}
+                            alt={user.username}
+                            width={60}
+                            height={60}
+                            className='rounded-full'
+                          />
+                          <p className='mt-2 text-center text-xs font-medium'>{user.username}</p>
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -250,17 +358,6 @@ export default function VideoHome() {
             <div className='absolute bottom-0 z-30 flex justify-center lg:hidden'>
               <Image src={guild.symbol} height={80} width={80} alt='guild symbol' />
             </div>
-            {/* <div className='absolute right-36 z-20 flex h-[700px] w-[1000px]'>
-              {guild.guild_name === 'VAJRA' && (
-                <Image
-                  src='/homepage/VajraSplash.svg'
-                  height={700}
-                  width={1000}
-                  alt='guild symbol'
-                  className='rotate-12'
-                />
-              )}
-            </div> */}
           </SwiperSlide>
         ))}
 

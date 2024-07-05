@@ -14,7 +14,6 @@ const getUsers = async () => {
     }
     const users = await res.json()
 
-    console.log('users', users)
     const filteredUsers = users.filter(
       (user) =>
         user.first_name &&
@@ -96,6 +95,7 @@ const DiscoverPage = () => {
     setSearchTerm('')
   }
 
+  // Fetch the users data
   useEffect(() => {
     const savePublicUsers = async () => {
       const users = await getUsers()
@@ -104,6 +104,7 @@ const DiscoverPage = () => {
     savePublicUsers()
   }, [])
 
+  // Fetch the guilds data
   useEffect(() => {
     const saveGuilds = async () => {
       const guild = await getGuilds()
@@ -112,6 +113,7 @@ const DiscoverPage = () => {
     saveGuilds()
   }, [])
 
+  // Map the guilds with the public users
   useEffect(() => {
     const mapGuildInfo = () => {
       const guilds = publicUsers.map((publicUser) => {
