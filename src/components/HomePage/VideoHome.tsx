@@ -32,8 +32,8 @@ const getUsers = async () => {
 
     const filteredUsers = users.filter(
       (user) =>
-        user.first_name &&
-        user.last_name &&
+        // user.first_name &&
+        // user.last_name &&
         user.username &&
         user.email &&
         user.description &&

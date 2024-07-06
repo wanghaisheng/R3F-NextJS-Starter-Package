@@ -120,7 +120,7 @@ export default function GuildsSlide({ guild, guilds }) {
         </div>
       </div>
       <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
-        <source src={guild.guild_video} type='video/mp4' />
+        <source src={guild.guild_frame} type='video/mp4' />
       </video>
       <div className='absolute z-30 hidden h-full lg:right-20 lg:flex lg:items-center'>
         <Image src={guild.symbol} height={250} width={250} alt='guild symbol' />
