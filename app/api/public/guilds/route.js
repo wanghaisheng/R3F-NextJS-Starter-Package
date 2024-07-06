@@ -57,6 +57,17 @@ export async function GET(request) {
         guild_frame: true,
       },
     })
+
+    // Find the index of the element with guild_name: 'BUDDHA'
+    const buddhaIndex = guilds.findIndex((guild) => guild.guild_name === 'BUDDHA')
+
+    if (buddhaIndex > -1) {
+      // Remove the element from its current position
+      const [buddhaElement] = guilds.splice(buddhaIndex, 1)
+      // Insert the element at the first position
+      guilds.unshift(buddhaElement)
+    }
+
     return NextResponse.json(guilds)
   } catch (error) {
     console.error('error fetching guilds', error)

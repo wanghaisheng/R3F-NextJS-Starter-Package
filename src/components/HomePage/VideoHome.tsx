@@ -78,6 +78,8 @@ export default function VideoHome() {
 
   const [isPlaying, setIsPlaying] = useState(true) // State to track autoplay status
 
+  console.log(guildData)
+
   // Fetch the users and guilds data on mount
   useEffect(() => {
     const fetchDataAndMapGuildInfo = async () => {
