@@ -19,10 +19,17 @@ export default function ShowGuild({
   selectedRegionFilter: string
   searchTerm: string
 }) {
-  const [changePic, setChangePic] = useState(false)
+  const [changedPics, setChangedPics] = useState<{ [key: number]: boolean }>({})
+  const [showInfos, setShowInfos] = useState<{ [key: number]: boolean }>({})
 
-  const handlePicChange = () => {
-    setChangePic(!changePic)
+  // Change Pic
+  const handlePicChange = (index: number) => {
+    setChangedPics((prev) => ({ ...prev, [index]: !prev[index] }))
+  }
+
+  // Show Info
+  const handleShowInfo = (index: number) => {
+    setShowInfos((prev) => ({ ...prev, [index]: !prev[index] }))
   }
 
   // Filter based on guild, continent, and search term
@@ -42,10 +49,12 @@ export default function ShowGuild({
         <Swiper spaceBetween={2} slidesPerView={1} className='h-[300px] w-full'>
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
-              <button onClick={handlePicChange}>change</button>
-              <Link
-                href={`/public-profile/${user.username}`}
-                className='relative ml-4 flex h-[260px] w-[283px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
+              <button className='absolute right-8 top-2 z-40 cursor-crosshair' onClick={() => handlePicChange(index)}>
+                change
+              </button>
+              <div
+                onClick={() => handleShowInfo(index)}
+                className='relative ml-4 flex h-[260px] w-[283px] cursor-pointer flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
               >
                 <div
                   className='absolute inset-0 rounded-lg'
@@ -68,7 +77,7 @@ export default function ShowGuild({
                 >
                   {/* Image */}
                   <div className='relative size-full overflow-hidden rounded-lg'>
-                    {!changePic ? (
+                    {!changedPics[index] ? (
                       <Image
                         src={user.user_image}
                         alt={user.username}
@@ -87,32 +96,30 @@ export default function ShowGuild({
                         className='transition-all duration-1000 ease-in-out hover:scale-105'
                       />
                     )}
-                  </div>
-                </div>
-
-                {/* Username */}
-                <div
-                  className={`absolute left-0 top-0 flex h-full items-center pl-4 transition duration-500 ease-out hover:text-purple-300 `}
-                >
-                  <div className='flex flex-col items-center justify-center text-base font-extrabold drop-shadow'>
-                    {user.username.split('').map((letter, index) => (
-                      <span key={index}>{letter.toUpperCase()}</span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Hover Description */}
-                <div className='group absolute right-0 top-0'>
-                  <div>
-                    <CiCircleMore />
-                  </div>
-                  <HoverDescription top={2} left={-230} translateY={20}>
-                    <div className='size-[220px] rounded bg-white text-black'>
-                      <div>{user.description}</div>
+                    {/* Username */}
+                    <div
+                      className={`absolute left-0 top-0 flex h-full items-center pl-4 transition duration-500 ease-out hover:text-purple-300 `}
+                    >
+                      <div className='flex flex-col items-center justify-center text-base font-extrabold drop-shadow'>
+                        {user.username.split('').map((letter, index) => (
+                          <span key={index}>{letter.toUpperCase()}</span>
+                        ))}
+                      </div>
                     </div>
-                  </HoverDescription>
+                    {/* Description */}
+                    <div
+                      className={`absolute z-40 flex size-full justify-center transition-all duration-300 ease-in-out ${showInfos[index] ? 'top-[40%]' : 'top-[500px] '}`}
+                    >
+                      <div className='h-full w-[90%] rounded-lg bg-pink-300 shadow'>
+                        <div className='text-black'>
+                          <div>{user.description}</div>
+                        </div>
+                        <Link href={`/public-profile/${user.username}`}>View More</Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
