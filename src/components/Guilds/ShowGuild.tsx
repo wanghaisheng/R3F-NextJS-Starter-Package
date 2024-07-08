@@ -6,6 +6,7 @@ import Link from 'next/link'
 import HoverDescription from '../HoverEffect/HoverDescription'
 import Image from 'next/image'
 import { CiCircleMore } from 'react-icons/ci'
+import { useState } from 'react'
 
 export default function ShowGuild({
   users,
@@ -18,6 +19,12 @@ export default function ShowGuild({
   selectedRegionFilter: string
   searchTerm: string
 }) {
+  const [changePic, setChangePic] = useState(false)
+
+  const handlePicChange = () => {
+    setChangePic(!changePic)
+  }
+
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
@@ -27,7 +34,7 @@ export default function ShowGuild({
     )
   })
 
-  console.log('users', users)
+  console.log('user in shouwGuild', users)
 
   return (
     <div className='h-[300px] w-full'>
@@ -35,6 +42,7 @@ export default function ShowGuild({
         <Swiper spaceBetween={2} slidesPerView={1} className='h-[300px] w-full'>
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
+              <button onClick={handlePicChange}>change</button>
               <Link
                 href={`/public-profile/${user.username}`}
                 className='relative ml-4 flex h-[260px] w-[283px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
@@ -58,16 +66,33 @@ export default function ShowGuild({
                     }))`,
                   }}
                 >
-                  <Image
-                    src={user.avatarimg}
-                    alt={user.username}
-                    layout='fill'
-                    objectFit='cover'
-                    className='hover:scale-105'
-                  />
+                  {/* Image */}
+                  <div className='relative size-full overflow-hidden rounded-lg'>
+                    {!changePic ? (
+                      <Image
+                        src={user.user_image}
+                        alt={user.username}
+                        layout='fill'
+                        objectFit='cover'
+                        className='rounded-lg transition-all duration-1000 ease-in-out hover:scale-125'
+                        unoptimized
+                        loading='lazy'
+                      />
+                    ) : (
+                      <Image
+                        src={user.avatarimg}
+                        alt={user.username}
+                        layout='fill'
+                        objectFit='cover'
+                        className='transition-all duration-1000 ease-in-out hover:scale-105'
+                      />
+                    )}
+                  </div>
                 </div>
+
+                {/* Username */}
                 <div
-                  className={`group absolute left-0 top-0 flex size-full items-center rounded-lg pl-4 shadow transition duration-500 ease-out hover:text-purple-300 `}
+                  className={`absolute left-0 top-0 flex h-full items-center pl-4 transition duration-500 ease-out hover:text-purple-300 `}
                 >
                   <div className='flex flex-col items-center justify-center text-base font-extrabold drop-shadow'>
                     {user.username.split('').map((letter, index) => (
@@ -76,12 +101,13 @@ export default function ShowGuild({
                   </div>
                 </div>
 
+                {/* Hover Description */}
                 <div className='group absolute right-0 top-0'>
                   <div>
                     <CiCircleMore />
                   </div>
-                  <HoverDescription top={10} left={-180} translateY={20}>
-                    <div className='size-[200px] rounded bg-white text-black'>
+                  <HoverDescription top={2} left={-230} translateY={20}>
+                    <div className='size-[220px] rounded bg-white text-black'>
                       <div>{user.description}</div>
                     </div>
                   </HoverDescription>

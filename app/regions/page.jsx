@@ -54,6 +54,8 @@ const Regions = () => {
     setSearchTerm('')
   }
 
+  console.log('users', users)
+
   // Map the user data to the format needed for the Cesium component
   useEffect(() => {
     if (users.length && guilds.length) {
@@ -65,6 +67,8 @@ const Regions = () => {
         return {
           name: `${user.first_name} ${user.last_name}`,
           username: user.username,
+          user_image:
+            user.image_urls.length > 0 ? user.image_urls[user.image_urls.length - 1] : '/card/defaultbuddha.svg',
           description: user.description,
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
