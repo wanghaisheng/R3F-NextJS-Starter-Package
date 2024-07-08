@@ -3,6 +3,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import Link from 'next/link'
+import HoverDescription from '../HoverEffect/HoverDescription'
+import Image from 'next/image'
+import { CiCircleMore } from 'react-icons/ci'
 
 export default function ShowGuild({
   users,
@@ -24,6 +27,8 @@ export default function ShowGuild({
     )
   })
 
+  console.log('users', users)
+
   return (
     <div className='h-[300px] w-full'>
       {filteredFactions.length > 0 ? (
@@ -32,12 +37,12 @@ export default function ShowGuild({
             <SwiperSlide key={index}>
               <Link
                 href={`/public-profile/${user.username}`}
-                className='relative ml-4 flex h-[260px] w-[283px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+                className='relative ml-4 flex h-[260px] w-[283px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
               >
                 <div
                   className='absolute inset-0 rounded-lg'
                   style={{
-                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user.avatarimg})`,
+                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: `drop-shadow( 0px 0px 3px rgba(${
@@ -52,7 +57,15 @@ export default function ShowGuild({
                               : '255, 255, 255, 1'
                     }))`,
                   }}
-                ></div>
+                >
+                  <Image
+                    src={user.avatarimg}
+                    alt={user.username}
+                    layout='fill'
+                    objectFit='cover'
+                    className='hover:scale-105'
+                  />
+                </div>
                 <div
                   className={`group absolute left-0 top-0 flex size-full items-center rounded-lg pl-4 shadow transition duration-500 ease-out hover:text-purple-300 `}
                 >
@@ -61,6 +74,17 @@ export default function ShowGuild({
                       <span key={index}>{letter.toUpperCase()}</span>
                     ))}
                   </div>
+                </div>
+
+                <div className='group absolute right-0 top-0'>
+                  <div>
+                    <CiCircleMore />
+                  </div>
+                  <HoverDescription top={10} left={-180} translateY={20}>
+                    <div className='size-[200px] rounded bg-white text-black'>
+                      <div>{user.description}</div>
+                    </div>
+                  </HoverDescription>
                 </div>
               </Link>
             </SwiperSlide>

@@ -13,6 +13,7 @@ import GuildsSlide from './SlidesHomePage/GuildsSlide'
 import AvatarSlideHome from './SlidesHomePage/AvatarSlideHome'
 import HomeSlide from './SlidesHomePage/HomeSlide'
 import { FaPauseCircle, FaPlayCircle } from 'react-icons/fa'
+import useUserAndGuildData from '../CustomHooks/useUserAndGuildData'
 
 let cache = {
   users: null,
@@ -69,46 +70,35 @@ const getGuilds = async () => {
 }
 
 export default function VideoHome() {
+  const { users, guilds } = useUserAndGuildData()
   const paginationLabels = ['HOME', 'AVATAR', 'BUDDHA', 'VAJRA', 'KARMA', 'RATNA', 'PADMA', 'GGONE', 'DISCOVER']
   const swiperRefs = useRef(null)
-  const [currentSlide, setCurrentSlide] = useState(0) // Current slide index
-  const [isSmallScreen, setIsSmallScreen] = useState(false) // Check if the screen is small
-  const [guildData, setGuildData] = useState([]) // Guilds data
-  const [guilds, setGuilds] = useState([]) // Guilds data with user info
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const [mappedGuilds, setMappedGuilds] = useState([])
+  const [isPlaying, setIsPlaying] = useState(true)
 
-  const [isPlaying, setIsPlaying] = useState(true) // State to track autoplay status
-
-  console.log(guildData)
-
-  // Fetch the users and guilds data on mount
+  // Map the users and guilds data
   useEffect(() => {
-    const fetchDataAndMapGuildInfo = async () => {
-      const users = await getUsers()
-      const guildsData = await getGuilds()
+    if (users.length && guilds.length) {
+      const mappedData = users.map((user) => {
+        const guild = guilds.find((g) => g.id === user.guild_id)
+        const avatarUrl = user.avatar.length > 0 ? user.avatar[user.avatar.length - 1].avatar_url : ''
 
-      if (users.length && guildsData.length) {
-        const mappedGuilds = users.map((user) => {
-          const guild = guildsData.find((g) => g.id === user.guild_id)
-          const avatarUrl = user.avatar.length > 0 ? user.avatar[user.avatar.length - 1].avatar_url : ''
-
-          return {
-            name: `${user.first_name} ${user.last_name}`,
-            username: user.username,
-            description: user.description,
-            image_urls: user.image_urls,
-            faculty: user.faculty,
-            guild: guild ? guild.guild_name : 'Unknown Guild',
-            avatarimg: avatarUrl.replace('glb', 'png'),
-            experience: user.experience,
-          }
-        })
-        setGuildData(guildsData)
-        setGuilds(mappedGuilds)
-      }
+        return {
+          name: `${user.first_name} ${user.last_name}`,
+          username: user.username,
+          description: user.description,
+          image_urls: user.image_urls,
+          faculty: user.faculty,
+          guild: guild ? guild.guild_name : 'Unknown Guild',
+          avatarimg: avatarUrl.replace('glb', 'png'),
+          experience: user.experience,
+        }
+      })
+      setMappedGuilds(mappedData)
     }
-
-    fetchDataAndMapGuildInfo()
-  }, []) // this runs once on mount
+  }, [users, guilds])
 
   // Handle the click on the HUD on the bottom of the screen | HUD as an bottom nav bar
   const handleHudClick = (index) => {
@@ -168,9 +158,9 @@ export default function VideoHome() {
         </SwiperSlide>
 
         {/* Guilds Slide */}
-        {guildData.map((guild, index) => (
+        {guilds.map((guild, index) => (
           <SwiperSlide key={index} className='bg-cover bg-center'>
-            <GuildsSlide guild={guild} guilds={guilds} />
+            <GuildsSlide guild={guild} guilds={mappedGuilds} />
           </SwiperSlide>
         ))}
 
