@@ -2,9 +2,6 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
-import { Pagination, Scrollbar } from 'swiper/modules'
 import Link from 'next/link'
 
 export default function ShowGuild({
@@ -30,14 +27,7 @@ export default function ShowGuild({
   return (
     <div className='h-[300px] w-full'>
       {filteredFactions.length > 0 ? (
-        <Swiper
-          modules={[Pagination, Scrollbar]}
-          scrollbar={{ draggable: true, hide: false }}
-          pagination={{ clickable: true }}
-          spaceBetween={2}
-          slidesPerView={1}
-          className='h-[300px] w-full'
-        >
+        <Swiper spaceBetween={2} slidesPerView={1} className='h-[300px] w-full'>
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
               <Link
@@ -64,11 +54,13 @@ export default function ShowGuild({
                   }}
                 ></div>
                 <div
-                  className={`group absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
+                  className={`group absolute left-0 top-0 flex size-full items-center rounded-lg pl-4 shadow transition duration-500 ease-out hover:text-purple-300 `}
                 >
-                  <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
-                    {user.username.toUpperCase()}
-                  </h1>
+                  <div className='flex flex-col items-center justify-center text-base font-extrabold drop-shadow'>
+                    {user.username.split('').map((letter, index) => (
+                      <span key={index}>{letter.toUpperCase()}</span>
+                    ))}
+                  </div>
                 </div>
               </Link>
             </SwiperSlide>
