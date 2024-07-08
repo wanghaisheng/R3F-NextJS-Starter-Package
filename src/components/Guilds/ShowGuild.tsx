@@ -41,10 +41,8 @@ export default function ShowGuild({
     )
   })
 
-  console.log('user in shouwGuild', users)
-
   return (
-    <div className='h-[300px] w-full'>
+    <div className='h-[300px] w-full pt-3'>
       {filteredFactions.length > 0 ? (
         <Swiper spaceBetween={2} slidesPerView={1} className='h-[300px] w-full'>
           {filteredFactions.map((user, index) => (
@@ -110,11 +108,16 @@ export default function ShowGuild({
                     <div
                       className={`absolute z-40 flex size-full justify-center transition-all duration-300 ease-in-out ${showInfos[index] ? 'top-[40%]' : 'top-[500px] '}`}
                     >
-                      <div className='h-full w-[90%] rounded-lg bg-pink-300 shadow'>
+                      <div className='flex h-[67%] w-[90%] flex-col items-center rounded-lg bg-white/80 shadow backdrop-blur-md transition-all duration-300 ease-in-out'>
                         <div className='text-black'>
                           <div>{user.description}</div>
                         </div>
-                        <Link href={`/public-profile/${user.username}`}>View More</Link>
+                        <Link
+                          className='absolute bottom-5 text-blue-500 hover:text-blue-700 hover:underline'
+                          href={`/public-profile/${user.username}`}
+                        >
+                          View More
+                        </Link>
                       </div>
                     </div>
                   </div>

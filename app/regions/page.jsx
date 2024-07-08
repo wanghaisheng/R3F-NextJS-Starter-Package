@@ -54,8 +54,6 @@ const Regions = () => {
     setSearchTerm('')
   }
 
-  console.log('users', users)
-
   // Map the user data to the format needed for the Cesium component
   useEffect(() => {
     if (users.length && guilds.length) {
