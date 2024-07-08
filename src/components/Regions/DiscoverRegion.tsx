@@ -33,7 +33,7 @@ export default function DiscoverRegion({
 
   return (
     <>
-      <div className='flex size-full items-center justify-center'>
+      <div className='flex size-full flex-col items-center justify-center md:flex-row'>
         {/* Video section */}
         <div className='absolute top-0 h-screen w-full'>
           <video key={selectedGuildFilter} className='absolute inset-0 size-full object-cover' autoPlay loop muted>
@@ -51,6 +51,28 @@ export default function DiscoverRegion({
               <source src='/livewallpapers/forest.mp4' type='video/mp4' />
             )}
           </video>
+        </div>
+        {/* Rigth Side Filter section */}
+        <div className='z-10 mb-10 mt-24 transition-all duration-200 md:absolute md:right-4 md:my-0 md:w-[22%] lg:right-10 xl:right-20'>
+          <div className='flex h-fit w-full flex-col gap-y-2 md:h-[450px]'>
+            <div className='flex items-center gap-3 font-semibold'>
+              <button
+                className={`w-[100px] rounded bg-white p-2 text-black transition-all duration-300 dark:bg-pink-300/20 dark:text-white ${viewBusiness && 'bg-gray-400 dark:bg-pink-300/70'}`}
+                onClick={() => handleBusinessFilterView()}
+              >
+                BUSINESS
+              </button>
+              <button
+                className={`w-[100px] rounded bg-white p-2 text-black transition-all duration-300 dark:bg-pink-300/20 dark:text-white ${viewMates && 'bg-gray-400 dark:bg-pink-300/70'}`}
+                onClick={() => handleMatesFilterView()}
+              >
+                MATES
+              </button>
+              <button className='w-[100px] rounded bg-pink-300/20 p-2 text-black dark:text-white'>...</button>
+            </div>
+
+            <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
+          </div>
         </div>
         <div className='flex size-full flex-col items-center justify-center'>
           <div
@@ -76,25 +98,6 @@ export default function DiscoverRegion({
               />
             </div>
           </div>
-        </div>
-        <div className='absolute top-36 z-10 hidden h-[450px] flex-col gap-y-2 transition-all duration-300 lg:right-6 lg:flex lg:w-[250px] xl:right-20 xl:w-[320px]'>
-          <div className='flex w-full justify-between gap-x-2'>
-            <button
-              className={`w-full rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewBusiness && 'dark:bg-pink-300/70'}`}
-              onClick={() => handleBusinessFilterView()}
-            >
-              BUSINESS
-            </button>
-            <button
-              className={`w-full rounded bg-white p-2 transition-all duration-300 dark:bg-pink-300/20 ${viewMates && 'dark:bg-pink-300/70'}`}
-              onClick={() => handleMatesFilterView()}
-            >
-              MATES
-            </button>
-            <button className='w-full rounded bg-pink-300/20 p-2'>...</button>
-          </div>
-
-          <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
         </div>
       </div>
     </>

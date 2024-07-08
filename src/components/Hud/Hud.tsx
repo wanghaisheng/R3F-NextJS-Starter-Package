@@ -39,7 +39,7 @@ const Hud = () => {
   }, [pathname])
   return (
     <>
-      <motion.nav className='container fixed bottom-0 z-20 mx-auto flex flex-col items-center justify-center rounded-2xl text-gray-200 dark:text-purple-200 '>
+      <motion.nav className='container fixed bottom-0 z-40 mx-auto flex flex-col items-center justify-center rounded-2xl text-gray-200 dark:text-purple-200 '>
         {/* HUD */}
         {hideMiddleNav ? null : (
           <div className='container mx-auto flex h-16 items-center justify-center px-0 py-2 '>

@@ -2,10 +2,11 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
-import { Pagination, Scrollbar } from 'swiper/modules'
 import Link from 'next/link'
+import HoverDescription from '../HoverEffect/HoverDescription'
+import Image from 'next/image'
+import { CiCircleMore } from 'react-icons/ci'
+import { useState } from 'react'
 
 export default function ShowGuild({
   users,
@@ -18,36 +19,45 @@ export default function ShowGuild({
   selectedRegionFilter: string
   searchTerm: string
 }) {
+  const [changedPics, setChangedPics] = useState<{ [key: number]: boolean }>({})
+  const [showInfos, setShowInfos] = useState<{ [key: number]: boolean }>({})
+
+  // Change Pic
+  const handlePicChange = (index: number) => {
+    setChangedPics((prev) => ({ ...prev, [index]: !prev[index] }))
+  }
+
+  // Show Info
+  const handleShowInfo = (index: number) => {
+    setShowInfos((prev) => ({ ...prev, [index]: !prev[index] }))
+  }
+
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
       (filterguild ? user.guild === filterguild : true) &&
       (selectedRegionFilter ? user.continent === selectedRegionFilter.toUpperCase() : true) &&
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
 
   return (
-    <div className='h-[300px] w-full'>
+    <div className='h-[300px] w-full pt-3'>
       {filteredFactions.length > 0 ? (
-        <Swiper
-          modules={[Pagination, Scrollbar]}
-          scrollbar={{ draggable: true, hide: false }}
-          pagination={{ clickable: true }}
-          spaceBetween={2}
-          slidesPerView={1}
-          className='h-[300px] w-full'
-        >
+        <Swiper spaceBetween={2} slidesPerView={1} className='h-[300px] w-full'>
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
-              <Link
-                href={`/public-profile/${user.username}`}
-                className='relative ml-4 flex h-[260px] w-[283px] flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out hover:scale-105'
+              <button className='absolute right-8 top-2 z-40 cursor-crosshair' onClick={() => handlePicChange(index)}>
+                change
+              </button>
+              <div
+                onClick={() => handleShowInfo(index)}
+                className='relative ml-4 flex h-[260px] w-[283px] cursor-pointer flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
               >
                 <div
                   className='absolute inset-0 rounded-lg'
                   style={{
-                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%), url(${user.avatarimg})`,
+                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: `drop-shadow( 0px 0px 3px rgba(${
@@ -62,16 +72,57 @@ export default function ShowGuild({
                               : '255, 255, 255, 1'
                     }))`,
                   }}
-                ></div>
-                <span
-                  className={`group absolute bottom-0 flex w-full items-center rounded-b-md bg-purple-950/60 px-3 py-2 shadow transition duration-500 ease-out hover:bg-purple-900/80 hover:text-purple-300 `}
                 >
-                  <h1 className='flex w-full items-center justify-center gap-x-4 text-sm font-bold transition duration-300 ease-in-out'>
-                    {user.username.toUpperCase()}
-                  </h1>
-                </span>
-                <div className='invisible group-hover:visible'>{user.description}</div>
-              </Link>
+                  {/* Image */}
+                  <div className='relative size-full overflow-hidden rounded-lg'>
+                    {!changedPics[index] ? (
+                      <Image
+                        src={user.user_image}
+                        alt={user.username}
+                        layout='fill'
+                        objectFit='cover'
+                        className='rounded-lg transition-all duration-1000 ease-in-out hover:scale-125'
+                        unoptimized
+                        loading='lazy'
+                      />
+                    ) : (
+                      <Image
+                        src={user.avatarimg}
+                        alt={user.username}
+                        layout='fill'
+                        objectFit='cover'
+                        className='transition-all duration-1000 ease-in-out hover:scale-105'
+                      />
+                    )}
+                    {/* Username */}
+                    <div
+                      className={`absolute left-0 top-0 flex h-full items-center pl-4 transition duration-500 ease-out hover:text-purple-300 `}
+                    >
+                      <div className='flex flex-col items-center justify-center text-base font-extrabold drop-shadow'>
+                        {user.username.split('').map((letter, index) => (
+                          <span key={index}>{letter.toUpperCase()}</span>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Description */}
+                    <div
+                      className={`absolute z-40 flex size-full justify-center transition-all duration-300 ease-in-out ${showInfos[index] ? 'top-[40%]' : 'top-[500px] '}`}
+                    >
+                      <div className='flex h-[67%] w-[90%] flex-col items-center rounded-lg bg-white/80 shadow backdrop-blur-md transition-all duration-300 ease-in-out'>
+                        <div className='text-black'>
+                          <div>{user.description}</div>
+                        </div>
+                        <Link
+                          className='absolute bottom-5 text-blue-500 hover:text-blue-700 hover:underline'
+                          href={`/public-profile/${user.username}`}
+                        >
+                          View More
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

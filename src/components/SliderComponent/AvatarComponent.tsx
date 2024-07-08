@@ -25,8 +25,8 @@ async function getGuilds() {
   }
 }
 
-export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
-  const { user } = useUser()
+export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen, token }) {
+  const { user, updateUser } = useUser()
   const [avatarsData, setAvatarsData] = useState([])
   const [isCardModalOpen, setIsCardModalOpen] = useState(false)
   const [guildData, setGuildData] = useState([
@@ -176,6 +176,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
   const [selectedGuild, setSelectedGuild] = useState(guildData ? guildData[0].guild_name : 'BUDDHA') // Default selected guild is 'BUDDHA'
   const selectedGuildData = guildData ? guildData.find((guild) => guild.guild_name === selectedGuild) : null
   const [modelSrc, setModelSrc] = useState<string | null>(null)
+  const [faculty, setFaculty] = useState('')
 
   //GuildsData
   useEffect(() => {
@@ -196,6 +197,9 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
       const guild = guildData.find((guild) => guild.id === user.guild_id)
       if (guild) {
         setSelectedGuild(guild.guild_name)
+      }
+      if (user.faculty.primary_faculty) {
+        setFaculty(user.faculty.primary_faculty)
       }
     }
     if (user && guildData.length > 0) {
@@ -234,6 +238,10 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     try {
       const submit = {
         guild_id: selectedGuildData.id,
+        faculty: {
+          primary_faculty: faculty,
+          optional_faculty: '',
+        },
       }
       console.log(submit)
       await axios({
@@ -241,7 +249,8 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
         method: 'PUT',
         data: submit,
       })
-      revalidateUser()
+      // revalidateUser()
+      updateUser(token)
       toast.success('user guild updated')
       onNextButtonClick()
     } catch (error) {
@@ -369,6 +378,20 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                           {selectedGuildData.guild_name}
                         </h3>
                         <p className='mt-3 text-xl font-bold text-white'>{selectedGuildData.description}</p>
+                        <div className='flex overflow-auto gap-2 justify-center'>
+                          {selectedGuildData.faculty.map((element, index) => (
+                            <button
+                              key={index}
+                              className='hover:text-blue-400'
+                              onClick={() => setFaculty(element.faculty_name)}
+                              style={{
+                                color: faculty ? (faculty === element.faculty_name ? 'yellow' : '') : '',
+                              }}
+                            >
+                              {element.faculty_name.toUpperCase()}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                       <div className='absolute -right-14 top-20 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
                         <div className=' flex flex-col items-center justify-center p-4 text-lg font-extrabold'>

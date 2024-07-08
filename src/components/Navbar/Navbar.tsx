@@ -26,6 +26,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
     setShowSignUp(true)
+    setShowSignIn(false)
     setOpen(false)
   }
 
@@ -48,6 +49,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
       setProfilePic(user.image_urls[user.image_urls.length - 1])
     }
   }, [user, user?.image_urls?.length])
+
+  const logoutAndToggleSidebar = () => {
+    logout()
+    setIsSidebarOpen(true) // Opens the sidebar
+  }
 
   return (
     <>
@@ -83,7 +89,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 <div className='flex'>
                   <Link
                     href='/'
-                    onClick={logout}
+                    onClick={logoutAndToggleSidebar}
                     className='group z-10 hidden items-center justify-end rounded-full hover:scale-105 focus:outline-none lg:flex'
                     id='user-menu-button'
                     aria-label='Sign Out'
@@ -232,7 +238,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                 {user ? (
                   <Link
                     href='/'
-                    onClick={logout}
+                    onClick={logoutAndToggleSidebar}
                     className='py-4 text-red-500 hover:text-fuchsia-300'
                     aria-label='Sign Out'
                   >

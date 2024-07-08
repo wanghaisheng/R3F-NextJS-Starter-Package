@@ -96,10 +96,10 @@ export default function RegionHeader({ onFilterChange }: { onFilterChange: (filt
           </ul>
         </div>
       ) : (
-        <div className='fixed top-0 items-center justify-start font-semibold'>
-          <ul className='flex h-screen w-[330px] flex-col gap-y-2 overflow-hidden bg-gradient-to-r from-black/80 text-white'>
+        <div className='fixed left-0 top-0 flex h-screen w-[330px] flex-col items-start justify-center bg-gradient-to-r from-black/80 font-semibold'>
+          <ul className='flex flex-col gap-y-2 text-white'>
             <li
-              className={`mt-[40%] flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition-all duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'gap-x-9 bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
+              className={`flex cursor-pointer items-center gap-x-7 py-3 pl-10 transition-all duration-300 ease-out hover:scale-105 hover:text-purple-300 ${activeFilter === 'ASIA' && 'gap-x-9 bg-gradient-to-r from-purple-700/30 text-purple-200'}`}
               onClick={() => handleFilterClick('ASIA')}
             >
               <FaGlobeAsia

@@ -58,46 +58,35 @@ export default function ShowRegionCesium({
 
   return (
     <>
-      <div className='relative flex-1'>
-        <div className='flex size-full flex-col justify-center lg:flex-row lg:justify-end lg:pr-5'>
-          {/* <div>
+      <div className='relative'>
+        {/* <div>
             {countries.map((country) => (
               <div key={country.name.common}>
                 <h1>{country.name.common}</h1>
               </div>
             ))}
           </div> */}
-          <div className='size-full'>
-            <Suspense fallback={<div>Loading map...</div>}>
-              <div className='absolute top-0 h-screen w-full'>
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 0,
-                  }}
-                >
-                  {!mapChange ? (
-                    <CesiumMap filteredContinent={selectedRegionFilter} />
-                  ) : (
-                    <MapComponent filteredContinent={selectedRegionFilter} />
-                  )}
-                </div>
-              </div>
-            </Suspense>
-            {/* Guilds showcase */}
-            <button
-              className='absolute right-4 top-[350px] z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500 lg:top-20'
-              onClick={handleMapChange}
-            >
-              {mapChange ? <FaEarthAmericas className='size-6' /> : <FaMap className='size-6' />}
-            </button>
+        <div className='h-screen w-full'>
+          <Suspense fallback={<div>Loading map...</div>}>
+            <div className='fixed top-0 size-full'>
+              {!mapChange ? (
+                <CesiumMap filteredContinent={selectedRegionFilter} />
+              ) : (
+                <MapComponent filteredContinent={selectedRegionFilter} />
+              )}
+            </div>
+          </Suspense>
+          {/* Guilds showcase */}
+          <button
+            className='absolute right-4 top-[350px] z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500 lg:top-20'
+            onClick={handleMapChange}
+          >
+            {mapChange ? <FaEarthAmericas className='size-6' /> : <FaMap className='size-6' />}
+          </button>
 
+          <div className='flex size-full items-center justify-end overflow-hidden'>
             <div
-              className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${isSmallScreen ? 'absolute top-[300px] h-[36vh] w-full px-4' : 'absolute right-0 top-36 mr-4 h-[57vh]  w-[46vh] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'}`}
+              className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${isSmallScreen ? 'h-[36vh] w-full px-4' : 'mr-4 w-[22%] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'}`}
             >
               <GuildHeader
                 onFilterChange={handleFilterGuildChange}
@@ -105,7 +94,7 @@ export default function ShowRegionCesium({
                 setSearchTerm={setSearchTerm}
               />
 
-              <div className='flex w-full overflow-auto'>
+              <div className='flex w-full'>
                 <ShowGuild
                   users={guilds}
                   selectedRegionFilter={selectedRegionFilter}

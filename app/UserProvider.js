@@ -6,7 +6,6 @@ import UserClientProvider from './UserClientProvider.js'
 const fetchUserData = async (userId, token) => {
   const response = await fetch(`http://localhost:3000/api/internal/users/${userId}`, {
     method: 'GET',
-    cache: 'force-cache',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',

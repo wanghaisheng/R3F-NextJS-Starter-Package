@@ -7,18 +7,13 @@ import DiscoverRegion from '../Regions/DiscoverRegion'
 
 const getUsers = async () => {
   try {
-    const res = await fetch('/api/public/users', {
-      next: {
-        revalidate: 30,
-      },
-    })
+    const res = await fetch('/api/public/users')
     if (!res.ok) {
       toast.error('Failed to fetch users data')
       return []
     }
     const users = await res.json()
 
-    console.log('users', users)
     const filteredUsers = users.filter(
       (user) =>
         user.first_name &&
@@ -39,11 +34,7 @@ const getUsers = async () => {
 
 const getGuilds = async () => {
   try {
-    const res = await fetch('/api/public/guilds', {
-      next: {
-        revalidate: 30,
-      },
-    })
+    const res = await fetch('/api/public/guilds')
     if (!res.ok) {
       toast.error('Failed to fetch guilds data')
       return []
@@ -104,6 +95,7 @@ const DiscoverPage = () => {
     setSearchTerm('')
   }
 
+  // Fetch the users data
   useEffect(() => {
     const savePublicUsers = async () => {
       const users = await getUsers()
@@ -112,6 +104,7 @@ const DiscoverPage = () => {
     savePublicUsers()
   }, [])
 
+  // Fetch the guilds data
   useEffect(() => {
     const saveGuilds = async () => {
       const guild = await getGuilds()
@@ -120,6 +113,7 @@ const DiscoverPage = () => {
     saveGuilds()
   }, [])
 
+  // Map the guilds with the public users
   useEffect(() => {
     const mapGuildInfo = () => {
       const guilds = publicUsers.map((publicUser) => {

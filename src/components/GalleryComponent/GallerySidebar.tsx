@@ -11,11 +11,7 @@ import Image from 'next/image'
 
 const getUserByUsername = async (username) => {
   try {
-    const res = await fetch(`/api/public/users/${username}`, {
-      next: {
-        revalidate: 30,
-      },
-    })
+    const res = await fetch(`/api/public/users/${username}`)
     if (!res.ok) {
       return toast.error('Failed to get the user')
     }

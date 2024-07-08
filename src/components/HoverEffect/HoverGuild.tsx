@@ -58,8 +58,10 @@ const guildData = [
   },
 ]
 
+// NOTE:: Make sure to add group in the className of the parent element
+
 export default function HoverGuild({ hoveredGuild, top, left, translateY }) {
-  const guild = guildData.find((g) => g.guild_name === hoveredGuild.toUpperCase())
+  const guild = guildData.find((g) => g.guild_name === hoveredGuild)
 
   if (!guild) {
     return null

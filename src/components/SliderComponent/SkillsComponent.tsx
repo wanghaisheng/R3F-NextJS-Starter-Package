@@ -2,8 +2,7 @@
 
 import toast from 'react-hot-toast'
 import { useState, useEffect, useRef } from 'react'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider'
 import { FaArrowLeft } from 'react-icons/fa6'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -15,10 +14,9 @@ import axios from 'axios'
 import SkillsChartComponent from './SkillsChartComponent'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import Image from 'next/image'
 import { revalidateUser } from 'lib/actions'
 
-export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
+export default function SkillsComponent({ onPrevButtonClick, isSmallScreen, token }) {
   const { user } = useUser()
   const router = useRouter()
   const [skills, setSkills] = useState([
@@ -119,11 +117,11 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
 
   // state change handle for image upload
   useEffect(() => {
-    const saveImage = () => {
+    const updateImage = () => {
       handleImgUpdate(skillIndex, imageUrlsUpdate[imageUrlsUpdate.length - 1])
     }
     if (skillIndex && imageUrlsUpdate.length !== 0) {
-      saveImage()
+      updateImage()
     }
   }, [skillIndex, imageUrlsUpdate])
   // state change handle for image upload
@@ -139,7 +137,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
     try {
       await axios({
         url: `/api/internal/skills/${skills[index].skill_id}`,
-        method: 'put',
+        method: 'PUT',
         data: submit,
       })
       revalidateUser()
@@ -165,7 +163,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen }) {
       certification:
         imageUrlsSubmit.length !== 0
           ? imageUrlsSubmit[imageUrlsSubmit.length - 1]
-          : skills[index].certifications.length !== 0
+          : skills[index].certifications && skills[index].certifications.length !== 0
             ? skills[index].certifications
             : '',
     }

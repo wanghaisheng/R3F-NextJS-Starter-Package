@@ -2,53 +2,10 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
-import toast from 'react-hot-toast'
-import axios from 'axios'
-// Cesium import
+import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
+
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
 
-// fetching public users to diplay
-const getUsers = async () => {
-  try {
-    const res = await fetch('/api/public/users')
-    if (!res.ok) {
-      toast.error('Failed to fetch users data')
-      return []
-    }
-    const users = await res.json()
-    const filteredUsers = users.filter(
-      (user) =>
-        user.first_name &&
-        user.last_name &&
-        user.username &&
-        user.email &&
-        user.region.ip &&
-        user.avatar.length !== 0 &&
-        user.guild_id,
-    )
-    return filteredUsers
-  } catch (error) {
-    toast.error('Internal Server Error')
-    return []
-  }
-}
-
-// fetching guilds to map with public users for filtering
-const getGuilds = async () => {
-  try {
-    const res = await fetch('/api/public/guilds')
-    if (!res.ok) {
-      toast.error('Failed to fetch guilds data')
-      return []
-    }
-    return res.json()
-  } catch (error) {
-    toast.error('Internal Server Error')
-    return []
-  }
-}
-
-// continents static data
 const continents = [
   {
     continent_name: 'AFRICA',
@@ -81,68 +38,44 @@ const continents = [
 ]
 
 const Regions = () => {
-  const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA') // Default is Asia
-  const [selectedGuildFilter, setSelectedGuildFilter] = useState(null) // Default is all guilds
+  const { users, guilds } = useUserAndGuildData()
+  const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA')
+  const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [publicUsers, setPublicUsers] = useState([])
-  const [guildData, setGuildData] = useState([])
-  const [guilds, setGuilds] = useState([])
+  const [mappedGuilds, setMappedGuilds] = useState([])
 
-  // Filter by region
   const handleRegionFilterChange = (filter) => {
     setSelectedRegionFilter(filter)
     setSearchTerm('')
   }
 
-  // Filter by guild
   const handleFilterGuildChange = (filter) => {
     setSelectedGuildFilter(filter)
     setSearchTerm('')
   }
 
-  // Fetching public users
+  // Map the user data to the format needed for the Cesium component
   useEffect(() => {
-    const savePublicUsers = async () => {
-      const users = await getUsers()
-      setPublicUsers(users)
-    }
-    savePublicUsers()
-  }, [])
-
-  // Fetching guilds
-  useEffect(() => {
-    const saveGuilds = async () => {
-      const guild = await getGuilds()
-      setGuildData(guild)
-    }
-    saveGuilds()
-  }, [])
-
-  // Mapping guilds with public users
-  useEffect(() => {
-    const mapGuildInfo = () => {
-      const guilds = publicUsers.map((publicUser) => {
-        const guild = guildData.find((g) => g.id === publicUser.guild_id)
-        const continent = continents.find((continent) => continent.continent_code === publicUser.region.continent_code)
-        const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
+    if (users.length && guilds.length) {
+      const mappedData = users.map((user) => {
+        const guild = guilds.find((g) => g.id === user.guild_id)
+        const continent = continents.find((continent) => continent.continent_code === user.region.continent_code)
+        const avatarUrl = user.avatar.length > 0 ? user.avatar[0].avatar_url : ''
 
         return {
-          name: `${publicUser.first_name} ${publicUser.last_name}`,
-          username: publicUser.username,
-          description: publicUser.description,
+          name: `${user.first_name} ${user.last_name}`,
+          username: user.username,
+          user_image:
+            user.image_urls.length > 0 ? user.image_urls[user.image_urls.length - 1] : '/card/defaultbuddha.svg',
+          description: user.description,
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
           continent: continent ? continent.continent_name : 'Unknown Continent',
         }
       })
-      setGuilds(guilds) // Set guilds to state
+      setMappedGuilds(mappedData)
     }
-
-    // Check if publicUsers and guildData are not empty
-    if (Array.isArray(publicUsers) && publicUsers.length !== 0 && Array.isArray(guildData) && guildData.length !== 0) {
-      mapGuildInfo()
-    }
-  }, [publicUsers, guildData])
+  }, [users, guilds])
 
   return (
     <>
@@ -150,7 +83,7 @@ const Regions = () => {
         <div className='flex flex-col justify-center lg:justify-start'>
           <ShowRegionCesium
             selectedRegionFilter={selectedRegionFilter}
-            guilds={guilds}
+            guilds={mappedGuilds}
             selectedGuildFilter={selectedGuildFilter}
             searchTerm={searchTerm}
             handleFilterGuildChange={handleFilterGuildChange}
