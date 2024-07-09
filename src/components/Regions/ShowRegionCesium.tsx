@@ -1,35 +1,40 @@
 'use client'
 import dynamic from 'next/dynamic'
+import { useState, useEffect, Suspense } from 'react'
+import ShowGuild from '../Guilds/ShowGuild'
+import Image from 'next/image'
 
 // Import the CesiumMap component dynamically
 const CesiumMap = dynamic(() => import('../LeafletMap/CesiumMap'), {
   ssr: false,
 })
-import { useState, useEffect } from 'react'
-import { Suspense } from 'react'
-import ShowGuild from '../Guilds/ShowGuild'
-import GuildHeader from '../Guilds/GuildHeader'
 
 // Import the LeafletMap component dynamically
 const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
   ssr: false,
 })
-import Image from 'next/image'
+
+interface Guild {
+  name: string
+  username: string
+  user_image: string
+  description: string
+  guild: string
+  avatarimg: string
+  continent: string
+  country: string
+}
 
 export default function ShowRegionCesium({
   selectedRegionFilter,
   guilds,
   selectedGuildFilter,
   searchTerm,
-  handleFilterGuildChange,
-  setSearchTerm,
 }: {
   selectedRegionFilter: string
-  guilds: any
+  guilds: Guild[]
   selectedGuildFilter: string
   searchTerm: string
-  handleFilterGuildChange: (event: any) => void
-  setSearchTerm: (event: any) => void
 }) {
   const [mapChange, setMapChange] = useState(true)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -82,14 +87,12 @@ export default function ShowRegionCesium({
 
         <div className='flex size-full items-center justify-end overflow-hidden'>
           <div
-            className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${isSmallScreen ? 'h-[36vh] w-full px-4' : 'mr-4 w-[22%] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'}`}
+            className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${
+              isSmallScreen
+                ? 'h-[36vh] w-full px-4'
+                : 'mr-4 w-[22%] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'
+            }`}
           >
-            <GuildHeader
-              onFilterChange={handleFilterGuildChange}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-            />
-
             <div className='flex w-full'>
               <ShowGuild
                 users={guilds}

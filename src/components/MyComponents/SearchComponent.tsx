@@ -11,12 +11,26 @@ const continentCountryMap = {
   Oceania: ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea'],
 }
 
-export default function SearchComponent() {
+export default function SearchComponent({
+  onRegionChange,
+  onCountryChange,
+  onGuildChange,
+  searchTerm,
+  setSearchTerm,
+  guilds,
+}: {
+  onRegionChange: (region: string) => void
+  onCountryChange: (country: string) => void
+  onGuildChange: (guild: string) => void
+  searchTerm: string
+  setSearchTerm: (searchTerm: string) => void
+  guilds: string[]
+}) {
   const [focus, setFocus] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
-  const [availableCountries, setAvailableCountries] = useState([])
-  const containerRef = useRef(null)
+  const [availableCountries, setAvailableCountries] = useState<string[]>([])
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const continents = Object.keys(continentCountryMap)
 
@@ -30,8 +44,8 @@ export default function SearchComponent() {
   }, [selectedContinent])
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setFocus(false)
       }
     }
@@ -46,24 +60,34 @@ export default function SearchComponent() {
     setFocus(true)
   }
 
-  const handleContinentSelect = (continent) => {
+  const handleContinentSelect = (continent: string) => {
     setSelectedContinent(continent)
+    onRegionChange(continent)
   }
 
-  const handleCountrySelect = (country) => {
+  const handleCountrySelect = (country: string) => {
     setSelectedCountry(country)
+    onCountryChange(country)
+  }
+
+  const handleGuildSelect = (guild: string) => {
+    onGuildChange(guild)
+  }
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value)
   }
 
   return (
     <div
       ref={containerRef}
-      className={`z-40 flex w-[35%] flex-col items-start rounded-2xl bg-white text-black ${
+      className={`flex w-full flex-col items-start rounded-2xl bg-white text-black ${
         focus ? 'p-5' : 'p-2'
       } transition-all duration-500 ease-in-out`}
       onClick={handleFocus}
     >
       <div className='flex w-full'>
-        <input className='mr-2 grow' placeholder='SEARCH' />
+        <input className='mr-2 grow' placeholder='SEARCH' value={searchTerm} onChange={handleSearchChange} />
         <DropdownComponent
           data={continents}
           onSelect={handleContinentSelect}
@@ -76,20 +100,8 @@ export default function SearchComponent() {
           placeholder='Select a country'
           disabled={!selectedContinent}
         />
-        <DropdownComponent
-          data={availableCountries}
-          onSelect={handleCountrySelect}
-          placeholder='Select guilds'
-          disabled={!selectedContinent}
-        />
+        <DropdownComponent data={guilds} onSelect={handleGuildSelect} placeholder='Select guilds' disabled={false} />
       </div>
-
-      {focus && (
-        <div className='mt-4 w-full'>
-          {selectedContinent && <p className='text-sm'>Selected continent: {selectedContinent}</p>}
-          {selectedCountry && <p className='mt-2 text-sm'>Selected country: {selectedCountry}</p>}
-        </div>
-      )}
     </div>
   )
 }
