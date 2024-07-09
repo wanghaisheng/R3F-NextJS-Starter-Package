@@ -86,7 +86,7 @@ export default function SearchComponent({
       ref={containerRef}
       className={`relative flex w-full flex-col items-start transition-all duration-500 ease-in-out`}
     >
-      <div className='flex w-full items-center justify-between gap-x-2 rounded-full bg-white p-4'>
+      <div className='flex w-full items-center justify-between gap-x-2 rounded-full bg-white p-4 drop-shadow-xl'>
         <div className='relative flex w-full max-w-lg items-center'>
           <IoSearch className='absolute left-4 size-5 text-gray-500' />
           <input
