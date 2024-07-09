@@ -14,8 +14,7 @@ import GuildHeader from '../Guilds/GuildHeader'
 const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
   ssr: false,
 })
-import { FaEarthAmericas } from 'react-icons/fa6'
-import { FaMap } from 'react-icons/fa'
+import Image from 'next/image'
 
 // async function getCountries() {
 //   // const response = await fetch('https://restcountries.com/v3.1/all')
@@ -58,50 +57,53 @@ export default function ShowRegionCesium({
 
   return (
     <>
-      <div className='relative'>
-        {/* <div>
-            {countries.map((country) => (
-              <div key={country.name.common}>
-                <h1>{country.name.common}</h1>
-              </div>
-            ))}
-          </div> */}
-        <div className='h-screen w-full'>
-          <Suspense fallback={<div>Loading map...</div>}>
-            <div className='fixed top-0 size-full'>
-              {!mapChange ? (
-                <CesiumMap filteredContinent={selectedRegionFilter} />
-              ) : (
-                <MapComponent filteredContinent={selectedRegionFilter} />
-              )}
+      <div className='relative h-screen w-full'>
+        {/* Guilds showcase */}
+        <div className='absolute bottom-3 left-8 z-50 size-16 rounded-lg border border-white '>
+          <div className='relative size-full overflow-hidden rounded-lg ' onClick={handleMapChange}>
+            <Image
+              src={` ${mapChange ? '/img/earth.png' : '/img/worldmap.png'}`}
+              alt={` ${mapChange ? 'cesium' : 'world map'}`}
+              fill
+              objectFit='cover'
+              unoptimized
+              loading='lazy'
+              className='rounded-lg transition-all duration-300 ease-in-out hover:scale-110'
+            />
+            <div className='absolute top-0 flex size-full items-center justify-center bg-black/40'>
+              <p className='text-[8px] font-semibold'>{mapChange ? 'SATELLITE' : 'DEFAULT'}</p>
             </div>
-          </Suspense>
-          {/* Guilds showcase */}
-          <button
-            className='absolute right-4 top-[350px] z-30 flex cursor-pointer items-center justify-center rounded border border-purple-700 bg-purple-950/20 p-2 transition-all ease-in-out hover:border-purple-500 lg:top-20'
-            onClick={handleMapChange}
+          </div>
+        </div>
+
+        {/* Map and Cesium */}
+        <Suspense fallback={<div>Loading map...</div>}>
+          <div className='fixed top-0 size-full'>
+            {!mapChange ? (
+              <CesiumMap filteredContinent={selectedRegionFilter} />
+            ) : (
+              <MapComponent filteredContinent={selectedRegionFilter} />
+            )}
+          </div>
+        </Suspense>
+
+        <div className='flex size-full items-center justify-end overflow-hidden'>
+          <div
+            className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${isSmallScreen ? 'h-[36vh] w-full px-4' : 'mr-4 w-[22%] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'}`}
           >
-            {mapChange ? <FaEarthAmericas className='size-6' /> : <FaMap className='size-6' />}
-          </button>
+            <GuildHeader
+              onFilterChange={handleFilterGuildChange}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
 
-          <div className='flex size-full items-center justify-end overflow-hidden'>
-            <div
-              className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${isSmallScreen ? 'h-[36vh] w-full px-4' : 'mr-4 w-[22%] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'}`}
-            >
-              <GuildHeader
-                onFilterChange={handleFilterGuildChange}
+            <div className='flex w-full'>
+              <ShowGuild
+                users={guilds}
+                selectedRegionFilter={selectedRegionFilter}
+                filterguild={selectedGuildFilter}
                 searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
               />
-
-              <div className='flex w-full'>
-                <ShowGuild
-                  users={guilds}
-                  selectedRegionFilter={selectedRegionFilter}
-                  filterguild={selectedGuildFilter}
-                  searchTerm={searchTerm}
-                />
-              </div>
             </div>
           </div>
         </div>
