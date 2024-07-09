@@ -1,15 +1,22 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function DropdownComponent({ data, onSelect, placeholder, disabled }) {
+interface DropdownComponentProps {
+  data: string[]
+  onSelect: (selected: string) => void
+  placeholder: string
+  disabled: boolean
+  value: string
+}
+
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ data, onSelect, placeholder, disabled, value }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedItem, setSelectedItem] = useState('')
-  const dropdownRef = useRef(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
@@ -18,8 +25,7 @@ export default function DropdownComponent({ data, onSelect, placeholder, disable
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleSelect = (item) => {
-    setSelectedItem(item)
+  const handleSelect = (item: string) => {
     setIsOpen(false)
     onSelect(item)
   }
@@ -28,17 +34,19 @@ export default function DropdownComponent({ data, onSelect, placeholder, disable
     <div className='relative mb-4 w-64' ref={dropdownRef}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`w-full rounded-md border border-gray-300 bg-white p-2 text-left shadow-sm transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`flex w-full items-center justify-between rounded-md border border-gray-300 bg-white p-2 text-left shadow-sm transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 ${
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
         }`}
         disabled={disabled}
       >
-        <p
-          className={`bg-white transition-all duration-300 ease-in-out ${selectedItem ? 'absolute left-4 top-[-8px] text-[10px]' : 'text-sm'}`}
-        >
-          {placeholder}
+        <p>
+          <span
+            className={`bg-white transition-all duration-300 ease-in-out ${value ? 'absolute left-4 top-[-8px] text-[10px]' : 'text-sm'}`}
+          >
+            {placeholder}
+          </span>
+          {value}
         </p>
-        {selectedItem}
         <span className='float-right'>▼</span>
       </button>
       <AnimatePresence>
@@ -66,3 +74,5 @@ export default function DropdownComponent({ data, onSelect, placeholder, disable
     </div>
   )
 }
+
+export default DropdownComponent

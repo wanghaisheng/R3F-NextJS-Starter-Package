@@ -29,20 +29,23 @@ export default function SearchComponent({
   const [focus, setFocus] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
+  const [selectedGuild, setSelectedGuild] = useState('')
   const [availableCountries, setAvailableCountries] = useState<string[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const continents = Object.keys(continentCountryMap)
+  const continents = ['All', ...Object.keys(continentCountryMap)] // ['All', 'North America', 'Europe', 'Asia', 'South America', 'Africa', 'Oceania']
 
+  // When selectedContinent changes
   useEffect(() => {
     if (selectedContinent) {
-      setAvailableCountries(continentCountryMap[selectedContinent])
+      setAvailableCountries(['All', ...continentCountryMap[selectedContinent]])
       setSelectedCountry('')
     } else {
-      setAvailableCountries([])
+      setAvailableCountries(['All'])
     }
   }, [selectedContinent])
 
+  // When clicked outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -56,26 +59,45 @@ export default function SearchComponent({
     }
   }, [])
 
+  // When focus
   const handleFocus = () => {
     setFocus(true)
   }
 
+  // When continent is selected
   const handleContinentSelect = (continent: string) => {
-    setSelectedContinent(continent)
-    onRegionChange(continent)
+    const newContinent = continent === 'All' ? '' : continent
+    setSelectedContinent(newContinent)
+    onRegionChange(newContinent)
   }
 
+  // When country is selected
   const handleCountrySelect = (country: string) => {
-    setSelectedCountry(country)
-    onCountryChange(country)
+    const newCountry = country === 'All' ? '' : country
+    setSelectedCountry(newCountry)
+    onCountryChange(newCountry)
   }
 
+  // When guild is selected
   const handleGuildSelect = (guild: string) => {
-    onGuildChange(guild)
+    const newGuild = guild === 'All' ? '' : guild
+    setSelectedGuild(newGuild)
+    onGuildChange(newGuild)
   }
 
+  // When search
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
+  }
+
+  const clearAll = () => {
+    setSelectedContinent('')
+    setSelectedCountry('')
+    setSelectedGuild('')
+    setSearchTerm('')
+    onRegionChange('')
+    onCountryChange('')
+    onGuildChange('')
   }
 
   return (
@@ -93,14 +115,28 @@ export default function SearchComponent({
           onSelect={handleContinentSelect}
           placeholder='Select a continent'
           disabled={false}
+          value={selectedContinent}
         />
         <DropdownComponent
           data={availableCountries}
           onSelect={handleCountrySelect}
           placeholder='Select a country'
-          disabled={!selectedContinent}
+          disabled={!selectedContinent || selectedContinent === 'All'}
+          value={selectedCountry}
         />
-        <DropdownComponent data={guilds} onSelect={handleGuildSelect} placeholder='Select guilds' disabled={false} />
+        <DropdownComponent
+          data={['All', ...guilds]}
+          onSelect={handleGuildSelect}
+          placeholder='Select guilds'
+          disabled={false}
+          value={selectedGuild}
+        />
+        <button
+          onClick={clearAll}
+          className='whitespace-nowrap rounded bg-gray-200 px-4 py-2 text-xs font-bold text-gray-800 hover:bg-gray-300'
+        >
+          Clear All
+        </button>
       </div>
     </div>
   )

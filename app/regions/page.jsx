@@ -48,7 +48,6 @@ const Regions = () => {
 
   const handleRegionFilterChange = (filter) => {
     setSelectedRegionFilter(filter.toUpperCase())
-    setSearchTerm('')
   }
 
   const handleCountryFilterChange = (filter) => {
@@ -82,6 +81,7 @@ const Regions = () => {
     }
   }, [users, guilds])
 
+  // Filter the guilds based on the selected region, country, guild, and search term
   const filteredGuilds = mappedGuilds.filter((guild) => {
     const matchesRegion = selectedRegionFilter ? guild.continent === selectedRegionFilter : true
     const matchesCountry = selectedCountryFilter ? guild.country === selectedCountryFilter : true
