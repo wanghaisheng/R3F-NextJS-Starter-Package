@@ -1,4 +1,4 @@
-export default function SearchComponent() {
+export default function SidebarSearchComponent() {
   // const { user } = useUser()
 
   return (

@@ -16,13 +16,6 @@ const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
 })
 import Image from 'next/image'
 
-// async function getCountries() {
-//   // const response = await fetch('https://restcountries.com/v3.1/all')
-//   const response = await fetch('https://restcountries.com/v3.1/region/asia')
-//   const data = await response.json()
-//   return data
-// }
-
 export default function ShowRegionCesium({
   selectedRegionFilter,
   guilds,

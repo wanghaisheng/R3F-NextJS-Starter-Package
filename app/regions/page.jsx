@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
+import SearchComponent from '@/components/MyComponents/SearchComponent'
 
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
 
@@ -80,6 +81,9 @@ const Regions = () => {
   return (
     <>
       <div className='relative'>
+        <div className='absolute top-28 flex w-full justify-center'>
+          <SearchComponent />
+        </div>
         <div className='flex flex-col justify-center lg:justify-start'>
           <ShowRegionCesium
             selectedRegionFilter={selectedRegionFilter}
@@ -90,9 +94,9 @@ const Regions = () => {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <div className='mt-24 lg:mt-0'>
+        {/* <div className='mt-24 lg:mt-0'>
           <RegionHeader onFilterChange={handleRegionFilterChange} />
-        </div>
+        </div> */}
       </div>
     </>
   )
