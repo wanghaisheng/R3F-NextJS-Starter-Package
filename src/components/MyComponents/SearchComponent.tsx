@@ -26,7 +26,6 @@ export default function SearchComponent({
   setSearchTerm: (searchTerm: string) => void
   guilds: string[]
 }) {
-  const [focus, setFocus] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedGuild, setSelectedGuild] = useState('')
@@ -44,25 +43,6 @@ export default function SearchComponent({
       setAvailableCountries(['All'])
     }
   }, [selectedContinent])
-
-  // When clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setFocus(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
-
-  // When focus
-  const handleFocus = () => {
-    setFocus(true)
-  }
 
   // When continent is selected
   const handleContinentSelect = (continent: string) => {
@@ -103,10 +83,7 @@ export default function SearchComponent({
   return (
     <div
       ref={containerRef}
-      className={`flex w-full flex-col items-start rounded-2xl bg-white text-black ${
-        focus ? 'p-5' : 'p-2'
-      } transition-all duration-500 ease-in-out`}
-      onClick={handleFocus}
+      className={`flex w-full flex-col items-start rounded-2xl bg-white p-2 text-black transition-all duration-500 ease-in-out`}
     >
       <div className='flex w-full'>
         <input className='mr-2 grow' placeholder='SEARCH' value={searchTerm} onChange={handleSearchChange} />

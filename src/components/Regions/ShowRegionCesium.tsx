@@ -90,7 +90,7 @@ export default function ShowRegionCesium({
             className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${
               isSmallScreen
                 ? 'h-[36vh] w-full px-4'
-                : 'mr-4 w-[22%] rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90%  p-2 shadow-md backdrop-blur-md'
+                : 'mr-4 flex w-[22%] items-center justify-center rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% shadow-md backdrop-blur-md'
             }`}
           >
             <div className='flex w-full'>
