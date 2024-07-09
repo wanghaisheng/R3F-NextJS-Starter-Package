@@ -77,7 +77,7 @@ const continents = [
   },
 ]
 
-const DiscoverPage = () => {
+const DiscoverPage = ({ facultyTags }) => {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA') // Using continent asia
   const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -154,6 +154,7 @@ const DiscoverPage = () => {
             searchTerm={searchTerm}
             handleFilterGuildChange={handleFilterGuildChange}
             setSearchTerm={setSearchTerm}
+            facultyTags={facultyTags}
           />
         </div>
         <div className='absolute top-20 flex w-full justify-center lg:top-32 lg:justify-start'>
