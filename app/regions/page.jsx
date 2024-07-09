@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import RegionHeader from '@/components/Regions/RegionHeader'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
+import SearchComponent from '@/components/MyComponents/SearchComponent'
 
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
 
@@ -40,18 +41,21 @@ const continents = [
 const Regions = () => {
   const { users, guilds } = useUserAndGuildData()
   const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA')
-  const [selectedGuildFilter, setSelectedGuildFilter] = useState(null)
+  const [selectedGuildFilter, setSelectedGuildFilter] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [mappedGuilds, setMappedGuilds] = useState([])
+  const [selectedCountryFilter, setSelectedCountryFilter] = useState('')
 
   const handleRegionFilterChange = (filter) => {
-    setSelectedRegionFilter(filter)
-    setSearchTerm('')
+    setSelectedRegionFilter(filter.toUpperCase())
   }
 
-  const handleFilterGuildChange = (filter) => {
+  const handleCountryFilterChange = (filter) => {
+    setSelectedCountryFilter(filter)
+  }
+
+  const handleGuildFilterChange = (filter) => {
     setSelectedGuildFilter(filter)
-    setSearchTerm('')
   }
 
   // Map the user data to the format needed for the Cesium component
@@ -77,21 +81,41 @@ const Regions = () => {
     }
   }, [users, guilds])
 
+  // Filter the guilds based on the selected region, country, guild, and search term
+  const filteredGuilds = mappedGuilds.filter((guild) => {
+    const matchesRegion = selectedRegionFilter ? guild.continent === selectedRegionFilter : true
+    const matchesCountry = selectedCountryFilter ? guild.country === selectedCountryFilter : true
+    const matchesGuild = selectedGuildFilter ? guild.guild === selectedGuildFilter : true
+    const matchesSearch = searchTerm
+      ? guild.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        guild.username.toLowerCase().includes(searchTerm.toLowerCase())
+      : true
+
+    return matchesRegion && matchesCountry && matchesGuild && matchesSearch
+  })
+
   return (
     <>
       <div className='relative'>
+        <div className='absolute top-28 flex w-full justify-center'>
+          <div className='z-40 w-[50%]'>
+            <SearchComponent
+              onRegionChange={handleRegionFilterChange}
+              onCountryChange={handleCountryFilterChange}
+              onGuildChange={handleGuildFilterChange}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              guilds={guilds.map((g) => g.guild_name)}
+            />
+          </div>
+        </div>
         <div className='flex flex-col justify-center lg:justify-start'>
           <ShowRegionCesium
             selectedRegionFilter={selectedRegionFilter}
-            guilds={mappedGuilds}
+            guilds={filteredGuilds}
             selectedGuildFilter={selectedGuildFilter}
             searchTerm={searchTerm}
-            handleFilterGuildChange={handleFilterGuildChange}
-            setSearchTerm={setSearchTerm}
           />
-        </div>
-        <div className='mt-24 lg:mt-0'>
-          <RegionHeader onFilterChange={handleRegionFilterChange} />
         </div>
       </div>
     </>
