@@ -31,22 +31,15 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ data, onSelect, p
   }
 
   return (
-    <div className='relative mb-4 w-64' ref={dropdownRef}>
+    <div ref={dropdownRef}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`flex w-full items-center justify-between rounded-md border border-gray-300 bg-white p-2 text-left shadow-sm transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`flex items-center justify-between whitespace-nowrap rounded-full border border-gray-300 bg-violet-400 px-4 py-2 text-left text-sm text-white shadow-sm transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 ${
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
         }`}
         disabled={disabled}
       >
-        <p>
-          <span
-            className={`bg-white transition-all duration-300 ease-in-out ${value ? 'absolute left-4 top-[-8px] text-[10px]' : 'text-sm'}`}
-          >
-            {placeholder}
-          </span>
-          {value}
-        </p>
+        <p>{value || placeholder}</p>
         <span className='float-right'>▼</span>
       </button>
       <AnimatePresence>
@@ -56,14 +49,14 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ data, onSelect, p
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white shadow-lg'
+            className='absolute left-0 top-16 z-20 grid w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg'
           >
             {data.map((item) => (
               <motion.li
                 key={item}
                 whileHover={{ backgroundColor: '#f3f4f6' }}
                 onClick={() => handleSelect(item)}
-                className='cursor-pointer px-4 py-2 hover:bg-gray-100'
+                className='flex h-32 cursor-pointer items-center justify-center rounded-lg border bg-gray-200 px-4 py-2'
               >
                 {item}
               </motion.li>

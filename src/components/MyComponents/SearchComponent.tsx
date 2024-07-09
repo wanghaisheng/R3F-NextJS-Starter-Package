@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import DropdownComponent from './DropDownMenu'
+import { IoSearch } from 'react-icons/io5'
+import { MdClear } from 'react-icons/md'
 
 const continentCountryMap = {
   'North America': ['United States', 'Canada', 'Mexico'],
@@ -8,7 +10,7 @@ const continentCountryMap = {
   Asia: ['Japan', 'China', 'India', 'South Korea', 'Thailand'],
   'South America': ['Brazil', 'Argentina', 'Colombia', 'Peru', 'Chile'],
   Africa: ['South Africa', 'Egypt', 'Nigeria', 'Kenya', 'Morocco'],
-  Oceania: ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea'],
+  'Australia & Oceania': ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea'],
 }
 
 export default function SearchComponent({
@@ -74,7 +76,6 @@ export default function SearchComponent({
     setSelectedContinent('')
     setSelectedCountry('')
     setSelectedGuild('')
-    setSearchTerm('')
     onRegionChange('')
     onCountryChange('')
     onGuildChange('')
@@ -83,37 +84,49 @@ export default function SearchComponent({
   return (
     <div
       ref={containerRef}
-      className={`flex w-full flex-col items-start rounded-2xl bg-white p-2 text-black transition-all duration-500 ease-in-out`}
+      className={`relative flex w-full flex-col items-start transition-all duration-500 ease-in-out`}
     >
-      <div className='flex w-full'>
-        <input className='mr-2 grow' placeholder='SEARCH' value={searchTerm} onChange={handleSearchChange} />
-        <DropdownComponent
-          data={continents}
-          onSelect={handleContinentSelect}
-          placeholder='Select a continent'
-          disabled={false}
-          value={selectedContinent}
-        />
-        <DropdownComponent
-          data={availableCountries}
-          onSelect={handleCountrySelect}
-          placeholder='Select a country'
-          disabled={!selectedContinent || selectedContinent === 'All'}
-          value={selectedCountry}
-        />
-        <DropdownComponent
-          data={['All', ...guilds]}
-          onSelect={handleGuildSelect}
-          placeholder='Select guilds'
-          disabled={false}
-          value={selectedGuild}
-        />
-        <button
-          onClick={clearAll}
-          className='whitespace-nowrap rounded bg-gray-200 px-4 py-2 text-xs font-bold text-gray-800 hover:bg-gray-300'
-        >
-          Clear All
-        </button>
+      <div className='flex w-full items-center justify-between gap-x-2 rounded-full bg-white p-4'>
+        <div className='relative flex w-full max-w-lg items-center'>
+          <IoSearch className='absolute left-4 size-5 text-gray-500' />
+          <input
+            type='search'
+            placeholder='Search'
+            onChange={handleSearchChange}
+            className='w-full rounded-full bg-gray-100 py-2 pl-12 pr-4 text-gray-700'
+          />
+        </div>
+        <div className='flex items-center space-x-2'>
+          <DropdownComponent
+            data={continents}
+            onSelect={handleContinentSelect}
+            placeholder='CONTINENTS'
+            disabled={false}
+            value={selectedContinent}
+          />
+          <DropdownComponent
+            data={availableCountries}
+            onSelect={handleCountrySelect}
+            placeholder='COUNTRIES'
+            disabled={!selectedContinent || selectedContinent === 'All'}
+            value={selectedCountry}
+          />
+          <DropdownComponent
+            data={['All', ...guilds]}
+            onSelect={handleGuildSelect}
+            placeholder='GUILDS'
+            disabled={false}
+            value={selectedGuild}
+          />
+        </div>
+        {(selectedContinent || selectedCountry || selectedGuild) && (
+          <button
+            onClick={clearAll}
+            className='whitespace-nowrap rounded-full bg-black p-2 text-xs font-bold text-white hover:bg-gray-600'
+          >
+            <MdClear />
+          </button>
+        )}
       </div>
     </div>
   )
