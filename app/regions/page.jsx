@@ -98,7 +98,7 @@ const Regions = () => {
   return (
     <>
       <div className='relative'>
-        <div className='absolute top-28 flex w-full justify-center'>
+        <div className='absolute top-[88px] flex w-full justify-center'>
           <div className='z-40 w-[50%]'>
             <SearchComponent
               onRegionChange={handleRegionFilterChange}

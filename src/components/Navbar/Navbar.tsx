@@ -124,21 +124,21 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         {/* For desktop view nav bar */}
         {hideMiddleNav ? null : (
           <div className='mx-auto flex h-20 items-center justify-center px-4 py-2 transition-all duration-300 '>
-            <div className='hidden  lg:flex'>
-              <div className='flex h-12 items-center justify-center gap-2 rounded-full bg-black/20 px-20 shadow-sm shadow-gray-200 backdrop-blur-md  md:gap-7 lg:gap-14 dark:shadow-[#6B37CA]'>
+            <div className='hidden text-white lg:flex'>
+              <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white/10 px-12 shadow-lg backdrop-blur-md  md:gap-x-7 lg:gap-x-14'>
                 <Link
                   href='/hud'
-                  className={`group ${pathname === '/hud' ? 'scale-110 py-2 text-2xl font-bold text-pink-700 drop-shadow' : 'py-2 font-semibold transition-all duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                  className={`group ${pathname === '/hud' ? 'scale-110 py-2 text-2xl font-bold text-pink-700' : 'py-2 font-semibold transition-all duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
                 >
-                  <GiShipWheel size={25} />
+                  <GiShipWheel size={25} className='drop-shadow' />
                   <CustomToolTip content='HUD' top='10' left='-9' translateY='30' />
                 </Link>
 
                 <Link
                   href='/discover'
-                  className={`group ${pathname === '/discover' ? 'scale-110 py-2 text-2xl font-bold text-pink-700 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
+                  className={`group ${pathname === '/discover' ? 'scale-110 py-2 text-2xl font-bold  text-pink-700 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
                 >
-                  <GiBarbedStar size={30} />
+                  <GiBarbedStar size={30} className='drop-shadow' />
                   <CustomToolTip content='DISCOVER' top='10' left='-24' translateY='30' />
                 </Link>
 
@@ -146,7 +146,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   href='/regions'
                   className={`group ${pathname.startsWith('/regions') ? 'scale-110 py-2 text-2xl font-bold text-pink-700 drop-shadow' : 'py-2 font-semibold transition duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
                 >
-                  <RiEarthFill size={25} />
+                  <RiEarthFill size={25} className='drop-shadow' />
                   <CustomToolTip content='REGIONS' top='10' left='-20' translateY='30' />
                 </Link>
               </div>
