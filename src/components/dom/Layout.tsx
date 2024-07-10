@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar/Navbar'
 import Hud from '@/components/Hud/Hud'
 import RightSidebar2 from '../RightSidebarComponent/RightSidebar2'
 import { SidebarProvider, useSidebar } from './SidebarProvider'
+import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
+import Loading from '@/loading'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
@@ -46,10 +48,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   )
 }
 
-const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => (
-  <SidebarProvider>
-    <Layout>{children}</Layout>
-  </SidebarProvider>
-)
+const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => {
+  const isLoading = useLoadingState(500)
+  return (
+    <SidebarProvider>
+      <Layout>
+        {isLoading && <Loading />}
+        {children}
+      </Layout>
+    </SidebarProvider>
+  )
+}
 
 export { LayoutWithProvider as Layout }
