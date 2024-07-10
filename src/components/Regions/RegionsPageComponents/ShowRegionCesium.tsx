@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect, Suspense } from 'react'
 import ShowGuild from '../../Guilds/ShowGuild'
 import Image from 'next/image'
+import { MdLayers } from 'react-icons/md'
 
 // Import the CesiumMap component dynamically
 const CesiumMap = dynamic(() => import('../../LeafletMap/CesiumMap'), {
@@ -68,7 +69,7 @@ export default function ShowRegionCesium({
         {/* Change Layers */}
         <div className={`absolute bottom-3 left-8 z-50 size-16 `}>
           <div className='flex size-full' onClick={handleOpenLayer}>
-            <div className='relative size-full cursor-pointer overflow-hidden rounded-lg border-2 border-white drop-shadow transition-all duration-300 ease-in-out hover:scale-105'>
+            <div className='relative size-full cursor-pointer overflow-hidden rounded-lg border-2 border-violet-300 drop-shadow transition-all duration-300 ease-in-out hover:scale-105'>
               <Image
                 src={mapChange === 'SATELLITE' ? '/img/earth.png' : '/img/worldmap.png'}
                 alt={mapChange === 'SATELLITE' ? 'cesium' : 'world map'}
@@ -78,8 +79,10 @@ export default function ShowRegionCesium({
                 loading='lazy'
                 className='rounded-lg transition-all duration-300 ease-in-out hover:scale-110'
               />
-              <div className='absolute top-0 flex size-full items-center justify-center bg-black/40'>
-                <p className='text-[8px] font-semibold'>{mapChange === 'SATELLITE' ? 'SATELLITE' : 'DEFAULT'}</p>
+              <div className='absolute top-0 flex size-full items-center justify-center bg-black/30'>
+                <p className='text-white drop-shadow'>
+                  <MdLayers size={30} />
+                </p>
               </div>
             </div>
           </div>
