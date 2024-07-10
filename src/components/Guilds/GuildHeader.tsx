@@ -8,7 +8,7 @@ import 'swiper/css'
 
 // import CustomToolTip from '../Hud/CustomToolTip'
 
-const CustomToolTip = dynamic(() => import('../Hud/CustomToolTip').then((mod) => mod.default))
+const CustomToolTip = dynamic(() => import('../MyComponents/CustomToolTip').then((mod) => mod.default))
 
 export default function GuildHeader({
   onFilterChange,

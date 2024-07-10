@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar/Navbar'
 import Hud from '@/components/Hud/Hud'
 import RightSidebar2 from '../RightSidebarComponent/RightSidebar2'
 import { SidebarProvider, useSidebar } from './SidebarProvider'
+import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
+import Loading from '@/loading'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
@@ -15,6 +17,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const ref = useRef<HTMLDivElement>(null)
   const { isSidebarOpen, setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
+  const isLoading = useLoadingState(1200)
 
   return (
     <div ref={ref}>
@@ -26,6 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         showSignIn={showSignIn}
         showSignUp={showSignUp}
       />
+      {isLoading && <Loading />}
       {children}
       <div>
         <RightSidebar2
@@ -46,10 +50,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   )
 }
 
-const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => (
-  <SidebarProvider>
-    <Layout>{children}</Layout>
-  </SidebarProvider>
-)
+const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <SidebarProvider>
+      <Layout>{children}</Layout>
+    </SidebarProvider>
+  )
+}
 
 export { LayoutWithProvider as Layout }

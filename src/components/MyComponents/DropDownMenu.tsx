@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { MdExpandLess } from 'react-icons/md'
 
 interface DropdownComponentProps {
   data: string[]
@@ -34,13 +35,15 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ data, onSelect, p
     <div ref={dropdownRef}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`flex items-center justify-between whitespace-nowrap rounded-full border border-gray-300 bg-violet-400 px-4 py-2 text-left text-sm text-white shadow-sm transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black p-2 text-xs font-semibold text-white shadow-sm transition-all duration-300 ease-in-out focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
         }`}
         disabled={disabled}
       >
-        <p>{value || placeholder}</p>
-        <span className='float-right'>▼</span>
+        <p>{value.toUpperCase() || placeholder}</p>
+        <span className={`${isOpen ? 'rotate-0' : 'rotate-180'} text-lg transition-all duration-300 ease-in-out`}>
+          <MdExpandLess />
+        </span>
       </button>
       <AnimatePresence>
         {isOpen && (

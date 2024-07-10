@@ -1,11 +1,12 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
-import RegionHeader from '@/components/Regions/RegionHeader'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import SearchComponent from '@/components/MyComponents/SearchComponent'
 
-const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
+const ShowRegionCesium = dynamic(() => import('@/components/Regions/RegionsPageComponents/ShowRegionCesium'), {
+  ssr: false,
+})
 
 const continents = [
   {
@@ -29,7 +30,7 @@ const continents = [
     continent_code: 'NA',
   },
   {
-    continent_name: 'OCEANIA',
+    continent_name: 'AUSTRALIA & OCEANIA',
     continent_code: 'OC',
   },
   {
@@ -58,6 +59,8 @@ const Regions = () => {
     setSelectedGuildFilter(filter)
   }
 
+  console.log('userfirst', users)
+
   // Map the user data to the format needed for the Cesium component
   useEffect(() => {
     if (users.length && guilds.length) {
@@ -75,6 +78,8 @@ const Regions = () => {
           guild: guild ? guild.guild_name : 'Unknown Guild',
           avatarimg: avatarUrl.replace('glb', 'png'),
           continent: continent ? continent.continent_name : 'Unknown Continent',
+          country: user.region.country, // country as country code
+          city: user.region.city,
         }
       })
       setMappedGuilds(mappedData)
@@ -97,8 +102,8 @@ const Regions = () => {
   return (
     <>
       <div className='relative'>
-        <div className='absolute top-28 flex w-full justify-center'>
-          <div className='z-40 w-[50%]'>
+        <div className='absolute top-[88px] flex w-full justify-center'>
+          <div className='z-30 w-[50%]'>
             <SearchComponent
               onRegionChange={handleRegionFilterChange}
               onCountryChange={handleCountryFilterChange}
@@ -114,6 +119,7 @@ const Regions = () => {
             selectedRegionFilter={selectedRegionFilter}
             guilds={filteredGuilds}
             selectedGuildFilter={selectedGuildFilter}
+            selectedCountryFilter={selectedCountryFilter}
             searchTerm={searchTerm}
           />
         </div>

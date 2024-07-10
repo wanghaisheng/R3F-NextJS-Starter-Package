@@ -36,7 +36,7 @@ const MapComponent = ({ filteredContinent }: { filteredContinent: string }) => {
   }, [filteredContinent])
 
   return (
-    <div className='z-0 h-screen w-full'>
+    <div className='h-screen w-full'>
       {/* Map */}
       <MapContainer
         key={mapCenter[0]}

@@ -15,7 +15,7 @@ import EmergencyComponent from './SubComponents/EmergencyComponent'
 import { CgProfile, CgPhotoscan } from 'react-icons/cg'
 import SideProfile from './Tabs/SideProfile'
 import { Toaster } from 'react-hot-toast'
-import CustomToolTip from '../Hud/CustomToolTip'
+import CustomToolTip from '../MyComponents/CustomToolTip'
 
 const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [activeTab, setActiveTab] = useState('profile') //active tab state
