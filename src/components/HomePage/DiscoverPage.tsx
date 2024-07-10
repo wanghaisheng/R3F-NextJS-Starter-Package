@@ -15,15 +15,7 @@ const getUsers = async () => {
     const users = await res.json()
 
     const filteredUsers = users.filter(
-      (user) =>
-        user.first_name &&
-        user.last_name &&
-        user.username &&
-        user.email &&
-        user.description &&
-        user.region.ip &&
-        user.avatar.length !== 0 &&
-        user.guild_id,
+      (user) => user.username && user.email && user.region.ip && user.avatar.length !== 0 && user.guild_id,
     )
     return filteredUsers
   } catch (error) {
