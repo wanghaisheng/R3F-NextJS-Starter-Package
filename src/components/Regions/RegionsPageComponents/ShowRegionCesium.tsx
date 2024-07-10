@@ -1,7 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { useState, useEffect, Suspense } from 'react'
-import ShowGuild from '../../Guilds/ShowGuild'
+import ShowRegionUsers from './ShowRegionUsers'
 import Image from 'next/image'
 import { MdLayers } from 'react-icons/md'
 
@@ -156,7 +156,7 @@ export default function ShowRegionCesium({
             }`}
           >
             <div className='flex w-full'>
-              <ShowGuild
+              <ShowRegionUsers
                 users={guilds}
                 selectedRegionFilter={selectedRegionFilter}
                 filterguild={selectedGuildFilter}
