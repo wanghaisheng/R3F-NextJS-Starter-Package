@@ -17,6 +17,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const ref = useRef<HTMLDivElement>(null)
   const { isSidebarOpen, setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
+  const isLoading = useLoadingState(1200)
 
   return (
     <div ref={ref}>
@@ -28,6 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         showSignIn={showSignIn}
         showSignUp={showSignUp}
       />
+      {isLoading && <Loading />}
       {children}
       <div>
         <RightSidebar2
@@ -49,13 +51,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 }
 
 const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => {
-  const isLoading = useLoadingState(1200)
   return (
     <SidebarProvider>
-      <Layout>
-        {isLoading && <Loading />}
-        {children}
-      </Layout>
+      <Layout>{children}</Layout>
     </SidebarProvider>
   )
 }
