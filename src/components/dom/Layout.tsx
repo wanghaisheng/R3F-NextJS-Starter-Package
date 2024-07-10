@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 }
 
 const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => {
-  const isLoading = useLoadingState(500)
+  const isLoading = useLoadingState(1200)
   return (
     <SidebarProvider>
       <Layout>

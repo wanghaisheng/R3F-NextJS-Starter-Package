@@ -1,16 +1,16 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { useState, useEffect, Suspense } from 'react'
-import ShowGuild from '../Guilds/ShowGuild'
+import ShowGuild from '../../Guilds/ShowGuild'
 import Image from 'next/image'
 
 // Import the CesiumMap component dynamically
-const CesiumMap = dynamic(() => import('../LeafletMap/CesiumMap'), {
+const CesiumMap = dynamic(() => import('../../LeafletMap/CesiumMap'), {
   ssr: false,
 })
 
 // Import the LeafletMap component dynamically
-const MapComponent = dynamic(() => import('../LeafletMap/LeafletMap'), {
+const MapComponent = dynamic(() => import('../../LeafletMap/LeafletMap'), {
   ssr: false,
 })
 

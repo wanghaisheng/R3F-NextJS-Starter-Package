@@ -1,11 +1,12 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
-import RegionHeader from '@/components/Regions/RegionHeader'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import SearchComponent from '@/components/MyComponents/SearchComponent'
 
-const ShowRegionCesium = dynamic(() => import('@/components/Regions/ShowRegionCesium'), { ssr: false })
+const ShowRegionCesium = dynamic(() => import('@/components/Regions/RegionsPageComponents/ShowRegionCesium'), {
+  ssr: false,
+})
 
 const continents = [
   {
