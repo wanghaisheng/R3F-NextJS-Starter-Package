@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { FaGlobeAfrica, FaGlobeEurope, FaGlobeAmericas, FaGlobeAsia } from 'react-icons/fa'
 import { FaEarthOceania } from 'react-icons/fa6'
 import { BsGlobeCentralSouthAsia } from 'react-icons/bs'
-import CustomToolTip from '../Hud/CustomToolTip'
+import CustomToolTip from '../MyComponents/CustomToolTip'
 
 export default function RegionHeader({ onFilterChange }: { onFilterChange: (filter: string) => void }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)

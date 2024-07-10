@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { TbCards } from 'react-icons/tb'
 import Image from 'next/image'
-import CustomToolTip from './CustomToolTip'
+import CustomToolTip from '../MyComponents/CustomToolTip'
 import SpringModal from '../FormModal/SpringModal'
 import { useUser } from '@/UserClientProvider'
 import { useSidebar } from '../dom/SidebarProvider'
@@ -18,8 +18,6 @@ const Hud = () => {
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
   const token = Cookies.get('token')
-
-  console.log('text', user)
 
   useEffect(() => {
     if (

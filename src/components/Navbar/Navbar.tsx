@@ -11,7 +11,7 @@ import Hamburger from 'hamburger-react'
 import { RiEarthFill } from 'react-icons/ri'
 import { GiShipWheel } from 'react-icons/gi'
 import { GiBarbedStar } from 'react-icons/gi'
-import CustomToolTip from '../Hud/CustomToolTip'
+import CustomToolTip from '../MyComponents/CustomToolTip'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)

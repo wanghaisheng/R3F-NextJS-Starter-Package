@@ -13,7 +13,8 @@ import ProfileComponent from '../SubComponents/ProfileComponent'
 import GallerySidebar from '@/components/GalleryComponent/GallerySidebar'
 import { RiGalleryFill } from 'react-icons/ri'
 import { GiRamProfile } from 'react-icons/gi'
-import CustomToolTip from '@/components/Hud/CustomToolTip'
+import CustomToolTip from '@/components/MyComponents/CustomToolTip'
+
 import Link from 'next/link'
 
 export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, setShowSignIn, setActiveTab }) {
