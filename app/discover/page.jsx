@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 
 async function getFacultyTags() {
   try {
-    const res = await fetch('http://localhost:3000/api/internal/filter-tags/all-faculties')
+    const res = await fetch('http://localhost:3000/api/public/filter-tags/all-faculties')
     if (!res.ok) {
       throw new Error('failed to fetch faculty tags')
     }
