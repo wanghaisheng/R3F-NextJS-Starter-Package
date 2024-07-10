@@ -5,12 +5,12 @@ import { IoSearch } from 'react-icons/io5'
 import { MdClear } from 'react-icons/md'
 
 const continentCountryMap = {
-  'North America': ['United States', 'Canada', 'Mexico'],
-  Europe: ['United Kingdom', 'Germany', 'France', 'Spain', 'Italy'],
-  Asia: ['Japan', 'China', 'India', 'South Korea', 'Thailand'],
-  'South America': ['Brazil', 'Argentina', 'Colombia', 'Peru', 'Chile'],
-  Africa: ['South Africa', 'Egypt', 'Nigeria', 'Kenya', 'Morocco'],
-  'Australia & Oceania': ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea'],
+  'North America': ['US', 'Canada', 'Mexico'],
+  Europe: ['United Kingdom', 'DE', 'France', 'Spain', 'Italy'],
+  Asia: ['Japan', 'China', 'India', 'South Korea', 'Thailand', 'NP'],
+  'South America': ['Brazil', 'AR', 'Colombia', 'Peru', 'Chile'],
+  Africa: ['South Africa', 'Egypt', 'NG', 'Kenya', 'Morocco'],
+  'Australia & Oceania': ['AU', 'New Zealand', 'Fiji', 'Papua New Guinea'],
 }
 
 export default function SearchComponent({

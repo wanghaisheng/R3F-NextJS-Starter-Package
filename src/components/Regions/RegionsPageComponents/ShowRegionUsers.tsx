@@ -11,11 +11,13 @@ export default function ShowRegionUsers({
   filterguild,
   selectedRegionFilter,
   searchTerm,
+  selectedCountryFilter,
 }: {
   users: any
   filterguild: string
   selectedRegionFilter: string
   searchTerm: string
+  selectedCountryFilter: string
 }) {
   const [changedPics, setChangedPics] = useState<{ [key: number]: boolean }>({})
   const [showInfos, setShowInfos] = useState<{ [key: number]: boolean }>({})
@@ -35,9 +37,12 @@ export default function ShowRegionUsers({
     return (
       (filterguild ? user.guild === filterguild : true) &&
       (selectedRegionFilter ? user.continent === selectedRegionFilter.toUpperCase() : true) &&
+      (selectedCountryFilter ? user.country === selectedCountryFilter : true) &&
       user.username.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
+
+  console.log('userdata', users)
 
   return (
     <div className='flex h-[300px] w-full items-center justify-center rounded-lg'>
@@ -105,9 +110,9 @@ export default function ShowRegionUsers({
                       </div>
                       {/* Description */}
                       <div
-                        className={`absolute z-40 flex size-full justify-center transition-all duration-300 ease-in-out ${showInfos[index] ? 'top-[40%]' : 'top-[500px] '}`}
+                        className={`absolute z-40 flex size-full justify-center backdrop-blur-md transition-all duration-300 ease-in-out ${showInfos[index] ? 'top-[40%]' : 'top-[500px] '}`}
                       >
-                        <div className='flex h-[67%] w-[90%] flex-col items-center rounded-lg bg-white/80 shadow backdrop-blur-md transition-all duration-300 ease-in-out'>
+                        <div className='flex h-[67%] w-[90%] flex-col items-center rounded-lg bg-white/50 shadow backdrop-blur-lg transition-all duration-300 ease-in-out'>
                           <div className='text-black'>
                             <div>{user.description}</div>
                           </div>

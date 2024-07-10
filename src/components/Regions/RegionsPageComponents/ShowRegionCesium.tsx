@@ -31,11 +31,13 @@ export default function ShowRegionCesium({
   guilds,
   selectedGuildFilter,
   searchTerm,
+  selectedCountryFilter,
 }: {
   selectedRegionFilter: string
   guilds: Guild[]
   selectedGuildFilter: string
   searchTerm: string
+  selectedCountryFilter: string
 }) {
   const [mapChange, setMapChange] = useState('DEFAULT')
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -149,18 +151,19 @@ export default function ShowRegionCesium({
         {/* Guilds/Users Showcase */}
         <div className='flex size-full items-center justify-end overflow-hidden'>
           <div
-            className={`${selectedGuildFilter ? getBorderColor(selectedGuildFilter) : 'shadow-purple-700'} ${
+            className={`shadow-xl shadow-black/30${
               isSmallScreen
                 ? 'h-[36vh] w-full px-4'
-                : 'mr-4 flex w-[22%] items-center justify-center rounded-lg bg-gradient-to-t from-white/30 from-10% via-black/20 via-30% to-black/50 to-90% shadow-md backdrop-blur-md'
+                : 'mr-4 flex w-[22%] items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm'
             }`}
           >
-            <div className='flex w-full'>
+            <div className='flex w-full drop-shadow'>
               <ShowRegionUsers
                 users={guilds}
                 selectedRegionFilter={selectedRegionFilter}
                 filterguild={selectedGuildFilter}
                 searchTerm={searchTerm}
+                selectedCountryFilter={selectedCountryFilter}
               />
             </div>
           </div>
@@ -170,20 +173,20 @@ export default function ShowRegionCesium({
   )
 }
 
-// Function to determine the shadow color based on the guild
-function getBorderColor(guild: string): string {
-  switch (guild) {
-    case 'BUDDHA':
-      return 'shadow-white'
-    case 'VAJRA':
-      return 'shadow-blue-500'
-    case 'KARMA':
-      return 'shadow-green-500'
-    case 'RATNA':
-      return 'shadow-yellow-500'
-    case 'PADMA':
-      return 'shadow-red-500'
-    default:
-      return 'shadow-purple-700'
-  }
-}
+// // Function to determine the shadow color based on the guild
+// function getBorderColor(guild: string): string {
+//   switch (guild) {
+//     case 'BUDDHA':
+//       return 'shadow-white/30'
+//     case 'VAJRA':
+//       return 'shadow-blue-500/30'
+//     case 'KARMA':
+//       return 'shadow-green-500/30'
+//     case 'RATNA':
+//       return 'shadow-yellow-500/30'
+//     case 'PADMA':
+//       return 'shadow-red-500/30'
+//     default:
+//       return 'shadow-black/30'
+//   }
+// }
