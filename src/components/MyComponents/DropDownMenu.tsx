@@ -95,7 +95,7 @@ const DropdownComponent = <T extends string | object>({
                 onClick={() => handleSelect(item)}
                 className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {flagProperty && (
+                {flagProperty && getDisplayValue(item) !== 'All' && (
                   <Image
                     src={`/continents/countryflags/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
