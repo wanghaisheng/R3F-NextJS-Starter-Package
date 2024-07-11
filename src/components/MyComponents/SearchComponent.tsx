@@ -51,6 +51,11 @@ const continentCountryMap: { [key: string]: CountryData[] } = {
     { name: 'Pakistan', code: 'PK' },
     { name: 'Bangladesh', code: 'BD' },
     { name: 'Sri Lanka', code: 'LK' },
+    { name: 'Afghanistan', code: 'AF' },
+    { name: 'Iran', code: 'IR' },
+    { name: 'Iraq', code: 'IQ' },
+    { name: 'Saudi Arabia', code: 'SA' },
+    { name: 'Turkey', code: 'TR' },
   ],
   'South America': [
     { name: 'Brazil', code: 'BR' },
@@ -86,6 +91,13 @@ const continentCountryMap: { [key: string]: CountryData[] } = {
     { name: 'New Zealand', code: 'NZ' },
     { name: 'Fiji', code: 'FJ' },
     { name: 'Papua New Guinea', code: 'PG' },
+    { name: 'Solomon Islands', code: 'SB' },
+    { name: 'Vanuatu', code: 'VU' },
+    { name: 'Samoa', code: 'WS' },
+    { name: 'Tonga', code: 'TO' },
+    { name: 'Micronesia', code: 'FM' },
+    { name: 'Marshall Islands', code: 'MH' },
+    { name: 'Palau', code: 'PW' },
   ],
 }
 
