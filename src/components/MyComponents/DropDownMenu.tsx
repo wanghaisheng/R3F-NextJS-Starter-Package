@@ -35,7 +35,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ data, onSelect, p
     <div ref={dropdownRef}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black p-2 text-xs font-semibold text-white shadow-sm transition-all duration-300 ease-in-out focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
+        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black p-2 text-xs font-semibold text-white shadow transition-all duration-300 ease-in-out focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
         }`}
         disabled={disabled}
