@@ -86,7 +86,7 @@ const DropdownComponent = <T extends string | object>({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className='absolute left-0 top-16 z-20 grid w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg'
+            className='absolute left-0 top-16 z-20 grid max-h-[450px] w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg'
           >
             {data.map((item, index) => (
               <motion.li
