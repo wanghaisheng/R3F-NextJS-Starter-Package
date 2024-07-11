@@ -32,13 +32,22 @@ const TagSwiper = ({ facultyTags, handleInputTagsChange }) => {
 
   return (
     <div
-      className='w-full overflow-x-scroll scrollbar-hide cursor-grab'
+      className='w-full overflow-x-scroll cursor-grab'
+      style={{
+        scrollbarWidth: 'none', // Firefox
+        msOverflowStyle: 'none', // Internet Explorer 10+
+      }}
       ref={scrollRef}
       onMouseDown={handleMouseDown}
       onMouseLeave={handleMouseLeave}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
     >
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none; // Safari and Chrome
+        }
+      `}</style>
       <div className='flex gap-x-3 py-2 whitespace-nowrap'>
         {facultyTags
           ? facultyTags.map((tag, index) => (

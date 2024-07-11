@@ -38,6 +38,7 @@ export default function DiscoverRegion({
       })
     }
   }
+
   //---------------------test input tags---------------------------------
 
   const handleBusinessFilterView = () => {
