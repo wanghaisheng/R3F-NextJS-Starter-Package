@@ -1,8 +1,9 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdExpandLess } from 'react-icons/md'
 import * as CountryFlags from 'country-flag-icons/react/3x2'
+import Image from 'next/image'
 
 interface DropdownComponentProps<T> {
   data: T[]
@@ -92,10 +93,19 @@ const DropdownComponent = <T extends string | object>({
                 key={index}
                 whileHover={{ backgroundColor: '#f3f4f6' }}
                 onClick={() => handleSelect(item)}
-                className='flex h-32 cursor-pointer items-center justify-center rounded-lg border bg-gray-200 px-4 py-2'
+                className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {renderFlag(item)}
-                {getDisplayValue(item)}
+                {flagProperty && (
+                  <Image
+                    src={`/continents/countryflags/${getDisplayValue(item)}.svg`}
+                    alt={getDisplayValue(item)}
+                    fill
+                    objectFit='contain'
+                    className='z-0'
+                  />
+                )}
+                <p className='absolute bottom-2 left-2 drop-shadow-md'>{renderFlag(item)}</p>
+                <p className='z-10 font-semibold'>{getDisplayValue(item).toUpperCase()}</p>
               </motion.li>
             ))}
           </motion.ul>
