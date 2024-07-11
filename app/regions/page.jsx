@@ -59,8 +59,6 @@ const Regions = () => {
     setSelectedGuildFilter(filter)
   }
 
-  console.log('userfirst', users)
-
   // Map the user data to the format needed for the Cesium component
   useEffect(() => {
     if (users.length && guilds.length) {

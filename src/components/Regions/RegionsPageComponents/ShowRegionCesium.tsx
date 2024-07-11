@@ -148,6 +148,13 @@ export default function ShowRegionCesium({
           </div>
         </Suspense>
 
+        {mapChange === 'DEFAULT' && (
+          <>
+            <div className='absolute top-0 z-40 h-20 w-full bg-gradient-to-b from-black/50'></div>
+            <div className='absolute bottom-0 z-40 h-20 w-full bg-gradient-to-t from-black/50'></div>
+          </>
+        )}
+
         {/* Guilds/Users Showcase */}
         <div className='flex size-full items-center justify-end overflow-hidden'>
           <div

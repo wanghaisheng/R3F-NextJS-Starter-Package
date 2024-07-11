@@ -42,8 +42,6 @@ export default function ShowRegionUsers({
     )
   })
 
-  console.log('userdata', users)
-
   return (
     <div className='flex h-[300px] w-full items-center justify-center rounded-lg'>
       {filteredFactions.length > 0 ? (
