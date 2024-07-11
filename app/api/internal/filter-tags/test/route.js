@@ -11,6 +11,7 @@ async function getGuildId(faculty_name) {
     const guild = guilds.find((guild) => {
       return guild.faculty.some((faculty) => faculty.faculty_name === faculty_name)
     })
+
     return guild ? guild.id : null // Assuming guild.id is the correct ID field
   } catch (error) {
     console.error(`Error fetching guild ID for faculty: ${faculty_name}`, error)
@@ -18,10 +19,17 @@ async function getGuildId(faculty_name) {
   }
 }
 
-async function getUsers(guild_id) {
+async function getUsers(guildsIds, users) {
   try {
-    const sendUsers = users.filter((user) => user.guild_id === guild_id)
-    return sendUsers
+    const finalUsers = []
+    for (let i = 0; i < guildsIds.length; i++) {
+      for (let j = 0; j < users.length; j++) {
+        if (guildsIds[i] === users[j].guild_id) {
+          finalUsers.push(users)
+        }
+      }
+    }
+    return finalUsers
   } catch (error) {
     console.error(`Error fetching users for guild ID: ${guild_id}`, error)
     return []
@@ -42,20 +50,33 @@ async function batchProcess(array, batchSize, callback) {
 export async function POST(request) {
   try {
     const { inputTags } = await request.json()
-    console.log(`Input tags: ${inputTags}`)
+    console.log(`Input tags: ${inputTags.length}`)
 
     // Fetch users and guilds once
     guilds = await prisma.guilds.findMany()
     console.log(`Guilds fetched: ${guilds.length}`)
 
-    users = await prisma.users.findMany({
-      include: {
+    const allUsers = await prisma.users.findMany({
+      select: {
+        first_name: true,
+        last_name: true,
+        username: true,
+        email: true,
+        image_urls: true,
+        description: true,
+        guild_id: true,
+        address: true,
+        region: true,
         cards: true,
         experience: true,
         avatar: true,
         skills: true,
+        faculty: true,
       },
     })
+    users = allUsers.filter(
+      (user) => user.username && user.email && user.region?.ip && user.avatar.length !== 0 && user.guild_id,
+    )
     console.log(`Users fetched: ${users.length}`)
 
     const batchSize = 5 // Adjust the batch size based on your requirements
@@ -68,23 +89,14 @@ export async function POST(request) {
 
     // Filter out any null guild IDs
     const validGuildIds = filteredGuildIds.filter((id) => id !== null)
-    console.log(`Valid guild IDs: ${validGuildIds}`)
+    const uniqueGuildIdsSet = new Set(validGuildIds)
+    const uniqueGuildIdsArray = [...uniqueGuildIdsSet]
 
-    // Fetch all users based on valid guild IDs
-    const usersByGuild = await batchProcess(validGuildIds, batchSize, async (batch) => {
-      const userResults = await Promise.all(batch.map((guild_id) => getUsers(guild_id)))
-      return userResults
-    })
+    const passedUsers = await getUsers(uniqueGuildIdsArray, users)
 
-    const flatUsers = usersByGuild[0]
-    console.log(`Flat users list: ${flatUsers.length}`)
+    console.log('passed users: ', passedUsers)
 
-    const filteredUsers = flatUsers.filter(
-      (user) => user.username && user.email && user.region?.ip && user.avatar.length !== 0 && user.guild_id,
-    )
-    console.log(`Filtered users: ${filteredUsers.length}`)
-
-    return NextResponse.json(filteredUsers)
+    return NextResponse.json(passedUsers)
   } catch (error) {
     console.error('Error processing request:', error)
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 })
