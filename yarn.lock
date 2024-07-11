@@ -3656,11 +3656,6 @@ cors@^2.8.5, cors@2.8.5:
     object-assign "^4"
     vary "^1"
 
-country-flag-icons@^1.5.13:
-  version "1.5.13"
-  resolved "https://registry.npmjs.org/country-flag-icons/-/country-flag-icons-1.5.13.tgz"
-  integrity sha512-4JwHNqaKZ19doQoNcBjsoYA+I7NqCH/mC/6f5cBWvdKzcK5TMmzLpq3Z/syVHMHJuDGFwJ+rPpGizvrqJybJow==
-
 cross-env@^7.0.3:
   version "7.0.3"
   resolved "https://registry.npmjs.org/cross-env/-/cross-env-7.0.3.tgz"
