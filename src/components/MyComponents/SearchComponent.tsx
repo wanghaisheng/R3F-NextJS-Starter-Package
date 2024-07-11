@@ -68,7 +68,7 @@ export default function SearchComponent({
   guilds: string[]
 }) {
   const [selectedContinent, setSelectedContinent] = useState('')
-  const [selectedCountry, setSelectedCountry] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState<CountryData | null>(null)
   const [selectedGuild, setSelectedGuild] = useState('')
   const [availableCountries, setAvailableCountries] = useState<CountryData[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
@@ -82,6 +82,7 @@ export default function SearchComponent({
     } else {
       setAvailableCountries([{ name: 'All', code: '' }])
     }
+    setSelectedCountry(null)
   }, [selectedContinent])
 
   // When continent is selected
@@ -93,9 +94,8 @@ export default function SearchComponent({
 
   // When country is selected
   const handleCountrySelect = (country: CountryData) => {
-    const newCountry = country.name === 'All' ? '' : country.name
-    setSelectedCountry(newCountry)
-    onCountryChange(newCountry)
+    setSelectedCountry(country)
+    onCountryChange(country.code)
   }
 
   // When guild is selected
@@ -112,7 +112,7 @@ export default function SearchComponent({
 
   const clearAll = () => {
     setSelectedContinent('')
-    setSelectedCountry('')
+    setSelectedCountry(null)
     setSelectedGuild('')
     onRegionChange('')
     onCountryChange('')
@@ -148,7 +148,7 @@ export default function SearchComponent({
             onSelect={handleCountrySelect}
             placeholder='COUNTRIES'
             disabled={!selectedContinent || selectedContinent === 'All'}
-            value={selectedCountry}
+            value={selectedCountry?.name || ''}
             displayProperty='name'
             flagProperty='code'
           />
