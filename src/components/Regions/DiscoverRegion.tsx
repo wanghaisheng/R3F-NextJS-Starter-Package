@@ -4,6 +4,7 @@ import GuildHeader from '../Guilds/GuildHeader'
 import { useState } from 'react'
 
 export default function DiscoverRegion({
+  facultyTags,
   selectedRegionFilter,
   guilds,
   selectedGuildFilter,
@@ -11,6 +12,7 @@ export default function DiscoverRegion({
   handleFilterGuildChange,
   setSearchTerm,
 }: {
+  facultyTags: string[]
   selectedRegionFilter: string
   guilds: any
   selectedGuildFilter: string
@@ -84,6 +86,7 @@ export default function DiscoverRegion({
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
+                facultyTags={facultyTags}
               />
             </div>
             <div className='size-full'>

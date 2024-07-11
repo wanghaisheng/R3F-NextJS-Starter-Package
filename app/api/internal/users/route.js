@@ -78,6 +78,7 @@ export async function POST(request) {
 export async function GET() {
   try {
     const users = await prisma.users.findMany()
+    console.log(users.length)
     return NextResponse.json(users)
   } catch (error) {
     console.error('Error fetching users', error)
