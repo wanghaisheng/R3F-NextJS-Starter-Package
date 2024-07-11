@@ -1,7 +1,11 @@
 'use client'
 import ShowGuildDiscover from '../Guilds/ShowGuildDiscover'
 import GuildHeader from '../Guilds/GuildHeader'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import { FreeMode } from 'swiper/modules'
+import TagSwiper from '../MyComponents/TagsSwiper'
 
 export default function DiscoverRegion({
   facultyTags,
@@ -23,6 +27,19 @@ export default function DiscoverRegion({
   const [viewBusiness, setViewBusiness] = useState(false)
   const [viewMates, setViewMates] = useState(true)
 
+  //---------------------test input tags---------------------------------
+  const [inputTags, setInputTags] = useState([])
+
+  const handleInputTagsChange = (tag: string) => {
+    if (!inputTags.includes(tag)) {
+      setInputTags((prevInputTags) => {
+        const updatedInputTags = [...prevInputTags, tag]
+        return updatedInputTags
+      })
+    }
+  }
+  //---------------------test input tags---------------------------------
+
   const handleBusinessFilterView = () => {
     setViewBusiness(true)
     setViewMates(false)
@@ -32,6 +49,10 @@ export default function DiscoverRegion({
     setViewMates(true)
     setViewBusiness(false)
   }
+
+  useEffect(() => {
+    console.log(inputTags)
+  }, [inputTags])
 
   return (
     <>
@@ -73,7 +94,27 @@ export default function DiscoverRegion({
               <button className='w-[100px] rounded bg-pink-300/20 p-2 text-black dark:text-white'>...</button>
             </div>
 
-            <div className='flex size-full flex-col items-center justify-center rounded bg-pink-300/20'>QUESTS</div>
+            {/*test input tags */}
+            <div className='flex flex-col gap-4 size-full  items-center justify-center rounded bg-pink-300/20'>
+              <div className='flex flex-wrap gap-1 w-full text-sm font-bold text-black'>
+                {inputTags
+                  ? inputTags.map((tag, index) => (
+                      <div
+                        className='bg-yellow-300 inline-block whitespace-nowrap cursor-pointer rounded p-1 transition-all duration-500 ease-in-out hover:scale-105 mx-2'
+                        onClick={() => handleInputTagsChange(tag)}
+                      >
+                        {tag}
+                      </div>
+                    ))
+                  : ''}
+              </div>
+              <div className='w-full'>
+                <TagSwiper facultyTags={facultyTags} handleInputTagsChange={handleInputTagsChange} />
+              </div>
+              <div>
+                <button>search</button>
+              </div>
+            </div>
           </div>
         </div>
         <div className='flex size-full flex-col items-center justify-center'>
