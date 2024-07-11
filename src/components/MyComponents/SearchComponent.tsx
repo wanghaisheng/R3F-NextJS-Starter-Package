@@ -4,13 +4,52 @@ import DropdownComponent from './DropDownMenu'
 import { IoSearch } from 'react-icons/io5'
 import { MdClear } from 'react-icons/md'
 
-const continentCountryMap = {
-  'North America': ['US', 'Canada', 'Mexico'],
-  Europe: ['United Kingdom', 'DE', 'France', 'Spain', 'Italy'],
-  Asia: ['Japan', 'China', 'India', 'South Korea', 'Thailand', 'NP'],
-  'South America': ['Brazil', 'AR', 'Colombia', 'Peru', 'Chile'],
-  Africa: ['South Africa', 'Egypt', 'NG', 'Kenya', 'Morocco'],
-  'Australia & Oceania': ['AU', 'New Zealand', 'Fiji', 'Papua New Guinea'],
+interface CountryData {
+  name: string
+  code: string
+}
+
+const continentCountryMap: { [key: string]: CountryData[] } = {
+  'North America': [
+    { name: 'United States', code: 'US' },
+    { name: 'Canada', code: 'CA' },
+    { name: 'Mexico', code: 'MX' },
+  ],
+  Europe: [
+    { name: 'United Kingdom', code: 'GB' },
+    { name: 'Germany', code: 'DE' },
+    { name: 'France', code: 'FR' },
+    { name: 'Spain', code: 'ES' },
+    { name: 'Italy', code: 'IT' },
+  ],
+  Asia: [
+    { name: 'Japan', code: 'JP' },
+    { name: 'China', code: 'CN' },
+    { name: 'India', code: 'IN' },
+    { name: 'South Korea', code: 'KR' },
+    { name: 'Thailand', code: 'TH' },
+    { name: 'Nepal', code: 'NP' },
+  ],
+  'South America': [
+    { name: 'Brazil', code: 'BR' },
+    { name: 'Argentina', code: 'AR' },
+    { name: 'Colombia', code: 'CO' },
+    { name: 'Peru', code: 'PE' },
+    { name: 'Chile', code: 'CL' },
+  ],
+  Africa: [
+    { name: 'South Africa', code: 'ZA' },
+    { name: 'Egypt', code: 'EG' },
+    { name: 'Nigeria', code: 'NG' },
+    { name: 'Kenya', code: 'KE' },
+    { name: 'Morocco', code: 'MA' },
+  ],
+  'Australia & Oceania': [
+    { name: 'Australia', code: 'AU' },
+    { name: 'New Zealand', code: 'NZ' },
+    { name: 'Fiji', code: 'FJ' },
+    { name: 'Papua New Guinea', code: 'PG' },
+  ],
 }
 
 export default function SearchComponent({
@@ -31,18 +70,17 @@ export default function SearchComponent({
   const [selectedContinent, setSelectedContinent] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedGuild, setSelectedGuild] = useState('')
-  const [availableCountries, setAvailableCountries] = useState<string[]>([])
+  const [availableCountries, setAvailableCountries] = useState<CountryData[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
   const continents = ['All', ...Object.keys(continentCountryMap)] // ['All', 'North America', 'Europe', 'Asia', 'South America', 'Africa', 'Oceania']
 
   // When selectedContinent changes
   useEffect(() => {
-    if (selectedContinent) {
-      setAvailableCountries(['All', ...continentCountryMap[selectedContinent]])
-      setSelectedCountry('')
+    if (selectedContinent && selectedContinent !== 'All') {
+      setAvailableCountries([{ name: 'All', code: '' }, ...continentCountryMap[selectedContinent]])
     } else {
-      setAvailableCountries(['All'])
+      setAvailableCountries([{ name: 'All', code: '' }])
     }
   }, [selectedContinent])
 
@@ -54,8 +92,8 @@ export default function SearchComponent({
   }
 
   // When country is selected
-  const handleCountrySelect = (country: string) => {
-    const newCountry = country === 'All' ? '' : country
+  const handleCountrySelect = (country: CountryData) => {
+    const newCountry = country.name === 'All' ? '' : country.name
     setSelectedCountry(newCountry)
     onCountryChange(newCountry)
   }
@@ -104,13 +142,17 @@ export default function SearchComponent({
             disabled={false}
             value={selectedContinent}
           />
+
           <DropdownComponent
             data={availableCountries}
             onSelect={handleCountrySelect}
             placeholder='COUNTRIES'
             disabled={!selectedContinent || selectedContinent === 'All'}
             value={selectedCountry}
+            displayProperty='name'
+            flagProperty='code'
           />
+
           <DropdownComponent
             data={['All', ...guilds]}
             onSelect={handleGuildSelect}
