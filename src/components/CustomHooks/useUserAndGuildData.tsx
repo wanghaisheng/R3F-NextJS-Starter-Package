@@ -16,7 +16,7 @@ const fetchData = async (url, errorMessage) => {
       toast.error(errorMessage)
       return []
     }
-    return await res.json()
+    return res.json()
   } catch (error) {
     toast.error('Internal Server Error')
     return []
