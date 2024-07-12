@@ -138,6 +138,8 @@ export default function SearchComponent({
   const handleContinentSelect = (continent: string) => {
     const newContinent = continent === 'All' ? '' : continent
     setSelectedContinent(newContinent)
+    setSelectedCountry(null) // Reset country
+    onCountryChange('') // Reset country
     onRegionChange(newContinent)
   }
 
