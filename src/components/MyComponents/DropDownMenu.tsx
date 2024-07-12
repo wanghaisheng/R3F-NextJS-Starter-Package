@@ -14,6 +14,7 @@ interface DropdownComponentProps<T> {
   displayProperty?: keyof T
   flagProperty?: keyof T
   imagePath?: string
+  symbolPath?: string
 }
 
 const DropdownComponent = <T extends string | object>({
@@ -25,6 +26,7 @@ const DropdownComponent = <T extends string | object>({
   displayProperty,
   flagProperty,
   imagePath,
+  symbolPath,
 }: DropdownComponentProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -97,7 +99,7 @@ const DropdownComponent = <T extends string | object>({
                 onClick={() => handleSelect(item)}
                 className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {imagePath && getDisplayValue(item) !== 'All' && imagePath !== '/guild' && (
+                {imagePath && getDisplayValue(item) !== 'All' && (
                   <Image
                     src={`${imagePath}/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
@@ -106,9 +108,9 @@ const DropdownComponent = <T extends string | object>({
                     className='z-0'
                   />
                 )}
-                {imagePath && getDisplayValue(item) !== 'All' && imagePath === '/guild' && (
+                {symbolPath && (
                   <Image
-                    src={`${imagePath}/${getDisplayValue(item)}.svg`}
+                    src={`${symbolPath}/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
                     height={30}
                     width={30}

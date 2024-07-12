@@ -212,7 +212,8 @@ export default function SearchComponent({
             placeholder='GUILDS'
             disabled={false}
             value={selectedGuild}
-            imagePath='/guild'
+            // imagePath='/guild'
+            symbolPath='/guild/symbols'
           />
         </div>
         {(selectedContinent || selectedCountry || selectedGuild) && (
