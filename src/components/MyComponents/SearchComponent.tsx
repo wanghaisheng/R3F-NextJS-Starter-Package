@@ -212,7 +212,7 @@ export default function SearchComponent({
             placeholder='GUILDS'
             disabled={false}
             value={selectedGuild}
-            // imagePath='/guilds'
+            imagePath='/guild'
           />
         </div>
         {(selectedContinent || selectedCountry || selectedGuild) && (
