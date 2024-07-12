@@ -19,19 +19,47 @@ async function getGuildId(faculty_name) {
   }
 }
 
+// async function getUsers(guildsIds, users) {
+//   try {
+//     const finalUsers = []
+//     for (let i = 0; i < guildsIds.length; i++) {
+//       for (let j = 0; j < users.length; j++) {
+//         if (guildsIds[i] === users[j].guild_id) {
+//           finalUsers.push(users)
+//         }
+//       }
+//     }
+//     return finalUsers
+//   } catch (error) {
+//     console.error(`Error fetching users for guild ID: ${guild_id}`, error)
+//     return []
+//   }
+// }
+
 async function getUsers(guildsIds, users) {
   try {
+    const guildsMap = new Map()
+
+    // Create a map where key is guild_id and value is an array of users
+    for (const user of users) {
+      if (!guildsMap.has(user.guild_id)) {
+        guildsMap.set(user.guild_id, [])
+      }
+      guildsMap.get(user.guild_id).push(user)
+    }
+
     const finalUsers = []
-    for (let i = 0; i < guildsIds.length; i++) {
-      for (let j = 0; j < users.length; j++) {
-        if (guildsIds[i] === users[j].guild_id) {
-          finalUsers.push(users)
-        }
+
+    // Iterate through guildsIds and collect users from the map
+    for (const guildId of guildsIds) {
+      if (guildsMap.has(guildId)) {
+        finalUsers.push(...guildsMap.get(guildId))
       }
     }
+
     return finalUsers
   } catch (error) {
-    console.error(`Error fetching users for guild ID: ${guild_id}`, error)
+    console.error('Error fetching users:', error)
     return []
   }
 }
@@ -54,6 +82,7 @@ export async function POST(request) {
 
     // Fetch users and guilds once
     guilds = await prisma.guilds.findMany()
+    console.log(`guilds fetched: ${guilds.length}`)
 
     const allUsers = await prisma.users.findMany({
       select: {
