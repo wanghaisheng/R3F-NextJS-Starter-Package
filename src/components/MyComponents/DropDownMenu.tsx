@@ -78,7 +78,6 @@ const DropdownComponent = <T extends string | object>({
           src={svgPath}
           alt={getDisplayValue(item)}
           fill
-          priority
           objectFit='contain'
           className='z-0'
           onError={(e) => {
