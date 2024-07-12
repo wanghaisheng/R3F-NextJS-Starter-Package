@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import Link from 'next/link'
@@ -49,9 +50,14 @@ export default function ShowRegionUsers({
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
               <div className='relative flex size-full items-center justify-center'>
-                <button className='absolute right-8 top-2 z-40 cursor-crosshair' onClick={() => handlePicChange(index)}>
-                  change
-                </button>
+                <div
+                  className='absolute right-6 top-6 z-40 flex h-[22px] w-[40px] cursor-pointer justify-start rounded-full bg-black/30 p-[3px] shadow-inner shadow-white/30'
+                  onClick={() => handlePicChange(index)}
+                >
+                  <div
+                    className={`size-[17px] rounded-full bg-white ${changedPics[index] ? 'translate-x-4' : ''} transition-transform duration-200 ease-in-out`}
+                  />
+                </div>
                 <div
                   onClick={() => handleShowInfo(index)}
                   className='relative flex size-[90%] cursor-pointer flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
@@ -134,4 +140,11 @@ export default function ShowRegionUsers({
       )}
     </div>
   )
+}
+
+// for switch
+const spring = {
+  type: 'spring',
+  stiffness: 700,
+  damping: 30,
 }
