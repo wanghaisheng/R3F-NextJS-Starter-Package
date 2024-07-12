@@ -13,6 +13,7 @@ interface DropdownComponentProps<T> {
   value: string
   displayProperty?: keyof T
   flagProperty?: keyof T
+  imagePath?: string
 }
 
 const DropdownComponent = <T extends string | object>({
@@ -23,6 +24,7 @@ const DropdownComponent = <T extends string | object>({
   value,
   displayProperty,
   flagProperty,
+  imagePath,
 }: DropdownComponentProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -95,9 +97,9 @@ const DropdownComponent = <T extends string | object>({
                 onClick={() => handleSelect(item)}
                 className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {flagProperty && getDisplayValue(item) !== 'All' && (
+                {imagePath && getDisplayValue(item) !== 'All' && (
                   <Image
-                    src={`/continents/countryflags/${getDisplayValue(item)}.svg`}
+                    src={`${imagePath}/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
                     fill
                     objectFit='contain'

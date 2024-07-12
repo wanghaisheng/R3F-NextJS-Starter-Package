@@ -192,6 +192,7 @@ export default function SearchComponent({
             placeholder='CONTINENTS'
             disabled={false}
             value={selectedContinent}
+            imagePath='/continents/continentmaps'
           />
 
           <DropdownComponent
@@ -202,6 +203,7 @@ export default function SearchComponent({
             value={selectedCountry?.name || ''}
             displayProperty='name'
             flagProperty='code'
+            imagePath='/continents/countrymaps'
           />
 
           <DropdownComponent
@@ -210,6 +212,7 @@ export default function SearchComponent({
             placeholder='GUILDS'
             disabled={false}
             value={selectedGuild}
+            // imagePath='/guilds'
           />
         </div>
         {(selectedContinent || selectedCountry || selectedGuild) && (
