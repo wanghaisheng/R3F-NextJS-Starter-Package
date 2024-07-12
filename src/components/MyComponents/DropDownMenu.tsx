@@ -67,6 +67,31 @@ const DropdownComponent = <T extends string | object>({
     return ''
   }
 
+  // Image rendering -- Display png if not svg else display svg
+  const renderImage = (item: T) => {
+    if (imagePath && getDisplayValue(item) !== 'All') {
+      const svgPath = `${imagePath}/${getDisplayValue(item)}.svg`
+      const pngPath = `${imagePath}/${getDisplayValue(item)}.png`
+
+      return (
+        <Image
+          src={svgPath}
+          alt={getDisplayValue(item)}
+          fill
+          priority
+          objectFit='contain'
+          className='z-0'
+          onError={(e) => {
+            const imgElement = e.target as HTMLImageElement
+            imgElement.onerror = null // Prevent infinite loop
+            imgElement.src = pngPath
+          }}
+        />
+      )
+    }
+    return null
+  }
+
   return (
     <div ref={dropdownRef}>
       <button
@@ -97,15 +122,7 @@ const DropdownComponent = <T extends string | object>({
                 onClick={() => handleSelect(item)}
                 className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {imagePath && getDisplayValue(item) !== 'All' && (
-                  <Image
-                    src={`${imagePath}/${getDisplayValue(item)}.svg`}
-                    alt={getDisplayValue(item)}
-                    fill
-                    objectFit='contain'
-                    className='z-0'
-                  />
-                )}
+                {renderImage(item)}
                 <p className='absolute bottom-2 left-2 drop-shadow-md'>{renderFlag(item)}</p>
                 <p className='z-10 font-semibold'>{getDisplayValue(item).toUpperCase()}</p>
               </motion.li>
