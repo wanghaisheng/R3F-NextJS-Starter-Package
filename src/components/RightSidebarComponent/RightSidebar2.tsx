@@ -9,13 +9,13 @@ import Image from 'next/image'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import WalletComponent from './SubComponents/WalletComponent'
-import SearchComponent from './SubComponents/SearchComponent'
+import SidebarSearchComponent from './SubComponents/SidebarSearchComponent'
 import ShopComponent from './SubComponents/ShopComponent'
 import EmergencyComponent from './SubComponents/EmergencyComponent'
 import { CgProfile, CgPhotoscan } from 'react-icons/cg'
 import SideProfile from './Tabs/SideProfile'
 import { Toaster } from 'react-hot-toast'
-import CustomToolTip from '../Hud/CustomToolTip'
+import CustomToolTip from '../MyComponents/CustomToolTip'
 
 const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [activeTab, setActiveTab] = useState('profile') //active tab state
@@ -103,7 +103,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
               {activeTab === 'emergency' && (
                 <EmergencyComponent setActiveTab={setActiveTab} setShowSignUp={setShowSignUp} />
               )}
-              {activeTab === 'search' && <SearchComponent />}
+              {activeTab === 'search' && <SidebarSearchComponent />}
             </div>
           )}
 

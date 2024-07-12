@@ -3,22 +3,27 @@
 import { useEffect, useState } from 'react'
 import { PiDiamondsFourLight } from 'react-icons/pi'
 import dynamic from 'next/dynamic'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 
 // import CustomToolTip from '../Hud/CustomToolTip'
 
-const CustomToolTip = dynamic(() => import('../Hud/CustomToolTip').then((mod) => mod.default))
+const CustomToolTip = dynamic(() => import('../MyComponents/CustomToolTip').then((mod) => mod.default))
 
 export default function GuildHeader({
   onFilterChange,
   searchTerm,
   setSearchTerm,
+  facultyTags,
 }: {
   onFilterChange: (filter: string) => void
   searchTerm: string
   setSearchTerm: (searchTerm: string) => void
+  facultyTags: string[]
 }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
+  const [inputTags, setInputTags] = useState([])
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,6 +38,13 @@ export default function GuildHeader({
   const handleFilterClick = (filter) => {
     onFilterChange(filter)
     setActiveFilter(filter)
+  }
+
+  const handleInputTagsChange = (tag: string) => {
+    setInputTags((prevInputTags) => {
+      const updatedInputTags = [...prevInputTags, tag]
+      return updatedInputTags
+    })
   }
 
   return (
@@ -59,13 +71,12 @@ export default function GuildHeader({
                   />
                 </svg>
               </div>
-
               <input
                 type='text'
                 id='simple-search'
                 className='flex w-full items-center justify-start rounded-lg bg-white/20 py-1 pl-10 text-sm text-gray-200 focus:outline-none'
                 placeholder='SEARCH'
-                value={searchTerm}
+                // value={inputTags.length > 0 ? inputTags.join(', ') : ''}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
@@ -169,6 +180,22 @@ export default function GuildHeader({
             <CustomToolTip content='Padma' top={-10} left={165} translateY={-22} />
           </a>
         </div>
+      </div>
+      <div className='flex gap-x-2 text-sm font-bold text-black'>
+        <Swiper slidesPerView={5}>
+          {facultyTags
+            ? facultyTags.map((tag, index) => (
+                <SwiperSlide key={index} style={{ width: 'auto' }}>
+                  <p
+                    className='bg-white inline-block whitespace-nowrap cursor-pointer rounded p-1 transition-all duration-500 ease-in-out hover:scale-105 mx-2'
+                    onClick={() => handleInputTagsChange(tag)}
+                  >
+                    {tag}
+                  </p>
+                </SwiperSlide>
+              ))
+            : ''}
+        </Swiper>
       </div>
     </div>
   )
