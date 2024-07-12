@@ -68,7 +68,7 @@ export default function DiscoverRegion({
   }
 
   useEffect(() => {
-    console.log(filteredUsers)
+    console.log('filteredUsers: ', filteredUsers)
   }, [filteredUsers])
 
   //---------------------test input tags---------------------------------
@@ -82,10 +82,6 @@ export default function DiscoverRegion({
     setViewMates(true)
     setViewBusiness(false)
   }
-
-  useEffect(() => {
-    console.log(inputTags)
-  }, [inputTags])
 
   return (
     <>
