@@ -19,6 +19,8 @@ const Hud = () => {
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
   const token = Cookies.get('token')
 
+  const username = user ? user.user?.username : ''
+
   useEffect(() => {
     if (
       pathname === '/' ||
@@ -96,7 +98,7 @@ const Hud = () => {
 
                 {token ? (
                   <Link
-                    href={`/public-profile/${user && user.user.username}`}
+                    href={`/public-profile/${username}`}
                     aria-label=''
                     className='group py-2 font-semibold transition duration-300 ease-out hover:scale-105'
                   >
