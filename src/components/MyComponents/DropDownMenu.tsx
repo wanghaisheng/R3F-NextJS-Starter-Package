@@ -108,7 +108,7 @@ const DropdownComponent = <T extends string | object>({
                     className='z-0'
                   />
                 )}
-                {symbolPath && (
+                {symbolPath && getDisplayValue(item) !== 'All' && (
                   <Image
                     src={`${symbolPath}/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
