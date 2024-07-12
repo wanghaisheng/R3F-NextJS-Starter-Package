@@ -138,6 +138,8 @@ export default function SearchComponent({
   const handleContinentSelect = (continent: string) => {
     const newContinent = continent === 'All' ? '' : continent
     setSelectedContinent(newContinent)
+    setSelectedCountry(null) // Reset country
+    onCountryChange('') // Reset country
     onRegionChange(newContinent)
   }
 
@@ -190,6 +192,7 @@ export default function SearchComponent({
             placeholder='CONTINENTS'
             disabled={false}
             value={selectedContinent}
+            imagePath='/continents/continentmaps'
           />
 
           <DropdownComponent
@@ -200,6 +203,7 @@ export default function SearchComponent({
             value={selectedCountry?.name || ''}
             displayProperty='name'
             flagProperty='code'
+            imagePath='/continents/countrymaps'
           />
 
           <DropdownComponent
@@ -208,6 +212,8 @@ export default function SearchComponent({
             placeholder='GUILDS'
             disabled={false}
             value={selectedGuild}
+            // imagePath='/guild'
+            symbolPath='/guild/symbols'
           />
         </div>
         {(selectedContinent || selectedCountry || selectedGuild) && (
