@@ -97,13 +97,23 @@ const DropdownComponent = <T extends string | object>({
                 onClick={() => handleSelect(item)}
                 className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {imagePath && getDisplayValue(item) !== 'All' && (
+                {imagePath && getDisplayValue(item) !== 'All' && imagePath !== '/guild' && (
                   <Image
                     src={`${imagePath}/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
                     fill
                     objectFit='contain'
                     className='z-0'
+                  />
+                )}
+                {imagePath && getDisplayValue(item) !== 'All' && imagePath === '/guild' && (
+                  <Image
+                    src={`${imagePath}/${getDisplayValue(item)}.svg`}
+                    alt={getDisplayValue(item)}
+                    height={30}
+                    width={30}
+                    objectFit='contain'
+                    className='absolute bottom-2 left-2 z-0 drop-shadow'
                   />
                 )}
                 <p className='absolute bottom-2 left-2 drop-shadow-md'>{renderFlag(item)}</p>
