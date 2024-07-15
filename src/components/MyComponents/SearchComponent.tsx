@@ -1,4 +1,8 @@
+'use client'
+
+import { useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
+import { motion } from 'framer-motion'
 
 export default function SearchComponent({
   searchTerm,
@@ -7,12 +11,19 @@ export default function SearchComponent({
   searchTerm: string
   setSearchTerm: (searchTerm: string) => void
 }) {
+  const [value, setValue] = useState('')
+
   // When search
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
+    setValue(e.target.value)
   }
+
+  const handleSearchButtonClick = () => {
+    setSearchTerm(value)
+  }
+
   return (
-    <div className='flex w-full items-center justify-between gap-x-2 rounded-full bg-white/20 p-2 shadow-xl backdrop-blur-lg'>
+    <div className='flex w-full items-center justify-between gap-x-2 rounded-full bg-white/20 p-1 shadow-xl backdrop-blur-lg'>
       <div className='relative flex w-full items-center'>
         <IoSearch className='absolute left-4 z-10 size-5 text-black drop-shadow' />
         <input
@@ -21,6 +32,13 @@ export default function SearchComponent({
           onChange={handleSearchChange}
           className='w-full rounded-full bg-white/20 py-2 pl-12 pr-4 text-white shadow backdrop-blur-sm transition-all duration-300 ease-in-out placeholder:text-black hover:bg-white/30 hover:text-black focus:outline-none focus:ring-2 focus:ring-black/50'
         />
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          className='absolute right-2 rounded-full border-2 border-black px-1 text-black drop-shadow backdrop-blur-lg transition-colors duration-300 ease-in-out hover:bg-black hover:text-white'
+          onClick={handleSearchButtonClick}
+        >
+          SEARCH
+        </motion.button>
       </div>
     </div>
   )
