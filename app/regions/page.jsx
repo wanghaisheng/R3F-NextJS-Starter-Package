@@ -42,7 +42,7 @@ const continents = [
 
 const Regions = () => {
   const { users, guilds } = useUserAndGuildData()
-  const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA')
+  const [selectedRegionFilter, setSelectedRegionFilter] = useState('') // Nothing as the default region
   const [selectedGuildFilter, setSelectedGuildFilter] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [mappedGuilds, setMappedGuilds] = useState([])

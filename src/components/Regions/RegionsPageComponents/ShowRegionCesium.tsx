@@ -141,9 +141,9 @@ export default function ShowRegionCesium({
         <Suspense fallback={<div>Loading map...</div>}>
           <div className='fixed top-0 size-full'>
             {mapChange === 'SATELLITE' ? (
-              <CesiumMap filteredContinent={selectedRegionFilter} />
+              <CesiumMap filteredContinent={selectedRegionFilter} filteredCountry={selectedCountryFilter} />
             ) : (
-              <MapComponent filteredContinent={selectedRegionFilter} />
+              <MapComponent filteredContinent={selectedRegionFilter} filteredCountry={selectedCountryFilter} />
             )}
           </div>
         </Suspense>

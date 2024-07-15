@@ -34,7 +34,7 @@ export default function SearchComponent({
         />
         <motion.button
           whileTap={{ scale: 0.95 }}
-          className='absolute right-2 rounded-full border-2 border-black px-1 text-black drop-shadow backdrop-blur-lg transition-colors duration-300 ease-in-out hover:bg-black hover:text-white'
+          className='absolute right-2 rounded-full px-2 py-1 text-xs font-bold text-black shadow shadow-black backdrop-blur-lg transition-colors duration-300 ease-in-out hover:bg-black hover:text-white'
           onClick={handleSearchButtonClick}
         >
           SEARCH
