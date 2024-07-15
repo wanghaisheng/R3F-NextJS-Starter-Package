@@ -9,13 +9,13 @@ import { GeoJsonObject } from 'geojson'
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 
 const calculateZoom = (area) => {
-  if (area > 3000000) {
+  if (area < 150000) {
     // Adjust thresholds as needed
-    return 4
-  } else if (area > 1000000) {
-    return 5
+    return 7
+  } else if (area < 300000) {
+    return 6
   } else {
-    return 6 // Adjusted minimum zoom for smaller countries
+    return 5
   }
 }
 
@@ -74,7 +74,9 @@ const MapComponent = ({
   useEffect(() => {
     if (filteredCountry && countriesData.length > 0) {
       const country = countriesData.find((country) => country.cca2.toUpperCase() === filteredCountry.toUpperCase())
-      const countryArea = countriesData.find((country) => country.area)
+      const countryArea = country.area
+
+      console.log('country:', countryArea)
 
       if (country) {
         const { latlng } = country
