@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import SearchComponent from '@/components/MyComponents/SearchComponent'
+import RegionHudComponent from '@/components/MyComponents/RegionHudComponent'
 
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/RegionsPageComponents/ShowRegionCesium'), {
   ssr: false,
@@ -102,14 +103,7 @@ const Regions = () => {
       <div className='relative'>
         <div className='absolute top-[88px] flex w-full justify-center'>
           <div className='z-30 w-[50%]'>
-            <SearchComponent
-              onRegionChange={handleRegionFilterChange}
-              onCountryChange={handleCountryFilterChange}
-              onGuildChange={handleGuildFilterChange}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              guilds={guilds.map((g) => g.guild_name)}
-            />
+            <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
         </div>
         <div className='flex flex-col justify-center lg:justify-start'>
@@ -120,6 +114,16 @@ const Regions = () => {
             selectedCountryFilter={selectedCountryFilter}
             searchTerm={searchTerm}
           />
+        </div>
+        <div className='absolute bottom-6 flex w-full justify-center'>
+          <div className='z-50 w-fit'>
+            <RegionHudComponent
+              onRegionChange={handleRegionFilterChange}
+              onCountryChange={handleCountryFilterChange}
+              onGuildChange={handleGuildFilterChange}
+              guilds={guilds.map((g) => g.guild_name)}
+            />
+          </div>
         </div>
       </div>
     </>

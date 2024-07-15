@@ -33,8 +33,6 @@ export default function ShowRegionUsers({
     setShowInfos((prev) => ({ ...prev, [index]: !prev[index] }))
   }
 
-  console.log(users)
-
   // Filter based on guild, continent, and search term
   const filteredFactions = users.filter((user) => {
     return (
