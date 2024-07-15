@@ -76,8 +76,6 @@ const MapComponent = ({
       const country = countriesData.find((country) => country.cca2.toUpperCase() === filteredCountry.toUpperCase())
       const countryArea = country.area
 
-      console.log('country:', countryArea)
-
       if (country) {
         const { latlng } = country
         const zoomLevel = calculateZoom(countryArea)
