@@ -5,6 +5,7 @@ import 'swiper/css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import * as CountryFlags from 'country-flag-icons/react/3x2'
 
 export default function ShowRegionUsers({
   users,
@@ -42,6 +43,12 @@ export default function ShowRegionUsers({
     )
   })
 
+  // Flag rendering
+  const renderFlag = (countryCode: string) => {
+    const FlagComponent = CountryFlags[countryCode as keyof typeof CountryFlags]
+    return FlagComponent ? <FlagComponent className='mr-2 h-4 w-6' /> : null
+  }
+
   return (
     <div className='flex h-[300px] w-full items-center justify-center rounded-lg'>
       {filteredFactions.length > 0 ? (
@@ -49,9 +56,16 @@ export default function ShowRegionUsers({
           {filteredFactions.map((user, index) => (
             <SwiperSlide key={index}>
               <div className='relative flex size-full items-center justify-center'>
-                <button className='absolute right-8 top-2 z-40 cursor-crosshair' onClick={() => handlePicChange(index)}>
-                  change
-                </button>
+                {/* Switch */}
+                <div
+                  className='absolute left-6 top-6 z-40 flex h-[22px] w-[40px] cursor-pointer justify-start rounded-full bg-black/30 p-[3px] shadow-inner shadow-white/30'
+                  onClick={() => handlePicChange(index)}
+                >
+                  <div
+                    className={`size-[17px] rounded-full bg-white ${changedPics[index] ? 'translate-x-4' : ''} transition-transform duration-200 ease-in-out`}
+                  />
+                </div>
+                {/* User */}
                 <div
                   onClick={() => handleShowInfo(index)}
                   className='relative flex size-[90%] cursor-pointer flex-col items-center justify-center rounded-lg shadow-sm transition duration-500 ease-out'
@@ -122,6 +136,19 @@ export default function ShowRegionUsers({
                           </Link>
                         </div>
                       </div>
+                      {/* Country Flag */}
+                      <div className='absolute bottom-2 right-0'>{renderFlag(user.country)}</div>
+                      <div className='absolute right-2 top-2 size-[25px] rounded-full drop-shadow'>
+                        {user.guild && (
+                          <Image
+                            src={`/guild/symbols/${user.guild.charAt(0).toUpperCase() + user.guild.slice(1).toLowerCase()}.svg`}
+                            alt={user.guild}
+                            height={25}
+                            width={25}
+                            objectFit='contain'
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -134,4 +161,11 @@ export default function ShowRegionUsers({
       )}
     </div>
   )
+}
+
+// for switch
+const spring = {
+  type: 'spring',
+  stiffness: 700,
+  damping: 30,
 }

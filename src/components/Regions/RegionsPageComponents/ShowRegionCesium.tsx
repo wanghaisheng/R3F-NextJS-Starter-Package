@@ -150,8 +150,8 @@ export default function ShowRegionCesium({
 
         {mapChange === 'DEFAULT' && (
           <>
-            <div className='absolute top-0 z-40 h-20 w-full bg-gradient-to-b from-black/50'></div>
-            <div className='absolute bottom-0 z-40 h-20 w-full bg-gradient-to-t from-black/50'></div>
+            <div className='absolute top-0 z-30 h-20 w-full bg-gradient-to-b from-black/50'></div>
+            <div className='absolute bottom-0 z-30 h-20 w-full bg-gradient-to-t from-black/50'></div>
           </>
         )}
 

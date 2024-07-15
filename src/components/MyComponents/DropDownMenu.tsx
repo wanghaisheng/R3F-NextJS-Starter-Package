@@ -13,6 +13,8 @@ interface DropdownComponentProps<T> {
   value: string
   displayProperty?: keyof T
   flagProperty?: keyof T
+  imagePath?: string
+  symbolPath?: string
 }
 
 const DropdownComponent = <T extends string | object>({
@@ -23,6 +25,8 @@ const DropdownComponent = <T extends string | object>({
   value,
   displayProperty,
   flagProperty,
+  imagePath,
+  symbolPath,
 }: DropdownComponentProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -82,11 +86,11 @@ const DropdownComponent = <T extends string | object>({
       <AnimatePresence>
         {isOpen && (
           <motion.ul
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className='absolute left-0 top-16 z-20 grid max-h-[450px] w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg'
+            className='absolute bottom-16 left-0 z-20 grid max-h-[450px] w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg '
           >
             {data.map((item, index) => (
               <motion.li
@@ -95,13 +99,23 @@ const DropdownComponent = <T extends string | object>({
                 onClick={() => handleSelect(item)}
                 className='relative flex h-32 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-gray-200 px-4 py-2'
               >
-                {flagProperty && getDisplayValue(item) !== 'All' && (
+                {imagePath && getDisplayValue(item) !== 'All' && (
                   <Image
-                    src={`/continents/countryflags/${getDisplayValue(item)}.svg`}
+                    src={`${imagePath}/${getDisplayValue(item)}.svg`}
                     alt={getDisplayValue(item)}
                     fill
                     objectFit='contain'
                     className='z-0'
+                  />
+                )}
+                {symbolPath && getDisplayValue(item) !== 'All' && (
+                  <Image
+                    src={`${symbolPath}/${getDisplayValue(item)}.svg`}
+                    alt={getDisplayValue(item)}
+                    height={30}
+                    width={30}
+                    objectFit='contain'
+                    className='absolute bottom-2 left-2 z-0 drop-shadow'
                   />
                 )}
                 <p className='absolute bottom-2 left-2 drop-shadow-md'>{renderFlag(item)}</p>
