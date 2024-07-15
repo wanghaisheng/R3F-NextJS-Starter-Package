@@ -12,6 +12,16 @@ const CesiumMap = ({ filteredContinent, filteredCountry }: { filteredContinent: 
 
   const cameraZoom: number = 9500000 // Adjust this as needed
 
+  const handleZoomToCountry = (countryArea: number) => {
+    if (countryArea < 150000) {
+      return 850000
+    } else if (countryArea < 300000) {
+      return 1100000
+    } else {
+      return 1500000
+    }
+  }
+
   // Fetch countries data
   useEffect(() => {
     const fetchCountriesData = async () => {
@@ -38,7 +48,7 @@ const CesiumMap = ({ filteredContinent, filteredCountry }: { filteredContinent: 
 
         // Fly to the country's location
         cesiumRef.current?.camera.flyTo({
-          destination: Cartesian3.fromDegrees(latlng[1], latlng[0], cameraZoom),
+          destination: Cartesian3.fromDegrees(latlng[1], latlng[0], handleZoomToCountry(countryArea)),
         })
       }
     }
