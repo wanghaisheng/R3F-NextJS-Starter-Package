@@ -116,7 +116,7 @@ const Regions = () => {
           />
         </div>
         <div className='absolute bottom-6 flex w-full justify-center'>
-          <div className='z-50 w-fit'>
+          <div className='z-50 w-full md:w-1/2'>
             <RegionHudComponent
               onRegionChange={handleRegionFilterChange}
               onCountryChange={handleCountryFilterChange}

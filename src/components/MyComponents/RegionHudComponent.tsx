@@ -161,12 +161,9 @@ export default function RegionHudComponent({
   }
 
   return (
-    <div
-      ref={containerRef}
-      className={`relative flex w-full flex-col items-start transition-all duration-500 ease-in-out`}
-    >
-      <div className='flex w-full items-center justify-between gap-x-2 rounded-full bg-white/20 p-2 shadow-xl backdrop-blur-lg'>
-        <div className='flex items-center space-x-2'>
+    <div ref={containerRef} className={`flex w-full flex-col items-center transition-all duration-500 ease-in-out`}>
+      <div className='relative flex w-full items-center justify-center gap-x-2 '>
+        <div className='flex items-center space-x-2 rounded-full bg-white/20 p-2 shadow-xl'>
           <DropdownComponent
             data={continents}
             onSelect={handleContinentSelect}
