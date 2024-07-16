@@ -88,8 +88,6 @@ export default function PublicProfile({ username }) {
   const avatar_url = fetchedData[0]?.avatarurl
   const userGuild = fetchedData[0]?.guild
 
-  console.log('jasn', skills)
-
   return (
     <div className='flex size-full'>
       {/* Video BG */}

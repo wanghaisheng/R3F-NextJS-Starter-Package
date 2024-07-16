@@ -26,13 +26,6 @@ export default function UserContent({ user, skillsData, guild, experience }) {
     setIsFlipped(newState)
   }
 
-  console.log('skillDTA', skillsData)
-
-  // skillsData.map((data) => {
-  //   const skillName = data.skill
-  //   setSkills((prev) => [...prev, skillName])
-  // })
-
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   useEffect(() => {
