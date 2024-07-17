@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { FaAnglesUp } from 'react-icons/fa6'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar))
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import UserContent from './PublicProfileComponent/UserContent'
 

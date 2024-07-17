@@ -3,7 +3,7 @@ import React, { useRef, ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar/Navbar'
 import Hud from '@/components/Hud/Hud'
-import RightSidebar2 from '../RightSidebarComponent/RightSidebar2'
+const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/RightSidebar2'), { ssr: false })
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
