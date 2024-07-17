@@ -2,7 +2,6 @@
 import React, { useRef, ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar/Navbar'
-import Hud from '@/components/Hud/Hud'
 const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/RightSidebar2'), { ssr: false })
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
@@ -40,11 +39,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           showSignIn={showSignIn}
           showSignUp={showSignUp}
         />
-      </div>
-      <div className='absolute bottom-0 w-full'>
-        <div className='flex justify-center'>
-          <Hud />
-        </div>
       </div>
     </div>
   )
