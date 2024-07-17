@@ -7,13 +7,13 @@ import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import CoverPhoto from './ProfileInfoComponents/CoverPhoto'
-import ProfilePic from './ProfileInfoComponents/ProfilePic'
+import CoverPhoto from './LeftSideComponents/CoverPhoto'
+import ProfilePic from './LeftSideComponents/ProfilePic'
 const HoverGuild = dynamic(() => import('@/components/HoverEffect/HoverGuild'), { ssr: false })
-import AchievementsComponent from './ProfileInfoComponents/AchievementsComponent'
-import AboutUser from './ProfileInfoComponents/AboutUser'
-import ProfileButtons from './ProfileInfoComponents/ProfileButtons'
-import ExperienceShow from './ExperienceShow'
+import AchievementsComponent from './RightSideComponents/AchievementsComponent'
+import AboutUser from './LeftSideComponents/AboutUser'
+import ProfileButtons from './PublicProfileHud/ProfileButtons'
+import ExperienceShow from './RightSideComponents/ExperienceShow'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { IoMdPhotos } from 'react-icons/io'
 import { SiCompilerexplorer } from 'react-icons/si'
@@ -98,7 +98,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
           <>
             <div className='relative flex size-full flex-col rounded-xl bg-violet-300/50 px-5 py-3 shadow shadow-purple-700 lg:w-[50%] dark:bg-black/50'>
               {/* Navigation */}
-              <nav className='sticky top-20 z-50 flex justify-center font-bold text-white transition-all duration-300 animate-ease-in-out'>
+              {/* <nav className='sticky top-20 z-50 flex justify-center font-bold text-white transition-all duration-300 animate-ease-in-out'>
                 <div className='flex items-center justify-center gap-x-4 rounded-full bg-black px-4 py-1 text-xl'>
                   <button
                     className={`rounded-full transition-all duration-500 ${visibleSection !== 'section0' ? 'text-white' : 'text-violet-500'}`}
@@ -121,23 +121,8 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                     <SiCompilerexplorer />
                   </button>
                 </div>
-              </nav>
-              {/* CoverPicture */}
-              <div className='mt-3 flex w-full items-center justify-center' id='section0' ref={sectionInfoRef}>
-                <CoverPhoto coverPhotoUrl={user.username} height={160} />
-              </div>
-              {/* Profile Picture And User Info */}
-              <div className='flex w-full flex-col items-center gap-x-5 py-8 md:flex-row'>
-                <div className='-mt-20 md:mt-0'>
-                  <ProfilePic
-                    profilePicUrl={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
-                    size={isSmallScreen ? 90 : 160}
-                  />
-                </div>
-                <div className='z-30 mt-5 grow md:mt-0'>
-                  <AboutUser userData={user} />
-                </div>
-              </div>
+              </nav> */}
+
               {/* interaction Buttons */}
               <div className='sticky top-28 z-50 -mt-7 flex w-full justify-center'>
                 <ProfileButtons />

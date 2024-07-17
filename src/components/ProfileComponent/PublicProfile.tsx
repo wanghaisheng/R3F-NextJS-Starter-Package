@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 import { FaAnglesUp } from 'react-icons/fa6'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
-import UserContent from './PublicProfileComponent/UserContent'
+import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserContent'
+import LeftSidePublicProfile from './PublicProfileComponent/ProfileInfoComponents/LeftSideComponents/LeftSidePublicProfile'
 
 export default function PublicProfile({ username }) {
   const { users, guilds } = useUserAndGuildData()
@@ -113,56 +114,10 @@ export default function PublicProfile({ username }) {
 
       {users ? (
         <>
-          {/* Avatar and Username */}
-          {!isSmallScreen ? (
-            <div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
-              {users && (
-                <>
-                  <div className='fixed left-6 z-0 flex h-full w-1/4 flex-col items-start justify-center'>
-                    <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold drop-shadow'>
-                      {username.split('').map((letter, index) => (
-                        <span key={index}>{letter.toUpperCase()}</span>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {avatar_url && (
-                <div className='z-40 size-full'>
-                  <Avatar
-                    modelSrc={`${avatar_url}`}
-                    animationSrc='/male-spawn-animation.fbx'
-                    // style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                    fov={40}
-                    cameraTarget={1.5}
-                    cameraInitialDistance={30}
-                    effects={{
-                      ambientOcclusion: true,
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              {avatar_url && (
-                <div className='fixed top-7 h-[700px] w-full'>
-                  <Avatar
-                    modelSrc={`${avatar_url}`}
-                    animationSrc='/male-spawn-animation.fbx'
-                    style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                    fov={40}
-                    cameraTarget={1.5}
-                    cameraInitialDistance={30}
-                    effects={{
-                      ambientOcclusion: true,
-                    }}
-                  />
-                </div>
-              )}
-            </>
-          )}
+          {/* LeftPart */}
+          <div className=''>
+            <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
+          </div>
 
           {/* Mid Part */}
           <div className='flex w-full justify-center'>
