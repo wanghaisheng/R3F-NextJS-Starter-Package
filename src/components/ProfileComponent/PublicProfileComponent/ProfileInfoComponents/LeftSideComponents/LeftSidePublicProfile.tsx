@@ -37,7 +37,7 @@ export default function LeftSidePublicProfile({ user, guild }) {
                 width: 140,
               }}
             >
-              {switchProfile ? (
+              {!switchProfile ? (
                 <Image
                   src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
                   alt='profile-pic'

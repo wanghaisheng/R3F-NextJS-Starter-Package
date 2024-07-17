@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { FaAnglesUp } from 'react-icons/fa6'
 
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserContent'
@@ -10,19 +9,7 @@ import LeftSidePublicProfile from './PublicProfileComponent/ProfileInfoComponent
 export default function PublicProfile({ username }) {
   const { users, guilds } = useUserAndGuildData()
   const [fetchedData, setFetchedData] = useState([])
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [skills, setSkills] = useState([])
-
-  // Check if the screen is small
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
-    }
-
-    handleResize() // Initial check
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   // Map the user data to the format needed
   useEffect(() => {
@@ -62,27 +49,6 @@ export default function PublicProfile({ username }) {
       setSkills(newSkills)
     }
   }, [fetchedData]) // Only re-run when fetchedData changes
-
-  // Scroll to top button
-  const [showScrollToTop, setShowScrollToTop] = useState(false)
-
-  // Show the button after scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollToTop(window.pageYOffset > 200) // Show the button after scrolling 200px down
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Function to scroll to the top
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // Smooth scrolling
-    })
-  }
 
   // selected user guild
   const userGuild = fetchedData[0]?.guild
@@ -126,16 +92,6 @@ export default function PublicProfile({ username }) {
               experience={fetchedData[0]?.experienceData}
             />
           </div>
-
-          {/* Scroll to top button */}
-          <button
-            className={`fixed bottom-10 right-10 z-50 ${
-              showScrollToTop ? 'translate-y-0' : 'translate-y-[-100rem]'
-            } rounded-full bg-purple-700/30 p-3 text-white transition-all duration-500 hover:bg-pink-300/40 hover:text-pink-200`}
-            onClick={scrollToTop}
-          >
-            <FaAnglesUp size={24} />
-          </button>
         </div>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>

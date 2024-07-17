@@ -11,6 +11,7 @@ const HoverGuild = dynamic(() => import('@/components/HoverEffect/HoverGuild'), 
 import AchievementsComponent from './RightSideComponents/AchievementsComponent'
 import ProfileButtons from './PublicProfileHud/ProfileButtons'
 import ExperienceShow from './RightSideComponents/ExperienceShow'
+import { FaAnglesUp } from 'react-icons/fa6'
 
 export default function UserContent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -39,48 +40,27 @@ export default function UserContent({ user, skillsData, guild, experience }) {
   const sectionInfoRef = useRef(null)
   const sectionGalleryRef = useRef(null)
   const sectionExperienceRef = useRef(null)
-  const [visibleSection, setVisibleSection] = useState(null)
-  const scrollOffset = 80 // Adjust this value to change the top offset
 
-  const scrollToSection = (sectionRef) => {
+  // Scroll to top button
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
+
+  // Show the button after scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTop(window.pageYOffset > 200) // Show the button after scrolling 200px down
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Function to scroll to the top
+  const scrollToTop = () => {
     window.scrollTo({
-      top: sectionRef.current.offsetTop - scrollOffset,
-      behavior: 'smooth',
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling
     })
   }
-
-  useEffect(() => {
-    const sectionRefs = [sectionInfoRef, sectionGalleryRef, sectionExperienceRef]
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSection(entry.target.id)
-          }
-        })
-      },
-      {
-        root: null,
-        rootMargin: `-${scrollOffset}px 0px 0px 0px`,
-        threshold: 0.5,
-      },
-    )
-
-    sectionRefs.forEach((sectionRef) => {
-      if (sectionRef.current) {
-        observer.observe(sectionRef.current)
-      }
-    })
-
-    return () => {
-      sectionRefs.forEach((sectionRef) => {
-        if (sectionRef.current) {
-          observer.unobserve(sectionRef.current)
-        }
-      })
-    }
-  }, [])
 
   return (
     <div
@@ -126,6 +106,16 @@ export default function UserContent({ user, skillsData, guild, experience }) {
           <div className='relative flex size-full px-10 py-3' id='section3' ref={sectionExperienceRef}>
             <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
           </div>
+
+          {/* Scroll to top button */}
+          <button
+            className={`fixed bottom-10 right-10 z-50 ${
+              showScrollToTop ? 'translate-y-0' : 'translate-y-[-100rem]'
+            } rounded-full bg-purple-700/30 p-3 text-white transition-all duration-500 hover:bg-pink-300/40 hover:text-pink-200`}
+            onClick={scrollToTop}
+          >
+            <FaAnglesUp size={24} />
+          </button>
         </>
       )}
     </div>
