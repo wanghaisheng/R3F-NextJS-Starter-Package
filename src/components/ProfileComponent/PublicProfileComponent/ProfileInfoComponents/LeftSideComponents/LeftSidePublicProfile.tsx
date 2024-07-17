@@ -2,25 +2,14 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AboutUser from './AboutUser'
 import CoverPhoto from './CoverPhoto'
+import HoverGuild from '@/components/HoverEffect/HoverGuild'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 
 export default function LeftSidePublicProfile({ user, guild }) {
-  // const [isSmallScreen, setIsSmallScreen] = useState(false)
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
-  //   }
-
-  //   handleResize() // Initial check
-  //   window.addEventListener('resize', handleResize)
-  //   return () => window.removeEventListener('resize', handleResize)
-  // }, [])
-
   const [switchProfile, setSwitchProfile] = useState(false)
 
   const handleSwitchProfile = () => {
@@ -35,7 +24,7 @@ export default function LeftSidePublicProfile({ user, guild }) {
         <div className='relative size-full rounded-xl p-3 shadow-xl shadow-black/30 backdrop-blur-lg'>
           {/* CoverPicture */}
           <div className='flex w-full items-center justify-center'>
-            <CoverPhoto coverPhotoUrl={user.username} height={170} />
+            <CoverPhoto coverPhotoUrl={user.username} height={178} />
           </div>
 
           {/* Profile Picture And User Info */}
@@ -89,6 +78,29 @@ export default function LeftSidePublicProfile({ user, guild }) {
           {/* About User */}
           <div className='flex w-full justify-center rounded-lg bg-black/20 p-2 shadow'>
             <AboutUser userData={user} />
+          </div>
+
+          <div className='absolute right-6 top-36'>...</div>
+
+          {/* Guild */}
+          <div className='flex flex-col pl-4 '>
+            <div className='group absolute right-4 top-4'>
+              <Image
+                src={guild.find((guild) => guild.guild_name === user.guild)?.symbol || ''}
+                height={30}
+                width={30}
+                alt='guild'
+                loading='lazy'
+                className='rounded-full border-2 border-white/50 transition-all duration-300 ease-in-out hover:rotate-180 group-hover:border-white/100'
+              />
+
+              <HoverGuild
+                hoveredGuild={guild.find((guild) => guild.guild_name === user.guild)?.guild_name.toUpperCase() || ''}
+                top={10}
+                left={50}
+                translateY={10}
+              />
+            </div>
           </div>
         </div>
       ) : (

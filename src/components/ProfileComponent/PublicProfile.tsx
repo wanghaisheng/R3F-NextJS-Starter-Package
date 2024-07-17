@@ -111,14 +111,14 @@ export default function PublicProfile({ username }) {
       </div>
 
       {users ? (
-        <div className='flex h-screen w-full justify-between'>
+        <div className='flex w-full flex-col justify-center md:h-screen md:flex-row md:justify-between'>
           {/* LeftPart */}
-          <div className='z-20 h-full w-[27%] p-5 pt-14'>
+          <div className='z-30 h-full p-5 pt-16 md:w-[29%]'>
             <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
           </div>
 
-          {/* Mid Part */}
-          <div className='z-20 flex-1 bg-green-500'>
+          {/* Right Part */}
+          <div className='z-20 h-full flex-1 p-5 pt-16 md:w-[71%]'>
             <UserContent
               user={fetchedData[0]}
               skillsData={skills}

@@ -13,7 +13,6 @@ export default function CoverPhoto({ coverPhotoUrl, height }) {
           alt='Cover Pic'
           className='rounded-lg transition-all duration-1000 ease-in-out hover:scale-125'
         />
-        <div className='absolute right-3 top-0'>...</div>
       </div>
     </>
   )
