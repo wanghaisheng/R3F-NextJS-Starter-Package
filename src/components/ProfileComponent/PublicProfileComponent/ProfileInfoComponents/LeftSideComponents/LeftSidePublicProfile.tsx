@@ -9,24 +9,30 @@ import CoverPhoto from './CoverPhoto'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 
 export default function LeftSidePublicProfile({ user, guild }) {
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
+  // const [isSmallScreen, setIsSmallScreen] = useState(false)
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
-    }
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsSmallScreen(window.innerWidth < 1025) // Adjust the breakpoint as needed
+  //   }
 
-    handleResize() // Initial check
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  //   handleResize() // Initial check
+  //   window.addEventListener('resize', handleResize)
+  //   return () => window.removeEventListener('resize', handleResize)
+  // }, [])
+
+  const [switchProfile, setSwitchProfile] = useState(false)
+
+  const handleSwitchProfile = () => {
+    setSwitchProfile(!switchProfile)
+  }
 
   const avatar_url = user?.avatarurl
 
   return (
     <>
       {user ? (
-        <div className='size-full rounded-xl border-2 p-3 backdrop-blur-lg'>
+        <div className='relative size-full rounded-xl p-3 shadow-xl shadow-black/30 backdrop-blur-lg'>
           {/* CoverPicture */}
           <div className='flex w-full items-center justify-center'>
             <CoverPhoto coverPhotoUrl={user.username} height={170} />
@@ -35,29 +41,53 @@ export default function LeftSidePublicProfile({ user, guild }) {
           {/* Profile Picture And User Info */}
           <div className='mt-[-76px] flex w-full items-center justify-center'>
             <div
-              className='relative overflow-hidden rounded-full border-2 border-black'
+              className='relative overflow-hidden rounded-full border-2'
               style={{
                 borderRadius: '50%',
                 height: 140,
                 width: 140,
               }}
             >
-              <Image
-                src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
-                alt='profile-pic'
-                fill
-                unoptimized
-                objectFit='cover'
-                className='rounded-full transition-all duration-[2500ms] ease-in-out hover:scale-125'
-              />
+              {switchProfile ? (
+                <Image
+                  src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
+                  alt='profile-pic'
+                  fill
+                  unoptimized
+                  objectFit='cover'
+                  className='rounded-full transition-all duration-[2500ms] ease-in-out hover:scale-125'
+                />
+              ) : (
+                <>
+                  {avatar_url && (
+                    <div className='size-full bg-white/20 backdrop-blur-3xl'>
+                      <Avatar
+                        modelSrc={`${avatar_url}`}
+                        animationSrc='/male-spawn-animation.fbx'
+                        fov={15}
+                        cameraTarget={2}
+                        cameraInitialDistance={3}
+                        effects={{
+                          ambientOcclusion: true,
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </div>
-          {/* username */}
-          <div className='flex w-full justify-center text-xl font-semibold'>
+          {/* Switch to toggle profile pic */}
+          <div className='absolute left-4 top-3' onClick={handleSwitchProfile}>
+            SWITCH
+          </div>
+          {/* USERNAME */}
+          <div className='my-2 flex w-full justify-center text-xl font-semibold'>
             {user.username.charAt(0).toUpperCase()}
             {user.username.slice(1)}
           </div>
-          <div className='z-30 mt-5 grow md:mt-0'>
+          {/* About User */}
+          <div className='flex w-full justify-center rounded-lg bg-black/20 p-2 shadow'>
             <AboutUser userData={user} />
           </div>
         </div>
@@ -69,40 +99,3 @@ export default function LeftSidePublicProfile({ user, guild }) {
     </>
   )
 }
-
-// {
-//   /* Username */
-// }
-// {
-//   user && (
-//     <>
-//       <div className='fixed left-6 z-0 flex h-full w-1/4 flex-col items-start justify-center'>
-//         <div className=' flex flex-col items-center justify-center pt-4 text-8xl font-extrabold drop-shadow'>
-//           {user.username.split('').map((letter, index) => (
-//             <span key={index}>{letter.toUpperCase()}</span>
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   )
-// }
-
-// {
-//   /* Avatar */
-// }
-// ;<div className='fixed flex h-screen w-[25%] items-center justify-center overflow-y-hidden'>
-//   {avatar_url && (
-//     <div className='z-40 size-full'>
-//       <Avatar
-//         modelSrc={`${avatar_url}`}
-//         animationSrc='/male-spawn-animation.fbx'
-//         fov={40}
-//         cameraTarget={1.5}
-//         cameraInitialDistance={30}
-//         effects={{
-//           ambientOcclusion: true,
-//         }}
-//       />
-//     </div>
-//   )}
-// </div>
