@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function CoverPhoto({ coverPhotoUrl, height }) {
   return (
     <>
-      <div className='relative w-full overflow-hidden rounded bg-black' style={{ height: height }}>
+      <div className='relative w-full overflow-hidden rounded-lg' style={{ height: height }}>
         <Image
           // {coverPhotoUrl}
           src='/card/defaultbuddha.svg'
@@ -11,9 +11,9 @@ export default function CoverPhoto({ coverPhotoUrl, height }) {
           objectFit='cover'
           unoptimized
           alt='Cover Pic'
-          className='rounded transition-all duration-1000 ease-in-out hover:scale-125'
+          className='rounded-lg transition-all duration-1000 ease-in-out hover:scale-125'
         />
-        <div className='absolute bottom-3 right-3'>Edit Button</div>
+        <div className='absolute right-3 top-0'>...</div>
       </div>
     </>
   )

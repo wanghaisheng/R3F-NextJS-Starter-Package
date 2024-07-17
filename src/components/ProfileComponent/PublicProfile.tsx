@@ -1,9 +1,8 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { FaAnglesUp } from 'react-icons/fa6'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
+
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserContent'
 import LeftSidePublicProfile from './PublicProfileComponent/ProfileInfoComponents/LeftSideComponents/LeftSidePublicProfile'
@@ -85,12 +84,11 @@ export default function PublicProfile({ username }) {
     })
   }
 
-  // avatar url and selected user guild
-  const avatar_url = fetchedData[0]?.avatarurl
+  // selected user guild
   const userGuild = fetchedData[0]?.guild
 
   return (
-    <div className='flex size-full'>
+    <>
       {/* Video BG */}
       <div className='fixed top-0 h-screen w-full'>
         {userGuild && (
@@ -113,14 +111,14 @@ export default function PublicProfile({ username }) {
       </div>
 
       {users ? (
-        <>
+        <div className='flex h-screen w-full justify-between'>
           {/* LeftPart */}
-          <div className=''>
+          <div className='z-20 h-full w-[33%] p-10 pt-20'>
             <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
           </div>
 
           {/* Mid Part */}
-          <div className='flex w-full justify-center'>
+          <div className='z-20 flex-1 bg-green-500'>
             <UserContent
               user={fetchedData[0]}
               skillsData={skills}
@@ -138,12 +136,12 @@ export default function PublicProfile({ username }) {
           >
             <FaAnglesUp size={24} />
           </button>
-        </>
+        </div>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>
           <div className='text-center text-2xl font-bold'>Loading...</div>
         </div>
       )}
-    </div>
+    </>
   )
 }
