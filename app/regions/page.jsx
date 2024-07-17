@@ -42,7 +42,7 @@ const continents = [
 
 const Regions = () => {
   const { users, guilds } = useUserAndGuildData()
-  const [selectedRegionFilter, setSelectedRegionFilter] = useState('ASIA')
+  const [selectedRegionFilter, setSelectedRegionFilter] = useState('') // Nothing as the default region
   const [selectedGuildFilter, setSelectedGuildFilter] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [mappedGuilds, setMappedGuilds] = useState([])
@@ -100,32 +100,38 @@ const Regions = () => {
 
   return (
     <>
-      <div className='relative'>
-        <div className='absolute top-[88px] flex w-full justify-center'>
-          <div className='z-30 w-[50%]'>
-            <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {users && guilds ? (
+        <div className='relative'>
+          <div className='absolute top-[88px] flex w-full justify-center'>
+            <div className='z-30 w-[50%]'>
+              <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            </div>
           </div>
-        </div>
-        <div className='flex flex-col justify-center lg:justify-start'>
-          <ShowRegionCesium
-            selectedRegionFilter={selectedRegionFilter}
-            guilds={filteredGuilds}
-            selectedGuildFilter={selectedGuildFilter}
-            selectedCountryFilter={selectedCountryFilter}
-            searchTerm={searchTerm}
-          />
-        </div>
-        <div className='absolute bottom-6 flex w-full justify-center'>
-          <div className='z-50 w-full md:w-1/2'>
-            <RegionHudComponent
-              onRegionChange={handleRegionFilterChange}
-              onCountryChange={handleCountryFilterChange}
-              onGuildChange={handleGuildFilterChange}
-              guilds={guilds.map((g) => g.guild_name)}
+          <div className='flex flex-col justify-center lg:justify-start'>
+            <ShowRegionCesium
+              selectedRegionFilter={selectedRegionFilter}
+              guilds={filteredGuilds}
+              selectedGuildFilter={selectedGuildFilter}
+              selectedCountryFilter={selectedCountryFilter}
+              searchTerm={searchTerm}
             />
           </div>
+          <div className='absolute bottom-6 flex w-full justify-center'>
+            <div className='z-50 w-full md:w-1/2'>
+              <RegionHudComponent
+                onRegionChange={handleRegionFilterChange}
+                onCountryChange={handleCountryFilterChange}
+                onGuildChange={handleGuildFilterChange}
+                guilds={guilds.map((g) => g.guild_name)}
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <div>loading...</div>
+        </>
+      )}
     </>
   )
 }

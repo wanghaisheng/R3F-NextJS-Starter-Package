@@ -18,8 +18,16 @@ export default function SearchComponent({
     setValue(e.target.value)
   }
 
+  // On search button click
   const handleSearchButtonClick = () => {
     setSearchTerm(value)
+  }
+
+  // On enter key press
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchButtonClick()
+    }
   }
 
   return (
@@ -30,11 +38,12 @@ export default function SearchComponent({
           type='search'
           placeholder='SEARCH'
           onChange={handleSearchChange}
-          className='w-full rounded-full bg-white/20 py-2 pl-12 pr-4 text-white shadow backdrop-blur-sm transition-all duration-300 ease-in-out placeholder:text-black hover:bg-white/30 hover:text-black focus:outline-none focus:ring-2 focus:ring-black/50'
+          onKeyDown={handleKeyDown}
+          className='w-full rounded-full bg-white/20 py-2 pl-12 pr-4 text-gray-700 shadow backdrop-blur-sm transition-all duration-300 ease-in-out placeholder:text-black hover:bg-white/30 hover:text-black focus:outline-none focus:ring-2 focus:ring-black/50'
         />
         <motion.button
           whileTap={{ scale: 0.95 }}
-          className='absolute right-2 rounded-full border-2 border-black px-1 text-black drop-shadow backdrop-blur-lg transition-colors duration-300 ease-in-out hover:bg-black hover:text-white'
+          className='absolute right-2 rounded-full px-2 py-1 text-xs font-bold text-black shadow shadow-black backdrop-blur-lg transition-colors duration-300 ease-in-out hover:bg-black hover:text-white'
           onClick={handleSearchButtonClick}
         >
           SEARCH

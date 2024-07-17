@@ -4,16 +4,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { TbCards } from 'react-icons/tb'
 import Image from 'next/image'
-import CustomToolTip from '../MyComponents/CustomToolTip'
+import CustomToolTip from '../../../MyComponents/CustomToolTip'
 import { useUser } from '@/UserClientProvider'
-import { useSidebar } from '../dom/SidebarProvider'
-import Cookies from 'js-cookie'
+import { useSidebar } from '../../../dom/SidebarProvider'
 
-const Hud = () => {
+const Hud = ({ loggedIn }: { loggedIn: boolean }) => {
   const user = useUser()
   const pathname = usePathname()
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
-  const token = Cookies.get('token')
 
   const username = user ? user.user?.username : ''
 
@@ -21,10 +19,11 @@ const Hud = () => {
     <>
       {/* HUD */}
       <div
-        className={`fixed bottom-0 z-40 mx-auto h-16 items-center justify-center px-0 py-2 transition-all duration-300 ease-in-out ${pathname === '/hud' ? 'flex' : 'hidden'}`}
+        className={`z-40 mx-auto h-16 items-center justify-center px-0 py-2 transition-all duration-300 ease-in-out ${pathname === '/hud' ? 'flex' : 'hidden'}`}
       >
         <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white/10 px-12 shadow-lg backdrop-blur-md md:gap-x-5 '>
-          {token ? (
+          {/* If not logged in then show the button to open the sidebar */}
+          {loggedIn ? (
             <Link
               href='/slider'
               aria-label='Go to slider'
@@ -72,7 +71,7 @@ const Hud = () => {
             <CustomToolTip content='GG Protals' top='-7' left='-19' translateY='-10' />
           </Link>
 
-          {token ? (
+          {loggedIn ? (
             <Link
               href={`/public-profile/${username}`}
               aria-label=''
