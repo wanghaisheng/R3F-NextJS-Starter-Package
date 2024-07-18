@@ -58,7 +58,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   return (
     <>
       {/* Logo and Sign In/Sign Out */}
-      <div className={`fixed left-0 top-0 z-50 flex size-12 rounded-full`}>
+      {/* <div className={`fixed left-0 top-0 z-50 flex size-12 rounded-full`}>
         <Link href='/discover' className='flex items-center justify-center'>
           <Image
             src={'/logos/lgo.png'}
@@ -68,7 +68,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
             alt='GG Logo'
           />
         </Link>
-      </div>
+      </div> */}
       <div className={`fixed right-0 top-3 z-50 flex items-center rounded-full`}>
         {/* SignIn, SignOut and Logout */}
         <div className='flex items-center justify-center text-black dark:text-white'>

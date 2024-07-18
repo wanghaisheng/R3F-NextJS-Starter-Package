@@ -79,7 +79,7 @@ export default function PublicProfile({ username }) {
       {users ? (
         <div className='flex w-full flex-col justify-center md:h-screen md:flex-row md:justify-between'>
           {/* LeftPart */}
-          <div className='z-30 h-full p-5 pt-16 md:w-[29%]'>
+          <div className='z-30 h-full p-5 pt-32 md:w-[29%]'>
             <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
           </div>
 

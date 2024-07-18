@@ -22,21 +22,39 @@ export default function LeftSidePublicProfile({ user, guild }) {
   return (
     <>
       {user ? (
-        <div className='relative size-full rounded-xl p-3 shadow-xl shadow-black/30 backdrop-blur-lg'>
+        <div className='relative size-full rounded-xl bg-white/40 p-3 shadow-xl shadow-black/30 backdrop-blur-lg'>
           {/* CoverPicture */}
-          <div className='flex w-full items-center justify-center'>
+          {/* <div className='flex w-full items-center justify-center'>
             <CoverPhoto coverPhotoUrl={user.username} height={178} />
+          </div> */}
+
+          <div className='absolute -left-6 top-[-128px] h-[127px] w-[170px] overflow-hidden'>
+            {avatar_url && (
+              <div className='size-full'>
+                <Avatar
+                  modelSrc={`${avatar_url}`}
+                  animationSrc='/male-spawn-animation.fbx'
+                  fov={20}
+                  cameraTarget={2}
+                  cameraInitialDistance={3}
+                  effects={{
+                    ambientOcclusion: true,
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           {/* Profile Picture And User Info */}
-          <div className='mt-[-76px] flex w-full items-center justify-center'>
+          <div className='-mt-9 flex w-full select-none items-center justify-end'>
             <div
-              className='relative overflow-hidden rounded-full border-2'
+              className='relative overflow-hidden rounded-full border-[3px]'
               style={{
                 borderRadius: '50%',
-                height: 140,
-                width: 140,
+                height: 50,
+                width: 50,
               }}
+              onClick={handleSwitchProfile}
             >
               {!switchProfile ? (
                 <Image
@@ -44,45 +62,34 @@ export default function LeftSidePublicProfile({ user, guild }) {
                   alt='profile-pic'
                   fill
                   unoptimized
+                  quality={60}
                   objectFit='cover'
-                  className='rounded-full transition-all duration-[2500ms] ease-in-out hover:scale-125'
+                  className='rounded-full transition-all duration-500 ease-in-out hover:scale-125'
                 />
               ) : (
                 <>
-                  {avatar_url && (
-                    <div className='size-full bg-white/20 backdrop-blur-3xl'>
-                      <Avatar
-                        modelSrc={`${avatar_url}`}
-                        animationSrc='/male-spawn-animation.fbx'
-                        fov={15}
-                        cameraTarget={2}
-                        cameraInitialDistance={3}
-                        effects={{
-                          ambientOcclusion: true,
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Image
+                    src={'/card/defaultbuddha.svg'}
+                    alt='profile-pic'
+                    fill
+                    unoptimized
+                    quality={60}
+                    objectFit='cover'
+                    className='rounded-full transition-all duration-500 ease-in-out hover:scale-125'
+                  />
                 </>
               )}
+              <div className='z-20 size-full bg-white/40'></div>
             </div>
           </div>
-          {/* Switch to toggle profile pic */}
-          <div className='absolute left-4 top-3' onClick={handleSwitchProfile}>
-            SWITCH
-          </div>
-          {/* USERNAME */}
-          <div className='my-2 flex w-full justify-center text-xl font-semibold'>
-            {user.username.charAt(0).toUpperCase()}
-            {user.username.slice(1)}
-          </div>
+
           {/* About User */}
-          <div className='flex w-full justify-center rounded-lg p-2 shadow-md shadow-black/40'>
+          <div className='flex w-full justify-center p-2 text-black'>
             <AboutUser userData={user} />
           </div>
 
           {/* User's Achievement */}
-          <div className='my-4 flex w-full rounded-lg py-2 shadow-md shadow-black/40'>
+          <div className='my-4 flex w-full rounded-lg bg-white/60 py-2 shadow-md shadow-black/40'>
             <AchievementsComponent userData={user} />
           </div>
 
@@ -90,7 +97,7 @@ export default function LeftSidePublicProfile({ user, guild }) {
 
           {/* Guild */}
           <div className='flex flex-col pl-4 '>
-            <div className='group absolute right-4 top-4'>
+            <div className='group absolute left-4 top-4'>
               <Image
                 src={guild.find((guild) => guild.guild_name === user.guild)?.symbol || ''}
                 height={30}

@@ -18,6 +18,11 @@ export default function AboutUser({ userData }) {
 
   return (
     <>
+      {/* USERNAME */}
+      <div className='my-2 flex w-full justify-center text-xl font-semibold'>
+        {userData.username.charAt(0).toUpperCase()}
+        {userData.username.slice(1)}
+      </div>
       {/* Row 1 */}
       <div className='w-full justify-center'>
         <div className='flex w-full flex-wrap items-center justify-center gap-x-2'>
