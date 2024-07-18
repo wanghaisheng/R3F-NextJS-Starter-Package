@@ -32,7 +32,6 @@ export async function POST(request) {
     })
     return NextResponse.json(new_guild)
   } catch (error) {
-    console.error('error creating guild', error)
     return NextResponse.error('Internal server error', 500)
   }
 }
@@ -68,7 +67,6 @@ export async function GET(request) {
 
     return NextResponse.json(guilds)
   } catch (error) {
-    console.error('error fetching guilds', error)
     return NextResponse.error('Internal server error', 500)
   }
 }

@@ -15,11 +15,15 @@ async function getFacultyTags() {
 
 const Discover = async () => {
   const facultyTags = await getFacultyTags()
-  return (
-    <div>
-      <DiscoverPage facultyTags={facultyTags} />
-    </div>
-  )
+  if (facultyTags) {
+    return (
+      <div>
+        <DiscoverPage facultyTags={facultyTags} />
+      </div>
+    )
+  } else {
+    return <loader></loader>
+  }
 }
 
 export default Discover
