@@ -62,8 +62,7 @@ export default function UserProfileHud({
           alt='profile pic'
           fill={true}
           unoptimized
-          objectFit='cover'
-          className='select-none transition-transform duration-300 ease-in-out hover:scale-125'
+          className='select-none object-cover transition-transform duration-300 ease-in-out hover:scale-125'
         />
       </div>
       {/* Top */}

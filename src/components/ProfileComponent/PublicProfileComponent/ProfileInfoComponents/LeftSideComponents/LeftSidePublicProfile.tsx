@@ -79,8 +79,7 @@ export default function LeftSidePublicProfile({ user, guild }) {
                   fill
                   unoptimized
                   quality={60}
-                  objectFit='cover'
-                  className='rounded-full transition-all duration-500 ease-in-out hover:scale-125'
+                  className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
                 />
               ) : (
                 <>
@@ -90,8 +89,7 @@ export default function LeftSidePublicProfile({ user, guild }) {
                     fill
                     unoptimized
                     quality={60}
-                    objectFit='cover'
-                    className='rounded-full transition-all duration-500 ease-in-out hover:scale-125'
+                    className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
                   />
                 </>
               )}

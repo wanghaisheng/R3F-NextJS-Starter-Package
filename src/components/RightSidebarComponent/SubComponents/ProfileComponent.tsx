@@ -238,7 +238,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               height={170}
               width={500}
               unoptimized
-              className='rounded'
+              className='rounded object-cover'
             />
             <FileUploaderRegular
               onChange={handleImageChange('cover')}

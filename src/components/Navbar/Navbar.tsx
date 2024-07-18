@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useUser } from '@/UserClientProvider'
 import { LuLogOut } from 'react-icons/lu'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
@@ -39,16 +38,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   }, [pathname])
 
   const { user, logout } = useUser()
-  // State to hold the current guild color
-
-  const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
-
-  // Update imageUrl whenever user's image_urls changes
-  useEffect(() => {
-    if (user && user.image_urls && user.image_urls.length > 0) {
-      setProfilePic(user.image_urls[user.image_urls.length - 1])
-    }
-  }, [user, user?.image_urls?.length])
 
   const logoutAndToggleSidebar = () => {
     logout()
