@@ -6,7 +6,8 @@ const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/R
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
-import UserProfileHud from '../MyComponents/UserProfileHud'
+import UserProfileHud from '../MyComponents/BottomHudComponents/UserProfileHud'
+import StatusHud from '../MyComponents/BottomHudComponents/StatusHud'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
@@ -42,7 +43,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         />
       </div>
 
-      <div className='absolute bottom-8 right-16 z-40'>
+      {/* user profile and wallet info */}
+      <div className='fixed bottom-8 right-16 z-40'>
         <UserProfileHud
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
@@ -51,6 +53,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           showSignIn={showSignIn}
           showSignUp={showSignUp}
         />
+      </div>
+
+      {/* status hud */}
+      <div className={`fixed bottom-8 left-1/3 z-50`}>
+        <StatusHud />
       </div>
     </div>
   )

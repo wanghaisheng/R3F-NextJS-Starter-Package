@@ -25,8 +25,10 @@ export default function UserProfileHud({
   const { user } = useUser()
   const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
 
+  // Theme changer
   const [theme, setTheme] = useState('light')
 
+  // handle theme change
   const handleThemeChange = () => {
     if (theme === 'light') {
       setTheme('dark')
@@ -35,6 +37,7 @@ export default function UserProfileHud({
     }
   }
 
+  // toggle sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
     setShowSignUp(true)
