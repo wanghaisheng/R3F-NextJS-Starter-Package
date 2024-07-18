@@ -56,24 +56,6 @@ export async function POST(request) {
 //Function to read user data
 export async function GET() {
   try {
-    function calculateAge(dob) {
-      // Convert the date of birth from string to Date object
-      const birthDate = new Date(dob)
-      // Get the current date
-      const currentDate = new Date()
-
-      // Calculate the age
-      let age = currentDate.getFullYear() - birthDate.getFullYear()
-      const monthDiff = currentDate.getMonth() - birthDate.getMonth()
-
-      // If the birth month hasn't occurred yet this year or it's the birth month but the day hasn't occurred yet, subtract 1 from age
-      if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
-        age--
-      }
-
-      return age
-    }
-
     const users = await prisma.users.findMany({
       select: {
         first_name: true,
@@ -92,25 +74,7 @@ export async function GET() {
         faculty: true,
       },
     })
-    const usersResponse = {
-      first_name: users.first_name,
-      last_name: users.last_name,
-      username: users.username,
-      email: users.email,
-      image_urls: users.image_urls,
-      description: users.description,
-      guild_id: users.guild_id,
-      address: users.address,
-      region: users.region,
-      age: calculateAge(users.dob),
-      cards: users.cards,
-      experience: users.experience,
-      avatar: users.avatar,
-      skills: users.skills,
-      faculty: users.faculty,
-    }
-
-    return NextResponse.json(usersResponse)
+    return NextResponse.json(users)
   } catch (error) {
     console.error('Error fetching users', error)
     return NextResponse.error('Internal Server Error', 500)

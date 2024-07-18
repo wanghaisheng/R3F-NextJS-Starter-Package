@@ -159,7 +159,6 @@ export default function DiscoverRegion({
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
-                facultyTags={facultyTags}
               />
             </div>
             <div className='size-full'>

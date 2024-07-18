@@ -8,18 +8,16 @@ import 'swiper/css'
 
 // import CustomToolTip from '../Hud/CustomToolTip'
 
-const CustomToolTip = dynamic(() => import('../MyComponents/CustomToolTip').then((mod) => mod.default))
+const CustomToolTip = dynamic(() => import('../MyComponents/CustomToolTip').then((mod) => mod.default), { ssr: false })
 
 export default function GuildHeader({
   onFilterChange,
   searchTerm,
   setSearchTerm,
-  facultyTags,
 }: {
   onFilterChange: (filter: string) => void
   searchTerm: string
   setSearchTerm: (searchTerm: string) => void
-  facultyTags: string[]
 }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
