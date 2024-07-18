@@ -34,6 +34,7 @@ export default function PublicProfile({ username }) {
             skillsData: user.skills,
             experienceData: user.experience,
             faculties: user.faculty,
+            overall_user_image: user.image_urls,
           }
         })
       setFetchedData(filteredData)
