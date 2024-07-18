@@ -6,6 +6,7 @@ import { useState } from 'react'
 import AboutUser from './AboutUser'
 import CoverPhoto from './CoverPhoto'
 import HoverGuild from '@/components/HoverEffect/HoverGuild'
+import AchievementsComponent from '../RightSideComponents/AchievementsComponent'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 
@@ -76,8 +77,13 @@ export default function LeftSidePublicProfile({ user, guild }) {
             {user.username.slice(1)}
           </div>
           {/* About User */}
-          <div className='flex w-full justify-center rounded-lg bg-black/20 p-2 shadow'>
+          <div className='flex w-full justify-center rounded-lg p-2 shadow-md shadow-black/40'>
             <AboutUser userData={user} />
+          </div>
+
+          {/* User's Achievement */}
+          <div className='my-4 flex w-full rounded-lg py-2 shadow-md shadow-black/40'>
+            <AchievementsComponent userData={user} />
           </div>
 
           <div className='absolute right-6 top-36'>...</div>

@@ -5,12 +5,6 @@ import SkillsChartComponent from '@/components/SliderComponent/SkillsChartCompon
 import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
-import Image from 'next/image'
-import dynamic from 'next/dynamic'
-const HoverGuild = dynamic(() => import('@/components/HoverEffect/HoverGuild'), { ssr: false })
-import AchievementsComponent from './RightSideComponents/AchievementsComponent'
-import ProfileButtons from './PublicProfileHud/ProfileButtons'
-import ExperienceShow from './RightSideComponents/ExperienceShow'
 import { FaAnglesUp } from 'react-icons/fa6'
 
 export default function UserContent({ user, skillsData, guild, experience }) {
@@ -69,14 +63,6 @@ export default function UserContent({ user, skillsData, guild, experience }) {
       {/* <div className={`fixed top-0 z-20 size-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div> */}
       {user && guild && (
         <>
-          {/* <div className='sticky top-28 z-50 -mt-7 flex w-full justify-center'>
-            <ProfileButtons />
-          </div> */}
-          {/* User's Achievement */}
-          <div className='mt-8 flex h-[220px] items-center justify-center px-2'>
-            <AchievementsComponent userData={user} />
-          </div>
-
           {/* Skills Chart and Gallery */}
           <div
             className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'
@@ -97,14 +83,10 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 <>{user && skillsData && <SkillsChartComponent skills={skillsData} />}</>
               ) : (
                 <div className='w-full'>
-                  <GalleryComponent username={user.username} />
+                  <GalleryComponent username={user.username} experience={experience} handleIsFlip={handleIsFlip} />
                 </div>
               )}
             </div>
-          </div>
-          {/* Experience Card Show */}
-          <div className='relative flex size-full px-10 py-3' id='section3' ref={sectionExperienceRef}>
-            <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
           </div>
 
           {/* Scroll to top button */}

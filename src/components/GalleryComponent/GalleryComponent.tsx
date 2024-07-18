@@ -8,6 +8,7 @@ import 'swiper/css/effect-cards'
 
 import { EffectCards } from 'swiper/modules'
 import Image from 'next/image'
+import ExperienceShow from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/ExperienceShow'
 
 const getUserByUsername = async (username) => {
   try {
@@ -21,7 +22,15 @@ const getUserByUsername = async (username) => {
   }
 }
 
-export default function GalleryComponent({ username }) {
+export default function GalleryComponent({
+  username,
+  handleIsFlip,
+  experience,
+}: {
+  username: string
+  handleIsFlip: (newState: boolean) => void
+  experience: any[]
+}) {
   const [user, setUser] = useState(null)
   const [profilePics, setProfilePics] = useState([])
   const [projPics, setProjPics] = useState([])
@@ -36,6 +45,7 @@ export default function GalleryComponent({ username }) {
   const profileRef = useRef(null)
   const projectsRef = useRef(null)
   const skillsRef = useRef(null)
+  const experienceRef = useRef(null)
 
   const handleTabClick = (tab: string) => {
     //function to handle tab click
@@ -98,6 +108,9 @@ export default function GalleryComponent({ username }) {
           break
         case 'certificates':
           ref = skillsRef.current
+          break
+        case 'experience':
+          ref = experienceRef.current
           break
         default:
           ref = profileRef.current
@@ -197,6 +210,13 @@ export default function GalleryComponent({ username }) {
           >
             Skills
           </div>
+          <div
+            ref={experienceRef}
+            onClick={() => handleTabClick('experience')}
+            className={`${activeTab === 'experience' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
+          >
+            Experience
+          </div>
         </div>
         <div
           className='absolute bottom-0 h-1 bg-purple-200 transition-all duration-300 ease-in-out'
@@ -237,6 +257,21 @@ export default function GalleryComponent({ username }) {
             ) : (
               <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No certificates to show</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'experience' && (
+          <div className='flex size-full justify-center overflow-hidden p-4'>
+            {/* Experience Card Show */}
+            {user && experience.length > 0 ? (
+              <div className='relative flex size-full px-10 py-3'>
+                <ExperienceShow user={user} experience={experience} handleIsFlip={handleIsFlip} />
+              </div>
+            ) : (
+              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
+                <p>No experience to show</p>
               </div>
             )}
           </div>
