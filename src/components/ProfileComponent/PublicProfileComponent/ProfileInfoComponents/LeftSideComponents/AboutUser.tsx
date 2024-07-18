@@ -20,20 +20,31 @@ export default function AboutUser({ userData }) {
   return (
     <div className='flex w-full gap-x-2'>
       {/* Left */}
-      <div className='relative flex w-[30%] flex-col'>
-        <div>{userData.name}</div>
-        <div>Age: {userData.age}</div>
-        <div>
-          {userData.city}, {userData.country}
+      <div className='relative flex w-[35%] flex-col text-black'>
+        <div className='text-lg font-semibold'>{userData.name}</div>
+        <div className='text-xs font-semibold '>
+          AGE : <span className='font-normal '>{userData.age}</span>
         </div>
-        <div>Faculty: </div>
+        <div className='text-xs font-semibold '>
+          FACULTY : <span className='font-normal '>{userData.faculties.primary_faculty}</span>
+        </div>
+        <div className='text-xs font-semibold '>
+          GUILD : <span className='font-normal '>{userData.guild}</span>
+        </div>
+        <div className='text-xs font-semibold '>
+          <span className='font-normal'>
+            {userData.city}, {userData.country}
+          </span>
+        </div>
 
-        <div className='absolute right-1 top-1 rounded-lg bg-violet-300 p-1'>
-          <HiPencil />
-        </div>
+        {user && user.username === userData.username && (
+          <div className='absolute right-1 top-1 rounded-lg bg-violet-300 p-1'>
+            <HiPencil />
+          </div>
+        )}
       </div>
       {/* Right */}
-      <div className='relative w-[70%] justify-center rounded-lg bg-white/60 p-2'>
+      <div className='relative w-[65%] justify-center rounded-lg bg-white/60 p-2'>
         <div className='flex w-full flex-wrap items-center justify-center gap-x-2'>
           <h1 className='cursor-pointer font-semibold'>
             10 <span className='text-sm font-normal hover:underline'>Followers</span>

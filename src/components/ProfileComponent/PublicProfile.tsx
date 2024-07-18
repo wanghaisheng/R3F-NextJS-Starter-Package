@@ -23,6 +23,7 @@ export default function PublicProfile({ username }) {
           return {
             name: `${user.first_name} ${user.last_name}`,
             username: user.username,
+            age: user.age,
             user_image:
               user.image_urls.length > 0 ? user.image_urls[user.image_urls.length - 1] : '/card/defaultbuddha.svg',
             description: user.description,
@@ -32,6 +33,7 @@ export default function PublicProfile({ username }) {
             city: user.region.city,
             skillsData: user.skills,
             experienceData: user.experience,
+            faculties: user.faculty,
           }
         })
       setFetchedData(filteredData)
