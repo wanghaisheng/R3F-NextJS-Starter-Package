@@ -1,15 +1,6 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "next",
-    "next/core-web-vitals",
-    "next", "prettier", "plugin:tailwindcss/recommended"
-  ],
-  "plugins": ["@typescript-eslint"],
+  "extends": ["next", "prettier", "plugin:tailwindcss/recommended"],
   "rules": {
-    // Your custom rules here
     "import/prefer-default-export": "off",
     "no-console": "warn",
     "no-var": "error",
