@@ -6,6 +6,7 @@ const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/R
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
+import UserProfileHud from '../MyComponents/UserProfileHud'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
@@ -32,6 +33,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {children}
       <div>
         <RightSidebar2
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+          setShowSignIn={setShowSignIn}
+          setShowSignUp={setShowSignUp}
+          showSignIn={showSignIn}
+          showSignUp={showSignUp}
+        />
+      </div>
+
+      <div className='absolute bottom-8 right-16 z-40'>
+        <UserProfileHud
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
           setShowSignIn={setShowSignIn}

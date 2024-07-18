@@ -1,8 +1,8 @@
 'use client'
+
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider'
 import { LuLogOut } from 'react-icons/lu'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -74,18 +74,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         <div className='flex items-center justify-center text-black dark:text-white'>
           {user ? (
             <>
-              <div onClick={toggleSidebar}>
-                <div
-                  className='mr-2 size-[38px] rounded-full bg-pink-400'
-                  key={profilePic}
-                  style={{
-                    backgroundImage: `url(${profilePic})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                ></div>
-              </div>
               <div className='flex'>
                 <Link
                   href='/'
