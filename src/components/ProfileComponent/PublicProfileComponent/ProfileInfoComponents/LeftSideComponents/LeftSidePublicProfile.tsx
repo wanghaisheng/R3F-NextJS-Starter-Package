@@ -7,6 +7,7 @@ import AboutUser from './AboutUser'
 import CoverPhoto from './CoverPhoto'
 import HoverGuild from '@/components/HoverEffect/HoverGuild'
 import AchievementsComponent from '../RightSideComponents/AchievementsComponent'
+import Pictures from './Pictures'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 
@@ -104,8 +105,16 @@ export default function LeftSidePublicProfile({ user, guild }) {
           </div>
 
           {/* User's Achievement */}
-          <div className='my-4 flex w-full rounded-lg bg-white/60 py-2 shadow-md shadow-black/40'>
+          <div className='flex w-full p-2'>
             <AchievementsComponent userData={user} />
+          </div>
+
+          {/* Pictures */}
+          <div className='flex w-full justify-between gap-x-2 p-2'>
+            <div className='w-1/2 bg-white/60'>
+              <Pictures user={user} user_images={user.overall_user_image} />
+            </div>
+            <div className='w-1/2 bg-white/60'>Skills</div>
           </div>
 
           <div className='absolute right-6 top-36'>...</div>
