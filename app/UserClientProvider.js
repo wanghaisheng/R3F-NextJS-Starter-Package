@@ -1,8 +1,8 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
-import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
+import { createContext, useContext, useState } from 'react'
 
 const UserContext = createContext()
 
@@ -16,7 +16,7 @@ const UserClientProvider = ({ children, user: initialUser }) => {
 
   const fetchUserData = async (userId, token) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/internal/users/${userId}`, {
+      const response = await fetch(`http://r3-f-next-js-starter-package.vercel.app/api/internal/users/${userId}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
