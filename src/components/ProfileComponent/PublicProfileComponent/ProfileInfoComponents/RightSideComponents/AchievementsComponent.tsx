@@ -9,9 +9,9 @@ import { FreeMode } from 'swiper/modules'
 export default function AchievementsComponent({ userData }) {
   const val = 20
   return (
-    <div className='w-full rounded-lg bg-white/60 p-2'>
+    <div className='w-full'>
       <Swiper
-        slidesPerView={'auto'}
+        slidesPerView={6}
         spaceBetween={10}
         freeMode={true}
         modules={[FreeMode]}
@@ -19,7 +19,7 @@ export default function AchievementsComponent({ userData }) {
       >
         {Array.from({ length: val }).map((_, i) => (
           <SwiperSlide key={i} style={{ width: 'auto' }}>
-            <div className='size-10 rounded-full border border-black bg-white/80'></div>
+            <div className='size-12 rounded-full  bg-white/80 shadow-inner shadow-black/20'></div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useState } from 'react'
 import AboutUser from './AboutUser'
-import CoverPhoto from './CoverPhoto'
+import { IoMdInformationCircleOutline } from 'react-icons/io'
 import HoverGuild from '@/components/HoverEffect/HoverGuild'
 import AchievementsComponent from '../RightSideComponents/AchievementsComponent'
 import Pictures from './Pictures'
@@ -33,7 +33,14 @@ export default function LeftSidePublicProfile({ user, guild }) {
 
           {/* USERNAME and description */}
           <div className='absolute -top-10 left-0 flex w-full flex-col items-center justify-center'>
-            <div className='text-4xl font-bold uppercase text-white/40 drop-shadow'>{user.username}</div>
+            <div
+              className='text-4xl font-bold uppercase text-black/50'
+              style={{
+                filter: `drop-shadow(0px 0px 2px ${guild.find((guild) => guild.guild_name === user.guild)?.color || 'white'})`,
+              }}
+            >
+              {user.username}
+            </div>
             <div className='group flex w-1/2 justify-center overflow-hidden text-center'>
               {/* not hovered */}
               <div className='cursor-pointer text-sm font-light text-black'>
@@ -52,16 +59,13 @@ export default function LeftSidePublicProfile({ user, guild }) {
             {avatar_url && (
               <div className='size-full'>
                 <Avatar
-                  modelSrc={`${avatar_url}`}
+                  modelSrc={`${avatar_url}?quality=low`}
                   animationSrc='/male-spawn-animation.fbx'
                   fov={20}
                   cameraTarget={2}
                   cameraInitialDistance={3}
                   effects={{
                     ambientOcclusion: true,
-                  }}
-                  style={{
-                    filter: `drop-shadow(0px 0px 3px ${guild.find((guild) => guild.guild_name === user.guild)?.color || 'white'})`,
                   }}
                 />
               </div>
@@ -114,16 +118,14 @@ export default function LeftSidePublicProfile({ user, guild }) {
           </div>
 
           {/* Pictures */}
-          <div className='h-[300px] w-full p-2'>
+          <div className='h-[310px] w-full p-2'>
             <div className='flex size-full flex-col overflow-auto rounded-lg bg-white/60'>
               {/* Gallery */}
               <section>
-                <h2
-                  className='sticky top-0 z-10 pl-2 text-lg font-semibold text-white'
-                  style={{ filter: 'drop-shadow(1px 1px 1px black' }}
-                >
-                  Gallery
-                </h2>
+                <div className='sticky top-0 z-10 flex w-fit items-center gap-x-1 rounded-br-lg bg-white px-2'>
+                  <h2 className='text-lg font-semibold text-black'>Gallery</h2>
+                  <IoMdInformationCircleOutline size={22} className='text-blue-400 drop-shadow' />
+                </div>
                 <div className='w-full rounded-lg'>
                   <Pictures user={user} user_images={user.overall_user_image} />
                 </div>
@@ -131,12 +133,10 @@ export default function LeftSidePublicProfile({ user, guild }) {
 
               {/* Skills */}
               <section>
-                <h2
-                  className='sticky top-0 z-10 pl-2 text-lg font-semibold text-white'
-                  style={{ filter: 'drop-shadow(1px 1px 1px black' }}
-                >
-                  Skills
-                </h2>
+                <div className='sticky top-0 z-10 flex w-fit items-center gap-x-1 rounded-r-lg bg-white px-2'>
+                  <h2 className='text-lg font-semibold text-black'>Skills</h2>
+                  <IoMdInformationCircleOutline size={22} className='text-blue-400 drop-shadow' />
+                </div>
                 <div className='w-full rounded-lg'>
                   <Pictures user={user} user_images={user.overall_user_image} />
                 </div>
@@ -144,12 +144,10 @@ export default function LeftSidePublicProfile({ user, guild }) {
 
               {/* Additional Skills or Content */}
               <section>
-                <h2
-                  className='sticky top-0 z-10 pl-2 text-lg font-semibold text-white'
-                  style={{ filter: 'drop-shadow(1px 1px 1px black' }}
-                >
-                  Additional Skills
-                </h2>
+                <div className='sticky top-0 z-10 flex w-fit items-center gap-x-1 rounded-r-lg bg-white px-2'>
+                  <h2 className='text-lg font-semibold text-black'>Additional Skills</h2>
+                  <IoMdInformationCircleOutline size={22} className='text-blue-400 drop-shadow' />
+                </div>
                 <div className='w-full rounded-lg '>
                   <Pictures user={user} user_images={user.overall_user_image} />
                 </div>
