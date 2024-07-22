@@ -52,7 +52,13 @@ export default function UserProfileHud({
   }, [user, user?.image_urls?.length])
 
   return (
-    <div className='relative h-[30px] w-[200px] rounded-full border-2 bg-white/20'>
+    <div
+      className='relative h-[30px] w-[200px] rounded-full'
+      style={{
+        backgroundColor: '#c1c1c1',
+        boxShadow: '7px 7px 25px #000000, inset -7px -7px 25px #ffffff',
+      }}
+    >
       <div
         className='absolute -right-3 -top-9 size-[54px] overflow-hidden rounded-full border-2 bg-black/60'
         onClick={toggleSidebar}
@@ -71,13 +77,27 @@ export default function UserProfileHud({
           <div className='flex size-[19px] items-center justify-center rounded-full border-2 border-green-500 text-green-500'>
             <GiCash />
           </div>
-          <p>13,789</p>
+          <p
+            style={{
+              color: '#ffffff',
+              textShadow: '1px 1px 2px #00FF00',
+            }}
+          >
+            13,789
+          </p>
         </div>
         <div className='flex gap-x-1 text-xs'>
           <div className='flex size-[19px] items-center justify-center  rounded-full border-2 border-yellow-500 text-yellow-500'>
             <IoDiamondSharp />
           </div>
-          <p>97,869</p>
+          <p
+            style={{
+              color: '#ffffff',
+              textShadow: '1px 1px 2px #FFFF00',
+            }}
+          >
+            97,869
+          </p>
         </div>
 
         <div

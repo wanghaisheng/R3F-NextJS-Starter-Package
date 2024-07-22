@@ -58,7 +58,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
 
   return (
     <div
-      className={`relative flex size-full flex-col overflow-auto rounded-xl p-3 shadow-xl shadow-black/30 backdrop-blur-lg`}
+      className={`relative flex size-full flex-col overflow-auto rounded-xl bg-white/30 p-3 shadow-xl shadow-black/30 backdrop-blur-lg`}
     >
       {/* <div className={`fixed top-0 z-20 size-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div> */}
       {user && guild && (

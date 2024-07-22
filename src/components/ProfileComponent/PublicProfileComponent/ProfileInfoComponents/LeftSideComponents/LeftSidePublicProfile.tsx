@@ -108,11 +108,14 @@ export default function LeftSidePublicProfile({ user, guild }) {
           </div>
 
           {/* Pictures */}
-          <div className='flex w-full justify-between gap-x-2 p-2'>
-            <div className='w-1/2 bg-white/60'>
+          <div className='flex w-full flex-col gap-y-4 p-2'>
+            {/* gallery */}
+            <div className='w-full rounded-lg bg-white/60'>
+              <div className='pl-2 text-start text-lg font-semibold text-black'>Gallery</div>
               <Pictures user={user} user_images={user.overall_user_image} />
             </div>
-            <div className='w-1/2 bg-white/60'>Skills</div>
+            {/* skills */}
+            <div className='w-full rounded-lg bg-white/60'>Skills</div>
           </div>
 
           <div className='absolute right-6 top-36'>...</div>
