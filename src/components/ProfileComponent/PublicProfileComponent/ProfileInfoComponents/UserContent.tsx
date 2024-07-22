@@ -83,7 +83,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 <>{user && skillsData && <SkillsChartComponent skills={skillsData} />}</>
               ) : (
                 <div className='w-full'>
-                  <GalleryComponent username={user.username} experience={experience} handleIsFlip={handleIsFlip} />
+                  <GalleryComponent userData={user} experience={experience} handleIsFlip={handleIsFlip} />
                 </div>
               )}
             </div>
