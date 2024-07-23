@@ -2,13 +2,12 @@
 import React, { useRef, ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar/Navbar'
-const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/RightSidebar2'), { ssr: false })
 import RightSideHud from '../GGHuds/RightSideHud'
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
-import UserProfileHud from '../MyComponents/BottomHudComponents/UserProfileHud'
-import StatusHud from '../MyComponents/BottomHudComponents/StatusHud'
+import UserProfileHud from '../GGHuds/UserProfileHud'
+import StatusHud from '../GGHuds/StatusHud'
 import { usePathname } from 'next/navigation'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
@@ -43,16 +42,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       />
       {isLoading && <Loading />}
       {children}
-      {/* <div>
-        <RightSidebar2
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-          setShowSignIn={setShowSignIn}
-          setShowSignUp={setShowSignUp}
-          showSignIn={showSignIn}
-          showSignUp={showSignUp}
-        />
-      </div> */}
 
       {/* user profile and wallet info and status hud  */}
       {pathname !== '/' && pathname !== '/slider' && pathname !== '/hud' && (
@@ -68,9 +57,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             />
           </div>
 
-          <div className={`fixed bottom-8 left-1/3 z-50`}>
-            <StatusHud />
-          </div>
+          <StatusHud />
         </>
       )}
     </div>
