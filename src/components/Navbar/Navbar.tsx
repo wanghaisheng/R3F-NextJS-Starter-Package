@@ -46,18 +46,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      {/* Logo and Sign In/Sign Out */}
-      {/* <div className={`fixed left-0 top-0 z-50 flex size-12 rounded-full`}>
-        <Link href='/discover' className='flex items-center justify-center'>
-          <Image
-            src={'/logos/lgo.png'}
-            className='absolute left-4 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-            height={60}
-            width={60}
-            alt='GG Logo'
-          />
-        </Link>
-      </div> */}
       <div className={`fixed right-0 top-3 z-50 flex items-center rounded-full`}>
         {/* SignIn, SignOut and Logout */}
         <div className='flex items-center justify-center text-black dark:text-white'>
@@ -103,8 +91,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         <div
           className={`fixed left-1/2 top-0 z-50 mx-auto flex -translate-x-1/2 items-center justify-between rounded-full px-6 py-3`}
         >
-          <div className='hidden text-white lg:flex'>
-            <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white/10 px-12 shadow-lg backdrop-blur-md  md:gap-x-7 lg:gap-x-14'>
+          <div className='hidden text-black/70 lg:flex'>
+            <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white px-12 shadow-lg backdrop-blur-md  md:gap-x-7 lg:gap-x-14'>
               <Link
                 href='/hud'
                 className={`group ${pathname === '/hud' ? 'scale-110 py-2 text-2xl font-bold text-pink-700' : 'py-2 font-semibold transition-all duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}

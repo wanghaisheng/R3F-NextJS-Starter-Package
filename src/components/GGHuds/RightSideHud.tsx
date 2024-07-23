@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { FaBell, FaBriefcase, FaStore, FaUserCircle, FaUsers, FaTimes, FaExpand } from 'react-icons/fa'
+import { FaBell, FaBriefcase, FaStore, FaUserCircle, FaUsers, FaTimes } from 'react-icons/fa'
 import ShopComponent from '../RightSidebarComponent/SubComponents/ShopComponent'
 import SideProfile from '../RightSidebarComponent/Tabs/SideProfile'
 import WalletComponent from '../RightSidebarComponent/SubComponents/WalletComponent'
 import EmergencyComponent from '../RightSidebarComponent/SubComponents/EmergencyComponent'
 import SidebarSearchComponent from '../RightSidebarComponent/SubComponents/SidebarSearchComponent'
+import CustomToolTipLeftRight from '../MyComponents/CustomToolTipLeftRight'
 
 const tabs = ['Profile', 'Wallet', 'Shop', 'Emergency', 'Notifications']
 
@@ -91,11 +92,12 @@ export default function RightSideHud({
           <div
             key={i}
             onClick={() => handleTabClick(tab)}
-            className={`flex size-[26px] items-center justify-center rounded-full bg-white shadow-black drop-shadow-lg hover:bg-blue-100 ${
+            className={`group flex size-[26px] items-center  justify-center rounded-full bg-white font-semibold shadow-black drop-shadow-lg hover:bg-blue-100 ${
               selectedTab === tab && isMobileViewVisible ? 'bg-blue-100' : ''
             }`}
           >
             {getIcon(tab)}
+            <CustomToolTipLeftRight content={tab} top='0' left='-35' translateY='0' />
           </div>
         ))}
       </div>
