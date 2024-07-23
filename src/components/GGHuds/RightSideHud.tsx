@@ -95,7 +95,7 @@ export default function RightSideHud({
       <div
         className={`fixed right-[76px] top-1/2 z-40 -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out ${
           isMobileViewVisible
-            ? 'h-[70%] w-[20%] translate-x-0 scale-100 opacity-100'
+            ? 'h-[73%] w-[20%] translate-x-0 scale-100 opacity-100'
             : 'size-[2%] translate-x-full scale-0 opacity-0'
         }`}
       >

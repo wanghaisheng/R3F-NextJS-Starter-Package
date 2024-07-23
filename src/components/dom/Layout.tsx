@@ -43,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       />
       {isLoading && <Loading />}
       {children}
-      <div>
+      {/* <div>
         <RightSidebar2
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
@@ -52,7 +52,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           showSignIn={showSignIn}
           showSignUp={showSignUp}
         />
-      </div>
+      </div> */}
 
       {/* user profile and wallet info and status hud  */}
       {pathname !== '/' && pathname !== '/slider' && pathname !== '/hud' && (

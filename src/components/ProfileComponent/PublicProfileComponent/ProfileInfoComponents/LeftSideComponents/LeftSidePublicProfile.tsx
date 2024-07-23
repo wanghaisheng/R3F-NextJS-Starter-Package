@@ -18,14 +18,12 @@ export default function LeftSidePublicProfile({ user, guild }) {
     setSwitchProfile(!switchProfile)
   }
 
-  console.log('guild', guild)
-
   const avatar_url = user?.avatarurl
 
   return (
     <>
       {user ? (
-        <div className='relative size-full rounded-xl bg-white/50 p-3 shadow-xl shadow-black/30 backdrop-blur-md'>
+        <div className=''>
           {/* CoverPicture */}
           {/* <div className='flex w-full items-center justify-center'>
             <CoverPhoto coverPhotoUrl={user.username} height={178} />
