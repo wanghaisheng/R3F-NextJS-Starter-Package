@@ -46,13 +46,15 @@ export default function RightSideHud({
     switch (selectedTab) {
       case 'Profile':
         return (
-          <SideProfile
-            showSignUp={showSignUp}
-            setShowSignUp={setShowSignUp}
-            showSignIn={showSignIn}
-            setShowSignIn={setShowSignIn}
-            setActiveTab={selectedTab}
-          />
+          <div className='flex size-full overflow-auto'>
+            <SideProfile
+              showSignUp={showSignUp}
+              setShowSignUp={setShowSignUp}
+              showSignIn={showSignIn}
+              setShowSignIn={setShowSignIn}
+              setActiveTab={selectedTab}
+            />
+          </div>
         )
       case 'Wallet':
         return <WalletComponent setActiveTab={selectedTab} setShowSignUp={setShowSignUp} />
@@ -67,9 +69,15 @@ export default function RightSideHud({
     }
   }
 
+  // Handle tab click
   const handleTabClick = (tab) => {
-    setSelectedTab(tab)
-    setIsMobileViewVisible(true)
+    if (tab === selectedTab) {
+      // If the tab is already selected minimize the view
+      setIsMobileViewVisible(!isMobileViewVisible)
+    } else {
+      setSelectedTab(tab)
+      setIsMobileViewVisible(true)
+    }
   }
 
   const toggleMobileView = () => {
@@ -93,10 +101,8 @@ export default function RightSideHud({
       </div>
 
       <div
-        className={`fixed right-[76px] top-1/2 z-40 -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out ${
-          isMobileViewVisible
-            ? 'h-[73%] w-[20%] translate-x-0 scale-100 opacity-100'
-            : 'size-[2%] translate-x-full scale-0 opacity-0'
+        className={`fixed right-[76px] top-1/2 z-40 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out ${
+          isMobileViewVisible ? ' translate-x-0 scale-100 opacity-100' : 'translate-x-full scale-0 opacity-0'
         }`}
       >
         <div
