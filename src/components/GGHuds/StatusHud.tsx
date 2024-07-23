@@ -35,11 +35,16 @@ export default function StatusHud() {
   }, [])
 
   const handleTabClick = (tab) => {
-    setSelectedTab(tab)
-    if (tab === 'Status') {
-      setIsStatusDropdownOpen(!isStatusDropdownOpen)
+    if (tab === selectedTab) {
+      // If the tab is already selected minimize the view
+      setSelectedTab('')
     } else {
-      setIsStatusDropdownOpen(false)
+      setSelectedTab(tab)
+      if (tab === 'Status') {
+        setIsStatusDropdownOpen(!isStatusDropdownOpen)
+      } else {
+        setIsStatusDropdownOpen(false)
+      }
     }
   }
 

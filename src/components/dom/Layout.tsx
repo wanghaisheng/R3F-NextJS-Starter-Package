@@ -47,14 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {pathname !== '/' && pathname !== '/slider' && pathname !== '/hud' && (
         <>
           <div className='fixed bottom-8 right-16 z-40'>
-            <UserProfileHud
-              isSidebarOpen={isSidebarOpen}
-              setIsSidebarOpen={setIsSidebarOpen}
-              setShowSignIn={setShowSignIn}
-              setShowSignUp={setShowSignUp}
-              showSignIn={showSignIn}
-              showSignUp={showSignUp}
-            />
+            <UserProfileHud />
           </div>
 
           <StatusHud />
