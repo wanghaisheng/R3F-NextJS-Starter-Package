@@ -87,7 +87,7 @@ export default function RightSideHud({
 
   return (
     <>
-      <div className='fixed right-[20px] top-1/2 z-50 flex w-[32px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50'>
+      <div className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50'>
         {tabs.map((tab, i) => (
           <div
             key={i}
@@ -103,8 +103,8 @@ export default function RightSideHud({
       </div>
 
       <div
-        className={`fixed right-[76px] top-1/2 z-40 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out ${
-          isMobileViewVisible ? ' translate-x-0 scale-100 opacity-100' : 'translate-x-full scale-0 opacity-0'
+        className={`fixed right-[76px] top-1/2 z-40 h-[73%] w-[20%] -translate-y-1/2 scale-100 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out ${
+          isMobileViewVisible ? ' translate-x-0 opacity-100' : 'translate-y-[1000px] opacity-0'
         }`}
       >
         <div
