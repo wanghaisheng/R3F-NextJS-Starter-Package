@@ -25,7 +25,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div ref={ref}>
-      {pathname !== '/' && pathname !== '/slider' && <RightSideHud />}
+      {pathname !== '/' && pathname !== '/slider' && (
+        <RightSideHud
+          setShowSignIn={setShowSignIn}
+          setShowSignUp={setShowSignUp}
+          showSignIn={showSignIn}
+          showSignUp={showSignUp}
+        />
+      )}
       <Navbar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
