@@ -3,6 +3,7 @@ import React, { useRef, ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar/Navbar'
 const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/RightSidebar2'), { ssr: false })
+import RightSideHud from '../GGHuds/RightSideHud'
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
@@ -24,6 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div ref={ref}>
+      <RightSideHud />
       <Navbar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
