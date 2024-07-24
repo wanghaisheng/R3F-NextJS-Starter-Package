@@ -10,6 +10,8 @@ import SidebarSearchComponent from '../RightSidebarComponent/SubComponents/Sideb
 import CustomToolTipLeftRight from '../MyComponents/CustomToolTipLeftRight'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
+import { useUser } from '@/UserClientProvider'
+import { VscClearAll } from 'react-icons/vsc'
 
 const tabs = ['Profile', 'Wallet', 'Shop', 'Emergency', 'Notifications']
 
@@ -43,10 +45,17 @@ export default function RightSideHud({
   showSignIn: any
   showSignUp: any
 }) {
+  const { user } = useUser()
   const pathname = usePathname()
   const [selectedTabs, setSelectedTabs] = useState([])
   const [removingTab, setRemovingTab] = useState(null) // state to track tabs being removed
+  const [showClearAll, setShowClearAll] = useState(false)
   const firstTabRef = useRef(null)
+
+  // function to close all tabs
+  const closeAllTabs = () => {
+    setSelectedTabs([])
+  }
 
   // Handle tab click
   const handleTabClick = (tab) => {
@@ -65,6 +74,22 @@ export default function RightSideHud({
     })
   }
 
+  // Handle sign in click
+  const handleSignInClick = () => {
+    setSelectedTabs((prevTabs) => {
+      if (prevTabs.includes('Profile')) {
+        return prevTabs
+      } else {
+        if (prevTabs.length >= 4) {
+          return ['Profile', ...prevTabs.slice(0, 3)]
+        } else {
+          return ['Profile', ...prevTabs]
+        }
+      }
+    })
+    setShowSignIn(true)
+  }
+
   // Render mobile view content
   const renderMobileViewContent = (tab) => {
     switch (tab) {
@@ -81,11 +106,12 @@ export default function RightSideHud({
           </div>
         )
       case 'Wallet':
-        return <WalletComponent setActiveTab={tab} setShowSignUp={setShowSignUp} />
+        return <WalletComponent onSignInClick={handleSignInClick} />
       case 'Shop':
         return <ShopComponent />
       case 'Emergency':
-        return <EmergencyComponent setActiveTab={tab} setShowSignUp={setShowSignUp} />
+        return <EmergencyComponent onSignInClick={handleSignInClick} />
+
       case 'Notifications':
         return <SidebarSearchComponent />
       default:
@@ -109,11 +135,28 @@ export default function RightSideHud({
     }
   }, [selectedTabs])
 
+  // Show clear all button after 1.5 seconds
+  useEffect(() => {
+    let timer
+    if (selectedTabs.length > 0) {
+      timer = setTimeout(() => {
+        setShowClearAll(true)
+      }, 600) // 0.6 seconds delay
+    } else {
+      setShowClearAll(false)
+    }
+
+    return () => clearTimeout(timer)
+  }, [selectedTabs])
+
   return (
     <>
       {/* Right side hud */}
       {pathname !== '/' && (
-        <div className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50'>
+        <motion.div
+          layout
+          className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50 transition-all duration-300 ease-in-out'
+        >
           {tabs.map((tab, i) => (
             <div
               key={i}
@@ -126,7 +169,22 @@ export default function RightSideHud({
               <CustomToolTipLeftRight content={tab} top='0' left='-35' translateY='0' />
             </div>
           ))}
-        </div>
+
+          <AnimatePresence>
+            {showClearAll && selectedTabs.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 0.3 }}
+                className='group flex size-[26px] items-center justify-center rounded-full bg-white font-semibold text-black shadow-black drop-shadow-lg hover:bg-blue-100'
+                onClick={closeAllTabs}
+              >
+                <VscClearAll size={17} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       )}
 
       {/* Bg black for focus */}

@@ -2,14 +2,8 @@ import Wallet from '@/components/card/TypeCard/Wallet'
 import TopUpWalletTabs from './TopUpWalletTabs'
 import { useUser } from '@/UserClientProvider'
 
-export default function WalletComponent({ setActiveTab, setShowSignUp }) {
+export default function WalletComponent({ onSignInClick }) {
   const { user } = useUser()
-
-  // handleSignUpClick is a function that sets the active tab to profile and shows the signup modal
-  const handleSignUpClick = () => {
-    setActiveTab('profile')
-    setShowSignUp(true)
-  }
 
   return (
     <>
@@ -34,15 +28,15 @@ export default function WalletComponent({ setActiveTab, setShowSignUp }) {
             </div>
           </>
         ) : (
-          <>
-            <div>You must signin to view this tab</div>
-            <div
-              onClick={handleSignUpClick}
-              className='mt-2 flex cursor-pointer justify-center rounded border bg-black p-2 transition-colors hover:bg-gray-300 hover:text-black  dark:border-purple-700 dark:bg-purple-800/30 dark:hover:bg-purple-800/40 dark:hover:text-purple-200'
+          <div className='flex h-full flex-col items-center justify-center'>
+            <p className='mb-4 text-lg text-gray-700'>Please sign in to view your wallet.</p>
+            <button
+              onClick={onSignInClick}
+              className='rounded bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600'
             >
-              Signup
-            </div>
-          </>
+              Sign In
+            </button>
+          </div>
         )}
       </div>
     </>
