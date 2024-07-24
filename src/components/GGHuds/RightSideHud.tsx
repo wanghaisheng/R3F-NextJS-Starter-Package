@@ -10,7 +10,6 @@ import SidebarSearchComponent from '../RightSidebarComponent/SubComponents/Sideb
 import CustomToolTipLeftRight from '../MyComponents/CustomToolTipLeftRight'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import { useUser } from '@/UserClientProvider'
 import { VscClearAll } from 'react-icons/vsc'
 
 const tabs = ['Profile', 'Wallet', 'Shop', 'Emergency', 'Notifications']
@@ -32,20 +31,7 @@ const getIcon = (tab) => {
   }
 }
 
-export default function RightSideHud({
-  openSignIn,
-  setShowSignIn,
-  setShowSignUp,
-  showSignIn,
-  showSignUp,
-}: {
-  openSignIn: boolean
-  setShowSignUp: any
-  setShowSignIn: any
-  showSignIn: any
-  showSignUp: any
-}) {
-  const { user } = useUser()
+export default function RightSideHud({ openSignIn }: { openSignIn: boolean }) {
   const pathname = usePathname()
   const [selectedTabs, setSelectedTabs] = useState([])
   const [removingTab, setRemovingTab] = useState(null) // state to track tabs being removed
@@ -87,7 +73,6 @@ export default function RightSideHud({
         }
       }
     })
-    setShowSignIn(true)
   }
 
   // Render mobile view content
@@ -96,13 +81,7 @@ export default function RightSideHud({
       case 'Profile':
         return (
           <div className='flex size-full overflow-auto'>
-            <SideProfile
-              showSignUp={showSignUp}
-              setShowSignUp={setShowSignUp}
-              showSignIn={showSignIn}
-              setShowSignIn={setShowSignIn}
-              setActiveTab={tab}
-            />
+            <SideProfile />
           </div>
         )
       case 'Wallet':
@@ -141,7 +120,7 @@ export default function RightSideHud({
     if (selectedTabs.length > 0) {
       timer = setTimeout(() => {
         setShowClearAll(true)
-      }, 600) // 0.6 seconds delay
+      }, 300) // 0.3 seconds delay
     } else {
       setShowClearAll(false)
     }
@@ -153,38 +132,40 @@ export default function RightSideHud({
     <>
       {/* Right side hud */}
       {pathname !== '/' && (
-        <motion.div
-          layout
-          className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50 transition-all duration-300 ease-in-out'
-        >
-          {tabs.map((tab, i) => (
-            <div
-              key={i}
-              onClick={() => handleTabClick(tab)}
-              className={`group flex size-[26px] items-center justify-center rounded-full font-semibold shadow-black drop-shadow-lg hover:bg-blue-100 ${
-                selectedTabs.includes(tab) ? 'bg-blue-400' : 'bg-white'
-              }`}
-            >
-              {getIcon(tab)}
-              <CustomToolTipLeftRight content={tab} top='0' left='-35' translateY='0' />
-            </div>
-          ))}
-
-          <AnimatePresence>
-            {showClearAll && selectedTabs.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                transition={{ duration: 0.3 }}
-                className='group flex size-[26px] items-center justify-center rounded-full bg-white font-semibold text-black shadow-black drop-shadow-lg hover:bg-blue-100'
-                onClick={closeAllTabs}
+        <>
+          <motion.div
+            layout
+            className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50 transition-all duration-300 ease-in-out'
+          >
+            {tabs.map((tab, i) => (
+              <div
+                key={i}
+                onClick={() => handleTabClick(tab)}
+                className={`group flex size-[26px] items-center justify-center rounded-full font-semibold shadow-black drop-shadow-lg hover:bg-blue-100 ${
+                  selectedTabs.includes(tab) ? 'bg-blue-400' : 'bg-white'
+                }`}
               >
-                <VscClearAll size={17} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+                {getIcon(tab)}
+                <CustomToolTipLeftRight content={tab} top='0' left='-35' translateY='0' />
+              </div>
+            ))}
+            <AnimatePresence>
+              {showClearAll && selectedTabs.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 30 }}
+                  transition={{ duration: 0.3 }}
+                  className='group absolute -bottom-8 right-1 flex size-[26px] items-center justify-center rounded-full bg-white font-semibold text-black shadow-black drop-shadow-lg hover:bg-blue-100'
+                  onClick={closeAllTabs}
+                >
+                  <VscClearAll size={17} />
+                  <CustomToolTipLeftRight content='Clear All' top='0' left='-35' translateY='0' />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </>
       )}
 
       {/* Bg black for focus */}

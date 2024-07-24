@@ -19,7 +19,7 @@ import Image from 'next/image'
 
 const { log } = console
 
-const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
+const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
   const router = useRouter()
   const { updateUser } = useUser()
   const [generalError, setGeneralError] = useState('') // State for managing error messages
@@ -66,7 +66,6 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
                 updateUser(token)
                 toast.success('Sign in successful')
 
-                setActiveTab('profile')
                 router.push('/discover')
               }
             } catch (error) {

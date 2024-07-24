@@ -83,12 +83,12 @@ export default function PublicProfile({ username }) {
       {users ? (
         <>
           {/* LeftPart */}
-          <div className='fixed left-[76px] top-1/2 z-30 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
             <LeftSideViewComponent />
           </div>
 
           {/* Mid Part */}
-          <div className='fixed left-1/2 top-1/2 z-30 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          <div className='fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
             <UserContent
               user={fetchedData[0]}
               skillsData={skills}
@@ -98,7 +98,7 @@ export default function PublicProfile({ username }) {
           </div>
 
           {/* Right Part */}
-          <div className='fixed right-[76px] top-1/2 z-30 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
             <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
           </div>
         </>

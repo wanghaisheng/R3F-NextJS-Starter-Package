@@ -17,8 +17,10 @@ import CustomToolTip from '@/components/MyComponents/CustomToolTip'
 
 import Link from 'next/link'
 
-export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, setShowSignIn, setActiveTab }) {
+export default function SideProfile() {
   const { user } = useUser()
+  const [showSignUp, setShowSignUp] = useState(false)
+  const [showSignIn, setShowSignIn] = useState(false)
 
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp)
@@ -27,6 +29,7 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
   const toggleSignIn = () => {
     setShowSignIn(!showSignIn)
   }
+
   return (
     <div className='flex h-full flex-col'>
       <div className='flex-1'>
@@ -42,7 +45,7 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
                 <CustomToolTip content='View Public Profile' top={7} left={-137} translateY={-4} />
               </Link>
             </div>
-            <ProfileComponent setShowSignUp={setShowSignUp} setActiveTab={setActiveTab} />
+            <ProfileComponent />
             <GallerySidebar username={user ? user.username : ''} />
           </div>
         )}
@@ -51,22 +54,12 @@ export default function SideProfile({ showSignUp, setShowSignUp, showSignIn, set
       {/* Show Signup and signin of user is not logged in */}
       {!user && (
         <div className='flex size-full items-center justify-center rounded-lg bg-gray-200 text-black dark:bg-black dark:text-white'>
-          <>
-            {showSignUp && (
-              <div>
-                <SignUpComponent
-                  toggleSignIn={toggleSignIn}
-                  toggleSignUp={toggleSignUp}
-                  setShowSignIn={setShowSignIn}
-                />
-              </div>
-            )}
-            {showSignIn && (
-              <div>
-                <SignInComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} setActiveTab={setActiveTab} />
-              </div>
-            )}
-          </>
+          {/* Display either signup or signin component based on state */}
+          {showSignUp ? (
+            <SignUpComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} setShowSignIn={setShowSignIn} />
+          ) : (
+            <SignInComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} />
+          )}
         </div>
       )}
     </div>
