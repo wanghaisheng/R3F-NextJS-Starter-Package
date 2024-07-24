@@ -79,11 +79,7 @@ export default function RightSideHud({ openSignIn }: { openSignIn: boolean }) {
   const renderMobileViewContent = (tab) => {
     switch (tab) {
       case 'Profile':
-        return (
-          <div className='flex size-full overflow-auto'>
-            <SideProfile />
-          </div>
-        )
+        return <SideProfile />
       case 'Wallet':
         return <WalletComponent onSignInClick={handleSignInClick} />
       case 'Shop':
@@ -135,7 +131,7 @@ export default function RightSideHud({ openSignIn }: { openSignIn: boolean }) {
         <>
           <motion.div
             layout
-            className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50 transition-all duration-300 ease-in-out'
+            className='fixed right-[20px] top-1/2 z-50 flex w-[33px] -translate-y-1/2 select-none flex-col items-center space-y-[6px] rounded-full bg-gray-200 px-[6px] py-[4px] shadow-lg shadow-black/50 transition-all duration-300 ease-in-out'
           >
             {tabs.map((tab, i) => (
               <div
@@ -181,7 +177,7 @@ export default function RightSideHud({ openSignIn }: { openSignIn: boolean }) {
                 ref={index === 0 ? firstTabRef : null}
                 tabIndex={0}
                 layout // Enable layout animations
-                className='ml-4 h-full w-[300px] overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='relative ml-4 h-full w-[300px] overflow-hidden rounded-md bg-white p-2 text-black shadow-lg shadow-black/50 focus:outline-none focus:ring-4 focus:ring-blue-500'
                 initial={{ x: 300, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{
@@ -196,17 +192,18 @@ export default function RightSideHud({ openSignIn }: { openSignIn: boolean }) {
                   duration: 0.5,
                 }}
               >
-                <div className='relative h-full p-4'>
-                  <motion.button
-                    className='absolute right-2 top-2 z-40 rounded-full bg-gray-200 p-1'
-                    onClick={() => handleTabClick(tab)}
-                    whileHover={{ rotate: 180, backgroundColor: '#d1d5db' }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <FaTimes size={14} />
-                  </motion.button>
-                  {renderMobileViewContent(tab)}
-                </div>
+                {/* minimize button */}
+                <motion.button
+                  className='absolute right-1 top-1 z-40 rounded-full bg-gray-200 p-1'
+                  onClick={() => handleTabClick(tab)}
+                  whileHover={{ rotate: 180, backgroundColor: '#d1d5db' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <FaTimes size={14} />
+                </motion.button>
+
+                {/* content */}
+                <div className='size-full'>{renderMobileViewContent(tab)}</div>
               </motion.div>
             ))}
           </AnimatePresence>

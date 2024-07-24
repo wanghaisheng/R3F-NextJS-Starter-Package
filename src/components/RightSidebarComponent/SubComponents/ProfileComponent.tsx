@@ -196,7 +196,7 @@ export default function ProfileComponent() {
             {form.username}
           </div>
 
-          <div className='z-10 mt-[-250px] h-[360px] w-full'>
+          {/* <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
                 modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
@@ -224,7 +224,7 @@ export default function ProfileComponent() {
                 }}
               />
             )}
-          </div>
+          </div> */}
 
           <div className='-mt-5 flex justify-center '>
             <GeniusID username={form.username} contact={form.phone_number} />
