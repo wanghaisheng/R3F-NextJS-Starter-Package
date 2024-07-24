@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, ReactNode } from 'react'
+import React, { useRef, ReactNode, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar/Navbar'
 import RightSideHud from '../GGHuds/RightSideHud'
@@ -19,13 +19,19 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname()
   const ref = useRef<HTMLDivElement>(null)
-  const { isSidebarOpen, setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
+  const { setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
   const isLoading = useLoadingState(1200)
+  const [openSignIn, setOpenSignIn] = useState(false)
+
+  const handleOpenSignIn = () => {
+    setOpenSignIn(!openSignIn)
+  }
 
   return (
     <div ref={ref}>
-      {pathname !== '/' && pathname !== '/slider' && (
+      {pathname !== '/slider' && (
         <RightSideHud
+          openSignIn={openSignIn}
           setShowSignIn={setShowSignIn}
           setShowSignUp={setShowSignUp}
           showSignIn={showSignIn}
@@ -33,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         />
       )}
       <Navbar
-        isSidebarOpen={isSidebarOpen}
+        handleOpenSignIn={handleOpenSignIn}
         setIsSidebarOpen={setIsSidebarOpen}
         setShowSignIn={setShowSignIn}
         setShowSignUp={setShowSignUp}
@@ -49,7 +55,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className='fixed bottom-8 right-16 z-40'>
             <UserProfileHud />
           </div>
-
           <StatusHud />
         </>
       )}

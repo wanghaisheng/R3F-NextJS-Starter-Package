@@ -12,7 +12,7 @@ import { GiShipWheel } from 'react-icons/gi'
 import { GiBarbedStar } from 'react-icons/gi'
 import CustomToolTip from '../MyComponents/CustomToolTip'
 
-const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
+const Navbar = ({ handleOpenSignIn, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
   const closeMenu = () => {
     setOpen(false)
@@ -21,13 +21,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const pathname = usePathname()
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
   const [hideTopRightNav, setHideTopRightNav] = useState(false)
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-    setShowSignUp(true)
-    setShowSignIn(false)
-    setOpen(false)
-  }
 
   useEffect(() => {
     if (pathname === '/slider') {
@@ -69,14 +62,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           ) : (
             <>
               {hideTopRightNav ? null : (
-                <div className='text-black dark:text-white'>
+                <div className='flex gap-x-4 text-black dark:text-white'>
                   <div
-                    onClick={toggleSidebar}
-                    className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 lg:flex'
+                    onClick={handleOpenSignIn}
+                    className='fixed right-[32px] top-[20px] z-50 flex h-[33px] select-none items-center justify-center rounded-full border-2 bg-gray-200 px-[4px] py-[6px] font-bold text-black shadow-lg shadow-black/30 transition-all duration-300 ease-out hover:bg-blue-300 lg:flex'
                   >
                     REGISTER
                   </div>
-                  <div className='-mr-2 flex items-center lg:hidden'>
+                  <div className='flex items-center lg:hidden'>
                     <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                   </div>
                 </div>
@@ -164,7 +157,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
             {user && (
               <li>
-                <p className='hover:text-violet-400' onClick={toggleSidebar}>
+                <p className='hover:text-violet-400' onClick={handleOpenSignIn}>
                   PROFILE
                 </p>
               </li>
@@ -180,7 +173,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   Logout
                 </Link>
               ) : (
-                <div onClick={toggleSidebar} className='py-4 text-blue-400 hover:text-fuchsia-300' aria-label='Sign In'>
+                <div
+                  onClick={handleOpenSignIn}
+                  className='py-4 text-blue-400 hover:text-fuchsia-300'
+                  aria-label='Sign In'
+                >
                   REGISTER
                 </div>
               )}
