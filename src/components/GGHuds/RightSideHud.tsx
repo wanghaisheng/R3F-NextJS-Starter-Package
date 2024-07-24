@@ -177,7 +177,7 @@ export default function RightSideHud({ openSignIn }: { openSignIn: boolean }) {
                 ref={index === 0 ? firstTabRef : null}
                 tabIndex={0}
                 layout // Enable layout animations
-                className='relative ml-4 h-full w-[300px] overflow-hidden rounded-md bg-white p-2 text-black shadow-lg shadow-black/50 focus:outline-none focus:ring-4 focus:ring-blue-500'
+                className='relative ml-4 h-full w-[306px] overflow-hidden rounded-md bg-white/50 p-2 text-black shadow-lg shadow-black/50 backdrop-blur-lg focus:outline-none focus:ring-4 focus:ring-blue-500'
                 initial={{ x: 300, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{

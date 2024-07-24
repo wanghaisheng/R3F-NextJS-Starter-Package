@@ -7,23 +7,26 @@ export default function WalletComponent({ onSignInClick }) {
 
   return (
     <>
-      <div className='relative -mt-3 px-2'>
+      <div className='relative flex size-full flex-col'>
         {user ? (
           <>
-            <Wallet
-              first_name={user.first_name}
-              last_name={user.last_name}
-              email={user.email}
-              dob={user.dob}
-              contact={user.phone_number}
-              address={user.address}
-              balance='9076400'
-            />
-            <div className='mt-8'>
-              <h1 className='text-lg font-semibold text-white'>Wallet</h1>
+            <div className='mb-1'>
+              <h1 className='text-lg font-semibold text-black'>Wallet</h1>
             </div>
-
-            <div className='mb-10'>
+            <div className='relative pb-2'>
+              <Wallet
+                first_name={user.first_name}
+                last_name={user.last_name}
+                email={user.email}
+                dob={user.dob}
+                contact={user.phone_number}
+                address={user.address}
+                balance='9076400'
+                height={200}
+                width={290}
+              />
+            </div>
+            <div className='h-full'>
               <TopUpWalletTabs />
             </div>
           </>
