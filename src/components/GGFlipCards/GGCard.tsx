@@ -29,7 +29,7 @@ export default function GGCard({ userData }) {
 
   return (
     <>
-      <div className='group h-full p-2 [prespective:1000px]'>
+      <div className='group h-full [prespective:1000px]'>
         {/* Flip the card when clicked */}
         <div
           className={`relative size-full rounded-xl shadow-md transition-all  duration-500 [transform-style:preserve-3d] 

@@ -10,7 +10,6 @@ import AchievementsComponent from '../ProfileComponent/PublicProfileComponent/Pr
 import Pictures from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/LeftSideComponents/Pictures'
 import GGCard from '../GGFlipCards/GGCard'
 import CustomSwiper from '../MyComponents/CustomSwiper'
-import { SwiperSlide } from 'swiper/react'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 
@@ -26,18 +25,10 @@ export default function RightSideViewComponent({ user, guild }) {
   return (
     <>
       {user ? (
-        <div className=''>
+        <div>
           {/* Card */}
-
-          <div>
-            <CustomSwiper>
-              <div className='h-[200px] w-[160px]'>
-                <GGCard userData={user} />
-              </div>
-              <div className='h-[200px] w-[159px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-              <div className='h-[200px] w-[159px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-              {/* Add more SwiperSlide elements as needed */}
-            </CustomSwiper>
+          <div className=' mt-5 h-[200px] w-full rounded-[7.35039px] px-2'>
+            <GGCard userData={user} />
           </div>
 
           {/* USERNAME and description */}
