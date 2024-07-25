@@ -6,6 +6,7 @@ import RightSideHud from '../GGHuds/RightSideHud'
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
+import { useUser } from '@/UserClientProvider'
 import UserProfileHud from '../GGHuds/UserProfileHud'
 import StatusHud from '../GGHuds/StatusHud'
 import { usePathname } from 'next/navigation'
@@ -18,6 +19,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname()
+  const { user } = useUser()
   const ref = useRef<HTMLDivElement>(null)
   const { setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
   const isLoading = useLoadingState(1200)
@@ -42,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {children}
 
       {/* user profile and wallet info and status hud  */}
-      {pathname !== '/' && pathname !== '/slider' && pathname !== '/hud' && (
+      {user && pathname !== '/' && pathname !== '/slider' && pathname !== '/hud' && (
         <>
           <div className='fixed bottom-8 right-16 z-40'>
             <UserProfileHud />
