@@ -122,8 +122,8 @@ export default function PublicProfile({ username }) {
 
           {/* Right Part */}
 
-          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
-            <div className='size-full overflow-auto'>
+          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-lg transition-all duration-500 ease-in-out'>
+            <div className='size-full overflow-hidden p-2'>
               <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
             </div>
 
