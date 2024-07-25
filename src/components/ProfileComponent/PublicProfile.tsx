@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
+import { useUser } from '@/UserClientProvider'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserContent'
 import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
@@ -10,34 +11,37 @@ import CustomSwiper from '../MyComponents/CustomSwiper'
 import { Avatar } from '../Avatar'
 
 export default function PublicProfile({ username }) {
+  const { user } = useUser()
   const { users, guilds } = useUserAndGuildData()
   const [fetchedData, setFetchedData] = useState([])
   const [skills, setSkills] = useState([])
 
-  // Map the user data to the format needed
+  // Map the publicUser data to the format needed
   useEffect(() => {
     if (users.length && guilds.length) {
       const filteredData = users
-        .filter((user) => user.username === username) // Filter by username
-        .map((user) => {
-          const guild = guilds.find((g) => g.id === user.guild_id)
-          const avatarUrl = user.avatar.length > 0 ? user.avatar[0].avatar_url : ''
+        .filter((publicUser) => publicUser.username === username) // Filter by username
+        .map((publicUser) => {
+          const guild = guilds.find((g) => g.id === publicUser.guild_id)
+          const avatarUrl = publicUser.avatar.length > 0 ? publicUser.avatar[0].avatar_url : ''
 
           return {
-            name: `${user.first_name} ${user.last_name}`,
-            username: user.username,
-            age: user.age,
+            name: `${publicUser.first_name} ${publicUser.last_name}`,
+            username: publicUser.username,
+            age: publicUser.age,
             user_image:
-              user.image_urls.length > 0 ? user.image_urls[user.image_urls.length - 1] : '/card/defaultbuddha.svg',
-            description: user.description,
+              publicUser.image_urls.length > 0
+                ? publicUser.image_urls[publicUser.image_urls.length - 1]
+                : '/card/defaultbuddha.svg',
+            description: publicUser.description,
             guild: guild ? guild.guild_name : 'Unknown Guild',
             avatarurl: avatarUrl,
-            country: user.region.country, // country as country code
-            city: user.region.city,
-            skillsData: user.skills,
-            experienceData: user.experience,
-            faculties: user.faculty,
-            overall_user_image: user.image_urls,
+            country: publicUser.region.country, // country as country code
+            city: publicUser.region.city,
+            skillsData: publicUser.skills,
+            experienceData: publicUser.experience,
+            faculties: publicUser.faculty,
+            overall_user_image: publicUser.image_urls,
           }
         })
       setFetchedData(filteredData)
@@ -56,10 +60,12 @@ export default function PublicProfile({ username }) {
     }
   }, [fetchedData]) // Only re-run when fetchedData changes
 
-  // selected user guild
+  // selected publicUser guild
   const userGuild = fetchedData[0]?.guild
 
   const avatar_url = fetchedData[0]?.avatarurl
+
+  const loggedin_user_avatar = user?.avatar.length > 0 ? user.avatar[user.avatar.length - 1].avatar_url : ''
 
   return (
     <>
@@ -120,8 +126,28 @@ export default function PublicProfile({ username }) {
             <div className='size-full overflow-auto'>
               <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
             </div>
-            {/* Avatar */}
-            <div className='absolute -right-6 top-[-100px] h-[100px] w-[150px] overflow-hidden'>
+
+            {/* Viewer's Avatar */}
+            {user.username !== fetchedData[0]?.username && (
+              <div className='absolute right-10 top-[-97px] h-[97px] w-[130px] overflow-hidden bg-transparent'>
+                {avatar_url && (
+                  <div className='size-full'>
+                    <Avatar
+                      modelSrc={`${loggedin_user_avatar}?quality=low`}
+                      animationSrc='/male-idle-1.fbx'
+                      fov={20}
+                      cameraTarget={2}
+                      cameraInitialDistance={2.5}
+                      effects={{
+                        ambientOcclusion: true,
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+            {/* Profile owner's Avatar */}
+            <div className='absolute -right-6 top-[-100px] h-[100px] w-[150px] overflow-hidden bg-transparent'>
               {avatar_url && (
                 <div className='size-full'>
                   <Avatar
