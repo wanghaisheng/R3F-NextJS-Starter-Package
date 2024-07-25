@@ -16,7 +16,7 @@ export default function RightSideViewComponent({ user, guild }) {
   return (
     <>
       {user ? (
-        <div className='relative'>
+        <div className='relative select-none'>
           {/* Card */}
           <div className=' h-[200px] w-full rounded-[7.35039px] '>
             <GGCard userData={user} />

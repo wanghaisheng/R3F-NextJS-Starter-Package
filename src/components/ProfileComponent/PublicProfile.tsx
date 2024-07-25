@@ -4,11 +4,10 @@ import { useEffect, useState } from 'react'
 
 import { useUser } from '@/UserClientProvider'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
-import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserContent'
 import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
 import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent'
-import CustomSwiper from '../MyComponents/CustomSwiper'
 import { Avatar } from '../Avatar'
+import MiddleViewComponent from '../PublicProfileViews/MiddleViewComponent'
 
 export default function PublicProfile({ username }) {
   const { user } = useUser()
@@ -99,20 +98,7 @@ export default function PublicProfile({ username }) {
 
           {/* Mid Part */}
           <div className='fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
-            <div className='mt-5 w-full px-2'>
-              <CustomSwiper>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-yellow-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                {/* Add more SwiperSlide elements as needed */}
-              </CustomSwiper>
-            </div>
-
-            <UserContent
+            <MiddleViewComponent
               user={fetchedData[0]}
               skillsData={skills}
               guild={guilds}
