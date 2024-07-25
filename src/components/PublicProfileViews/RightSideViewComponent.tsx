@@ -11,100 +11,19 @@ import Pictures from '../ProfileComponent/PublicProfileComponent/ProfileInfoComp
 import GGCard from '../GGFlipCards/GGCard'
 import CustomSwiper from '../MyComponents/CustomSwiper'
 
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
-
 export default function RightSideViewComponent({ user, guild }) {
-  const [switchProfile, setSwitchProfile] = useState(false)
-
-  const handleSwitchProfile = () => {
-    setSwitchProfile(!switchProfile)
-  }
-
-  const avatar_url = user?.avatarurl
-
   return (
     <>
       {user ? (
-        <div>
+        <div className='relative p-2'>
           {/* Card */}
-          <div className=' mt-5 h-[200px] w-full rounded-[7.35039px] px-2'>
+          <div className=' h-[200px] w-full rounded-[7.35039px] '>
             <GGCard userData={user} />
           </div>
 
-          {/* USERNAME and description */}
-          <div className='absolute -top-10 left-0 flex w-full flex-col items-center justify-center'>
-            <div
-              className='text-4xl font-bold uppercase text-black/50'
-              style={{
-                filter: `drop-shadow(0px 0px 2px ${guild.find((guild) => guild.guild_name === user.guild)?.color || 'white'})`,
-              }}
-            >
-              {user.username}
-            </div>
-            <div className='group flex w-1/2 justify-center overflow-hidden text-center'>
-              {/* not hovered */}
-              <div className='cursor-pointer text-sm font-light text-black'>
-                {user.description.length > 10 ? `${user.description.substring(0, 10)}...` : user.description}
-              </div>
-
-              {/* pop up when hovered */}
-              <div className='invisible absolute top-[-80px] h-[100px] w-[200px] rounded-lg border bg-white/40 text-start text-sm font-semibold text-black group-hover:visible'>
-                {user.description}
-              </div>
-            </div>
-          </div>
-
-          {/* Avatar */}
-          <div className='absolute -left-6 top-[-128px] h-[127px] w-[170px] overflow-hidden'>
-            {avatar_url && (
-              <div className='size-full'>
-                <Avatar
-                  modelSrc={`${avatar_url}?quality=low`}
-                  animationSrc='/male-spawn-animation.fbx'
-                  fov={20}
-                  cameraTarget={2}
-                  cameraInitialDistance={3}
-                  effects={{
-                    ambientOcclusion: true,
-                  }}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Profile Picture */}
-          <div className='-mt-12 flex w-full select-none items-center justify-end'>
-            <div
-              className='relative overflow-hidden rounded-full border-[3px]'
-              style={{
-                borderRadius: '50%',
-                height: 65,
-                width: 65,
-              }}
-              onClick={handleSwitchProfile}
-            >
-              {!switchProfile ? (
-                <Image
-                  src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
-                  alt='profile-pic'
-                  fill
-                  unoptimized
-                  quality={60}
-                  className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
-                />
-              ) : (
-                <>
-                  <Image
-                    src={'/card/defaultbuddha.svg'}
-                    alt='profile-pic'
-                    fill
-                    unoptimized
-                    quality={60}
-                    className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
-                  />
-                </>
-              )}
-            </div>
+          <div className='mt-2 w-full rounded-md bg-white/60 px-2 py-1 text-black'>
+            <h1 className='text-[16px] font-bold '>BIO</h1>
+            <p className='text-[12px] font-semibold'>{user.description}</p>
           </div>
 
           {/* About User */}
@@ -156,7 +75,7 @@ export default function RightSideViewComponent({ user, guild }) {
           </div>
 
           {/* Guild */}
-          <div className='flex flex-col pl-4 '>
+          {/* <div className='flex flex-col pl-4 '>
             <div className='group absolute left-0 top-0'>
               <Image
                 src={guild.find((guild) => guild.guild_name === user.guild)?.symbol || ''}
@@ -174,7 +93,7 @@ export default function RightSideViewComponent({ user, guild }) {
                 translateY={10}
               />
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className='flex size-full items-center justify-center'>

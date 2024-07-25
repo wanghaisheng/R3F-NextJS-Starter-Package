@@ -15,7 +15,7 @@ const CustomSwiper = ({ children }) => {
       coverflowEffect={{
         rotate: 0,
         stretch: 50,
-        depth: 200,
+        depth: 100,
         modifier: 1,
         slideShadows: false,
       }}

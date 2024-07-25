@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
+import Image from 'next/image'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import { FaAnglesUp } from 'react-icons/fa6'
@@ -60,6 +61,26 @@ export default function UserContent({ user, skillsData, guild, experience }) {
     <div
       className={`relative flex size-full flex-col overflow-auto rounded-xl bg-custom-gradient-purple p-3 shadow-xl shadow-black/30 backdrop-blur-lg`}
     >
+      {/* Profile Picture */}
+      <div className='flex w-full select-none items-center justify-end'>
+        <div
+          className='relative overflow-hidden rounded-full border-[3px]'
+          style={{
+            borderRadius: '50%',
+            height: 65,
+            width: 65,
+          }}
+        >
+          <Image
+            src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
+            alt='profile-pic'
+            fill
+            unoptimized
+            quality={60}
+            className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
+          />
+        </div>
+      </div>
       {/* <div className={`fixed top-0 z-20 size-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div> */}
       {user && guild && (
         <>

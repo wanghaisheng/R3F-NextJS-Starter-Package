@@ -7,6 +7,7 @@ import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserCont
 import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
 import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent'
 import CustomSwiper from '../MyComponents/CustomSwiper'
+import { Avatar } from '../Avatar'
 
 export default function PublicProfile({ username }) {
   const { users, guilds } = useUserAndGuildData()
@@ -58,6 +59,8 @@ export default function PublicProfile({ username }) {
   // selected user guild
   const userGuild = fetchedData[0]?.guild
 
+  const avatar_url = fetchedData[0]?.avatarurl
+
   return (
     <>
       {/* Video BG */}
@@ -102,6 +105,7 @@ export default function PublicProfile({ username }) {
                 {/* Add more SwiperSlide elements as needed */}
               </CustomSwiper>
             </div>
+
             <UserContent
               user={fetchedData[0]}
               skillsData={skills}
@@ -111,8 +115,28 @@ export default function PublicProfile({ username }) {
           </div>
 
           {/* Right Part */}
-          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
-            <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
+
+          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+            <div className='size-full overflow-auto'>
+              <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
+            </div>
+            {/* Avatar */}
+            <div className='absolute -right-6 top-[-100px] h-[100px] w-[150px] overflow-hidden'>
+              {avatar_url && (
+                <div className='size-full'>
+                  <Avatar
+                    modelSrc={`${avatar_url}?quality=low`}
+                    animationSrc='/male-spawn-animation.fbx'
+                    fov={20}
+                    cameraTarget={2}
+                    cameraInitialDistance={2.5}
+                    effects={{
+                      ambientOcclusion: true,
+                    }}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </>
       ) : (
