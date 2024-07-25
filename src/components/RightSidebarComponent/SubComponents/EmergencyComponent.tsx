@@ -6,7 +6,7 @@ import { useUser } from '@/UserClientProvider'
 import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
 
-export default function EmergencyComponent({ setActiveTab, setShowSignUp }) {
+export default function EmergencyComponent({ onSignInClick }) {
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
   const { user } = useUser()
@@ -16,12 +16,6 @@ export default function EmergencyComponent({ setActiveTab, setShowSignUp }) {
   const [isFlipped, setIsFlipped] = useState(false) // isFlipped is a boolean state variable that is used to determine if the card is flipped or not
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
-  }
-
-  // handleSignUpClick is a function that sets the active tab to profile and shows the signup modal
-  const handleSignUpClick = () => {
-    setActiveTab('profile')
-    setShowSignUp(true)
   }
 
   return (
@@ -63,17 +57,15 @@ export default function EmergencyComponent({ setActiveTab, setShowSignUp }) {
           )}
         </>
       ) : (
-        <>
-          <>
-            <div>You must signin to view this tab</div>
-            <div
-              onClick={handleSignUpClick}
-              className='mt-2 flex cursor-pointer justify-center rounded border bg-black p-2 transition-colors hover:bg-gray-300 hover:text-black  dark:border-purple-700 dark:bg-purple-800/30 dark:hover:bg-purple-800/40 dark:hover:text-purple-200'
-            >
-              Signup
-            </div>
-          </>
-        </>
+        <div className='flex h-full flex-col items-center justify-center'>
+          <p className='mb-4 text-lg text-gray-700'>Please sign in to view your emergency card.</p>
+          <button
+            onClick={onSignInClick}
+            className='rounded bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600'
+          >
+            Sign In
+          </button>
+        </div>
       )}
     </>
   )

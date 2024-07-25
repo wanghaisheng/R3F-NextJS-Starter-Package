@@ -32,6 +32,7 @@ const useUserAndGuildData = () => {
     const fetchUserAndGuildData = async () => {
       if (!cache.users) {
         const fetchedUsers = await fetchData('/api/public/users', 'Failed to fetch users data')
+
         cache.users = fetchedUsers.filter(
           (user) =>
             user.username &&

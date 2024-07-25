@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import UserContent from './PublicProfileComponent/ProfileInfoComponents/UserContent'
 import LeftSidePublicProfile from './PublicProfileComponent/ProfileInfoComponents/LeftSideComponents/LeftSidePublicProfile'
-import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
 
-export default function PublicProfile({ username }) {
+export default function PublicProfileV1({ username }) {
   const { users, guilds } = useUserAndGuildData()
   const [fetchedData, setFetchedData] = useState([])
   const [skills, setSkills] = useState([])
@@ -81,14 +80,14 @@ export default function PublicProfile({ username }) {
       </div>
 
       {users ? (
-        <>
+        <div className='flex w-full flex-col justify-center md:h-screen md:flex-row md:justify-between'>
           {/* LeftPart */}
-          <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
-            <LeftSideViewComponent />
+          <div className='z-30 h-full p-5 pt-32 md:w-[29%]'>
+            <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
           </div>
 
-          {/* Mid Part */}
-          <div className='fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          {/* Right Part */}
+          <div className='fixed left-1/2 top-1/2 z-40 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
             <UserContent
               user={fetchedData[0]}
               skillsData={skills}
@@ -96,12 +95,7 @@ export default function PublicProfile({ username }) {
               experience={fetchedData[0]?.experienceData}
             />
           </div>
-
-          {/* Right Part */}
-          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-white text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
-            <LeftSidePublicProfile user={fetchedData[0]} guild={guilds} />
-          </div>
-        </>
+        </div>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>
           <div className='text-center text-2xl font-bold'>Loading...</div>

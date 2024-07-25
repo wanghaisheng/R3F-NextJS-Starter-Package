@@ -1,43 +1,19 @@
 'use client'
+
 import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false }) //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider'
+const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import GeniusID from '@/components/card/GeniusID' //----------------> module not found error in my branch
-import { revalidateUser } from 'lib/actions'
+import GeniusID from '@/components/card/GeniusID'
 import Cookies from 'js-cookie'
 import { IoChevronBack } from 'react-icons/io5'
 
-// async function getAllFaculties() {
-//   try {
-//     const res = await fetch('/api/internal/faculties/all-faculties')
-//     if (!res.ok) {
-//       throw new Error(`failded to fetch faculties`)
-//     }
-//     return res.json()
-//   } catch (error) {
-//     console.error('Internal server error')
-//   }
-// }
-// async function getGuildFaculty() {
-//   try {
-//     const res = await fetch('/api/internal/faculties/guild-faculty')
-//     if (!res.ok) {
-//       throw new Error(`failded to fetch faculties`)
-//     }
-//     return res.json()
-//   } catch (error) {
-//     console.error('Internal server error')
-//   }
-// }
-
-export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
+export default function ProfileComponent() {
   const { user, updateUser } = useUser()
   const token = Cookies.get('token')
   const [showForm, setShowForm] = useState(false)
@@ -61,37 +37,6 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
 
   const [regionStatus, setRegionStatus] = useState(false)
   const [avatarsData, setAvatarsData] = useState(user?.avatar || [])
-
-  // const [primaryFaculty, setPrimaryFaculty] = useState('')
-  // const [optionalFaculty, setOptionalFaculty] = useState('')
-  // const [guild_faculty, setGuild_Faculty] = useState([])
-  // const [faculties, setFaculties] = useState([])
-
-  //get all faculties
-  // useEffect(() => {
-  //   const fetchFaculties = async () => {
-  //     const faculties = await getAllFaculties()
-  //     setFaculties(faculties)
-  //   }
-  //   fetchFaculties()
-  // }, [])
-
-  // //get guild based faculties
-  // useEffect(() => {
-  //   const fetchGuildFaculty = async () => {
-  //     const guild_faculty = await getAllFaculties()
-  //     setFaculties(guild_faculty)
-  //   }
-  //   fetchGuildFaculty()
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log(faculties)
-  // }, [faculties])
-
-  // useEffect(() => {
-  //   console.log(guild_faculty)
-  // }, [guild_faculty])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -217,14 +162,9 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
     }
   }
 
-  const handleSignUpClick = () => {
-    setActiveTab('search')
-    setShowSignUp(true)
-  }
-
   return (
     <div className='flex h-full flex-col overflow-hidden pb-8'>
-      {user ? (
+      {user && (
         <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-gray-200 p-3 text-white dark:bg-black/40'>
           {/* CoverImage */}
           <div className='relative h-[170px] w-full overflow-hidden rounded'>
@@ -238,7 +178,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
               height={170}
               width={500}
               unoptimized
-              className='rounded'
+              className='rounded object-cover'
             />
             <FileUploaderRegular
               onChange={handleImageChange('cover')}
@@ -256,7 +196,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             {form.username}
           </div>
 
-          <div className='z-10 mt-[-250px] h-[360px] w-full'>
+          {/* <div className='z-10 mt-[-250px] h-[360px] w-full'>
             {avatarsData && avatarsData.length !== 0 ? (
               <Avatar
                 modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
@@ -284,7 +224,7 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
                 }}
               />
             )}
-          </div>
+          </div> */}
 
           <div className='-mt-5 flex justify-center '>
             <GeniusID username={form.username} contact={form.phone_number} />
@@ -417,16 +357,6 @@ export default function ProfileComponent({ setShowSignUp, setActiveTab }) {
             </form>
           )}
         </div>
-      ) : (
-        <>
-          <div>You must sign In to view this tab</div>
-          <div
-            onClick={handleSignUpClick}
-            className='mt-2 flex cursor-pointer justify-center rounded border border-purple-700 bg-purple-800/30 p-2 transition-colors hover:bg-purple-800/40 hover:text-purple-200'
-          >
-            Signup
-          </div>
-        </>
       )}
     </div>
   )

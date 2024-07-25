@@ -1,10 +1,9 @@
 'use client'
+
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-// import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider'
 import { LuLogOut } from 'react-icons/lu'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import Hamburger from 'hamburger-react'
@@ -13,7 +12,7 @@ import { GiShipWheel } from 'react-icons/gi'
 import { GiBarbedStar } from 'react-icons/gi'
 import CustomToolTip from '../MyComponents/CustomToolTip'
 
-const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
+const Navbar = ({ handleOpenSignIn, setIsSidebarOpen, showSignIn, showSignUp, setShowSignIn, setShowSignUp }) => {
   const [isOpen, setOpen] = useState(false)
   const closeMenu = () => {
     setOpen(false)
@@ -22,13 +21,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   const pathname = usePathname()
   const [hideMiddleNav, setHideMiddleNav] = useState(true)
   const [hideTopRightNav, setHideTopRightNav] = useState(false)
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-    setShowSignUp(true)
-    setShowSignIn(false)
-    setOpen(false)
-  }
 
   useEffect(() => {
     if (pathname === '/slider') {
@@ -39,16 +31,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
   }, [pathname])
 
   const { user, logout } = useUser()
-  // State to hold the current guild color
-
-  const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
-
-  // Update imageUrl whenever user's image_urls changes
-  useEffect(() => {
-    if (user && user.image_urls && user.image_urls.length > 0) {
-      setProfilePic(user.image_urls[user.image_urls.length - 1])
-    }
-  }, [user, user?.image_urls?.length])
 
   const logoutAndToggleSidebar = () => {
     logout()
@@ -57,35 +39,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
   return (
     <>
-      {/* Logo and Sign In/Sign Out */}
-      <div className={`fixed left-0 top-0 z-50 flex size-12 rounded-full`}>
-        <Link href='/discover' className='flex items-center justify-center'>
-          <Image
-            src={'/logos/lgo.png'}
-            className='absolute left-4 animate-rotate-y rounded-full p-2 animate-duration-[4000ms] animate-infinite'
-            height={60}
-            width={60}
-            alt='GG Logo'
-          />
-        </Link>
-      </div>
       <div className={`fixed right-0 top-3 z-50 flex items-center rounded-full`}>
         {/* SignIn, SignOut and Logout */}
         <div className='flex items-center justify-center text-black dark:text-white'>
           {user ? (
             <>
-              <div onClick={toggleSidebar}>
-                <div
-                  className='mr-2 size-[38px] rounded-full bg-pink-400'
-                  key={profilePic}
-                  style={{
-                    backgroundImage: `url(${profilePic})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                ></div>
-              </div>
               <div className='flex'>
                 <Link
                   href='/'
@@ -104,14 +62,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
           ) : (
             <>
               {hideTopRightNav ? null : (
-                <div className='text-black dark:text-white'>
+                <div className='flex gap-x-4 text-black dark:text-white'>
                   <div
-                    onClick={toggleSidebar}
-                    className='hidden rounded-xl p-2 text-white shadow-md shadow-violet-600 backdrop-blur-xl hover:scale-105 hover:bg-violet-900 lg:flex'
+                    onClick={handleOpenSignIn}
+                    className='fixed right-[32px] top-[20px] z-50 flex h-[33px] select-none items-center justify-center rounded-full border-2 bg-gray-200 px-[4px] py-[6px] font-bold text-black shadow-lg shadow-black/30 transition-all duration-300 ease-out hover:bg-blue-300 lg:flex'
                   >
                     REGISTER
                   </div>
-                  <div className='-mr-2 flex items-center lg:hidden'>
+                  <div className='flex items-center lg:hidden'>
                     <Hamburger toggled={isOpen} toggle={setOpen} color='#4FD1C5' />
                   </div>
                 </div>
@@ -126,8 +84,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
         <div
           className={`fixed left-1/2 top-0 z-50 mx-auto flex -translate-x-1/2 items-center justify-between rounded-full px-6 py-3`}
         >
-          <div className='hidden text-white lg:flex'>
-            <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white/10 px-12 shadow-lg backdrop-blur-md  md:gap-x-7 lg:gap-x-14'>
+          <div className='hidden text-black/70 lg:flex'>
+            <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white px-12 shadow-lg backdrop-blur-md  md:gap-x-7 lg:gap-x-14'>
               <Link
                 href='/hud'
                 className={`group ${pathname === '/hud' ? 'scale-110 py-2 text-2xl font-bold text-pink-700' : 'py-2 font-semibold transition-all duration-300 ease-out hover:scale-105 hover:text-purple-600'}`}
@@ -199,7 +157,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
 
             {user && (
               <li>
-                <p className='hover:text-violet-400' onClick={toggleSidebar}>
+                <p className='hover:text-violet-400' onClick={handleOpenSignIn}>
                   PROFILE
                 </p>
               </li>
@@ -215,7 +173,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp, setSh
                   Logout
                 </Link>
               ) : (
-                <div onClick={toggleSidebar} className='py-4 text-blue-400 hover:text-fuchsia-300' aria-label='Sign In'>
+                <div
+                  onClick={handleOpenSignIn}
+                  className='py-4 text-blue-400 hover:text-fuchsia-300'
+                  aria-label='Sign In'
+                >
                   REGISTER
                 </div>
               )}

@@ -3,11 +3,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Scrollbar, Pagination } from 'swiper/modules'
+import { Scrollbar } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/scrollbar'
-import 'swiper/css/pagination'
 
 const demodata = [
   {
@@ -128,14 +126,12 @@ const demodata = [
 
 const categories = ['Laptops', 'Smartphones', 'Headphones', 'Consoles', 'Electronics']
 
-export default function ShopComponent() {
+export default function ShopComponentV1() {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category)
-    setIsDropdownOpen(false) // Close the dropdown after selection
   }
 
   const handleSearchChange = (event) => {
@@ -153,93 +149,81 @@ export default function ShopComponent() {
   })
 
   return (
-    <div className='px-4'>
+    <div>
       <div className='mb-4 flex items-center gap-2'>
         <input
           type='text'
           placeholder='Search products...'
           value={searchTerm}
           onChange={handleSearchChange}
-          className='w-full rounded-md border px-3 py-2'
+          className='-mt-4 w-full rounded-md border bg-black/50 px-3 py-2 text-white focus:outline-none dark:border-purple-700 dark:bg-purple-950/20 dark:text-purple-200'
         />
       </div>
-
-      {/* Category Dropdown */}
+      {/* Carousel */}
       <div className='relative mb-4'>
-        <div
-          className={`flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 ${isDropdownOpen ? 'border-blue-500' : ''}`}
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >
-          <span>{selectedCategory || 'All Categories'}</span>
-          <svg xmlns='http://www.w3.org/2000/svg' className='size-5' viewBox='0 0 20 20' fill='currentColor'>
-            <path
-              fillRule='evenodd'
-              d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-              clipRule='evenodd'
-            />
-          </svg>
-        </div>
-        {isDropdownOpen && (
-          <div className='absolute z-10 mt-1 w-full rounded-md bg-white shadow-md'>
-            <ul className='p-2'>
-              <li
-                className={`cursor-pointer py-1 ${selectedCategory === null ? 'bg-gray-100' : ''}`}
+        <div className='flex gap-2 overflow-auto'>
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={3}
+            scrollbar={{ draggable: true, hide: false }}
+            modules={[Scrollbar]}
+          >
+            <SwiperSlide className='shrink-0 pb-4'>
+              <button
+                className={`w-full justify-center rounded-md  p-2  ${
+                  selectedCategory === null
+                    ? ' border bg-black/20 text-white dark:border-purple-600'
+                    : ' bg-gray-200 text-black dark:bg-purple-800/30 dark:text-gray-200'
+                }`}
                 onClick={() => handleCategoryClick(null)}
               >
                 All
-              </li>
-              {categories.map((category) => (
-                <li
-                  key={category}
-                  className={`cursor-pointer py-1 ${selectedCategory === category ? 'bg-gray-100' : ''}`}
+              </button>
+            </SwiperSlide>
+            {categories.map((category) => (
+              <SwiperSlide key={category} className='shrink-0 pb-4'>
+                <button
+                  className={`w-full justify-center rounded-md p-2 ${
+                    selectedCategory === category
+                      ? ' border bg-black/20 text-white dark:border-purple-600'
+                      : ' bg-gray-200 text-black dark:bg-purple-800/30 dark:text-gray-200'
+                  }`}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {category}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                </button>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-
-      {/* Products Slider */}
-      <div className='relative mb-4'>
-        <Swiper
-          spaceBetween={10}
-          slidesPerView={2}
-          navigation={true}
-          scrollbar={{ draggable: true, hide: false }}
-          pagination={{ clickable: true }}
-          modules={[Scrollbar, Navigation, Pagination]}
-          className='flex'
-        >
-          {searchedProducts.map((product) => (
-            <SwiperSlide key={product.productId} className='shrink-0 pb-4'>
-              <div
-                key={product.productId}
-                className='relative overflow-hidden rounded-md bg-white/40 shadow-md dark:bg-white'
-              >
-                <div className='h-48 w-full overflow-hidden rounded-md bg-gray-100'>
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    width={300}
-                    height={200}
-                    className='object-cover'
-                    unoptimized
-                  />
-                </div>
-                <div className='mt-4'>
-                  <h1 className='text-lg font-medium'>${product.price}</h1>
-                  <h2 className='text-sm text-gray-500'>{product.name}</h2>
-                </div>
-                <div className='absolute right-2 top-2 rounded-full bg-white p-1 shadow-md'>
-                  <span className='text-sm font-bold text-yellow-500'>{product.rating}</span>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <div className='-mt-2 grid grid-cols-2 gap-4'>
+        {searchedProducts.map((product) => (
+          <div
+            key={product.productId}
+            className='relative overflow-hidden rounded-md bg-white/40 shadow-md dark:bg-white'
+          >
+            <div className='h-24 w-full overflow-hidden rounded-md bg-white/40 shadow-md dark:bg-purple-800/30'>
+              <Image
+                src={product.imageUrl}
+                unoptimized
+                alt={product.name}
+                width={200}
+                height={100}
+                layout='responsive'
+                className='object-cover'
+              />
+            </div>
+            <div className='h-14 w-full bg-gray-300 p-1 backdrop-blur-sm dark:bg-purple-600/40'>
+              <h1 className='font-medium text-black'>${product.price}</h1>
+              <h2 className='text-sm text-black'>{product.name.slice(0, 10)}...</h2>
+              {/* <p className='mt-1 text-sm text-gray-600'>{product.description.slice(0, 22)}...</p> */}
+            </div>
+            <div className='absolute bottom-14 right-1'>
+              <span className='text-sm font-bold text-yellow-400 drop-shadow'>({product.rating}/5)</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

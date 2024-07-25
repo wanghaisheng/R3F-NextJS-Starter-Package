@@ -1,6 +1,5 @@
 'use client'
 
-import toast from 'react-hot-toast'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { Autoplay } from 'swiper/modules'
@@ -14,60 +13,6 @@ import AvatarSlideHome from './SlidesHomePage/AvatarSlideHome'
 import HomeSlide from './SlidesHomePage/HomeSlide'
 import { FaPauseCircle, FaPlayCircle } from 'react-icons/fa'
 import useUserAndGuildData from '../CustomHooks/useUserAndGuildData'
-
-let cache = {
-  users: null,
-  guilds: null,
-}
-
-const getUsers = async () => {
-  if (cache.users) return cache.users
-
-  try {
-    const res = await fetch('/api/public/users')
-    if (!res.ok) {
-      toast.error('Failed to fetch users data')
-      return []
-    }
-    const users = await res.json()
-
-    const filteredUsers = users.filter(
-      (user) =>
-        // user.first_name &&
-        // user.last_name &&
-        user.username &&
-        user.email &&
-        user.description &&
-        user.faculty &&
-        user.region.ip &&
-        user.avatar.length !== 0 &&
-        user.guild_id,
-    )
-    cache.users = filteredUsers
-    return filteredUsers
-  } catch (error) {
-    toast.error('Internal Server Error')
-    return []
-  }
-}
-
-const getGuilds = async () => {
-  if (cache.guilds) return cache.guilds
-
-  try {
-    const res = await fetch('/api/public/guilds')
-    if (!res.ok) {
-      toast.error('Failed to fetch guilds data')
-      return []
-    }
-    const guilds = await res.json()
-    cache.guilds = guilds
-    return guilds
-  } catch (error) {
-    toast.error('Internal Server Error')
-    return []
-  }
-}
 
 export default function VideoHome() {
   const { users, guilds } = useUserAndGuildData()
