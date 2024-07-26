@@ -116,7 +116,7 @@ const Regions = () => {
               searchTerm={searchTerm}
             />
           </div>
-          <div className='absolute bottom-6 flex w-full justify-center'>
+          <div className='fixed bottom-[20px] left-1/2 z-30 flex h-[33px] w-full -translate-x-1/2 select-none items-center justify-center '>
             <div className='z-50 w-full md:w-1/2'>
               <RegionHudComponent
                 onRegionChange={handleRegionFilterChange}

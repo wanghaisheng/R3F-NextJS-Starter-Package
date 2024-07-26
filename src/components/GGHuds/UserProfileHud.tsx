@@ -3,7 +3,6 @@
 import { useUser } from '@/UserClientProvider'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 import { IoCart, IoDiamondSharp } from 'react-icons/io5'
 import { FaCreditCard } from 'react-icons/fa6'
 import { HiMiniWallet } from 'react-icons/hi2'
@@ -14,7 +13,6 @@ import { GiCash } from 'react-icons/gi'
 const tabs = ['.', 'sn', 'Cart', 'Edit', 'Wallet']
 
 export default function UserProfileHud() {
-  const pathname = usePathname()
   const [selectedTab, setSelectedTab] = useState('Cart')
   const { user } = useUser()
   const [profilePic, setProfilePic] = useState('/card/defaultbuddha.svg')
@@ -63,9 +61,7 @@ export default function UserProfileHud() {
   }, [user, user?.image_urls?.length])
 
   return (
-    <div
-      className={` bottom-[20px] right-[32px] z-50 flex h-[33px] select-none items-center space-x-[6px] rounded-full bg-gray-200 py-[6px] pl-[0px] pr-[50px] shadow-lg shadow-black/50 ${user ? 'fixed' : 'hidden'}`}
-    >
+    <div className='fixed bottom-[20px] right-[32px] z-50 flex h-[33px] select-none items-center space-x-[6px] rounded-full bg-gray-200 py-[6px] pl-[0px] pr-[50px] shadow-lg shadow-black/50'>
       <Link
         href={`/public-profile/${username}`}
         className='absolute -right-3 -top-9 size-[62px] overflow-hidden rounded-full border-2 bg-black/60'

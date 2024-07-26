@@ -7,9 +7,9 @@ import Image from 'next/image'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import { FaAnglesUp } from 'react-icons/fa6'
-import CustomSwiper from '@/components/MyComponents/CustomSwiper'
+import CustomSwiper from '../MyComponents/CustomSwiper'
 
-export default function UserContent({ user, skillsData, guild, experience }) {
+export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
   const [isFlipped, setIsFlipped] = useState(false)
   // Check if flipped or not
@@ -60,30 +60,50 @@ export default function UserContent({ user, skillsData, guild, experience }) {
 
   return (
     <div
-      className={`relative flex size-full flex-col overflow-auto rounded-xl bg-custom-gradient-purple p-3 shadow-xl shadow-black/30 backdrop-blur-lg`}
+      className={`relative flex size-full flex-col overflow-auto rounded-xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-lg`}
     >
-      {/* Profile Picture */}
-      {user && (
-        <div className='flex w-full select-none items-center justify-end'>
-          <div
-            className='relative overflow-hidden rounded-full border-[3px]'
-            style={{
-              borderRadius: '50%',
-              height: 65,
-              width: 65,
-            }}
-          >
-            <Image
-              src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
-              alt='profile-pic'
-              fill
-              unoptimized
-              quality={60}
-              className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
-            />
+      <div className='flex w-full flex-col gap-y-2'>
+        <div className='flex w-full'>
+          {/* Profile Picture */}
+          {user && (
+            <div className='flex w-full select-none items-center gap-x-2'>
+              <div
+                className='relative overflow-hidden rounded-full border-[2px]'
+                style={{
+                  borderRadius: '50%',
+                  height: 50,
+                  width: 50,
+                }}
+              >
+                <Image
+                  src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
+                  alt='profile-pic'
+                  fill
+                  unoptimized
+                  quality={60}
+                  className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
+                />
+              </div>
+              <div className='h-[40px] flex-1 rounded-full bg-white/50'></div>
+            </div>
+          )}
+        </div>
+        <div className='mt-1 flex justify-between text-[12px] font-semibold'>
+          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
+            GALLERY
+          </div>
+          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
+            PROJECTS
+          </div>
+          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
+            EXPERIENCE
+          </div>
+          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
+            SKILLS
           </div>
         </div>
-      )}
+      </div>
+
       {/* <div className={`fixed top-0 z-20 size-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div> */}
       {user && guild && (
         <>
