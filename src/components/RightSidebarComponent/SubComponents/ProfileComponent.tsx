@@ -1,23 +1,22 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/UserClientProvider'
-const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import Image from 'next/image'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
 import GeniusID from '@/components/card/GeniusID'
 import Cookies from 'js-cookie'
 import { IoChevronBack } from 'react-icons/io5'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { FaMapPin } from 'react-icons/fa'
 
 export default function ProfileComponent() {
   const { user, updateUser } = useUser()
   const token = Cookies.get('token')
   const [showForm, setShowForm] = useState(false)
-
   const [form, setForm] = useState({
     username: user?.username || '',
     phone_number: user?.phone_number || '',
@@ -36,7 +35,6 @@ export default function ProfileComponent() {
   })
 
   const [regionStatus, setRegionStatus] = useState(false)
-  const [avatarsData, setAvatarsData] = useState(user?.avatar || [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -165,9 +163,9 @@ export default function ProfileComponent() {
   return (
     <div className='flex h-full flex-col overflow-hidden pb-8'>
       {user && (
-        <div className='h-full flex-1 items-center justify-center overflow-auto rounded-lg bg-gray-200 p-3 text-white dark:bg-black/40'>
+        <div className='h-full flex-1 items-center justify-center text-white'>
           {/* CoverImage */}
-          <div className='relative h-[170px] w-full overflow-hidden rounded'>
+          <div className='relative h-[170px] w-full overflow-hidden rounded-lg'>
             <Image
               src={
                 form.cover_images.length > 0
@@ -192,49 +190,15 @@ export default function ProfileComponent() {
               <span className='pl-2 text-sm font-semibold text-white drop-shadow'>{form.description}</span>
             </p>
           </div>
-          <div className='mb-3 mt-0 flex items-center justify-center overflow-hidden whitespace-nowrap text-5xl font-bold uppercase text-black dark:text-white'>
-            {form.username}
-          </div>
 
-          {/* <div className='z-10 mt-[-250px] h-[360px] w-full'>
-            {avatarsData && avatarsData.length !== 0 ? (
-              <Avatar
-                modelSrc={`${avatarsData.slice(-1)[0].avatar_url}?quality=low`}
-                // shadows
-                animationSrc='/male-spawn-animation.fbx'
-                style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                fov={40}
-                cameraTarget={1.5}
-                cameraInitialDistance={30}
-                effects={{
-                  ambientOcclusion: true,
-                }}
-              />
-            ) : (
-              <Avatar
-                modelSrc='https://models.readyplayer.me/65ba39f18f9cbe2fcfec8a10.glb?quality=low'
-                // shadows
-                animationSrc='/male-idle-3.fbx'
-                style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-                fov={40}
-                cameraTarget={1.5}
-                cameraInitialDistance={30}
-                effects={{
-                  ambientOcclusion: true,
-                }}
-              />
-            )}
-          </div> */}
-
-          <div className='-mt-5 flex justify-center '>
+          <div className='mt-1 flex justify-center '>
             <GeniusID username={form.username} contact={form.phone_number} />
           </div>
-
           {!showForm && (
             <div className='mt-2 flex justify-start pl-2'>
               <button
                 className='flex items-center justify-center rounded border bg-black p-1 transition-all ease-in-out hover:bg-gray-400 hover:text-black dark:border-purple-700
-            dark:bg-purple-950/20 dark:hover:border-purple-500'
+                dark:bg-purple-950/20 dark:hover:border-purple-500'
                 onClick={handleShowForm}
               >
                 Edit Profile
@@ -242,17 +206,25 @@ export default function ProfileComponent() {
             </div>
           )}
 
-          {showForm && (
-            <form
-              onSubmit={handleSubmit}
-              className='mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-center'
+          <motion.div
+            className={`fixed left-0 top-0 flex size-full items-center justify-center ${showForm ? 'block' : 'hidden'}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showForm ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className='absolute inset-0 z-10 size-full bg-black/50' onClick={handleShowForm}></div>
+            <motion.div
+              className='z-20 mx-auto w-[90%] rounded-lg bg-black p-6 shadow-lg'
+              initial={{ scale: 0.9 }}
+              animate={{ scale: showForm ? 1 : 0.9 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className='flex w-full flex-col gap-y-2 px-4  text-black dark:text-purple-200'>
-                <button className='flex justify-start' onClick={handleShowForm}>
-                  <IoChevronBack size={24} />
-                </button>
+              <button className='text-white' onClick={handleShowForm}>
+                <IoChevronBack size={24} />
+              </button>
+              <form onSubmit={handleSubmit} className='flex flex-col gap-y-4'>
                 <div className='flex flex-col'>
-                  <label htmlFor='description' className='font-semibold'>
+                  <label htmlFor='username' className='font-semibold'>
                     USERNAME
                   </label>
                   <input
@@ -280,82 +252,58 @@ export default function ProfileComponent() {
                   />
                 </div>
                 <div className='flex flex-col'>
-                  <label htmlFor='phone_number' className='font-semibold'>
-                    Contact
-                  </label>
-
-                  <input
-                    type='text'
-                    name='phone_number'
-                    value={form.phone_number}
-                    onChange={handleInputChange}
-                    placeholder='Phone Number'
-                    className='rounded-md bg-black/50 px-3 text-white dark:bg-white/20'
-                    aria-label='Phone Number'
-                  />
-                </div>
-                <div className='flex flex-col'>
                   <label htmlFor='dob' className='font-semibold'>
-                    DOB
+                    Date of Birth
                   </label>
-
                   <input
                     type='date'
                     name='dob'
+                    id='dob'
+                    placeholder='Date of Birth'
                     value={form.dob}
-                    onChange={handleInputChange}
                     className='rounded-md bg-black/50 px-3 text-white dark:bg-white/20'
-                    required
-                    aria-label='Date of Birth'
+                    onChange={handleInputChange}
                   />
                 </div>
-                {/* Only shown if regionStatus is not given */}
-                {!regionStatus && (
-                  <div className='flex'>
-                    <label htmlFor='' className='font-semibold'>
-                      Region
-                    </label>
-
+                <div className='flex flex-col'>
+                  <label htmlFor='phone_number' className='font-semibold'>
+                    Phone Number
+                  </label>
+                  <input
+                    type='text'
+                    name='phone_number'
+                    id='phone_number'
+                    placeholder='Phone Number'
+                    value={form.phone_number}
+                    className='rounded-md bg-black/50 px-3 text-white dark:bg-white/20'
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className='flex items-center gap-x-4'>
+                  <FaMapPin size={24} color={regionStatus ? 'green' : 'gray'} />
+                  <p className='text-lg font-semibold'>{regionStatus ? 'Location Enabled' : 'Location Disabled'}</p>
+                  <label className='flex cursor-pointer items-center'>
                     <input
                       type='checkbox'
-                      id='region_status'
                       checked={regionStatus}
                       onChange={(e) => handleRegionStatus(e.target.checked)}
-                      className='ml-2 flex size-5 items-center justify-start'
-                      aria-label='region status'
-                      disabled={regionStatus} // Disable checkbox if regionStatus is true
+                      className='sr-only'
                     />
-                  </div>
-                )}
-                <div className='flex items-center justify-between gap-x-2'>
-                  <label htmlFor='profile_picture' className='whitespace-nowrap font-semibold'>
-                    Profile Picture
+                    <div
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full ${regionStatus ? 'bg-green-500' : 'bg-gray-300'}`}
+                    >
+                      <span
+                        className={`absolute left-1 size-5 rounded-full bg-white transition-transform ${regionStatus ? 'translate-x-5' : ''}`}
+                      />
+                    </div>
                   </label>
-                  <div className='my-2 flex w-full items-center justify-center'>
-                    <FileUploaderRegular
-                      onChange={handleImageChange('profile')}
-                      pubkey={'aff2bf9d09cde0f92516'}
-                      maxLocalFileSizeBytes={10000000}
-                      imgOnly={true}
-                      sourceList='local, url, camera'
-                      className='flex w-full justify-center rounded-lg bg-black/30 dark:bg-white'
-                    />
-                  </div>
                 </div>
-              </div>
-
-              <div className='mt-4 w-full px-4'>
-                <button
-                  className='flex w-full items-center justify-center rounded border bg-black p-1 transition-all ease-in-out hover:bg-gray-400 hover:text-black dark:border-purple-700
-            dark:bg-purple-950/20 dark:hover:border-purple-500'
-                  type='submit'
-                  aria-label='next'
-                >
-                  SUBMIT
+                <button type='submit' className='mt-4 rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600'>
+                  Update
                 </button>
-              </div>
-            </form>
-          )}
+              </form>
+            </motion.div>
+          </motion.div>
         </div>
       )}
     </div>
