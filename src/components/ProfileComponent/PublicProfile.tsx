@@ -114,24 +114,26 @@ export default function PublicProfile({ username }) {
             </div>
 
             {/* Viewer's Avatar */}
-            {user.username !== fetchedData[0]?.username && (
-              <div className='absolute right-10 top-[-97px] h-[97px] w-[130px] overflow-hidden bg-transparent'>
-                {avatar_url && (
-                  <div className='size-full'>
-                    <Avatar
-                      modelSrc={`${loggedin_user_avatar}?quality=low`}
-                      animationSrc='/male-idle-1.fbx'
-                      fov={20}
-                      cameraTarget={2}
-                      cameraInitialDistance={2.5}
-                      effects={{
-                        ambientOcclusion: true,
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
+            <div className='absolute -left-6 top-[-96px] h-[96px] w-[130px] overflow-hidden bg-transparent'>
+              {user.username !== fetchedData[0]?.username && (
+                <>
+                  {avatar_url && (
+                    <div className='size-full'>
+                      <Avatar
+                        modelSrc={`${loggedin_user_avatar}?quality=low`}
+                        animationSrc='/male-idle-3.fbx'
+                        fov={20}
+                        cameraTarget={2}
+                        cameraInitialDistance={2.5}
+                        effects={{
+                          ambientOcclusion: true,
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
             {/* Profile owner's Avatar */}
             <div className='absolute -right-6 top-[-100px] h-[100px] w-[150px] overflow-hidden bg-transparent'>
               {avatar_url && (

@@ -70,10 +70,10 @@ const DropdownComponent = <T extends string | object>({
   }
 
   return (
-    <div ref={dropdownRef}>
+    <motion.div ref={dropdownRef}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black p-2 text-xs font-semibold text-white shadow transition-all duration-300 ease-in-out hover:bg-gray-700 focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
+        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black px-2 py-1 text-xs font-semibold text-white shadow transition-all duration-300 ease-in-out hover:bg-gray-700 focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
         }`}
         disabled={disabled}
@@ -83,13 +83,22 @@ const DropdownComponent = <T extends string | object>({
           <MdExpandLess />
         </span>
       </button>
-      <AnimatePresence>
+      <AnimatePresence mode='popLayout'>
         {isOpen && (
           <motion.ul
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 300 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
+            exit={{
+              y: 300,
+              opacity: 0,
+              transition: { duration: 0.3 },
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 260,
+              damping: 20,
+              duration: 0.5,
+            }}
             className='absolute bottom-16 left-0 z-20 grid max-h-[450px] w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg '
           >
             {data.map((item, index) => (
@@ -125,7 +134,7 @@ const DropdownComponent = <T extends string | object>({
           </motion.ul>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 

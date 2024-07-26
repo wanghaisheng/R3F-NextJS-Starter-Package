@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from 'react'
 import DropdownComponent from './DropDownMenu'
 import { MdClear } from 'react-icons/md'
+import useUserAndGuildData from '../CustomHooks/useUserAndGuildData'
+import { motion } from 'framer-motion'
 
 interface CountryData {
   name: string
@@ -163,7 +165,7 @@ export default function RegionHudComponent({
   return (
     <div ref={containerRef} className={`flex w-full flex-col items-center transition-all duration-500 ease-in-out`}>
       <div className='relative flex w-full items-center justify-center gap-x-2 '>
-        <div className='flex items-center space-x-2 rounded-full bg-white/20 p-2 shadow-xl'>
+        <div className='flex h-[33px] items-center space-x-[6px] rounded-full bg-gray-200 px-[4px] py-[6px] shadow-lg shadow-black/50 '>
           <DropdownComponent
             data={continents}
             onSelect={handleContinentSelect}
@@ -190,17 +192,20 @@ export default function RegionHudComponent({
             placeholder='GUILDS'
             disabled={false}
             value={selectedGuild}
-            // imagePath='/guild'
             symbolPath='/guild/symbols'
           />
         </div>
         {(selectedContinent || selectedCountry || selectedGuild) && (
-          <button
+          <motion.button
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.3 }}
             onClick={clearAll}
             className='whitespace-nowrap rounded-full bg-black p-2 text-xs font-bold text-white hover:bg-gray-600'
           >
             <MdClear />
-          </button>
+          </motion.button>
         )}
       </div>
     </div>
