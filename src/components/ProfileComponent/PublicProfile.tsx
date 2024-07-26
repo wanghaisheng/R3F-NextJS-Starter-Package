@@ -133,7 +133,7 @@ export default function PublicProfile({ username }) {
 
             {/* Viewer's Avatar */}
             <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
-              {user.username !== fetchedData[0]?.username && (
+              {user?.username !== fetchedData[0]?.username && (
                 <>
                   {loggedin_user_avatar && (
                     <div className='size-full'>
