@@ -135,7 +135,7 @@ export default function PublicProfile({ username }) {
             <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
               {user.username !== fetchedData[0]?.username && (
                 <>
-                  {avatar_url && (
+                  {loggedin_user_avatar && (
                     <div className='size-full'>
                       <Avatar
                         modelSrc={`${loggedin_user_avatar}?quality=low`}
