@@ -8,12 +8,27 @@ import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
 import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent'
 import { Avatar } from '../Avatar'
 import MiddleViewComponent from '../PublicProfileViews/MiddleViewComponent'
+import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
+
+// Expressions
+const expressions = [
+  { label: 'neutral', icon: '/emojis/neutral.svg', bg: '#FFFFFF', animation: '/F_Talking_Variations_001.fbx' },
+  { label: 'sad', icon: '/emojis/sad.svg', bg: '#0C2E5C', animation: '/M_Standing_Expressions_011.fbx' },
+  { label: 'happy', icon: '/emojis/happy.svg', bg: '#007F13', animation: '/M_Standing_Expressions_012.fbx' },
+  { label: 'amazed', icon: '/emojis/amazed.svg', bg: '#F8BF43', animation: '/M_Standing_Expressions_013.fbx' },
+  { label: 'angry', icon: '/emojis/angry.svg', bg: '#A20325', animation: '/M_Standing_Expressions_016.fbx' },
+]
 
 export default function PublicProfile({ username }) {
   const { user } = useUser()
   const { users, guilds } = useUserAndGuildData()
   const [fetchedData, setFetchedData] = useState([])
   const [skills, setSkills] = useState([])
+  const [emote, setEmote] = useState('/male-idle-3.fbx')
+
+  const handleEmote = (emote) => {
+    setEmote(emote)
+  }
 
   // Map the publicUser data to the format needed
   useEffect(() => {
@@ -91,6 +106,9 @@ export default function PublicProfile({ username }) {
 
       {users ? (
         <>
+          {/* Expression Bottom Mid Hud */}
+          <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
+
           {/* LeftPart */}
           <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
             <LeftSideViewComponent />
@@ -114,14 +132,14 @@ export default function PublicProfile({ username }) {
             </div>
 
             {/* Viewer's Avatar */}
-            <div className='absolute -left-6 top-[-96px] h-[96px] w-[130px] overflow-hidden bg-transparent'>
+            <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
               {user.username !== fetchedData[0]?.username && (
                 <>
                   {avatar_url && (
                     <div className='size-full'>
                       <Avatar
                         modelSrc={`${loggedin_user_avatar}?quality=low`}
-                        animationSrc='/male-idle-3.fbx'
+                        animationSrc={emote}
                         fov={20}
                         cameraTarget={2}
                         cameraInitialDistance={2.5}
@@ -135,7 +153,7 @@ export default function PublicProfile({ username }) {
               )}
             </div>
             {/* Profile owner's Avatar */}
-            <div className='absolute -right-6 top-[-100px] h-[100px] w-[150px] overflow-hidden bg-transparent'>
+            <div className='absolute -right-6 top-[-100px] z-30 h-[100px] w-[150px] overflow-hidden bg-transparent'>
               {avatar_url && (
                 <div className='size-full'>
                   <Avatar
