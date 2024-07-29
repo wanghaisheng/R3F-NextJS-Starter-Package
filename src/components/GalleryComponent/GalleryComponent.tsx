@@ -14,23 +14,34 @@ export default function GalleryComponent({
   userData,
   handleIsFlip,
   experience,
+  activeTab,
 }: {
   userData: any
   handleIsFlip: (newState: boolean) => void
   experience: any[]
+  activeTab: string
 }) {
+  const [profilePics, setProfilePics] = useState([])
   const [projPics, setProjPics] = useState([])
-  const [showMoreProjPics, setShowMoreProjPics] = useState(false)
+  const [showMorePics, setShowMorePics] = useState(false)
 
-  const [activeTab, setActiveTab] = useState('profilePics') //active tab state
-  const [lineStyle, setLineStyle] = useState({})
-  const projectsRef = useRef(null)
-  const experienceRef = useRef(null)
-
-  const handleTabClick = (tab: string) => {
-    //function to handle tab click
-    setActiveTab(tab)
+  const handleShowMorePics = () => {
+    setShowMorePics(!showMorePics)
   }
+
+  // get user
+  useEffect(() => {
+    const getProfilePics = () => {
+      if (userData?.overall_user_image) {
+        const profilePics = userData.overall_user_image
+
+        setProfilePics(profilePics)
+      }
+    }
+    if (userData) {
+      getProfilePics()
+    }
+  }, [userData])
 
   // Get project pictures
   useEffect(() => {
@@ -47,35 +58,8 @@ export default function GalleryComponent({
     }
   }, [userData])
 
-  // Dynamic Line Slide under the active tab style
-  useEffect(() => {
-    const updateLineStyle = () => {
-      let ref
-      switch (activeTab) {
-        case 'projPics':
-          ref = projectsRef.current
-          break
-        case 'experience':
-          ref = experienceRef.current
-          break
-        default:
-          ref = projectsRef.current
-      }
-      if (ref) {
-        setLineStyle({
-          width: ref.offsetWidth,
-          left: ref.offsetLeft,
-        })
-      }
-    }
-
-    updateLineStyle()
-    window.addEventListener('resize', updateLineStyle)
-    return () => window.removeEventListener('resize', updateLineStyle)
-  }, [activeTab])
-
   // Function to render pictures
-  const renderPictures = (pictures, showMore, setShowMore) => {
+  const renderPictures = (pictures, showMore, handleShowMore) => {
     if (pictures.length < 6) {
       return (
         // Card View
@@ -96,71 +80,69 @@ export default function GalleryComponent({
       )
     } else {
       // Grid View
-      const picturesToShow = showMore ? pictures : pictures.slice(0, 10)
+      const picturesToShow = showMore ? pictures : pictures.slice(0, 9)
       return (
-        <div className='flex w-full flex-col'>
-          <div className='flex size-full flex-wrap justify-center gap-3'>
+        <div className='size-full overflow-auto'>
+          <div className='flex size-full flex-wrap justify-center gap-x-6 gap-y-4'>
             {picturesToShow.map((pic, index) => (
               <div
                 key={index}
-                className='relative flex h-[200px] w-[250px] justify-center overflow-hidden rounded border-2'
+                className='relative flex h-[270px] w-[185px] justify-center overflow-hidden rounded border-2 shadow-lg shadow-black/40'
               >
                 <Image
                   src={pic}
                   alt='pictures'
                   fill
                   unoptimized
-                  className='rounded object-cover transition-all duration-[2500ms] ease-in-out hover:scale-125'
+                  className='rounded object-cover transition-all duration-1000 ease-in-out hover:scale-125'
                 />
               </div>
             ))}
-          </div>
-          <div className='flex w-full justify-center'>
-            {pictures.length > 10 && (
-              <button
-                onClick={() => setShowMore(!showMore)}
-                className='mt-4 rounded bg-violet-600 p-2 text-white hover:bg-violet-800'
-              >
-                {showMore ? 'Show Less' : 'Show More'}
-              </button>
-            )}
+            <div className='flex w-full justify-center'>
+              {pictures.length > 9 && (
+                <button
+                  onClick={handleShowMorePics}
+                  className='rounded bg-violet-600 p-2 text-white hover:bg-violet-800'
+                >
+                  {showMorePics ? 'Show Less' : 'Show More'}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )
     }
   }
 
+  // Define a helper function to check the activeTab
+  const isActiveTab = (tab: string) => activeTab === tab
+
   return (
     <>
-      <div className='relative'>
-        <div className='flex w-full justify-between px-10 transition-all duration-300 ease-in-out'>
-          <div
-            ref={projectsRef}
-            onClick={() => handleTabClick('projPics')}
-            className={`${activeTab === 'projPics' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
-          >
-            Projects
-          </div>
-          <div
-            ref={experienceRef}
-            onClick={() => handleTabClick('experience')}
-            className={`${activeTab === 'experience' ? 'font-bold text-pink-300' : 'text-white'} cursor-pointer  hover:text-violet-300`}
-          >
-            Experience
-          </div>
-        </div>
-        <div
-          className='absolute bottom-0 h-1 bg-purple-200 transition-all duration-300 ease-in-out'
-          style={lineStyle}
-        ></div>
-        <hr className='mt-2 border border-gray-700' />
-      </div>
-
       <div className='flex size-full flex-col items-center justify-center'>
+        {isActiveTab('home') && (
+          <div className='text-xl font-semibold '>
+            <p>Home section content here, similar to YouTube categories</p>
+            {/* Add your home section content here */}
+          </div>
+        )}
+
+        {activeTab === 'profilePics' && (
+          <>
+            {userData && profilePics.length > 0 ? (
+              renderPictures(profilePics, showMorePics, handleShowMorePics)
+            ) : (
+              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
+                <p>No profile pictures to show</p>
+              </div>
+            )}
+          </>
+        )}
+
         {activeTab === 'projPics' && (
-          <div className='flex size-full justify-center overflow-hidden p-4'>
+          <div className='flex size-full justify-center overflow-auto p-4'>
             {userData && projPics.length > 0 ? (
-              renderPictures(projPics, showMoreProjPics, setShowMoreProjPics)
+              renderPictures(projPics, showMorePics, handleShowMorePics)
             ) : (
               <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
                 <p>No projects to show</p>
@@ -170,7 +152,7 @@ export default function GalleryComponent({
         )}
 
         {activeTab === 'experience' && (
-          <div className='flex size-full justify-center overflow-hidden p-4'>
+          <div className='flex size-full justify-center overflow-auto p-4'>
             {/* Experience Card Show */}
             {userData && experience.length > 0 ? (
               <div className='relative flex size-full px-10 py-3'>
@@ -181,6 +163,13 @@ export default function GalleryComponent({
                 <p>No experience to show</p>
               </div>
             )}
+          </div>
+        )}
+
+        {isActiveTab('skills') && (
+          <div className='text-xl font-semibold '>
+            <p>Skills section content here</p>
+            {/* Add your home section content here */}
           </div>
         )}
       </div>

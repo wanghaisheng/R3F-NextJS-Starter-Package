@@ -17,6 +17,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
     setIsFlipped(newState)
   }
 
+  const [activeTab, setActiveTab] = useState('home')
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   useEffect(() => {
@@ -31,6 +32,10 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
 
   const handletoggle = () => {
     setToggle(!toggle)
+  }
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab)
   }
 
   const sectionInfoRef = useRef(null)
@@ -60,15 +65,15 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
 
   return (
     <div
-      className={`relative flex size-full flex-col overflow-auto rounded-xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-lg`}
+      className={`relative flex size-full select-none flex-col overflow-auto rounded-xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
     >
       <div className='flex w-full flex-col gap-y-2'>
         <div className='flex w-full'>
-          {/* Profile Picture */}
+          {/* Profile Picture and Search*/}
           {user && (
             <div className='flex w-full select-none items-center gap-x-2'>
               <div
-                className='relative overflow-hidden rounded-full border-[2px]'
+                className='relative overflow-hidden rounded-full border-[2px] shadow-lg shadow-black/30'
                 style={{
                   borderRadius: '50%',
                   height: 50,
@@ -84,76 +89,56 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
                   className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
                 />
               </div>
-              <div className='h-[40px] flex-1 rounded-full bg-white/50'></div>
+              <div className='h-[40px] flex-1 rounded-full bg-white/50 shadow-lg shadow-black/30'></div>
             </div>
           )}
         </div>
-        <div className='mt-1 flex justify-between text-[12px] font-semibold'>
-          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
-            GALLERY
+        {/* Tabs */}
+        <div className='mt-1 flex select-none justify-between gap-x-2 text-[12px] font-semibold'>
+          <div
+            onClick={() => handleTabClick('home')}
+            className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'home' ? 'font-bold text-pink-600' : 'text-black'}`}
+          >
+            <p className='flex size-full items-center justify-center'>HOME</p>
           </div>
-          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
-            PROJECTS
+          <div
+            onClick={() => handleTabClick('profilePics')}
+            className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'profilePics' ? 'font-bold text-pink-600' : 'text-black'}`}
+          >
+            <p className='flex size-full items-center justify-center'>GALLERY</p>
           </div>
-          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
-            EXPERIENCE
+          <div
+            onClick={() => handleTabClick('projPics')}
+            className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'projPics' ? 'font-bold text-pink-600' : 'text-black'}`}
+          >
+            <p className='flex size-full items-center justify-center'>PROJECTS</p>
           </div>
-          <div className='flex h-[32px] w-[156px] items-center justify-center rounded-full bg-white/80 shadow-md shadow-black/50'>
-            SKILLS
+          <div
+            onClick={() => handleTabClick('experience')}
+            className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'experience' ? 'font-bold text-pink-600' : 'text-black'}`}
+          >
+            <p className='flex size-full items-center justify-center'>EXPERIENCE</p>
+          </div>
+          <div
+            onClick={() => handleTabClick('skills')}
+            className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'skills' ? 'font-bold text-pink-600' : 'text-black'}`}
+          >
+            <p className='flex size-full items-center justify-center'>SKILLS</p>
           </div>
         </div>
       </div>
 
-      {/* <div className={`fixed top-0 z-20 size-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div> */}
       {user && guild && (
         <>
-          {/* Skills Chart and Gallery */}
-          <div
-            className='relative mt-6 flex flex-col flex-wrap items-center justify-center gap-y-4 py-2 lg:flex-row lg:gap-x-4'
-            id='section2'
-            ref={sectionGalleryRef}
-          >
-            <div className='mt-5 w-full px-2'>
-              <CustomSwiper>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-yellow-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                {/* Add more SwiperSlide elements as needed */}
-              </CustomSwiper>
-            </div>
-            <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
-              {user && skillsData && (
-                <button
-                  className='absolute right-2 top-2 rounded-lg bg-purple-700/30 p-2 transition-colors hover:bg-pink-300/40 hover:text-pink-200'
-                  aria-label='toggle gallery'
-                  onClick={handletoggle}
-                >
-                  {toggle ? <LuGalleryHorizontal size={20} /> : <IoBarChartOutline size={20} />}
-                </button>
-              )}
-              {toggle ? (
-                <>{user && skillsData && <SkillsChartComponent skills={skillsData} />}</>
-              ) : (
-                <div className='w-full'>
-                  <GalleryComponent userData={user} experience={experience} handleIsFlip={handleIsFlip} />
-                </div>
-              )}
-            </div>
+          {/* Gallery */}
+          <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
+            <GalleryComponent
+              userData={user}
+              experience={experience}
+              handleIsFlip={handleIsFlip}
+              activeTab={activeTab}
+            />
           </div>
-
-          {/* Scroll to top button */}
-          <button
-            className={`fixed bottom-10 right-10 z-50 ${
-              showScrollToTop ? 'translate-y-0' : 'translate-y-[-100rem]'
-            } rounded-full bg-purple-700/30 p-3 text-white transition-all duration-500 hover:bg-pink-300/40 hover:text-pink-200`}
-            onClick={scrollToTop}
-          >
-            <FaAnglesUp size={24} />
-          </button>
         </>
       )}
     </div>

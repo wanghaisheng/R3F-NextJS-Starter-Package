@@ -10,6 +10,8 @@ export default function GGCard({ userData }) {
   const [imgSrc, setImgSrc] = useState('')
   const pathname = usePathname()
 
+  console.log('usd', userData)
+
   useEffect(() => {
     QRCode.toDataURL(pathname).then(setImgSrc)
   }, [pathname])
@@ -38,39 +40,36 @@ export default function GGCard({ userData }) {
         >
           <Image src='/card/ljsd.png' alt='GID' fill priority className='rounded-lg object-cover' />
           <div className='absolute top-0 flex w-full justify-end'>
-            <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>GENIUS ID</p>
+            <p className='pr-3 pt-1 font-bold text-gray-200 dark:text-purple-500'>879169</p>
           </div>
           <div className='absolute inset-0 cursor-default rounded-xl'>
             {/* Card Details */}
             <div className='absolute top-5 flex flex-col p-5 text-sm text-white'>
               <nav className='mb-1 flex w-full list-none flex-wrap'>
                 <ul>
-                  {/* Display selected guild's symbol */}
-                  {/* {selectedGuild && (
-                      <li className='absolute -top-2 left-5'> */}
-                  {/* Use selectedGuild to get the corresponding guild's symbol */}
-                  {/* {guildData.find((guild) => guild.name === selectedGuild)?.symbol}
-                      </li>
-                    )} */}
-                  <li className={`mb-1 w-full text-xl font-semibold`}>
+                  <li className={`absolute left-0 top-0 w-full uppercase`}>
+                    <p>{userData.guild}</p>
+                  </li>
+                  <li className={`w-full text-xl font-bold uppercase`}>
                     <p>{userData.username}</p>
                   </li>
-                  {/* <li className='mb-1 w-full'>
-                      <p className='text-gray-400 dark:text-purple-500'>{userData ? userData.email : ''}</p>
-                    </li> */}
-                  {/* <li
-                      className={`w-full ${user ? (user.phone_number === contact ? '' : 'border-b border-pink-300 ') : ''}`}
-                    >
-                      <p>Contact : {contact && contact}</p>
-                    </li> */}
+                  <li className='mb-1 w-full'>
+                    <p className='text-gray-400 dark:text-purple-500'>{userData ? userData.email : ''}</p>
+                  </li>
+                  <li className='mb-1 w-full'>
+                    <p className='text-gray-400 dark:text-purple-500'>Age : {userData ? userData.age : ''}</p>
+                  </li>
+                  <li className={`w-full`}>
+                    <p>Contact : {userData && userData.phone_number}</p>
+                  </li>
                 </ul>
               </nav>
             </div>
           </div>
-          <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
+          {/* <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
             <div className='text-base font-bold text-gray-200 dark:text-purple-500'>GOING GENIUS</div>
             <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
-          </div>
+          </div> */}
 
           {/* QRCode */}
           <div className='absolute inset-0  rounded-lg bg-black px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'>
