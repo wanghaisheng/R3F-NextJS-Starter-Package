@@ -95,19 +95,30 @@ export default function GGCard({ userData }) {
             {/* QRCode */}
             <div
               style={getGradientStyle(userData.guild)}
-              className='absolute inset-0 z-10 rounded-lg px-12 text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'
+              className='absolute inset-0 z-10 rounded-lg text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'
             >
-              <div className='relative size-full'>
-                <div className='absolute left-2 top-2 text-blue-300 hover:underline'>{userData.email}</div>
+              <div className='relative size-full '>
+                <div className='absolute left-2 top-2 text-[14px] text-blue-300 hover:underline'>
+                  {userData.email}xyz@gmail.com
+                </div>
+                <div
+                  className='absolute right-2 top-2 text-[14px] font-bold'
+                  style={{ color: getTextColor(userData.guild) }}
+                >
+                  REGION
+                </div>
+                <div className='absolute bottom-2 left-2 text-[14px] font-bold text-white'>{userData.guild}</div>
+                <div
+                  className='absolute bottom-2 right-2 text-xs font-semibold'
+                  style={{ color: getTextColor(userData.guild) }}
+                >
+                  Back
+                </div>
 
                 <div className='flex size-full items-center justify-center '>
                   {imgSrc && (
                     <Image className='rounded-sm object-cover' alt='qr code' src={imgSrc} width={42} height={42} />
                   )}
-                </div>
-                <div className='absolute bottom-2 left-4 flex w-full items-center justify-between'>
-                  <div className='text-base font-semibold text-gray-200 dark:text-purple-500'>GOING GENIUS</div>
-                  <Image className='mr-5 mt-1' width={30} height={30} src='/GGlogo.png' alt='logo' />
                 </div>
               </div>
             </div>
