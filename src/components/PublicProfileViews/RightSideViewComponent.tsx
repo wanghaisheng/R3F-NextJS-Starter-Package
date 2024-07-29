@@ -1,15 +1,7 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { useState } from 'react'
-import AboutUser from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/LeftSideComponents/AboutUser'
-import { IoMdInformationCircleOutline } from 'react-icons/io'
-import HoverGuild from '@/components/HoverEffect/HoverGuild'
 import AchievementsComponent from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/AchievementsComponent'
-import Pictures from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/LeftSideComponents/Pictures'
 import GGCard from '../GGFlipCards/GGCard'
-import CustomSwiper from '../MyComponents/CustomSwiper'
 import SocialMedias from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/SocialMedias'
 
 export default function RightSideViewComponent({ user, guild }) {
@@ -24,13 +16,13 @@ export default function RightSideViewComponent({ user, guild }) {
 
           {/* Bio */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='text-[16px] font-bold '>BIO</h1>
+            <h1 className='cursor-pointer text-[16px] font-bold'>BIO</h1>
             <p className='h-[60px] w-full overflow-auto text-[12px] font-semibold'>{user.description}</p>
           </div>
 
           {/* Achievements */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='text-[16px] font-bold '>ACHIEVEMENTS</h1>
+            <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
             <div className='relative p-2 font-semibold'>
               <AchievementsComponent userData={user} />
             </div>
@@ -38,7 +30,7 @@ export default function RightSideViewComponent({ user, guild }) {
 
           {/* Social Media */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='text-[16px] font-bold '>SOCIALS</h1>
+            <h1 className='cursor-pointer text-[16px] font-bold '>SOCIALS</h1>
             <div className='relative p-2 font-semibold'>
               <SocialMedias userData={user} />
             </div>
