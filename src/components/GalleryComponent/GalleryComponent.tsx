@@ -83,11 +83,11 @@ export default function GalleryComponent({
       const picturesToShow = showMore ? pictures : pictures.slice(0, 9)
       return (
         <div className='size-full overflow-auto'>
-          <div className='flex size-full flex-wrap justify-center gap-x-6 gap-y-4'>
+          <div className='flex size-full flex-wrap justify-center gap-x-7 gap-y-5'>
             {picturesToShow.map((pic, index) => (
               <div
                 key={index}
-                className='relative flex h-[270px] w-[185px] justify-center overflow-hidden rounded border-2 shadow-lg shadow-black/40'
+                className='relative flex h-[272px] w-[192px] justify-center overflow-hidden rounded border-2 shadow-lg shadow-black/40'
               >
                 <Image
                   src={pic}
