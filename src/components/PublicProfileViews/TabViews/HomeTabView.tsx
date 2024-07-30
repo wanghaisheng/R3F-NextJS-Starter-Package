@@ -5,15 +5,15 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip 
     { name: 'Profile Pictures', link: 'profilePics', image: userData?.overall_user_image?.[0] },
     { name: 'Projects', link: 'projPics', image: projPics[0] },
     { name: 'Experience', link: 'experience', image: '/experience-icon.png' },
-    { name: 'Skills', link: 'skills', image: '/skills-icon.png' },
   ]
 
   return (
     <div className='w-full'>
-      <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+      <div className='flex w-full flex-col text-white'>
         {categories.map((category, index) => (
           <div key={index}>
             <div className='flex flex-col items-center'>
+              <p className='mt-2 text-lg font-semibold'>{category.name}</p>
               <div className='relative h-40 w-full overflow-hidden rounded-lg'>
                 <Image
                   src={category.image || '/placeholder.png'}
@@ -24,7 +24,6 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip 
                   className='object-cover transition-all duration-300 ease-in-out hover:scale-110'
                 />
               </div>
-              <p className='mt-2 text-lg font-semibold'>{category.name}</p>
             </div>
           </div>
         ))}
