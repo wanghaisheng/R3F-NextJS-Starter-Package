@@ -110,7 +110,7 @@ export default function PublicProfile({ username }) {
           <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
 
           {/* LeftPart */}
-          <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          <div className='fixed left-[76px] top-1/2 z-20  h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md  bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
             <LeftSideViewComponent />
           </div>
 
@@ -126,14 +126,14 @@ export default function PublicProfile({ username }) {
 
           {/* Right Part */}
 
-          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-lg transition-all duration-500 ease-in-out'>
+          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
             <div className='size-full overflow-hidden p-2'>
               <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
             </div>
 
             {/* Viewer's Avatar */}
             <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
-              {user.username !== fetchedData[0]?.username && (
+              {user?.username !== fetchedData[0]?.username && (
                 <>
                   {loggedin_user_avatar && (
                     <div className='size-full'>

@@ -7,12 +7,7 @@ import { FaApple } from 'react-icons/fa'
 import SignInComponent from '@/components/SignUp/SignInComponent'
 import { useUser } from '@/UserClientProvider'
 import { LogosFacebook } from '@/logo/LogosFacebook'
-import { IoIosArrowBack } from 'react-icons/io'
 import ProfileComponent from '../SubComponents/ProfileComponent'
-import GallerySidebar from '@/components/GalleryComponent/GallerySidebar'
-import { RiGalleryFill } from 'react-icons/ri'
-import { GiRamProfile } from 'react-icons/gi'
-import CustomToolTip from '@/components/MyComponents/CustomToolTip'
 
 import Link from 'next/link'
 
@@ -45,7 +40,7 @@ export default function SideProfile() {
         <div className='flex size-full items-center justify-center rounded-lg bg-gray-200 text-black dark:bg-black dark:text-white'>
           {/* Display either signup or signin component based on state */}
           {showSignUp ? (
-            <SignUpComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} setShowSignIn={setShowSignIn} />
+            <SignUpComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} />
           ) : (
             <SignInComponent toggleSignIn={toggleSignIn} toggleSignUp={toggleSignUp} />
           )}
