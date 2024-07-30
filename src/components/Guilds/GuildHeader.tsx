@@ -14,12 +14,10 @@ export default function GuildHeader({
   onFilterChange,
   searchTerm,
   setSearchTerm,
-  facultyTags,
 }: {
   onFilterChange: (filter: string) => void
   searchTerm: string
   setSearchTerm: (searchTerm: string) => void
-  facultyTags: string[]
 }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
@@ -179,23 +177,6 @@ export default function GuildHeader({
             <CustomToolTip content='Padma' top={-10} left={165} translateY={-22} />
           </a>
         </div>
-      </div>
-
-      <div className='flex gap-x-2 text-sm font-bold text-black'>
-        <Swiper slidesPerView={5}>
-          {facultyTags
-            ? facultyTags.map((tag, index) => (
-                <SwiperSlide key={index} style={{ width: 'auto' }}>
-                  <p
-                    className='mx-2 inline-block cursor-pointer whitespace-nowrap rounded bg-white p-1 transition-all duration-500 ease-in-out hover:scale-105'
-                    onClick={() => handleInputTagsChange(tag)}
-                  >
-                    {tag}
-                  </p>
-                </SwiperSlide>
-              ))
-            : ''}
-        </Swiper>
       </div>
     </div>
   )

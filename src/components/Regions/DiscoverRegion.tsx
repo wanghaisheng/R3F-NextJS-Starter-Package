@@ -6,6 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { FreeMode } from 'swiper/modules'
 import TagSwiper from '../MyComponents/TagsSwiper'
+import { TiDeleteOutline } from 'react-icons/ti'
+import toast from 'react-hot-toast'
 
 export default function DiscoverRegion({
   facultyTags,
@@ -26,6 +28,7 @@ export default function DiscoverRegion({
 }) {
   const [viewBusiness, setViewBusiness] = useState(false)
   const [viewMates, setViewMates] = useState(true)
+  const [filteredUsers, setFilteredUsers] = useState([])
 
   //---------------------test input tags---------------------------------
   const [inputTags, setInputTags] = useState([])
@@ -39,6 +42,35 @@ export default function DiscoverRegion({
     }
   }
 
+  const handleDeleteTags = (index: number) => {
+    setInputTags((prevInputTags) => {
+      const updatedInputTags = [...prevInputTags]
+      updatedInputTags.splice(index, 1)
+      return updatedInputTags
+    })
+  }
+
+  const filterUsers = async () => {
+    try {
+      const res = await fetch('/api/public/filter-tags/faculty-name/filter-users', {
+        method: 'POST',
+        body: JSON.stringify({ inputTags: inputTags }),
+      })
+      if (!res.ok) {
+        toast.error('unable to filter users')
+      }
+      const filteredUsers = await res.json()
+      setFilteredUsers(filteredUsers)
+    } catch (error) {
+      console.error(error)
+      toast.error('Internal server error')
+    }
+  }
+
+  useEffect(() => {
+    console.log('filteredUsers: ', filteredUsers)
+  }, [filteredUsers])
+
   //---------------------test input tags---------------------------------
 
   const handleBusinessFilterView = () => {
@@ -50,10 +82,6 @@ export default function DiscoverRegion({
     setViewMates(true)
     setViewBusiness(false)
   }
-
-  useEffect(() => {
-    console.log(inputTags)
-  }, [inputTags])
 
   return (
     <>
@@ -101,11 +129,14 @@ export default function DiscoverRegion({
                 {inputTags
                   ? inputTags.map((tag, index) => (
                       <div
-                        key={index}
-                        className='mx-2 inline-block cursor-pointer whitespace-nowrap rounded bg-yellow-300 p-1 transition-all duration-500 ease-in-out hover:scale-105'
+                        className='flex bg-yellow-300 whitespace-nowrap cursor-pointer rounded p-1 transition-all duration-500 ease-in-out hover:scale-105 mx-2'
+
                         onClick={() => handleInputTagsChange(tag)}
                       >
                         {tag}
+                        <button>
+                          <TiDeleteOutline className='text-red-600 ml-2' onClick={() => handleDeleteTags(index)} />
+                        </button>
                       </div>
                     ))
                   : ''}
@@ -114,7 +145,7 @@ export default function DiscoverRegion({
                 <TagSwiper facultyTags={facultyTags} handleInputTagsChange={handleInputTagsChange} />
               </div>
               <div>
-                <button>search</button>
+                <button onClick={filterUsers}>search</button>
               </div>
             </div>
           </div>
@@ -129,7 +160,6 @@ export default function DiscoverRegion({
                 onFilterChange={handleFilterGuildChange}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
-                facultyTags={facultyTags}
               />
             </div>
             <div className='size-full'>
