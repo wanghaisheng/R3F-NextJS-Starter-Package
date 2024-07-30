@@ -1,10 +1,10 @@
-import { cookies } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
+import { cookies } from 'next/headers'
 
 import UserClientProvider from './UserClientProvider.js'
 
 const fetchUserData = async (userId, token) => {
-  const response = await fetch(`http://localhost:3000/api/internal/users/${userId}`, {
+  const response = await fetch(`http://r3-f-next-js-starter-package.vercel.app/api/internal/users/${userId}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

@@ -1,25 +1,24 @@
 'use client'
-import { LiaSignInAltSolid } from 'react-icons/lia'
-import { RiLockPasswordLine } from 'react-icons/ri'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { LiaSignInAltSolid } from 'react-icons/lia'
+import { RiLockPasswordLine } from 'react-icons/ri'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { motion } from 'framer-motion'
 import Cookies from 'js-cookie'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
-import { useState } from 'react' // Import useState
-import toast from 'react-hot-toast'
-import { IoQrCodeOutline } from 'react-icons/io5'
-import Link from 'next/link'
-import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
-import OtherSignInComponent from './OtherSignInComponent'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'; // Import useState
+import toast from 'react-hot-toast'
+import { IoEyeOffOutline, IoEyeOutline, IoQrCodeOutline } from 'react-icons/io5'
+import * as Yup from 'yup'
+import OtherSignInComponent from './OtherSignInComponent'
 
 const { log } = console
 
-const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
+const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
   const router = useRouter()
   const { updateUser } = useUser()
   const [generalError, setGeneralError] = useState('') // State for managing error messages
@@ -33,7 +32,6 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
   }
-
   return (
     <>
       <div className='flex h-auto flex-col items-center justify-center dark:bg-black/30'>
@@ -66,8 +64,8 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn, setActiveTab }) => {
                 updateUser(token)
                 toast.success('Sign in successful')
 
-                setActiveTab('profile')
                 router.push('/discover')
+                router.refresh()
               }
             } catch (error) {
               log('Error: ', error)

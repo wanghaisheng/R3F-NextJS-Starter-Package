@@ -30,6 +30,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+#eslintrc
+.eslintrc
+
 # next-pwa
 /public/workbox-*.js
 /public/sw.js

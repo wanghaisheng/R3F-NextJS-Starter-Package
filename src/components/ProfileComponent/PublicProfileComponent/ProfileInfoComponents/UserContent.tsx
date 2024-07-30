@@ -3,9 +3,11 @@
 import { useEffect, useState, useRef } from 'react'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
 import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
+import Image from 'next/image'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import { FaAnglesUp } from 'react-icons/fa6'
+import CustomSwiper from '@/components/MyComponents/CustomSwiper'
 
 export default function UserContent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -58,8 +60,30 @@ export default function UserContent({ user, skillsData, guild, experience }) {
 
   return (
     <div
-      className={`relative flex size-full flex-col overflow-auto rounded-xl p-3 shadow-xl shadow-black/30 backdrop-blur-lg`}
+      className={`relative flex size-full flex-col overflow-auto rounded-xl bg-custom-gradient-purple p-3 shadow-xl shadow-black/30 backdrop-blur-lg`}
     >
+      {/* Profile Picture */}
+      {user && (
+        <div className='flex w-full select-none items-center justify-end'>
+          <div
+            className='relative overflow-hidden rounded-full border-[3px]'
+            style={{
+              borderRadius: '50%',
+              height: 65,
+              width: 65,
+            }}
+          >
+            <Image
+              src={user.user_image ? user.user_image : '/card/defaultbuddha.svg'}
+              alt='profile-pic'
+              fill
+              unoptimized
+              quality={60}
+              className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
+            />
+          </div>
+        </div>
+      )}
       {/* <div className={`fixed top-0 z-20 size-full bg-black/50 ${isFlipped ? 'flex' : ' hidden'}`}></div> */}
       {user && guild && (
         <>
@@ -69,6 +93,18 @@ export default function UserContent({ user, skillsData, guild, experience }) {
             id='section2'
             ref={sectionGalleryRef}
           >
+            <div className='mt-5 w-full px-2'>
+              <CustomSwiper>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-yellow-500'></div>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
+                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
+                {/* Add more SwiperSlide elements as needed */}
+              </CustomSwiper>
+            </div>
             <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
               {user && skillsData && (
                 <button
@@ -83,7 +119,7 @@ export default function UserContent({ user, skillsData, guild, experience }) {
                 <>{user && skillsData && <SkillsChartComponent skills={skillsData} />}</>
               ) : (
                 <div className='w-full'>
-                  <GalleryComponent username={user.username} experience={experience} handleIsFlip={handleIsFlip} />
+                  {/* <GalleryComponent userData={user} experience={experience} handleIsFlip={handleIsFlip} /> */}
                 </div>
               )}
             </div>

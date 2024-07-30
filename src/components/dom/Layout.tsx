@@ -1,13 +1,15 @@
 'use client'
-import React, { useRef, ReactNode } from 'react'
+import React, { useRef, ReactNode, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar/Navbar'
-const RightSidebar2 = dynamic(() => import('@/components/RightSidebarComponent/RightSidebar2'), { ssr: false })
+import RightSideHud from '../GGHuds/RightSideHud'
 import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
 import Loading from '@/loading'
-import UserProfileHud from '../MyComponents/BottomHudComponents/UserProfileHud'
-import StatusHud from '../MyComponents/BottomHudComponents/StatusHud'
+import { useUser } from '@/UserClientProvider'
+import UserProfileHud from '../GGHuds/UserProfileHud'
+import StatusHud from '../GGHuds/StatusHud'
+import { usePathname } from 'next/navigation'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
@@ -16,14 +18,22 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const pathname = usePathname()
+  const { user } = useUser()
   const ref = useRef<HTMLDivElement>(null)
-  const { isSidebarOpen, setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
+  const { setIsSidebarOpen, showSignUp, setShowSignUp, showSignIn, setShowSignIn } = useSidebar()
   const isLoading = useLoadingState(1200)
+  const [openSignIn, setOpenSignIn] = useState(false)
+
+  const handleOpenSignIn = () => {
+    setOpenSignIn(!openSignIn)
+  }
 
   return (
     <div ref={ref}>
+      {pathname !== '/slider' && <RightSideHud openSignIn={openSignIn} />}
       <Navbar
-        isSidebarOpen={isSidebarOpen}
+        handleOpenSignIn={handleOpenSignIn}
         setIsSidebarOpen={setIsSidebarOpen}
         setShowSignIn={setShowSignIn}
         setShowSignUp={setShowSignUp}
@@ -32,33 +42,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       />
       {isLoading && <Loading />}
       {children}
-      <div>
-        <RightSidebar2
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-          setShowSignIn={setShowSignIn}
-          setShowSignUp={setShowSignUp}
-          showSignIn={showSignIn}
-          showSignUp={showSignUp}
-        />
-      </div>
 
-      {/* user profile and wallet info */}
-      <div className='fixed bottom-8 right-16 z-40'>
-        <UserProfileHud
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-          setShowSignIn={setShowSignIn}
-          setShowSignUp={setShowSignUp}
-          showSignIn={showSignIn}
-          showSignUp={showSignUp}
-        />
-      </div>
-
-      {/* status hud */}
-      <div className={`fixed bottom-8 left-1/3 z-50`}>
-        <StatusHud />
-      </div>
+      {/* user profile and wallet info and status hud  */}
+      {user && pathname !== '/' && pathname !== '/slider' && pathname !== '/hud' && (
+        <>
+          <div className='fixed bottom-8 right-16 z-40'>
+            <UserProfileHud />
+          </div>
+          <StatusHud />
+        </>
+      )}
     </div>
   )
 }

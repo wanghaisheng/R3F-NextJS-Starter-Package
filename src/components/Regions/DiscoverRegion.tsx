@@ -124,12 +124,13 @@ export default function DiscoverRegion({
             </div>
 
             {/*test input tags */}
-            <div className='flex flex-col gap-4 size-full  items-center justify-center rounded bg-pink-300/20'>
-              <div className='flex flex-wrap gap-1 w-full text-sm font-bold text-black'>
+            <div className='flex size-full flex-col items-center  justify-center gap-4 rounded bg-pink-300/20'>
+              <div className='flex w-full flex-wrap gap-1 text-sm font-bold text-black'>
                 {inputTags
                   ? inputTags.map((tag, index) => (
                       <div
                         className='flex bg-yellow-300 whitespace-nowrap cursor-pointer rounded p-1 transition-all duration-500 ease-in-out hover:scale-105 mx-2'
+
                         onClick={() => handleInputTagsChange(tag)}
                       >
                         {tag}

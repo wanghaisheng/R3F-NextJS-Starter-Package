@@ -1,10 +1,9 @@
+import jwt from 'jsonwebtoken'
 import NextAuth from 'next-auth/next'
 import GoogleProvider from 'next-auth/providers/google'
-import { PrismaClient } from '@prisma/client'
-import jwt from 'jsonwebtoken'
-import { redirect } from 'next/navigation'
+import prisma from 'prisma/client'
 
-const prisma = new PrismaClient()
+
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 const JWT_SECRET = process.env.JWT_SECRET
@@ -63,3 +62,4 @@ export const authOptions = {
 const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
+

@@ -43,7 +43,6 @@ const nextConfig = {
   // },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   images: {
-    // domains: ['models.readyplayer.me'],
     remotePatterns: [
       {
         protocol: 'https',
