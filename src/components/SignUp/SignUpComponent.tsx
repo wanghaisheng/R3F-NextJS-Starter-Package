@@ -3,7 +3,10 @@ import { LiaSignInAltSolid } from 'react-icons/lia'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@/UserClientProvider'
 import { motion } from 'framer-motion'
+import Cookies from 'js-cookie'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import toast from 'react-hot-toast'
@@ -13,13 +16,15 @@ import Image from 'next/image'
 
 const { log } = console
 
-export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSignIn }) {
-  const [generalError, setGeneralError] = useState('') // State for managing error messages
-  const [showPassword, setShowPassword] = useState(false) // State for managing password visibility
+export default function SignUpComponent({ toggleSignUp, toggleSignIn }) {
+  const router = useRouter()
+  const { updateUser } = useUser()
+  const [generalError, setGeneralError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const changetoSignIn = () => {
     toggleSignUp()
-    setShowSignIn(true)
+    toggleSignIn()
   }
 
   const handleShowPassword = () => {
@@ -27,7 +32,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
   }
 
   return (
-    <div className='flex h-auto flex-col items-center justify-center  dark:bg-black/30'>
+    <div className='flex h-auto flex-col items-center justify-center dark:bg-black/30'>
       <Image src='/gglogo.svg' alt='sidebar' height={28} width={28} className='absolute right-5 top-24' />
 
       <div className='m-0 mb-2 flex w-full items-center justify-start rounded-t-3xl py-3 font-bold'>
@@ -36,7 +41,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
       <Formik
         initialValues={{ username: '', email: '', password: '' }}
         validationSchema={Yup.object().shape({
-          username: Yup.string().required('Username is required').min(5, 'Password must be at least 5 characters'),
+          username: Yup.string().required('Username is required').min(5, 'Username must be at least 5 characters'),
           email: Yup.string().email('Invalid email format').required('Email is required'),
           password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
         })}
@@ -44,15 +49,35 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
           log('Submit: ', values)
           setGeneralError('')
           try {
-            const { data } = await axios({
+            // Sign up request
+            const { data: signUpData } = await axios({
               url: '/api/internal/users',
               method: 'POST',
               data: values,
             })
-            log('Response:', data)
-            if (data != null) {
+            log('Sign Up Response:', signUpData)
+            if (signUpData != null) {
               toast.success('Sign up successful')
-              changetoSignIn()
+
+              // Immediately sign in after successful sign up
+              try {
+                const { data: signInData } = await axios({
+                  url: '/api/internal/signin',
+                  method: 'POST',
+                  data: { email: values.email, password: values.password },
+                })
+                const token = signInData.token
+                if (token) {
+                  Cookies.set('token', token)
+                  updateUser(token)
+                  toast.success('Logged in successfully')
+                  router.push('/discover')
+                }
+              } catch (signInError) {
+                console.error('Automatic sign in error:', signInError)
+                toast.error('Sign up successful, but automatic login failed. Please log in manually.')
+                changetoSignIn()
+              }
             }
           } catch (error) {
             log('Error: ', error)
@@ -85,7 +110,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
                 placeholder='Username'
                 onChange={(e) => {
                   handleChange(e)
-                  setGeneralError('') // Clear general error on typing
+                  setGeneralError('')
                 }}
               />
             </div>
@@ -107,11 +132,12 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
                 placeholder='Email'
                 onChange={(e) => {
                   handleChange(e)
-                  setGeneralError('') // Clear general error on typing
+                  setGeneralError('')
                 }}
               />
             </div>
             <ErrorMessage name='email' component='p' className='-mt-2 text-xs text-red-500' />
+
             <p className='-mb-2 flex w-full cursor-pointer items-center justify-start text-sm text-black dark:text-violet-400'>
               Password <span className='pl-1 text-base text-red-500'>*</span>
             </p>
@@ -128,7 +154,7 @@ export default function SignUpComponent({ toggleSignUp, toggleSignIn, setShowSig
                 placeholder='Password'
                 onChange={(e) => {
                   handleChange(e)
-                  setGeneralError('') // Clear general error on typing
+                  setGeneralError('')
                 }}
               />
               <button type='button' onClick={handleShowPassword} className='pr-2  text-black dark:text-purple-200'>

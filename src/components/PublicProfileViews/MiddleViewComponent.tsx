@@ -9,6 +9,7 @@ import { IoBarChartOutline } from 'react-icons/io5'
 import { FaAnglesUp } from 'react-icons/fa6'
 import CustomSwiper from '../MyComponents/CustomSwiper'
 import HomeTabView from './TabViews/HomeTabView'
+import ProjectTabView from './TabViews/ProjectTabView'
 
 export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -151,16 +152,17 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
           <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
             {activeTab === 'home' ? (
               <HomeTabView userData={user} experience={experience} handleIsFlip={handleIsFlip} projPics={projPics} />
+            ) : activeTab === 'projPics' ? (
+              <ProjectTabView projPics={projPics} />
             ) : (
-              <>HI</>
+              <GalleryComponent
+                userData={user}
+                experience={experience}
+                skillsData={skillsData}
+                handleIsFlip={handleIsFlip}
+                activeTab={activeTab}
+              />
             )}
-            <GalleryComponent
-              userData={user}
-              experience={experience}
-              skillsData={skillsData}
-              handleIsFlip={handleIsFlip}
-              activeTab={activeTab}
-            />
           </div>
         </>
       )}

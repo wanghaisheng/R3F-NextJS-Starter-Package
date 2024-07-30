@@ -101,8 +101,6 @@ export default function GalleryComponent({
   return (
     <>
       <div className='flex size-full flex-col items-center justify-center'>
-        {isActiveTab('home') && <div className='text-xl font-semibold '>ok</div>}
-
         {activeTab === 'profilePics' && (
           <>
             {userData && profilePics.length > 0 ? (
@@ -113,18 +111,6 @@ export default function GalleryComponent({
               </div>
             )}
           </>
-        )}
-
-        {activeTab === 'projPics' && (
-          <div className='flex size-full justify-center overflow-auto p-4'>
-            {userData && projPics.length > 0 ? (
-              renderPictures(projPics, showMorePics)
-            ) : (
-              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
-                <p>No projects to show</p>
-              </div>
-            )}
-          </div>
         )}
 
         {activeTab === 'experience' && (
