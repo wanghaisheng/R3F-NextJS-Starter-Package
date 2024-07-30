@@ -8,6 +8,7 @@ import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import { FaAnglesUp } from 'react-icons/fa6'
 import CustomSwiper from '../MyComponents/CustomSwiper'
+import HomeTabView from './TabViews/HomeTabView'
 
 export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -19,6 +20,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
 
   const [activeTab, setActiveTab] = useState('home')
   const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const [projPics, setProjPics] = useState([])
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,6 +39,21 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
   const handleTabClick = (tab) => {
     setActiveTab(tab)
   }
+
+  // Get project pictures
+  useEffect(() => {
+    const getProjPics = () => {
+      if (user?.experienceData) {
+        const projPics = user.experienceData
+          .filter((exp) => exp.project_pictures && exp.project_pictures.length > 0)
+          .flatMap((exp) => exp.project_pictures)
+        setProjPics(projPics)
+      }
+    }
+    if (user) {
+      getProjPics()
+    }
+  }, [user])
 
   const sectionInfoRef = useRef(null)
   const sectionGalleryRef = useRef(null)
@@ -132,9 +149,15 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
         <>
           {/* Gallery */}
           <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
+            {activeTab === 'home' ? (
+              <HomeTabView userData={user} experience={experience} handleIsFlip={handleIsFlip} projPics={projPics} />
+            ) : (
+              <>HI</>
+            )}
             <GalleryComponent
               userData={user}
               experience={experience}
+              skillsData={skillsData}
               handleIsFlip={handleIsFlip}
               activeTab={activeTab}
             />
