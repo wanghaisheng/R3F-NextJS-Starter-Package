@@ -13,6 +13,7 @@ interface CustomSwiperProps {
   rotate: number
   stretch: number
   slideShadows: boolean
+  initialSlide: number
   slidesPerView: number
 }
 
@@ -24,6 +25,7 @@ const CustomSwiper = ({
   modifier,
   slideShadows,
   slidesPerView,
+  initialSlide,
 }: CustomSwiperProps) => {
   return (
     <Swiper
@@ -31,6 +33,7 @@ const CustomSwiper = ({
       effect={'coverflow'}
       grabCursor={true}
       centeredSlides={true}
+      initialSlide={initialSlide}
       slidesPerView={slidesPerView}
       coverflowEffect={{
         rotate: rotate,
