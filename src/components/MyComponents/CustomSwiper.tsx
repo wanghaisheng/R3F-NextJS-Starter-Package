@@ -45,6 +45,8 @@ const CustomSwiper = ({
       modules={[EffectCoverflow]}
       style={{
         width: '100%',
+        paddingTop: '20px',
+        paddingBottom: '20px',
       }}
     >
       {Children.map(children, (child) => (

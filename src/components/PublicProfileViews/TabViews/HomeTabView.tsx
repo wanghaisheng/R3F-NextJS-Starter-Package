@@ -39,13 +39,21 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
             >
               {displayProjectPics.map((proj, index) => (
                 <div
-                  className='h-[200px] w-[100%] rounded-[7.35039px] border-2 border-black bg-yellow-500'
+                  className='relative h-[176px] w-[100%] overflow-hidden rounded-[7.35039px] border-2 border-black'
                   key={index}
-                ></div>
+                >
+                  <Image
+                    src={proj}
+                    alt={`project pic ${index}`}
+                    fill
+                    unoptimized
+                    className='object-cover transition-transform duration-300 ease-in-out hover:scale-110'
+                  />
+                </div>
               ))}
 
               {remainingProjectPhotos !== 0 && (
-                <div className={`h-[200px] w-[100%] rounded-[7.35039px] border-2 border-black bg-yellow-500`}>
+                <div className={`h-[176px] w-[100%] rounded-[7.35039px] border-2 border-black bg-yellow-500`}>
                   <div
                     className='flex size-full cursor-pointer items-center justify-center'
                     onClick={() => handleViewMore('projPics')}
@@ -63,16 +71,24 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
               slidesPerView={3}
               initialSlide={1}
               slideShadows={false}
-              depth={100}
-              rotate={0}
-              stretch={0}
-              modifier={2.1}
+              depth={-100}
+              rotate={40}
+              stretch={2}
+              modifier={1.2}
             >
               {displayProjectPics.map((proj, index) => (
                 <div
-                  className='h-[200px] w-[100%] rounded-[7.35039px] border-2 border-black bg-yellow-500'
+                  className='relative h-[176px] w-[100%] overflow-hidden rounded-[7.35039px] border-2 border-black'
                   key={index}
-                ></div>
+                >
+                  <Image
+                    src={proj}
+                    alt={`project pic ${index}`}
+                    fill
+                    unoptimized
+                    className='object-cover transition-transform duration-300 ease-in-out hover:scale-110'
+                  />
+                </div>
               ))}
             </CustomSwiper>
           )}
