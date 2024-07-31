@@ -24,8 +24,10 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
     <div className='flex w-full flex-col items-center'>
       <div className='h-[150px] w-full rounded-lg bg-white'></div>
 
+      <h2 className='mt-4  flex w-full items-center justify-center text-lg font-bold text-white'>PROJECTS</h2>
+
       {projPics && (
-        <div className='mt-4 flex h-[220px] w-full justify-between gap-x-2'>
+        <div className='-mt-4 flex h-[220px] w-full justify-between gap-x-2'>
           {/* Here I did it this way because it was  creating an extra space even if there were only 3 pictures */}
           {remainingProjectPhotos !== 0 ? (
             <CustomSwiper
@@ -94,6 +96,15 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
           )}
         </div>
       )}
+
+      <h2 className='-mt-2 flex w-full items-center justify-center text-lg font-bold text-white'>EXPERIENCE</h2>
+
+      <div className='mt-2 flex h-[170px] w-full items-center justify-between gap-x-2'>
+        <div className='flex size-full rounded-lg bg-white'></div>
+        <div className='flex size-full rounded-lg bg-white'></div>
+      </div>
+
+      <h2 className='mt-2 flex w-full items-center justify-center text-lg font-bold text-white'>GALLERY</h2>
 
       <div className='mt-4 grid w-full grid-cols-4 gap-2'>
         {displayPhotos.map((photo, index) => (
