@@ -105,7 +105,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
       className={`relative flex size-full select-none flex-col overflow-auto rounded-3xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
     >
       <div className='relative flex w-full'>
-        {/* Profile Picture and Search*/}
+        {/* Profile Picture */}
         {user && (
           <div className='absolute -left-1 -top-2 flex w-full select-none items-center gap-x-2'>
             <div
@@ -127,7 +127,9 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
             </div>
           </div>
         )}
+        {/* Profile Picture End */}
 
+        {/* Search */}
         <div className='flex h-[40px] w-full items-center justify-between rounded-full bg-white/50 px-[6px] shadow-lg shadow-black/30'>
           <div className='pl-12 text-lg font-bold uppercase'>{user?.username}</div>
           <motion.div
@@ -177,36 +179,38 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
             </AnimatePresence>
           </motion.div>
         </div>
+        {/* Search End */}
       </div>
+
       {/* Tabs */}
-      <div className='mt-10 flex select-none justify-between gap-x-2 text-[12px] font-semibold'>
+      <div className='mt-3 flex select-none justify-between gap-x-2 text-[14px] font-semibold'>
         <div
           onClick={() => handleTabClick('home')}
-          className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'home' ? 'font-bold text-pink-600' : 'text-black'}`}
+          className={`h-[32px] flex-1 cursor-pointer ${activeTab === 'home' ? 'font-bold text-pink-600' : 'text-white'}`}
         >
           <p className='flex size-full items-center justify-center'>HOME</p>
         </div>
         <div
           onClick={() => handleTabClick('profilePics')}
-          className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'profilePics' ? 'font-bold text-pink-600' : 'text-black'}`}
+          className={`h-[32px] flex-1 cursor-pointer ${activeTab === 'profilePics' ? 'font-bold text-pink-600' : 'text-white'}`}
         >
           <p className='flex size-full items-center justify-center'>GALLERY</p>
         </div>
         <div
           onClick={() => handleTabClick('projPics')}
-          className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'projPics' ? 'font-bold text-pink-600' : 'text-black'}`}
+          className={`h-[32px] flex-1 cursor-pointer ${activeTab === 'projPics' ? 'font-bold text-pink-600' : 'text-white'}`}
         >
           <p className='flex size-full items-center justify-center'>PROJECTS</p>
         </div>
         <div
           onClick={() => handleTabClick('experience')}
-          className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'experience' ? 'font-bold text-pink-600' : 'text-black'}`}
+          className={`h-[32px] flex-1 cursor-pointer ${activeTab === 'experience' ? 'font-bold text-pink-600' : 'text-white'}`}
         >
           <p className='flex size-full items-center justify-center'>EXPERIENCE</p>
         </div>
         <div
           onClick={() => handleTabClick('skills')}
-          className={`h-[32px] flex-1 cursor-pointer rounded-full bg-white/80 shadow-md shadow-black/50 ${activeTab === 'skills' ? 'font-bold text-pink-600' : 'text-black'}`}
+          className={`h-[32px] flex-1 cursor-pointer ${activeTab === 'skills' ? 'font-bold text-pink-600' : 'text-white'}`}
         >
           <p className='flex size-full items-center justify-center'>SKILLS</p>
         </div>
@@ -217,7 +221,13 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
           {/* Gallery */}
           <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
             {activeTab === 'home' ? (
-              <HomeTabView userData={user} experience={experience} handleIsFlip={handleIsFlip} projPics={projPics} />
+              <HomeTabView
+                userData={user}
+                experience={experience}
+                handleIsFlip={handleIsFlip}
+                projPics={projPics}
+                setActiveTab={setActiveTab}
+              />
             ) : activeTab === 'projPics' ? (
               <ProjectTabView projPics={projPics} />
             ) : (
