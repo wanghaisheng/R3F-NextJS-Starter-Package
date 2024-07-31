@@ -32,10 +32,10 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
               slidesPerView={3}
               initialSlide={1}
               slideShadows={false}
-              depth={100}
-              rotate={0}
-              stretch={0}
-              modifier={2.1}
+              depth={-100}
+              rotate={40}
+              stretch={2}
+              modifier={1.2}
             >
               {displayProjectPics.map((proj, index) => (
                 <div
