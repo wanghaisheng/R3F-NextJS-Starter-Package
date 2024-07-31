@@ -3,6 +3,7 @@
 import AchievementsComponent from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/AchievementsComponent'
 import GGCard from '../GGFlipCards/GGCard'
 import SocialMedias from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/SocialMedias'
+import CustomSwiper from '../MyComponents/CustomSwiper'
 
 export default function RightSideViewComponent({ user, guild }) {
   return (
@@ -12,6 +13,16 @@ export default function RightSideViewComponent({ user, guild }) {
           {/* Card */}
           <div className=' h-[200px] w-full rounded-[7.35039px] '>
             <GGCard userData={user} />
+          </div>
+          <div className='relative mt-4 flex h-[150px] w-full justify-between gap-x-2'>
+            <CustomSwiper slidesPerView={3} slideShadows={false} depth={100} rotate={0} stretch={0} modifier={2.5}>
+              <div className='h-[130px] w-[100px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+              <div className='h-[130px] w-[100px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+              <div className='h-[130px] w-[100px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+              <div className='h-[130px] w-[100px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+              <div className='h-[130px] w-[100px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+              <div className='h-[130px] w-[100px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+            </CustomSwiper>
           </div>
 
           {/* Bio */}

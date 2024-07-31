@@ -1,3 +1,4 @@
+import CustomSwiper from '@/components/MyComponents/CustomSwiper'
 import Image from 'next/image'
 
 export default function HomeView({ userData, projPics, experience, handleIsFlip, setActiveTab }) {
@@ -18,13 +19,19 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
   // console.log('exp', experience)
 
   return (
-    <div className='w-full'>
+    <div className='flex w-full flex-col items-center'>
       <div className='h-[150px] w-full rounded-lg bg-white'></div>
       <div className='mt-4 h-[150px] w-full rounded-lg bg-white'></div>
 
-      <div className='mt-4 flex h-[150px] w-full justify-between gap-x-2'>
-        <div className='flex w-full rounded-lg bg-white'></div>
-        <div className='flex w-full rounded-lg bg-white'></div>
+      <div className='mt-4 flex h-[150px] w-[80%] justify-between gap-x-2'>
+        <CustomSwiper slidesPerView={3} slideShadows={false} depth={100} rotate={0} stretch={0} modifier={2.5}>
+          <div className='h-[130px] w-[200px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+          <div className='h-[130px] w-[200px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+          <div className='h-[130px] w-[200px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+          <div className='h-[130px] w-[200px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+          <div className='h-[130px] w-[200px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+          <div className='h-[130px] w-[200px] rounded-[7.35039px] border-2 border-black bg-yellow-500'></div>
+        </CustomSwiper>
       </div>
 
       <div className='mt-4 grid w-full grid-cols-4 gap-2'>
