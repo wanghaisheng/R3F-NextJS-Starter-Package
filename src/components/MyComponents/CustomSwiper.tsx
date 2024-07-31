@@ -4,31 +4,50 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import { EffectCoverflow } from 'swiper/modules'
-import { Children } from 'react'
+import { Children, ReactNode } from 'react'
 
-const CustomSwiper = ({ children }) => {
+interface CustomSwiperProps {
+  children: ReactNode
+  depth: number
+  modifier: number
+  rotate: number
+  stretch: number
+  slideShadows: boolean
+  slidesPerView: number
+}
+
+const CustomSwiper = ({
+  children,
+  depth,
+  rotate,
+  stretch,
+  modifier,
+  slideShadows,
+  slidesPerView,
+}: CustomSwiperProps) => {
   return (
-    <div className='container mx-auto px-4'>
-      <Swiper
-        effect={'coverflow'}
-        grabCursor={true}
-        centeredSlides={true}
-        loop={true}
-        slidesPerView={'auto'}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5,
-        }}
-        modules={[EffectCoverflow]}
-        className='relative h-36 py-4'
-      >
-        {Children.map(children, (child) => (
-          <SwiperSlide className='size-full rounded-2xl'>{child}</SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      speed={500}
+      effect={'coverflow'}
+      grabCursor={true}
+      centeredSlides={true}
+      slidesPerView={slidesPerView}
+      coverflowEffect={{
+        rotate: rotate,
+        stretch: stretch,
+        depth: depth,
+        modifier: modifier,
+        slideShadows: slideShadows,
+      }}
+      modules={[EffectCoverflow]}
+      style={{
+        width: '100%',
+      }}
+    >
+      {Children.map(children, (child) => (
+        <SwiperSlide>{child}</SwiperSlide>
+      ))}
+    </Swiper>
   )
 }
 
