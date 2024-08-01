@@ -30,32 +30,34 @@ const CustomCardStack = ({
   perSlideRotate,
 }: CustomCardStackProps) => {
   return (
-    <Swiper
-      effect={'cards'}
-      grabCursor={true}
-      modules={[EffectCards]}
-      speed={speed}
-      mousewheel={{
-        invert: false,
-      }}
-      initialSlide={initialSlide}
-      className='flex items-center justify-center rounded-lg'
-      style={{
-        height: `${height}px`,
-        width: `${width}px`,
-      }}
-      cardsEffect={{
-        slideShadows: slideShadows,
-        perSlideOffset: perSlideOffset,
-        perSlideRotate: perSlideRotate,
-      }}
-    >
-      {Children.map(children, (child, index) => (
-        <SwiperSlide key={index} className='overflow-hidden rounded-lg'>
-          {child}
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className='relative p-2'>
+      <Swiper
+        effect={'cards'}
+        grabCursor={true}
+        modules={[EffectCards]}
+        speed={speed}
+        mousewheel={{
+          invert: false,
+        }}
+        initialSlide={initialSlide}
+        style={{
+          height: `${height}px`,
+          width: `${width}px`,
+        }}
+        className='flex items-center justify-center'
+        cardsEffect={{
+          slideShadows: slideShadows,
+          perSlideOffset: perSlideOffset,
+          perSlideRotate: perSlideRotate,
+        }}
+      >
+        {Children.map(children, (child, index) => (
+          <SwiperSlide key={index} className='overflow-hidden rounded-lg'>
+            {child}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   )
 }
 

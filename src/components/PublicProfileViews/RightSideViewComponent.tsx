@@ -10,32 +10,32 @@ export default function RightSideViewComponent({ user, guild }) {
     <>
       {user ? (
         <div className='relative select-none'>
-          {/* Card */}
+          {/* CardStack Swiper */}
           <CustomCardStack
             height={200}
             width={290}
             speed={200}
             initialSlide={1}
             perSlideOffset={7}
-            perSlideRotate={0}
+            perSlideRotate={1}
             slideShadows={false}
           >
-            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
-            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
-            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
-            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
           </CustomCardStack>
 
           {/* Bio */}
-          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+          <div className='-mt-1 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold'>BIO</h1>
             <p className='h-[60px] w-full overflow-auto text-[12px] font-semibold'>{user.description}</p>
           </div>
