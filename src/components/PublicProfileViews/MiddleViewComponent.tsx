@@ -79,29 +79,6 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
     }
   }, [user])
 
-  const sectionGalleryRef = useRef(null)
-
-  // Scroll to top button
-  const [showScrollToTop, setShowScrollToTop] = useState(false)
-
-  // Show the button after scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollToTop(window.pageYOffset > 200) // Show the button after scrolling 200px down
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Function to scroll to the top
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // Smooth scrolling
-    })
-  }
-
   return (
     <div
       className={`relative flex size-full select-none flex-col overflow-auto rounded-3xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
@@ -223,7 +200,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
       {user && guild && (
         <>
           {/* Gallery */}
-          <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
+          <div className='relative mt-2 h-[89%] w-full overflow-auto py-2'>
             {activeTab === 'home' ? (
               <HomeTabView userData={user} experience={experience} projPics={projPics} setActiveTab={setActiveTab} />
             ) : activeTab === 'projPics' ? (
