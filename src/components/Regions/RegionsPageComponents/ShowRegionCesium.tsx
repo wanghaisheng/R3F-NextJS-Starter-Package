@@ -72,7 +72,7 @@ export default function ShowRegionCesium({
   return (
     <div className='relative h-screen w-full'>
       {/* Change Layers */}
-      <div className='absolute bottom-3 left-8 z-50 size-16'>
+      <div className='absolute bottom-16 left-8 z-50 size-16'>
         <div className='flex size-full' onClick={handleOpenLayer}>
           <div className='relative size-full cursor-pointer overflow-hidden rounded-lg border-2 border-violet-300 drop-shadow transition-all duration-300 ease-in-out hover:scale-105'>
             <Image

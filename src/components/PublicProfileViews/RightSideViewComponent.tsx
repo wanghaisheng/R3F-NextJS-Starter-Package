@@ -13,23 +13,22 @@ export default function RightSideViewComponent({ user, guild }) {
           {/* CardStack Swiper */}
           <CustomCardStack
             height={200}
-            width={290}
             speed={200}
             initialSlide={1}
             perSlideOffset={7}
             perSlideRotate={1}
             slideShadows={false}
           >
-            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
-            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
-            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
-            <div className=' h-[190px] w-[92%] rounded-[7.35039px] '>
+            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
               <GGCard userData={user} />
             </div>
           </CustomCardStack>

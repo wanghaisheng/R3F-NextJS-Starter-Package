@@ -11,7 +11,6 @@ import { Children, ReactNode } from 'react'
 interface CustomCardStackProps {
   children: ReactNode
   height: number
-  width: number
   initialSlide: number
   speed: number
   perSlideOffset: number
@@ -22,7 +21,6 @@ interface CustomCardStackProps {
 const CustomCardStack = ({
   children,
   height,
-  width,
   speed,
   initialSlide,
   perSlideOffset,
@@ -30,7 +28,7 @@ const CustomCardStack = ({
   perSlideRotate,
 }: CustomCardStackProps) => {
   return (
-    <div className='relative p-2'>
+    <div className='relative w-full py-2'>
       <Swiper
         effect={'cards'}
         grabCursor={true}
@@ -42,9 +40,8 @@ const CustomCardStack = ({
         initialSlide={initialSlide}
         style={{
           height: `${height}px`,
-          width: `${width}px`,
         }}
-        className='flex items-center justify-center'
+        className='flex w-full items-center justify-center'
         cardsEffect={{
           slideShadows: slideShadows,
           perSlideOffset: perSlideOffset,
@@ -52,7 +49,7 @@ const CustomCardStack = ({
         }}
       >
         {Children.map(children, (child, index) => (
-          <SwiperSlide key={index} className='overflow-hidden rounded-lg'>
+          <SwiperSlide key={index} className='overflow-hidden rounded-lg pl-2 pr-1'>
             {child}
           </SwiperSlide>
         ))}
