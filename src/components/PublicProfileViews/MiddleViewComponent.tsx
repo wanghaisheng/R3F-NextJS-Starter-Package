@@ -6,6 +6,7 @@ import Image from 'next/image'
 import HomeTabView from './TabViews/HomeTabView'
 import ProjectTabView from './TabViews/ProjectTabView'
 import { AnimatePresence, motion } from 'framer-motion'
+import ExperienceTabView from './TabViews/ExperienceTabView'
 
 export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -154,7 +155,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
                     placeholder='Search...'
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    className='w-full bg-transparent outline-none'
+                    className='w-full bg-transparent pl-4 outline-none'
                   />
                   <motion.button
                     className='flex size-[22px] items-center justify-center rounded-full bg-blue-300'
@@ -215,7 +216,9 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
           <p className='flex size-full items-center justify-center'>SKILLS</p>
         </div>
       </div>
+      {/* Tabs End */}
 
+      {/* Views */}
       {user && guild && (
         <>
           {/* Gallery */}
@@ -230,6 +233,8 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
               />
             ) : activeTab === 'projPics' ? (
               <ProjectTabView projPics={projPics} />
+            ) : activeTab === 'experience' ? (
+              <ExperienceTabView experience={experience} userData={user} handleIsFlip={handleIsFlip} />
             ) : (
               <GalleryComponent
                 userData={user}
@@ -242,6 +247,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
           </div>
         </>
       )}
+      {/* Views End */}
     </div>
   )
 }

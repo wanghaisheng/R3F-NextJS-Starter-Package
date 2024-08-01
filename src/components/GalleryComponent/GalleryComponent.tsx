@@ -6,11 +6,9 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-cards'
 
-import { EffectCards } from 'swiper/modules'
 import Image from 'next/image'
 import ExperienceShow from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/ExperienceShow'
 import SkillsChartComponent from '../SliderComponent/SkillsChartComponent'
-import HomeView from '../PublicProfileViews/TabViews/HomeTabView'
 
 export default function GalleryComponent({
   userData,
@@ -111,21 +109,6 @@ export default function GalleryComponent({
               </div>
             )}
           </>
-        )}
-
-        {activeTab === 'experience' && (
-          <div className='flex size-full justify-center overflow-auto p-4'>
-            {/* Experience Card Show */}
-            {userData && experience.length > 0 ? (
-              <div className='relative flex size-full px-10 py-3'>
-                <ExperienceShow user={userData} experience={experience} handleIsFlip={handleIsFlip} />
-              </div>
-            ) : (
-              <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
-                <p>No experience to show</p>
-              </div>
-            )}
-          </div>
         )}
 
         {isActiveTab('skills') && (
