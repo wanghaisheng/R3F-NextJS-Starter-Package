@@ -88,7 +88,7 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
                     alt={`project pic ${index}`}
                     fill
                     unoptimized
-                    className='object-cover transition-transform duration-300 ease-in-out hover:scale-110'
+                    className='object-cover transition-transform duration-300 ease-in-out hover:scale-105'
                   />
                 </div>
               ))}
@@ -115,7 +115,7 @@ export default function HomeView({ userData, projPics, experience, handleIsFlip,
               width={100}
               height={100}
               unoptimized
-              className='size-full object-cover transition-transform duration-300 ease-in-out hover:scale-125'
+              className='size-full object-cover transition-transform duration-300 ease-in-out hover:scale-105'
             />
           </div>
         ))}

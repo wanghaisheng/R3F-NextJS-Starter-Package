@@ -3,6 +3,7 @@
 import AchievementsComponent from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/AchievementsComponent'
 import GGCard from '../GGFlipCards/GGCard'
 import SocialMedias from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/SocialMedias'
+import CustomCardStack from '../MyComponents/CustomCardStack'
 
 export default function RightSideViewComponent({ user, guild }) {
   return (
@@ -10,9 +11,28 @@ export default function RightSideViewComponent({ user, guild }) {
       {user ? (
         <div className='relative select-none'>
           {/* Card */}
-          <div className=' h-[200px] w-full rounded-[7.35039px] '>
-            <GGCard userData={user} />
-          </div>
+          <CustomCardStack
+            height={200}
+            width={290}
+            speed={200}
+            initialSlide={1}
+            perSlideOffset={7}
+            perSlideRotate={0}
+            slideShadows={false}
+          >
+            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+              <GGCard userData={user} />
+            </div>
+            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+              <GGCard userData={user} />
+            </div>
+            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+              <GGCard userData={user} />
+            </div>
+            <div className=' h-[196px] w-[95%] rounded-[7.35039px] '>
+              <GGCard userData={user} />
+            </div>
+          </CustomCardStack>
 
           {/* Bio */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>

@@ -1,5 +1,4 @@
 'use client'
-import toast from 'react-hot-toast'
 import { useState, useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
