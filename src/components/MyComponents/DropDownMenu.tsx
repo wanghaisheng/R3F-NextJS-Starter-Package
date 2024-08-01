@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdExpandLess } from 'react-icons/md'
 import * as CountryFlags from 'country-flag-icons/react/3x2'
@@ -42,63 +42,61 @@ const DropdownComponent = <T extends string | object>({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleSelect = (item: T) => {
-    setIsOpen(false)
-    onSelect(item)
-  }
+  const handleSelect = useCallback(
+    (item: T) => {
+      setIsOpen(false)
+      onSelect(item)
+    },
+    [onSelect],
+  )
 
-  // Flag rendering
-  const renderFlag = (item: T) => {
-    if (typeof item === 'object' && flagProperty && item[flagProperty]) {
-      const code = item[flagProperty] as string
-      if (CountryFlags[code as keyof typeof CountryFlags]) {
-        const FlagComponent = CountryFlags[code as keyof typeof CountryFlags]
-        return <FlagComponent className='mr-2 h-4 w-6' />
+  const renderFlag = useCallback(
+    (item: T) => {
+      if (typeof item === 'object' && flagProperty && item[flagProperty]) {
+        const code = item[flagProperty] as string
+        if (CountryFlags[code as keyof typeof CountryFlags]) {
+          const FlagComponent = CountryFlags[code as keyof typeof CountryFlags]
+          return <FlagComponent className='mr-2 h-4 w-6' />
+        }
       }
-    }
-    return null
-  }
+      return null
+    },
+    [flagProperty],
+  )
 
-  // Display value
-  const getDisplayValue = (item: T): string => {
-    if (typeof item === 'string') {
-      return item
-    } else if (typeof item === 'object' && displayProperty) {
-      return item[displayProperty] as string
-    }
-    return ''
-  }
+  const getDisplayValue = useCallback(
+    (item: T): string => {
+      if (typeof item === 'string') {
+        return item
+      } else if (typeof item === 'object' && displayProperty) {
+        return item[displayProperty] as string
+      }
+      return ''
+    },
+    [displayProperty],
+  )
 
   return (
     <motion.div ref={dropdownRef}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black px-2 py-1 text-xs font-semibold text-white shadow transition-all duration-300 ease-in-out hover:bg-gray-700 focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
+        className={`flex items-center justify-between whitespace-nowrap rounded-full bg-black px-2 py-1 text-xs font-semibold text-white shadow transition-all duration-200 ease-in-out hover:bg-gray-700 focus:text-violet-300 focus:outline-none focus:ring-1 focus:ring-violet-300 ${
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
         }`}
         disabled={disabled}
       >
         <p>{value.toUpperCase() || placeholder}</p>
-        <span className={`${isOpen ? 'rotate-0' : 'rotate-180'} text-lg transition-all duration-300 ease-in-out`}>
+        <span className={`${isOpen ? 'rotate-0' : 'rotate-180'} text-lg transition-transform duration-200 ease-in-out`}>
           <MdExpandLess />
         </span>
       </button>
-      <AnimatePresence mode='popLayout'>
+      <AnimatePresence mode='wait'>
         {isOpen && (
           <motion.ul
-            initial={{ opacity: 0, y: 300 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{
-              y: 300,
-              opacity: 0,
-              transition: { duration: 0.3 },
-            }}
-            transition={{
-              type: 'spring',
-              stiffness: 260,
-              damping: 20,
-              duration: 0.5,
-            }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
             className='absolute bottom-16 left-0 z-20 grid max-h-[450px] w-full grid-cols-3 justify-center gap-4 overflow-auto rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg '
           >
             {data.map((item, index) => (

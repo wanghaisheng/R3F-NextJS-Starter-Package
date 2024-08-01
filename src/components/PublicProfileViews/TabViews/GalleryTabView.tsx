@@ -1,20 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-export default function ProjectTabView({ projPics }) {
-  const [showMorePics, setShowMorePics] = useState(false)
+const GalleryTabView = ({ userData }: { userData: any }) => {
+  const galleryPhotos = userData?.overall_user_image || []
 
+  const [showMorePics, setShowMorePics] = useState(false)
   const handleShowMorePics = () => {
     setShowMorePics(!showMorePics)
   }
 
-  const picturesToShow = showMorePics ? projPics : projPics.slice(0, 21)
-
-  return (
-    <div className='size-full'>
-      {projPics?.length !== 0 ? (
+  // Function to render pictures
+  const renderPictures = (pictures, showMore) => {
+    // Grid View
+    const picturesToShow = showMore ? pictures : pictures.slice(0, 21)
+    return (
+      <div className='size-full overflow-auto'>
         <div className='flex size-full flex-wrap justify-center gap-x-7 gap-y-5'>
           {picturesToShow.map((pic, index) => (
             <div
@@ -31,18 +33,28 @@ export default function ProjectTabView({ projPics }) {
             </div>
           ))}
           <div className='flex w-full justify-center'>
-            {projPics.length > 9 && (
+            {pictures.length > 9 && (
               <button onClick={handleShowMorePics} className='rounded bg-violet-600 p-2 text-white hover:bg-violet-800'>
                 {showMorePics ? 'Show Less' : 'Show More'}
               </button>
             )}
           </div>
         </div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      {userData && galleryPhotos.length > 0 ? (
+        renderPictures(galleryPhotos, showMorePics)
       ) : (
         <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
-          <p>No project to show</p>
+          <p>No profile pictures to show</p>
         </div>
       )}
-    </div>
+    </>
   )
 }
+
+export default GalleryTabView

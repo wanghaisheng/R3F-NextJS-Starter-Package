@@ -1,11 +1,13 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import Image from 'next/image'
 import HomeTabView from './TabViews/HomeTabView'
 import ProjectTabView from './TabViews/ProjectTabView'
 import { AnimatePresence, motion } from 'framer-motion'
+import ExperienceTabView from './TabViews/ExperienceTabView'
+import SkillsTabView from './TabViews/SkillsTabView'
+import GalleryTabView from './TabViews/GalleryTabView'
 
 export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -77,29 +79,6 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
     }
   }, [user])
 
-  const sectionGalleryRef = useRef(null)
-
-  // Scroll to top button
-  const [showScrollToTop, setShowScrollToTop] = useState(false)
-
-  // Show the button after scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollToTop(window.pageYOffset > 200) // Show the button after scrolling 200px down
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Function to scroll to the top
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // Smooth scrolling
-    })
-  }
-
   return (
     <div
       className={`relative flex size-full select-none flex-col overflow-auto rounded-3xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
@@ -154,7 +133,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
                     placeholder='Search...'
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    className='w-full bg-transparent outline-none'
+                    className='w-full bg-transparent pl-4 outline-none'
                   />
                   <motion.button
                     className='flex size-[22px] items-center justify-center rounded-full bg-blue-300'
@@ -215,33 +194,28 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
           <p className='flex size-full items-center justify-center'>SKILLS</p>
         </div>
       </div>
+      {/* Tabs End */}
 
+      {/* Views */}
       {user && guild && (
         <>
           {/* Gallery */}
-          <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
+          <div className='relative mt-2 h-[89%] w-full overflow-auto py-2'>
             {activeTab === 'home' ? (
-              <HomeTabView
-                userData={user}
-                experience={experience}
-                handleIsFlip={handleIsFlip}
-                projPics={projPics}
-                setActiveTab={setActiveTab}
-              />
+              <HomeTabView userData={user} experience={experience} projPics={projPics} setActiveTab={setActiveTab} />
             ) : activeTab === 'projPics' ? (
               <ProjectTabView projPics={projPics} />
+            ) : activeTab === 'experience' ? (
+              <ExperienceTabView experience={experience} userData={user} handleIsFlip={handleIsFlip} />
+            ) : activeTab === 'skills' ? (
+              <SkillsTabView skillsData={skillsData} />
             ) : (
-              <GalleryComponent
-                userData={user}
-                experience={experience}
-                skillsData={skillsData}
-                handleIsFlip={handleIsFlip}
-                activeTab={activeTab}
-              />
+              <GalleryTabView userData={user} />
             )}
           </div>
         </>
       )}
+      {/* Views End */}
     </div>
   )
 }

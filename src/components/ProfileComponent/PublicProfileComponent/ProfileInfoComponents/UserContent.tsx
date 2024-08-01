@@ -2,12 +2,10 @@
 
 import { useEffect, useState, useRef } from 'react'
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent'
-import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import Image from 'next/image'
 import { LuGalleryHorizontal } from 'react-icons/lu'
 import { IoBarChartOutline } from 'react-icons/io5'
 import { FaAnglesUp } from 'react-icons/fa6'
-import CustomSwiper from '@/components/MyComponents/CustomSwiper'
 
 export default function UserContent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -93,18 +91,6 @@ export default function UserContent({ user, skillsData, guild, experience }) {
             id='section2'
             ref={sectionGalleryRef}
           >
-            <div className='mt-5 w-full px-2'>
-              <CustomSwiper>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-yellow-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                <div className='h-[200px] w-[250px] rounded-[7.35039px] bg-gradient-to-r from-purple-700 to-purple-500'></div>
-                {/* Add more SwiperSlide elements as needed */}
-              </CustomSwiper>
-            </div>
             <div className='flex w-[90%] flex-col items-center justify-center rounded-xl px-4 py-2'>
               {user && skillsData && (
                 <button
