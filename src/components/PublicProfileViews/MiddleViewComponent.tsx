@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import GalleryComponent from '@/components/GalleryComponent/GalleryComponent'
 import Image from 'next/image'
 import HomeTabView from './TabViews/HomeTabView'
 import ProjectTabView from './TabViews/ProjectTabView'
 import { AnimatePresence, motion } from 'framer-motion'
 import ExperienceTabView from './TabViews/ExperienceTabView'
+import SkillsTabView from './TabViews/SkillsTabView'
+import GalleryTabView from './TabViews/GalleryTabView'
 
 export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
   const [toggle, setToggle] = useState(false)
@@ -235,14 +236,10 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
               <ProjectTabView projPics={projPics} />
             ) : activeTab === 'experience' ? (
               <ExperienceTabView experience={experience} userData={user} handleIsFlip={handleIsFlip} />
+            ) : activeTab === 'skills' ? (
+              <SkillsTabView skillsData={skillsData} />
             ) : (
-              <GalleryComponent
-                userData={user}
-                experience={experience}
-                skillsData={skillsData}
-                handleIsFlip={handleIsFlip}
-                activeTab={activeTab}
-              />
+              <GalleryTabView userData={user} />
             )}
           </div>
         </>
