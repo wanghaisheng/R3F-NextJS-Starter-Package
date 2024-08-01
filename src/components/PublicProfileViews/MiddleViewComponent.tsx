@@ -225,13 +225,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
           {/* Gallery */}
           <div className='relative mt-2 h-[89%] w-full overflow-auto py-2' id='section2' ref={sectionGalleryRef}>
             {activeTab === 'home' ? (
-              <HomeTabView
-                userData={user}
-                experience={experience}
-                handleIsFlip={handleIsFlip}
-                projPics={projPics}
-                setActiveTab={setActiveTab}
-              />
+              <HomeTabView userData={user} experience={experience} projPics={projPics} setActiveTab={setActiveTab} />
             ) : activeTab === 'projPics' ? (
               <ProjectTabView projPics={projPics} />
             ) : activeTab === 'experience' ? (

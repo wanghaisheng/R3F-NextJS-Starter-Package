@@ -4,30 +4,17 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 const GalleryTabView = ({ userData }: { userData: any }) => {
-  const [profilePics, setProfilePics] = useState([])
+  const galleryPhotos = userData?.overall_user_image || []
+
   const [showMorePics, setShowMorePics] = useState(false)
   const handleShowMorePics = () => {
     setShowMorePics(!showMorePics)
   }
 
-  // get user profile pics for gallery
-  useEffect(() => {
-    const getProfilePics = () => {
-      if (userData?.overall_user_image) {
-        const profilePics = userData.overall_user_image
-
-        setProfilePics(profilePics)
-      }
-    }
-    if (userData) {
-      getProfilePics()
-    }
-  }, [userData])
-
   // Function to render pictures
   const renderPictures = (pictures, showMore) => {
     // Grid View
-    const picturesToShow = showMore ? pictures : pictures.slice(0, 9)
+    const picturesToShow = showMore ? pictures : pictures.slice(0, 21)
     return (
       <div className='size-full overflow-auto'>
         <div className='flex size-full flex-wrap justify-center gap-x-7 gap-y-5'>
@@ -59,8 +46,8 @@ const GalleryTabView = ({ userData }: { userData: any }) => {
 
   return (
     <>
-      {userData && profilePics.length > 0 ? (
-        renderPictures(profilePics, showMorePics)
+      {userData && galleryPhotos.length > 0 ? (
+        renderPictures(galleryPhotos, showMorePics)
       ) : (
         <div className='ml-4 flex h-[190px] w-[290px] animate-pulse items-center justify-center rounded-lg bg-white/10'>
           <p>No profile pictures to show</p>
