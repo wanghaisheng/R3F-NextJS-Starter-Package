@@ -8,8 +8,6 @@ import { FreeMode } from 'swiper/modules'
 import Image from 'next/image'
 
 export default function AvatarsShowcase({ userData }) {
-  console.log('ud', userData)
-
   const avatar_images = userData.avatar_images
 
   const val = 20

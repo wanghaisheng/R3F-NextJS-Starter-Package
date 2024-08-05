@@ -1,15 +1,26 @@
 'use client'
 
-import AchievementsComponent from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/AchievementsComponent'
+import AchievementsComponent from './RIghtSideComponents/AchievementsComponent'
 import GGCard from '../GGFlipCards/GGCard'
-import SocialMedias from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/SocialMedias'
+import SocialMedias from './RIghtSideComponents/SocialMedias'
 import CustomCardStack from '../MyComponents/CustomCardStack'
-import AvatarsShowcase from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/AvatarsShowcase'
+import AvatarsShowcase from './RIghtSideComponents/AvatarsShowcase'
+import { useUser } from '@/UserClientProvider'
+import { TbCards } from 'react-icons/tb'
+import { FaEdit } from 'react-icons/fa'
+import Link from 'next/link'
+import { MdOutlineShoppingCartCheckout } from 'react-icons/md'
+import { CiCircleMore } from 'react-icons/ci'
+import CustomToolTipLeftRight from '../MyComponents/CustomToolTipLeftRight'
+import { LuScreenShare } from 'react-icons/lu'
 
-export default function RightSideViewComponent({ user, guild }) {
+export default function RightSideViewComponent({ publicUser, guild }) {
+  const { user } = useUser()
+
+  const explorerUsername = user?.username
   return (
     <>
-      {user ? (
+      {publicUser ? (
         <div className='relative size-full select-none overflow-y-auto overflow-x-hidden p-2'>
           {/* CardStack Swiper */}
           <div className='sticky top-0 z-40'>
@@ -22,83 +33,113 @@ export default function RightSideViewComponent({ user, guild }) {
               slideShadows={false}
             >
               <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-                <GGCard userData={user} />
+                <GGCard userData={publicUser} />
               </div>
               <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-                <GGCard userData={user} />
+                <GGCard userData={publicUser} />
               </div>
               <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-                <GGCard userData={user} />
+                <GGCard userData={publicUser} />
               </div>
               <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-                <GGCard userData={user} />
+                <GGCard userData={publicUser} />
               </div>
             </CustomCardStack>
           </div>
 
           {/* Bio */}
-          <div className='-mt-1 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='cursor-pointer text-[16px] font-bold'>BIO</h1>
-            <p className='h-[60px] w-full overflow-auto text-[12px] font-semibold'>{user.description}</p>
+          <div className='relative w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+            <h1 className='text-[16px] font-bold'>BIO</h1>
+            {explorerUsername === publicUser.username && (
+              <div className='absolute right-2 top-2'>
+                <div className='group'>
+                  <FaEdit size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='Edit Bio' top='-4' left='-20' translateY='0' />
+                </div>
+              </div>
+            )}
+            <p className='h-[60px] w-full overflow-auto text-[12px] font-semibold'>{publicUser.description}</p>
           </div>
 
           {/* Achievements */}
-          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
+          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+            <h1 className='text-[16px] font-bold'>ACHIEVEMENTS</h1>
+            {explorerUsername === publicUser.username && (
+              <div className='absolute right-2 top-2'>
+                <div className='group'>
+                  <CiCircleMore size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='View More' top='-4' left='-20' translateY='0' />
+                </div>
+              </div>
+            )}
             <div className='relative py-2 font-semibold'>
-              <AchievementsComponent userData={user} />
+              <AchievementsComponent userData={publicUser} />
             </div>
           </div>
 
           {/* Avatars */}
-          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='cursor-pointer text-[16px] font-bold'>AVATARS</h1>
+          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+            <h1 className='text-[16px] font-bold'>AVATARS</h1>
+            {explorerUsername === publicUser.username && (
+              <div className='absolute right-2 top-2 flex gap-x-3'>
+                <div className='group'>
+                  <Link href='/slider'>
+                    <LuScreenShare size={14} className='cursor-pointer' />
+                  </Link>
+                  <CustomToolTipLeftRight content='Advance Edit' top='-4' left='-45' translateY='0' />
+                </div>
+                <div className='group'>
+                  <FaEdit size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='Edit Here' top='-4' left='-20' translateY='0' />
+                </div>
+              </div>
+            )}
             <div className='relative py-2 font-semibold'>
-              <AvatarsShowcase userData={user} />
+              <AvatarsShowcase userData={publicUser} />
             </div>
           </div>
 
           {/* Skins */}
-          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold'>SKINS</h1>
+            {explorerUsername === publicUser.username && (
+              <div className='absolute right-2 top-2 flex gap-x-3'>
+                <div className='group'>
+                  <MdOutlineShoppingCartCheckout size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='Purchase More Skins' top='-4' left='-45' translateY='0' />
+                </div>
+                <div className='group'>
+                  <FaEdit size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='Edit' top='-4' left='-20' translateY='0' />
+                </div>
+              </div>
+            )}
             <div className='relative py-2 font-semibold'>
-              <AchievementsComponent userData={user} />
+              <AchievementsComponent userData={publicUser} />
             </div>
           </div>
 
           {/* Social Media */}
-          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold '>SOCIALS</h1>
+            {explorerUsername === publicUser.username && (
+              <div className='absolute right-2 top-2 flex gap-x-3'>
+                <div className='group'>
+                  <Link href='/slider'>
+                    <LuScreenShare size={14} className='cursor-pointer' />
+                  </Link>
+                  <CustomToolTipLeftRight content='Advance Edit' top='-4' left='-45' translateY='0' />
+                </div>
+                <div className='group'>
+                  <FaEdit size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='Edit Here' top='-4' left='-20' translateY='0' />
+                </div>
+              </div>
+            )}
             <div className='relative py-2 font-semibold'>
-              <SocialMedias userData={user} />
+              <SocialMedias userData={publicUser} />
             </div>
           </div>
-
-          {/* About User */}
-          {/* <div className='flex w-full justify-center p-2 text-black'>
-            <AboutUser userData={user} />
-          </div> */}
-
-          {/* Guild */}
-          {/* <div className='flex flex-col pl-4 '>
-            <div className='group absolute left-0 top-0'>
-              <Image
-                src={guild.find((guild) => guild.guild_name === user.guild)?.symbol || ''}
-                height={30}
-                width={30}
-                alt='guild'
-                loading='lazy'
-                className='rounded-full border-2 border-white/50 transition-all duration-300 ease-in-out hover:rotate-180 group-hover:border-white/100'
-              />
-
-              <HoverGuild
-                hoveredGuild={guild.find((guild) => guild.guild_name === user.guild)?.guild_name.toUpperCase() || ''}
-                top={10}
-                left={50}
-                translateY={10}
-              />
-            </div>
-          </div> */}
         </div>
       ) : (
         <div className='flex size-full items-center justify-center'>

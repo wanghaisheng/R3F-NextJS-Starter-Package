@@ -127,7 +127,7 @@ export default function PublicProfile({ username }) {
 
           {/* Right Part */}
           <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
-            <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
+            <RightSideViewComponent publicUser={fetchedData[0]} guild={guilds} />
 
             {/* Viewer's Avatar */}
             <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
