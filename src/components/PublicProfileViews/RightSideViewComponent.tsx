@@ -9,29 +9,31 @@ export default function RightSideViewComponent({ user, guild }) {
   return (
     <>
       {user ? (
-        <div className='relative select-none'>
+        <div className='relative size-full select-none overflow-auto p-2'>
           {/* CardStack Swiper */}
-          <CustomCardStack
-            height={200}
-            speed={200}
-            initialSlide={1}
-            perSlideOffset={7}
-            perSlideRotate={1}
-            slideShadows={false}
-          >
-            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-              <GGCard userData={user} />
-            </div>
-            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-              <GGCard userData={user} />
-            </div>
-            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-              <GGCard userData={user} />
-            </div>
-            <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
-              <GGCard userData={user} />
-            </div>
-          </CustomCardStack>
+          <div className='sticky top-0'>
+            <CustomCardStack
+              height={200}
+              speed={200}
+              initialSlide={1}
+              perSlideOffset={7}
+              perSlideRotate={1}
+              slideShadows={false}
+            >
+              <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
+                <GGCard userData={user} />
+              </div>
+              <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
+                <GGCard userData={user} />
+              </div>
+              <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
+                <GGCard userData={user} />
+              </div>
+              <div className=' h-[190px] w-[96%] rounded-[7.35039px] '>
+                <GGCard userData={user} />
+              </div>
+            </CustomCardStack>
+          </div>
 
           {/* Bio */}
           <div className='-mt-1 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
@@ -40,6 +42,18 @@ export default function RightSideViewComponent({ user, guild }) {
           </div>
 
           {/* Achievements */}
+          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+            <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
+            <div className='relative p-2 font-semibold'>
+              <AchievementsComponent userData={user} />
+            </div>
+          </div>
+          <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+            <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
+            <div className='relative p-2 font-semibold'>
+              <AchievementsComponent userData={user} />
+            </div>
+          </div>
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
             <div className='relative p-2 font-semibold'>
