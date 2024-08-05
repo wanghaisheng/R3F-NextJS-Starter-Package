@@ -9,9 +9,9 @@ export default function RightSideViewComponent({ user, guild }) {
   return (
     <>
       {user ? (
-        <div className='relative size-full select-none overflow-auto p-2'>
+        <div className='relative size-full select-none overflow-y-auto overflow-x-hidden p-2'>
           {/* CardStack Swiper */}
-          <div className='sticky top-0'>
+          <div className='sticky top-0 z-40'>
             <CustomCardStack
               height={200}
               speed={200}
@@ -44,19 +44,23 @@ export default function RightSideViewComponent({ user, guild }) {
           {/* Achievements */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
-            <div className='relative p-2 font-semibold'>
+            <div className='relative py-2 font-semibold'>
               <AchievementsComponent userData={user} />
             </div>
           </div>
+
+          {/* Avatars */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
-            <div className='relative p-2 font-semibold'>
-              <AchievementsComponent userData={user} />
+            <h1 className='cursor-pointer text-[16px] font-bold'>AVATARS</h1>
+            <div className='relative py-2 font-semibold'>
+              <SocialMedias userData={user} />
             </div>
           </div>
+
+          {/* Skins */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
-            <h1 className='cursor-pointer text-[16px] font-bold'>ACHIEVEMENTS</h1>
-            <div className='relative p-2 font-semibold'>
+            <h1 className='cursor-pointer text-[16px] font-bold'>SKINS</h1>
+            <div className='relative py-2 font-semibold'>
               <AchievementsComponent userData={user} />
             </div>
           </div>
@@ -64,7 +68,7 @@ export default function RightSideViewComponent({ user, guild }) {
           {/* Social Media */}
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold '>SOCIALS</h1>
-            <div className='relative p-2 font-semibold'>
+            <div className='relative py-2 font-semibold'>
               <SocialMedias userData={user} />
             </div>
           </div>

@@ -11,7 +11,7 @@ export default function SocialMedias({ userData }) {
   return (
     <div className='w-full'>
       <Swiper
-        slidesPerView={5}
+        slidesPerView={'auto'}
         spaceBetween={5}
         freeMode={true}
         modules={[FreeMode]}

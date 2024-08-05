@@ -11,7 +11,7 @@ export default function AchievementsComponent({ userData }) {
   return (
     <div className='w-full'>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={'auto'}
         spaceBetween={6}
         freeMode={true}
         modules={[FreeMode]}
