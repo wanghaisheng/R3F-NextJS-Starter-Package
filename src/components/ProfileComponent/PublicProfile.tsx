@@ -43,6 +43,7 @@ export default function PublicProfile({ username }) {
             name: `${publicUser.first_name} ${publicUser.last_name}`,
             username: publicUser.username,
             age: publicUser.age,
+            avatar_images: publicUser.avatar.map((avatar) => avatar.avatar_url),
             user_image:
               publicUser.image_urls.length > 0
                 ? publicUser.image_urls[publicUser.image_urls.length - 1]

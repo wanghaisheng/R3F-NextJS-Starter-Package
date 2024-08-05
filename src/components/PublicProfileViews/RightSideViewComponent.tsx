@@ -4,6 +4,7 @@ import AchievementsComponent from '../ProfileComponent/PublicProfileComponent/Pr
 import GGCard from '../GGFlipCards/GGCard'
 import SocialMedias from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/SocialMedias'
 import CustomCardStack from '../MyComponents/CustomCardStack'
+import AvatarsShowcase from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/AvatarsShowcase'
 
 export default function RightSideViewComponent({ user, guild }) {
   return (
@@ -53,7 +54,7 @@ export default function RightSideViewComponent({ user, guild }) {
           <div className='mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold'>AVATARS</h1>
             <div className='relative py-2 font-semibold'>
-              <SocialMedias userData={user} />
+              <AvatarsShowcase userData={user} />
             </div>
           </div>
 
