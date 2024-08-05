@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import ImagePopUp from './ImagePopUp'
 
-const GalleryTabView = ({ userData }: { userData: any }) => {
+const GalleryTabView = ({ userData, onImageClick }) => {
   const galleryPhotos = userData?.overall_user_image || []
-
   const [showMorePics, setShowMorePics] = useState(false)
+
   const handleShowMorePics = () => {
     setShowMorePics(!showMorePics)
   }
@@ -29,6 +30,7 @@ const GalleryTabView = ({ userData }: { userData: any }) => {
                 fill
                 unoptimized
                 className='rounded object-cover transition-all duration-1000 ease-in-out hover:scale-125'
+                onClick={() => onImageClick(pic)}
               />
             </div>
           ))}

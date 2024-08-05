@@ -9,6 +9,7 @@ import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent
 import { Avatar } from '../Avatar'
 import MiddleViewComponent from '../PublicProfileViews/MiddleViewComponent'
 import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
+import ImagePopUp from '../PublicProfileViews/TabViews/ImagePopUp'
 
 // Expressions
 const expressions = [
@@ -25,6 +26,15 @@ export default function PublicProfile({ username }) {
   const [fetchedData, setFetchedData] = useState([])
   const [skills, setSkills] = useState([])
   const [emote, setEmote] = useState('/male-idle-3.fbx')
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image)
+  }
+
+  const handleClosePopup = () => {
+    setSelectedImage(null)
+  }
 
   const handleEmote = (emote) => {
     setEmote(emote)
@@ -125,6 +135,7 @@ export default function PublicProfile({ username }) {
               skillsData={skills}
               guild={guilds}
               experience={fetchedData[0]?.experienceData}
+              onImageClick={handleImageClick}
             />
           </div>
 
@@ -171,6 +182,9 @@ export default function PublicProfile({ username }) {
               )}
             </div>
           </div>
+
+          {/* Full-screen Popup */}
+          {selectedImage && <ImagePopUp image={selectedImage} onClose={handleClosePopup} />}
         </>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>

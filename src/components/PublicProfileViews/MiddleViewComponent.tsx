@@ -11,7 +11,7 @@ import GalleryTabView from './TabViews/GalleryTabView'
 import { IoSearchSharp } from 'react-icons/io5'
 import { RxCrossCircled } from 'react-icons/rx'
 
-export default function MiddleViewComponent({ user, skillsData, guild, experience, publicUserGuild }) {
+export default function MiddleViewComponent({ user, skillsData, guild, experience, publicUserGuild, onImageClick }) {
   const [toggle, setToggle] = useState(false)
   const [isFlipped, setIsFlipped] = useState(false)
   // Check if flipped or not
@@ -215,7 +215,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
             ) : activeTab === 'skills' ? (
               <SkillsTabView skillsData={skillsData} />
             ) : (
-              <GalleryTabView userData={user} />
+              <GalleryTabView userData={user} onImageClick={onImageClick} />
             )}
           </div>
         </>
