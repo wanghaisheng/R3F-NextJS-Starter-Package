@@ -116,9 +116,12 @@ export default function PublicProfile({ username }) {
           </div>
 
           {/* Mid Part */}
-          <div className='fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          <div
+            className={`fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out`}
+          >
             <MiddleViewComponent
               user={fetchedData[0]}
+              publicUserGuild={userGuild}
               skillsData={skills}
               guild={guilds}
               experience={fetchedData[0]?.experienceData}
