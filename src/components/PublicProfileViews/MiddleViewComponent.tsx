@@ -115,7 +115,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
         <div
           className={`flex h-[40px] w-full items-center justify-between rounded-full bg-white/50 px-[6px] shadow-md shadow-black/30 ${publicUserGuild === 'BUDDHA' ? 'text-white' : publicUserGuild === 'PADMA' ? 'text-red-600' : publicUserGuild === 'KARMA' ? 'text-green-600' : publicUserGuild === 'VAJRA' ? 'text-blue-600' : publicUserGuild === 'RATNA' ? 'text-yellow-600' : 'text-black'}`}
         >
-          <div className='pl-12 text-lg font-bold uppercase'>{user?.username}</div>
+          <div className='pl-12 text-lg font-bold uppercase text-black'>{user?.username}</div>
           <motion.div
             className={`z-40 flex h-[30px] items-center rounded-full bg-white ${publicUserGuild === 'BUDDHA' && 'text-black'}`}
             initial={{ width: '30px' }}

@@ -2,30 +2,28 @@ import CustomSwiper from '../MyComponents/CustomSwiper'
 
 export default function LeftSideViewComponent() {
   return (
-    <div className='flex flex-col gap-2 p-2'>
-      <div className='h-[200px] w-full rounded-lg bg-white/40'></div>
-
-      {/* <div className='p-4'>
-        <CustomSwiper>
-          <div className='size-[100px] bg-pink-300'></div>
-          <div className='size-[100px] bg-pink-300'></div>
-          <div className='size-[100px] bg-pink-300'></div>
-          <div className='size-[100px] bg-pink-300'></div>
-          <div className='size-[100px] bg-pink-300'></div>
-        </CustomSwiper>
-      </div> */}
-
-      <div className='relative h-[305px] w-full overflow-auto'>
-        <div className='mb-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
-        <div className='my-2 h-[100px] w-full rounded-lg bg-white/40'></div>
+    <>
+      <div className='relative mb-8 mt-[-36px] flex w-full justify-center'>
+        <div className='z-30 size-[185px] rounded-full bg-white'></div>
+        <div className='absolute -bottom-3 z-30 size-[30px] rounded-full bg-gray-500'></div>
       </div>
-    </div>
+      <div className='fixed left-2 top-2 hover:text-pink-400'>SE</div>
+      <div className='fixed right-2 top-2 hover:text-pink-400'>FF</div>
+
+      <div className='flex w-full justify-between px-7 text-sm'>
+        <div className='flex h-[29px] items-center rounded-full bg-black text-white'>
+          <div className='size-[32px] rounded-full border border-green-500 bg-black'>I</div>
+          <p className='pl-2 pr-3'>ME</p>
+        </div>
+        <div className='flex h-[29px] items-center rounded-full bg-black text-white'>
+          <div className='size-[32px] rounded-full border border-yellow-500 bg-black'>I</div>
+          <p className='pl-2 pr-3'>US</p>
+        </div>
+        <div className='flex h-[29px] items-center rounded-full bg-black text-white'>
+          <div className='size-[32px] rounded-full border border-white bg-black'>I</div>
+          <p className='pl-2 pr-3'>ACT</p>
+        </div>
+      </div>
+    </>
   )
 }
