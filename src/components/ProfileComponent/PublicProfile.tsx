@@ -9,6 +9,7 @@ import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent
 import { Avatar } from '../Avatar'
 import MiddleViewComponent from '../PublicProfileViews/MiddleViewComponent'
 import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
+import ImagePopUp from '../PublicProfileViews/TabViews/ImagePopUp'
 
 // Expressions
 const expressions = [
@@ -25,6 +26,15 @@ export default function PublicProfile({ username }) {
   const [fetchedData, setFetchedData] = useState([])
   const [skills, setSkills] = useState([])
   const [emote, setEmote] = useState('/male-idle-3.fbx')
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image)
+  }
+
+  const handleClosePopup = () => {
+    setSelectedImage(null)
+  }
 
   const handleEmote = (emote) => {
     setEmote(emote)
@@ -43,6 +53,7 @@ export default function PublicProfile({ username }) {
             name: `${publicUser.first_name} ${publicUser.last_name}`,
             username: publicUser.username,
             age: publicUser.age,
+            avatar_images: publicUser.avatar.map((avatar) => avatar.avatar_url),
             user_image:
               publicUser.image_urls.length > 0
                 ? publicUser.image_urls[publicUser.image_urls.length - 1]
@@ -110,25 +121,27 @@ export default function PublicProfile({ username }) {
           <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
 
           {/* LeftPart */}
-          <div className='fixed left-[76px] top-1/2 z-20  h-[73%] w-[20%] -translate-y-1/2 overflow-hidden rounded-md  bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
+          <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md  bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
             <LeftSideViewComponent />
           </div>
 
           {/* Mid Part */}
-          <div className='fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out'>
+          <div
+            className={`fixed left-1/2 top-1/2 z-20 h-[73%] w-[47%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg text-black shadow-lg shadow-black/50 transition-all duration-500 ease-in-out`}
+          >
             <MiddleViewComponent
               user={fetchedData[0]}
+              publicUserGuild={userGuild}
               skillsData={skills}
               guild={guilds}
               experience={fetchedData[0]?.experienceData}
+              onImageClick={handleImageClick}
             />
           </div>
 
           {/* Right Part */}
           <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
-            <div className='size-full overflow-hidden p-2'>
-              <RightSideViewComponent user={fetchedData[0]} guild={guilds} />
-            </div>
+            <RightSideViewComponent publicUser={fetchedData[0]} guild={guilds} />
 
             {/* Viewer's Avatar */}
             <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
@@ -169,6 +182,9 @@ export default function PublicProfile({ username }) {
               )}
             </div>
           </div>
+
+          {/* Full-screen Popup */}
+          {selectedImage && <ImagePopUp image={selectedImage} onClose={handleClosePopup} />}
         </>
       ) : (
         <div className='flex h-screen w-full items-center justify-center'>

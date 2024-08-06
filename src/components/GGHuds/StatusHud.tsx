@@ -68,7 +68,7 @@ export default function StatusHud() {
   }
 
   return (
-    <div className='fixed bottom-[20px] left-[20px] z-50 flex h-[33px] select-none items-center space-x-[6px] rounded-full bg-gray-200 px-[4px] py-[6px] shadow-lg shadow-black/50'>
+    <div className='fixed bottom-[20px] left-[20px] z-40 flex h-[33px] select-none items-center space-x-[6px] rounded-full bg-gray-200 px-[4px] py-[6px] shadow-lg shadow-black/50'>
       {tabs.map((tab, i) => (
         <div
           key={i}

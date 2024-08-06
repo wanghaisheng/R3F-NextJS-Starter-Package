@@ -1,4 +1,4 @@
-import ExperienceShow from '@/components/ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/ExperienceShow'
+import ExperienceShow from '@/components/PublicProfileViews/RIghtSideComponents/ExperienceShow'
 
 const ExperienceTabView = ({
   experience,

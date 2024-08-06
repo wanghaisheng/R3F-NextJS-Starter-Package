@@ -6,7 +6,7 @@ import { useState } from 'react'
 import AboutUser from './AboutUser'
 import { IoMdInformationCircleOutline } from 'react-icons/io'
 import HoverGuild from '@/components/HoverEffect/HoverGuild'
-import AchievementsComponent from '../RightSideComponents/AchievementsComponent'
+import AchievementsComponent from '../../../../PublicProfileViews/RIghtSideComponents/AchievementsComponent'
 import Pictures from './Pictures'
 
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false })

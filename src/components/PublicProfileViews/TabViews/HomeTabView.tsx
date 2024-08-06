@@ -20,7 +20,9 @@ export default function HomeView({ userData, projPics, experience, setActiveTab 
 
   const pinnedExperience = experience[0]
   const pinnedExperiencePhoto =
-    pinnedExperience?.project_pictures?.length !== 0 ? pinnedExperience?.project_pictures[0] : '/card/abstract2.webp'
+    pinnedExperience?.project_pictures?.length !== 0
+      ? pinnedExperience?.project_pictures[pinnedExperience?.project_pictures.length - 1]
+      : '/card/abstract2.webp'
   const pinnedExperienceName = pinnedExperience?.name || 'No Name'
   const pinnedExperienceDescription = pinnedExperience?.description || 'No Description'
   // Pinned EXP End
@@ -146,7 +148,11 @@ export default function HomeView({ userData, projPics, experience, setActiveTab 
             {displayExperiences.map((exp, index) => (
               <div key={index} className='relative flex size-full overflow-hidden rounded-lg bg-white'>
                 <Image
-                  src={exp.project_pictures.length !== 0 ? exp.project_pictures[0] : '/card/abstract1.webp'}
+                  src={
+                    exp.project_pictures.length !== 0
+                      ? exp.project_pictures[exp.project_pictures.length - 1]
+                      : '/card/abstract1.webp'
+                  }
                   fill
                   alt={exp.name}
                   unoptimized

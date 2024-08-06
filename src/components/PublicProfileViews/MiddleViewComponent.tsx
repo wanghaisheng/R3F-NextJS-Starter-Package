@@ -8,8 +8,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import ExperienceTabView from './TabViews/ExperienceTabView'
 import SkillsTabView from './TabViews/SkillsTabView'
 import GalleryTabView from './TabViews/GalleryTabView'
+import { IoSearchSharp } from 'react-icons/io5'
+import { RxCrossCircled } from 'react-icons/rx'
 
-export default function MiddleViewComponent({ user, skillsData, guild, experience }) {
+export default function MiddleViewComponent({ user, skillsData, guild, experience, publicUserGuild, onImageClick }) {
   const [toggle, setToggle] = useState(false)
   const [isFlipped, setIsFlipped] = useState(false)
   // Check if flipped or not
@@ -81,14 +83,16 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
 
   return (
     <div
-      className={`relative flex size-full select-none flex-col overflow-auto rounded-3xl bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
+      className={`relative flex size-full select-none flex-col overflow-auto rounded-lg bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
     >
       <div className='relative flex w-full'>
         {/* Profile Picture */}
         {user && (
           <div className='absolute -left-1 -top-2 flex w-full select-none items-center gap-x-2'>
             <div
-              className='relative overflow-hidden rounded-full border-[2px] shadow-lg shadow-black/30'
+              className={`relative overflow-hidden rounded-full border-[2px] shadow-lg shadow-black/30
+                ${publicUserGuild === 'BUDDHA' ? 'border-white' : publicUserGuild === 'PADMA' ? 'border-red-600' : publicUserGuild === 'KARMA' ? 'border-green-600' : publicUserGuild === 'VAJRA' ? 'border-blue-600' : publicUserGuild === 'RATNA' ? 'border-yellow-600' : 'border-black'}
+                `}
               style={{
                 borderRadius: '50%',
                 height: 54,
@@ -100,7 +104,6 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
                 alt='profile-pic'
                 fill
                 unoptimized
-                quality={60}
                 className='rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-125'
               />
             </div>
@@ -109,10 +112,12 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
         {/* Profile Picture End */}
 
         {/* Search */}
-        <div className='flex h-[40px] w-full items-center justify-between rounded-full bg-white/50 px-[6px] shadow-lg shadow-black/30'>
-          <div className='pl-12 text-lg font-bold uppercase'>{user?.username}</div>
+        <div
+          className={`flex h-[40px] w-full items-center justify-between rounded-full bg-white/50 px-[6px] shadow-md shadow-black/30 ${publicUserGuild === 'BUDDHA' ? 'text-white' : publicUserGuild === 'PADMA' ? 'text-red-600' : publicUserGuild === 'KARMA' ? 'text-green-600' : publicUserGuild === 'VAJRA' ? 'text-blue-600' : publicUserGuild === 'RATNA' ? 'text-yellow-600' : 'text-black'}`}
+        >
+          <div className='pl-12 text-lg font-bold uppercase text-black'>{user?.username}</div>
           <motion.div
-            className='z-40 flex h-[30px] items-center rounded-full bg-white'
+            className={`z-40 flex h-[30px] items-center rounded-full bg-white ${publicUserGuild === 'BUDDHA' && 'text-black'}`}
             initial={{ width: '30px' }}
             animate={{ width: searchClicked ? '300px' : '30px' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
@@ -136,12 +141,12 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
                     className='w-full bg-transparent pl-4 outline-none'
                   />
                   <motion.button
-                    className='flex size-[22px] items-center justify-center rounded-full bg-blue-300'
+                    className='flex size-[22px] items-center justify-center rounded-full'
                     onClick={handleCloseSearchClick}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    X
+                    <RxCrossCircled />
                   </motion.button>
                 </motion.div>
               ) : (
@@ -152,7 +157,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  🔍
+                  <IoSearchSharp size={20} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -210,7 +215,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
             ) : activeTab === 'skills' ? (
               <SkillsTabView skillsData={skillsData} />
             ) : (
-              <GalleryTabView userData={user} />
+              <GalleryTabView userData={user} onImageClick={onImageClick} />
             )}
           </div>
         </>

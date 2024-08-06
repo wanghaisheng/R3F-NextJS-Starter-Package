@@ -7,7 +7,7 @@ import 'swiper/css/effect-cards'
 
 import { EffectCards } from 'swiper/modules'
 import Image from 'next/image'
-import ExperienceShow from '../ProfileComponent/PublicProfileComponent/ProfileInfoComponents/RightSideComponents/ExperienceShow'
+import ExperienceShow from '../PublicProfileViews/RIghtSideComponents/ExperienceShow'
 import SkillsChartComponent from '../SliderComponent/SkillsChartComponent'
 
 export default function GalleryV1({
