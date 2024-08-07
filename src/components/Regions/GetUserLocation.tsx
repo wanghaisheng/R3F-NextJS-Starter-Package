@@ -1,18 +1,29 @@
-export default function GetUserLocation() {
+'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function GetUserLocation({
+  onLocationFound,
+}: {
+  onLocationFound: (location: [number, number]) => void
+}) {
   //ask perms to get user location
   const getUserLocation = () => {
-    {
-      navigator.geolocation
-        ? navigator.geolocation.getCurrentPosition(showPosition, showError)
-        : alert('Geolocation is not supported by this browser.')
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          onLocationFound([position.coords.latitude, position.coords.longitude])
+        },
+        (error) => {
+          handleLocationError(error)
+        },
+      )
+    } else {
+      alert('Geolocation is not supported by this browser.')
     }
   }
 
-  const showPosition = (position: any) => {
-    alert(position.coords.latitude + ', ' + position.coords.longitude) // Concatenate latitude and longitude into a single string
-  }
-
-  const showError = (error: any) => {
+  const handleLocationError = (error: any) => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         alert('User denied the request for Geolocation.')
@@ -31,9 +42,15 @@ export default function GetUserLocation() {
 
   //without perms via IPAddress get location
   const getLocationViaIP = async () => {
-    const response = await fetch('https://ipapi.co/json/')
-    const data = await response.json()
-    alert(data.latitude + ', ' + data.longitude + ' ' + data.city + ', ' + data.region + ', ' + data.country_name)
+    try {
+      const response = await fetch('https://ipapi.co/json/')
+      const data = await response.json()
+      onLocationFound([data.latitude, data.longitude]) // Pass latitude and longitude
+      // alert(data.latitude + ', ' + data.longitude + ' ' + data.city + ', ' + data.region + ', ' + data.country_name)
+    } catch (error) {
+      console.error('Error fetching location via IP:', error)
+      alert('Error getting location via IP address.')
+    }
   }
 
   return (

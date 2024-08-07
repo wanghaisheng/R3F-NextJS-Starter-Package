@@ -34,12 +34,14 @@ export default function ShowRegionCesium({
   selectedGuildFilter,
   searchTerm,
   selectedCountryFilter,
+  userLocation,
 }: {
   selectedRegionFilter: string
   guilds: Guild[]
   selectedGuildFilter: string
   searchTerm: string
   selectedCountryFilter: string
+  userLocation?: [number, number]
 }) {
   const [isClient, setIsClient] = useState(false)
   const [mapChange, setMapChange] = useState('DEFAULT')
@@ -146,9 +148,17 @@ export default function ShowRegionCesium({
       <Suspense fallback={<div>Loading map...</div>}>
         <div className='fixed top-0 size-full'>
           {mapChange === 'SATELLITE' ? (
-            <CesiumMap filteredContinent={selectedRegionFilter} filteredCountry={selectedCountryFilter} />
+            <CesiumMap
+              filteredContinent={selectedRegionFilter}
+              filteredCountry={selectedCountryFilter}
+              userLocation={userLocation}
+            />
           ) : (
-            <MapComponent filteredContinent={selectedRegionFilter} filteredCountry={selectedCountryFilter} />
+            <MapComponent
+              filteredContinent={selectedRegionFilter}
+              filteredCountry={selectedCountryFilter}
+              userLocation={userLocation}
+            />
           )}
         </div>
       </Suspense>

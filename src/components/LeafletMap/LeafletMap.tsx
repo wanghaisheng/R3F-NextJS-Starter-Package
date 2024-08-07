@@ -6,7 +6,8 @@ import worldGeoJSON from 'geojson-world-map'
 
 import { GeoJsonObject } from 'geojson'
 
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet'
+import GetUserLocation from '../Regions/GetUserLocation'
 
 const calculateZoom = (area) => {
   if (area < 150000) {
@@ -22,13 +23,15 @@ const calculateZoom = (area) => {
 const MapComponent = ({
   filteredContinent,
   filteredCountry,
+  userLocation,
 }: {
   filteredContinent: string
   filteredCountry: string
+  userLocation?: [number, number]
 }) => {
   const [mapCenter, setMapCenter] = useState<[number, number]>([30, 100]) // Initial map center to Asia
   const [countriesData, setCountriesData] = useState<any[]>([])
-
+  // State to store user location
   const handleFlyTo = (center: [number, number], zoom: number) => {
     setMapCenter(center) // Update the map center state
     setZoomLevel(zoom) // Update the zoom level state
@@ -103,7 +106,13 @@ const MapComponent = ({
             fillOpacity: 0,
           })}
         />
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+        {userLocation && ( // Show user location marker if available
+          <Marker position={userLocation}>
+            <Popup>Your Location</Popup>
+          </Marker>
+        )}
+        {/* <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' /> */}
+        <TileLayer url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png' />
       </MapContainer>
     </div>
   )
