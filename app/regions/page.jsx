@@ -113,9 +113,9 @@ const Regions = () => {
             <div className='z-30 w-[50%]'>
               <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
-            <div className='z-50'>
+            {/* <div className='z-50'>
               <GetUserLocation onLocationFound={handleLocationFound} />
-            </div>
+            </div> */}
           </div>
           <div className='flex flex-col justify-center lg:justify-start'>
             <ShowRegionCesium
