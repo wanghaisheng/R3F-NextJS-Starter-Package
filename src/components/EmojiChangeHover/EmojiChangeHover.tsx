@@ -65,7 +65,7 @@ const EmojiChangeHover = () => {
 
   // Effect to change emoji every 2 seconds
   useEffect(() => {
-    const interval = setInterval(changeEmoji, 2000)
+    const interval = setInterval(changeEmoji, 5000)
     return () => clearInterval(interval)
   }, [changeEmoji])
 
