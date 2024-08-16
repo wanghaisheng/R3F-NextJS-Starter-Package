@@ -4,12 +4,14 @@ import { useState, useEffect, useRef } from 'react'
 import soundData from '../../public/soundboard/soundData.json'
 
 const SoundBoard = () => {
+  // State variables
   const [sounds, setSounds] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [activeSearchTerm, setActiveSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const audioRef = useRef(null)
 
+  // Effect to process sound data when component mounts
   useEffect(() => {
     // Process sound data to handle multiple categories
     const processedSounds = soundData.map((sound) => ({
@@ -19,6 +21,7 @@ const SoundBoard = () => {
     setSounds(processedSounds)
   }, [])
 
+  // Function to play audio
   const playAudio = async (src) => {
     if (audioRef.current) {
       audioRef.current.pause()
@@ -29,28 +32,34 @@ const SoundBoard = () => {
     audioRef.current.play()
   }
 
+  // Function to handle search
   const handleSearch = () => {
     setActiveSearchTerm(searchTerm)
   }
 
+  // Function to handle 'Enter' key press in search input
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSearch()
     }
   }
 
+  // Filter sounds based on search term and selected category
   const filteredSounds = sounds.filter(
     (sound) =>
       sound.name.toLowerCase().includes(activeSearchTerm.toLowerCase()) &&
       (selectedCategory === 'All' || sound.categories.includes(selectedCategory)),
   )
 
+  // Get unique categories from sounds
   const categories = ['All', ...new Set(sounds.flatMap((sound) => sound.categories))]
 
   return (
     <div className='container mx-auto p-4'>
-      <h1 className='mb-6 text-center text-4xl font-bold'>SoundBoard</h1>
+      <h1 className='mb-6 mt-16 text-center text-4xl font-bold'>SoundBoard</h1>
+      {/* Search and filter controls */}
       <div className='mb-8 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0'>
+        {/* Search input */}
         <div className='relative w-full sm:w-auto'>
           <input
             type='text'
@@ -60,6 +69,7 @@ const SoundBoard = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={handleKeyDown}
           />
+          {/* Search icon */}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='absolute left-3 top-1/2 size-5 -translate-y-1/2 text-gray-400'
@@ -75,12 +85,14 @@ const SoundBoard = () => {
             />
           </svg>
         </div>
+        {/* Search button */}
         <button
           onClick={handleSearch}
           className='w-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-2 font-semibold text-white shadow-lg transition-all hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-600/50 sm:w-auto'
         >
           Search
         </button>
+        {/* Category select */}
         <select
           className='w-full rounded-full border border-gray-300 p-2 text-black focus:outline-none focus:ring-2 focus:ring-purple-600 sm:w-auto'
           value={selectedCategory}
@@ -94,6 +106,7 @@ const SoundBoard = () => {
         </select>
       </div>
 
+      {/* Grid of sound buttons */}
       <div className='grid grid-cols-2 gap-y-10 md:grid-cols-4 lg:grid-cols-6'>
         {filteredSounds.map((sound) => (
           <div key={sound.id} className='flex flex-col items-center'>
