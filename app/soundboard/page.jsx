@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import soundData from '../../public/soundboard/soundData.json'
 
 const SoundBoard = () => {
@@ -8,14 +8,25 @@ const SoundBoard = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [activeSearchTerm, setActiveSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const audioRef = useRef(null)
 
   useEffect(() => {
-    setSounds(soundData)
+    // Process sound data to handle multiple categories
+    const processedSounds = soundData.map((sound) => ({
+      ...sound,
+      categories: sound.category.split(', '),
+    }))
+    setSounds(processedSounds)
   }, [])
 
   const playAudio = async (src) => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+    }
     const { default: audio } = await import(`../../public/soundboard/${src}`)
-    new Audio(audio).play()
+    audioRef.current = new Audio(audio)
+    audioRef.current.play()
   }
 
   const handleSearch = () => {
@@ -31,10 +42,10 @@ const SoundBoard = () => {
   const filteredSounds = sounds.filter(
     (sound) =>
       sound.name.toLowerCase().includes(activeSearchTerm.toLowerCase()) &&
-      (selectedCategory === 'All' || sound.category === selectedCategory),
+      (selectedCategory === 'All' || sound.categories.includes(selectedCategory)),
   )
 
-  const categories = ['All', ...new Set(sounds.map((sound) => sound.category))]
+  const categories = ['All', ...new Set(sounds.flatMap((sound) => sound.categories))]
 
   return (
     <div className='container mx-auto p-4'>
@@ -82,7 +93,8 @@ const SoundBoard = () => {
           ))}
         </select>
       </div>
-      <div className='grid grid-cols-2 gap-6 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
+
+      <div className='grid grid-cols-2 gap-y-10 md:grid-cols-4 lg:grid-cols-6'>
         {filteredSounds.map((sound) => (
           <div key={sound.id} className='flex flex-col items-center'>
             <button
@@ -90,9 +102,9 @@ const SoundBoard = () => {
               className='size-20 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-600/50'
               aria-label={`Play ${sound.name}`}
             >
-              <span className='sr-only'>Play</span>
+              Play
             </button>
-            <span className='mt-2 text-center text-sm'>{sound.name}</span>
+            <span className='mt-2 text-center'>{sound.name}</span>
           </div>
         ))}
       </div>
