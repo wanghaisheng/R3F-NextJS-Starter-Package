@@ -6,7 +6,15 @@ import { useEffect, useState, useRef } from 'react'
 
 import './css/main.css'
 
-const CesiumMap = ({ filteredContinent, filteredCountry }: { filteredContinent: string; filteredCountry: string }) => {
+const CesiumMap = ({
+  filteredContinent,
+  filteredCountry,
+  userLocation,
+}: {
+  filteredContinent: string
+  filteredCountry: string
+  userLocation: [number, number] | null
+}) => {
   const cesiumRef = useRef<CesiumWidget | null>(null)
   const [countriesData, setCountriesData] = useState<any[]>([])
 
@@ -110,6 +118,14 @@ const CesiumMap = ({ filteredContinent, filteredCountry }: { filteredContinent: 
             break
         }
       }
+
+      // // Fly to user's location
+      // if (cesiumRef.current && userLocation) {
+      //   const [latitude, longitude] = userLocation
+      //   cesiumRef.current.camera.flyTo({
+      //     destination: Cartesian3.fromDegrees(longitude, latitude, 95000),
+      //   })
+      // }
     }
 
     initializeCesiumViewer()

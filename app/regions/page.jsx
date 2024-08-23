@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
 import SearchComponent from '@/components/MyComponents/SearchComponent'
 import RegionHudComponent from '@/components/MyComponents/RegionHudComponent'
+import GetUserLocation from '@/components/Regions/GetUserLocation'
 
 const ShowRegionCesium = dynamic(() => import('@/components/Regions/RegionsPageComponents/ShowRegionCesium'), {
   ssr: false,
@@ -47,6 +48,12 @@ const Regions = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [mappedGuilds, setMappedGuilds] = useState([])
   const [selectedCountryFilter, setSelectedCountryFilter] = useState('')
+
+  const [userLocation, setUserLocation] = useState(null)
+
+  const handleLocationFound = (location) => {
+    setUserLocation(location)
+  }
 
   const handleRegionFilterChange = (filter) => {
     setSelectedRegionFilter(filter.toUpperCase())
@@ -106,6 +113,9 @@ const Regions = () => {
             <div className='z-30 w-[50%]'>
               <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
+            {/* <div className='z-50'>
+              <GetUserLocation onLocationFound={handleLocationFound} />
+            </div> */}
           </div>
           <div className='flex flex-col justify-center lg:justify-start'>
             <ShowRegionCesium
@@ -114,6 +124,7 @@ const Regions = () => {
               selectedGuildFilter={selectedGuildFilter}
               selectedCountryFilter={selectedCountryFilter}
               searchTerm={searchTerm}
+              userLocation={userLocation}
             />
           </div>
           <div className='fixed bottom-[20px] left-1/2 z-30 flex h-[33px] w-full -translate-x-1/2 select-none items-center justify-center '>
