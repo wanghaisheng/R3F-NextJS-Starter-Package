@@ -15,26 +15,24 @@ const UserClientProvider = ({ children, user: initialUser }) => {
   }
 
   const fetchUserData = async (userId, token) => {
-  try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL
-    const response = await fetch(`${apiUrl}/api/internal/users/${userId}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    })
+    try {
+      const response = await fetch(`http://r3-f-next-js-starter-package.vercel.app/api/internal/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+      const userData = await response.json()
+      setUser(userData)
+    } catch (error) {
+      console.error('Error fetching user data:', error)
     }
-    const userData = await response.json()
-    setUser(userData)
-  } catch (error) {
-    console.error('Error fetching user data:', error)
   }
-}
-
 
   const logout = () => {
     Cookies.remove('token')
