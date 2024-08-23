@@ -4,7 +4,8 @@ import { cookies } from 'next/headers'
 import UserClientProvider from './UserClientProvider.js'
 
 const fetchUserData = async (userId, token) => {
-  const response = await fetch(`http://r3-f-next-js-starter-package.vercel.app/api/internal/users/${userId}`, {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const response = await fetch(`${apiUrl}/api/internal/users/${userId}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
