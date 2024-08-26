@@ -1,32 +1,33 @@
 import { NextResponse } from 'next/server'
 
 // The list of all allowed origins
-// const allowedOrigins = [
-//   'https://www.goinggenius.com.np',
-//   'https://my-weather-app-topaz.vercel.app',
-//   'http://localhost:3001',
-// ]
+const allowedOrigins = [
+  'https://www.goinggenius.com.np',
+  'https://my-weather-app-topaz.vercel.app',
+  'https://r3-f-next-js-starter-package.vercel.app',
+  'http://localhost:3001',
+]
 
 export function middleware(request) {
   const token = request.cookies.get('token')?.value
   const requestUrl = request.nextUrl.pathname
-  // const origin = request.headers.get('origin')
+  const origin = request.headers.get('origin')
 
   // Handle CORS for '/api/public/:path*'
-  // if (requestUrl.startsWith('/api/public/')) {
-  //   const res = NextResponse.next()
+  if (requestUrl.startsWith('/api/public/')) {
+    const res = NextResponse.next()
 
-  //   if (allowedOrigins.includes(origin)) {
-  //     res.headers.set('Access-Control-Allow-Credentials', process.env.ACCESS_CONTROL_ALLOW_CREDENTIALS)
-  //     res.headers.set('Access-Control-Allow-Origin', origin)
-  //     res.headers.set('Access-Control-Allow-Methods', process.env.ACCESS_CONTROL_ALLOW_METHODS)
-  //     res.headers.set('Access-Control-Allow-Headers', process.env.ACCESS_CONTROL_ALLOW_HEADERS)
-  //   } else {
-  //     return new NextResponse('Origin not allowed', { status: 403 })
-  //   }
+    if (allowedOrigins.includes(origin)) {
+      res.headers.set('Access-Control-Allow-Credentials', process.env.ACCESS_CONTROL_ALLOW_CREDENTIALS)
+      res.headers.set('Access-Control-Allow-Origin', origin)
+      res.headers.set('Access-Control-Allow-Methods', process.env.ACCESS_CONTROL_ALLOW_METHODS)
+      res.headers.set('Access-Control-Allow-Headers', process.env.ACCESS_CONTROL_ALLOW_HEADERS)
+    } else {
+      return new NextResponse('Origin not allowed', { status: 403 })
+    }
 
-  //   return res
-  // }
+    return res
+  }
 
   // Define protected routes
   const protectedRoutes = ['/slider']
