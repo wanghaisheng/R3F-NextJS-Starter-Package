@@ -16,6 +16,8 @@ import { IoEyeOffOutline, IoEyeOutline, IoQrCodeOutline } from 'react-icons/io5'
 import * as Yup from 'yup'
 import OtherSignInComponent from './OtherSignInComponent'
 
+const { log } = console
+
 const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
   const router = useRouter()
   const { updateUser } = useUser()
@@ -48,37 +50,29 @@ const SignInComponent = ({ toggleSignUp, toggleSignIn }) => {
             password: Yup.string().required('Password is required').min(3, 'Password must be at least 3 characters'),
           })}
           onSubmit={async (values, { setSubmitting }) => {
+            log('Submit: ', values)
             setGeneralError('')
             try {
-              const { data } = await axios.post('/api/internal/signin', values)
-              const { token, user } = data
-
+              const { data } = await axios({
+                url: '/api/internal/signin',
+                method: 'POST',
+                data: values,
+              })
+              const token = data.token
               if (token) {
-                // Set token in cookies
                 Cookies.set('token', token)
-
-                // Call the server-side API to create the session
-                const sessionResponse = await axios.post('/api/create-session', {
-                  gg_id: user.gg_id,
-                  email: user.email,
-                  role: user.role,
-                })
-
-                // Set session token in cookies
-                Cookies.set('session', sessionResponse.data.sessionToken)
-
-                // Update the user context
                 updateUser(token)
-
                 toast.success('Sign in successful')
+
                 router.push('/discover')
                 router.refresh()
               }
             } catch (error) {
+              log('Error: ', error)
               if (error.response && error.response.status === 404) {
                 setGeneralError('User does not exist')
               } else if (error.response && error.response.status === 401) {
-                setGeneralError('Password does not match')
+                setGeneralError('Password do not match')
               } else {
                 setGeneralError('An error occurred. Please try again.')
               }
