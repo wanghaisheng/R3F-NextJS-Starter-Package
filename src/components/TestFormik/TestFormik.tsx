@@ -1,21 +1,21 @@
 'use client'
 
-import { Formik, Field, Form } from 'formik'
+import { Field, Form, Formik } from 'formik'
 // import { useUser } from './UserClientProvider'
 import { useUser } from '@/UserClientProvider'
-import toast from 'react-hot-toast'
+import Cookies from 'js-cookie'
 import { revalidateUser } from 'lib/actions'
-// import Cookies from 'js-cookie'
+import toast from 'react-hot-toast'
 
 const TestFormik = () => {
   const { user, updateUser } = useUser()
-  // const token = Cookies.get('token')
+  const token = Cookies.get('token')
   const id = user ? user.gg_id : ''
   return (
     <>
       <div className='relative h-screen w-full'>
         <p>{user ? user.username : 'not a username'}</p>
-        <div className='flex size-full justify-center mt-24'>
+        <div className='mt-24 flex size-full justify-center'>
           <Formik
             initialValues={{
               username: '',
@@ -30,8 +30,8 @@ const TestFormik = () => {
                   body: JSON.stringify(values),
                 })
                 if (res.ok) {
-                  // await revalidateUser()
-                  // updateUser(token)
+                  await revalidateUser()
+                  updateUser(token)
                   toast.success('username updated')
                 } else {
                   toast.error('Update failed')
