@@ -28,17 +28,6 @@ const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Ava
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false }) //----------------> module not found error in my branch
 
 import { useSidebar } from '@/components/dom/SidebarProvider' //----------------> module not found error in my branch
-import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
-
-// Expressions
-const expressions = [
-  { label: 'neutral', icon: '/emojis/neutral.svg', bg: '#FFFFFF', animation: '/sillydance.fbx' },
-  { label: 'sad', icon: '/emojis/sad.svg', bg: '#0C2E5C', animation: '/flair.fbx' },
-  { label: 'happy', icon: '/emojis/happy.svg', bg: '#007F13', animation: '/moonwalk.fbx' },
-  { label: 'amazed', icon: '/emojis/amazed.svg', bg: '#F8BF43', animation: '/Flip Kick 2.fbx' },
-  { label: 'angry', icon: '/emojis/angry.svg', bg: '#A20325', animation: '/Swimming.fbx' },
-  { label: 'angry', icon: '/emojis/angry.svg', bg: '#A20325', animation: '/hang.fbx' },
-]
 
 export default function PrivateProfile() {
   const { user } = useUser()
@@ -50,12 +39,6 @@ export default function PrivateProfile() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const isScrollingRef = useRef(false)
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
-
-  const [emote, setEmote] = useState('/fly.fbx')
-
-  const handleEmote = (emote) => {
-    setEmote(emote)
-  }
 
   const handleChangeSlide = (index) => {
     if (emblaApi) emblaApi.scrollTo(index)
@@ -271,10 +254,10 @@ export default function PrivateProfile() {
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
             shadows
-            animationSrc={emote}
+            animationSrc='/male-idle-3.fbx'
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-            fov={30}
-            cameraTarget={1}
+            fov={40}
+            cameraTarget={1.5}
             cameraInitialDistance={30}
             effects={{
               ambientOcclusion: true,
@@ -284,10 +267,10 @@ export default function PrivateProfile() {
           <Avatar
             modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
             shadows
-            animationSrc={emote}
+            animationSrc='/male-idle-3.fbx'
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
-            fov={30}
-            cameraTarget={1}
+            fov={40}
+            cameraTarget={1.5}
             cameraInitialDistance={30}
             effects={{
               ambientOcclusion: true,
@@ -632,14 +615,12 @@ export default function PrivateProfile() {
         </div>
       </div>
 
-      <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
-
       {user ? (
-        <div className='fixed bottom-12 w-full justify-center'>
+        <div className='fixed bottom-2 w-full justify-center'>
           <Hud loggedIn={true} />
         </div>
       ) : (
-        <div className='fixed bottom-12 w-full justify-center'>
+        <div className='fixed bottom-2 w-full justify-center'>
           <div>
             <Hud loggedIn={false} />
           </div>
