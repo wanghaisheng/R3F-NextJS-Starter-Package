@@ -1,18 +1,13 @@
 'use client'
 
-import AchievementsComponent from './RIghtSideComponents/AchievementsComponent'
-import GGCard from '../GGFlipCards/GGCard'
-import SocialMedias from './RIghtSideComponents/SocialMedias'
-import CustomCardStack from '../MyComponents/CustomCardStack'
-import AvatarsShowcase from './RIghtSideComponents/AvatarsShowcase'
 import { useUser } from '@/UserClientProvider'
-import { TbCards } from 'react-icons/tb'
-import { FaEdit } from 'react-icons/fa'
 import Link from 'next/link'
-import { MdOutlineShoppingCartCheckout } from 'react-icons/md'
-import { CiCircleMore } from 'react-icons/ci'
-import CustomToolTipLeftRight from '../MyComponents/CustomToolTipLeftRight'
+import { FaEdit } from 'react-icons/fa'
 import { LuScreenShare } from 'react-icons/lu'
+import GGCard from '../GGFlipCards/GGCard'
+import CustomCardStack from '../MyComponents/CustomCardStack'
+import CustomToolTipLeftRight from '../MyComponents/CustomToolTipLeftRight'
+import AvatarsShowcase from './RIghtSideComponents/AvatarsShowcase'
 
 export default function RightSideViewComponent({ publicUser, guild }) {
   const { user } = useUser()
@@ -62,7 +57,7 @@ export default function RightSideViewComponent({ publicUser, guild }) {
           </div>
 
           {/* Achievements */}
-          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+          {/* <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='text-[16px] font-bold'>ACHIEVEMENTS</h1>
             {explorerUsername === publicUser.username && (
               <div className='absolute right-2 top-2'>
@@ -75,7 +70,7 @@ export default function RightSideViewComponent({ publicUser, guild }) {
             <div className='relative py-2 font-semibold'>
               <AchievementsComponent userData={publicUser} />
             </div>
-          </div>
+          </div> */}
 
           {/* Avatars */}
           <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
@@ -100,7 +95,7 @@ export default function RightSideViewComponent({ publicUser, guild }) {
           </div>
 
           {/* Skins */}
-          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+          {/* <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold'>SKINS</h1>
             {explorerUsername === publicUser.username && (
               <div className='absolute right-2 top-2 flex gap-x-3'>
@@ -117,10 +112,10 @@ export default function RightSideViewComponent({ publicUser, guild }) {
             <div className='relative py-2 font-semibold'>
               <AchievementsComponent userData={publicUser} />
             </div>
-          </div>
+          </div> */}
 
           {/* Social Media */}
-          <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
+          {/* <div className='relative mt-2 w-full rounded-md bg-white/80 px-2 py-1 text-black'>
             <h1 className='cursor-pointer text-[16px] font-bold '>SOCIALS</h1>
             {explorerUsername === publicUser.username && (
               <div className='absolute right-2 top-2 flex gap-x-3'>
@@ -139,7 +134,7 @@ export default function RightSideViewComponent({ publicUser, guild }) {
             <div className='relative py-2 font-semibold'>
               <SocialMedias userData={publicUser} />
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className='flex size-full items-center justify-center'>

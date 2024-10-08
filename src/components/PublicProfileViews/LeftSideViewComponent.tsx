@@ -1,29 +1,45 @@
-import CustomSwiper from '../MyComponents/CustomSwiper'
+import { useUser } from '@/UserClientProvider'
+import { useEffect, useState } from 'react'
+import { Avatar } from '../Avatar'
+import useUserAndGuildData from '../CustomHooks/useUserAndGuildData'
 
-export default function LeftSideViewComponent() {
+interface LeftSideViewComponentProps {
+  emote: string | null
+}
+
+export default function LeftSideViewComponent({ emote: parentEmote }: LeftSideViewComponentProps) {
+  const { user } = useUser()
+  const { users, guilds } = useUserAndGuildData()
+  const [fetchedData, setFetchedData] = useState([])
+  const [currentEmote, setCurrentEmote] = useState('/male-idle-3.fbx')
+  const loggedin_user_avatar = user?.avatar.length > 0 ? user.avatar[user.avatar.length - 1].avatar_url : ''
+
+  useEffect(() => {
+    if (parentEmote) {
+      setCurrentEmote(parentEmote)
+    }
+  }, [parentEmote])
+
   return (
     <>
-      <div className='relative mb-8 mt-[-36px] flex w-full justify-center'>
-        <div className='z-30 size-[185px] rounded-full bg-white'></div>
-        <div className='absolute -bottom-3 z-30 size-[30px] rounded-full bg-gray-500'></div>
-      </div>
-      <div className='fixed left-2 top-2 hover:text-pink-400'>SE</div>
-      <div className='fixed right-2 top-2 hover:text-pink-400'>FF</div>
-
-      <div className='flex w-full justify-between px-7 text-sm'>
-        <div className='flex h-[29px] items-center rounded-full bg-black text-white'>
-          <div className='size-[32px] rounded-full border border-green-500 bg-black'>I</div>
-          <p className='pl-2 pr-3'>ME</p>
-        </div>
-        <div className='flex h-[29px] items-center rounded-full bg-black text-white'>
-          <div className='size-[32px] rounded-full border border-yellow-500 bg-black'>I</div>
-          <p className='pl-2 pr-3'>US</p>
-        </div>
-        <div className='flex h-[29px] items-center rounded-full bg-black text-white'>
-          <div className='size-[32px] rounded-full border border-white bg-black'>I</div>
-          <p className='pl-2 pr-3'>ACT</p>
-        </div>
-      </div>
+      {user?.username !== fetchedData[0]?.username && (
+        <>
+          {loggedin_user_avatar && (
+            <div className='size-full'>
+              <Avatar
+                modelSrc={`${loggedin_user_avatar}?quality=low`}
+                animationSrc={currentEmote}
+                fov={20}
+                cameraTarget={2}
+                cameraInitialDistance={2.5}
+                effects={{
+                  ambientOcclusion: true,
+                }}
+              />
+            </div>
+          )}
+        </>
+      )}
     </>
   )
 }

@@ -1,15 +1,14 @@
 'use client'
-import React, { useRef, ReactNode, useState } from 'react'
-import dynamic from 'next/dynamic'
-import Navbar from '@/components/Navbar/Navbar'
-import RightSideHud from '../GGHuds/RightSideHud'
-import { SidebarProvider, useSidebar } from './SidebarProvider'
 import { useLoadingState } from '@/components/CustomHooks/useLoadingState'
+import Navbar from '@/components/Navbar/Navbar'
 import Loading from '@/loading'
 import { useUser } from '@/UserClientProvider'
-import UserProfileHud from '../GGHuds/UserProfileHud'
-import StatusHud from '../GGHuds/StatusHud'
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
+import React, { ReactNode, useRef, useState } from 'react'
+import RightSideHud from '../GGHuds/RightSideHud'
+import UserProfileHud from '../GGHuds/UserProfileHud'
+import { SidebarProvider, useSidebar } from './SidebarProvider'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
@@ -49,7 +48,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className='fixed bottom-8 right-16 z-40'>
             <UserProfileHud />
           </div>
-          <StatusHud />
+          {/* <StatusHud /> */}
         </>
       )}
     </div>
@@ -65,3 +64,4 @@ const LayoutWithProvider: React.FC<LayoutProps> = ({ children }) => {
 }
 
 export { LayoutWithProvider as Layout }
+

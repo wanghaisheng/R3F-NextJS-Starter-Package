@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 
 import { useUser } from '@/UserClientProvider'
 import useUserAndGuildData from '@/components/CustomHooks/useUserAndGuildData'
-import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
-import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent'
 import { Avatar } from '../Avatar'
-import MiddleViewComponent from '../PublicProfileViews/MiddleViewComponent'
 import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
+import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
+import MiddleViewComponent from '../PublicProfileViews/MiddleViewComponent'
+import RightSideViewComponent from '../PublicProfileViews/RightSideViewComponent'
 import ImagePopUp from '../PublicProfileViews/TabViews/ImagePopUp'
 
 // Expressions
@@ -20,13 +20,18 @@ const expressions = [
   { label: 'angry', icon: '/emojis/angry.svg', bg: '#A20325', animation: '/M_Standing_Expressions_016.fbx' },
 ]
 
-export default function PublicProfile({ username }) {
+interface EmoteHandlerProps {
+  username: string // Replace 'any' with the actual type of your expressions
+}
+
+export default function PublicProfile({ username }: EmoteHandlerProps) {
   const { user } = useUser()
   const { users, guilds } = useUserAndGuildData()
   const [fetchedData, setFetchedData] = useState([])
   const [skills, setSkills] = useState([])
   const [emote, setEmote] = useState('/male-idle-3.fbx')
   const [selectedImage, setSelectedImage] = useState(null)
+  const [currentEmote, setCurrentEmote] = useState<string | null>(null)
 
   const handleImageClick = (image) => {
     setSelectedImage(image)
@@ -36,7 +41,8 @@ export default function PublicProfile({ username }) {
     setSelectedImage(null)
   }
 
-  const handleEmote = (emote) => {
+  const handleEmote = (emote: string) => {
+    setCurrentEmote(emote)
     setEmote(emote)
   }
 
@@ -122,7 +128,7 @@ export default function PublicProfile({ username }) {
 
           {/* LeftPart */}
           <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md  bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
-            <LeftSideViewComponent />
+            <LeftSideViewComponent emote={currentEmote} />
           </div>
 
           {/* Mid Part */}
@@ -144,7 +150,7 @@ export default function PublicProfile({ username }) {
             <RightSideViewComponent publicUser={fetchedData[0]} guild={guilds} />
 
             {/* Viewer's Avatar */}
-            <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
+            {/* <div className='absolute -left-6 top-[-96px] z-30 h-[96px] w-[130px] overflow-hidden bg-transparent'>
               {user?.username !== fetchedData[0]?.username && (
                 <>
                   {loggedin_user_avatar && (
@@ -163,7 +169,7 @@ export default function PublicProfile({ username }) {
                   )}
                 </>
               )}
-            </div>
+            </div> */}
             {/* Profile owner's Avatar */}
             <div className='absolute -right-6 top-[-100px] z-30 h-[100px] w-[150px] overflow-hidden bg-transparent'>
               {avatar_url && (
