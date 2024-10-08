@@ -127,7 +127,7 @@ export default function PublicProfile({ username }: EmoteHandlerProps) {
           <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
 
           {/* LeftPart */}
-          <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md  bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
+          <div className='fixed left-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2  rounded-md text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
             <LeftSideViewComponent emote={currentEmote} />
           </div>
 
@@ -146,7 +146,7 @@ export default function PublicProfile({ username }: EmoteHandlerProps) {
           </div>
 
           {/* Right Part */}
-          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md bg-custom-gradient-purple text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
+          <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
             <RightSideViewComponent publicUser={fetchedData[0]} guild={guilds} />
 
             {/* Viewer's Avatar */}

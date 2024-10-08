@@ -29,9 +29,9 @@ export default function LeftSideViewComponent({ emote: parentEmote }: LeftSideVi
               <Avatar
                 modelSrc={`${loggedin_user_avatar}?quality=low`}
                 animationSrc={currentEmote}
-                fov={20}
-                cameraTarget={2}
-                cameraInitialDistance={2.5}
+                fov={50}
+                cameraTarget={1.5}
+                cameraInitialDistance={10}
                 effects={{
                   ambientOcclusion: true,
                 }}

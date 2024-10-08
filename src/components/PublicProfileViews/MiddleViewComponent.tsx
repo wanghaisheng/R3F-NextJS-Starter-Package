@@ -80,7 +80,7 @@ export default function MiddleViewComponent({ user, skillsData, guild, experienc
 
   return (
     <div
-      className={`relative flex size-full select-none flex-col overflow-auto rounded-lg bg-custom-gradient-purple p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
+      className={`relative flex size-full select-none flex-col overflow-auto rounded-lg p-4 shadow-xl shadow-black/30 backdrop-blur-md`}
     >
       <div className='relative flex w-full'>
         {/* Profile Picture */}
