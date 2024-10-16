@@ -377,7 +377,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                           {selectedGuildData.guild_name}
                         </h3>
                         <p className='mt-3 text-xl font-bold text-white'>{selectedGuildData.description}</p>
-                        <div className='flex justify-center gap-2 overflow-auto'>
+                        <div className='flex flex-wrap justify-center gap-2 p-1'>
                           {selectedGuildData.faculty.map((element, index) => (
                             <button
                               key={index}
@@ -395,9 +395,13 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                       <div className='absolute -right-14 top-20 z-0 hidden w-1/4 items-start justify-center lg:flex lg:flex-col'>
                         <div className=' flex flex-col items-center justify-center p-4 text-lg font-extrabold'>
                           {selectedGuildData.element.split('').map((letter, index) => (
-                            <span key={index} style={{ color: selectedGuildData.color }}>
+                            <h1
+                              key={index}
+                              style={{ color: selectedGuildData.color, stroke: '1px' }}
+                              className='font-outline-2'
+                            >
                               {letter.toUpperCase()}
-                            </span>
+                            </h1>
                           ))}
                         </div>
                       </div>
