@@ -1,17 +1,16 @@
 'use client'
-import InputFormForCard from './Forms/InputFormForCard'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import { useState, useEffect, useRef } from 'react'
+import InputFormForCard from './Forms/InputFormForCard'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
-import CardsFlipCard from '../card/cardsFlipCard'
-import { TiDelete } from 'react-icons/ti'
-import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import { revalidateUser } from 'lib/actions'
+import { TiDelete } from 'react-icons/ti'
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import CardsFlipCard from '../card/cardsFlipCard'
 
 export default function CardComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen, token }) {
   const { user, updateUser } = useUser()
@@ -216,7 +215,7 @@ export default function CardComponent({ onNextButtonClick, onPrevButtonClick, is
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[900px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+        className='relative flex h-[900px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           {/* heading */}

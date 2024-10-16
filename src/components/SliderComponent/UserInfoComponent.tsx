@@ -1,12 +1,12 @@
 'use client'
+import { useEffect, useState } from 'react'
 import 'react-tabs/style/react-tabs.css'
-import { useState, useEffect } from 'react'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import axios from 'axios'
-import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
-import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
 import toast from 'react-hot-toast'
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import GeniusIDFlipCard from '../card/GeniusIDFlipCard'
 
 import { FaArrowRight } from 'react-icons/fa6'
 
@@ -134,7 +134,7 @@ export default function UserInfoComponent({ onNextButtonClick, isSmallScreen }) 
       <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0 '>
         <div
           id='Genius ID'
-          className='relative flex h-[770px] w-[300px] rounded bg-[#F5F5F5]/20 px-2 py-4 shadow-md md:w-[500px] md:rounded-3xl md:px-10 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+          className='relative flex h-[770px] w-[300px] rounded bg-[#F5F5F5]/20 px-2 py-4 shadow-md md:w-[500px] md:rounded-3xl md:px-10 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
         >
           <div className='flex w-full flex-col'>
             <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>

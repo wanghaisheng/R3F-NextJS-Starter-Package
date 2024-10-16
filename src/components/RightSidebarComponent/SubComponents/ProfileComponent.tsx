@@ -1,17 +1,18 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import GeniusID from '@/components/card/GeniusID'
+import CustomToolTipLeftRight from '@/components/MyComponents/CustomToolTipLeftRight'
 import { useUser } from '@/UserClientProvider'
-import axios from 'axios'
-import toast from 'react-hot-toast'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
-import GeniusID from '@/components/card/GeniusID'
-import Cookies from 'js-cookie'
-import { IoChevronBack } from 'react-icons/io5'
+import axios from 'axios'
 import { motion } from 'framer-motion'
+import Cookies from 'js-cookie'
 import Image from 'next/image'
-import { FaMapPin } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { FaEdit, FaMapPin } from 'react-icons/fa'
+import { IoChevronBack } from 'react-icons/io5'
 
 export default function ProfileComponent() {
   const { user, updateUser } = useUser()
@@ -192,20 +193,16 @@ export default function ProfileComponent() {
           </div>
 
           <div className='mt-1 flex justify-center '>
+            {!showForm && (
+              <button className='fixed z-10 mt-6 flex pl-2' onClick={handleShowForm}>
+                <div className='group'>
+                  <FaEdit size={14} className='cursor-pointer' />
+                  <CustomToolTipLeftRight content='Edit Here' top='-4' left='-20' translateY='0' />
+                </div>
+              </button>
+            )}
             <GeniusID username={form.username} contact={form.phone_number} />
           </div>
-          {!showForm && (
-            <div className='mt-2 flex justify-start pl-2'>
-              <button
-                className='flex items-center justify-center rounded border bg-black p-1 transition-all ease-in-out hover:bg-gray-400 hover:text-black dark:border-purple-700
-                dark:bg-purple-950/20 dark:hover:border-purple-500'
-                onClick={handleShowForm}
-              >
-                Edit Profile
-              </button>
-            </div>
-          )}
-
           <motion.div
             className={`fixed left-0 top-0 flex size-full items-center justify-center ${showForm ? 'block' : 'hidden'}`}
             initial={{ opacity: 0 }}
@@ -290,15 +287,15 @@ export default function ProfileComponent() {
                       className='sr-only'
                     />
                     <div
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full ${regionStatus ? 'bg-green-500' : 'bg-gray-300'}`}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full ${regionStatus ? 'bg-white' : 'bg-gray-300'}`}
                     >
                       <span
-                        className={`absolute left-1 size-5 rounded-full bg-white transition-transform ${regionStatus ? 'translate-x-5' : ''}`}
+                        className={`absolute left-1 size-5 rounded-full bg-black transition-transform ${regionStatus ? 'translate-x-5' : ''}`}
                       />
                     </div>
                   </label>
                 </div>
-                <button type='submit' className='mt-4 rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600'>
+                <button type='submit' className='mt-4 rounded-md bg-white px-4 py-2 text-black hover:bg-white'>
                   Update
                 </button>
               </form>

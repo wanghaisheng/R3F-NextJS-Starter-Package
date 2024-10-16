@@ -2,9 +2,9 @@
 
 import { CardBody } from '@/components/card/card' //----------------> module not found error in my branch
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
+import QRCode from 'qrcode'
+import { useEffect, useState } from 'react'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 

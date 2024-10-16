@@ -26,6 +26,8 @@ export default function LeftSideViewComponent({ emote: parentEmote }: LeftSideVi
         <>
           {loggedin_user_avatar && (
             <div className='size-full'>
+              <ambientLight />
+              <pointLight position={[0, 20, 10]} intensity={15} />
               <Avatar
                 modelSrc={`${loggedin_user_avatar}?quality=low`}
                 animationSrc={currentEmote}
@@ -33,7 +35,7 @@ export default function LeftSideViewComponent({ emote: parentEmote }: LeftSideVi
                 cameraTarget={1.5}
                 cameraInitialDistance={10}
                 effects={{
-                  ambientOcclusion: true,
+                  ambientOcclusion: false,
                 }}
               />
             </div>

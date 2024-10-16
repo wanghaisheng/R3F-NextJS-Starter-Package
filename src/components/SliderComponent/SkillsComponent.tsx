@@ -1,20 +1,20 @@
 'use client'
 
-import toast from 'react-hot-toast'
-import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/UserClientProvider'
-import { FaArrowLeft } from 'react-icons/fa6'
-import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import 'react-tabs/style/react-tabs.css'
-import { TiDelete } from 'react-icons/ti'
-import { IoHome } from 'react-icons/io5'
-import { useRouter } from 'next/navigation'
-import axios from 'axios'
-import SkillsChartComponent from './SkillsChartComponent'
 import { FileUploaderRegular } from '@uploadcare/react-uploader'
 import '@uploadcare/react-uploader/core.css'
+import axios from 'axios'
 import { revalidateUser } from 'lib/actions'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { FaArrowLeft } from 'react-icons/fa6'
+import { IoHome } from 'react-icons/io5'
+import { TiDelete } from 'react-icons/ti'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import SkillsChartComponent from './SkillsChartComponent'
 
 export default function SkillsComponent({ onPrevButtonClick, isSmallScreen, token }) {
   const { user } = useUser()
@@ -248,7 +248,7 @@ export default function SkillsComponent({ onPrevButtonClick, isSmallScreen, toke
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='card'
-        className='relative flex h-[770px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 px-2 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+        className='relative flex h-[770px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 px-2 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>

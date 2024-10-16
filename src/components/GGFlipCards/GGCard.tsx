@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
+import QRCode from 'qrcode'
+import { useEffect, useState } from 'react'
 
 const guildColors = {
   BUDDHA: '#FFFFFF',
@@ -60,7 +60,7 @@ export default function GGCard({ userData }) {
             <div className='absolute right-2 top-2'>
               {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
               <p className={`text-montserrat text-xs font-semibold`} style={{ color: getTextColor(userData.guild) }}>
-                DEVELOPER
+                {userData.faculty}
               </p>
             </div>
 
@@ -98,9 +98,7 @@ export default function GGCard({ userData }) {
               className='absolute inset-0 z-10 rounded-lg text-center text-slate-200 [backface-visibility:hidden] [transform:rotateY(180deg)]'
             >
               <div className='relative size-full '>
-                <div className='absolute left-2 top-2 text-[14px] text-blue-300 hover:underline'>
-                  {userData.email}xyz@gmail.com
-                </div>
+                <div className='absolute left-2 top-2 text-[14px] text-blue-300 hover:underline'>{userData.email}</div>
                 <div
                   className='absolute right-2 top-2 text-[14px] font-bold'
                   style={{ color: getTextColor(userData.guild) }}

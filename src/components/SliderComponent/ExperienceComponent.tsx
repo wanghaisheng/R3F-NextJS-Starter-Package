@@ -1,24 +1,20 @@
 'use client'
 
-import toast from 'react-hot-toast'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import 'react-tabs/style/react-tabs.css'
 import { useRouter } from 'next/navigation'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import toast from 'react-hot-toast'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
 // import { useUser } from '@/context/UserContext/UserContext'
 import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
-import { TiDelete } from 'react-icons/ti'
-import ExperienceFlipCard from '../card/experienceFlipCard'
-import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import '@uploadcare/react-uploader/core.css'
 import axios from 'axios'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { IoHome } from 'react-icons/io5'
+import { TiDelete } from 'react-icons/ti'
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import ExperienceFlipCard from '../card/experienceFlipCard'
 import InputFormForExperience from './Forms/InputFormForExperience'
-import Image from 'next/image'
-import { FileUploaderRegular } from '@uploadcare/react-uploader'
-import '@uploadcare/react-uploader/core.css'
-import { revalidateUser } from 'lib/actions'
-import { redirect } from 'next/navigation'
 
 export default function ExperienceComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen, token }) {
   const { user, updateUser } = useUser()
@@ -214,7 +210,7 @@ export default function ExperienceComponent({ onNextButtonClick, onPrevButtonCli
 
   return (
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:mb-0 md:ml-0'>
-      <div className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'>
+      <div className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'>
         <div className='flex h-screen w-full flex-col '>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
             EXPERIENCE

@@ -1,15 +1,13 @@
 'use client'
-import { SnackbarProvider } from 'notistack'
-import { motion } from 'framer-motion'
-import { useState, useEffect, useCallback, useRef } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import SkillsComponent from '@/components/SliderComponent/SkillsComponent'
 import AvatarComponent from '@/components/SliderComponent/AvatarComponent'
 import ExperienceComponent from '@/components/SliderComponent/ExperienceComponent'
+import SkillsComponent from '@/components/SliderComponent/SkillsComponent'
+import useEmblaCarousel from 'embla-carousel-react'
+import { motion } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 // import ConnectionComponent from '@/components/SliderComponent/ConnectionComponent'
-import UserInfoComponent from '@/components/SliderComponent/UserInfoComponent'
 import Card2Component from '@/components/SliderComponent/Card2Component'
-import toast, { Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 import Cookies = require('js-cookie')
 
 type PropType = {
@@ -74,6 +72,11 @@ const EmblaCarousel: React.FC<PropType> = () => {
   return (
     <>
       <section className='mx-auto mt-20 w-full'>
+        <div className='fixed top-0 h-screen w-full'>
+          <video className='absolute inset-0 size-full object-cover' autoPlay loop muted>
+            <source src='/livewallpapers/vajra.mp4' type='video/mp4' />
+          </video>
+        </div>
         <Toaster />
 
         <div className='overflow-hidden' ref={emblaRef}>

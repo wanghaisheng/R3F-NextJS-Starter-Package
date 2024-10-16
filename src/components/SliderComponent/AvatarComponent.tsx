@@ -3,14 +3,13 @@ import Image from 'next/image'
 import toast from 'react-hot-toast'
 import { Avatar } from 'src/components/Avatar' //----------------> module not found error in my branch
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
-import { useState, useEffect, useMemo } from 'react'
-import FormModal2 from '../FormModal/Modal2'
 import Avatar_creator from '@/components/avatar-creator/avatar' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
 import axios from 'axios'
-import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import { useEffect, useMemo, useState } from 'react'
 import { FaArrowRight } from 'react-icons/fa'
-import { revalidateUser } from 'lib/actions'
+import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
+import FormModal2 from '../FormModal/Modal2'
 
 async function getGuilds() {
   try {
@@ -262,7 +261,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='My Avatar'
-        className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10  md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10 dark:md:shadow-purple-700'
+        className='relative flex h-[1055px] w-[300px] flex-col rounded bg-[#F5F5F5]/20 py-4 md:w-[600px] md:rounded-3xl md:px-10  md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex w-full flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-200 drop-shadow lg:my-5 lg:text-5xl'>
@@ -378,7 +377,7 @@ export default function AvatarComponent({ onNextButtonClick, onPrevButtonClick, 
                           {selectedGuildData.guild_name}
                         </h3>
                         <p className='mt-3 text-xl font-bold text-white'>{selectedGuildData.description}</p>
-                        <div className='flex overflow-auto gap-2 justify-center'>
+                        <div className='flex justify-center gap-2 overflow-auto'>
                           {selectedGuildData.faculty.map((element, index) => (
                             <button
                               key={index}

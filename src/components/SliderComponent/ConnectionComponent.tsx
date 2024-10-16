@@ -1,12 +1,11 @@
 'use client'
-import { useState } from 'react'
 import Image from 'next/image'
-import toast from 'react-hot-toast'
+import Link from 'next/link'
+import { useState } from 'react'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { IoHome } from 'react-icons/io5'
 import { TiDelete } from 'react-icons/ti'
 import DrawOutlineButton from '../AnimatedButton/DrawOutlineButton'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import Link from 'next/link'
-import { IoHome } from 'react-icons/io5'
 export default function ConnectionComponent({ onNextButtonClick, onPrevButtonClick, isSmallScreen }) {
   const [connections, setConnections] = useState([])
   const handleLogoClick = (logo) => {
@@ -40,7 +39,7 @@ export default function ConnectionComponent({ onNextButtonClick, onPrevButtonCli
     <div className='-ml-3 mb-12 mt-2 flex flex-col items-center md:ml-0 lg:mb-0'>
       <div
         id='connection'
-        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:shadow-purple-700/70 md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
+        className='relative flex h-[900px] w-[300px] flex-col py-4 md:w-[600px] md:rounded-3xl md:px-10 md:shadow-md md:backdrop-blur-md lg:h-[550px] lg:w-[800px] dark:bg-transparent md:dark:bg-black/10'
       >
         <div className='flex flex-col'>
           <div className='relative my-3 flex justify-center text-2xl font-semibold text-purple-950 drop-shadow lg:my-5 lg:text-5xl dark:text-purple-200'>
