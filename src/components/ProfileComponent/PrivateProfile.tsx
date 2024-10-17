@@ -3,34 +3,42 @@ import { CardBody, CardContainer } from '@/components/card/card' //-------------
 import SkillsChartComponent from '@/components/SliderComponent/SkillsChartComponent' //----------------> module not found error in my branch
 import dynamic from 'next/dynamic'
 // import { useUser } from '@/context/UserContext/UserContext'
-import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
-import { useCallback, useEffect, useState, useRef } from 'react'
 import SpringModal from '@/components/FormModal/SpringModal' //----------------> module not found error in my branch
+import { useUser } from '@/UserClientProvider' //----------------> module not found error in my branch
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { TbCards } from 'react-icons/tb'
 
-import Hud from './PublicProfileComponent/PrivateProfileComponents/Hud'
-
 // For the card flip QR code
-import QRCode from 'qrcode'
 import { usePathname } from 'next/navigation'
+import QRCode from 'qrcode'
 // For the carousel
-import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 import useEmblaCarousel from 'embla-carousel-react'
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
 // For carousel inside slide 1
-import AvatarImageComponent from '../avatarImage/AvatarImage'
 import DrawOutlineButton from '@/components/AnimatedButton/DrawOutlineButton' //----------------> module not found error in my branch
 import Link from 'next/link'
+import AvatarImageComponent from '../avatarImage/AvatarImage'
 // Cards
-import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard' //----------------> module not found error in my branch
 import CardsFlipCard from '@/components/card/cardsFlipCard' //----------------> module not found error in my branch
+import GeniusIDFlipCard from '@/components/card/GeniusIDFlipCard' //----------------> module not found error in my branch
 import ExperienceFlipCard from '../card/experienceFlipCard'
 const Avatar = dynamic(() => import('@/components/Avatar').then((mod) => mod.Avatar), { ssr: false }) //----------------> module not found error in my branch
 const SkinsCard = dynamic(() => import('@/components/card/SkinsCard'), { ssr: false }) //----------------> module not found error in my branch
 
 import { useSidebar } from '@/components/dom/SidebarProvider' //----------------> module not found error in my branch
+import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
+
+const expressions = [
+  { label: 'neutral', icon: '/emojis/neutral.svg', bg: '#FFFFFF', animation: '/F_Talking_Variations_001.fbx' },
+  { label: 'sad', icon: '/emojis/sad.svg', bg: '#0C2E5C', animation: '/M_Standing_Expressions_011.fbx' },
+  { label: 'happy', icon: '/emojis/happy.svg', bg: '#007F13', animation: '/M_Standing_Expressions_012.fbx' },
+  { label: 'amazed', icon: '/emojis/amazed.svg', bg: '#F8BF43', animation: '/M_Standing_Expressions_013.fbx' },
+  { label: 'angry', icon: '/emojis/angry.svg', bg: '#A20325', animation: '/M_Standing_Expressions_016.fbx' },
+]
 
 export default function PrivateProfile() {
   const { user } = useUser()
+  const [emote, setEmote] = useState('/male-idle-3.fbx')
   const [skillsData, setSkillsData] = useState([])
   const [avatarsData, setAvatarsData] = useState([])
   const [cardsData, setCardsData] = useState([])
@@ -39,9 +47,15 @@ export default function PrivateProfile() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const isScrollingRef = useRef(false)
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar()
+  const [currentEmote, setCurrentEmote] = useState<string | null>(null)
 
   const handleChangeSlide = (index) => {
     if (emblaApi) emblaApi.scrollTo(index)
+  }
+
+  const handleEmote = (emote: string) => {
+    setCurrentEmote(emote)
+    setEmote(emote)
   }
 
   const handleScroll = useCallback(
@@ -249,12 +263,12 @@ export default function PrivateProfile() {
 
   return (
     <div className='relative mt-20 flex flex-col lg:size-full'>
-      <div className='absolute top-[40%] flex h-[360px] w-full items-center justify-center lg:relative lg:h-[600px]'>
+      <div className='absolute inset-x-[25%] top-[40%] z-10 flex h-[360px] w-[50%] items-center justify-center lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
             shadows
-            animationSrc='/male-idle-3.fbx'
+            animationSrc={currentEmote}
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
@@ -267,7 +281,7 @@ export default function PrivateProfile() {
           <Avatar
             modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
             shadows
-            animationSrc='/male-idle-3.fbx'
+            animationSrc={currentEmote}
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
@@ -615,7 +629,7 @@ export default function PrivateProfile() {
         </div>
       </div>
 
-      {user ? (
+      {/* {user ? (
         <div className='fixed bottom-2 w-full justify-center'>
           <Hud loggedIn={true} />
         </div>
@@ -625,7 +639,9 @@ export default function PrivateProfile() {
             <Hud loggedIn={false} />
           </div>
         </div>
-      )}
+      )} */}
+
+      <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
     </div>
   )
 }
