@@ -1,7 +1,7 @@
 'use client'
 
-import { createContext, useState, useContext } from 'react'
-import { MdKeyboardDoubleArrowRight, MdKeyboardDoubleArrowLeft } from 'react-icons/md'
+import { createContext, useContext, useState } from 'react'
+import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md'
 import CardsFlipCard from '../card/cardsFlipCard'
 interface SidebarContextType {
   expanded: boolean
@@ -16,10 +16,7 @@ export default function RightSidebar({ children }) {
     <aside className='h-full'>
       <nav className='flex h-full flex-col bg-slate-950 shadow-sm'>
         <div className='flex items-center justify-between p-4 pb-2'>
-          <button
-            onClick={() => setExpanded((curr) => !curr)}
-            className='rounded-lg bg-purple-700 p-1.5 hover:bg-purple-900'
-          >
+          <button onClick={() => setExpanded((curr) => !curr)} className='rounded-lg bg-white p-1.5 hover:bg-white/10'>
             {!expanded ? <MdKeyboardDoubleArrowLeft size={20} /> : <MdKeyboardDoubleArrowRight size={20} />}
           </button>
         </div>

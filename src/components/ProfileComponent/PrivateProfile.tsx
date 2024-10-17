@@ -263,12 +263,12 @@ export default function PrivateProfile() {
 
   return (
     <div className='relative mt-20 flex flex-col lg:size-full'>
-      <div className='absolute inset-x-[25%] top-[40%] z-10 flex h-[360px] w-[50%] items-center justify-center lg:relative lg:h-[600px]'>
+      <div className='fixed left-[38%] top-[20%] z-10 h-[73%] w-[25%] items-center justify-center rounded-lg text-black lg:relative lg:h-[600px]'>
         {avatarsData && avatarsData.length !== 0 ? (
           <Avatar
             modelSrc={`${avatarsData.slice(-1)[0].avatar_url}`}
             shadows
-            animationSrc={currentEmote}
+            animationSrc={emote}
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
@@ -281,7 +281,7 @@ export default function PrivateProfile() {
           <Avatar
             modelSrc='https://models.readyplayer.me/658be9e8fc8bec93d06806f3.glb?morphTargets=ARKit,Eyes Extra&textureAtlas=none&lod=0'
             shadows
-            animationSrc={currentEmote}
+            animationSrc={emote}
             style={{ background: 'rgb(9,20,26)', pointerEvents: 'none' }}
             fov={40}
             cameraTarget={1.5}
@@ -640,8 +640,9 @@ export default function PrivateProfile() {
           </div>
         </div>
       )} */}
-
-      <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
+      <div className='z-20'>
+        <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
+      </div>
     </div>
   )
 }
