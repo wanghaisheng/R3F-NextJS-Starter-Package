@@ -29,7 +29,7 @@ import { useSidebar } from '@/components/dom/SidebarProvider' //----------------
 import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
 
 const expressions = [
-  { label: 'neutral', icon: '/emojis/neutral.svg', bg: '#FFFFFF', animation: '/F_Talking_Variations_001.fbx' },
+  { label: 'neutral', icon: '/emojis/neutral.svg', bg: '#FFFFFF', animation: '/M_Talking_Variations_001.fbx' },
   { label: 'sad', icon: '/emojis/sad.svg', bg: '#0C2E5C', animation: '/M_Standing_Expressions_011.fbx' },
   { label: 'happy', icon: '/emojis/happy.svg', bg: '#007F13', animation: '/M_Standing_Expressions_012.fbx' },
   { label: 'amazed', icon: '/emojis/amazed.svg', bg: '#F8BF43', animation: '/M_Standing_Expressions_013.fbx' },
