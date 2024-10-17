@@ -1,19 +1,17 @@
 'use client'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
+import { FaChevronDown } from 'react-icons/fa'
+import { MdArrowUpward, MdOutlineChangeCircle } from 'react-icons/md'
 import 'swiper/css'
+import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import Link from 'next/link'
-import Image from 'next/image'
-import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
-import { FcLike } from 'react-icons/fc'
-import dynamic from 'next/dynamic'
-import { useRef, useState } from 'react'
-import { MdArrowUpward } from 'react-icons/md'
-import { MdOutlineChangeCircle } from 'react-icons/md'
-import { FaChevronDown } from 'react-icons/fa'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 const ExpCardShowVertical = dynamic(
   () => import('../ProfileComponent/PublicProfileComponent/ExpCardShowVeritcal').then((mod) => mod.default),
@@ -123,9 +121,9 @@ export default function ShowGuildDiscover({
                         </div>
                       </div>
                       <div className='flex w-full justify-between px-9 py-4'>
-                        <div>
+                        {/* <div>
                           <FcLike />
-                        </div>
+                        </div> */}
                         <div>
                           <p
                             onClick={() => swiperRefs.current[index]?.slideNext()}
@@ -134,7 +132,7 @@ export default function ShowGuildDiscover({
                             <FaChevronDown />
                           </p>
                         </div>
-                        <div>!</div>
+                        {/* <div>!</div> */}
                       </div>
                     </SwiperSlide>
                     {/* Lower Section | Body | Description */}
@@ -249,7 +247,7 @@ export default function ShowGuildDiscover({
         <div className='flex size-full items-center justify-center p-4'>
           <div className='flex size-[380px] animate-pulse items-center justify-center rounded bg-white/20 text-white'>
             {' '}
-            !!!
+            "Loading"
           </div>
         </div>
       )}
