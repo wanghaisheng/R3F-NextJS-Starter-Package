@@ -56,7 +56,7 @@ const RightSidebar2 = ({ isSidebarOpen, setIsSidebarOpen, showSignIn, showSignUp
       )}
       <div
         className={`fixed right-0 top-0 z-50 h-screen w-96 rounded-l-md bg-white/30 backdrop-blur-md transition-transform duration-300 ease-in-out dark:bg-black/5 ${
-          isSidebarOpen ? 'w-72 translate-x-0 shadow-lg shadow-white dark:shadow-purple-500' : 'w-0 translate-x-full'
+          isSidebarOpen ? 'w-72 translate-x-0 shadow-lg shadow-white dark:shadow-white' : 'w-0 translate-x-full'
         }`}
       >
         <div className='flex items-center justify-between px-4 py-6'>
