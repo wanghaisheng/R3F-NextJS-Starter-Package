@@ -1,9 +1,19 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import RegionHeader from '@/components/Regions/RegionHeader'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import ExpressionBottomMidHud from '../GGHuds/ExpressionBottomMidHud'
+import LeftSideViewComponent from '../PublicProfileViews/LeftSideViewComponent'
 import DiscoverRegion from '../Regions/DiscoverRegion'
+import RegionHeader from '../Regions/RegionHeader'
+
+const expressions = [
+  { label: 'neutral', icon: '/emojis/neutral.svg', bg: '#FFFFFF', animation: '/F_Talking_Variations_001.fbx' },
+  { label: 'sad', icon: '/emojis/sad.svg', bg: '#0C2E5C', animation: '/M_Standing_Expressions_011.fbx' },
+  { label: 'happy', icon: '/emojis/happy.svg', bg: '#007F13', animation: '/M_Standing_Expressions_012.fbx' },
+  { label: 'amazed', icon: '/emojis/amazed.svg', bg: '#F8BF43', animation: '/M_Standing_Expressions_013.fbx' },
+  { label: 'angry', icon: '/emojis/angry.svg', bg: '#A20325', animation: '/M_Standing_Expressions_016.fbx' },
+]
 
 const getUsers = async () => {
   try {
@@ -76,6 +86,13 @@ const DiscoverPage = ({ facultyTags }) => {
   const [publicUsers, setPublicUsers] = useState([])
   const [guildData, setGuildData] = useState([])
   const [guilds, setGuilds] = useState([])
+  const [currentEmote, setCurrentEmote] = useState<string | null>(null)
+  const [emote, setEmote] = useState('/male-idle-3.fbx')
+
+  const handleEmote = (emote: string) => {
+    setCurrentEmote(emote)
+    setEmote(emote)
+  }
 
   const handleRegionFilterChange = (filter) => {
     setSelectedRegionFilter(filter)
@@ -153,6 +170,11 @@ const DiscoverPage = ({ facultyTags }) => {
           {/* Left Sidebar/Header Section to showcase the regions to filter with */}
           <RegionHeader onFilterChange={handleRegionFilterChange} />
         </div>
+        <div className='fixed right-[76px] top-1/2 z-20 h-[73%] w-[20%] -translate-y-1/2 rounded-md text-black shadow-lg shadow-black/50 backdrop-blur-md transition-all duration-500 ease-in-out'>
+          <LeftSideViewComponent emote={currentEmote} />
+        </div>
+
+        <ExpressionBottomMidHud expressions={expressions} handleEmote={handleEmote} />
       </div>
     </>
   )
