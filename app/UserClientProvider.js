@@ -16,7 +16,8 @@ const UserClientProvider = ({ children, user: initialUser }) => {
 
   const fetchUserData = async (userId, token) => {
     try {
-      const response = await fetch(`https://r3-f-next-js-starter-package.vercel.app/api/internal/users/${userId}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL
+      const response = await fetch(`${apiUrl}/api/internal/users/${userId}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

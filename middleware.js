@@ -5,7 +5,7 @@ const allowedOrigins = [
   'https://www.goinggenius.com.np',
   'https://my-weather-app-topaz.vercel.app',
   'https://r3-f-next-js-starter-package.vercel.app',
-  'http://localhost:3001',
+  'http://localhost:3000',
 ]
 
 export function middleware(request) {
