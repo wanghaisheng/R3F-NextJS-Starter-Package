@@ -1,22 +1,12 @@
-import jwt from 'jsonwebtoken'
 import { NextResponse } from 'next/server'
 
+// The list of all allowed origins
 const allowedOrigins = [
   'https://www.goinggenius.com.np',
   'https://my-weather-app-topaz.vercel.app',
   'https://r3-f-next-js-starter-package.vercel.app',
-  'http://localhost:3000',
+  'http://localhost:3001',
 ]
-
-// Function to verify JWT token
-function verifyToken(token) {
-  try {
-    const secret = process.env.JWT_SECRET // Ensure you have JWT_SECRET in your environment variables
-    return jwt.verify(token, secret)
-  } catch (err) {
-    return null
-  }
-}
 
 export function middleware(request) {
   const token = request.cookies.get('token')?.value
@@ -45,23 +35,16 @@ export function middleware(request) {
   // Check if the requested URL matches any of the protected routes
   const isProtectedRoute = protectedRoutes.some((route) => requestUrl.startsWith(route))
 
-  // If it's a protected route, validate the token
-  if (isProtectedRoute) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/discover', request.url))
-    }
-    // Validate the token
-    const verifiedToken = verifyToken(token)
-
-    if (!verifiedToken) {
-      return NextResponse.redirect(new URL('/discover', request.url))
-    }
+  // If it's a protected route and user has no token, redirect to signin
+  if (isProtectedRoute && !token) {
+    return NextResponse.redirect(new URL('/discover', request.url))
   }
 
   return NextResponse.next()
 }
 
 // Matcher to apply the middleware to specific routes
+// '/api/public/:path*'
 export const config = {
   matcher: ['/slider'],
 }
